@@ -1,10 +1,10 @@
-import {NextIntlClientProvider, hasLocale} from 'next-intl';
+// import {NextIntlClientProvider, hasLocale} from 'next-intl';
 import type { Metadata } from "next";
 import { Nunito, PT_Sans } from "next/font/google";
-import "../globals.css";
+import "./globals.css";
 import ReduxProvider from "@/components/redux-provider";
-import {notFound} from 'next/navigation';
-import {routing} from '@/i18n/routing';
+// import {notFound} from 'next/navigation';
+// import {routing} from '@/i18n/routing';
 
 const nunito = Nunito({
   variable: "--font-nunito",
@@ -23,20 +23,19 @@ export const metadata: Metadata = {
 };
 
 export default async function LocaleLayout({
-                                             children,
-                                             params
-                                           }: {
+  children,
+}: // params
+{
   children: React.ReactNode;
-  params: Promise<{locale: string}>;
+  // params: Promise<{locale: string}>;
 }) {
-
-  const {locale} = await params;
-  if (!hasLocale(routing.locales, locale)) {
-    notFound();
-  }
+  // const {locale} = await params;
+  // if (!hasLocale(routing.locales, locale)) {
+  //   notFound();
+  // }
 
   return (
-    <html lang={locale}>
+    <html lang="en">
       <head>
         <title>PEACHY GANG</title>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -52,12 +51,12 @@ export default async function LocaleLayout({
       <body
         className={`${nunito.variable} ${ptSans.variable} antialiased relative`}
       >
-      <NextIntlClientProvider>
+        {/*<NextIntlClientProvider>*/}
         <ReduxProvider>
           <div className="texture" />
           {children}
         </ReduxProvider>
-      </NextIntlClientProvider>
+        {/*</NextIntlClientProvider>*/}
       </body>
     </html>
   );

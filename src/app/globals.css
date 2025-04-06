@@ -6,11 +6,11 @@
 @custom-variant dark (&:is(.dark *));
 
 * {
-  font-family: var(--font-sans);
+  font-family: var(--font-sans), serif;
 }
 
 body {
-  font-family: var(--font-sans);
+  font-family: var(--font-sans), serif;
 }
 
 :root {
@@ -20,9 +20,9 @@ body {
   --card-foreground: oklch(0.41 0.077 74.3); /* Original */
   --popover: oklch(0.92 0.042 83.6); /* Original */
   --popover-foreground: oklch(0.41 0.077 74.3); /* Original */
-  --primary: oklch(0.9 0.06 355); /* #F8D1D7 - soft pink */
-  --primary-foreground: oklch(0.35 0.1 355); /* Darker pink for contrast */
-  --primary-border: oklch(0.78 0.06 355); /* Slightly darker pink border */
+  --primary: oklch(0.71 0.097 111.7); /* #F8D1D7 - soft pink */
+  --primary-foreground: oklch(0.98 0.005 0); /* Darker pink for contrast */
+  --primary-border: oklch(0.59 0.096 111.8); /* Slightly darker pink border */
   --secondary: oklch(0.88 0.055 83.6); /* Original */
   --secondary-foreground: oklch(0.51 0.077 78.9); /* Original */
   --muted: oklch(0.86 0.064 83.7); /* Original */
@@ -54,8 +54,7 @@ body {
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: Nunito, sans-serif;
-  --font-mono: var(--font-geist-mono);
+  --font-sans: Delius, sans-serif;
   --font-weight-light: 700;
   --font-weight-normal: 700;
   --font-weight-medium: 700;
