@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+import { setCookie } from "cookies-next";
 import {
   API_ENDPOINT,
   CLIENT_ID,
@@ -18,7 +19,6 @@ export async function GET(request: NextRequest) {
       return NextResponse.redirect("/login?error=no_code");
     }
 
-    // Exchange the code for an access token
     const tokenResponse = await fetch(`${API_ENDPOINT}/oauth2/token`, {
       method: "POST",
       headers: {
@@ -41,17 +41,16 @@ export async function GET(request: NextRequest) {
 
     const tokenData = (await tokenResponse.json()) as AccessToken;
 
-    // Create a response with the redirect
-    const response = NextResponse.redirect(
-      `${getAbsoluteUrl()}/peachy/dashboard`
-    );
+    const response = NextResponse.redirect(`${getAbsoluteUrl()}/peachy`);
 
-    // Set the session cookie
-    response.cookies.set(TokenCookie, JSON.stringify(tokenData), {
+    setCookie(TokenCookie, JSON.stringify(tokenData), {
+      req: request,
+      res: response,
       httpOnly: true,
       secure: process.env.NODE_ENV === "production",
       sameSite: "lax",
-      maxAge: 60 * 60 * 24 * 30, // 30 days
+      maxAge: 60 * 60 * 24 * 30,
+      path: "/",
     });
 
     return response;

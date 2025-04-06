@@ -1,19 +1,20 @@
-import { setCookie, deleteCookie } from 'cookies-next';
-import { NextApiRequest, NextApiResponse } from 'next';
-import { NextApiRequestCookies } from 'next/dist/server/api-utils';
-import { NextRequest } from 'next/server';
-import { z } from 'zod';
-import type { IncomingMessage } from 'http';
+import { setCookie, deleteCookie } from "cookies-next";
+import { NextApiRequest, NextApiResponse } from "next";
+import { NextApiRequestCookies } from "next/dist/server/api-utils";
+import { NextRequest } from "next/server";
+import { z } from "zod";
+import type { IncomingMessage } from "http";
 
-export const API_ENDPOINT = 'https://discord.com/api/v10';
-export const CLIENT_ID = process.env.BOT_CLIENT_ID ?? '1342317947573633077';
-export const CLIENT_SECRET = process.env.BOT_CLIENT_SECRET ?? 'U4tRAzv47CaZTv1u3F9jyRlDd87k_aja';
+export const API_ENDPOINT = "https://discord.com/api/v10";
+export const CLIENT_ID = process.env.BOT_CLIENT_ID ?? "1342317947573633077";
+export const CLIENT_SECRET =
+  process.env.BOT_CLIENT_SECRET ?? "U4tRAzv47CaZTv1u3F9jyRlDd87k_aja";
 
-const TokenCookie = 'ts-token';
+const TokenCookie = "ts-token";
 
 export const tokenSchema = z.object({
   access_token: z.string(),
-  token_type: z.literal('Bearer'),
+  token_type: z.literal("Bearer"),
   expires_in: z.number(),
   refresh_token: z.string(),
   scope: z.string(),
@@ -25,7 +26,7 @@ interface OptionsType {
   httpOnly?: boolean;
   maxAge?: number;
   path?: string;
-  sameSite?: 'strict' | 'lax' | 'none';
+  sameSite?: "strict" | "lax" | "none";
   secure?: boolean;
 }
 
@@ -43,15 +44,19 @@ export function middleware_hasServerSession(req: NextRequest) {
 }
 
 export function getServerSession(
-    req: IncomingMessage & {
-      cookies: NextApiRequestCookies;
-    }
+  req: IncomingMessage & {
+    cookies: NextApiRequestCookies;
+  }
 ) {
   const raw = req.cookies[TokenCookie];
   return tokenSchema.safeParse(raw == null ? raw : JSON.parse(raw));
 }
 
-export function setServerSession(req: NextApiRequest, res: NextApiResponse, data: AccessToken) {
+export function setServerSession(
+  req: NextApiRequest,
+  res: NextApiResponse,
+  data: AccessToken
+) {
   setCookie(TokenCookie, data, { req, res, ...options });
 }
 
@@ -72,12 +77,12 @@ async function revokeToken(accessToken: string) {
   };
 
   const headers = {
-    'Content-Type': 'application/x-www-form-urlencoded',
+    "Content-Type": "application/x-www-form-urlencoded",
   };
 
   await fetch(`https://discord.com/api/oauth2/token/revoke`, {
     headers,
     body: new URLSearchParams(data),
-    method: 'POST',
+    method: "POST",
   });
 }

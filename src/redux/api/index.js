@@ -1,32 +1,32 @@
 import { createApi } from "@reduxjs/toolkit/query/react";
 import axios from "axios";
 
-let token = null;
-
-// Check if the code is running on the client side
-if (typeof window !== "undefined") {
-  token = localStorage.getItem("jwtToken");
-}
-
-const headers = {
-  Authorization: token ? `Bearer ${token}` : "",
-  "Content-Type": "application/json",
-};
-
 const axiosBaseQuery =
-  ({ baseUrl } = { baseUrl: "" }) =>
-  async ({ url, method, body, params }) => {
+  ({ defaultBaseUrl } = { defaultBaseUrl: "" }) =>
+  async ({ url, method, body, params, baseUrl, customHeaders }) => {
+    const token =
+      typeof window !== "undefined" ? localStorage.getItem("jwtToken") : null;
+
+    const headers = {
+      "Content-Type": "application/json",
+      ...(token && !customHeaders?.Authorization
+        ? { Authorization: `Bearer ${token}` }
+        : {}),
+      ...(customHeaders || {}),
+    };
+    const resolvedBaseUrl = baseUrl || defaultBaseUrl;
+
     try {
       const result = await axios({
         headers,
-        url: baseUrl + url,
+        url: resolvedBaseUrl + url,
         method,
         data: body,
         params,
       });
       return { data: result.data };
     } catch (axiosError) {
-      let err = axiosError;
+      const err = axiosError;
       return {
         error: {
           status: err.response?.status,
@@ -39,8 +39,8 @@ const axiosBaseQuery =
 
 export const emptySplitApi = createApi({
   reducerPath: "api",
-  baseQuery: axiosBaseQuery({ baseUrl: "" }),
-  tagTypes: ["AUTH", "USER"],
+  baseQuery: axiosBaseQuery({ defaultBaseUrl: "/api/" }),
+  tagTypes: ["AUTH", "USER", "GUILD", "GUILDS"],
   refetchOnFocus: true,
   refetchOnReconnect: true,
   keepUnusedDataFor: 5,

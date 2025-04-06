@@ -90,7 +90,7 @@ export function NavUser() {
             </DropdownMenuLabel>
             <DropdownMenuSeparator />
             <DropdownMenuGroup>
-              <DropdownMenuItem onClick={() => router.push("/profile")}>
+              <DropdownMenuItem onClick={() => router.push("/peachy/profile")}>
                 <BadgeCheck />
                 Profile
               </DropdownMenuItem>

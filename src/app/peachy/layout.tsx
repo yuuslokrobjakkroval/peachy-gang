@@ -15,7 +15,7 @@ import {
   SidebarTrigger,
 } from "@/components/ui/sidebar";
 import { Separator } from "@/components/ui/separator";
-import { ChevronRight } from "lucide-react"; // Import ChevronRight icon from lucide-react
+import { ChevronRight } from "lucide-react";
 import { toCapitalCase } from "@/utils/common";
 
 export default function PeachyLayout({

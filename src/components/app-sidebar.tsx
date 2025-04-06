@@ -2,20 +2,11 @@
 
 import * as React from "react";
 import {
-  AudioWaveform,
   BookOpen,
-  Bot,
-  BotIcon,
-  Command,
   CommandIcon,
   FeatherIcon,
-  Frame,
-  GalleryVerticalEnd,
   LayoutDashboard,
-  Map,
-  PieChart,
-  Settings2,
-  SquareTerminal,
+  Library,
 } from "lucide-react";
 
 import { NavMain } from "@/components/nav-main";
@@ -111,6 +102,30 @@ const data = {
         {
           title: "Utility",
           url: "#",
+        },
+      ],
+    },
+    {
+      title: "Information",
+      url: "#",
+      icon: Library,
+      isActive: true,
+      items: [
+        {
+          title: "About",
+          url: "/peachy/about",
+        },
+        {
+          title: "Contact",
+          url: "/peachy/contact",
+        },
+        {
+          title: "Privacy Policy",
+          url: "/peachy/privacy",
+        },
+        {
+          title: "Terms & Conditions",
+          url: "/peachy/terms-conditions",
         },
       ],
     },
