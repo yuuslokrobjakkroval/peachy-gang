@@ -11,6 +11,7 @@ import {
 
 import { NavMain } from "@/components/nav-main";
 import { NavProjects } from "@/components/nav-projects";
+import { NavGuild } from "@/components/nav-guild";
 import { NavUser } from "@/components/nav-user";
 // import { TeamSwitcher } from "@/components/team-switcher";
 import {
@@ -29,38 +30,6 @@ const data = {
       icon: LayoutDashboard,
       isActive: true,
       items: [],
-    },
-    {
-      title: "Feature",
-      url: "#",
-      icon: FeatherIcon,
-      isActive: true,
-      items: [
-        {
-          title: "Welcome Message",
-          url: "#",
-        },
-        {
-          title: "Booster Message",
-          url: "#",
-        },
-        {
-          title: "Invite Message",
-          url: "#",
-        },
-        {
-          title: "Join Roles",
-          url: "#",
-        },
-        {
-          title: "Giveaway",
-          url: "#",
-        },
-        {
-          title: "Good Bye Message",
-          url: "#",
-        },
-      ],
     },
     {
       title: "Documentation",
@@ -129,47 +98,7 @@ const data = {
         },
       ],
     },
-    // {
-    //   title: "Settings",
-    //   url: "#",
-    //   icon: Settings2,
-    //   items: [
-    //     {
-    //       title: "General",
-    //       url: "#",
-    //     },
-    //     {
-    //       title: "Team",
-    //       url: "#",
-    //     },
-    //     {
-    //       title: "Billing",
-    //       url: "#",
-    //     },
-    //     {
-    //       title: "Limits",
-    //       url: "#",
-    //     },
-    //   ],
-    // },
   ],
-  // projects: [
-  //   {
-  //     name: "Design Engineering",
-  //     url: "#",
-  //     icon: Frame,
-  //   },
-  //   {
-  //     name: "Sales & Marketing",
-  //     url: "#",
-  //     icon: PieChart,
-  //   },
-  //   {
-  //     name: "Travel",
-  //     url: "#",
-  //     icon: Map,
-  //   },
-  // ],
 };
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
@@ -177,6 +106,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
     <Sidebar collapsible="icon" {...props}>
       <SidebarContent>
         <NavMain items={data.navMain} />
+        <NavGuild />
       </SidebarContent>
       <SidebarFooter>
         <NavUser />

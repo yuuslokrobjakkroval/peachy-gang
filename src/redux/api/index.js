@@ -1,25 +1,24 @@
 import { createApi } from "@reduxjs/toolkit/query/react";
 import axios from "axios";
+import { getCookie } from "cookies-next";
 
 const axiosBaseQuery =
-  ({ defaultBaseUrl } = { defaultBaseUrl: "" }) =>
-  async ({ url, method, body, params, baseUrl, customHeaders }) => {
-    const token =
-      typeof window !== "undefined" ? localStorage.getItem("jwtToken") : null;
+  () =>
+  async ({ url, method, body, params }) => {
+    const tokenCookie = getCookie("ts-token");
+    const accessToken = tokenCookie
+      ? JSON.parse(tokenCookie).access_token
+      : null;
 
     const headers = {
       "Content-Type": "application/json",
-      ...(token && !customHeaders?.Authorization
-        ? { Authorization: `Bearer ${token}` }
-        : {}),
-      ...(customHeaders || {}),
+      Authorization: `Bearer ${accessToken}`,
     };
-    const resolvedBaseUrl = baseUrl || defaultBaseUrl;
 
     try {
       const result = await axios({
         headers,
-        url: resolvedBaseUrl + url,
+        url,
         method,
         data: body,
         params,
@@ -39,7 +38,7 @@ const axiosBaseQuery =
 
 export const emptySplitApi = createApi({
   reducerPath: "api",
-  baseQuery: axiosBaseQuery({ defaultBaseUrl: "/api/" }),
+  baseQuery: axiosBaseQuery({ baseUrl: "" }),
   tagTypes: ["AUTH", "USER", "GUILD", "GUILDS"],
   refetchOnFocus: true,
   refetchOnReconnect: true,

@@ -19,32 +19,41 @@ import {
   useSidebar,
 } from "@/components/ui/sidebar";
 import { useRouter } from "next/navigation";
-// import { useGetProfileQuery } from "@/redux/api/users";
+import { useFetchUserInfoQuery } from "@/redux/api/discord";
+import { LoadingPage } from "./loading-page";
+import { avatarUrl } from "@/utils/common";
+
+export type UserInfo = {
+  id: string;
+  username: string;
+  global_name: string;
+  discriminator: string;
+  avatar: string;
+  mfa_enabled?: boolean;
+  banner?: string;
+  email?: string;
+  accent_color?: number;
+  locale?: string;
+  flags?: number;
+  premium_type?: number;
+  public_flags?: number;
+};
+
+const peachyInfo: UserInfo = {
+  id: "",
+  username: "peachy",
+  global_name: "peachy",
+  discriminator: "",
+  email: "peachy@gmail.com",
+  avatar: "",
+};
 
 export function NavUser() {
   const { isMobile } = useSidebar();
   const router = useRouter();
-  // const { data: me, isLoading, isError } = useGetProfileQuery(null);
+  const { data: user = peachyInfo, isLoading } = useFetchUserInfoQuery(null);
 
-  // // Handle loading or error states
-  // if (isLoading) {
-  //   return <div>Loading...</div>;
-  // }
-
-  // if (isError || !me) {
-  //   return <div>Error loading profile</div>;
-  // }
-
-  // const me = {
-  //   username: 'Yuu',
-  //   email: 'yuu@gmail.com'
-  //   avatar: 'https://i.imgur.com/b75yC08.jpg',
-  // }
-  const me = {
-    username: "shadcn",
-    email: "m@example.com",
-    avatar: "/avatars/shadcn.jpg",
-  };
+  if (isLoading) <LoadingPage />;
 
   return (
     <SidebarMenu>
@@ -56,14 +65,14 @@ export function NavUser() {
               className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground"
             >
               <Avatar className="h-8 w-8 rounded-lg">
-                <AvatarImage src={me.avatar} alt={me.username} />
+                <AvatarImage src={avatarUrl(user)} alt={user.global_name} />
                 <AvatarFallback className="rounded-lg">
-                  {me.username?.[0]}
+                  {user.global_name?.[0]}
                 </AvatarFallback>
               </Avatar>
               <div className="grid flex-1 text-left text-sm leading-tight">
-                <span className="truncate font-medium">{me.username}</span>
-                <span className="truncate text-xs">{me.email}</span>
+                <span className="truncate font-medium">{user.global_name}</span>
+                <span className="truncate text-xs">{user.email}</span>
               </div>
               <ChevronsUpDown className="ml-auto size-4" />
             </SidebarMenuButton>
@@ -77,14 +86,16 @@ export function NavUser() {
             <DropdownMenuLabel className="p-0 font-normal">
               <div className="flex items-center gap-2 px-1 py-1.5 text-left text-sm">
                 <Avatar className="h-8 w-8 rounded-lg">
-                  <AvatarImage src={me.avatar} alt={me.username} />
+                  <AvatarImage src={avatarUrl(user)} alt={user.global_name} />
                   <AvatarFallback className="rounded-lg">
-                    {me.username?.[0]}
+                    {user.global_name?.[0]}
                   </AvatarFallback>
                 </Avatar>
                 <div className="grid flex-1 text-left text-sm leading-tight">
-                  <span className="truncate font-medium">{me.username}</span>
-                  <span className="truncate text-xs">{me.email}</span>
+                  <span className="truncate font-medium">
+                    {user.global_name}
+                  </span>
+                  <span className="truncate text-xs">{user.email}</span>
                 </div>
               </div>
             </DropdownMenuLabel>

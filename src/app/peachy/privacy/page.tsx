@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { PEACHY } from "@/utils/config";
+import { config } from "@/utils/config";
 
 export default function PrivacyPolicyPage() {
   return (
@@ -11,7 +11,7 @@ export default function PrivacyPolicyPage() {
         </h1>
         <div className="flex justify-center mb-8">
           <Image
-            src={PEACHY.url}
+            src={config.url}
             alt="Peach and Goma"
             width={200}
             height={200}

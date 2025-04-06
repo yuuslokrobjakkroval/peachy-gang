@@ -44,7 +44,7 @@ export function NavMain({
             className="group/collapsible"
           >
             {(item.items ?? []).length === 0 ? (
-              <SidebarMenuItem>
+              <SidebarMenuItem key={item.title}>
                 <SidebarMenuButton tooltip={item.title}>
                   {item.icon && <item.icon />}
                   <a href={item.url}>
@@ -53,7 +53,7 @@ export function NavMain({
                 </SidebarMenuButton>
               </SidebarMenuItem>
             ) : (
-              <SidebarMenuItem>
+              <SidebarMenuItem key={item.title}>
                 <CollapsibleTrigger asChild>
                   <SidebarMenuButton tooltip={item.title}>
                     {item.icon && <item.icon />}

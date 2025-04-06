@@ -1,4 +1,4 @@
-import { PEACHY } from "@/utils/config";
+import { config } from "@/utils/config";
 import Image from "next/image";
 
 export default function AboutPage() {
@@ -11,7 +11,7 @@ export default function AboutPage() {
         </h1>
         <div className="flex justify-center mb-8">
           <Image
-            src={PEACHY.url}
+            src={config.url}
             alt="Peach and Goma"
             width={300}
             height={300}
@@ -48,9 +48,8 @@ export default function AboutPage() {
             </p>
           </div>
           <div className="md:w-1/2 flex justify-center">
-            {/* Placeholder for an additional image */}
             <Image
-              src={PEACHY.url} // Replace with a specific Peach/Goma image if available
+              src={config.url}
               alt="Peach and Goma Beginnings"
               width={200}
               height={200}
