@@ -54,7 +54,7 @@ body {
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: Delius, sans-serif;
+  --font-sans: Nunito, sans-serif;
   --font-weight-light: 700;
   --font-weight-normal: 700;
   --font-weight-medium: 700;
