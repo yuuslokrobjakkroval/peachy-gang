@@ -1,6 +1,6 @@
 <h1 align="center">
   <br>
-  <a href="https://github.com/yuuslokrobjakkroval"><img src="./public/images/banner/main.gif" height="380" alt="Profile"></a>
+  <a href="https://github.com/yuuslokrobjakkroval"><img align="right" alt="PEACHYBANNER" width="400" src="https://i.imgur.com/fFqwcK2.gif" /></a>
   <br>
     <div style="color:#F582AE">
         PEACHY
