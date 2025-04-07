@@ -154,12 +154,51 @@ body {
 }
 
 .dark {
-  --sidebar: hsl(240 5.9% 10%);
-  --sidebar-foreground: hsl(240 4.8% 95.9%);
-  --sidebar-primary: hsl(224.3 76.3% 48%);
-  --sidebar-primary-foreground: hsl(0 0% dominio100%);
-  --sidebar-accent: hsl(240 3.7% 15.9%);
-  --sidebar-accent-foreground: hsl(240 4.8% 95.9%);
-  --sidebar-border: hsl(240 3.7% 15.9%);
-  --sidebar-ring: hsl(217.2 91.2% 59.8%);
+  --background: oklch(
+    0.3 0.03 83.6
+  ); /* Lighter grayish background (was 0.15) */
+  --foreground: oklch(0.9 0.01 78.9); /* Slightly less bright text (was 0.95) */
+  --card: oklch(0.35 0.03 83.6); /* Lighter card background (was 0.2) */
+  --card-foreground: oklch(
+    0.85 0.01 74.3
+  ); /* Slightly darker card text (was 0.9) */
+  --popover: oklch(0.35 0.03 83.6); /* Lighter popover (was 0.2) */
+  --popover-foreground: oklch(
+    0.85 0.01 74.3
+  ); /* Slightly darker popover text (was 0.9) */
+  --primary: oklch(0.7 0.12 111.7); /* Lighter pink (was 0.65) */
+  --primary-foreground: oklch(0.98 0.005 0); /* Unchanged for contrast */
+  --primary-border: oklch(0.6 0.11 111.8); /* Lighter pink border (was 0.55) */
+  --secondary: oklch(0.4 0.04 83.6); /* Lighter secondary (was 0.25) */
+  --secondary-foreground: oklch(
+    0.8 0.02 78.9
+  ); /* Slightly darker text (was 0.85) */
+  --muted: oklch(0.45 0.05 83.7); /* Lighter muted (was 0.3) */
+  --muted-foreground: oklch(
+    0.7 0.03 74.3
+  ); /* Slightly darker muted text (was 0.75) */
+  --accent: oklch(0.45 0.04 83.6); /* Lighter accent (was 0.3) */
+  --accent-foreground: oklch(
+    0.9 0.01 0
+  ); /* Slightly darker accent text (was 0.95) */
+  --destructive: oklch(0.55 0.25 29.2); /* Lighter red (was 0.5) */
+  --destructive-foreground: oklch(0.98 0.01 0); /* Unchanged for contrast */
+  --destructive-border: oklch(
+    0.4 0.24 29.2
+  ); /* Lighter destructive border (was 0.35) */
+  --border: oklch(0.5 0.05 80.8); /* Lighter border (was 0.4) */
+  --input: oklch(0.5 0.05 80.8); /* Lighter input (was 0.4) */
+  --ring: oklch(0.75 0.08 74.3); /* Slightly lighter ring (was 0.7) */
+  --sidebar: hsl(240 5% 20%); /* Lighter sidebar (was 10%) */
+  --sidebar-foreground: hsl(
+    240 4.8% 90%
+  ); /* Slightly darker text (was 95.9%) */
+  --sidebar-primary: hsl(224.3 76.3% 55%); /* Lighter blue (was 48%) */
+  --sidebar-primary-foreground: hsl(0 0% 100%); /* Unchanged */
+  --sidebar-accent: hsl(240 3.7% 25%); /* Lighter accent (was 15.9%) */
+  --sidebar-accent-foreground: hsl(
+    240 4.8% 90%
+  ); /* Slightly darker (was 95.9%) */
+  --sidebar-border: hsl(240 3.7% 25%); /* Lighter border (was 15.9%) */
+  --sidebar-ring: hsl(217.2 91.2% 65%); /* Lighter ring (was 59.8%) */
 }
