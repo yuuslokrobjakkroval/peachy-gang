@@ -55,7 +55,7 @@ const data = {
   ],
 };
 
-export function GuildSidebar({
+export function FeatureSidebar({
   ...props
 }: React.ComponentProps<typeof Sidebar>) {
   return (

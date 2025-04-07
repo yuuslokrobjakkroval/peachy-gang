@@ -30,14 +30,6 @@ export default function UserProfile() {
               <p>Failed to load user information.</p>
             )}
           </div>
-          <div className="text-3xl md:text-4xl font-bold text-center text-pink-600 mb-6">
-            <Card>
-              <CardHeader>
-                <CardTitle>Settings</CardTitle>
-              </CardHeader>
-              <CardContent></CardContent>
-            </Card>
-          </div>
         </div>
       </div>
     </div>

@@ -1,4 +1,21 @@
 import { config } from "./config";
+import { CustomFeatures, FeatureConfig } from "@/utils/types";
+import { UseFeaturesConfig } from "@/utils/features";
+
+export type IdFeature<K extends keyof CustomFeatures = keyof CustomFeatures> =
+  FeatureConfig<K> & {
+    id: K;
+  };
+
+export function getFeatures(): IdFeature<any>[] {
+  const features = UseFeaturesConfig();
+  return Object.entries(features).map(([k, v]) => {
+    return {
+      id: k,
+      ...v,
+    };
+  });
+}
 
 export type UserInfo = {
   id: string;
