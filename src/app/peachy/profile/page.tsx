@@ -1,7 +1,6 @@
 "use client";
 
-import { LoadingPage } from "@/components/loading-page";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { LoadingPage } from "@/components/loading/circle";
 import { useFetchUserInfoQuery } from "@/redux/api/discord";
 
 export default function UserProfile() {
