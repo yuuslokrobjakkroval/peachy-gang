@@ -13,7 +13,7 @@ import {
 } from "@/components/ui/sidebar";
 import { Label } from "@/components/ui/label";
 import { useGetGuildsQuery } from "@/redux/api/discord";
-import { LoadingPage } from "./loading-page";
+import { LoadingPage } from "./loading/circle";
 import { getOwnerGuild, iconUrl } from "@/utils/common";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
@@ -22,8 +22,6 @@ export function NavGuild() {
   const router = useRouter();
   const [search, setSearch] = useState<string>("");
   const { data: guilds, isLoading } = useGetGuildsQuery(null);
-
-  if (isLoading) return <LoadingPage />;
 
   const searchGuild = (servers: any) => {
     return getOwnerGuild(servers).filter((server: any) => {
@@ -39,13 +37,15 @@ export function NavGuild() {
     });
   };
 
+  if (isLoading || !guilds) return <LoadingPage />;
+
   return (
     <SidebarGroup>
       <SidebarGroupLabel>🏠 GUILDS 🏠</SidebarGroupLabel>
       <SidebarMenu>
         <SidebarMenuItem className="m-1 gap-3">
           <SidebarMenuButton
-            size="xl"
+            size="lg"
             className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground md:h-8 md:p-0 "
           >
             <Label htmlFor="search" className="sr-only">
@@ -74,7 +74,7 @@ export function NavGuild() {
             <SidebarMenuItem key={guild.id} className="gap-3">
               <SidebarMenuButton
                 tooltip={guild.name}
-                size="xl"
+                size="lg"
                 className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground md:h-12 md:p-2 cursor-pointer"
                 onClick={() => router.push(`/peachy/guilds/${guild.id}`)}
               >

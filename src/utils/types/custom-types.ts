@@ -2,7 +2,7 @@
  * Custom types that should be configured by developer
  ***/
 
-import { GuildInfo } from './types';
+import { GuildInfo } from "./types";
 
 export type CustomGuildInfo = GuildInfo & {};
 
@@ -48,14 +48,13 @@ export type ImageMessage = {
  * Define feature ids and their option types
  */
 export type CustomFeatures = {
-  'welcome-message': WelcomeMessageFeature;
-  'auto-response': AutoResponseFeature;
-  'booster-message': BoosterMessageFeature;
-  'invite-tracker-message': InviteTrackerMessageFeature;
-  'join-create': JoinToCreateFeature;
-  'join-roles': JoinRolesFeature;
-  'giveaway-schedule': GiveawayScheduleFeature;
-  'goodbye-message': GoodByeMessageFeature;
+  "welcome-message": WelcomeMessageFeature;
+  "auto-response": AutoResponseFeature;
+  "booster-message": BoosterMessageFeature;
+  "invite-tracker-message": InviteTrackerMessageFeature;
+  "join-roles": JoinRolesFeature;
+  "giveaway-schedule": GiveawayScheduleFeature;
+  "goodbye-message": GoodByeMessageFeature;
 };
 
 /** Updated types using EmbedMessage */
@@ -64,8 +63,8 @@ export type WelcomeMessageFeature = {
   isActive?: boolean;
   isEmbed?: boolean;
   content?: string;
-  message: EmbedMessage;
-  image: ImageMessage;
+  message?: EmbedMessage;
+  image?: ImageMessage;
 };
 
 export type AutoResponseFeature = {
@@ -81,8 +80,8 @@ export type BoosterMessageFeature = {
   isActive?: boolean;
   isEmbed?: boolean;
   content?: string;
-  message: EmbedMessage;
-  image: ImageMessage;
+  message?: EmbedMessage;
+  image?: ImageMessage;
 };
 
 export type InviteTrackerMessageFeature = {
@@ -90,14 +89,8 @@ export type InviteTrackerMessageFeature = {
   isActive?: boolean;
   isEmbed?: boolean;
   content?: string;
-  message: EmbedMessage;
-  image: ImageMessage;
-};
-
-export type JoinToCreateFeature = {
-  tempChannels?: any;
-  interface?: any;
-  channel?: string;
+  message?: EmbedMessage;
+  image?: ImageMessage;
 };
 
 export type JoinRolesFeature = {
@@ -121,8 +114,8 @@ export type GoodByeMessageFeature = {
   isActive?: boolean;
   isEmbed?: boolean;
   content?: string;
-  message: EmbedMessage;
-  image: ImageMessage;
+  message?: EmbedMessage;
+  image?: ImageMessage;
 };
 
 export interface User {

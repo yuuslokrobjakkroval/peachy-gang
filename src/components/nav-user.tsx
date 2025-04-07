@@ -20,8 +20,9 @@ import {
 } from "@/components/ui/sidebar";
 import { useRouter } from "next/navigation";
 import { useFetchUserInfoQuery } from "@/redux/api/discord";
-import { LoadingPage } from "./loading-page";
+import { LoadingPage } from "@/components/loading/circle";
 import { avatarUrl } from "@/utils/common";
+import React from "react";
 
 export type UserInfo = {
   id: string;
@@ -53,7 +54,7 @@ export function NavUser() {
   const router = useRouter();
   const { data: user = peachyInfo, isLoading } = useFetchUserInfoQuery(null);
 
-  if (isLoading) <LoadingPage />;
+  if (isLoading) return <LoadingPage />;
 
   return (
     <SidebarMenu>

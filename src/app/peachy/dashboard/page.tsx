@@ -5,7 +5,7 @@ import { useGetUsersQuery } from "@/redux/api/users";
 import { SectionCards } from "@/components/section-cards";
 import { ChartAreaInteractive } from "@/components/chart-area-interactive";
 import { UsersTable } from "@/components/table";
-import { LoadingPage } from "@/components/loading-page";
+import { LoadingPage } from "@/components/loading/circle";
 
 export default function DashboardPage() {
   const getParams = () => {

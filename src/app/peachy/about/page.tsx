@@ -22,7 +22,8 @@ export default function AboutPage() {
         {/* About Section */}
         <section className="bg-white rounded-2xl shadow-md p-6 mb-8">
           <h2 className="text-2xl font-semibold text-pink-500 mb-4 text-center">
-            About Peach and Goma: A Tale of Love, Laughter, and Adorable Cats
+            About Peach and Goma: <br /> A Tale of Love, Laughter, and Adorable
+            Cats
           </h2>
           <p className="text-gray-600 mb-4">
             Hello! I’m 晓晓 (Xiao Xiao), better known by my artist name 不绝晓晓

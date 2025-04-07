@@ -39,7 +39,7 @@ const axiosBaseQuery =
 export const emptySplitApi = createApi({
   reducerPath: "api",
   baseQuery: axiosBaseQuery({ baseUrl: "" }),
-  tagTypes: ["AUTH", "USER", "GUILD", "GUILDS"],
+  tagTypes: ["AUTH", "USER", "GUILD", "GUILDS", "FEATURE"],
   refetchOnFocus: true,
   refetchOnReconnect: true,
   keepUnusedDataFor: 5,

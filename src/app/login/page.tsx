@@ -1,31 +1,35 @@
-/** @format */
+import { GalleryVerticalEnd } from "lucide-react";
 
-import React from "react";
-import { LoginForm } from "@/components/login-form";
 import { DiscordLoginButton } from "@/components/discord-login-button";
 
-export default function Page() {
+export default function LoginPage() {
   return (
-    <div className="flex min-h-svh w-full items-center justify-center p-6 md:p-10">
-      <div className="w-full max-w-sm space-y-6">
-        <div className="text-center">
-          <h1 className="text-2xl font-bold">Welcome to Peachy</h1>
-          <p className="text-muted-foreground mt-2">
-            Choose your preferred login method
-          </p>
+    <div className="grid min-h-svh lg:grid-cols-2">
+      <div className="flex flex-col gap-4 p-6 md:p-10">
+        <div className="flex justify-center gap-2 md:justify-start">
+          <a href="/login" className="flex items-center gap-2 font-medium">
+            {/* <div className="bg-primary text-primary-foreground flex size-6 items-center justify-center rounded-md">
+              <GalleryVerticalEnd className="size-4" />
+            </div> */}
+            PEACHY
+          </a>
         </div>
-        <DiscordLoginButton />
-        <div className="relative">
-          <div className="absolute inset-0 flex items-center">
-            <span className="w-full border-t" />
-          </div>
-          <div className="relative flex justify-center text-xs uppercase">
-            <span className="bg-background px-2 text-muted-foreground">
-              Or continue with
-            </span>
+        <div className="flex flex-1 items-center justify-center">
+          <div className="flex flex-col items-center gap-2 text-center">
+            <h1 className="text-2xl font-bold">Welcome to PEACHY</h1>
+            <p className="text-balance text-sm text-muted-foreground">
+              Choose your preferred login method
+            </p>
+            <DiscordLoginButton />
           </div>
         </div>
-        <LoginForm />
+      </div>
+      <div className="bg-muted relative hidden lg:block">
+        <img
+          src="/images/login/house.webp"
+          alt="Image"
+          className="absolute inset-0 h-full w-full object-cover dark:brightness-[0.2] dark:grayscale"
+        />
       </div>
     </div>
   );
