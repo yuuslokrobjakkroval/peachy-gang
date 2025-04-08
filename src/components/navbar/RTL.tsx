@@ -45,7 +45,7 @@ const RTLNavbar = (props: {
       {/* Right Side Actions */}
       <div className="flex items-center gap-3">
         {/* Notification Dropdown */}
-        <DropdownMenu>
+        {/* <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <Button
               variant="ghost"
@@ -99,10 +99,10 @@ const RTLNavbar = (props: {
               </div>
             </DropdownMenuItem>
           </DropdownMenuContent>
-        </DropdownMenu>
+        </DropdownMenu> */}
 
         {/* Info Dropdown */}
-        <DropdownMenu>
+        {/* <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <Button variant="ghost" className="p-2" aria-label="Information">
               <IoMdInformationCircleOutline className="h-6 w-6 text-gray-600 dark:text-white" />
@@ -152,7 +152,7 @@ const RTLNavbar = (props: {
               </a>
             </Button>
           </DropdownMenuContent>
-        </DropdownMenu>
+        </DropdownMenu> */}
 
         {/* Dark Mode Toggle */}
         <Button
