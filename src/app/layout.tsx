@@ -2,10 +2,11 @@
 import type { Metadata } from "next";
 import { Nunito, PT_Sans } from "next/font/google";
 import "./globals.css";
-import ReduxProvider from "@/components/redux-provider";
 // import {notFound} from 'next/navigation';
 // import {routing} from '@/i18n/routing';
 import { ThemeProvider } from "@/components/theme-provider";
+import ReduxProvider from "@/components/redux-provider";
+import { PeachyProvider } from "@/context/peachy";
 
 const nunito = Nunito({
   variable: "--font-nunito",
@@ -61,8 +62,10 @@ export default async function LocaleLayout({
           disableTransitionOnChange
         >
           <ReduxProvider>
-            <div className="texture" />
-            {children}
+            <PeachyProvider>
+              <div className="texture" />
+              {children}
+            </PeachyProvider>
           </ReduxProvider>
         </ThemeProvider>
         {/*</NextIntlClientProvider>*/}

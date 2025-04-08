@@ -36,7 +36,7 @@ export default function ContactPage() {
           <h2 className="text-2xl font-semibold text-pink-500 mb-4">
             We’d Love to Hear from You!
           </h2>
-          <p className="text-gray-600 max-w-2xl mx-auto">
+          <p className="text-muted-foreground max-w-2xl mx-auto">
             Whether you have questions about Peach and Goma, want to share your
             love for their adventures, or have ideas for new stickers, reach out
             to us! Fill out the form below or connect with us on social media.
@@ -144,7 +144,7 @@ export default function ContactPage() {
           <h2 className="text-2xl font-semibold text-pink-500 mb-4 text-center">
             Other Ways to Connect
           </h2>
-          <div className="text-gray-600 space-y-4">
+          <div className="text-muted-foreground space-y-4">
             <p>
               <strong>Email:</strong>{" "}
               <a
@@ -191,7 +191,7 @@ export default function ContactPage() {
           <h2 className="text-2xl font-semibold text-pink-500 mb-4">
             Thank You for Reaching Out!
           </h2>
-          <p className="text-gray-600 max-w-2xl mx-auto">
+          <p className="text-muted-foreground max-w-2xl mx-auto">
             We’ll get back to you as soon as possible. In the meantime, keep
             spreading the love with Peach and Goma! 🐾
           </p>

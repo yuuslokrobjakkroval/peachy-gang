@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-
+import Image from "next/image";
 import { DiscordLoginButton } from "@/components/discord-login-button";
 import { Moon, Sun } from "lucide-react";
 import { useTheme } from "next-themes";
@@ -13,12 +13,13 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 
+
 export default function LoginPage() {
   const { setTheme } = useTheme();
   return (
     <div className="grid min-h-svh lg:grid-cols-2">
       <div className="flex flex-col gap-4 p-6 md:p-10">
-        <div className="flex justify-center gap-2 md:justify-between">
+        <div className="flex justify-between gap-2">
           <a href="/login" className="flex items-center gap-2 font-medium">
             PEACHY
           </a>
@@ -48,10 +49,12 @@ export default function LoginPage() {
         </div>
       </div>
       <div className="bg-muted relative hidden lg:block">
-        <img
+        <Image
           src="/images/login/house.webp"
           alt="Image"
-          className="absolute inset-0 h-full w-full object-cover"
+          layout="fill"
+          objectFit="cover"
+          className="absolute inset-0"
         />
       </div>
     </div>

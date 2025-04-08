@@ -25,7 +25,7 @@ export default function AboutPage() {
             About Peach and Goma: <br /> A Tale of Love, Laughter, and Adorable
             Cats
           </h2>
-          <p className="text-gray-600 mb-4">
+          <p className="text-muted-foreground mb-4">
             Hello! I’m 晓晓 (Xiao Xiao), better known by my artist name 不绝晓晓
             (Bu Jue Xiao Xiao). I’m a designer, digital artist, and animator
             from China—and the creator of the beloved Peach and Goma ®.
@@ -38,7 +38,7 @@ export default function AboutPage() {
             <h3 className="text-xl font-medium text-gray-800 mb-2">
               Our Beginnings
             </h3>
-            <p className="text-gray-600">
+            <p className="text-muted-foreground">
               Peach and Goma came to life in 2017 when I designed the first
               "Peach Cat ®" stickers for WeChat. This charming duo—a white cat
               named Peach and her gray cat boyfriend, Goma—was inspired by my
@@ -64,7 +64,7 @@ export default function AboutPage() {
           <h3 className="text-xl font-medium text-gray-800 mb-2">
             From China to the World
           </h3>
-          <p className="text-gray-600 mb-4">
+          <p className="text-muted-foreground mb-4">
             What started on Weibo quickly spread beyond borders. Peach and
             Goma’s irresistible charm captured hearts globally, appearing on
             platforms like LINE, WeChat, KakaoTalk, Telegram, and WhatsApp. In
@@ -86,7 +86,7 @@ export default function AboutPage() {
           <h3 className="text-xl font-medium text-gray-800 mb-2">
             Our Mission
           </h3>
-          <p className="text-gray-600 max-w-2xl mx-auto">
+          <p className="text-muted-foreground max-w-2xl mx-auto">
             Peach and Goma are more than just adorable characters—they’re a
             celebration of life’s simple joys, warmth, and love. My goal is to
             spread happiness through their stories while safeguarding their
@@ -105,7 +105,7 @@ export default function AboutPage() {
               <p className="font-semibold text-gray-800">
                 Who created Peach and Goma?
               </p>
-              <p className="text-gray-600">
+              <p className="text-muted-foreground">
                 That would be me, Bu Jue Xiao Xiao!
               </p>
             </div>
@@ -113,7 +113,7 @@ export default function AboutPage() {
               <p className="font-semibold text-gray-800">
                 Where did they come from?
               </p>
-              <p className="text-gray-600">
+              <p className="text-muted-foreground">
                 They were born from my imagination in China in 2017.
               </p>
             </div>
@@ -121,7 +121,7 @@ export default function AboutPage() {
               <p className="font-semibold text-gray-800">
                 Who are Peach and Goma?
               </p>
-              <p className="text-gray-600">
+              <p className="text-muted-foreground">
                 A lovable cat couple—Peach (white) and Goma (gray)—madly in
                 love!
               </p>
@@ -130,7 +130,7 @@ export default function AboutPage() {
               <p className="font-semibold text-gray-800">
                 How can I get their stickers?
               </p>
-              <p className="text-gray-600">
+              <p className="text-muted-foreground">
                 Check out 20+ FREE sticker packs on our{" "}
                 <a
                   href="https://t.me/PeachLovesGoma"
@@ -147,7 +147,7 @@ export default function AboutPage() {
         {/* Thank You Section */}
         <section className="text-center">
           <h3 className="text-xl font-medium text-pink-500 mb-2">Thank YOU!</h3>
-          <p className="text-gray-600 max-w-2xl mx-auto">
+          <p className="text-muted-foreground max-w-2xl mx-auto">
             Your support fuels this adventure. Let’s keep spreading joy together
             with Peach and Goma!
           </p>

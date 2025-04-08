@@ -168,14 +168,14 @@ const columns: ColumnDef<z.infer<typeof schema>>[] = [
   //   enableSorting: false,
   //   enableHiding: false,
   // },
-  {
-    accessorKey: "userId",
-    header: "ID",
-    cell: ({ row }) => {
-      return <TableCellViewer item={row.original} />;
-    },
-    enableHiding: false,
-  },
+  // {
+  //   accessorKey: "userId",
+  //   header: "ID",
+  //   cell: ({ row }) => {
+  //     return <TableCellViewer item={row.original} />;
+  //   },
+  //   enableHiding: false,
+  // },
   {
     accessorKey: "username",
     header: "Name",

@@ -21,14 +21,14 @@ const extendedApi = emptySplitApi.injectEndpoints({
     }),
     getUserById: builder.query({
       query: (id) => ({
-        url: `/peachy/users/information/${id}`,
+        url: `${process.env.NEXT_PUBLIC_API}/peachy/profile/${id}`,
         method: "GET",
       }),
       providesTags: (result, error, arg) => [{ type: "USER", id: arg }],
     }),
     updateUser: builder.mutation({
       query: ({ id, body }) => ({
-        url: `/peachy/users/${id}`,
+        url: `${process.env.NEXT_PUBLIC_API}/peachy/users/${id}`,
         method: "PATCH",
         headers: {
           "Content-Type": "application/json",

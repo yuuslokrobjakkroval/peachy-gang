@@ -2,7 +2,7 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   images: {
-    domains: ["i.imgur.com"],
+    domains: ["i.imgur.com", "cdn.discordapp.com"],
   },
   typescript: {
     // Ignore TypeScript errors during production build

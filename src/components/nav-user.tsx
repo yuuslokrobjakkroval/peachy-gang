@@ -1,4 +1,5 @@
 "use client";
+import React from "react";
 
 import { BadgeCheck, Bell, ChevronsUpDown, LogOut } from "lucide-react";
 
@@ -19,42 +20,18 @@ import {
   useSidebar,
 } from "@/components/ui/sidebar";
 import { useRouter } from "next/navigation";
-import { useFetchUserInfoQuery } from "@/redux/api/discord";
-import { LoadingPage } from "@/components/loading/circle";
-import { avatarUrl } from "@/utils/common";
-import React from "react";
+import { avatarUrl, UserInfo } from "@/utils/common";
+import { usePeachy } from "@/context/peachy";
 
-export type UserInfo = {
-  id: string;
-  username: string;
-  global_name: string;
-  discriminator: string;
-  avatar: string;
-  mfa_enabled?: boolean;
-  banner?: string;
-  email?: string;
-  accent_color?: number;
-  locale?: string;
-  flags?: number;
-  premium_type?: number;
-  public_flags?: number;
-};
-
-const peachyInfo: UserInfo = {
-  id: "",
-  username: "peachy",
-  global_name: "peachy",
-  discriminator: "",
-  email: "peachy@gmail.com",
-  avatar: "",
-};
-
-export function NavUser() {
+export function NavUser({ user }: { user: UserInfo }) {
   const { isMobile } = useSidebar();
   const router = useRouter();
-  const { data: user = peachyInfo, isLoading } = useFetchUserInfoQuery(null);
+  const { setPeachyInfo } = usePeachy();
 
-  if (isLoading) return <LoadingPage />;
+  const handleProfileClick = () => {
+    setPeachyInfo(user);
+    router.push("/peachy/profile");
+  };
 
   return (
     <SidebarMenu>
@@ -102,7 +79,7 @@ export function NavUser() {
             </DropdownMenuLabel>
             <DropdownMenuSeparator />
             <DropdownMenuGroup>
-              <DropdownMenuItem onClick={() => router.push("/peachy/profile")}>
+              <DropdownMenuItem onClick={handleProfileClick}>
                 <BadgeCheck />
                 Profile
               </DropdownMenuItem>

@@ -22,7 +22,7 @@ export default function FeaturePage() {
       : "";
   const { data: guild, isLoading, refetch } = useGetGuildQuery(guildId);
 
-  if (isLoading || !guild) return <LoadingPage />;
+  if (isLoading) return <LoadingPage />;
 
   return (
     <SidebarProvider>
@@ -75,15 +75,6 @@ function NotJoined({ guild }: { guild: string }) {
   return (
     <div className="flex min-h-svh w-full items-center justify-center">
       <section className="rounded-2xl p-6 mb-8">
-        {/* <Icon as={BsMailbox} className="w-12 h-12" />
-          <Text className="text-xl font-semibold text-center">
-            Guild not found
-          </Text>
-          <Text className="text-center text-gray-500">
-            The guild you are looking for could not be found. Please check the
-            invite link or try again.
-          </Text>
-          */}
         <Button
           size="lg"
           onClick={() => router.push(`${config.inviteUrl}&guild_id=${guild}`)}

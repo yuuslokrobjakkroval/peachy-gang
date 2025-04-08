@@ -10,18 +10,19 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
   SidebarInput,
+  SidebarHeader,
 } from "@/components/ui/sidebar";
 import { Label } from "@/components/ui/label";
 import { useGetGuildsQuery } from "@/redux/api/discord";
 import { LoadingPage } from "./loading/circle";
-import { getOwnerGuild, iconUrl } from "@/utils/common";
+import { getOwnerGuild, Guild, iconUrl } from "@/utils/common";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { SearchForm } from "@/components/search-form";
 
-export function NavGuild() {
+export function NavGuild({ guilds }: { guilds: Guild[] }) {
   const router = useRouter();
   const [search, setSearch] = useState<string>("");
-  const { data: guilds, isLoading } = useGetGuildsQuery(null);
 
   const searchGuild = (servers: any) => {
     return getOwnerGuild(servers).filter((server: any) => {
@@ -37,30 +38,13 @@ export function NavGuild() {
     });
   };
 
-  if (isLoading || !guilds) return <LoadingPage />;
-
   return (
-    <SidebarGroup>
+    <SidebarGroup className="py-0">
       <SidebarGroupLabel>🏠 GUILDS 🏠</SidebarGroupLabel>
+      {/* <SidebarHeader>
+        <SearchForm />
+      </SidebarHeader> */}
       <SidebarMenu>
-        <SidebarMenuItem className="m-1 gap-3">
-          <SidebarMenuButton
-            size="lg"
-            className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground md:h-8 md:p-0 "
-          >
-            <Label htmlFor="search" className="sr-only">
-              Search
-            </Label>
-            <SidebarInput
-              id="search"
-              placeholder="Search the docs..."
-              className="pl-8"
-              value={search}
-              onChange={(e) => setSearch(e.target.value)}
-            />
-            <Search className="pointer-events-none absolute left-2 top-1/2 size-4 -translate-y-1/2 select-none opacity-50" />
-          </SidebarMenuButton>
-        </SidebarMenuItem>
         {searchGuild(guilds)?.length === 0 ? (
           <SidebarMenuItem className="gap-3">
             <SidebarMenuButton>

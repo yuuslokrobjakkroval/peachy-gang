@@ -17,9 +17,11 @@ import {
 } from "@/components/ui/sidebar";
 import { Separator } from "@/components/ui/separator";
 import { ChevronRight } from "lucide-react";
-import { Guild, toCapitalCase } from "@/utils/common";
+import { useFetchUserInfoQuery } from "@/redux/api/discord";
 import { useGetGuildsQuery } from "@/redux/api/discord";
+import { UserInfo, Guild, toCapitalCase } from "@/utils/common";
 import { LoadingPage } from "@/components/loading/circle";
+import RTLNavbar from "@/components/navbar/RTL";
 
 export default function PeachyLayout({
   children,
@@ -34,7 +36,8 @@ export default function PeachyLayout({
       ? currentPath[guildIdIndex]
       : undefined;
 
-  const { data: guilds, isLoading } = useGetGuildsQuery({});
+  const { data: user, isLoading: userLoading } = useFetchUserInfoQuery(null);
+  const { data: guilds, isLoading: guildLoading } = useGetGuildsQuery({});
 
   const guild = guilds?.find((g: Guild) => g.id === guildId);
 
@@ -45,19 +48,16 @@ export default function PeachyLayout({
     return segment;
   });
 
-  if (isLoading || !guilds) return <LoadingPage />;
+  if (userLoading || guildLoading) return <LoadingPage />;
 
   return (
     <SidebarProvider>
-      <AppSidebar />
+      <AppSidebar user={user} guilds={guilds} />
       <SidebarInset>
-        <header className="flex h-16 shrink-0 items-center gap-2 transition-[width,height] ease-linear group-has-data-[collapsible=icon]/sidebar-wrapper:h-12">
+        <header className="flex justify-between h-16 shrink-0 items-center gap-2 transition-[width,height] ease-linear group-has-data-[collapsible=icon]/sidebar-wrapper:h-12 ml-8 mr-8">
           <div className="flex items-center gap-2 px-4">
             <SidebarTrigger className="-ml-1" />
-            <Separator
-              orientation="vertical"
-              className="mr-2 data-[orientation=vertical]:h-4"
-            />
+            <Separator orientation="vertical" className="mr-2 h-4" />
             <Breadcrumb>
               <BreadcrumbList className="flex-wrap break-words sm:gap-2.5 flex items-center gap-1 text-sm text-foreground">
                 {breadcrumbPath.map((segment, index) => (
@@ -83,6 +83,10 @@ export default function PeachyLayout({
                 ))}
               </BreadcrumbList>
             </Breadcrumb>
+          </div>
+
+          <div className="flex items-center">
+            <RTLNavbar user={user} />
           </div>
         </header>
         <main className="flex flex-1 flex-col gap-4 p-4 pt-0">{children}</main>

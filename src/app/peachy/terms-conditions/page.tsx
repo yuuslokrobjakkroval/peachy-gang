@@ -24,7 +24,7 @@ export default function TermsConditionsPage() {
           <h2 className="text-2xl font-semibold text-pink-500 mb-4">
             Introduction
           </h2>
-          <p className="text-gray-600 mb-4">
+          <p className="text-muted-foreground mb-4">
             The Peach and Goma website, located at{" "}
             <a
               href="https://www.peachandgoma.com"
@@ -36,7 +36,7 @@ export default function TermsConditionsPage() {
             Use outline the legally binding conditions governing your use of the
             Site.
           </p>
-          <p className="text-gray-600">
+          <p className="text-muted-foreground">
             By accessing the Site, you agree to these Terms and confirm you are
             at least 18 years old. If you disagree with any provision, do not
             use the Site. Additional guidelines or rules for specific features
@@ -49,7 +49,7 @@ export default function TermsConditionsPage() {
           <h2 className="text-2xl font-semibold text-pink-500 mb-4">
             Access to the Site
           </h2>
-          <p className="text-gray-600 mb-4">
+          <p className="text-muted-foreground mb-4">
             Bujuexiaoxiao grants you a non-transferable, non-exclusive,
             revocable, limited license to access the Site for personal,
             noncommercial use, subject to these Terms.
@@ -57,8 +57,8 @@ export default function TermsConditionsPage() {
           <h3 className="text-lg font-medium text-gray-800 mb-2">
             Restrictions
           </h3>
-          <p className="text-gray-600 mb-4">You may not:</p>
-          <ul className="list-disc list-inside text-gray-600 space-y-2">
+          <p className="text-muted-foreground mb-4">You may not:</p>
+          <ul className="list-disc list-inside text-muted-foreground space-y-2">
             <li>
               Sell, rent, lease, transfer, or commercially exploit the Site
             </li>
@@ -72,7 +72,7 @@ export default function TermsConditionsPage() {
               without permission
             </li>
           </ul>
-          <p className="text-gray-600 mt-4">
+          <p className="text-muted-foreground mt-4">
             All copyright and proprietary notices must remain intact.
             Bujuexiaoxiao reserves the right to change, suspend, or terminate
             the Site without notice and is not liable for any resulting impacts.
@@ -84,7 +84,7 @@ export default function TermsConditionsPage() {
           <h2 className="text-2xl font-semibold text-pink-500 mb-4">
             Intellectual Property
           </h2>
-          <p className="text-gray-600">
+          <p className="text-muted-foreground">
             All intellectual property rights (e.g., copyrights, trademarks) in
             the Site and its content are owned by Bujuexiaoxiao or its
             suppliers. These Terms grant you no rights to these properties
@@ -98,7 +98,7 @@ export default function TermsConditionsPage() {
           <h2 className="text-2xl font-semibold text-pink-500 mb-4">
             Third-Party Links & Ads
           </h2>
-          <p className="text-gray-600 mb-4">
+          <p className="text-muted-foreground mb-4">
             The Site may include third-party links or advertisements not
             controlled by Bujuexiaoxiao. We provide these for convenience and
             are not responsible for their content or practices. Use them at your
@@ -107,7 +107,7 @@ export default function TermsConditionsPage() {
           <h3 className="text-lg font-medium text-gray-800 mb-2">
             Cookies and Web Beacons
           </h3>
-          <p className="text-gray-600 mb-4">
+          <p className="text-muted-foreground mb-4">
             We use cookies to store preferences and optimize user experience.
             Google, a third-party vendor, may use DART cookies for ads. You can
             opt out of DART cookies at{" "}
@@ -126,7 +126,7 @@ export default function TermsConditionsPage() {
           <h2 className="text-2xl font-semibold text-pink-500 mb-4">
             User Content
           </h2>
-          <p className="text-gray-600">
+          <p className="text-muted-foreground">
             You are responsible for any content you provide. Bujuexiaoxiao does
             not control or endorse user content and is not liable for any loss
             or damage resulting from it. Disputes between users are your
@@ -139,7 +139,7 @@ export default function TermsConditionsPage() {
           <h2 className="text-2xl font-semibold text-pink-500 mb-4">
             Disclaimers
           </h2>
-          <p className="text-gray-600">
+          <p className="text-muted-foreground">
             The Site is provided “as-is” and “as available.” Bujuexiaoxiao and
             its suppliers disclaim all warranties, including merchantability,
             fitness for a particular purpose, or non-infringement. We do not
@@ -154,7 +154,7 @@ export default function TermsConditionsPage() {
           <h2 className="text-2xl font-semibold text-pink-500 mb-4">
             Limitation on Liability
           </h2>
-          <p className="text-gray-600">
+          <p className="text-muted-foreground">
             To the maximum extent permitted by law, Bujuexiaoxiao and its
             suppliers are not liable for lost profits, data, or indirect damages
             arising from your use of the Site. Our liability is capped at $50
@@ -168,7 +168,7 @@ export default function TermsConditionsPage() {
           <h2 className="text-2xl font-semibold text-pink-500 mb-4">
             Term and Termination
           </h2>
-          <p className="text-gray-600">
+          <p className="text-muted-foreground">
             These Terms remain in effect while you use the Site. We may suspend
             or terminate your access at our discretion, including for
             violations. Upon termination, your account and content may be
@@ -181,7 +181,7 @@ export default function TermsConditionsPage() {
           <h2 className="text-2xl font-semibold text-pink-500 mb-4">
             Copyright Policy
           </h2>
-          <p className="text-gray-600 mb-4">
+          <p className="text-muted-foreground mb-4">
             We respect intellectual property rights and may remove infringing
             materials or terminate repeat infringers’ accounts. To report
             copyright infringement, provide a written notification to our
@@ -194,7 +194,7 @@ export default function TermsConditionsPage() {
             </a>
             , including:
           </p>
-          <ul className="list-disc list-inside text-gray-600 space-y-2">
+          <ul className="list-disc list-inside text-muted-foreground space-y-2">
             <li>Your signature</li>
             <li>Identification of the copyrighted work</li>
             <li>Identification of the infringing material</li>
@@ -209,7 +209,7 @@ export default function TermsConditionsPage() {
           <h2 className="text-2xl font-semibold text-pink-500 mb-4">
             Dispute Resolution
           </h2>
-          <p className="text-gray-600 mb-4">
+          <p className="text-muted-foreground mb-4">
             Disputes must be resolved through binding arbitration on an
             individual basis via the American Arbitration Association (AAA).
             Before arbitration, send a written Notice of Dispute to{" "}
@@ -221,7 +221,7 @@ export default function TermsConditionsPage() {
             </a>
             . If unresolved within 30 days, arbitration may begin.
           </p>
-          <p className="text-gray-600 mb-4">
+          <p className="text-muted-foreground mb-4">
             Arbitration follows AAA Consumer Arbitration Rules (available at{" "}
             <a
               href="https://www.adr.org"
@@ -233,7 +233,7 @@ export default function TermsConditionsPage() {
             Hearings occur within 100 miles of your residence (or as agreed).
             You waive jury trials and class actions.
           </p>
-          <p className="text-gray-600">
+          <p className="text-muted-foreground">
             Arbitration is confidential, and awards are final. Claims for
             defamation or intellectual property infringement are exempt.
             Litigation, if permitted, occurs in courts in Netherlands County,
@@ -244,14 +244,14 @@ export default function TermsConditionsPage() {
         {/* General Section */}
         <section className="bg-white rounded-2xl shadow-md p-6 mb-8">
           <h2 className="text-2xl font-semibold text-pink-500 mb-4">General</h2>
-          <p className="text-gray-600 mb-4">
+          <p className="text-muted-foreground mb-4">
             We may revise these Terms, notifying you via email or Site posting.
             Changes take effect 30 days after notice or immediately for new
             users. You consent to electronic communications. These Terms are the
             entire agreement, and invalid provisions will be modified to remain
             enforceable.
           </p>
-          <p className="text-gray-600">
+          <p className="text-muted-foreground">
             The Site may be subject to U.S. export controls. California
             residents can report complaints to the California Department of
             Consumer Affairs at 400 R Street, Sacramento, CA 95814, or (800)
@@ -264,7 +264,7 @@ export default function TermsConditionsPage() {
           <h2 className="text-2xl font-semibold text-pink-500 mb-4">
             Contact Us
           </h2>
-          <p className="text-gray-600 max-w-2xl mx-auto">
+          <p className="text-muted-foreground max-w-2xl mx-auto">
             Questions about these Terms? Reach out at{" "}
             <a
               href="mailto:mail@peachandgoma.com"

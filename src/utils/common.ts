@@ -20,8 +20,10 @@ export function getFeatures(): IdFeature<any>[] {
 export type UserInfo = {
   id: string;
   username: string;
+  global_name: string;
   discriminator: string;
   avatar: string;
+  email: string;
   mfa_enabled?: boolean;
   banner?: string;
   accent_color?: number;
@@ -226,7 +228,7 @@ export function parsePrize(prize: number | string): number {
   return typeof prize === "string" ? Number(prize) : prize;
 }
 
-export function formatCurrency(num: number | string): string {
+export function formatCoin(num: number | string): string {
   if (typeof num === "string" && num.match(/\d+[kmbtq]/i)) {
     const multiplier: { [key: string]: number } = {
       k: 1000,
@@ -242,6 +244,41 @@ export function formatCurrency(num: number | string): string {
   }
 
   return num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,");
+}
+
+export function formatCoinCompact(num: number | string): string {
+  // Convert input to number if it's a string
+  const value = typeof num === "string" ? parseFloat(num) : num;
+
+  // Return original string if conversion fails or number is invalid
+  if (isNaN(value)) return num.toString();
+
+  if (value === 0) return "0";
+
+  // Define thresholds and their corresponding suffixes
+  const suffixes: { threshold: number; suffix: string }[] = [
+    { threshold: 1000000000000, suffix: "T" }, // Trillion
+    { threshold: 1000000000, suffix: "B" }, // Billion
+    { threshold: 1000000, suffix: "M" }, // Million
+    { threshold: 1000, suffix: "K" }, // Thousand
+    { threshold: 0, suffix: "" }, // Less than thousand
+  ];
+
+  // Find the appropriate suffix
+  for (const { threshold, suffix } of suffixes) {
+    if (value >= threshold) {
+      const formattedNum = value / threshold;
+
+      // Handle decimal places
+      if (formattedNum >= 10) {
+        return Math.round(formattedNum) + suffix;
+      } else {
+        return formattedNum.toFixed(2).replace(/\.?0+$/, "") + suffix;
+      }
+    }
+  }
+
+  return value.toString();
 }
 
 export function getRandomElement(arr: any): any {
