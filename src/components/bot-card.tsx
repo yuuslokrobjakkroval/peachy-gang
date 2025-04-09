@@ -49,10 +49,12 @@ export const CardStack = ({
         {cards.map((card, index) => (
           <motion.div
             key={card.id}
+            aria-label={`Card: ${card.name}, ${card.designation}`}
             className={cn(
-              "absolute w-full h-full rounded-xl p-4 sm:p-6 shadow-lg border border-[var(--border)]",
-              "bg-[var(--card)] text-[var(--card-foreground)] overflow-hidden",
-              "flex flex-col justify-between"
+              "absolute w-full h-full rounded-[var(--radius-lg)] p-4 sm:p-6 border border-border shadow-lg",
+              "bg-card text-card-foreground overflow-hidden",
+              "flex flex-col justify-between",
+              "hover:shadow-xl transition-shadow duration-300"
             )}
             style={{
               transformOrigin: "top center",
@@ -70,19 +72,31 @@ export const CardStack = ({
               stiffness: 200,
               damping: 20,
             }}
-          ></motion.div>
+          >
+            {/* Overlay for better text readability */}
+            <div className="absolute inset-0 bg-background/30" />
+            <div className="relative z-10 p-4">
+              <h3 className="text-lg sm:text-xl font-semibold text-primary">
+                {card.name}
+              </h3>
+              <p className="text-sm sm:text-base text-muted-foreground">
+                {card.designation}
+              </p>
+              <div className="mt-2">{card.content}</div>
+            </div>
+          </motion.div>
         ))}
       </div>
 
       {/* Categories Section */}
       {cards[0]?.categories && (
-        <div className="mt-6 w-full max-w-md mx-auto">
-          <div className="relative mb-4">
+        <div className="mt-8 w-full max-w-lg mx-auto">
+          <div className="relative mb-6">
             <div className="absolute inset-0 flex items-center">
-              <span className="w-full border-t border-[var(--border)]" />
+              <span className="w-full border-t border-border" />
             </div>
-            <div className="relative flex justify-center text-xs uppercase">
-              <span className="bg-[var(--background)] px-2 text-[var(--muted-foreground)]">
+            <div className="relative flex justify-center text-xs sm:text-sm uppercase">
+              <span className="bg-background px-3 text-muted-foreground">
                 Command Categories
               </span>
             </div>
@@ -92,10 +106,10 @@ export const CardStack = ({
               <div
                 key={index}
                 className={cn(
-                  "bg-[var(--card)] bg-opacity-80 border border-[var(--border)]",
-                  "rounded-[var(--radius)] p-2 sm:p-3 text-center text-xs sm:text-sm",
-                  "font-medium text-[var(--card-foreground)]",
-                  "hover:bg-opacity-100 transition-all duration-200"
+                  "bg-card border border-border",
+                  "rounded-[var(--radius)] p-3 text-center text-sm",
+                  "font-medium text-card-foreground",
+                  "hover:bg-muted hover:shadow-sm transition-all duration-200"
                 )}
               >
                 {category}

@@ -3,7 +3,6 @@ import Image from "next/image";
 import { Card } from "@/components/ui/card";
 import { User } from "@/utils/types";
 import { wallpapers } from "@/assets/inventory/wallpaper";
-import { FaHeart } from "react-icons/fa";
 
 const Inventory = ({
   peachyInfo,
@@ -21,49 +20,51 @@ const Inventory = ({
       .filter(Boolean) || [];
 
   return (
-    <Card className="w-full p-4 h-full">
-      <div className="mb-4 w-full">
-        <h4 className="text-xl font-bold text-navy-700 dark:text-white">
+    <Card className="w-full p-6 h-full bg-card text-card-foreground border-2 shadow-md transition-colors duration-200">
+      <div className="w-full">
+        <h4 className="text-2xl font-semibold tracking-tight text-primary">
           Inventory
         </h4>
       </div>
       {userWallpapers.length > 0 ? (
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {userWallpapers.map((wallpaper: any) => (
             <div
               key={wallpaper.id}
-              className="flex w-full flex-row items-center justify-between rounded-2xl bg-white p-2 shadow-3xl shadow-shadow-500 dark:!bg-navy-700 dark:shadow-none"
+              className="group flex w-full flex-col rounded-xl bg-card border border-border hover:border-primary transition-all duration-300 overflow-hidden"
             >
-              {/* Image on the left */}
-              <div className="flex-shrink-0">
+              {/* Image Container */}
+              <div className="relative w-full aspect-[16/9] overflow-hidden">
                 <Image
-                  className="rounded-lg object-cover"
+                  className="rounded-t-xl object-cover transition-transform duration-300 group-hover:scale-105"
                   src={wallpaper.image}
                   alt={wallpaper.name}
-                  width={128}
-                  height={128}
+                  fill
                   quality={100}
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                  placeholder="blur"
+                  blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mN8/+F9PQAI8wNPgZ3H9gAAAABJRU5ErkJggg=="
                 />
               </div>
 
-              {/* Text on the right */}
-              <div className="flex flex-1 flex-row items-center justify-between ml-4">
-                <div className="flex-1">
-                  <p className="text-base font-medium text-navy-700 dark:text-white">
-                    {wallpaper.name}
-                  </p>
-                  <p className="mt-2 text-sm text-muted-foreground line-clamp-3">
-                    {wallpaper.description}
-                  </p>
-                </div>
+              {/* Content Container */}
+              <div className="p-4 flex flex-col flex-1">
+                <p className="text-lg font-medium text-primary transition-colors">
+                  {wallpaper.name}
+                </p>
+                <p className="mt-2 text-sm text-muted-foreground line-clamp-3">
+                  {wallpaper.description}
+                </p>
               </div>
             </div>
           ))}
         </div>
       ) : (
-        <p className="text-muted-foreground">
-          No wallpapers in your inventory yet!
-        </p>
+        <div className="flex items-center justify-center h-32">
+          <p className="text-muted-foreground text-center text-lg">
+            No wallpapers in your inventory yet!
+          </p>
+        </div>
       )}
     </Card>
   );

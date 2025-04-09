@@ -12,6 +12,7 @@ export type AppConfig = {
    * url for avatar
    */
   url: string;
+  banner: string;
   /**
    * icon (react component)
    */

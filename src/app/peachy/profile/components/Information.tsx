@@ -3,15 +3,6 @@ import { Card } from "@/components/ui/card";
 import { avatarUrl, bannerUrl, formatCoinCompact } from "@/utils/common";
 import { MdVerified } from "react-icons/md";
 import { User } from "@/utils/types";
-import {
-  BrainCog,
-  CircleDollarSign,
-  Coins,
-  Gift,
-  HandCoins,
-  Landmark,
-  Spade,
-} from "lucide-react";
 
 const Information = ({
   peachyInfo,

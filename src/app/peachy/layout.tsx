@@ -19,7 +19,7 @@ import { Separator } from "@/components/ui/separator";
 import { ChevronRight } from "lucide-react";
 import { useFetchUserInfoQuery } from "@/redux/api/discord";
 import { useGetGuildsQuery } from "@/redux/api/discord";
-import { UserInfo, Guild, toCapitalCase } from "@/utils/common";
+import { Guild, toCapitalCase } from "@/utils/common";
 import { LoadingPage } from "@/components/loading/circle";
 import RTLNavbar from "@/components/navbar/RTL";
 

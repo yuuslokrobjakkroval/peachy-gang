@@ -7,6 +7,7 @@ import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
 import ReduxProvider from "@/components/redux-provider";
 import { PeachyProvider } from "@/context/peachy";
+import { Toaster } from "@/components/ui/sonner";
 
 const nunito = Nunito({
   variable: "--font-nunito",
@@ -65,6 +66,7 @@ export default async function LocaleLayout({
             <PeachyProvider>
               <div className="texture" />
               {children}
+              <Toaster position="top-right" />
             </PeachyProvider>
           </ReduxProvider>
         </ThemeProvider>

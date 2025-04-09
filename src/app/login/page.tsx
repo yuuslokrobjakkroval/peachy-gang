@@ -12,7 +12,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-
+import { MaskedImage } from "@/components/ui/masked-image";
 
 export default function LoginPage() {
   const { setTheme } = useTheme();
@@ -50,11 +50,10 @@ export default function LoginPage() {
       </div>
       <div className="bg-muted relative hidden lg:block">
         <Image
-          src="/images/login/house.webp"
+          src="/images/house.webp"
           alt="Image"
           layout="fill"
           objectFit="cover"
-          className="absolute inset-0"
         />
       </div>
     </div>

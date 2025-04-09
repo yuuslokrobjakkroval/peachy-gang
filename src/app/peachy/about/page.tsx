@@ -35,7 +35,7 @@ export default function AboutPage() {
         {/* Beginnings Section */}
         <section className="flex flex-col md:flex-row items-center mb-8">
           <div className="md:w-1/2 p-4">
-            <h3 className="text-xl font-medium text-gray-800 mb-2">
+            <h3 className="text-xl font-medium text-white-800 mb-2">
               Our Beginnings
             </h3>
             <p className="text-muted-foreground">
@@ -83,7 +83,7 @@ export default function AboutPage() {
 
         {/* Mission Section */}
         <section className="text-center mb-8">
-          <h3 className="text-xl font-medium text-gray-800 mb-2">
+          <h3 className="text-xl font-medium text-white-800 mb-2">
             Our Mission
           </h3>
           <p className="text-muted-foreground max-w-2xl mx-auto">

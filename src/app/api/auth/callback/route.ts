@@ -14,6 +14,17 @@ export async function GET(request: NextRequest) {
   try {
     const { searchParams } = new URL(request.url);
     const code = searchParams.get("code");
+    const error = searchParams.get("error"); // Check for error query param
+
+    // Handle user cancellation (e.g., error=access_denied)
+    if (error) {
+      console.log("OAuth error received:", error);
+      return NextResponse.redirect(
+        `${getAbsoluteUrl()}/login?error=user_cancelled&reason=${encodeURIComponent(
+          error
+        )}`
+      );
+    }
 
     if (!code) {
       return NextResponse.redirect("/login?error=no_code");
@@ -56,6 +67,8 @@ export async function GET(request: NextRequest) {
     return response;
   } catch (error) {
     console.error("Auth callback error:", error);
-    return NextResponse.redirect("/login?error=unknown");
+    return NextResponse.redirect(
+      `${getAbsoluteUrl()}/login?error=server_error`
+    );
   }
 }

@@ -5,58 +5,67 @@ import { Switch } from "@/components/ui/switch";
 import { useTheme } from "next-themes";
 
 function Setting() {
-  const { setTheme } = useTheme();
-  const [darkmode, setDarkmode] = React.useState(false);
+  const { theme, setTheme } = useTheme();
+
+  const handleThemeToggle = () => {
+    const newTheme = theme === "dark" ? "light" : "dark";
+    setTheme(newTheme);
+  };
+
   return (
-    <Card className="w-full p-4 h-full">
-      <div className="relative mb-3 flex items-center justify-between pt-1">
-        <h4 className="text-balance text-xl font-bold text-navy-700 dark:text-white">
+    <Card className="w-full p-6 h-full bg-card text-card-foreground border-2 shadow-md transition-all duration-300 ease-in-out flex flex-col">
+      <div className="mb-6 flex items-center justify-between">
+        <h4 className="text-2xl font-semibold tracking-tight text-primary transition-colors duration-300">
           Settings
         </h4>
-        {/* <CardMenu /> */}
       </div>
-      <div className="flex flex-col">
-        <div className="mt-3 flex items-center gap-3">
+
+      <div className="flex flex-col gap-6 flex-1">
+        <div className="flex items-center gap-4">
           <Switch
-            id="switch1"
-            onClick={() => {
-              if (darkmode) {
-                document.body.classList.remove("dark");
-                setTheme("light");
-                setDarkmode(false);
-              } else {
-                document.body.classList.add("dark");
-                setTheme("dark");
-                setDarkmode(true);
-              }
-            }}
+            id="dark-mode"
+            checked={theme === "dark"}
+            onClick={handleThemeToggle}
+            className="data-[state=checked]:bg-primary data-[state=unchecked]:bg-muted transition-colors duration-200 ease-in-out"
           />
-          <label
-            htmlFor="checkbox1"
-            className="text-base font-medium text-navy-700 dark:text-white"
-          >
-            Dark Mode
-            <p className="flex justify-center text-balance text-base font-normal text-muted-foreground">
+          <div>
+            <label
+              htmlFor="dark-mode"
+              className="text-lg font-medium text-primary cursor-pointer transition-colors duration-300"
+            >
+              Dark Mode
+            </label>
+            <p className="text-sm text-muted-foreground transition-colors duration-300">
               Enables dark theme to protect your eyes
             </p>
-          </label>
+          </div>
         </div>
 
-        <div className="mt-4 flex items-center gap-3">
-          <Switch id="switch2" />
-          <label
-            htmlFor="checkbox2"
-            className="text-base font-medium text-navy-700 dark:text-white"
-          >
-            Developer Mode
-            <p className="flex justify-center text-balance text-base  font-normal text-muted-foreground">
+        <div className="flex items-center gap-4">
+          <Switch
+            id="developer-mode"
+            className="data-[state=checked]:bg-primary data-[state=unchecked]:bg-muted transition-colors duration-200 ease-in-out"
+          />
+          <div>
+            <label
+              htmlFor="developer-mode"
+              className="text-lg font-medium text-primary cursor-pointer transition-colors duration-300"
+            >
+              Developer Mode
+            </label>
+            <p className="text-sm text-muted-foreground transition-colors duration-300">
               Used for debugging and testing
             </p>
-          </label>
+          </div>
         </div>
       </div>
-      <div className="flex justify-center items-center mt-2 gap-3">
-        <Button variant="destructive" size="lg">
+
+      <div className="mt-6 flex justify-center gap-3">
+        <Button
+          variant="destructive"
+          size="lg"
+          className="w-full max-w-xs shadow-destructive-border hover:bg-destructive/90 transition-colors duration-200 ease-in-out"
+        >
           Logout
         </Button>
       </div>

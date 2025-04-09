@@ -32,68 +32,68 @@ const RTLNavbar = (props: {
   const router = useRouter();
 
   return (
-    <nav className="flex items-center gap-3 rounded-xl p-2 backdrop-blur-md dark:bg-navy-800/80">
+    <nav className="flex items-center gap-3 rounded-xl p-2 transition-all duration-300 mt-3">
       <div className="flex items-center gap-4">
         {/* Brand Text */}
         {brandText && (
-          <span className="hidden text-lg font-semibold text-navy-700 dark:text-white xl:block">
+          <span className="hidden text-lg font-semibold text-primary xl:block transition-colors duration-300">
             {brandText}
           </span>
         )}
       </div>
 
       {/* Right Side Actions */}
-      <div className="flex items-center gap-3">
+      <div className="flex items-center gap-3 ml-auto">
         {/* Notification Dropdown */}
         {/* <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <Button
               variant="ghost"
-              className="relative p-2"
+              className="relative p-2 hover:bg-muted transition-colors duration-200"
               aria-label="Notifications"
             >
-              <IoMdNotificationsOutline className="h-6 w-6 text-gray-600 dark:text-white" />
-              <span className="absolute right-1 top-1 h-2 w-2 rounded-full bg-red-500" />
+              <IoMdNotificationsOutline className="h-6 w-6 text-foreground" />
+              <span className="absolute right-1 top-1 h-2 w-2 rounded-full bg-destructive" />
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent
-            className="w-[320px] rounded-xl bg-white p-4 shadow-lg dark:bg-navy-700 dark:text-white"
+            className="w-[320px] rounded-xl bg-card p-4 border border-border shadow-lg transition-all duration-200"
             align="end"
           >
             <div className="flex items-center justify-between">
-              <DropdownMenuLabel className="text-lg font-semibold text-navy-700 dark:text-white">
+              <DropdownMenuLabel className="text-lg font-semibold text-primary">
                 Notifications
               </DropdownMenuLabel>
               <Button
                 variant="ghost"
-                className="text-sm text-navy-700 dark:text-white"
+                className="text-sm text-muted-foreground hover:text-primary"
               >
                 Mark all read
               </Button>
             </div>
-            <DropdownMenuSeparator className="my-2 bg-gray-200 dark:bg-white/10" />
-            <DropdownMenuItem className="flex w-full gap-3 p-2 hover:bg-gray-100 dark:hover:bg-navy-600">
-              <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-gradient-to-br from-brand-400 to-brand-600 text-white">
+            <DropdownMenuSeparator className="my-2 bg-border" />
+            <DropdownMenuItem className="flex w-full gap-3 p-2 hover:bg-muted transition-colors duration-200">
+              <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-primary text-primary-foreground">
                 <BsArrowBarUp className="h-6 w-6" />
               </div>
               <div className="flex-1">
-                <p className="text-sm font-medium text-gray-900 dark:text-white">
+                <p className="text-sm font-medium text-foreground">
                   New Update: Horizon UI Dashboard PRO
                 </p>
-                <p className="text-xs text-gray-600 dark:text-gray-300">
+                <p className="text-xs text-muted-foreground">
                   A new update is available!
                 </p>
               </div>
             </DropdownMenuItem>
-            <DropdownMenuItem className="flex w-full gap-3 p-2 hover:bg-gray-100 dark:hover:bg-navy-600">
-              <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-gradient-to-br from-brand-400 to-brand-600 text-white">
+            <DropdownMenuItem className="flex w-full gap-3 p-2 hover:bg-muted transition-colors duration-200">
+              <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-primary text-primary-foreground">
                 <BsArrowBarUp className="h-6 w-6" />
               </div>
               <div className="flex-1">
-                <p className="text-sm font-medium text-gray-900 dark:text-white">
+                <p className="text-sm font-medium text-foreground">
                   New Update: Horizon UI Dashboard PRO
                 </p>
-                <p className="text-xs text-gray-600 dark:text-gray-300">
+                <p className="text-xs text-muted-foreground">
                   A new update is available!
                 </p>
               </div>
@@ -104,18 +104,22 @@ const RTLNavbar = (props: {
         {/* Info Dropdown */}
         {/* <DropdownMenu>
           <DropdownMenuTrigger asChild>
-            <Button variant="ghost" className="p-2" aria-label="Information">
-              <IoMdInformationCircleOutline className="h-6 w-6 text-gray-600 dark:text-white" />
+            <Button
+              variant="ghost"
+              className="p-2 hover:bg-muted transition-colors duration-200"
+              aria-label="Information"
+            >
+              <IoMdInformationCircleOutline className="h-6 w-6 text-foreground" />
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent
-            className="w-[300px] rounded-xl bg-white p-4 shadow-lg dark:bg-navy-700 dark:text-white"
+            className="w-[300px] rounded-xl bg-card p-4 border border-border shadow-lg transition-all duration-200"
             align="end"
           >
-            <div className="mb-3 h-24 w-full rounded-lg bg-gray-200 dark:bg-navy-600" />
+            <div className="mb-3 h-24 w-full rounded-lg bg-muted" />
             <Button
               asChild
-              className="w-full bg-brand-500 text-white hover:bg-brand-600 dark:bg-brand-400 dark:hover:bg-brand-300"
+              className="w-full bg-primary text-primary-foreground hover:bg-primary/90 transition-colors duration-200"
             >
               <a
                 href="https://horizon-ui.com/pro"
@@ -128,7 +132,7 @@ const RTLNavbar = (props: {
             <Button
               asChild
               variant="outline"
-              className="mt-2 w-full text-navy-700 dark:text-white dark:border-white/20 dark:hover:bg-navy-600"
+              className="mt-2 w-full text-foreground border-border hover:bg-muted transition-colors duration-200"
             >
               <a
                 href="https://horizon-ui.com/docs-tailwind/docs/react/installation"
@@ -141,7 +145,7 @@ const RTLNavbar = (props: {
             <Button
               asChild
               variant="ghost"
-              className="mt-2 w-full text-navy-700 dark:text-white dark:hover:bg-navy-600"
+              className="mt-2 w-full text-foreground hover:bg-muted transition-colors duration-200"
             >
               <a
                 href="https://horizon-ui.com/"
@@ -157,49 +161,54 @@ const RTLNavbar = (props: {
         {/* Dark Mode Toggle */}
         <Button
           variant="ghost"
-          className="p-2"
+          className="p-2 hover:bg-muted transition-colors duration-200"
           onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
           aria-label="Toggle Theme"
         >
           {theme === "dark" ? (
-            <RiSunFill className="h-6 w-6 text-gray-600 dark:text-white" />
+            <RiSunFill className="h-6 w-6 text-foreground" />
           ) : (
-            <RiMoonFill className="h-6 w-6 text-gray-600 dark:text-white" />
+            <RiMoonFill className="h-6 w-6 text-foreground" />
           )}
         </Button>
 
         {/* Profile Dropdown */}
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
-            <Button variant="ghost" className="p-1">
+            <Button
+              variant="ghost"
+              className="p-1 hover:bg-muted transition-colors duration-200"
+            >
               <Avatar>
                 <AvatarImage
                   src={avatarUrl(user)}
                   alt={toCapitalCase(user.username)}
                 />
-                <AvatarFallback>{toCapitalCase(user.username)}</AvatarFallback>
+                <AvatarFallback className="bg-muted text-foreground">
+                  {toCapitalCase(user.username)}
+                </AvatarFallback>
               </Avatar>
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent
-            className="w-[220px] rounded-xl bg-white p-2 shadow-lg dark:bg-navy-700 dark:text-white"
+            className="w-[220px] rounded-xl bg-card p-2 border border-border shadow-lg transition-all duration-200"
             align="end"
           >
-            <DropdownMenuLabel className="px-2 py-1 text-sm font-semibold text-navy-700 dark:text-white">
+            <DropdownMenuLabel className="px-2 py-1 text-sm text-foreground font-semibold">
               👋 Hey, {user.global_name}
             </DropdownMenuLabel>
-            <DropdownMenuSeparator className="my-1 bg-gray-200 dark:bg-white/10" />
+            <DropdownMenuSeparator className="my-1 bg-border" />
             <DropdownMenuItem
-              className="px-2 py-1 text-sm hover:bg-gray-100 dark:hover:bg-navy-600"
+              className="px-2 py-1 text-sm text-foreground hover:bg-muted transition-colors duration-200"
               onClick={() => router.push("/peachy/profile")}
             >
               Profile Settings
             </DropdownMenuItem>
-            {/* <DropdownMenuItem className="px-2 py-1 text-sm hover:bg-gray-100 dark:hover:bg-navy-600">
+            {/* <DropdownMenuItem className="px-2 py-1 text-sm text-foreground hover:bg-muted transition-colors duration-200">
               Newsletter Settings
             </DropdownMenuItem> */}
             <DropdownMenuItem
-              className="px-2 py-1 text-sm text-red-500 hover:bg-gray-100 dark:hover:bg-navy-600"
+              className="px-2 py-1 text-sm text-destructive hover:bg-muted transition-colors duration-200"
               onClick={() => router.push("/login")}
             >
               Log Out

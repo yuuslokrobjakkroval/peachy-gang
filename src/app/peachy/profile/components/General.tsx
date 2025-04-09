@@ -1,63 +1,58 @@
 import { Card } from "@/components/ui/card";
+import { User } from "@/utils/types";
 
-const General = () => {
+const General = ({
+  peachyInfo,
+  userInfo,
+}: {
+  peachyInfo: any;
+  userInfo: User;
+}) => {
   return (
-    <Card className="w-full p-4 h-full">
+    <Card className="w-full p-6 h-full bg-card text-card-foreground shadow-md">
       {/* Header */}
-      <div className="mt-2 mb-8 w-full">
-        <h4 className="px-2 text-xl font-bold text-navy-700 dark:text-white">
+      <div className="w-full">
+        <h4 className="text-2xl font-semibold tracking-tight text-primary">
           General Information
         </h4>
-        <p className="mt-2 px-2 text-base text-muted-foreground">
-          As we live, our hearts turn colder. Cause pain is what we go through
-          as we become older. We get insulted by others, lose trust for those
-          others. We get back stabbed by friends. It becomes harder for us to
-          give others a hand. We get our heart broken by people we love, even
-          that we give them all...
-        </p>
       </div>
+
       {/* Cards */}
-      <div className="grid grid-cols-2 gap-4 px-2">
-        <div className="flex flex-col items-start justify-center rounded-2xl bg-white bg-clip-border px-3 py-4 shadow-3xl shadow-shadow-500 dark:!bg-navy-700 dark:shadow-none">
-          <p className="text-sm text-muted-foreground">Education</p>
-          <p className="text-base font-medium text-navy-700 dark:text-white">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        <div className="flex flex-col rounded-lg bg-card p-4 shadow-sm border border-border hover:shadow-md transition-shadow duration-200">
+          <p className="text-lg font-semibold text-primary">Education</p>
+          <p className="text-sm text-muted-foreground mt-1">
             Stanford University
           </p>
         </div>
 
-        <div className="flex flex-col justify-center rounded-2xl bg-white bg-clip-border px-3 py-4 shadow-3xl shadow-shadow-500 dark:!bg-navy-700 dark:shadow-none">
-          <p className="text-sm text-muted-foreground">Languages</p>
-          <p className="text-base font-medium text-navy-700 dark:text-white">
+        <div className="flex flex-col rounded-lg bg-card p-4 shadow-sm border border-border hover:shadow-md transition-shadow duration-200">
+          <p className="text-lg font-semibold text-primary">Languages</p>
+          <p className="text-sm text-muted-foreground mt-1">
             English, Spanish, Italian
           </p>
         </div>
 
-        <div className="flex flex-col items-start justify-center rounded-2xl bg-white bg-clip-border px-3 py-4 shadow-3xl shadow-shadow-500 dark:!bg-navy-700 dark:shadow-none">
-          <p className="text-sm text-muted-foreground">Department</p>
-          <p className="text-base font-medium text-navy-700 dark:text-white">
-            Product Design
+        <div className="flex flex-col rounded-lg bg-card p-4 shadow-sm border border-border hover:shadow-md transition-shadow duration-200">
+          <p className="text-lg font-semibold text-primary">Department</p>
+          <p className="text-sm text-muted-foreground mt-1">Product Design</p>
+        </div>
+
+        <div className="flex flex-col rounded-lg bg-card p-4 shadow-sm border border-border hover:shadow-md transition-shadow duration-200">
+          <p className="text-lg font-semibold text-primary">Work History</p>
+          <p className="text-sm text-muted-foreground mt-1">
+            Senior Designer at Simmmple (2018-2023)
           </p>
         </div>
 
-        <div className="flex flex-col justify-center rounded-2xl bg-white bg-clip-border px-3 py-4 shadow-3xl shadow-shadow-500 dark:!bg-navy-700 dark:shadow-none">
-          <p className="text-sm text-muted-foreground">Work History</p>
-          <p className="text-base font-medium text-navy-700 dark:text-white">
-            English, Spanish, Italian
-          </p>
+        <div className="flex flex-col rounded-lg bg-card p-4 shadow-sm border border-border hover:shadow-md transition-shadow duration-200">
+          <p className="text-lg font-semibold text-primary">Organization</p>
+          <p className="text-sm text-muted-foreground mt-1">Simmmple Web LLC</p>
         </div>
 
-        <div className="flex flex-col items-start justify-center rounded-2xl bg-white bg-clip-border px-3 py-4 shadow-3xl shadow-shadow-500 dark:!bg-navy-700 dark:shadow-none">
-          <p className="text-sm text-muted-foreground">Organization</p>
-          <p className="text-base font-medium text-navy-700 dark:text-white">
-            Simmmple Web LLC
-          </p>
-        </div>
-
-        <div className="flex flex-col justify-center rounded-2xl bg-white bg-clip-border px-3 py-4 shadow-3xl shadow-shadow-500 dark:!bg-navy-700 dark:shadow-none">
-          <p className="text-sm text-muted-foreground">Birthday</p>
-          <p className="text-base font-medium text-navy-700 dark:text-white">
-            20 July 1986
-          </p>
+        <div className="flex flex-col rounded-lg bg-card p-4 shadow-sm border border-border hover:shadow-md transition-shadow duration-200">
+          <p className="text-lg font-semibold text-primary">Birthday</p>
+          <p className="text-sm text-muted-foreground mt-1">20 July 1986</p>
         </div>
       </div>
     </Card>
