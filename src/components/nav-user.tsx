@@ -27,6 +27,7 @@ export function NavUser({ user }: { user: UserInfo }) {
   const { isMobile } = useSidebar();
   const router = useRouter();
   const { setPeachyInfo } = usePeachy();
+  console.log(user);
 
   const handleProfileClick = () => {
     setPeachyInfo(user);
