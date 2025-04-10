@@ -32,8 +32,8 @@ export default function PeachyPage() {
     error,
     stop,
     reload,
-    status,
-  } = useChat({});
+    isLoading,
+  } = useChat({ api: "/api/gemini" });
 
   const scrollRef = useRef<HTMLDivElement>(null);
 
@@ -172,17 +172,7 @@ export default function PeachyPage() {
                     </div>
                   ))}
 
-                  {(status === "submitted" || status === "streaming") && (
-                    <div>
-                      {status === "submitted" && (
-                        <Loader2 className="animate-spin" />
-                      )}
-                      <button type="button" onClick={() => stop()}>
-                        Stop
-                      </button>
-                    </div>
-                  )}
-                  {/* {isLoading && (
+                  {isLoading && (
                     <div className="w-full items-center flex justify-center gap-3">
                       <Loader2 className="animate-spin h-5 w-5 text-primary" />
                       <button
@@ -193,7 +183,7 @@ export default function PeachyPage() {
                         abort
                       </button>
                     </div>
-                  )} */}
+                  )}
 
                   {error && (
                     <div className="w-full items-center flex justify-center gap-3">
@@ -226,7 +216,7 @@ export default function PeachyPage() {
                   <Button
                     type="submit"
                     className="size-9"
-                    disabled={status === "submitted" || status === "streaming"}
+                    disabled={isLoading}
                     size="icon"
                   >
                     <Send className="size-4" />
