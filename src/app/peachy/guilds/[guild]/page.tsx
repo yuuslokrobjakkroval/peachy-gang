@@ -22,7 +22,6 @@ export default function FeaturePage() {
       ? currentPath[guildIdIndex]
       : "";
   const { data: guild, isLoading, refetch } = useGetGuildQuery(guildId);
-  console.log(guild);
 
   if (isLoading) return <LoadingPage />;
 

@@ -78,9 +78,6 @@ const ContentLoader: React.FC = () => {
     setOpenSuccess(Boolean(message));
   }, [message]);
 
-  console.log("error", error);
-  console.log("message", message);
-
   return (
     <React.Fragment>
       {openError ? (

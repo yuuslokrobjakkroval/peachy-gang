@@ -14,7 +14,6 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 export default function GuildPage() {
   const pathname = usePathname();
   const { data: guilds, isLoading } = useGetGuildQuery(null);
-  console.log(guilds);
 
   if (isLoading) return <LoadingPage />;
 

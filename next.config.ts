@@ -4,8 +4,8 @@ const nextConfig: NextConfig = {
   images: {
     domains: [
       "i.imgur.com",
-      "cdn.discordapp.com",
       "images.remotePatterns",
+      "cdn.discordapp.com",
       "i.pinimg.com",
     ],
   },
@@ -17,6 +17,7 @@ const nextConfig: NextConfig = {
     // Optionally ignore ESLint errors (e.g., unused components)
     ignoreDuringBuilds: true,
   },
+  devIndicators: false,
 };
 
 export default nextConfig;
