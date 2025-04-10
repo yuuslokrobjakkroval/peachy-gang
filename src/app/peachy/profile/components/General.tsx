@@ -1,4 +1,5 @@
 import { Card } from "@/components/ui/card";
+import { toCapitalCase, toNumber } from "@/utils/common";
 import { User } from "@/utils/types";
 
 const General = ({
@@ -20,39 +21,47 @@ const General = ({
       {/* Cards */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
         <div className="flex flex-col rounded-lg bg-card p-4 shadow-sm border border-border hover:shadow-md transition-shadow duration-200">
-          <p className="text-lg font-semibold text-primary">Education</p>
+          <p className="text-lg font-semibold text-primary">Bio</p>
           <p className="text-sm text-muted-foreground mt-1">
-            Stanford University
+            {userInfo?.profile?.bio}
           </p>
         </div>
 
         <div className="flex flex-col rounded-lg bg-card p-4 shadow-sm border border-border hover:shadow-md transition-shadow duration-200">
-          <p className="text-lg font-semibold text-primary">Languages</p>
+          <p className="text-lg font-semibold text-primary">Gender</p>
           <p className="text-sm text-muted-foreground mt-1">
-            English, Spanish, Italian
+            {toCapitalCase(userInfo?.profile?.gender)}
           </p>
-        </div>
-
-        <div className="flex flex-col rounded-lg bg-card p-4 shadow-sm border border-border hover:shadow-md transition-shadow duration-200">
-          <p className="text-lg font-semibold text-primary">Department</p>
-          <p className="text-sm text-muted-foreground mt-1">Product Design</p>
-        </div>
-
-        <div className="flex flex-col rounded-lg bg-card p-4 shadow-sm border border-border hover:shadow-md transition-shadow duration-200">
-          <p className="text-lg font-semibold text-primary">Work History</p>
-          <p className="text-sm text-muted-foreground mt-1">
-            Senior Designer at Simmmple (2018-2023)
-          </p>
-        </div>
-
-        <div className="flex flex-col rounded-lg bg-card p-4 shadow-sm border border-border hover:shadow-md transition-shadow duration-200">
-          <p className="text-lg font-semibold text-primary">Organization</p>
-          <p className="text-sm text-muted-foreground mt-1">Simmmple Web LLC</p>
         </div>
 
         <div className="flex flex-col rounded-lg bg-card p-4 shadow-sm border border-border hover:shadow-md transition-shadow duration-200">
           <p className="text-lg font-semibold text-primary">Birthday</p>
-          <p className="text-sm text-muted-foreground mt-1">20 July 1986</p>
+          <p className="text-sm text-muted-foreground mt-1">
+            {toCapitalCase(userInfo?.profile?.birthday)}
+          </p>
+        </div>
+
+        <div className="flex flex-col rounded-lg bg-card p-4 shadow-sm border border-border hover:shadow-md transition-shadow duration-200">
+          <p className="text-lg font-semibold text-primary">Zodiac Sign</p>
+          <p className="text-sm text-muted-foreground mt-1">
+            {toCapitalCase(userInfo?.profile?.zodiacSign)}
+          </p>
+        </div>
+
+        <div className="flex flex-col rounded-lg bg-card p-4 shadow-sm border border-border hover:shadow-md transition-shadow duration-200">
+          <p className="text-lg font-semibold text-primary">Level</p>
+          <p className="text-sm text-muted-foreground mt-1">
+            {toNumber(userInfo?.profile?.level)}
+          </p>
+        </div>
+
+        <div className="flex flex-col rounded-lg bg-card p-4 shadow-sm border border-border hover:shadow-md transition-shadow duration-200">
+          <p className="text-lg font-semibold text-primary">Exp</p>
+          <p className="text-sm text-muted-foreground mt-1">
+            {`${toNumber(userInfo?.profile?.xp)} / ${toNumber(
+              userInfo?.profile?.levelXp
+            )}`}
+          </p>
         </div>
       </div>
     </Card>

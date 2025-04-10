@@ -31,6 +31,13 @@ export type UserInfo = {
   flags?: number;
   premium_type?: number;
   public_flags?: number;
+  avatar_decoration_data?: any;
+};
+
+export type Decoration = {
+  sku_id: string;
+  asset: string;
+  expires_at: Date;
 };
 
 export type Guild = {
@@ -119,15 +126,26 @@ export type BotApplicationInfo = {
   flags: number;
 };
 
+export function getOwnerGuild(guilds: Guild[]) {
+  return guilds?.filter((guild) => config.guild.filter(guild));
+}
+
+export function toNumber(num: number): string {
+  return num.toFixed(0).replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,");
+}
+
 export function toCapitalCase(text: string): string {
   return text
-    .split(" ")
+    .split(/[\s-_]+/)
     .map((word) => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
     .join(" ");
 }
 
 export function toUpperCase(text: string): string {
-  return text.toUpperCase();
+  return text
+    .split(/[\s-_]+/)
+    .map((word) => word.toUpperCase())
+    .join(" ");
 }
 
 export function toRGB(num: number) {
@@ -289,10 +307,6 @@ export function getRandomNumber(min: number, max: number): number {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
-export function getOwnerGuild(guilds: Guild[]) {
-  return guilds?.filter((guild) => config.guild.filter(guild));
-}
-
 export function iconUrl(guild: Guild) {
   if (guild?.icon?.startsWith("a")) {
     return `https://cdn.discordapp.com/icons/${guild.id}/${guild.icon}.gif`;
@@ -311,6 +325,10 @@ export function bannerUrl(id: string, banner: string): string {
   } else {
     return `https://cdn.discordapp.com/banners/${id}/${banner}.png?size=1024`;
   }
+}
+
+export function decorationUrl(decoration: Decoration) {
+  return `https://cdn.discordapp.com/avatar-decoration-presets/${decoration.asset}.png?size=128`;
 }
 
 export function emojiUrl(emoji: any): string {

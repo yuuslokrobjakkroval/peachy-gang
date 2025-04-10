@@ -1,10 +1,11 @@
+"use client";
+
 import React from "react";
-import { BsArrowBarUp } from "react-icons/bs";
+
+import { useRouter } from "next/navigation";
+import { usePeachy } from "@/context/peachy";
+import { IoMdNotifications } from "react-icons/io";
 import { RiMoonFill, RiSunFill } from "react-icons/ri";
-import {
-  IoMdNotificationsOutline,
-  IoMdInformationCircleOutline,
-} from "react-icons/io";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -15,10 +16,16 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Button } from "@/components/ui/button";
 import { useTheme } from "next-themes";
-import { avatarUrl, toCapitalCase, UserInfo } from "@/utils/common";
+import {
+  avatarUrl,
+  decorationUrl,
+  toCapitalCase,
+  UserInfo,
+} from "@/utils/common";
 import { Avatar, AvatarFallback } from "../ui/avatar";
 import { AvatarImage } from "@radix-ui/react-avatar";
-import { useRouter } from "next/navigation";
+import Image from "next/image";
+import { ArrowUpIcon } from "lucide-react";
 
 const RTLNavbar = (props: {
   user: UserInfo;
@@ -27,9 +34,15 @@ const RTLNavbar = (props: {
   secondary?: boolean | string;
 }) => {
   const { user, onOpenSidenav, brandText } = props;
+  const { setPeachyInfo } = usePeachy();
 
   const { theme, setTheme } = useTheme();
   const router = useRouter();
+
+  const handleProfileClick = () => {
+    setPeachyInfo(user);
+    router.push("/peachy/profile");
+  };
 
   return (
     <nav className="flex items-center gap-3 rounded-xl p-2 transition-all duration-300 mt-3">
@@ -44,16 +57,29 @@ const RTLNavbar = (props: {
 
       {/* Right Side Actions */}
       <div className="flex items-center gap-3 ml-auto">
+        {/* Dark Mode Toggle */}
+        <Button
+          variant="ghost"
+          className="hover:bg-muted transition-colors duration-200"
+          onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+          aria-label="Toggle Theme"
+        >
+          {theme === "dark" ? (
+            <RiSunFill className="h-6 w-6 text-foreground" />
+          ) : (
+            <RiMoonFill className="h-6 w-6 text-foreground" />
+          )}
+        </Button>
+
         {/* Notification Dropdown */}
-        {/* <DropdownMenu>
+        <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <Button
               variant="ghost"
-              className="relative p-2 hover:bg-muted transition-colors duration-200"
+              className="hover:bg-muted transition-colors duration-200"
               aria-label="Notifications"
             >
-              <IoMdNotificationsOutline className="h-6 w-6 text-foreground" />
-              <span className="absolute right-1 top-1 h-2 w-2 rounded-full bg-destructive" />
+              <IoMdNotifications className="h-6 w-6 text-foreground" />
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent
@@ -72,122 +98,55 @@ const RTLNavbar = (props: {
               </Button>
             </div>
             <DropdownMenuSeparator className="my-2 bg-border" />
-            <DropdownMenuItem className="flex w-full gap-3 p-2 hover:bg-muted transition-colors duration-200">
-              <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-primary text-primary-foreground">
-                <BsArrowBarUp className="h-6 w-6" />
-              </div>
-              <div className="flex-1">
+            <DropdownMenuItem className="flex w-full gap-3 p-2 transition-colors duration-200">
+              {/* <div className="flex-1">
                 <p className="text-sm font-medium text-foreground">
-                  New Update: Horizon UI Dashboard PRO
+                  New Update: Horizon UI
                 </p>
-                <p className="text-xs text-muted-foreground">
+                <p className="text-xs font-normal text-muted-foreground">
                   A new update is available!
                 </p>
-              </div>
+              </div> */}
             </DropdownMenuItem>
-            <DropdownMenuItem className="flex w-full gap-3 p-2 hover:bg-muted transition-colors duration-200">
-              <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-primary text-primary-foreground">
-                <BsArrowBarUp className="h-6 w-6" />
-              </div>
-              <div className="flex-1">
-                <p className="text-sm font-medium text-foreground">
-                  New Update: Horizon UI Dashboard PRO
-                </p>
-                <p className="text-xs text-muted-foreground">
-                  A new update is available!
-                </p>
-              </div>
-            </DropdownMenuItem>
+            <DropdownMenuItem className="flex w-full gap-3 p-2 transition-colors duration-200"></DropdownMenuItem>
           </DropdownMenuContent>
-        </DropdownMenu> */}
-
-        {/* Info Dropdown */}
-        {/* <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <Button
-              variant="ghost"
-              className="p-2 hover:bg-muted transition-colors duration-200"
-              aria-label="Information"
-            >
-              <IoMdInformationCircleOutline className="h-6 w-6 text-foreground" />
-            </Button>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent
-            className="w-[300px] rounded-xl bg-card p-4 border border-border shadow-lg transition-all duration-200"
-            align="end"
-          >
-            <div className="mb-3 h-24 w-full rounded-lg bg-muted" />
-            <Button
-              asChild
-              className="w-full bg-primary text-primary-foreground hover:bg-primary/90 transition-colors duration-200"
-            >
-              <a
-                href="https://horizon-ui.com/pro"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Buy Horizon UI PRO
-              </a>
-            </Button>
-            <Button
-              asChild
-              variant="outline"
-              className="mt-2 w-full text-foreground border-border hover:bg-muted transition-colors duration-200"
-            >
-              <a
-                href="https://horizon-ui.com/docs-tailwind/docs/react/installation"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                See Documentation
-              </a>
-            </Button>
-            <Button
-              asChild
-              variant="ghost"
-              className="mt-2 w-full text-foreground hover:bg-muted transition-colors duration-200"
-            >
-              <a
-                href="https://horizon-ui.com/"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Try Horizon Free
-              </a>
-            </Button>
-          </DropdownMenuContent>
-        </DropdownMenu> */}
-
-        {/* Dark Mode Toggle */}
-        <Button
-          variant="ghost"
-          className="p-2 hover:bg-muted transition-colors duration-200"
-          onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-          aria-label="Toggle Theme"
-        >
-          {theme === "dark" ? (
-            <RiSunFill className="h-6 w-6 text-foreground" />
-          ) : (
-            <RiMoonFill className="h-6 w-6 text-foreground" />
-          )}
-        </Button>
+        </DropdownMenu>
 
         {/* Profile Dropdown */}
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <Button
               variant="ghost"
-              className="p-1 hover:bg-muted transition-colors duration-200"
+              className="p-1 hover:bg-muted transition-colors duration-200 relative"
             >
-              <Avatar>
-                <AvatarImage
-                  src={avatarUrl(user)}
-                  alt={toCapitalCase(user.username)}
-                />
-                <AvatarFallback className="bg-muted text-foreground">
-                  {toCapitalCase(user.username)}
-                </AvatarFallback>
-              </Avatar>
+              {/* Decoration and Avatar Wrapper */}
+              <div className="relative flex items-center justify-center">
+                {/* Avatar */}
+                <div className="relative rounded-full">
+                  <Avatar>
+                    <AvatarImage
+                      src={avatarUrl(user)}
+                      alt={toCapitalCase(user.username)}
+                    />
+                    <AvatarFallback className="bg-muted text-foreground">
+                      {toCapitalCase(user.username)}
+                    </AvatarFallback>
+                  </Avatar>
+                </div>
+
+                {/* Avatar Decoration */}
+                {user.avatar_decoration_data?.asset && (
+                  <div className="absolute inset-0 flex items-center justify-center">
+                    <Image
+                      src={decorationUrl(user.avatar_decoration_data)}
+                      alt="Avatar Decoration"
+                      width={96}
+                      height={96}
+                      className="object-contain"
+                    />
+                  </div>
+                )}
+              </div>
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent
@@ -200,7 +159,7 @@ const RTLNavbar = (props: {
             <DropdownMenuSeparator className="my-1 bg-border" />
             <DropdownMenuItem
               className="px-2 py-1 text-sm text-foreground hover:bg-muted transition-colors duration-200"
-              onClick={() => router.push("/peachy/profile")}
+              onClick={handleProfileClick}
             >
               Profile Settings
             </DropdownMenuItem>

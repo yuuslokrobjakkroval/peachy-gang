@@ -1,6 +1,11 @@
 import Image from "next/image";
 import { Card } from "@/components/ui/card";
-import { avatarUrl, bannerUrl, formatCoinCompact } from "@/utils/common";
+import {
+  avatarUrl,
+  bannerUrl,
+  decorationUrl,
+  formatCoinCompact,
+} from "@/utils/common";
 import { MdVerified } from "react-icons/md";
 import { User } from "@/utils/types";
 
@@ -11,26 +16,48 @@ const Information = ({
   peachyInfo: any;
   userInfo: User;
 }) => {
-  const backgroundStyle =
-    !!peachyInfo.banner === null
-      ? { background: `url(${bannerUrl(peachyInfo.id, peachyInfo.banner)})` }
-      : { backgroundColor: peachyInfo.banner_color };
+  const backgroundStyle = peachyInfo.banner
+    ? {
+        background: `url(${bannerUrl(peachyInfo.id, peachyInfo.banner)})`,
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+      }
+    : { backgroundColor: peachyInfo.banner_color };
 
   return (
     <Card className="items-center w-full h-full p-[16px] bg-cover">
       {/* Background and profile */}
       <div
-        className="relative mt-1 flex h-32 w-full justify-center rounded-xl bg-cover"
+        className="relative mt-1 flex w-full justify-center rounded-xl bg-cover h-[clamp(160px,20vw,300px)]"
         style={backgroundStyle}
       >
-        <div className="absolute -bottom-12 flex h-[87px] w-[87px] items-center justify-center rounded-full border-[4px] border-white bg-pink-400 dark:!border-navy-700">
-          <Image
-            className="h-full w-full rounded-full"
-            src={avatarUrl(peachyInfo)}
-            alt=""
-            width="512"
-            height="512"
-          />
+        <div className="absolute -bottom-12 left-1/2 -translate-x-1/2">
+          {/* Decoration and Avatar Wrapper */}
+          <div className="relative w-[96px] h-[96px] flex items-center justify-center">
+            {/* Avatar */}
+            <div className="relative w-[87px] h-[87px] rounded-full border-[4px] border-white bg-pink-400 dark:!border-navy-700 overflow-hidden">
+              <Image
+                src={avatarUrl(peachyInfo)}
+                alt="Profile Avatar"
+                width={87}
+                height={87}
+                className="rounded-full object-cover"
+              />
+            </div>
+
+            {/* Avatar Decoration */}
+            {peachyInfo.avatar_decoration_data?.asset && (
+              <div className="absolute inset-0 z-10 flex items-center justify-center">
+                <Image
+                  src={decorationUrl(peachyInfo.avatar_decoration_data)}
+                  alt="Avatar Decoration"
+                  width={96}
+                  height={96}
+                  className="object-contain"
+                />
+              </div>
+            )}
+          </div>
         </div>
       </div>
 
@@ -86,13 +113,6 @@ const Information = ({
             {formatCoinCompact(userInfo.balance?.coinflip ?? 0)}
           </p>
           <p className="text-sm font-normal text-muted-foreground">Coin Flip</p>
-        </div>
-
-        <div className="flex flex-col items-center justify-center">
-          <p className="flex justify-center items-center text-lg font-bold text-navy-700 dark:text-white">
-            {formatCoinCompact(userInfo.balance?.sponsor ?? 0)}
-          </p>
-          <p className="text-sm font-normal text-muted-foreground">Sponsor</p>
         </div>
       </div>
     </Card>

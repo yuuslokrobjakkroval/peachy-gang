@@ -1,7 +1,13 @@
 "use client";
 import React from "react";
 
-import { BadgeCheck, Bell, ChevronsUpDown, LogOut } from "lucide-react";
+import {
+  BadgeCheck,
+  Bell,
+  ChevronsUpDown,
+  CreditCard,
+  LogOut,
+} from "lucide-react";
 
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import {
@@ -27,7 +33,6 @@ export function NavUser({ user }: { user: UserInfo }) {
   const { isMobile } = useSidebar();
   const router = useRouter();
   const { setPeachyInfo } = usePeachy();
-  console.log(user);
 
   const handleProfileClick = () => {
     setPeachyInfo(user);
@@ -85,8 +90,8 @@ export function NavUser({ user }: { user: UserInfo }) {
                 Profile
               </DropdownMenuItem>
               <DropdownMenuItem>
-                <Bell />
-                Notifications
+                <CreditCard />
+                Billing
               </DropdownMenuItem>
             </DropdownMenuGroup>
             <DropdownMenuSeparator />

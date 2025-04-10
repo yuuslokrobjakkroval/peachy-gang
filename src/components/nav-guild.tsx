@@ -1,7 +1,6 @@
 "use client";
 
-import { Search } from "lucide-react";
-
+import { useRouter } from "next/navigation";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import {
   SidebarGroup,
@@ -9,43 +8,20 @@ import {
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
-  SidebarInput,
-  SidebarHeader,
 } from "@/components/ui/sidebar";
-import { Label } from "@/components/ui/label";
-import { useGetGuildsQuery } from "@/redux/api/discord";
-import { LoadingPage } from "./loading/circle";
 import { getOwnerGuild, Guild, iconUrl } from "@/utils/common";
-import { useState } from "react";
-import { useRouter } from "next/navigation";
-import { SearchForm } from "@/components/search-form";
+import { usePeachy } from "@/context/peachy";
 
 export function NavGuild({ guilds }: { guilds: Guild[] }) {
+  const { peachyInfo }: { peachyInfo: any } = usePeachy();
   const router = useRouter();
-  const [search, setSearch] = useState<string>("");
-
-  const searchGuild = (servers: any) => {
-    return getOwnerGuild(servers).filter((server: any) => {
-      const normalizedName = server.name
-        .toLowerCase()
-        .normalize("NFKD")
-        .replace(/[\u0300-\u036f]/g, "");
-      const normalizedSearch = search
-        .toLowerCase()
-        .normalize("NFKD")
-        .replace(/[\u0300-\u036f]/g, "");
-      return normalizedName.toLowerCase().includes(normalizedSearch);
-    });
-  };
 
   return (
     <SidebarGroup className="py-0">
       <SidebarGroupLabel>🏠 GUILDS 🏠</SidebarGroupLabel>
-      {/* <SidebarHeader>
-        <SearchForm />
-      </SidebarHeader> */}
+
       <SidebarMenu>
-        {searchGuild(guilds)?.length === 0 ? (
+        {getOwnerGuild(guilds)?.length === 0 ? (
           <SidebarMenuItem className="gap-3">
             <SidebarMenuButton>
               <span className="text-gray-500 dark:text-gray-400 text-sm italic">
@@ -54,7 +30,7 @@ export function NavGuild({ guilds }: { guilds: Guild[] }) {
             </SidebarMenuButton>
           </SidebarMenuItem>
         ) : (
-          searchGuild(guilds)?.map((guild: any) => (
+          getOwnerGuild(guilds)?.map((guild: any) => (
             <SidebarMenuItem key={guild.id} className="gap-3">
               <SidebarMenuButton
                 tooltip={guild.name}
