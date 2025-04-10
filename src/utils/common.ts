@@ -338,3 +338,49 @@ export function emojiUrl(emoji: any): string {
     return `https://cdn.discordapp.com/emojis/${emoji.id}.png?size=128`;
   }
 }
+
+export const getRandomEmoji = (): string => {
+  const emojis: string[] = [
+    "😊", // Smiling face
+    "👍", // Thumbs up
+    "✨", // Sparkles
+    "🚀", // Rocket
+    "🌟", // Glowing star
+    "😎", // Cool face
+    "🎉", // Party popper
+    "❤️", // Red heart
+    "😂", // Laughing face
+    "🐾", // Paw prints
+    "🌈", // Rainbow
+    "🍕", // Pizza
+    "🎸", // Guitar
+    "☀️", // Sun
+    "🌙", // Crescent moon
+    "✈️", // Airplane
+    "🎁", // Gift
+    "🤓", // Nerd face
+    "🍦", // Ice cream
+    "🏆", // Trophy
+    "🤗", // Hugging face
+    "👾", // Alien monster
+    "🍉", // Watermelon
+    "🏝️", // Desert island
+    "🐳", // Whale
+    "🎨", // Artist palette
+    "🦄", // Unicorn
+    "🍔", // Hamburger
+    "🔔", // Bell
+    "🌸", // Cherry blossom
+    "👻", // Ghost
+    "🎤", // Microphone
+    "🐼", // Panda
+    "🍓", // Strawberry
+    "⛄", // Snowman
+    "🦋", // Butterfly
+    "🎮", // Video game controller
+    "🌮", // Taco
+    "🧩", // Puzzle piece
+    "⚡", // Lightning bolt
+  ];
+  return getRandomElement(emojis);
+};
