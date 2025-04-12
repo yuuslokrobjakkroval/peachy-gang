@@ -67,13 +67,8 @@ const Information = ({
           {peachyInfo?.global_name}
           {peachyInfo?.verified && <MdVerified className="mt-0.5" />}
         </h4>
-
         <p className="flex justify-center text-base font-normal text-muted-foreground">
           {peachyInfo?.username}
-        </p>
-
-        <p className="text-base font-normal text-muted-foreground">
-          {userInfo?.profile?.bio ?? ""}
         </p>
       </div>
 
