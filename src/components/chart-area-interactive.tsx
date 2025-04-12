@@ -23,11 +23,19 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
 
 // Fallback data if no valid user data is provided
 const fallbackChartData = [
-  { date: "2025-04-05", coin: 0, bank: 0 }, // Current date as fallback
+  {
+    date: "2025-04-05",
+    coin: 0,
+    bank: 0,
+    slots: 0,
+    blackjack: 0,
+    coinflip: 0,
+    klaklouk: 0,
+    sponsor: 0,
+  },
 ];
 
 // Function to generate chart data from user data
@@ -39,36 +47,75 @@ const generateChartData = (users: any) => {
   }
 
   const usersArray = Array.isArray(users) ? users : [users];
-  const user = usersArray[0]; // Work with the first user
 
-  // Ensure user has required fields
-  if (!user?.createdAt || !user?.updatedAt || !user?.balance?.coin) {
-    console.warn("User data is missing required fields, using fallback data.");
+  // Filter users with required fields
+  const validUsers = usersArray.filter(
+    (user) => user?.createdAt && user?.updatedAt && user?.balance
+  );
+
+  if (validUsers.length === 0) {
+    console.warn("No users have required fields, using fallback data.");
     return fallbackChartData;
   }
 
-  const startDate = new Date(user.createdAt);
-  const endDate = new Date(user.updatedAt);
-  const totalCoin = user.balance.coin;
+  // Aggregate balances
+  const totalBalance = validUsers.reduce(
+    (acc, user) => ({
+      coin: acc.coin + (user.balance.coin || 0),
+      bank: acc.bank + (user.balance.bank || 0),
+      slots: acc.slots + (user.balance.slots || 0),
+      blackjack: acc.blackjack + (user.balance.blackjack || 0),
+      coinflip: acc.coinflip + (user.balance.coinflip || 0),
+      klaklouk: acc.klaklouk + (user.balance.klaklouk || 0),
+      sponsor: acc.sponsor + (user.balance.sponsor || 0),
+    }),
+    {
+      coin: 0,
+      bank: 0,
+      slots: 0,
+      blackjack: 0,
+      coinflip: 0,
+      klaklouk: 0,
+      sponsor: 0,
+    }
+  );
+
+  // Find earliest createdAt and latest updatedAt
+  const startDate = new Date(
+    Math.min(...validUsers.map((user) => new Date(user.createdAt).getTime()))
+  );
+  const endDate = new Date(
+    Math.max(...validUsers.map((user) => new Date(user.updatedAt).getTime()))
+  );
   const daysDiff =
     Math.ceil((endDate.getTime() - startDate.getTime()) / (1000 * 3600 * 24)) ||
-    1; // Avoid division by 0
+    1;
 
-  // Simulate daily coin accumulation
-  const dailyIncrement = totalCoin / daysDiff;
+  // Simulate daily accumulation for each balance type
   const chartData = [];
+  const balanceTypes = [
+    "coin",
+    "bank",
+    "slots",
+    "blackjack",
+    "coinflip",
+    "klaklouk",
+    "sponsor",
+  ];
 
   for (let i = 0; i <= daysDiff; i++) {
     const date = new Date(startDate);
     date.setDate(date.getDate() + i);
     const formattedDate = date.toISOString().split("T")[0];
-    const coinBalance = Math.floor(dailyIncrement * i);
+    const dailyData: any = { date: formattedDate };
 
-    chartData.push({
-      date: formattedDate,
-      coin: coinBalance,
-      bank: user.balance.bank || 0, // Default to 0 if undefined
+    balanceTypes.forEach((type) => {
+      const total = totalBalance[type as keyof typeof totalBalance];
+      const dailyIncrement = total / daysDiff;
+      dailyData[type] = Math.floor(dailyIncrement * i);
     });
+
+    chartData.push(dailyData);
   }
 
   return chartData;
@@ -76,12 +123,32 @@ const generateChartData = (users: any) => {
 
 const chartConfig = {
   coin: {
-    label: "Coin Balance",
-    color: "hsl(var(--chart-1))",
+    label: "Coin",
+    color: "#ff6384", // Vibrant red-pink
   },
   bank: {
-    label: "Bank Balance",
-    color: "hsl(var(--chart-2))",
+    label: "Bank",
+    color: "#36a2eb", // Bright blue
+  },
+  slots: {
+    label: "Slots",
+    color: "#ffce56", // Warm yellow
+  },
+  blackjack: {
+    label: "Blackjack",
+    color: "#4bc0c0", // Teal
+  },
+  coinflip: {
+    label: "Coinflip",
+    color: "#9966ff", // Purple
+  },
+  klaklouk: {
+    label: "Klaklouk",
+    color: "#ff9f40", // Orange
+  },
+  sponsor: {
+    label: "Sponsor",
+    color: "#c9cbcf", // Light gray
   },
 } satisfies ChartConfig;
 
@@ -100,8 +167,10 @@ export function ChartAreaInteractive({ users }: { users: any }) {
   const filteredData = chartData.filter((item) => {
     const date = new Date(item.date);
     const referenceDate = new Date(chartData[chartData.length - 1].date); // Latest date
-    let daysToSubtract = 90;
-    if (timeRange === "30d") daysToSubtract = 30;
+    let daysToSubtract = 90; // Default to 3 months
+    if (timeRange === "180d") daysToSubtract = 180;
+    else if (timeRange === "90d") daysToSubtract = 90;
+    else if (timeRange === "30d") daysToSubtract = 30;
     else if (timeRange === "7d") daysToSubtract = 7;
     const startDate = new Date(referenceDate);
     startDate.setDate(startDate.getDate() - daysToSubtract);
@@ -111,45 +180,28 @@ export function ChartAreaInteractive({ users }: { users: any }) {
   return (
     <Card className="@container/card">
       <CardHeader className="relative">
-        <CardTitle>Coin Balance Trend</CardTitle>
+        <CardTitle>Total Balance Trends</CardTitle>
         <CardDescription>
           {chartData === fallbackChartData ? (
             "No data available"
           ) : (
             <>
               <span className="@[540px]/card:block hidden">
-                Coin accumulation over time
+                Total balance accumulation over time
               </span>
-              <span className="@[540px]/card:hidden">Coin Trend</span>
+              <span className="@[540px]/card:hidden">Balance Trends</span>
             </>
           )}
         </CardDescription>
         <div className="absolute right-4 top-4">
-          <ToggleGroup
-            type="single"
-            value={timeRange}
-            onValueChange={setTimeRange}
-            variant="outline"
-            className="@[767px]/card:flex hidden"
-          >
-            <ToggleGroupItem value="90d" className="h-8 px-2.5">
-              Last 3 months
-            </ToggleGroupItem>
-            <ToggleGroupItem value="30d" className="h-8 px-2.5">
-              Last 30 days
-            </ToggleGroupItem>
-            <ToggleGroupItem value="7d" className="h-8 px-2.5">
-              Last 7 days
-            </ToggleGroupItem>
-          </ToggleGroup>
           <Select value={timeRange} onValueChange={setTimeRange}>
-            <SelectTrigger
-              className="@[767px]/card:hidden flex w-40"
-              aria-label="Select a value"
-            >
+            <SelectTrigger className="w-40" aria-label="Select time range">
               <SelectValue placeholder="Last 3 months" />
             </SelectTrigger>
             <SelectContent className="rounded-xl">
+              <SelectItem value="180d" className="rounded-lg">
+                Last 6 months
+              </SelectItem>
               <SelectItem value="90d" className="rounded-lg">
                 Last 3 months
               </SelectItem>
@@ -175,32 +227,33 @@ export function ChartAreaInteractive({ users }: { users: any }) {
           >
             <AreaChart data={filteredData}>
               <defs>
-                <linearGradient id="fillCoin" x1="0" y1="0" x2="0" y2="1">
-                  <stop
-                    offset="5%"
-                    stopColor="var(--color-coin)"
-                    stopOpacity={1.0}
-                  />
-                  <stop
-                    offset="95%"
-                    stopColor="var(--color-coin)"
-                    stopOpacity={0.1}
-                  />
-                </linearGradient>
-                <linearGradient id="fillBank" x1="0" y1="0" x2="0" y2="1">
-                  <stop
-                    offset="5%"
-                    stopColor="var(--color-bank)"
-                    stopOpacity={0.8}
-                  />
-                  <stop
-                    offset="95%"
-                    stopColor="var(--color-bank)"
-                    stopOpacity={0.1}
-                  />
-                </linearGradient>
+                {Object.keys(chartConfig).map((key) => (
+                  <linearGradient
+                    key={key}
+                    id={`fill${key.charAt(0).toUpperCase() + key.slice(1)}`}
+                    x1="0"
+                    y1="0"
+                    x2="0"
+                    y2="1"
+                  >
+                    <stop
+                      offset="5%"
+                      stopColor={
+                        chartConfig[key as keyof typeof chartConfig].color
+                      }
+                      stopOpacity={0.8}
+                    />
+                    <stop
+                      offset="95%"
+                      stopColor={
+                        chartConfig[key as keyof typeof chartConfig].color
+                      }
+                      stopOpacity={0.1}
+                    />
+                  </linearGradient>
+                ))}
               </defs>
-              <CartesianGrid vertical={false} />
+              <CartesianGrid vertical={false} strokeOpacity={0.3} />
               <XAxis
                 dataKey="date"
                 tickLine={false}
@@ -223,26 +276,26 @@ export function ChartAreaInteractive({ users }: { users: any }) {
                       return new Date(value).toLocaleDateString("en-US", {
                         month: "short",
                         day: "numeric",
+                        year: "numeric",
                       });
                     }}
                     indicator="dot"
                   />
                 }
               />
-              <Area
-                dataKey="coin"
-                type="natural"
-                fill="url(#fillCoin)"
-                stroke="var(--color-coin)"
-                stackId="a"
-              />
-              <Area
-                dataKey="bank"
-                type="natural"
-                fill="url(#fillBank)"
-                stroke="var(--color-bank)"
-                stackId="a"
-              />
+              {Object.keys(chartConfig).map((key) => (
+                <Area
+                  key={key}
+                  dataKey={key}
+                  type="natural"
+                  fill={`url(#fill${
+                    key.charAt(0).toUpperCase() + key.slice(1)
+                  })`}
+                  stroke={chartConfig[key as keyof typeof chartConfig].color}
+                  stackId="a"
+                  fillOpacity={0.4}
+                />
+              ))}
             </AreaChart>
           </ChartContainer>
         )}

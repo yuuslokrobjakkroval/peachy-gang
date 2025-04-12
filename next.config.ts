@@ -4,6 +4,7 @@ const nextConfig: NextConfig = {
   images: {
     domains: [
       "i.imgur.com",
+      "images.domains",
       "images.remotePatterns",
       "cdn.discordapp.com",
       "i.pinimg.com",

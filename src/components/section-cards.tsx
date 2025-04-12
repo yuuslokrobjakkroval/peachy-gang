@@ -36,28 +36,28 @@ export function SectionCards({ users, meta }: { users: any; meta: any }) {
   }).length;
 
   return (
-    <div className="*:data-[slot=card]:shadow-xs @xl/main:grid-cols-2 @5xl/main:grid-cols-4 grid grid-cols-1 gap-4 px-4 *:data-[slot=card]:bg-gradient-to-t *:data-[slot=card]:from-primary/5 *:data-[slot=card]:to-card dark:*:data-[slot=card]:bg-card lg:px-6">
+    <div className="grid grid-cols-1 gap-4 px-4 @xl/main:grid-cols-2 @5xl/main:grid-cols-4 lg:px-6">
       {/* Card 1: Total Users */}
-      <Card className="@container/card">
+      <Card className="@container/card min-w-[250px] bg-gradient-to-t from-primary/5 to-card shadow-sm dark:bg-card">
         <CardHeader className="relative">
-          <CardDescription className="flex items-center gap-2">
-            <UserIcon className="size-4 text-muted-foreground" />
+          <CardDescription className="flex items-center gap-2 text-sm">
+            <UserIcon className="h-4 w-4 text-muted-foreground" />
             Total Users
           </CardDescription>
-          <CardTitle className="@[250px]/card:text-4xl text-3xl font-bold tabular-nums text-primary">
+          <CardTitle className="text-2xl font-bold tabular-nums text-primary @[250px]/card:text-3xl">
             {(meta?.itemCount ?? usersArray.length)?.toLocaleString()}
           </CardTitle>
-          <div className="absolute right-4 top-4">
+          <div className="absolute right-3 top-3">
             <Badge
               variant="secondary"
-              className="flex gap-1 rounded-full bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200"
+              className="flex gap-1 rounded-full bg-green-100 px-2 py-1 text-xs text-green-800 dark:bg-green-900 dark:text-green-200"
             >
-              <TrendingUpIcon className="size-3" />+
+              <TrendingUpIcon className="h-3 w-3" />+
               {usersArray.length > 1 ? "5" : "0"}%
             </Badge>
           </div>
         </CardHeader>
-        <CardFooter className="flex-col items-start gap-1 text-sm">
+        <CardFooter className="flex-col items-start gap-1 text-xs">
           <div className="flex gap-2 font-medium text-green-600 dark:text-green-400">
             {activeUsers} active this week
           </div>
@@ -68,11 +68,11 @@ export function SectionCards({ users, meta }: { users: any; meta: any }) {
       </Card>
 
       {/* Card 2: Total Coin */}
-      <Card className="@container/card">
+      <Card className="@container/card min-w-[250px] bg-gradient-to-t from-primary/5 to-card shadow-sm dark:bg-card">
         <CardHeader className="relative">
-          <CardDescription className="flex items-center gap-2">
+          <CardDescription className="flex items-center gap-2 text-sm">
             <svg
-              className="size-4 text-muted-foreground"
+              className="h-4 w-4 text-muted-foreground"
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"
@@ -86,20 +86,11 @@ export function SectionCards({ users, meta }: { users: any; meta: any }) {
             </svg>
             Total Coin
           </CardDescription>
-          <CardTitle className="@[250px]/card:text-4xl text-3xl font-bold tabular-nums text-yellow-600 dark:text-yellow-400">
+          <CardTitle className="text-2xl font-bold tabular-nums text-yellow-600 dark:text-yellow-400 @[250px]/card:text-3xl">
             {totalCoin.toLocaleString()}
           </CardTitle>
-          <div className="absolute right-4 top-4">
-            <Badge
-              variant="secondary"
-              className="flex gap-1 rounded-full bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-200"
-            >
-              <TrendingUpIcon className="size-3" />
-              +12.5%
-            </Badge>
-          </div>
         </CardHeader>
-        <CardFooter className="flex-col items-start gap-1 text-sm">
+        <CardFooter className="flex-col items-start gap-1 text-xs">
           <div className="flex gap-2 font-medium text-yellow-600 dark:text-yellow-400">
             Across {usersArray.length} wallets
           </div>
@@ -108,11 +99,11 @@ export function SectionCards({ users, meta }: { users: any; meta: any }) {
       </Card>
 
       {/* Card 3: Bank Reserves */}
-      <Card className="@container/card">
+      <Card className="@container/card min-w-[250px] bg-gradient-to-t from-primary/5 to-card shadow-sm dark:bg-card">
         <CardHeader className="relative">
-          <CardDescription className="flex items-center gap-2">
+          <CardDescription className="flex items-center gap-2 text-sm">
             <svg
-              className="size-4 text-muted-foreground"
+              className="h-4 w-4 text-muted-foreground"
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"
@@ -126,20 +117,11 @@ export function SectionCards({ users, meta }: { users: any; meta: any }) {
             </svg>
             Bank Reserves
           </CardDescription>
-          <CardTitle className="@[250px]/card:text-4xl text-3xl font-bold tabular-nums text-blue-600 dark:text-blue-400">
+          <CardTitle className="text-2xl font-bold tabular-nums text-blue-600 dark:text-blue-400 @[250px]/card:text-3xl">
             {totalCoinInBank.toLocaleString()}
           </CardTitle>
-          <div className="absolute right-4 top-4">
-            <Badge
-              variant="secondary"
-              className="flex gap-1 rounded-full bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200"
-            >
-              <TrendingUpIcon className="size-3" />
-              +8.2%
-            </Badge>
-          </div>
         </CardHeader>
-        <CardFooter className="flex-col items-start gap-1 text-sm">
+        <CardFooter className="flex-col items-start gap-1 text-xs">
           <div className="flex gap-2 font-medium text-blue-600 dark:text-blue-400">
             Stored securely
           </div>
@@ -148,26 +130,17 @@ export function SectionCards({ users, meta }: { users: any; meta: any }) {
       </Card>
 
       {/* Card 4: Average Level & Engagement */}
-      <Card className="@container/card">
+      <Card className="@container/card min-w-[250px] bg-gradient-to-t from-primary/5 to-card shadow-sm dark:bg-card">
         <CardHeader className="relative">
-          <CardDescription className="flex items-center gap-2">
-            <AwardIcon className="size-4 text-muted-foreground" />
+          <CardDescription className="flex items-center gap-2 text-sm">
+            <AwardIcon className="h-4 w-4 text-muted-foreground" />
             User Engagement
           </CardDescription>
-          <CardTitle className="@[250px]/card:text-4xl text-3xl font-bold tabular-nums text-purple-600 dark:text-purple-400">
+          <CardTitle className="text-2xl font-bold tabular-nums text-purple-600 dark:text-purple-400 @[250px]/card:text-3xl">
             {averageLevel.toFixed(1)}
           </CardTitle>
-          <div className="absolute right-4 top-4">
-            <Badge
-              variant="secondary"
-              className="flex gap-1 rounded-full bg-purple-100 text-purple-800 dark:bg-purple-900 dark:text-purple-200"
-            >
-              <TrendingUpIcon className="size-3" />
-              +15%
-            </Badge>
-          </div>
         </CardHeader>
-        <CardFooter className="flex-col items-start gap-1 text-sm">
+        <CardFooter className="flex-col items-start gap-1 text-xs">
           <div className="flex gap-2 font-medium text-purple-600 dark:text-purple-400">
             Average Level
           </div>
