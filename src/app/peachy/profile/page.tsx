@@ -10,7 +10,7 @@ import Setting from "./components/Setting";
 import { LoadingPage } from "@/components/loading/circle";
 import Error from "@/components/handler/error";
 
-export default function UserProfile() {
+export default function Profile() {
   const { peachyInfo }: { peachyInfo: any } = usePeachy();
 
   const { data: userInfo, isLoading } = useGetUserByIdQuery(peachyInfo?.id, {

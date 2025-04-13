@@ -50,10 +50,10 @@ export default function LoginPage() {
       </div>
       <div className="bg-muted relative hidden lg:block">
         <Image
+          className="object-cover"
           src="/images/house.webp"
           alt="Image"
-          layout="fill"
-          objectFit="cover"
+          fill
         />
       </div>
     </div>

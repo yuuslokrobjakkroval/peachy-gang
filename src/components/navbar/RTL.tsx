@@ -24,11 +24,18 @@ import {
   toCapitalCase,
   UserInfo,
 } from "@/utils/common";
-import { Avatar, AvatarFallback } from "../ui/avatar";
+import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { AvatarImage } from "@radix-ui/react-avatar";
 import Image from "next/image";
-import { getRandom } from "@tsparticles/engine";
-import { Tooltip, TooltipContent, TooltipTrigger } from "../ui/tooltip";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { AllNotification } from "./Notification/All";
+import { UnreadNotification } from "./Notification/Unread";
+import { ArchiveNotification } from "./Notification/Archive";
 
 const RTLNavbar = (props: {
   user: UserInfo;
@@ -46,6 +53,11 @@ const RTLNavbar = (props: {
   const handleProfileClick = () => {
     setPeachyInfo(user);
     router.push("/peachy/profile");
+  };
+
+  const handleProfileSettingClick = () => {
+    setPeachyInfo(user);
+    router.push("/peachy/profile/setting");
   };
 
   const handleOpenChange = (open: boolean) => {
@@ -91,7 +103,6 @@ const RTLNavbar = (props: {
         </Tooltip>
 
         {/* Notification Dropdown */}
-
         <DropdownMenu>
           <Tooltip>
             <TooltipTrigger asChild>
@@ -110,32 +121,60 @@ const RTLNavbar = (props: {
             </TooltipContent>
           </Tooltip>
           <DropdownMenuContent
-            className="w-[320px] rounded-xl bg-card p-4 border border-border shadow-lg transition-all duration-200"
+            className="w-[340px] max-h-[80vh] overflow-auto rounded-2xl bg-card p-6 border border-border shadow-lg transition-all duration-200"
             align="end"
           >
-            <div className="flex items-center justify-between">
-              <DropdownMenuLabel className="text-lg font-semibold text-primary">
+            <div className="flex items-center justify-between mb-4">
+              <DropdownMenuLabel className="text-xl font-semibold text-foreground">
                 Notifications
               </DropdownMenuLabel>
               <Button
                 variant="ghost"
-                className="text-sm text-muted-foreground hover:text-primary"
+                className="text-sm text-primary hover:text-primary-dark"
               >
                 Mark all read
               </Button>
             </div>
-            <DropdownMenuSeparator className="my-2 bg-border" />
-            <DropdownMenuItem className="flex w-full gap-3 p-2 transition-colors duration-200">
-              {/* <div className="flex-1">
-                <p className="text-sm font-medium text-foreground">
-                  New Update: Horizon UI
-                </p>
-                <p className="text-xs font-normal text-muted-foreground">
-                  A new update is available!
-                </p>
-              </div> */}
-            </DropdownMenuItem>
-            <DropdownMenuItem className="flex w-full gap-3 p-2 transition-colors duration-200"></DropdownMenuItem>
+            <Tabs defaultValue="all" aria-label="Notification filters">
+              <TabsList className="grid w-full grid-cols-3 bg-muted/50 rounded-lg">
+                <TabsTrigger
+                  value="all"
+                  className="data-[state=active]:bg-background data-[state=active]:text-foreground rounded-md text-sm font-medium"
+                >
+                  All
+                </TabsTrigger>
+                <TabsTrigger
+                  value="unread"
+                  className="data-[state=active]:bg-background data-[state=active]:text-foreground rounded-md py-2 text-sm font-medium"
+                >
+                  Unread
+                </TabsTrigger>
+                <TabsTrigger
+                  value="archive"
+                  className="data-[state=active]:bg-background data-[state=active]:text-foreground rounded-md py-2 text-sm font-medium"
+                >
+                  Archive
+                </TabsTrigger>
+              </TabsList>
+              <TabsContent
+                value="all"
+                className="space-y-4 pt-2 max-h-[450px] overflow-auto rounded-2xl bg-card scrollbar-thin scrollbar-thumb-primary scrollbar-track-muted"
+              >
+                <AllNotification />
+              </TabsContent>
+              <TabsContent
+                value="unread"
+                className="space-y-4 pt-2 max-h-[450px] overflow-auto rounded-2xl bg-card scrollbar-thin scrollbar-thumb-primary scrollbar-track-muted"
+              >
+                <UnreadNotification />
+              </TabsContent>
+              <TabsContent
+                value="archive"
+                className="space-y-4 pt-2 max-h-[450px] overflow-auto rounded-2xl bg-card scrollbar-thin scrollbar-thumb-primary scrollbar-track-muted"
+              >
+                <ArchiveNotification />
+              </TabsContent>
+            </Tabs>
           </DropdownMenuContent>
         </DropdownMenu>
 
@@ -197,9 +236,12 @@ const RTLNavbar = (props: {
             >
               Profile
             </DropdownMenuItem>
-            {/* <DropdownMenuItem className="px-2 py-1 text-sm text-foreground hover:bg-muted transition-colors duration-200">
-              Newsletter Settings
-            </DropdownMenuItem> */}
+            <DropdownMenuItem
+              className="px-2 py-1 text-sm text-foreground hover:bg-muted transition-colors duration-200"
+              onClick={handleProfileSettingClick}
+            >
+              Settings
+            </DropdownMenuItem>
             <DropdownMenuItem
               className="px-2 py-1 text-sm text-destructive hover:bg-muted transition-colors duration-200"
               onClick={() => router.push("/login")}
