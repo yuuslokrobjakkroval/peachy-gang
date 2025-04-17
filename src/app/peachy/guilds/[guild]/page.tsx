@@ -12,6 +12,7 @@ import { config, configPeach, configGoma } from "@/utils/config";
 import React from "react";
 import BannerPage from "@/components/applications/banner";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { BoxIcon, Mailbox } from "lucide-react";
 
 export default function FeaturePage() {
   const pathname = usePathname();
@@ -124,12 +125,23 @@ function NotJoined({ guild }: { guild: string }) {
   return (
     <div className="flex min-h-svh w-full items-center justify-center">
       <section className="rounded-2xl p-6 mb-8">
-        <Button
-          size="lg"
-          onClick={() => router.push(`${config.inviteUrl}&guild_id=${guild}`)}
-        >
-          Invite Bot
-        </Button>
+        <div className="w-full items-center flex flex-col justify-center gap-3">
+          <div className="text-center text-2xl font-semibold text-primary">
+            <Mailbox width={72} height={72} />
+          </div>
+          <h1 className="text-center text-2xl font-semibold text-primary">
+            Where is it?
+          </h1>
+          <p className="text-sm text-muted-foreground">
+            The bot can't access the server, let's invite him!
+          </p>
+          <Button
+            size="lg"
+            onClick={() => router.push(`${config.inviteUrl}&guild_id=${guild}`)}
+          >
+            Invite Bot
+          </Button>
+        </div>
       </section>
     </div>
   );

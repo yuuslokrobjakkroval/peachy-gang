@@ -16,7 +16,7 @@ export type AppConfig = {
   /**
    * icon (react component)
    */
-  icon?: (props: any) => ReactElement;
+  icon?: any;
   /**
    * Guild settings
    */

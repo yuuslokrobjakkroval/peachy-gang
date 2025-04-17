@@ -1,10 +1,8 @@
-import { NextPage } from "next";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { Input } from "@/components/ui/input"; // Assuming you have an Input component
 import { useGetGuildsQuery } from "@/redux/api/discord";
-import { LoadingPage } from "./Loading/circle";
+import { LoadingPage } from "./loading/circle";
 import { getOwnerGuild, iconUrl } from "@/utils/common";
-import { Card, CardDescription, CardHeader, CardTitle } from "./ui/card";
+import { Card, CardHeader, CardTitle } from "./ui/card";
 
 export const GuildsPage = ({}) => {
   const { data: guilds, isLoading } = useGetGuildsQuery(null);

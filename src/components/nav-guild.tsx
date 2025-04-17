@@ -11,10 +11,18 @@ import {
 } from "@/components/ui/sidebar";
 import { getOwnerGuild, Guild, iconUrl } from "@/utils/common";
 import { usePeachy } from "@/context/peachy";
+import { useEffect } from "react";
 
 export function NavGuild({ guilds }: { guilds: Guild[] }) {
-  const { peachyInfo }: { peachyInfo: any } = usePeachy();
+  const { setGuilds } = usePeachy();
+
   const router = useRouter();
+
+  useEffect(() => {
+    if (guilds.length > 0) {
+      setGuilds(guilds);
+    }
+  });
 
   return (
     <SidebarGroup className="py-0">

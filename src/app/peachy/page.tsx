@@ -1,8 +1,6 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { CardStack } from "@/components/bot-card";
-import { CARD } from "@/utils/config";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 
@@ -19,6 +17,8 @@ import {
 } from "@/components/ui/card";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Input } from "@/components/ui/input";
+import BotInformation from "@/components/contents/bot-info";
+import { CARD } from "@/utils/config";
 
 export default function PeachyPage() {
   const [isChatOpen, setIsChatOpen] = useState(false);
@@ -66,7 +66,7 @@ export default function PeachyPage() {
   }, [messages]);
   return (
     <div className="flex min-h-svh w-full items-center justify-center">
-      <CardStack items={CARD} />
+      <BotInformation Cards={CARD} />
       <AnimatePresence>
         {showChatIcon && (
           <motion.div

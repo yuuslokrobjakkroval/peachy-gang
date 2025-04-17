@@ -19,7 +19,7 @@ import { Separator } from "@/components/ui/separator";
 import { ChevronRight } from "lucide-react";
 import { useFetchUserInfoQuery } from "@/redux/api/discord";
 import { useGetGuildsQuery } from "@/redux/api/discord";
-import { Guild, toCapitalCase } from "@/utils/common";
+import { Guild, toCapitalCase, toUpperCase } from "@/utils/common";
 import { LoadingPage } from "@/components/loading/circle";
 import RTLNavbar from "@/components/navbar/RTL";
 
@@ -70,12 +70,12 @@ export default function PeachyLayout({
                             .join("/")}`}
                           className="hover:text-primary transition-colors"
                         >
-                          {toCapitalCase(segment)}
+                          {toUpperCase(segment)}
                           <ChevronRight className="w-6 h-6 hover:text-primary inline-block" />
                         </BreadcrumbLink>
                       ) : (
                         <BreadcrumbPage className="font-semibold text-foreground">
-                          {toCapitalCase(segment)}
+                          {toUpperCase(segment)}
                         </BreadcrumbPage>
                       )}
                     </BreadcrumbItem>

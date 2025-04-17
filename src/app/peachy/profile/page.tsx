@@ -8,12 +8,20 @@ import Inventory from "./components/Inventory";
 import Setting from "./components/Setting";
 
 import { LoadingPage } from "@/components/loading/circle";
-import Error from "@/components/handler/error";
+import AuthError from "@/components/handler/auth-error";
+import {
+  handleAuthError,
+  AUTH_ERROR_CODES,
+} from "@/utils/auth/handleAuthError";
 
 export default function Profile() {
   const { peachyInfo }: { peachyInfo: any } = usePeachy();
 
-  const { data: userInfo, isLoading } = useGetUserByIdQuery(peachyInfo?.id, {
+  const {
+    data: userInfo,
+    isLoading,
+    error,
+  } = useGetUserByIdQuery(peachyInfo?.id, {
     skip: !peachyInfo.id,
   });
 
@@ -21,9 +29,21 @@ export default function Profile() {
 
   if (!peachyInfo) {
     return (
-      <Error
-        error="Failed to fetch user data"
-        reset={() => window.location.reload()}
+      <AuthError
+        error="User not authenticated"
+        code={AUTH_ERROR_CODES.NOT_AUTHENTICATED}
+        redirectTo="/login"
+      />
+    );
+  }
+
+  if (error) {
+    const authError = handleAuthError(error);
+    return (
+      <AuthError
+        error={authError.message}
+        code={authError.code}
+        redirectTo={authError.redirectTo}
       />
     );
   }
