@@ -4,21 +4,21 @@ const bot = emptySplitApi.injectEndpoints({
   endpoints: (builder) => ({
     getGuild: builder.query({
       query: (guild) => ({
-        url: `${process.env.NEXT_PUBLIC_API}/guilds/${guild}`,
+        url: `${process.env.NEXT_PUBLIC_API_ENDPOINT}/guilds/${guild}`,
         method: "GET",
       }),
       providesTags: (result, error, arg) => [{ type: "GUILD", id: arg }],
     }),
     getGuildInfo: builder.query({
       query: (guild) => ({
-        url: `${process.env.NEXT_PUBLIC_API}/guilds/${guild}`,
+        url: `${process.env.NEXT_PUBLIC_API_ENDPOINT}/guilds/${guild}`,
         method: "GET",
       }),
       providesTags: (result, error, arg) => [{ type: "GUILD", id: arg }],
     }),
     enableFeature: builder.mutation({
       query: ({ guild, feature }) => ({
-        url: `${process.env.NEXT_PUBLIC_API}/guilds/${guild}/features/${feature}`,
+        url: `${process.env.NEXT_PUBLIC_API_ENDPOINT}/guilds/${guild}/features/${feature}`,
         method: "POST",
       }),
       invalidatesTags: (result, error, arg) => [
@@ -27,16 +27,23 @@ const bot = emptySplitApi.injectEndpoints({
     }),
     disableFeature: builder.mutation({
       query: ({ guild, feature }) => ({
-        url: `${process.env.NEXT_PUBLIC_API}/guilds/${guild}/features/${feature}`,
+        url: `${process.env.NEXT_PUBLIC_API_ENDPOINT}/guilds/${guild}/features/${feature}`,
         method: "DELETE",
       }),
       invalidatesTags: (result, error, arg) => [
         { type: "FEATURE", id: `${arg.guild}-${arg.feature}` },
       ],
     }),
+    getFeature: builder.query({
+      query: ({ guild, feature }) => ({
+        url: `${process.env.NEXT_PUBLIC_API_ENDPOINT}/guilds/${guild}/features/${feature}`,
+        method: "GET",
+      }),
+      providesTags: (result, error, arg) => [{ type: "GUILD", id: arg }],
+    }),
     sendMessageFeature: builder.mutation({
       query: ({ guild, feature, userId }) => ({
-        url: `${process.env.NEXT_PUBLIC_API}/guilds/${guild}/features/${feature}/send-message`,
+        url: `${process.env.NEXT_PUBLIC_API_ENDPOINT}/guilds/${guild}/features/${feature}/send-message`,
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -49,21 +56,21 @@ const bot = emptySplitApi.injectEndpoints({
     }),
     fetchGuildRoles: builder.query({
       query: (guild) => ({
-        url: `${process.env.NEXT_PUBLIC_API}/guilds/${guild}/roles`,
+        url: `${process.env.NEXT_PUBLIC_API_ENDPOINT}/guilds/${guild}/roles`,
         method: "GET",
       }),
       providesTags: (result, error, arg) => [{ type: "ROLES", id: arg }],
     }),
     fetchGuildChannels: builder.query({
       query: (guild) => ({
-        url: `${process.env.NEXT_PUBLIC_API}/guilds/${guild}/channels`,
+        url: `${process.env.NEXT_PUBLIC_API_ENDPOINT}/guilds/${guild}/channels`,
         method: "GET",
       }),
       providesTags: (result, error, arg) => [{ type: "CHANNELS", id: arg }],
     }),
     fetchGuildEmoji: builder.query({
       query: (guild) => ({
-        url: `${process.env.NEXT_PUBLIC_API}/guilds/${guild}/emojis`,
+        url: `${process.env.NEXT_PUBLIC_API_ENDPOINT}/guilds/${guild}/emojis`,
         method: "GET",
       }),
       providesTags: (result, error, arg) => [{ type: "EMOJIS", id: arg }],
@@ -77,6 +84,7 @@ export const {
   useSendMessageFeatureMutation,
   useEnableFeatureMutation,
   useDisableFeatureMutation,
+  useGetFeatureQuery,
   useFetchGuildRolesQuery,
   useFetchGuildChannelsQuery,
   useFetchGuildEmojiQuery,

@@ -17,11 +17,7 @@ export async function GET(request: NextRequest) {
     const error = searchParams.get("error");
 
     if (error) {
-      return NextResponse.redirect(
-        `${getAbsoluteUrl()}/login?error=user_cancelled&reason=${encodeURIComponent(
-          error
-        )}`
-      );
+      return NextResponse.redirect(`${getAbsoluteUrl()}/login`);
     }
 
     if (!code) {

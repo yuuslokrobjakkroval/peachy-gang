@@ -2,19 +2,14 @@
 
 import React from "react";
 import { useGetUsersQuery } from "@/redux/api/users";
-import { SectionCards } from "@/components/section-cards";
-import { ChartAreaInteractive } from "@/components/chart-area-interactive";
-import { UsersTable } from "@/components/table";
 import { LoadingPage } from "@/components/loading/circle";
+import { RankTable } from "@/components/rank-table";
 
-export default function DashboardPage() {
+export default function RankPage() {
   const getParams = () => {
     return {
-      // search: search || null,
       order: -1,
       orderBy: "coin",
-      // page: page,
-      // limit: rowsPerPage,
     };
   };
 
@@ -30,12 +25,14 @@ export default function DashboardPage() {
   return (
     <div className="flex flex-1 flex-col">
       <div className="@container/main flex flex-1 flex-col gap-2">
-        <div className="flex flex-col gap-4 py-4 md:gap-6 md:py-6">
-          <SectionCards users={users} meta={meta} />
-          <div className="px-4 lg:px-6">
-            <ChartAreaInteractive users={users} />
+        <div className="flex min-h-screen w-full flex-col items-center p-6 md:p-10">
+          <div className="w-full">
+            {/* Header Section */}
+            <h1 className="text-3xl md:text-4xl font-bold text-primary text-center mb-6">
+              LEADERBOARD
+            </h1>
+            <RankTable data={users} isLoading={isLoading} />
           </div>
-          <UsersTable data={users} isLoading={isLoading} />
         </div>
       </div>
     </div>

@@ -51,9 +51,17 @@ export default async function LocaleLayout({
           name="keywords"
           content="nextjs, react, typescript, tailwindcss, peachy gang"
         />
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+        document.body.removeAttribute('cz-shortcut-listen');
+      `,
+          }}
+        />
       </head>
       <body
         className={`${nunito.variable} ${ptSans.variable} antialiased relative`}
+        cz-shortcut-listen="true"
       >
         {/*<NextIntlClientProvider>*/}
         <ThemeProvider

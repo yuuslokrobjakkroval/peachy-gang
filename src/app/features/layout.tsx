@@ -1,8 +1,6 @@
 "use client";
 
 import React from "react";
-import { usePathname } from "next/navigation";
-import { AppSidebar } from "@/components/app-sidebar";
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -17,12 +15,13 @@ import {
 } from "@/components/ui/sidebar";
 import { Separator } from "@/components/ui/separator";
 import { ChevronRight } from "lucide-react";
-import { useFetchUserInfoQuery } from "@/redux/api/discord";
-import { useGetGuildsQuery } from "@/redux/api/discord";
-import { Guild, toUpperCase } from "@/utils/common";
-import { LoadingPage } from "@/components/loading/circle";
-import RTLNavbar from "@/components/navbar/RTL";
+import { usePathname } from "next/navigation";
 import { usePeachy } from "@/context/peachy";
+import { FeatureSidebar } from "@/components/feature-sidebar";
+import RTLNavbar from "@/components/navbar/RTL";
+import { toUpperCase } from "@/utils/common";
+
+import { useGetGuildInfoQuery } from "@/redux/api/guild";
 
 export default function PeachyLayout({
   children,
@@ -31,35 +30,16 @@ export default function PeachyLayout({
 }) {
   const pathname = usePathname();
   const currentPath = pathname.split("/").filter(Boolean);
-  const guildIdIndex = currentPath.indexOf("guilds") + 1;
-  const guildId =
-    guildIdIndex > 0 && guildIdIndex < currentPath.length
-      ? currentPath[guildIdIndex]
-      : undefined;
-
-  const { setUserInfoByDiscord, setGuilds } = usePeachy();
-  const { data: user, isLoading: userLoading } = useFetchUserInfoQuery(null);
-  const { data: guilds, isLoading: guildLoading } = useGetGuildsQuery(null);
-
-  const guild = guilds?.find((g: Guild) => g.id === guildId);
+  const { userInfoByDiscord, guildId } = usePeachy();
+  const { data: guild } = useGetGuildInfoQuery(guildId);
 
   const breadcrumbPath = currentPath.map((segment, index) => {
-    if (index === guildIdIndex && guild?.name) {
-      return guild.name;
-    }
     return segment;
   });
 
-  if (userLoading || guildLoading) {
-    return <LoadingPage />;
-  } else {
-    setUserInfoByDiscord(user);
-    setGuilds(guilds);
-  }
-
   return (
     <SidebarProvider>
-      <AppSidebar />
+      <FeatureSidebar />
       <SidebarInset>
         <header className="flex justify-between h-16 shrink-0 items-center gap-2 transition-[width,height] ease-linear group-has-data-[collapsible=icon]/sidebar-wrapper:h-12 ml-8 mr-8">
           <div className="flex items-center gap-2 px-4">
@@ -93,7 +73,7 @@ export default function PeachyLayout({
           </div>
 
           <div className="flex items-center">
-            <RTLNavbar user={user} />
+            <RTLNavbar user={userInfoByDiscord} />
           </div>
         </header>
         <main className="flex flex-1 flex-col gap-4 p-4 pt-0">{children}</main>

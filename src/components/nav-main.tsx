@@ -1,6 +1,6 @@
 "use client";
 
-import { ChevronRight, type LucideIcon } from "lucide-react";
+import { ChevronRight, Swords, type LucideIcon } from "lucide-react";
 
 import {
   Collapsible,
@@ -29,12 +29,15 @@ export function NavMain({
     items?: {
       title: string;
       url: string;
+      icon?: LucideIcon;
     }[];
   }[];
 }) {
   return (
     <SidebarGroup>
-      <SidebarGroupLabel>💭 PEACH AND GOMA 💭</SidebarGroupLabel>
+      <SidebarGroupLabel>
+        <Swords className="mr-1" /> PEACHY GANG <Swords className="ml-1" />
+      </SidebarGroupLabel>
       <SidebarMenu>
         {items.map((item) => (
           <Collapsible
@@ -66,7 +69,15 @@ export function NavMain({
                     {item.items?.map((subItem) => (
                       <SidebarMenuSubItem key={subItem.title}>
                         <SidebarMenuSubButton asChild>
-                          <a href={subItem.url}>
+                          <a
+                            href={subItem.url}
+                            className="flex items-center gap-2"
+                          >
+                            {subItem.icon && (
+                              <span className="text-sidebar-primary">
+                                <subItem.icon className="h-4 w-4" />
+                              </span>
+                            )}
                             <span>{subItem.title}</span>
                           </a>
                         </SidebarMenuSubButton>

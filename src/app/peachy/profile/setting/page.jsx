@@ -20,15 +20,18 @@ import { LoadingPage } from "@/components/loading/circle";
 import Error from "@/components/handler/error";
 
 export default function ProfileSetting() {
-  const { peachyInfo } = usePeachy();
+  const { userInfoByDiscord } = usePeachy();
 
-  const { data: userInfo, isLoading } = useGetUserByIdQuery(peachyInfo?.id, {
-    skip: !peachyInfo.id,
-  });
+  const { data: userInfo, isLoading } = useGetUserByIdQuery(
+    userInfoByDiscord?.id,
+    {
+      skip: !userInfoByDiscord.id,
+    }
+  );
 
   if (isLoading) return <LoadingPage />;
 
-  if (!peachyInfo) {
+  if (!userInfoByDiscord) {
     return (
       <Error
         error="Failed to fetch user data"

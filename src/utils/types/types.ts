@@ -66,7 +66,7 @@ export interface FeatureConfig<K extends keyof CustomFeatures> {
   /**
    * Render content in Feature view
    */
-  useRender: UseFormRender<CustomFeatures[K]>;
+  useRender?: UseFormRender<CustomFeatures[K]>;
   /**
    * Render skeleton before featrue is loaded
    */

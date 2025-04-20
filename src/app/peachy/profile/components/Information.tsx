@@ -10,19 +10,22 @@ import { MdVerified } from "react-icons/md";
 import { User } from "@/utils/types";
 
 const Information = ({
-  peachyInfo,
+  userInfoByDiscord,
   userInfo,
 }: {
-  peachyInfo: any;
+  userInfoByDiscord: any;
   userInfo: User;
 }) => {
-  const backgroundStyle = peachyInfo.banner
+  const backgroundStyle = userInfoByDiscord.banner
     ? {
-        background: `url(${bannerUrl(peachyInfo.id, peachyInfo.banner)})`,
+        background: `url(${bannerUrl(
+          userInfoByDiscord.id,
+          userInfoByDiscord.banner
+        )})`,
         backgroundSize: "cover",
         backgroundPosition: "center",
       }
-    : { backgroundColor: peachyInfo.banner_color };
+    : { backgroundColor: userInfoByDiscord.banner_color };
 
   return (
     <Card className="items-center w-full h-full p-[16px] bg-cover">
@@ -37,7 +40,7 @@ const Information = ({
             {/* Avatar */}
             <div className="relative w-[87px] h-[87px] rounded-full border-[4px] border-white bg-pink-400 dark:!border-navy-700 overflow-hidden">
               <Image
-                src={avatarUrl(peachyInfo)}
+                src={avatarUrl(userInfoByDiscord)}
                 alt="Profile Avatar"
                 width={87}
                 height={87}
@@ -46,10 +49,10 @@ const Information = ({
             </div>
 
             {/* Avatar Decoration */}
-            {peachyInfo.avatar_decoration_data?.asset && (
+            {userInfoByDiscord.avatar_decoration_data?.asset && (
               <div className="absolute inset-0 z-10 flex items-center justify-center">
                 <Image
-                  src={decorationUrl(peachyInfo.avatar_decoration_data)}
+                  src={decorationUrl(userInfoByDiscord.avatar_decoration_data)}
                   alt="Avatar Decoration"
                   width={96}
                   height={96}
@@ -64,11 +67,11 @@ const Information = ({
       {/* Global Name and Username */}
       <div className="mt-8 flex flex-col">
         <h4 className="flex justify-center text-xl font-bold text-navy-700 dark:text-white gap-1">
-          {peachyInfo?.global_name}
-          {peachyInfo?.verified && <MdVerified className="mt-0.5" />}
+          {userInfoByDiscord?.global_name}
+          {userInfoByDiscord?.verified && <MdVerified className="mt-0.5" />}
         </h4>
         <p className="flex justify-center text-base font-normal text-muted-foreground">
-          {peachyInfo?.username}
+          {userInfoByDiscord?.username}
         </p>
       </div>
 

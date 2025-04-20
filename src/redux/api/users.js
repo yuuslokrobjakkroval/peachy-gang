@@ -2,18 +2,9 @@ import { emptySplitApi } from ".";
 
 const extendedApi = emptySplitApi.injectEndpoints({
   endpoints: (builder) => ({
-    // getProfile: builder.query({
-    //   query: () => ({
-    //     url: `${process.env.NEXT_PUBLIC_API}/users/profile/:id`,
-    //     method: "GET",
-    //   }),
-    //   providesTags: (result, error, args) => [
-    //     { type: "USER", id: "INFOMATION" },
-    //   ],
-    // }),
     getUsers: builder.query({
       query: (params) => ({
-        url: `${process.env.NEXT_PUBLIC_API}/peachy/users`,
+        url: `${process.env.NEXT_PUBLIC_API_ENDPOINT}/peachy/users`,
         method: "GET",
         params,
       }),
@@ -21,14 +12,14 @@ const extendedApi = emptySplitApi.injectEndpoints({
     }),
     getUserById: builder.query({
       query: (id) => ({
-        url: `${process.env.NEXT_PUBLIC_API}/peachy/profile/${id}`,
+        url: `${process.env.NEXT_PUBLIC_API_ENDPOINT}/peachy/profile/${id}`,
         method: "GET",
       }),
       providesTags: (result, error, arg) => [{ type: "USER", id: arg }],
     }),
     updateUser: builder.mutation({
       query: ({ id, body }) => ({
-        url: `${process.env.NEXT_PUBLIC_API}/peachy/users/${id}`,
+        url: `${process.env.NEXT_PUBLIC_API_ENDPOINT}/peachy/users/${id}`,
         method: "PATCH",
         headers: {
           "Content-Type": "application/json",
@@ -41,7 +32,6 @@ const extendedApi = emptySplitApi.injectEndpoints({
 });
 
 export const {
-  // useGetProfileQuery,
   useGetUsersQuery,
   useGetUserByIdQuery,
   useUpdateUserMutation,

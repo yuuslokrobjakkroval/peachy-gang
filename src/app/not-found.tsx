@@ -6,7 +6,7 @@ import { usePeachy } from "@/context/peachy";
 
 export default function NotFound() {
   const router = useRouter();
-  const { peachyInfo } = usePeachy();
+  const { userInfoByDiscord } = usePeachy();
 
   return (
     // <div className="relative flex min-h-screen w-full flex-col items-center justify-center p-6 md:p-10 bg-background">
@@ -30,7 +30,7 @@ export default function NotFound() {
     //     >
     //       Oops! <br /> Page Not Found
     //     </h3>
-    //     <p className="text-lg md:text-xl text-muted-foreground mb-8 shadow-sm">
+    //     <p className="text-lg md:text-xl text-muted-foreground mb-8">
     //       Looks like you’ve wandered into the void. You should be redirected
     //       automatically. If not, head back home.
     //     </p>
@@ -62,7 +62,7 @@ export default function NotFound() {
           </Button>
           <Button
             onClick={() =>
-              router.push(`${!!peachyInfo ? "/peachy" : "/login"}`)
+              router.push(`${!!userInfoByDiscord ? "/peachy" : "/login"}`)
             }
             variant="default"
             size="lg"

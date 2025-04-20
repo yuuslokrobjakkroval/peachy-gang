@@ -15,19 +15,19 @@ import {
 } from "@/utils/auth/handleAuthError";
 
 export default function Profile() {
-  const { peachyInfo }: { peachyInfo: any } = usePeachy();
+  const { userInfoByDiscord }: { userInfoByDiscord: any } = usePeachy();
 
   const {
     data: userInfo,
     isLoading,
     error,
-  } = useGetUserByIdQuery(peachyInfo?.id, {
-    skip: !peachyInfo.id,
+  } = useGetUserByIdQuery(userInfoByDiscord?.id, {
+    skip: !userInfoByDiscord.id,
   });
 
   if (isLoading) return <LoadingPage />;
 
-  if (!peachyInfo) {
+  if (!userInfoByDiscord) {
     return (
       <AuthError
         error="User not authenticated"
@@ -53,7 +53,10 @@ export default function Profile() {
       {/* <RTLNavbar /> */}
       <div className="w-ful mt-3 flex h-fit flex-col gap-5 lg:grid lg:grid-cols-12">
         <div className="col-span-8 lg:!mb-0">
-          <Information peachyInfo={peachyInfo} userInfo={userInfo} />
+          <Information
+            userInfoByDiscord={userInfoByDiscord}
+            userInfo={userInfo}
+          />
         </div>
 
         <div className="col-span-4 lg:col-span-4 lg:mb-0 3xl:!col-span-4">
@@ -61,13 +64,16 @@ export default function Profile() {
         </div>
 
         <div className="col-span-12 lg:!mb-0">
-          <General peachyInfo={peachyInfo} userInfo={userInfo} />
+          <General userInfoByDiscord={userInfoByDiscord} userInfo={userInfo} />
         </div>
       </div>
 
       <div className="grid h-full grid-cols-1 gap-5 lg:!grid-cols-12">
         <div className="col-span-12 lg:col-span-12 lg:mb-0 3xl:col-span-12">
-          <Inventory peachyInfo={peachyInfo} userInfo={userInfo} />
+          <Inventory
+            userInfoByDiscord={userInfoByDiscord}
+            userInfo={userInfo}
+          />
         </div>
       </div>
     </div>

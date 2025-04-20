@@ -65,7 +65,7 @@ export default function PeachyPage() {
     }
   }, [messages]);
   return (
-    <div className="flex min-h-svh w-full items-center justify-center">
+    <div className="flex w-full items-center justify-center">
       <BotInformation Cards={CARD} />
       <AnimatePresence>
         {showChatIcon && (

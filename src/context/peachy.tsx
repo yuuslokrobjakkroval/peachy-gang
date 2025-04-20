@@ -1,4 +1,3 @@
-// context/PeachyContext.tsx
 "use client";
 
 import {
@@ -8,17 +7,34 @@ import {
   useEffect,
   ReactNode,
 } from "react";
-import { Guild } from "@/utils/common"; // Assuming you have a Guild type defined
+
+import { UserInfo, Guild } from "@/utils/common";
+import { User } from "@/utils/types";
 
 // Define the context value type
 interface PeachyContextType<T = any> {
-  peachyInfo: T | null;
-  setPeachyInfo: (data: T | null) => void;
-  guilds: Guild[] | null; // Add guilds to the context
-  setGuilds: (guilds: Guild[] | null) => void; // Add setGuilds function
+  // USER
+  userInfoByDiscord: UserInfo;
+  setUserInfoByDiscord: (data: UserInfo) => void;
+
+  userInfoByBot: User;
+  setUserInfoByBot: (data: User) => void;
+
+  // GUILD
+  guilds: Guild[];
+  setGuilds: (guilds: Guild[]) => void;
+
+  guild: Guild;
+  setGuild: (guild: Guild) => void;
+
+  guildId: string;
+  setGuildId: (guildId: string) => void;
+
+  // FEATURE
+  feature: string;
+  setFeature: (feature: string) => void;
 }
 
-// Create the context with a generic type, defaulting to undefined
 const PeachyContext = createContext<PeachyContextType<any> | undefined>(
   undefined
 );
@@ -29,68 +45,143 @@ interface PeachyProviderProps {
 }
 
 export function PeachyProvider<T>({ children }: PeachyProviderProps) {
-  // State for peachyInfo
-  const [peachyInfo, setPeachyInfo] = useState<T | null>(() => {
+  // State for user info by discord
+  const [userInfoByDiscord, setUserInfoByDiscord] = useState<UserInfo>(() => {
     if (typeof window !== "undefined") {
-      const storedData = localStorage.getItem("peachyData");
+      const storedData = localStorage.getItem("userInfoByDiscord");
       return storedData ? JSON.parse(storedData) : null;
     }
     return null;
   });
 
-  // State for guilds
-  const [guilds, setGuilds] = useState<Guild[] | []>(() => {
+  // State for user info from bot
+  const [userInfoByBot, setUserInfoByBot] = useState<User>(() => {
     if (typeof window !== "undefined") {
-      const storedGuilds = localStorage.getItem("guildsData");
+      const storedData = localStorage.getItem("userInfoByBot");
+      return storedData ? JSON.parse(storedData) : null;
+    }
+    return null;
+  });
+
+  // State for all guilds
+  const [guilds, setGuilds] = useState<Guild[]>(() => {
+    if (typeof window !== "undefined") {
+      const storedGuilds = localStorage.getItem("guilds");
       return storedGuilds ? JSON.parse(storedGuilds) : [];
     }
     return [];
   });
 
-  // Sync peachyInfo to localStorage
-  useEffect(() => {
-    if (peachyInfo !== null) {
-      localStorage.setItem("peachyData", JSON.stringify(peachyInfo));
-    } else {
-      localStorage.removeItem("peachyData");
+  // State for guild info
+  const [guild, setGuild] = useState<Guild>(() => {
+    if (typeof window !== "undefined") {
+      const storedGuild = localStorage.getItem("guild");
+      return storedGuild ? JSON.parse(storedGuild) : null;
     }
-  }, [peachyInfo]);
+    return null;
+  });
 
-  // Sync guilds to localStorage
+  // State for guild id
+  const [guildId, setGuildId] = useState<string>(() => {
+    if (typeof window !== "undefined") {
+      const storedGuild = localStorage.getItem("guildId");
+      return storedGuild ? JSON.parse(storedGuild) : null;
+    }
+    return null;
+  });
+
+  // State for feature name
+  const [feature, setFeature] = useState<string>(() => {
+    if (typeof window !== "undefined") {
+      const storedGuild = localStorage.getItem("feature");
+      return storedGuild ? JSON.parse(storedGuild) : null;
+    }
+    return null;
+  });
+
+  // Sync user info by discord to localStorage
+  useEffect(() => {
+    if (userInfoByDiscord !== null) {
+      localStorage.setItem(
+        "userInfoByDiscord",
+        JSON.stringify(userInfoByDiscord)
+      );
+    } else {
+      localStorage.removeItem("userInfoByDiscord");
+    }
+  }, [userInfoByDiscord]);
+
+  // Sync user info by bot to localStorage
+  useEffect(() => {
+    if (userInfoByBot !== null) {
+      localStorage.setItem("userInfoByBot", JSON.stringify(userInfoByBot));
+    } else {
+      localStorage.removeItem("userInfoByBot");
+    }
+  }, [userInfoByBot]);
+
+  // Sync all guilds to localStorage
   useEffect(() => {
     if (guilds.length > 0) {
-      localStorage.setItem("guildsData", JSON.stringify(guilds));
+      localStorage.setItem("guilds", JSON.stringify(guilds));
     } else {
-      localStorage.removeItem("guildsData");
+      localStorage.removeItem("guilds");
     }
   }, [guilds]);
 
-  // Optional: Fetch guilds on mount (if you want to fetch them automatically)
+  // Sync guild info to localStorage
   useEffect(() => {
-    async function fetchGuilds() {
-      try {
-        const response = await fetch("YOUR_API_ENDPOINT/guilds");
-        const data: Guild[] = await response.json();
-        setGuilds(data);
-      } catch (error) {
-        console.error("Failed to fetch guilds:", error);
-        setGuilds([]); // Handle error case
-      }
+    if (!!guild) {
+      localStorage.setItem("guild", JSON.stringify(guild));
+    } else {
+      localStorage.removeItem("guild");
     }
+  }, [guild]);
 
-    // Only fetch if guilds haven't been set yet
-    if (guilds === null && typeof window !== "undefined") {
-      fetchGuilds();
+  // Sync guild id to localStorage
+  useEffect(() => {
+    if (!!guildId) {
+      localStorage.setItem("guildId", JSON.stringify(guildId));
+    } else {
+      localStorage.removeItem("guildId");
     }
-  }, [guilds]);
+  }, [guildId]);
+
+  // Sync guild id to localStorage
+  useEffect(() => {
+    if (!!feature) {
+      localStorage.setItem("feature", JSON.stringify(feature));
+    } else {
+      localStorage.removeItem("feature");
+    }
+  }, [feature]);
 
   return (
     <PeachyContext.Provider
       value={{
-        peachyInfo,
-        setPeachyInfo,
-        guilds: guilds as Guild[],
-        setGuilds: (newGuilds: Guild[] | null) => setGuilds(newGuilds ?? []),
+        // USER
+        userInfoByDiscord,
+        setUserInfoByDiscord,
+
+        // USER BY BOT
+        userInfoByBot,
+        setUserInfoByBot,
+
+        // ALL GUILD
+        guilds,
+        setGuilds,
+
+        // GUILD INFO
+        guild,
+        setGuild,
+
+        // GUILD ID
+        guildId,
+        setGuildId,
+
+        // FEATURE
+        feature,
+        setFeature,
       }}
     >
       {children}

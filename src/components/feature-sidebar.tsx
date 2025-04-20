@@ -1,21 +1,40 @@
 "use client";
 
 import * as React from "react";
-import { FeatherIcon, LayoutDashboard } from "lucide-react";
-import { NavMain } from "@/components/nav-main";
-import { NavUser } from "@/components/nav-user";
+import {
+  Cat,
+  LayoutDashboard,
+  FeatherIcon,
+  Hand,
+  Rocket,
+  UserPlus,
+  Waypoints,
+  Gift,
+  UserMinus,
+} from "lucide-react";
 import {
   Sidebar,
   SidebarContent,
   SidebarFooter,
   SidebarRail,
 } from "@/components/ui/sidebar";
+import { NavMain } from "@/components/nav-main";
+import { NavUser } from "@/components/nav-user";
+import { Guild, UserInfo } from "@/utils/common";
+import { NavGuild } from "./nav-guild";
 
 const data = {
   navMain: [
     {
+      title: "Peachy",
+      url: "/peachy",
+      icon: Cat,
+      isActive: true,
+      items: [],
+    },
+    {
       title: "Dashboard",
-      url: "/peachy/dashboard",
+      url: "/dashboard",
       icon: LayoutDashboard,
       isActive: true,
       items: [],
@@ -29,26 +48,32 @@ const data = {
         {
           title: "Welcome Message",
           url: "/peachy/feature/welcome",
+          icon: Hand,
         },
         {
           title: "Booster Message",
           url: "/peachy/feature/booster",
+          icon: Rocket,
         },
         {
           title: "Invite Message",
           url: "/peachy/feature/invite",
+          icon: UserPlus,
         },
         {
           title: "Join Roles",
           url: "/peachy/feature/join-roles",
+          icon: Waypoints,
         },
         {
           title: "Giveaway",
           url: "/peachy/feature/giveaway",
+          icon: Gift,
         },
         {
           title: "Good Bye Message",
           url: "/peachy/feature/good-bye",
+          icon: UserMinus,
         },
       ],
     },
@@ -62,8 +87,11 @@ export function FeatureSidebar({
     <Sidebar collapsible="icon" {...props}>
       <SidebarContent>
         <NavMain items={data.navMain} />
+        <NavGuild />
       </SidebarContent>
-      <SidebarFooter>{/* <NavUser /> */}</SidebarFooter>
+      <SidebarFooter>
+        <NavUser />
+      </SidebarFooter>
       <SidebarRail />
     </Sidebar>
   );

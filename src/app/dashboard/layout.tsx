@@ -19,10 +19,9 @@ import { Separator } from "@/components/ui/separator";
 import { ChevronRight } from "lucide-react";
 import { useFetchUserInfoQuery } from "@/redux/api/discord";
 import { useGetGuildsQuery } from "@/redux/api/discord";
-import { Guild, toUpperCase } from "@/utils/common";
+import { Guild, toCapitalCase, toUpperCase } from "@/utils/common";
 import { LoadingPage } from "@/components/loading/circle";
 import RTLNavbar from "@/components/navbar/RTL";
-import { usePeachy } from "@/context/peachy";
 
 export default function PeachyLayout({
   children,
@@ -37,9 +36,8 @@ export default function PeachyLayout({
       ? currentPath[guildIdIndex]
       : undefined;
 
-  const { setUserInfoByDiscord, setGuilds } = usePeachy();
   const { data: user, isLoading: userLoading } = useFetchUserInfoQuery(null);
-  const { data: guilds, isLoading: guildLoading } = useGetGuildsQuery(null);
+  const { data: guilds, isLoading: guildLoading } = useGetGuildsQuery({});
 
   const guild = guilds?.find((g: Guild) => g.id === guildId);
 
@@ -50,12 +48,7 @@ export default function PeachyLayout({
     return segment;
   });
 
-  if (userLoading || guildLoading) {
-    return <LoadingPage />;
-  } else {
-    setUserInfoByDiscord(user);
-    setGuilds(guilds);
-  }
+  if (userLoading || guildLoading) return <LoadingPage />;
 
   return (
     <SidebarProvider>

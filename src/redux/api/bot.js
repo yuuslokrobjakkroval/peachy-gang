@@ -4,7 +4,7 @@ const bot = emptySplitApi.injectEndpoints({
   endpoints: (builder) => ({
     getBotApplicationInfo: builder.query({
       query: () => ({
-        url: `${process.env.NEXT_PUBLIC_API}/me/application`,
+        url: `${process.env.NEXT_PUBLIC_API_ENDPOINT}/me/application`,
         method: "GET",
       }),
       providesTags: (result, error, arg) => [

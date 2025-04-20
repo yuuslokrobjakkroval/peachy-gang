@@ -46,6 +46,7 @@ export type Guild = {
   icon: string;
   owner: boolean;
   permissions: string;
+  description: string;
 };
 
 export type IconHash = string;
@@ -127,7 +128,7 @@ export type BotApplicationInfo = {
 };
 
 export function getOwnerGuild(guilds: Guild[]) {
-  return guilds?.filter((guild) => config.guild.filter(guild));
+  return guilds?.filter((guild) => config.guild.filter(guild)) ?? [];
 }
 
 export function toNumber(num: number): string {
@@ -316,7 +317,9 @@ export function iconUrl(guild: Guild) {
 }
 
 export function avatarUrl(user: UserInfo) {
-  return `https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}?size=512`;
+  if (user) {
+    return `https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}?size=512`;
+  }
 }
 
 export function bannerUrl(id: string, banner: string): string {

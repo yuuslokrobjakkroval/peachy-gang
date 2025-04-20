@@ -5,10 +5,10 @@ import { User } from "@/utils/types";
 import { wallpapers } from "@/assets/inventory/wallpaper";
 
 const Inventory = ({
-  peachyInfo,
+  userInfoByDiscord,
   userInfo,
 }: {
-  peachyInfo: any;
+  userInfoByDiscord: any;
   userInfo: User;
 }) => {
   const userWallpapers: any =

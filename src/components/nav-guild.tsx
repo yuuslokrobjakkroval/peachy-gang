@@ -11,22 +11,17 @@ import {
 } from "@/components/ui/sidebar";
 import { getOwnerGuild, Guild, iconUrl } from "@/utils/common";
 import { usePeachy } from "@/context/peachy";
-import { useEffect } from "react";
+import { Castle } from "lucide-react";
 
-export function NavGuild({ guilds }: { guilds: Guild[] }) {
-  const { setGuilds } = usePeachy();
-
+export function NavGuild() {
+  const { guilds } = usePeachy();
   const router = useRouter();
-
-  useEffect(() => {
-    if (guilds.length > 0) {
-      setGuilds(guilds);
-    }
-  });
 
   return (
     <SidebarGroup className="py-0">
-      <SidebarGroupLabel>🏠 GUILDS 🏠</SidebarGroupLabel>
+      <SidebarGroupLabel>
+        <Castle className="mr-1" /> GUILDS <Castle className="ml-1" />
+      </SidebarGroupLabel>
 
       <SidebarMenu>
         {getOwnerGuild(guilds)?.length === 0 ? (
@@ -44,7 +39,7 @@ export function NavGuild({ guilds }: { guilds: Guild[] }) {
                 tooltip={guild.name}
                 size="lg"
                 className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground md:h-12 md:p-2 cursor-pointer"
-                onClick={() => router.push(`/peachy/guilds/${guild.id}`)}
+                onClick={() => router.push(`/guilds/${guild.id}`)}
               >
                 <Avatar className="h-8 w-8 rounded-lg">
                   <AvatarImage src={iconUrl(guild)} alt={guild.name} />

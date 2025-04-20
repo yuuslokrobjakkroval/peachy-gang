@@ -23,18 +23,17 @@ export default function GuildPage() {
         <div className="flex flex-col gap-4 py-4 md:gap-8 md:p-6">
           <div className="w-full">
             <div className="mb-6">
-              <div className="flex items-center justify-center text-xs sm:text-sm uppercase">
-                <Separator className="flex-1" />
-                <span className="px-4 py-1 text-muted-foreground rounded-md">
-                  <h4 className="flex text-2xl font-semibold tracking-tight text-primary gap-2">
-                    <Bot className="mt-1" /> BOTS
-                  </h4>
+              <div className="flex justify-start text-xs sm:text-sm uppercase">
+                <span className="text-muted-foreground rounded-md">
+                  <h2 className="flex text-2xl font-semibold tracking-tight text-primary gap-2">
+                    BOTS <Bot />
+                  </h2>
                 </span>
-                <Separator className="flex-1" />
               </div>
+              <Separator className="text-card-foreground" />
             </div>
 
-            <div className="w-ful mt-3 mb-3 flex h-fit flex-col gap-5 lg:grid lg:grid-cols-12">
+            <div className="w-ful mt-3 mb-3 flex h-fit flex-col gap-2 lg:grid lg:grid-cols-12">
               <div className="col-span-12 lg:!mb-0">
                 <BannerPage item={config} />
               </div>
@@ -49,27 +48,26 @@ export default function GuildPage() {
             </div>
 
             <div className="mb-6">
-              <div className="flex items-center justify-center text-xs sm:text-sm uppercase">
-                <Separator className="flex-1" />
-                <span className="px-4 py-1 text-muted-foreground rounded-md">
-                  <h4 className="flex text-2xl font-semibold tracking-tight text-primary gap-2">
-                    <Castle className="mt-1" /> GUILDS
-                  </h4>
+              <div className="flex justify-start text-xs sm:text-sm uppercase">
+                <span className="text-muted-foreground rounded-md">
+                  <h2 className="flex text-2xl font-semibold tracking-tight text-primary gap-2">
+                    GUILDS <Castle />
+                  </h2>
                 </span>
-                <Separator className="flex-1" />
               </div>
+              <Separator className="text-card-foreground" />
             </div>
 
-            <div className="grid grid-cols-1  md:grid-cols-3 gap-4 mt-3">
+            <div className="grid grid-cols-1  md:grid-cols-3 gap-2 mt-3">
               {getOwnerGuild(guilds ?? [])?.map((guild: Guild) => (
                 <Card
                   key={guild.id}
                   className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground md:p-2 cursor-pointer hover:border-primary transition-all duration-300 overflow-hidden"
-                  onClick={() => router.push(`/peachy/guilds/${guild.id}`)}
+                  onClick={() => router.push(`/guilds/${guild.id}`)}
                 >
                   <CardHeader className="p-4">
                     <CardTitle className="flex items-start gap-3">
-                      <Avatar className="h-12 w-12 rounded-lg border-2 border-white dark:border-gray-600 shadow-sm">
+                      <Avatar className="h-12 w-12 rounded-lg border-2 border-white dark:border-gray-600">
                         <AvatarImage
                           src={iconUrl(guild)}
                           alt={guild.name}
@@ -83,6 +81,11 @@ export default function GuildPage() {
                         <span className="text-base font-semibold text-gray-900 dark:text-gray-100 truncate">
                           {guild.name}
                         </span>
+                        {guild?.description && (
+                          <p className="flex flex-col text-muted-foreground">
+                            {guild.description}
+                          </p>
+                        )}
                       </div>
                     </CardTitle>
                   </CardHeader>

@@ -15,6 +15,7 @@ import {
 } from "@/redux/api/guild";
 import { toast } from "sonner";
 import { X } from "lucide-react";
+import { usePeachy } from "@/context/peachy";
 
 const Features = ({
   guild,
@@ -33,9 +34,13 @@ const Features = ({
   const [disableFeature, { isLoading: disableLoading }] =
     useDisableFeatureMutation();
 
+  const { setGuildId, setFeature } = usePeachy();
+
   const handleEnableClick = async () => {
     if (enabled) {
-      router.push(`/guilds/${guild}/features/${feature.id}`);
+      setGuildId(guild);
+      setFeature(feature.id);
+      router.push(`/features/${feature.id}`);
     } else {
       try {
         await enableFeature({

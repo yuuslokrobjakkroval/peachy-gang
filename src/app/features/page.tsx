@@ -4,24 +4,20 @@ import { usePathname, useRouter } from "next/navigation";
 import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
 import { useGetGuildQuery } from "@/redux/api/guild";
 import { LoadingPage } from "@/components/loading/circle";
-import { avatarUrl, getFeatures, iconUrl, toCapitalCase } from "@/utils/common";
-import { CustomGuildInfo } from "@/utils/types";
+import { getFeatures, iconUrl, toCapitalCase } from "@/utils/common";
 import Features from "@/components/features";
 import { Button } from "@/components/ui/button";
 import { config, configPeach, configGoma } from "@/utils/config";
 import React from "react";
 import BannerPage from "@/components/applications/banner";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { BoxIcon, Mailbox } from "lucide-react";
+import { CircleArrowLeft, Mailbox } from "lucide-react";
+import { Separator } from "@/components/ui/separator";
+import { getAbsoluteUrl } from "@/utils/get-absolute-url";
+import { usePeachy } from "@/context/peachy";
 
-export default function FeaturePage() {
-  const pathname = usePathname();
-  const currentPath = pathname.split("/").filter(Boolean);
-  const guildIdIndex = currentPath.indexOf("guilds") + 1;
-  const guildId =
-    guildIdIndex > 0 && guildIdIndex < currentPath.length
-      ? currentPath[guildIdIndex]
-      : "";
+export default function FeaturesPage() {
+  const { guildId } = usePeachy();
   const { data: guild, isLoading, refetch } = useGetGuildQuery(guildId);
 
   if (isLoading) return <LoadingPage />;
@@ -49,32 +45,38 @@ function GuildPanel({
   info: any;
   refetch: () => void;
 }) {
+  const router = useRouter();
   const features = getFeatures();
   return (
     <div className="flex flex-col gap-4 py-4 md:gap-8 md:p-6">
       <div className="w-full">
-        <div className="flex gap-3">
+        <div className="flex gap-2">
+          <CircleArrowLeft
+            className="text-2xl font-semibold tracking-tight text-primary mt-2 cursor-pointer"
+            onClick={() => router.back()}
+          />
           <Avatar className="mt-0.5 ml-1">
             <AvatarImage src={iconUrl(info)} alt={toCapitalCase(info.name)} />
             <AvatarFallback className="bg-muted text-foreground">
               {toCapitalCase(info.name)}
             </AvatarFallback>
           </Avatar>
-          <h4 className="text-2xl font-semibold tracking-tight text-primary">
+          <h4 className="text-2xl font-semibold tracking-tight text-primary mt-1">
             {toCapitalCase(info.name)}
             <span className="w-full border-t border-border" />
           </h4>
         </div>
 
-        <div className="relative mt-6 mb-6">
-          <div className="absolute inset-0 flex items-center">
-            <span className="w-full border-t border-border" />
-          </div>
-          <div className="relative flex justify-center text-xs sm:text-sm uppercase">
-            <span className="bg-background px-3 text-muted-foreground">
-              <h4 className="text-2xl font-semibold tracking-tight text-primary"></h4>
-            </span>
-          </div>
+        <div className="mt-3 mb-3">
+          {info?.description && (
+            <p className="flex flex-col text-muted-foreground">
+              {info.description}
+            </p>
+          )}
+        </div>
+
+        <div className="mt-3 mb-6">
+          <Separator className="text-card-foreground" />
         </div>
 
         <div className="w-ful mt-3 mb-3 flex h-fit flex-col gap-5 lg:grid lg:grid-cols-12">
@@ -122,6 +124,16 @@ function GuildPanel({
 
 function NotJoined({ guild }: { guild: string }) {
   const router = useRouter();
+  const pathname = usePathname();
+
+  const redirectUrl = `${getAbsoluteUrl()}${pathname}`;
+
+  const inviteUrl = `${
+    config.inviteUrl
+  }&scope=bot&guild_id=${guild}&permissions=8&redirect_uri=${encodeURIComponent(
+    `${getAbsoluteUrl()}/api/invite/callback`
+  )}&response_type=code&state=${encodeURIComponent(redirectUrl)}`;
+
   return (
     <div className="flex min-h-svh w-full items-center justify-center">
       <section className="rounded-2xl p-6 mb-8">
@@ -135,12 +147,19 @@ function NotJoined({ guild }: { guild: string }) {
           <p className="text-sm text-muted-foreground">
             The bot can't access the server, let's invite him!
           </p>
-          <Button
-            size="lg"
-            onClick={() => router.push(`${config.inviteUrl}&guild_id=${guild}`)}
-          >
-            Invite Bot
-          </Button>
+          <div className="flex justify-between gap-3">
+            <Button variant="outline" onClick={() => router.back()}>
+              Go Back
+            </Button>
+            <Button
+              onClick={() => {
+                // Redirect to the Discord invite URL
+                window.location.href = inviteUrl;
+              }}
+            >
+              Invite Bot
+            </Button>
+          </div>
         </div>
       </section>
     </div>

@@ -44,19 +44,19 @@ const RTLNavbar = (props: {
   secondary?: boolean | string;
 }) => {
   const { user, onOpenSidenav, brandText } = props;
-  const { setPeachyInfo } = usePeachy();
+  const { setUserInfoByDiscord } = usePeachy();
 
   const { theme, setTheme } = useTheme();
   const router = useRouter();
   const [hasBeenOpened, setHasBeenOpened] = useState(false);
 
   const handleProfileClick = () => {
-    setPeachyInfo(user);
+    setUserInfoByDiscord(user);
     router.push("/peachy/profile");
   };
 
   const handleProfileSettingClick = () => {
-    setPeachyInfo(user);
+    setUserInfoByDiscord(user);
     router.push("/peachy/profile/setting");
   };
 
@@ -179,77 +179,79 @@ const RTLNavbar = (props: {
         </DropdownMenu>
 
         {/* Profile Dropdown */}
-        <DropdownMenu onOpenChange={handleOpenChange}>
-          <Tooltip>
-            <TooltipTrigger asChild>
-              <DropdownMenuTrigger asChild>
-                <Button
-                  variant="ghost"
-                  className="p-1 hover:bg-muted transition-colors duration-200 relative"
-                >
-                  {/* Decoration and Avatar Wrapper */}
-                  <div className="relative flex items-center justify-center">
-                    {/* Avatar */}
-                    <div className="relative rounded-full">
-                      <Avatar>
-                        <AvatarImage
-                          src={avatarUrl(user)}
-                          alt={toCapitalCase(user.username)}
-                        />
-                        <AvatarFallback className="bg-muted text-foreground">
-                          {toCapitalCase(user.username)}
-                        </AvatarFallback>
-                      </Avatar>
-                    </div>
-
-                    {/* Avatar Decoration */}
-                    {user.avatar_decoration_data?.asset && (
-                      <div className="absolute inset-0 flex items-center justify-center">
-                        <Image
-                          src={decorationUrl(user.avatar_decoration_data)}
-                          alt="Avatar Decoration"
-                          width={96}
-                          height={96}
-                          className="object-contain"
-                        />
+        {user && (
+          <DropdownMenu onOpenChange={handleOpenChange}>
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <DropdownMenuTrigger asChild>
+                  <Button
+                    variant="ghost"
+                    className="p-1 hover:bg-muted transition-colors duration-200 relative"
+                  >
+                    {/* Decoration and Avatar Wrapper */}
+                    <div className="relative flex items-center justify-center">
+                      {/* Avatar */}
+                      <div className="relative rounded-full">
+                        <Avatar>
+                          <AvatarImage
+                            src={avatarUrl(user)}
+                            alt={toCapitalCase(user.username)}
+                          />
+                          <AvatarFallback className="bg-muted text-foreground">
+                            {toCapitalCase(user.username)}
+                          </AvatarFallback>
+                        </Avatar>
                       </div>
-                    )}
-                  </div>
-                </Button>
-              </DropdownMenuTrigger>
-            </TooltipTrigger>
-            <TooltipContent>
-              <p className="text-sm text-secondary">User</p>
-            </TooltipContent>
-          </Tooltip>
-          <DropdownMenuContent
-            className="w-[220px] rounded-xl bg-card p-2 border border-border shadow-lg transition-all duration-200"
-            align="end"
-          >
-            <DropdownMenuLabel className="px-2 py-1 text-sm text-foreground font-semibold">
-              Hey, {user.global_name} {hasBeenOpened && getRandomEmoji()}
-            </DropdownMenuLabel>
-            <DropdownMenuSeparator className="my-1 bg-border" />
-            <DropdownMenuItem
-              className="px-2 py-1 text-sm text-foreground hover:bg-muted transition-colors duration-200"
-              onClick={handleProfileClick}
+
+                      {/* Avatar Decoration */}
+                      {user.avatar_decoration_data?.asset && (
+                        <div className="absolute inset-0 flex items-center justify-center">
+                          <Image
+                            src={decorationUrl(user.avatar_decoration_data)}
+                            alt="Avatar Decoration"
+                            width={96}
+                            height={96}
+                            className="object-contain"
+                          />
+                        </div>
+                      )}
+                    </div>
+                  </Button>
+                </DropdownMenuTrigger>
+              </TooltipTrigger>
+              <TooltipContent>
+                <p className="text-sm text-secondary">User</p>
+              </TooltipContent>
+            </Tooltip>
+            <DropdownMenuContent
+              className="w-[220px] rounded-xl bg-card p-2 border border-border shadow-lg transition-all duration-200"
+              align="end"
             >
-              Profile
-            </DropdownMenuItem>
-            <DropdownMenuItem
-              className="px-2 py-1 text-sm text-foreground hover:bg-muted transition-colors duration-200"
-              onClick={handleProfileSettingClick}
-            >
-              Settings
-            </DropdownMenuItem>
-            <DropdownMenuItem
-              className="px-2 py-1 text-sm text-destructive hover:bg-muted transition-colors duration-200"
-              onClick={() => router.push("/login")}
-            >
-              Log Out
-            </DropdownMenuItem>
-          </DropdownMenuContent>
-        </DropdownMenu>
+              <DropdownMenuLabel className="px-2 py-1 text-sm text-foreground font-semibold">
+                Hey, {user.global_name} {hasBeenOpened && getRandomEmoji()}
+              </DropdownMenuLabel>
+              <DropdownMenuSeparator className="my-1 bg-border" />
+              <DropdownMenuItem
+                className="px-2 py-1 text-sm text-foreground hover:bg-muted transition-colors duration-200"
+                onClick={handleProfileClick}
+              >
+                Profile
+              </DropdownMenuItem>
+              <DropdownMenuItem
+                className="px-2 py-1 text-sm text-foreground hover:bg-muted transition-colors duration-200"
+                onClick={handleProfileSettingClick}
+              >
+                Settings
+              </DropdownMenuItem>
+              <DropdownMenuItem
+                className="px-2 py-1 text-sm text-destructive hover:bg-muted transition-colors duration-200"
+                onClick={() => router.push("/login")}
+              >
+                Log Out
+              </DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
+        )}
       </div>
     </nav>
   );

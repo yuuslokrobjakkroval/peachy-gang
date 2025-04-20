@@ -18,7 +18,7 @@ export const GuildsPage = ({}) => {
         >
           <CardHeader className="p-4">
             <CardTitle className="flex items-start gap-3">
-              <Avatar className="h-12 w-12 rounded-lg border-2 border-white dark:border-gray-600 shadow-sm">
+              <Avatar className="h-12 w-12 rounded-lg border-2 border-white dark:border-gray-600">
                 <AvatarImage
                   src={iconUrl(guild)}
                   alt={guild.name}

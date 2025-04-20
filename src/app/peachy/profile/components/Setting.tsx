@@ -26,7 +26,6 @@ function Setting() {
             id="dark-mode"
             checked={theme === "dark"}
             onClick={handleThemeToggle}
-            className="data-[state=checked]:bg-primary data-[state=unchecked]:bg-muted transition-colors duration-200 ease-in-out"
           />
           <div>
             <label
@@ -42,10 +41,7 @@ function Setting() {
         </div>
 
         <div className="flex items-center gap-4">
-          <Switch
-            id="developer-mode"
-            className="data-[state=checked]:bg-primary data-[state=unchecked]:bg-muted transition-colors duration-200 ease-in-out"
-          />
+          <Switch id="developer-mode" />
           <div>
             <label
               htmlFor="developer-mode"

@@ -5,7 +5,7 @@ const extendedApi = emptySplitApi.injectEndpoints({
   endpoints: (builder) => ({
     signUp: builder.mutation({
       query: (body) => ({
-        url: `${process.env.NEXT_PUBLIC_API}/auth/signup`,
+        url: `${process.env.NEXT_PUBLIC_API_ENDPOINT}/auth/signup`,
         method: "POST",
         body,
       }),
@@ -13,7 +13,7 @@ const extendedApi = emptySplitApi.injectEndpoints({
     }),
     login: builder.mutation({
       query: (body) => ({
-        url: `${process.env.NEXT_PUBLIC_API}/auth/login`,
+        url: `${process.env.NEXT_PUBLIC_API_ENDPOINT}/auth/login`,
         method: "POST",
         body,
       }),

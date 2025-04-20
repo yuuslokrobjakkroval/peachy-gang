@@ -2,17 +2,14 @@
 
 import * as React from "react";
 import {
-  BookOpen,
-  Bot,
-  Castle,
-  CommandIcon,
-  FeatherIcon,
+  Cat,
   LayoutDashboard,
+  GraduationCap,
+  Castle,
   Library,
 } from "lucide-react";
 
 import { NavMain } from "@/components/nav-main";
-import { NavProjects } from "@/components/nav-projects";
 import { NavGuild } from "@/components/nav-guild";
 import { NavUser } from "@/components/nav-user";
 // import { TeamSwitcher } from "@/components/team-switcher";
@@ -20,7 +17,6 @@ import {
   Sidebar,
   SidebarContent,
   SidebarFooter,
-  SidebarHeader,
   SidebarRail,
 } from "@/components/ui/sidebar";
 import { UserInfo, Guild } from "@/utils/common";
@@ -28,22 +24,30 @@ import { UserInfo, Guild } from "@/utils/common";
 const data = {
   navMain: [
     {
+      title: "Peachy",
+      url: "/peachy",
+      icon: Cat,
+      isActive: true,
+      items: [],
+    },
+    {
       title: "Dashboard",
-      url: "/peachy/dashboard",
+      url: "/dashboard",
       icon: LayoutDashboard,
       isActive: true,
       items: [],
     },
     {
-      title: "Bot",
-      url: "/peachy",
-      icon: Bot,
+      title: "Rank",
+      url: "/rank",
+      icon: GraduationCap,
       isActive: true,
       items: [],
     },
+
     {
       title: "Guilds",
-      url: "/peachy/guilds",
+      url: "/guilds",
       icon: Castle,
       isActive: true,
       items: [],
@@ -118,19 +122,15 @@ const data = {
   ],
 };
 
-export function AppSidebar({
-  user,
-  guilds,
-  ...props
-}: { user: UserInfo; guilds: Guild[] } & React.ComponentProps<typeof Sidebar>) {
+export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   return (
     <Sidebar collapsible="icon" {...props}>
       <SidebarContent>
         <NavMain items={data.navMain} />
-        <NavGuild guilds={guilds} />
+        <NavGuild />
       </SidebarContent>
       <SidebarFooter>
-        <NavUser user={user} />
+        <NavUser />
       </SidebarFooter>
       <SidebarRail />
     </Sidebar>

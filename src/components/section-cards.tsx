@@ -38,7 +38,7 @@ export function SectionCards({ users, meta }: { users: any; meta: any }) {
   return (
     <div className="grid grid-cols-1 gap-4 px-4 @xl/main:grid-cols-2 @5xl/main:grid-cols-4 lg:px-6">
       {/* Card 1: Total Users */}
-      <Card className="@container/card min-w-[250px] bg-gradient-to-t from-primary/5 to-card shadow-sm dark:bg-card">
+      <Card className="@container/card min-w-[250px] bg-gradient-to-t from-primary/5 to-card dark:bg-card">
         <CardHeader className="relative">
           <CardDescription className="flex items-center gap-2 text-sm">
             <UserIcon className="h-4 w-4 text-muted-foreground" />
@@ -68,7 +68,7 @@ export function SectionCards({ users, meta }: { users: any; meta: any }) {
       </Card>
 
       {/* Card 2: Total Coin */}
-      <Card className="@container/card min-w-[250px] bg-gradient-to-t from-primary/5 to-card shadow-sm dark:bg-card">
+      <Card className="@container/card min-w-[250px] bg-gradient-to-t from-primary/5 to-card dark:bg-card">
         <CardHeader className="relative">
           <CardDescription className="flex items-center gap-2 text-sm">
             <svg
@@ -99,7 +99,7 @@ export function SectionCards({ users, meta }: { users: any; meta: any }) {
       </Card>
 
       {/* Card 3: Bank Reserves */}
-      <Card className="@container/card min-w-[250px] bg-gradient-to-t from-primary/5 to-card shadow-sm dark:bg-card">
+      <Card className="@container/card min-w-[250px] bg-gradient-to-t from-primary/5 to-card dark:bg-card">
         <CardHeader className="relative">
           <CardDescription className="flex items-center gap-2 text-sm">
             <svg
@@ -130,7 +130,7 @@ export function SectionCards({ users, meta }: { users: any; meta: any }) {
       </Card>
 
       {/* Card 4: Average Level & Engagement */}
-      <Card className="@container/card min-w-[250px] bg-gradient-to-t from-primary/5 to-card shadow-sm dark:bg-card">
+      <Card className="@container/card min-w-[250px] bg-gradient-to-t from-primary/5 to-card dark:bg-card">
         <CardHeader className="relative">
           <CardDescription className="flex items-center gap-2 text-sm">
             <AwardIcon className="h-4 w-4 text-muted-foreground" />
