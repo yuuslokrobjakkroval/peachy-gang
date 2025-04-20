@@ -47,7 +47,7 @@ export async function GET(request: NextRequest) {
     const tokenData = (await tokenResponse.json()) as AccessToken;
 
     const response = NextResponse.redirect(
-      `${getAbsoluteUrl()}/peachy/dashboard`
+      `${getAbsoluteUrl()}/dashboard`
     );
 
     setCookie(TokenCookie, JSON.stringify(tokenData), {
