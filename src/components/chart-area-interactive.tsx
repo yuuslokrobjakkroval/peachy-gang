@@ -193,7 +193,7 @@ export function ChartAreaInteractive({ users }: { users: any }) {
             </>
           )}
         </CardDescription>
-        <div className="absolute right-4 top-4">
+        <div className="absolute right-4 top-4 mt-3">
           <Select value={timeRange} onValueChange={setTimeRange}>
             <SelectTrigger className="w-40" aria-label="Select time range">
               <SelectValue placeholder="Last 3 months" />
