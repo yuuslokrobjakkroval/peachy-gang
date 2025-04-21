@@ -17,12 +17,12 @@ import {
 } from "@/components/ui/card";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Input } from "@/components/ui/input";
+import { Hero } from "@/components/home/hero";
 import BotInformation from "@/components/contents/bot-info";
 import { CARD } from "@/utils/config";
 
 export default function PeachyPage() {
   const [isChatOpen, setIsChatOpen] = useState(false);
-  const [showChatIcon, setShowChatIcon] = useState(true);
   const chatIconRef = useRef<HTMLButtonElement>(null);
   const {
     messages,
@@ -37,23 +37,21 @@ export default function PeachyPage() {
 
   const scrollRef = useRef<HTMLDivElement>(null);
 
-  // useEffect(() => {
-  //   const handleScroll = () => {
-  //     if (window.screenY > 200) {
-  //       setShowChatIcon(true);
-  //     } else {
-  //       setShowChatIcon(false);
-  //       setIsChatOpen(false);
-  //     }
-  //   };
+  const [isScrolled, setIsScrolled] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
-  //   handleScroll();
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 10) {
+        setIsScrolled(true);
+      } else {
+        setIsScrolled(false);
+      }
+    };
 
-  //   window.addEventListener("scroll", handleScroll);
-  //   return () => {
-  //     window.removeEventListener("scroll", handleScroll);
-  //   };
-  // }, []);
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   const toggleChat = () => {
     setIsChatOpen(!isChatOpen);
@@ -65,31 +63,29 @@ export default function PeachyPage() {
     }
   }, [messages]);
   return (
-    <div className="flex w-full items-center justify-center">
+    <div className="flex flex-col w-full items-center justify-center">
       <BotInformation Cards={CARD} />
       <AnimatePresence>
-        {showChatIcon && (
-          <motion.div
-            initial={{ opacity: 0, y: 100 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: 100 }}
-            transition={{ duration: 0.2 }}
-            className="fixed bottom-4 right-4 z-50"
+        <motion.div
+          initial={{ opacity: 0, y: 100 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: 100 }}
+          transition={{ duration: 0.2 }}
+          className="fixed bottom-4 right-4 z-50"
+        >
+          <Button
+            ref={chatIconRef}
+            onClick={toggleChat}
+            size="icon"
+            className="rounded-full size-14 p-2 shadow-lg"
           >
-            <Button
-              ref={chatIconRef}
-              onClick={toggleChat}
-              size="icon"
-              className="rounded-full size-14 p-2 shadow-lg"
-            >
-              {!isChatOpen ? (
-                <MessageCircle className="size-8" />
-              ) : (
-                <ArrowDownCircle className="size-8" />
-              )}
-            </Button>
-          </motion.div>
-        )}
+            {!isChatOpen ? (
+              <MessageCircle className="size-8" />
+            ) : (
+              <ArrowDownCircle className="size-8" />
+            )}
+          </Button>
+        </motion.div>
       </AnimatePresence>
       <AnimatePresence>
         {isChatOpen && (

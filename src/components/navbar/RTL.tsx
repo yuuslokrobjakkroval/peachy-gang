@@ -19,7 +19,6 @@ import { useTheme } from "next-themes";
 import {
   avatarUrl,
   decorationUrl,
-  getRandomElement,
   getRandomEmoji,
   toCapitalCase,
   UserInfo,
@@ -58,6 +57,10 @@ const RTLNavbar = (props: {
   const handleProfileSettingClick = () => {
     setUserInfoByDiscord(user);
     router.push("/peachy/profile/setting");
+  };
+
+  const handleLogoutClick = () => {
+    router.push("/login");
   };
 
   const handleOpenChange = (open: boolean) => {
@@ -245,7 +248,7 @@ const RTLNavbar = (props: {
               </DropdownMenuItem>
               <DropdownMenuItem
                 className="px-2 py-1 text-sm text-destructive hover:bg-muted transition-colors duration-200"
-                onClick={() => router.push("/login")}
+                onClick={handleLogoutClick}
               >
                 Log Out
               </DropdownMenuItem>

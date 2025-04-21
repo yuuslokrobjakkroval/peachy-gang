@@ -1,13 +1,7 @@
 "use client";
 import React, { useState, useEffect } from "react";
 
-import {
-  BadgeCheck,
-  Bell,
-  ChevronsUpDown,
-  CreditCard,
-  LogOut,
-} from "lucide-react";
+import { BadgeCheck, ChevronsUpDown, CreditCard, LogOut } from "lucide-react";
 
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import {
@@ -26,7 +20,7 @@ import {
   useSidebar,
 } from "@/components/ui/sidebar";
 import { useRouter } from "next/navigation";
-import { avatarUrl, UserInfo } from "@/utils/common";
+import { avatarUrl } from "@/utils/common";
 import { usePeachy } from "@/context/peachy";
 
 export function NavUser() {
@@ -41,6 +35,10 @@ export function NavUser() {
 
   const handleBillingClick = () => {
     router.push("/peachy/billing");
+  };
+
+  const handleLogoutClick = () => {
+    router.push("/login");
   };
 
   useEffect(() => {
@@ -117,7 +115,7 @@ export function NavUser() {
                 </DropdownMenuItem>
               </DropdownMenuGroup>
               <DropdownMenuSeparator />
-              <DropdownMenuItem onClick={() => router.push("/login")}>
+              <DropdownMenuItem onClick={handleLogoutClick}>
                 <LogOut />
                 Log out
               </DropdownMenuItem>

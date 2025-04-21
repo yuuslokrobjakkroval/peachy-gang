@@ -12,7 +12,6 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { MaskedImage } from "@/components/ui/masked-image";
 
 export default function LoginPage() {
   const { setTheme } = useTheme();

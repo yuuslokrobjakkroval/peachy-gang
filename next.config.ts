@@ -1,10 +1,10 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  reactStrictMode: true,
   images: {
     domains: [
       "i.imgur.com",
-      "images.domains",
       "images.remotePatterns",
       "cdn.discordapp.com",
       "i.pinimg.com",
