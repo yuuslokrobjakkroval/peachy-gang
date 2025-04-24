@@ -1,23 +1,23 @@
-import { cn } from '@/lib/utils';
+import { cn } from "@/lib/utils";
 import {
   LoaderCircleIcon,
   LoaderIcon,
   LoaderPinwheelIcon,
   type LucideProps,
-} from 'lucide-react';
+} from "lucide-react";
 
-type SpinnerVariantProps = Omit<SpinnerProps, 'variant'>;
+type SpinnerVariantProps = Omit<SpinnerProps, "variant">;
 
 const Default = ({ className, ...props }: SpinnerVariantProps) => (
-  <LoaderIcon className={cn('animate-spin', className)} {...props} />
+  <LoaderIcon className={cn("animate-spin", className)} {...props} />
 );
 
 const Circle = ({ className, ...props }: SpinnerVariantProps) => (
-  <LoaderCircleIcon className={cn('animate-spin', className)} {...props} />
+  <LoaderCircleIcon className={cn("animate-spin", className)} {...props} />
 );
 
 const Pinwheel = ({ className, ...props }: SpinnerVariantProps) => (
-  <LoaderPinwheelIcon className={cn('animate-spin', className)} {...props} />
+  <LoaderPinwheelIcon className={cn("animate-spin", className)} {...props} />
 );
 
 const CircleFilled = ({
@@ -28,13 +28,13 @@ const CircleFilled = ({
   <div className="relative" style={{ width: size, height: size }}>
     <div className="absolute inset-0 rotate-180">
       <LoaderCircleIcon
-        className={cn('animate-spin', className, 'text-foreground opacity-20')}
+        className={cn("animate-spin", className, "text-foreground opacity-20")}
         size={size}
         {...props}
       />
     </div>
     <LoaderCircleIcon
-      className={cn('relative animate-spin', className)}
+      className={cn("relative animate-spin", className)}
       size={size}
       {...props}
     />
@@ -223,8 +223,8 @@ const Infinite = ({ size = 24, ...props }: SpinnerVariantProps) => (
       d="M24.3 30C11.4 30 5 43.3 5 50s6.4 20 19.3 20c19.3 0 32.1-40 51.4-40 C88.6 30 95 43.3 95 50s-6.4 20-19.3 20C56.4 70 43.6 30 24.3 30z"
       strokeLinecap="round"
       style={{
-        transform: 'scale(0.8)',
-        transformOrigin: '50px 50px',
+        transform: "scale(0.8)",
+        transformOrigin: "50px 50px",
       }}
     >
       <animate
@@ -240,33 +240,74 @@ const Infinite = ({ size = 24, ...props }: SpinnerVariantProps) => (
 
 export type SpinnerProps = LucideProps & {
   variant?:
-    | 'default'
-    | 'circle'
-    | 'pinwheel'
-    | 'circle-filled'
-    | 'ellipsis'
-    | 'ring'
-    | 'bars'
-    | 'infinite';
+    | "default"
+    | "circle"
+    | "pinwheel"
+    | "circle-filled"
+    | "ellipsis"
+    | "ring"
+    | "bars"
+    | "infinite";
 };
 
 export const Spinner = ({ variant, ...props }: SpinnerProps) => {
+  const CenteredWrapper = ({ children }: { children: React.ReactNode }) => (
+    <div className="flex flex-col justify-center min-h-svh w-full items-center gap-2">
+      {children}
+      {variant === "circle" && (
+        <p className="text-sm text-muted-foreground">Loading</p>
+      )}
+    </div>
+  );
+
   switch (variant) {
-    case 'circle':
-      return <Circle {...props} />;
-    case 'pinwheel':
-      return <Pinwheel {...props} />;
-    case 'circle-filled':
-      return <CircleFilled {...props} />;
-    case 'ellipsis':
-      return <Ellipsis {...props} />;
-    case 'ring':
-      return <Ring {...props} />;
-    case 'bars':
-      return <Bars {...props} />;
-    case 'infinite':
-      return <Infinite {...props} />;
+    case "circle":
+      return (
+        <CenteredWrapper>
+          <Circle {...props} />
+        </CenteredWrapper>
+      );
+    case "pinwheel":
+      return (
+        <CenteredWrapper>
+          <Pinwheel {...props} />
+        </CenteredWrapper>
+      );
+    case "circle-filled":
+      return (
+        <CenteredWrapper>
+          <CircleFilled {...props} />
+        </CenteredWrapper>
+      );
+    case "ellipsis":
+      return (
+        <CenteredWrapper>
+          <Ellipsis {...props} />
+        </CenteredWrapper>
+      );
+    case "ring":
+      return (
+        <CenteredWrapper>
+          <Ring {...props} />
+        </CenteredWrapper>
+      );
+    case "bars":
+      return (
+        <CenteredWrapper>
+          <Bars {...props} />
+        </CenteredWrapper>
+      );
+    case "infinite":
+      return (
+        <CenteredWrapper>
+          <Infinite {...props} />
+        </CenteredWrapper>
+      );
     default:
-      return <Default {...props} />;
+      return (
+        <CenteredWrapper>
+          <Default {...props} />
+        </CenteredWrapper>
+      );
   }
 };

@@ -18,6 +18,7 @@ import { usePeachy } from "@/context/peachy";
 
 export default function FeaturesPage() {
   const { guildId } = usePeachy();
+
   const { data: guild, isLoading, refetch } = useGetGuildQuery(guildId);
 
   if (isLoading) return <LoadingPage />;

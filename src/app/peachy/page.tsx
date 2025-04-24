@@ -63,7 +63,17 @@ export default function PeachyPage() {
     }
   }, [messages]);
   return (
-    <div className="flex flex-col w-full items-center justify-center">
+    <div
+      className="w-full h-full flex flex-col items-center justify-center rounded-lg"
+      style={{
+        backgroundImage: "url('/images/background.png')",
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+        backgroundRepeat: "no-repeat",
+        backgroundAttachment: "fixed",
+        backgroundBlendMode: "multiply",
+      }}
+    >
       <BotInformation Cards={CARD} />
       <AnimatePresence>
         <motion.div
@@ -129,14 +139,15 @@ export default function PeachyPage() {
                         }`}
                       >
                         <ReactMarkdown
-                          remarkPlugins={remarkGfm}
+                          remarkPlugins={[remarkGfm]}
                           components={{
                             code({
-                              node,
                               inline,
                               className,
                               children,
                               ...props
+                            }: React.HTMLAttributes<HTMLElement> & {
+                              inline?: boolean;
                             }) {
                               return inline ? (
                                 <code

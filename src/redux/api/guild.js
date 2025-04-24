@@ -41,6 +41,19 @@ const bot = emptySplitApi.injectEndpoints({
       }),
       providesTags: (result, error, arg) => [{ type: "GUILD", id: arg }],
     }),
+    updateFeature: builder.mutation({
+      query: (body) => ({
+        url: `${process.env.NEXT_PUBLIC_API_ENDPOINT}/guilds/${guild}/features/${feature}`,
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body,
+      }),
+      invalidatesTags: (result, error, arg) => [
+        { type: "FEATURE", id: `${arg.guild}-${arg.feature}` },
+      ],
+    }),
     sendMessageFeature: builder.mutation({
       query: ({ guild, feature, userId }) => ({
         url: `${process.env.NEXT_PUBLIC_API_ENDPOINT}/guilds/${guild}/features/${feature}/send-message`,
@@ -54,21 +67,21 @@ const bot = emptySplitApi.injectEndpoints({
         { type: "FEATURE", id: `${arg.guild}-${arg.feature}` },
       ],
     }),
-    fetchGuildRoles: builder.query({
+    getGuildRoles: builder.query({
       query: (guild) => ({
         url: `${process.env.NEXT_PUBLIC_API_ENDPOINT}/guilds/${guild}/roles`,
         method: "GET",
       }),
       providesTags: (result, error, arg) => [{ type: "ROLES", id: arg }],
     }),
-    fetchGuildChannels: builder.query({
+    getGuildChannels: builder.query({
       query: (guild) => ({
         url: `${process.env.NEXT_PUBLIC_API_ENDPOINT}/guilds/${guild}/channels`,
         method: "GET",
       }),
       providesTags: (result, error, arg) => [{ type: "CHANNELS", id: arg }],
     }),
-    fetchGuildEmoji: builder.query({
+    getGuildEmoji: builder.query({
       query: (guild) => ({
         url: `${process.env.NEXT_PUBLIC_API_ENDPOINT}/guilds/${guild}/emojis`,
         method: "GET",
@@ -84,8 +97,9 @@ export const {
   useSendMessageFeatureMutation,
   useEnableFeatureMutation,
   useDisableFeatureMutation,
+  useUpdateFeatureMutation,
   useGetFeatureQuery,
-  useFetchGuildRolesQuery,
-  useFetchGuildChannelsQuery,
-  useFetchGuildEmojiQuery,
+  useGetGuildRolesQuery,
+  useGetGuildChannelsQuery,
+  useGetGuildEmojiQuery,
 } = bot;

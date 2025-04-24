@@ -36,10 +36,24 @@ const axiosBaseQuery =
     }
   };
 
+const dynamicTagTypes = [
+  "AUTH",
+  "USER",
+  "GUILD",
+  "GUILDS",
+  "FEATURE",
+  "MESSAGE",
+  "MEMBER",
+  "INVITE",
+  "CHANNELS",
+  "ROLES",
+  "EMOJIS",
+];
+
 export const emptySplitApi = createApi({
   reducerPath: "api",
   baseQuery: axiosBaseQuery({ baseUrl: "" }),
-  tagTypes: ["AUTH", "USER", "GUILD", "GUILDS", "FEATURE"],
+  tagTypes: dynamicTagTypes,
   refetchOnFocus: true,
   refetchOnReconnect: true,
   keepUnusedDataFor: 5,
