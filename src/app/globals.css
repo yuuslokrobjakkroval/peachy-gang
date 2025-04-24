@@ -192,6 +192,12 @@ body {
   body {
     @apply bg-background text-foreground;
     font-weight: var(--font-weight-bold);
+    background-image: url("/background.png");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-blend-mode: multiply;
   }
   .border {
     border-width: 2px !important;
