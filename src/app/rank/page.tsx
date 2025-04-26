@@ -3,7 +3,7 @@
 import React from "react";
 import { useGetUsersQuery } from "@/redux/api/users";
 import { LoadingPage } from "@/components/loading/circle";
-import { RankTable } from "@/components/rank-table";
+import { RankTable } from "@/components/table/rank-table";
 
 export default function RankPage() {
   const getParams = () => {

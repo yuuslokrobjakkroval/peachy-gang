@@ -8,6 +8,7 @@ export type AppConfig = {
    * bot name
    */
   name: string;
+  description?: string;
   /**
    * url for avatar
    */

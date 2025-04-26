@@ -70,4 +70,9 @@ export const configGoma: AppConfig = {
   categories: ["Config", "Filters", "Info", "Music", "Playlist"],
 };
 
-export const CARD: any = [config, configGoma, configPeach];
+export const CARD: any = [config, configPeach, configGoma];
+export const APPLICATION: any = {
+  peachy: config,
+  peach: configPeach,
+  goma: configGoma,
+}

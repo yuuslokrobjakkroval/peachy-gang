@@ -2,9 +2,9 @@
 
 import React from "react";
 import { useGetUsersQuery } from "@/redux/api/users";
-import { SectionCards } from "@/components/section-cards";
-import { ChartAreaInteractive } from "@/components/chart-area-interactive";
-import { UsersTable } from "@/components/table";
+import { SectionCards } from "@/components/applications/dashboard/section-cards";
+import { ChartAreaInteractive } from "@/components/applications/dashboard/chart-area-interactive";
+import { UsersTable } from "@/components/table/table";
 import { LoadingPage } from "@/components/loading/circle";
 
 export default function DashboardPage() {
