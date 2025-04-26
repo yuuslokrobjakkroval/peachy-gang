@@ -11,6 +11,7 @@ import {
   Waypoints,
   Gift,
   UserMinus,
+  Bot,
 } from "lucide-react";
 import {
   Sidebar,
@@ -47,32 +48,37 @@ const data = {
       items: [
         {
           title: "Welcome Message",
-          url: "/peachy/feature/welcome",
+          url: `/features/welcome-message`,
           icon: Hand,
         },
         {
+          title: "Auto Response",
+          url: `/features/auto-response`,
+          icon: Bot,
+        },
+        {
           title: "Booster Message",
-          url: "/peachy/feature/booster",
+          url: "/features/booster-message",
           icon: Rocket,
         },
         {
           title: "Invite Message",
-          url: "/peachy/feature/invite",
+          url: "/features/invite-tracker-message",
           icon: UserPlus,
         },
         {
           title: "Join Roles",
-          url: "/peachy/feature/join-roles",
+          url: "/features/join-roles",
           icon: Waypoints,
         },
         {
-          title: "Giveaway",
-          url: "/peachy/feature/giveaway",
+          title: "Giveaway Schedule",
+          url: "/features/giveaway-schedule",
           icon: Gift,
         },
         {
-          title: "Good Bye Message",
-          url: "/peachy/feature/good-bye",
+          title: "GoodBye Message",
+          url: "/features/goodbye-message",
           icon: UserMinus,
         },
       ],

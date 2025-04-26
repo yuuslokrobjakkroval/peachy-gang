@@ -20,7 +20,7 @@ const Information = ({
     ? {
         background: `url(${bannerUrl(
           userInfoByDiscord.id,
-          userInfoByDiscord.banner
+          userInfoByDiscord.banner,
         )})`,
         backgroundSize: "cover",
         backgroundPosition: "center",

@@ -59,75 +59,89 @@ body {
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-ring: var(--sidebar-ring);
-  --font-sans: var(--font-sans);
+  --font-sans: Nunito, sans-serif;
   --font-mono: var(--font-mono);
-  --font-serif: var(--font-serif);
+  --font-serif: PT Serif, serif;
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
   --radius-xl: calc(var(--radius) + 4px);
   --shadow-2xs: var(--shadow-2xs);
-  --shadow-xs: var(--shadow-xs);
-  --shadow-sm: var(--shadow-sm);
+  --shadow-xs: 0 2px 0 0 var(--border);
+  --shadow-sm: 0 2px 0 0 var(--border);
   --shadow: var(--shadow);
-  --shadow-md: var(--shadow-md);
-  --shadow-lg: var(--shadow-lg);
-  --shadow-xl: var(--shadow-xl);
-  --shadow-2xl: var(--shadow-2xl);
+  --shadow-md: 0 2px 0 0 var(--border);
+  --shadow-lg: 0 2px 0 0 var(--border);
+  --shadow-xl: 0 2px 0 0 var(--border);
+  --shadow-2xl: 0 2px 0 0 var(--border);
+  --font-weight-light: 700;
+  --font-weight-normal: 700;
+  --font-weight-medium: 700;
+  --font-weight-semibold: 700;
+  --shadow-3xl: 0 2px 0 0 var(--border);
+  --color-destructive-border: var(--destructive-border);
+  --color-primary-border: var(--primary-border);
 }
 
 :root {
-  --background: oklch(0.88 0.05 91.79);
-  --foreground: oklch(0.43 0.03 59.22);
-  --card: oklch(0.89 0.04 87.57);
-  --card-foreground: oklch(0.43 0.03 59.22);
-  --popover: oklch(0.94 0.03 89.85);
-  --popover-foreground: oklch(0.43 0.03 59.22);
-  --primary: oklch(0.67 0.11 118.91);
-  --primary-foreground: oklch(0.99 0.01 88.64);
-  --secondary: oklch(0.85 0.06 91.15);
-  --secondary-foreground: oklch(0.43 0.03 59.22);
-  --muted: oklch(0.85 0.06 91.15);
-  --muted-foreground: oklch(0.58 0.03 60.93);
-  --accent: oklch(0.84 0.07 90.33);
-  --accent-foreground: oklch(0.43 0.03 59.22);
-  --destructive: oklch(0.71 0.1 29.98);
-  --destructive-foreground: oklch(0.98 0.01 91.48);
-  --border: oklch(0.69 0.04 59.84);
-  --input: oklch(0.84 0.07 90.33);
-  --ring: oklch(0.73 0.06 130.85);
-  --chart-1: oklch(0.73 0.06 130.85);
-  --chart-2: oklch(0.68 0.06 132.45);
-  --chart-3: oklch(0.82 0.03 136.65);
-  --chart-4: oklch(0.59 0.05 137.62);
-  --chart-5: oklch(0.52 0.04 137.19);
-  --sidebar: oklch(0.86 0.06 90.52);
-  --sidebar-foreground: oklch(0.43 0.03 59.22);
-  --sidebar-primary: oklch(0.73 0.06 130.85);
-  --sidebar-primary-foreground: oklch(0.99 0.01 88.64);
-  --sidebar-accent: oklch(0.92 0.02 88);
-  --sidebar-accent-foreground: oklch(0.43 0.03 59.22);
-  --sidebar-border: oklch(0.91 0.02 88);
-  --sidebar-ring: oklch(0.73 0.06 130.85);
+  --background: oklch(0.91 0.048 83.6);
+  --foreground: oklch(0.41 0.077 78.9);
+  --card: oklch(0.92 0.042 83.6);
+  --card-foreground: oklch(0.41 0.077 74.3);
+  --popover: oklch(0.92 0.042 83.6);
+  --popover-foreground: oklch(0.41 0.077 74.3);
+  --primary: oklch(0.71 0.097 111.7);
+  --primary-foreground: oklch(0.98 0.005 0);
+  --secondary: oklch(0.88 0.055 83.6);
+  --secondary-foreground: oklch(0.51 0.077 78.9);
+  --muted: oklch(0.86 0.064 83.7);
+  --muted-foreground: oklch(0.51 0.077 74.3);
+  --accent: oklch(0.86 0.055 83.6);
+  --accent-foreground: oklch(0.26 0.016 0);
+  --destructive: oklch(0.63 0.24 29.2);
+  --destructive-foreground: oklch(0.97 0.018 0);
+  --border: oklch(0.74 0.063 80.8);
+  --input: oklch(0.74 0.063 80.8);
+  --ring: oklch(0.51 0.077 74.3);
+  --chart-1: oklch(0.66 0.19 41.6);
+  --chart-2: oklch(0.68 0.16 184.9);
+  --chart-3: oklch(0.48 0.09 210.9);
+  --chart-4: oklch(0.85 0.19 85.4);
+  --chart-5: oklch(0.74 0.19 66.3);
+  --sidebar: oklch(0.87 0.059 83.7);
+  --sidebar-foreground: oklch(0.41 0.077 78.9);
+  --sidebar-primary: oklch(0.26 0.016 0);
+  --sidebar-primary-foreground: oklch(0.98 0.005 0);
+  --sidebar-accent: oklch(0.83 0.058 83.6);
+  --sidebar-accent-foreground: oklch(0.26 0.016 0);
+  --sidebar-border: oklch(0.91 0.005 0);
+  --sidebar-ring: oklch(0.71 0.005 0);
   --font-sans: Merriweather, serif;
   --font-serif: Source Serif 4, serif;
   --font-mono: JetBrains Mono, monospace;
   --font-ghibi: Ghibli;
   --font-ghibi-bold: Ghibli-Bold;
-  --radius: 0.425rem;
+  --radius: 0.625rem;
   --shadow-2xs: 3px 3px 2px 0px hsl(88 22% 35% / 0.07);
   --shadow-xs: 3px 3px 2px 0px hsl(88 22% 35% / 0.07);
-  --shadow-sm: 3px 3px 2px 0px hsl(88 22% 35% / 0.15),
+  --shadow-sm:
+    3px 3px 2px 0px hsl(88 22% 35% / 0.15),
     3px 1px 2px -1px hsl(88 22% 35% / 0.15);
-  --shadow: 3px 3px 2px 0px hsl(88 22% 35% / 0.15),
+  --shadow:
+    3px 3px 2px 0px hsl(88 22% 35% / 0.15),
     3px 1px 2px -1px hsl(88 22% 35% / 0.15);
-  --shadow-md: 3px 3px 2px 0px hsl(88 22% 35% / 0.15),
+  --shadow-md:
+    3px 3px 2px 0px hsl(88 22% 35% / 0.15),
     3px 2px 4px -1px hsl(88 22% 35% / 0.15);
-  --shadow-lg: 3px 3px 2px 0px hsl(88 22% 35% / 0.15),
+  --shadow-lg:
+    3px 3px 2px 0px hsl(88 22% 35% / 0.15),
     3px 4px 6px -1px hsl(88 22% 35% / 0.15);
-  --shadow-xl: 3px 3px 2px 0px hsl(88 22% 35% / 0.15),
+  --shadow-xl:
+    3px 3px 2px 0px hsl(88 22% 35% / 0.15),
     3px 8px 10px -1px hsl(88 22% 35% / 0.15);
   --shadow-2xl: 3px 3px 2px 0px hsl(88 22% 35% / 0.38);
+  --primary-border: oklch(0.59 0.096 111.8);
+  --destructive-border: oklch(0.43 0.24 29.2);
 }
 
 .dark {
@@ -171,15 +185,20 @@ body {
   --radius: 0.425rem;
   --shadow-2xs: 3px 3px 2px 0px hsl(88 22% 35% / 0.07);
   --shadow-xs: 3px 3px 2px 0px hsl(88 22% 35% / 0.07);
-  --shadow-sm: 3px 3px 2px 0px hsl(88 22% 35% / 0.15),
+  --shadow-sm:
+    3px 3px 2px 0px hsl(88 22% 35% / 0.15),
     3px 1px 2px -1px hsl(88 22% 35% / 0.15);
-  --shadow: 3px 3px 2px 0px hsl(88 22% 35% / 0.15),
+  --shadow:
+    3px 3px 2px 0px hsl(88 22% 35% / 0.15),
     3px 1px 2px -1px hsl(88 22% 35% / 0.15);
-  --shadow-md: 3px 3px 2px 0px hsl(88 22% 35% / 0.15),
+  --shadow-md:
+    3px 3px 2px 0px hsl(88 22% 35% / 0.15),
     3px 2px 4px -1px hsl(88 22% 35% / 0.15);
-  --shadow-lg: 3px 3px 2px 0px hsl(88 22% 35% / 0.15),
+  --shadow-lg:
+    3px 3px 2px 0px hsl(88 22% 35% / 0.15),
     3px 4px 6px -1px hsl(88 22% 35% / 0.15);
-  --shadow-xl: 3px 3px 2px 0px hsl(88 22% 35% / 0.15),
+  --shadow-xl:
+    3px 3px 2px 0px hsl(88 22% 35% / 0.15),
     3px 8px 10px -1px hsl(88 22% 35% / 0.15);
   --shadow-2xl: 3px 3px 2px 0px hsl(88 22% 35% / 0.38);
 }
@@ -191,12 +210,6 @@ body {
   body {
     @apply bg-background text-foreground;
     font-weight: var(--font-weight-bold);
-    /* background-image: url("/images/background.png");
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    background-blend-mode: multiply; */
   }
   .border {
     border-width: 2px !important;
