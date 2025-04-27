@@ -1,28 +1,27 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-    content: [
-      './pages/**/*.{js,ts,jsx,tsx}',
-      './components/**/*.{js,ts,jsx,tsx}',
-      './app/**/*.{js,ts,jsx,tsx}',
-      './components/ui/**/*.{js,ts,jsx,tsx}',
-    ],
-    theme: {
-      extend: {
-        fontFamily: {
-          ghibli: ['Ghibli', 'serif'],
-          'ghibli-bold': ['Ghibli-Bold', 'serif'],
-        },
+  content: [
+    "./pages/**/*.{js,ts,jsx,tsx}",
+    "./components/**/*.{js,ts,jsx,tsx}",
+    "./app/**/*.{js,ts,jsx,tsx}",
+    "./components/ui/**/*.{js,ts,jsx,tsx}",
+  ],
+  theme: {
+    extend: {
+      fontFamily: {
+        ghibli: ["Ghibli", "serif"],
+        "ghibli-bold": ["Ghibli-Bold", "serif"],
       },
     },
-    plugins: [
-      function ({ addUtilities }) {
-        addUtilities({
-          '.text-ghibli-bold': {
-            fontFamily: '"Ghibli-Bold", serif',
-            fontWeight: '700',
-          },
-        });
-      },
-      require('tw-animate-css'),
-    ],
-  };
+  },
+  plugins: [
+    function ({ addUtilities }) {
+      addUtilities({
+        ".text-ghibli-bold": {
+          fontFamily: '"Ghibli-Bold", serif',
+          fontWeight: "700",
+        },
+      });
+    },
+  ],
+};
