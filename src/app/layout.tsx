@@ -8,7 +8,6 @@ import { ThemeProvider } from "@/components/provider/theme-provider";
 import ReduxProvider from "@/components/provider/redux-provider";
 import { PeachyProvider } from "@/context/peachy";
 import { Toaster } from "@/components/ui/sonner";
-import { Analytics } from "@vercel/analytics/react";
 
 const nunito = Nunito({
   variable: "--font-nunito",
@@ -68,7 +67,6 @@ export default async function LocaleLayout({
             <PeachyProvider>
               <div className="texture" />
               {children}
-              <Analytics />
               <Toaster position="top-right" />
             </PeachyProvider>
           </ReduxProvider>
