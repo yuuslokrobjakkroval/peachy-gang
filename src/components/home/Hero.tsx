@@ -2,15 +2,19 @@
 
 import React from "react";
 import { useGetCustomersQuery } from "@/redux/api/users";
-import { LoadingPage } from "@/components/loading/circle";
 import Image from "next/image";
 import { Container } from "@/components/home/Container";
+import Loading from "../loading/circle";
 
 export const Hero = () => {
   const { data: customers, isLoading } = useGetCustomersQuery(null);
 
   if (isLoading) {
-    return <LoadingPage />;
+    return (
+      <div className="w-full">
+        <Loading />
+      </div>
+    );
   }
   return (
     <>
