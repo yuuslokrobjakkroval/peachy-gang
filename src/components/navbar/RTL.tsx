@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 import { usePeachy } from "@/context/peachy";
 import { IoMdNotifications } from "react-icons/io";
@@ -46,7 +46,6 @@ const RTLNavbar = (props: {
   const { theme, setTheme } = useTheme();
   const router = useRouter();
   const [hasBeenOpened, setHasBeenOpened] = useState(false);
-  const [isClient, setIsClient] = useState(false); // Track client-side render
 
   const handleProfileClick = () => {
     setUserInfoByDiscord(user);
@@ -69,14 +68,6 @@ const RTLNavbar = (props: {
       setHasBeenOpened(false);
     }
   };
-
-  // Set isClient to true after the component is mounted on the client
-  useEffect(() => {
-    setIsClient(true);
-  }, []);
-
-  // Don't render anything until it's confirmed to be client-side
-  if (!isClient) return null;
 
   return (
     <nav className="flex items-center gap-3 rounded-xl p-2 transition-all duration-300 mt-3">

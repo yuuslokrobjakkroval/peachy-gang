@@ -1,6 +1,5 @@
 "use client";
 
-import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import {
@@ -15,18 +14,6 @@ import { Castle } from "lucide-react";
 
 export function NavGuild({ guilds }: { guilds: Guild[] }) {
   const router = useRouter();
-
-  // Track if we're on the client-side
-  const [isClient, setIsClient] = useState(false);
-
-  useEffect(() => {
-    // This will only run on the client
-    setIsClient(true);
-  }, []);
-
-  // Return early to prevent rendering the component on the server
-  if (!isClient) return null;
-
   return (
     <SidebarGroup className="py-0">
       <SidebarGroupLabel>
