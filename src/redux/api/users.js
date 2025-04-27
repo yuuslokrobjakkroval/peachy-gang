@@ -4,7 +4,7 @@ const extendedApi = emptySplitApi.injectEndpoints({
   endpoints: (builder) => ({
     getCustomers: builder.query({
       query: (params) => ({
-        url: `${process.env.NEXT_PUBLIC_API_ENDPOINT}/peachy/customers`,
+        url: `${process.env.NEXT_PUBLIC_API_ENDPOINT}/peachy/my/customers`,
         method: "GET",
         params,
       }),
