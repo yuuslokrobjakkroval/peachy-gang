@@ -30,8 +30,7 @@ export default function PeachyLayout({
 }) {
   const pathname = usePathname();
   const currentPath = pathname.split("/").filter(Boolean);
-  const { userInfoByDiscord, guildId } = usePeachy();
-  const { data: guild } = useGetGuildInfoQuery(guildId);
+  const { userInfoByDiscord } = usePeachy();
 
   const breadcrumbPath = currentPath.map((segment, index) => {
     return segment;

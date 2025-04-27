@@ -48,6 +48,8 @@ const Features = ({
           guild,
           feature: feature.id,
         }).unwrap();
+        refetch();
+
         toast.success(`Enabled ${feature.name}`, {
           description:
             "You have successfully enabled this feature. Configure it now?",
@@ -60,11 +62,11 @@ const Features = ({
                   guild,
                   feature: feature.id,
                 }).unwrap();
+                refetch();
                 toast.success(`Disabled ${feature.name}`, {
                   description:
                     "You have successfully undone the enable action.",
                 });
-                refetch();
               } catch (error) {
                 toast.error(`Failed to disable ${feature.name}`);
               }
@@ -72,7 +74,6 @@ const Features = ({
           },
           duration: 1000,
         });
-        refetch();
       } catch (error) {
         toast.error(`Failed to enable ${feature.name}`, {
           duration: 1000,
@@ -88,6 +89,7 @@ const Features = ({
         guild,
         feature: feature.id,
       }).unwrap();
+      refetch();
       toast.success(`Disabled ${feature.name}`, {
         description: "You have successfully disabled this feature.",
         action: {
@@ -99,10 +101,10 @@ const Features = ({
                 guild,
                 feature: feature.id,
               }).unwrap();
+              refetch();
               toast.success(`Enabled ${feature.name}`, {
                 description: "You have successfully undone the disable action.",
               });
-              refetch();
             } catch (error) {
               toast.error(`Failed to enable ${feature.name}`);
             }
@@ -110,7 +112,6 @@ const Features = ({
         },
         duration: 1000,
       });
-      refetch();
     } catch (error) {
       toast.error(`Failed to disable ${feature.name}`, {
         duration: 1000,
@@ -135,6 +136,7 @@ const Features = ({
       </CardHeader>
       <CardFooter className="flex justify-between items-start gap-1 text-sm">
         <Button
+          className="cursor-pointer"
           variant={enabled ? "default" : "outline"}
           aria-label={
             enabled ? `Configure ${feature.name}` : `Enable ${feature.name}`
@@ -146,6 +148,7 @@ const Features = ({
         </Button>
         {enabled && (
           <Button
+            className="cursor-pointer"
             variant="destructive"
             aria-label={`Disable ${feature.name}`}
             disabled={disableLoading}

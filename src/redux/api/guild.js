@@ -43,11 +43,8 @@ const bot = emptySplitApi.injectEndpoints({
     }),
     updateFeature: builder.mutation({
       query: (body) => ({
-        url: `${process.env.NEXT_PUBLIC_API_ENDPOINT}/guilds/${guild}/features/${feature}`,
+        url: `${process.env.NEXT_PUBLIC_API_ENDPOINT}/guilds/${body.guild}/features/${body.feature}`,
         method: "PATCH",
-        headers: {
-          "Content-Type": "application/json",
-        },
         body,
       }),
       invalidatesTags: (result, error, arg) => [
@@ -55,13 +52,10 @@ const bot = emptySplitApi.injectEndpoints({
       ],
     }),
     sendMessageFeature: builder.mutation({
-      query: ({ guild, feature, userId }) => ({
-        url: `${process.env.NEXT_PUBLIC_API_ENDPOINT}/guilds/${guild}/features/${feature}/send-message`,
+      query: (body) => ({
+        url: `${process.env.NEXT_PUBLIC_API_ENDPOINT}/guilds/${body.guild}/features/${body.feature}/send-message`,
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: { guild, feature, userId },
+        body,
       }),
       invalidatesTags: (result, error, arg) => [
         { type: "FEATURE", id: `${arg.guild}-${arg.feature}` },

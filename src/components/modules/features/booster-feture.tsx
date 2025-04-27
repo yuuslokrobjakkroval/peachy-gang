@@ -1,4 +1,3 @@
-// app/feature/page.tsx
 "use client";
 import React, { useEffect } from "react";
 import { useFormik } from "formik";
@@ -29,7 +28,7 @@ const validationSchema = Yup.object({
   content: Yup.string().required("Content is required"),
 });
 
-export function WelcomeMessageFeature({
+export function BoosterMessageFeature({
   featureConfig,
   featureInfo,
   guild,
@@ -81,7 +80,7 @@ export function WelcomeMessageFeature({
       },
       image: {
         layout: featureInfo.image?.layout ?? "classic",
-        feature: featureInfo.image?.feature ?? "WELCOME",
+        feature: featureInfo.image?.feature ?? "BOOSTER",
         avatarShape: featureInfo.image?.avatarShape ?? "Circle",
         circleColor: featureInfo.image?.circleColor ?? "#77CDFF",
         featureColor: featureInfo.image?.featureColor ?? "#77CDFF",
@@ -102,7 +101,7 @@ export function WelcomeMessageFeature({
         await updateFeature(body).unwrap();
         toast.success(`Updated ${toCapitalCase(feature)}`, {
           description: "Feature settings saved successfully.",
-          duration: 2000,
+          className: "bg-gradient-to-r from-pink-500 to-purple-500 text-white",
         });
         refetch();
       } catch (error) {
@@ -191,7 +190,7 @@ export function WelcomeMessageFeature({
                         feature,
                         userId: userInfoByDiscord.id,
                       }).unwrap();
-                      toast.success("Message sent  successfully!", {
+                      toast.success("Message sent successfully!", {
                         duration: 2000,
                       });
                     } catch (error) {

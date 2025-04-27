@@ -29,7 +29,7 @@ const validationSchema = Yup.object({
   content: Yup.string().required("Content is required"),
 });
 
-export function WelcomeMessageFeature({
+export function InviteTrackerFeature({
   featureConfig,
   featureInfo,
   guild,
@@ -81,7 +81,7 @@ export function WelcomeMessageFeature({
       },
       image: {
         layout: featureInfo.image?.layout ?? "classic",
-        feature: featureInfo.image?.feature ?? "WELCOME",
+        feature: featureInfo.image?.feature ?? "INVITE TRACKER",
         avatarShape: featureInfo.image?.avatarShape ?? "Circle",
         circleColor: featureInfo.image?.circleColor ?? "#77CDFF",
         featureColor: featureInfo.image?.featureColor ?? "#77CDFF",
@@ -102,7 +102,7 @@ export function WelcomeMessageFeature({
         await updateFeature(body).unwrap();
         toast.success(`Updated ${toCapitalCase(feature)}`, {
           description: "Feature settings saved successfully.",
-          duration: 2000,
+          className: "bg-gradient-to-r from-pink-500 to-purple-500 text-white",
         });
         refetch();
       } catch (error) {
@@ -181,7 +181,7 @@ export function WelcomeMessageFeature({
                 </Button>
                 <Button
                   className="cursor-pointer bg-primary text-primary-foreground hover:bg-primary/90 rounded-lg"
-                  aria-label="Test message"
+                  aria-label="test Message"
                   disabled={sendMessageLoading}
                   onClick={async () => {
                     try {
@@ -191,7 +191,7 @@ export function WelcomeMessageFeature({
                         feature,
                         userId: userInfoByDiscord.id,
                       }).unwrap();
-                      toast.success("Message sent  successfully!", {
+                      toast.success("Message sent successfully!", {
                         duration: 2000,
                       });
                     } catch (error) {

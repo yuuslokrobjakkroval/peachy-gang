@@ -14,6 +14,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { CircleArrowLeft, Mailbox } from "lucide-react";
 import { Separator } from "@/components/ui/separator";
 import { getAbsoluteUrl } from "@/utils/get-absolute-url";
+import { Spinner } from "@/components/loading/spinner";
 
 export default function FeaturesPage() {
   const pathname = usePathname();
@@ -25,7 +26,13 @@ export default function FeaturesPage() {
       : "";
   const { data: guild, isLoading, refetch } = useGetGuildInfoQuery(guildId);
 
-  if (isLoading) return <LoadingPage />;
+  if (isLoading) {
+    return (
+      <div className="flex h-screen w-full items-center justify-center">
+        <Spinner variant="circle" />
+      </div>
+    );
+  }
 
   return (
     <SidebarProvider>

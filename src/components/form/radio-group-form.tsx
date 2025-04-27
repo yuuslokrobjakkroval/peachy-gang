@@ -14,10 +14,14 @@ export type RadioGroupFormProps = {
   value: string;
   onChange: (value: string) => void;
   className?: string;
+  layout?: "row" | "column";
 };
 
 export const RadioGroupForm = forwardRef<HTMLDivElement, RadioGroupFormProps>(
-  ({ control, options, value, onChange, className }, ref) => {
+  (
+    { control, options, value, onChange, className, layout = "column" },
+    ref
+  ) => {
     return (
       <Card className="p-4" ref={ref}>
         <div className="space-y-2">
@@ -32,30 +36,32 @@ export const RadioGroupForm = forwardRef<HTMLDivElement, RadioGroupFormProps>(
               {control.description}
             </p>
           )}
+          <RadioGroup
+            className={`${className} flex ${
+              layout === "row" ? "flex-row gap-4" : "flex-col gap-2"
+            }`}
+            value={value}
+            onValueChange={onChange}
+          >
+            {options.map((option) => (
+              <div key={option.value} className="flex items-center gap-2">
+                <RadioGroupItem
+                  id={`${control.id}-${option.value}`}
+                  value={option.value}
+                />
+                <Label htmlFor={`${control.id}-${option.value}`}>
+                  {option.label}
+                </Label>
+              </div>
+            ))}
+          </RadioGroup>
+          {control.error && (
+            <p className="pl-1 text-sm text-red-500">{control.error}</p>
+          )}
         </div>
-        <RadioGroup
-          className={className}
-          value={value}
-          onValueChange={onChange}
-        >
-          {options.map((option) => (
-            <div key={option.value} className="flex items-center gap-2">
-              <RadioGroupItem
-                id={`${control.id}-${option.value}`}
-                value={option.value}
-              />
-              <Label htmlFor={`${control.id}-${option.value}`}>
-                {option.label}
-              </Label>
-            </div>
-          ))}
-        </RadioGroup>
-        {control.error && (
-          <p className="pl-1 text-sm text-red-500">{control.error}</p>
-        )}
       </Card>
     );
-  },
+  }
 );
 
 RadioGroupForm.displayName = "RadioGroupForm";

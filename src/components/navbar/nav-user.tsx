@@ -1,8 +1,7 @@
 "use client";
+
 import React, { useState, useEffect } from "react";
-
 import { BadgeCheck, ChevronsUpDown, CreditCard, LogOut } from "lucide-react";
-
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import {
   DropdownMenu,
@@ -28,6 +27,7 @@ export function NavUser() {
   const router = useRouter();
   const { isMobile: sidebarIsMobile } = useSidebar();
   const [isMobile, setIsMobile] = useState(false);
+  const [isClient, setIsClient] = useState(false);
 
   const handleProfileClick = () => {
     router.push("/peachy/profile");
@@ -44,6 +44,12 @@ export function NavUser() {
   useEffect(() => {
     setIsMobile(sidebarIsMobile);
   }, [sidebarIsMobile]);
+
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
+
+  if (!isClient) return null;
 
   return (
     <SidebarMenu>

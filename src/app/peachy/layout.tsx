@@ -1,6 +1,7 @@
 "use client";
 
-import React from "react";
+import React, { useEffect } from "react";
+import { usePeachy } from "@/context/peachy";
 import { usePathname } from "next/navigation";
 import { AppSidebar } from "@/components/sidebar/app-sidebar";
 import {
@@ -20,9 +21,8 @@ import { ChevronRight } from "lucide-react";
 import { useFetchUserInfoQuery } from "@/redux/api/discord";
 import { useGetGuildsQuery } from "@/redux/api/discord";
 import { Guild, toUpperCase } from "@/utils/common";
-import { LoadingPage } from "@/components/loading/circle";
 import RTLNavbar from "@/components/navbar/RTL";
-import { usePeachy } from "@/context/peachy";
+import { Spinner } from "@/components/loading/spinner";
 
 export default function PeachyLayout({
   children,
@@ -38,8 +38,16 @@ export default function PeachyLayout({
       : undefined;
 
   const { setUserInfoByDiscord, setGuilds } = usePeachy();
-  const { data: user, isLoading: userLoading } = useFetchUserInfoQuery(null);
-  const { data: guilds, isLoading: guildLoading } = useGetGuildsQuery(null);
+  const {
+    data: user,
+    isLoading: userLoading,
+    isSuccess: userSuccess,
+  } = useFetchUserInfoQuery(null);
+  const {
+    data: guilds,
+    isLoading: guildLoading,
+    isSuccess: guildSuccess,
+  } = useGetGuildsQuery(null);
 
   const guild = guilds?.find((g: Guild) => g.id === guildId);
 
@@ -50,11 +58,20 @@ export default function PeachyLayout({
     return segment;
   });
 
-  if (userLoading || guildLoading) {
-    return <LoadingPage />;
-  } else {
-    setUserInfoByDiscord(user);
-    setGuilds(guilds);
+  useEffect(() => {
+    if (userSuccess && guildSuccess) {
+      setUserInfoByDiscord(user);
+      setGuilds(guilds);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [user, guilds]);
+
+  if (userLoading && guildLoading) {
+    return (
+      <div className="flex justify-center items-center h-12">
+        <Spinner variant="circle" />
+      </div>
+    );
   }
 
   return (

@@ -17,7 +17,10 @@ export const InputForm = forwardRef<HTMLInputElement, InputFormProps>(
     return (
       <Card className="p-4">
         <div className="space-y-2">
-          <Label htmlFor={control.id} className="text-sm font-medium">
+          <Label
+            htmlFor={control.id}
+            className="text-lg font-semibold text-primary"
+          >
             {control.label}
           </Label>
           {control.description && (
@@ -32,7 +35,7 @@ export const InputForm = forwardRef<HTMLInputElement, InputFormProps>(
         </div>
       </Card>
     );
-  },
+  }
 );
 
 InputForm.displayName = "InputForm";

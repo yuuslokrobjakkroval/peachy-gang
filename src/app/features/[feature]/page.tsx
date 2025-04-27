@@ -14,9 +14,15 @@ import { toCapitalCase } from "@/utils/common";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { WelcomeMessageFeature } from "@/components/modules/features/welcome-feture";
+import { useParams } from "next/navigation";
+import { InviteTrackerFeature } from "@/components/modules/features/inviter-tracker-feture";
+import { BoosterMessageFeature } from "@/components/modules/features/booster-feture";
+import { UseFeaturesConfig } from "@/utils/features";
 
 export default function FeaturePage() {
   const { guildId, feature } = usePeachy();
+  console.log(guildId, feature);
+
   const {
     data: featureInfo,
     isLoading,
@@ -44,17 +50,69 @@ export default function FeaturePage() {
 }
 
 export function IsEnabledPage({ featureInfo, guild, feature, refetch }: any) {
+  const features = UseFeaturesConfig();
+  const { feature: featureParam } = useParams();
+
+  const featureConfig =
+    typeof featureParam === "string" && featureParam in features
+      ? features[featureParam as keyof typeof features]
+      : undefined;
+
   function handleFeature({ featureInfo, guild, feature, refetch }: any) {
-    switch (feature) {
+    switch (featureParam) {
       case "welcome-message":
         return (
           <WelcomeMessageFeature
+            featureConfig={featureConfig}
             featureInfo={featureInfo}
             guild={guild}
             feature={feature}
             refetch={refetch}
           />
         );
+
+      case "auto-response":
+        return "auto-response";
+
+      case "booster-message":
+        return (
+          <BoosterMessageFeature
+            featureConfig={featureConfig}
+            featureInfo={featureInfo}
+            guild={guild}
+            feature={feature}
+            refetch={refetch}
+          />
+        );
+
+      case "invite-tracker-message":
+        return (
+          <InviteTrackerFeature
+            featureConfig={featureConfig}
+            featureInfo={featureInfo}
+            guild={guild}
+            feature={feature}
+            refetch={refetch}
+          />
+        );
+
+      case "join-roles":
+        return "join-roles";
+
+      case "giveaway-schedule":
+        return "giveaway-schedule";
+
+      case "goodbye-message":
+        return (
+          <WelcomeMessageFeature
+            featureConfig={featureConfig}
+            featureInfo={featureInfo}
+            guild={guild}
+            feature={feature}
+            refetch={refetch}
+          />
+        );
+
       default:
         return "hello";
     }

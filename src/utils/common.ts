@@ -316,9 +316,11 @@ export function iconUrl(guild: Guild) {
   }
 }
 
-export function avatarUrl(user: UserInfo) {
-  if (user) {
-    return `https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}?size=512`;
+export function avatarUrl(user: any): any {
+  if (user.avatar?.startsWith("a")) {
+    return `https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}.gif?size=1024`;
+  } else {
+    return `https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}.png?size=1024`;
   }
 }
 

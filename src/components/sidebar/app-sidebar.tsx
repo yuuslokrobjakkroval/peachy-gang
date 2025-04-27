@@ -19,7 +19,7 @@ import {
   SidebarFooter,
   SidebarRail,
 } from "@/components/ui/sidebar";
-import { UserInfo, Guild } from "@/utils/common";
+import { usePeachy } from "@/context/peachy";
 
 const data = {
   navMain: [
@@ -123,11 +123,12 @@ const data = {
 };
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
+  const { guilds } = usePeachy();
   return (
     <Sidebar collapsible="icon" {...props}>
       <SidebarContent>
         <NavMain items={data.navMain} />
-        <NavGuild />
+        <NavGuild guilds={guilds} />
       </SidebarContent>
       <SidebarFooter>
         <NavUser />

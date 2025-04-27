@@ -1,7 +1,7 @@
 "use client";
 
+import { usePeachy } from "@/context/peachy";
 import { ChevronRight, Swords, type LucideIcon } from "lucide-react";
-
 import {
   Collapsible,
   CollapsibleContent,
@@ -33,6 +33,7 @@ export function NavMain({
     }[];
   }[];
 }) {
+  const { setFeature } = usePeachy();
   return (
     <SidebarGroup>
       <SidebarGroupLabel>
@@ -68,7 +69,14 @@ export function NavMain({
                   <SidebarMenuSub>
                     {item.items?.map((subItem) => (
                       <SidebarMenuSubItem key={subItem.title}>
-                        <SidebarMenuSubButton asChild>
+                        <SidebarMenuSubButton
+                          asChild
+                          onClick={() => {
+                            setFeature(
+                              subItem.title.toLowerCase().replace(/\s+/g, "-")
+                            );
+                          }}
+                        >
                           <a
                             href={subItem.url}
                             className="flex items-center gap-2"

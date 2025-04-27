@@ -34,7 +34,6 @@ export const TextAreaForm = forwardRef<HTMLTextAreaElement, TextAreaFormProps>(
     const [isPopoverOpen, setIsPopoverOpen] = useState<boolean>(false);
     const inputRef = useRef<any>(null);
     const emojisPerPage = 20;
-    const emojisPerRow = 4;
     const { data: emojis, isLoading } = useGetGuildEmojiQuery(guildId);
 
     const filteredEmojis = emojis
@@ -113,7 +112,7 @@ export const TextAreaForm = forwardRef<HTMLTextAreaElement, TextAreaFormProps>(
                   <div className="absolute right-1 top-1">
                     <Button
                       variant="ghost"
-                      size="icon"
+                      size="sm"
                       onClick={() => setIsPopoverOpen(!isPopoverOpen)}
                       aria-label="Pick an emoji"
                     >
@@ -132,16 +131,20 @@ export const TextAreaForm = forwardRef<HTMLTextAreaElement, TextAreaFormProps>(
                     <div className="grid grid-cols-4 gap-2 mt-4">
                       {currentPageEmojis.map((emoji: any) => (
                         <Button
-                          key={emoji.id}
+                          key={emoji.name}
                           variant="ghost"
                           size="sm"
                           className="w-16 h-16"
                           onClick={() => handleEmojiClick(emoji)}
                         >
                           <img
+                            key={emoji.id}
                             src={emojiUrl(emoji)}
-                            alt={emoji.name}
+                            alt={emoji.name || "Emoji"}
                             className="object-contain"
+                            onError={(e) =>
+                              (e.currentTarget.src = "/fallback-emoji.png")
+                            }
                           />
                         </Button>
                       ))}

@@ -26,7 +26,7 @@ interface GuildChannel {
 interface Option {
   label: string;
   value: string;
-  icon: React.ReactNode;
+  icon?: React.ReactNode;
 }
 
 export type ChannelSelectFormProps = {
@@ -45,28 +45,28 @@ export type ChannelSelectFormProps = {
 
 const renderChannel = (
   channel: GuildChannel,
-  categoryName?: string,
+  categoryName?: string
 ): Option => {
   const icon = () => {
     switch (channel.type) {
       case ChannelTypes.GUILD_STAGE_VOICE:
       case ChannelTypes.GUILD_VOICE:
-        return <VoiceIcon className="w-4 h-4 text-pink-300" />;
+        return <VoiceIcon className="w-4 h-4 text-primary" />;
       default:
-        return <ChatIcon className="w-4 h-4 text-pink-300" />;
+        return <ChatIcon className="w-4 h-4 text-primary" />;
     }
   };
 
   return {
     label: categoryName ? `${categoryName}: ${channel.name}` : channel.name,
     value: channel.id,
-    icon: icon(),
+    // icon: icon(),
   };
 };
 
 const mapOptions = (
   channels: GuildChannel[],
-  type: number | null,
+  type: number | null
 ): Option[] => {
   const categories = new Map<string, GuildChannel[]>();
   const roots: GuildChannel[] = [];
@@ -113,7 +113,7 @@ export const ChannelSelectForm = forwardRef<
       description,
       className,
     },
-    ref,
+    ref
   ) => {
     const {
       data: channels = [],
@@ -140,45 +140,47 @@ export const ChannelSelectForm = forwardRef<
           {description && (
             <p className="text-sm text-muted-foreground">{description}</p>
           )}
-          {isLoading ? (
-            <div className="flex justify-center items-center h-12">
-              <Spinner variant="circle" />
-            </div>
-          ) : (
-            <Select value={value} onValueChange={onChange}>
-              <SelectTrigger
-                id={control.id}
-                className={cn("w-full", className)}
-              >
+
+          <Select value={value} onValueChange={onChange}>
+            <SelectTrigger id={control.id} className={cn("w-full", className)}>
+              {isLoading ? (
+                <div className="flex items-center gap-2">
+                  <Spinner variant="circle" className="h-4 w-4" />
+                </div>
+              ) : (
                 <SelectValue placeholder="Select a channel" />
-              </SelectTrigger>
-              <SelectContent className="bg-card border  rounded-md shadow-lg max-h-60 overflow-y-auto">
-                {options.length === 0 ? (
-                  <SelectItem value="" disabled>
-                    No channels available
+              )}
+            </SelectTrigger>
+            <SelectContent className="bg-card border rounded-md shadow-lg max-h-60 overflow-y-auto">
+              {isLoading ? (
+                <div className="flex justify-center items-center h-12">
+                  <Spinner variant="circle" />
+                </div>
+              ) : options.length === 0 ? (
+                <SelectItem value="" disabled>
+                  No channels available
+                </SelectItem>
+              ) : (
+                options.map((option) => (
+                  <SelectItem
+                    key={option.value}
+                    value={option.value}
+                    className="flex items-center gap-2 p-2 hover:bg-primary/10 rounded-md"
+                  >
+                    {option.icon}
+                    {option.label}
                   </SelectItem>
-                ) : (
-                  options.map((option) => (
-                    <SelectItem
-                      key={option.value}
-                      value={option.value}
-                      className="flex items-center gap-2 p-2 hover:bg-pink-500/10 rounded-md"
-                    >
-                      {option.icon}
-                      {option.label}
-                    </SelectItem>
-                  ))
-                )}
-              </SelectContent>
-            </Select>
-          )}
+                ))
+              )}
+            </SelectContent>
+          </Select>
           {control.error && (
             <p className="pl-1 text-sm text-red-500">{control.error}</p>
           )}
         </div>
       </Card>
     );
-  },
+  }
 );
 
 ChannelSelectForm.displayName = "ChannelSelectForm";
