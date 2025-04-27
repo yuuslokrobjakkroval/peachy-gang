@@ -14,14 +14,4 @@ module.exports = {
       },
     },
   },
-  plugins: [
-    function ({ addUtilities }) {
-      addUtilities({
-        ".text-ghibli-bold": {
-          fontFamily: '"Ghibli-Bold", serif',
-          fontWeight: "700",
-        },
-      });
-    },
-  ],
 };
