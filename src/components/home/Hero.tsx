@@ -30,7 +30,7 @@ export const Hero = () => {
           <div className="text-xl text-center text-foreground dark:text-foreground font-ghibi">
             Trusted by{" "}
             <span className="text-primary font-ghibi-bold">
-              +{customers?.toLocaleString()}
+              +{customers ? customers?.toLocaleString() : 0}
             </span>{" "}
             customers in discord
           </div>
