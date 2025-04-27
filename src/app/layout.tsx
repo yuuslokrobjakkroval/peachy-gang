@@ -1,7 +1,6 @@
 // import {NextIntlClientProvider, hasLocale} from 'next-intl';
 import type { Metadata } from "next";
 import { Nunito, PT_Sans } from "next/font/google";
-import "./globals.css";
 // import {notFound} from 'next/navigation';
 // import {routing} from '@/i18n/routing';
 import { ThemeProvider } from "@/components/provider/theme-provider";
@@ -9,6 +8,8 @@ import ReduxProvider from "@/components/provider/redux-provider";
 import { PeachyProvider } from "@/context/peachy";
 import { Toaster } from "@/components/ui/sonner";
 import { Analytics } from "@vercel/analytics/react";
+
+import "./globals.css";
 
 const nunito = Nunito({
   variable: "--font-nunito",
