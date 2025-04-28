@@ -17,7 +17,6 @@ import {
 } from "@/components/ui/card";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Input } from "@/components/ui/input";
-import { Hero } from "@/components/home/hero";
 import BotInformation from "@/components/contents/bot-info";
 import { CARD } from "@/utils/config";
 
@@ -37,22 +36,6 @@ export default function PeachyPage() {
 
   const scrollRef = useRef<HTMLDivElement>(null);
 
-  const [isScrolled, setIsScrolled] = useState(false);
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      if (window.scrollY > 10) {
-        setIsScrolled(true);
-      } else {
-        setIsScrolled(false);
-      }
-    };
-
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
   const toggleChat = () => {
     setIsChatOpen(!isChatOpen);
   };
@@ -62,18 +45,9 @@ export default function PeachyPage() {
       scrollRef.current.scrollIntoView({ behavior: "smooth" });
     }
   }, [messages]);
+
   return (
-    <div
-      className="w-full h-full flex flex-col items-center justify-center rounded-lg"
-      style={{
-        backgroundImage: "url('/images/background.png')",
-        backgroundSize: "cover",
-        backgroundPosition: "center",
-        backgroundRepeat: "no-repeat",
-        backgroundAttachment: "fixed",
-        backgroundBlendMode: "multiply",
-      }}
-    >
+    <div className="w-full h-full flex flex-col items-center justify-center rounded-lg">
       <BotInformation Cards={CARD} />
       <AnimatePresence>
         <motion.div

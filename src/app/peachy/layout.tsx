@@ -22,7 +22,7 @@ import { useFetchUserInfoQuery } from "@/redux/api/discord";
 import { useGetGuildsQuery } from "@/redux/api/discord";
 import { Guild, toUpperCase } from "@/utils/common";
 import RTLNavbar from "@/components/navbar/RTL";
-import { Spinner } from "@/components/loading/spinner";
+import Loading from "@/components/loading/circle";
 
 export default function PeachyLayout({
   children,
@@ -68,8 +68,8 @@ export default function PeachyLayout({
 
   if (userLoading && guildLoading) {
     return (
-      <div className="flex justify-center items-center h-12">
-        <Spinner variant="circle" />
+      <div className="w-full">
+        <Loading />
       </div>
     );
   }

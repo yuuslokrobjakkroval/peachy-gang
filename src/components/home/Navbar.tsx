@@ -1,7 +1,7 @@
 "use client";
 import Link from "next/link";
-import ThemeChanger from "./DarkSwitch";
 import Image from "next/image";
+import ThemeChanger from "../theme.switch";
 
 export const Navbar = () => {
   // const navigation = ["Features", "Pricing", "Blog"];

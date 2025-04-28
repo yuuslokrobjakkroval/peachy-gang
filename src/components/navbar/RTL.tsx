@@ -1,10 +1,9 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { usePeachy } from "@/context/peachy";
 import { IoMdNotifications } from "react-icons/io";
-import { RiMoonFill, RiSunFill } from "react-icons/ri";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -14,7 +13,6 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Button } from "@/components/ui/button";
-import { useTheme } from "next-themes";
 import {
   avatarUrl,
   decorationUrl,
@@ -34,7 +32,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { AllNotification } from "./Notification/All";
 import { UnreadNotification } from "./Notification/Unread";
 import { ArchiveNotification } from "./Notification/Archive";
-import ThemeChanger from "../home/DarkSwitch";
+import ThemeChanger from "../theme.switch";
 
 const RTLNavbar = (props: {
   user: UserInfo;
@@ -44,9 +42,9 @@ const RTLNavbar = (props: {
 }) => {
   const { user, onOpenSidenav, brandText } = props;
   const { setUserInfoByDiscord } = usePeachy();
-  const { theme, setTheme } = useTheme();
   const router = useRouter();
   const [hasBeenOpened, setHasBeenOpened] = useState(false);
+  const [isClient, setIsClient] = useState(false);
 
   const handleProfileClick = () => {
     setUserInfoByDiscord(user);
@@ -70,6 +68,12 @@ const RTLNavbar = (props: {
     }
   };
 
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
+
+  if (!isClient) return null;
+
   return (
     <nav className="flex items-center gap-3 rounded-xl p-2 transition-all duration-300 mt-3">
       <div className="flex items-center gap-4">
@@ -88,8 +92,8 @@ const RTLNavbar = (props: {
           <TooltipTrigger asChild>
             <ThemeChanger />
           </TooltipTrigger>
-          <TooltipContent className="text-sm text-secondary">
-            <p>Theme</p>
+          <TooltipContent>
+            <p className="text-sm text-secondary">Theme</p>
           </TooltipContent>
         </Tooltip>
 

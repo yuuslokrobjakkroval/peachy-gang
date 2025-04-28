@@ -49,9 +49,11 @@ export default function PeachyLayout({
   });
 
   if (userLoading || guildLoading) {
-    <div className="w-full">
-      <Loading />
-    </div>;
+    return (
+      <div className="w-full">
+        <Loading />
+      </div>
+    );
   }
 
   return (

@@ -26,7 +26,6 @@ export const DialogForm: React.FC<DialogFormProps> = ({
   title,
   description,
   onSubmit,
-  theme = "default",
 }) => {
   const [formData, setFormData] = React.useState({ name: "" });
   const [open, setOpen] = React.useState(false);
@@ -38,29 +37,6 @@ export const DialogForm: React.FC<DialogFormProps> = ({
     setFormData({ name: "" });
   };
 
-  const baseStyles = {
-    content:
-      "bg-card text-card-foreground shadow-lg rounded-[--radius-lg] border",
-    title: "text-lg font-semibold",
-    button:
-      "bg-primary text-primary-foreground shadow-primary hover:bg-primary/90",
-  };
-
-  const ghibliStyles =
-    theme === "ghibli"
-      ? {
-          content:
-            "relative bg-gradient-to-br from-[oklch(0.85_0.08_110)] to-[oklch(0.85_0.08_140)] border-none shadow-md",
-          title:
-            "text-[oklch(0.41_0.077_78.9)] font-handwritten animate-twinkle",
-          button:
-            "bg-[oklch(0.71_0.097_111.7)] text-[oklch(0.98_0.005_0)] shadow-primary hover:bg-[oklch(0.71_0.097_111.7)]/80",
-          texture: "texture",
-        }
-      : {};
-
-  const styles = { ...baseStyles, ...ghibliStyles };
-
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
@@ -68,10 +44,9 @@ export const DialogForm: React.FC<DialogFormProps> = ({
           {triggerLabel}
         </Button>
       </DialogTrigger>
-      <DialogContent className={`sm:max-w-[425px] ${styles.content}`}>
-        {theme === "ghibli" && <div className={styles.texture} />}
+      <DialogContent className={`sm:max-w-[425px]`}>
         <DialogHeader>
-          <DialogTitle className={styles.title}>{title}</DialogTitle>
+          <DialogTitle>{title}</DialogTitle>
           {description && (
             <DialogDescription className="text-sm text-muted-foreground">
               {description}
@@ -96,9 +71,9 @@ export const DialogForm: React.FC<DialogFormProps> = ({
               className="w-full border shadow-sm"
             />
           </div>
-          <Button type="submit" className={`w-full ${styles.button}`}>
-            Submit
-          </Button>
+          <div className="flex justify-end mt-4">
+            <Button type="submit">Submit</Button>
+          </div>
         </form>
       </DialogContent>
     </Dialog>

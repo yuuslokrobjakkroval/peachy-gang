@@ -7,7 +7,6 @@ import { Container } from "@/components/home/Container";
 import Loading from "../loading/circle";
 import { Button } from "../ui/button";
 import { useRouter } from "next/navigation";
-import FormLayoutExample from "../layouts/form-layout-example";
 
 export const Hero = () => {
   const router = useRouter();
@@ -67,8 +66,6 @@ export const Hero = () => {
               <SonyLogo />
             </div>
           </div>
-
-          <FormLayoutExample />
         </div>
       </Container>
     </>

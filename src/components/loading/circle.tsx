@@ -35,28 +35,25 @@ export default function Loading() {
       </div>
 
       {/* Main Scene */}
-      <div className="relative z-20 w-full max-w-sm p-12 mx-4 rounded-xl bg-card/85 text-card-foreground shadow-lg border">
+      <div className="relative z-20 w-full max-w-sm p-12 mx-4 rounded-xl text-card-foreground">
         <div className="flex flex-col items-center gap-10">
-          {/* Celestial Spirit Skeleton */}
-          <div className="relative">
-            <Skeleton
-              className="w-40 h-40 rounded-full bg-primary/90 animate-[pulse_2.5s_ease-in-out_infinite] delay-100"
-              style={{ boxShadow: `0 0 35px var(--primary)` }}
-            />
-          </div>
-
           {/* Starry Elements */}
-          <div className="flex gap-8">
-            <Skeleton className="w-10 h-10 rounded-full bg-secondary/80 animate-[twinkle_2.7s_ease-in-out_infinite] delay-300" />
-            <Skeleton className="w-12 h-12 rounded-full bg-primary/80 animate-[twinkle_2.9s_ease-in-out_infinite] delay-400" />
-            <Skeleton className="w-10 h-10 rounded-full bg-secondary/80 animate-[twinkle_3.1s_ease-in-out_infinite] delay-500" />
+          <div className="flex gap-8 relative">
+            <div className="relative">
+              {/* Background Star (static, glowing) */}
+              <div className="w-10 h-10 rounded-full bg-secondary/60 animate-gentlePulse" />
+              {/* Foreground Moon (moving to simulate eclipse) */}
+              <div className="w-10 h-10 rounded-full bg-primary/90 absolute top-0 left-0 animate-eclipse delay-300" />
+            </div>
+            <div className="relative">
+              <div className="w-12 h-12 rounded-full bg-secondary/60 animate-gentlePulse" />
+              <div className="w-12 h-12 rounded-full bg-primary/90 absolute top-0 left-0 animate-eclipse delay-400" />
+            </div>
+            <div className="relative">
+              <div className="w-10 h-10 rounded-full bg-secondary/60 animate-gentlePulse" />
+              <div className="w-10 h-10 rounded-full bg-primary/90 absolute top-0 left-0 animate-eclipse delay-500" />
+            </div>
           </div>
-
-          {/* Title Skeleton */}
-          <Skeleton
-            className="w-64 h-12 rounded-md bg-primary/80 animate-[pulse_2.5s_ease-in-out_infinite] delay-600 font-ghibi-bold"
-            style={{ letterSpacing: "0.1em", textTransform: "uppercase" }}
-          />
         </div>
       </div>
 

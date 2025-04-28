@@ -41,29 +41,39 @@ export const SheetForm: React.FC<SheetFormProps> = ({
     setFormData({ title: "", details: "" });
   };
 
+  const baseStyles = {
+    content: "bg-sidebar text-sidebar-foreground shadow-lg border",
+    title: "text-lg font-semibold",
+    button:
+      "bg-primary text-primary-foreground shadow-primary hover:bg-primary/90",
+  };
+
   const ghibliStyles =
     theme === "ghibli"
       ? {
-          content: "bg-gradient-to-br from-blue-100 to-purple-100 border-none",
-          title: "text-blue-800 font-handwritten animate-twinkle",
-          button: "bg-blue-200 hover:bg-blue-300 text-blue-800",
+          content:
+            "relative bg-gradient-to-br from-[oklch(0.85_0.08_200)] to-[oklch(0.85_0.08_260)] border-none shadow-md",
+          title:
+            "text-[oklch(0.41_0.077_78.9)] font-handwritten animate-twinkle",
+          button:
+            "bg-[oklch(0.68_0.16_184.9)] text-[oklch(0.26_0.016_0)] shadow-primary hover:bg-[oklch(0.68_0.16_184.9)]/80",
+          texture: "texture",
         }
-      : {
-          content: "bg-white",
-          title: "text-primary",
-          button: "bg-primary text-white",
-        };
+      : {};
+
+  const styles = { ...baseStyles, ...ghibliStyles };
 
   return (
     <Sheet open={open} onOpenChange={setOpen}>
       <SheetTrigger asChild>
-        <Button variant="outline">{triggerLabel}</Button>
+        <Button variant="outline" className="border shadow-sm">
+          {triggerLabel}
+        </Button>
       </SheetTrigger>
-      <SheetContent side={side} className={ghibliStyles.content}>
+      <SheetContent side={side} className={styles.content}>
+        {theme === "ghibli" && <div className={styles.texture} />}
         <SheetHeader>
-          <SheetTitle className={`text-lg font-semibold ${ghibliStyles.title}`}>
-            {title}
-          </SheetTitle>
+          <SheetTitle className={styles.title}>{title}</SheetTitle>
           {description && (
             <SheetDescription className="text-sm text-muted-foreground">
               {description}
@@ -72,7 +82,10 @@ export const SheetForm: React.FC<SheetFormProps> = ({
         </SheetHeader>
         <form onSubmit={handleSubmit} className="space-y-4 mt-4">
           <div className="space-y-2">
-            <Label htmlFor="title" className="text-sm font-medium">
+            <Label
+              htmlFor="title"
+              className="text-sm font-medium text-foreground"
+            >
               Title
             </Label>
             <Input
@@ -82,11 +95,14 @@ export const SheetForm: React.FC<SheetFormProps> = ({
                 setFormData({ ...formData, title: e.target.value })
               }
               placeholder="Enter a title"
-              className="w-full"
+              className="w-full border shadow-sm"
             />
           </div>
           <div className="space-y-2">
-            <Label htmlFor="details" className="text-sm font-medium">
+            <Label
+              htmlFor="details"
+              className="text-sm font-medium text-foreground"
+            >
               Details
             </Label>
             <Textarea
@@ -96,10 +112,10 @@ export const SheetForm: React.FC<SheetFormProps> = ({
                 setFormData({ ...formData, details: e.target.value })
               }
               placeholder="Enter details"
-              className="w-full"
+              className="w-full border shadow-sm"
             />
           </div>
-          <Button type="submit" className={`w-full ${ghibliStyles.button}`}>
+          <Button type="submit" className={`w-full ${styles.button}`}>
             Save
           </Button>
         </form>

@@ -27,6 +27,7 @@ export function NavUser() {
   const router = useRouter();
   const { isMobile: sidebarIsMobile } = useSidebar();
   const [isMobile, setIsMobile] = useState(false);
+  const [isClient, setIsClient] = useState(false);
 
   const handleProfileClick = () => {
     router.push("/peachy/profile");
@@ -43,6 +44,12 @@ export function NavUser() {
   useEffect(() => {
     setIsMobile(sidebarIsMobile);
   }, [sidebarIsMobile]);
+
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
+
+  if (!isClient) return null;
 
   return (
     <SidebarMenu>

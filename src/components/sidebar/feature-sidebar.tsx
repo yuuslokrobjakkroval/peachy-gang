@@ -33,16 +33,16 @@ export function FeatureSidebar({
   const data = {
     navMain: [
       {
-        title: "Peachy",
-        url: "/peachy",
-        icon: Cat,
+        title: "Dashboard",
+        url: "/dashboard",
+        icon: LayoutDashboard,
         isActive: true,
         items: [],
       },
       {
-        title: "Dashboard",
-        url: "/dashboard",
-        icon: LayoutDashboard,
+        title: "Peachy",
+        url: "/peachy",
+        icon: Cat,
         isActive: true,
         items: [],
       },
