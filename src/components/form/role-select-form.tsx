@@ -1,3 +1,4 @@
+// app/components/form/role-select-form.tsx
 import React, { useMemo, forwardRef } from "react";
 import { useGetGuildRolesQuery } from "@/redux/api/guild";
 import {
@@ -24,8 +25,8 @@ interface RoleSelectFormProps {
     error?: any;
   };
   guild: string;
-  value: string;
-  onChange: (value: string) => void;
+  value: string[];
+  onChange: (value: string[]) => void;
   description?: string;
   className?: string;
 }
@@ -52,6 +53,16 @@ export const RoleSelectForm = forwardRef<HTMLDivElement, RoleSelectFormProps>(
       return <div className="text-red-400">Error loading roles</div>;
     }
 
+    // Handle multi-select changes
+    const handleChange = (selectedValue: string) => {
+      // Skip if the selected value is the placeholder
+      if (selectedValue === "no-roles") return;
+      const newValues = value.includes(selectedValue)
+        ? value.filter((v) => v !== selectedValue)
+        : [...value, selectedValue];
+      onChange(newValues);
+    };
+
     return (
       <Card className="p-4" ref={ref}>
         <div className="space-y-2">
@@ -65,22 +76,36 @@ export const RoleSelectForm = forwardRef<HTMLDivElement, RoleSelectFormProps>(
             <p className="text-sm text-muted-foreground">{description}</p>
           )}
 
-          <Select value={value} onValueChange={onChange}>
+          <Select
+            onValueChange={handleChange}
+            disabled={isLoading || options.length === 0}
+          >
             <SelectTrigger id={control.id} className={className}>
               {isLoading ? (
                 <div className="flex items-center gap-2">
                   <Spinner variant="circle" className="h-4 w-4" />
-                  <span>Loading...</span>
                 </div>
               ) : (
-                <SelectValue placeholder="Select a channel" />
+                <SelectValue
+                  placeholder="Select roles"
+                  className={value.length > 0 ? "" : "text-muted-foreground"}
+                >
+                  {value.length > 0
+                    ? options
+                        .filter((opt) => value.includes(opt.value))
+                        .map((opt) => opt.label)
+                        .join(", ")
+                    : options.length === 0
+                      ? "No roles available"
+                      : "Select roles"}
+                </SelectValue>
               )}
             </SelectTrigger>
             <SelectContent className="bg-card border rounded-md shadow-lg max-h-60 overflow-y-auto">
               {options.length === 0 ? (
-                <SelectItem value="" disabled>
+                <div className="p-2 text-muted-foreground text-sm">
                   No roles available
-                </SelectItem>
+                </div>
               ) : (
                 options.map((option) => (
                   <SelectItem
@@ -88,7 +113,15 @@ export const RoleSelectForm = forwardRef<HTMLDivElement, RoleSelectFormProps>(
                     value={option.value}
                     className="flex items-center gap-2 p-2 hover:bg-primary/10 rounded-md"
                   >
-                    {option.label}
+                    <span
+                      className={
+                        value.includes(option.value)
+                          ? "text-primary font-semibold"
+                          : ""
+                      }
+                    >
+                      {option.label}
+                    </span>
                   </SelectItem>
                 ))
               )}

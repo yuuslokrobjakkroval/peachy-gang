@@ -5,8 +5,6 @@ import { usePeachy } from "@/context/peachy";
 import {
   useGetFeatureQuery,
   useEnableFeatureMutation,
-  useDisableFeatureMutation,
-  useUpdateFeatureMutation,
 } from "@/redux/api/guild";
 import { Spinner } from "@/components/loading/spinner";
 import { toast } from "sonner";
@@ -18,10 +16,10 @@ import { useParams } from "next/navigation";
 import { InviteTrackerFeature } from "@/components/modules/features/inviter-tracker-feture";
 import { BoosterMessageFeature } from "@/components/modules/features/booster-feture";
 import { UseFeaturesConfig } from "@/utils/features";
+import { JoinRoleFeature } from "@/components/modules/features/join-roles";
 
 export default function FeaturePage() {
   const { guildId, feature } = usePeachy();
-  console.log(guildId, feature);
 
   const {
     data: featureInfo,
@@ -97,7 +95,15 @@ export function IsEnabledPage({ featureInfo, guild, feature, refetch }: any) {
         );
 
       case "join-roles":
-        return "join-roles";
+        return (
+          <JoinRoleFeature
+            featureConfig={featureConfig}
+            featureInfo={featureInfo}
+            guild={guild}
+            feature={feature}
+            refetch={refetch}
+          />
+        );
 
       case "giveaway-schedule":
         return "giveaway-schedule";
