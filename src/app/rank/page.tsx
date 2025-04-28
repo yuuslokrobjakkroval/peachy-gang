@@ -2,7 +2,7 @@
 
 import React from "react";
 import { useGetUsersQuery } from "@/redux/api/users";
-import { LoadingPage } from "@/components/loading/circle";
+import { Loading } from "@/components/loading/circle";
 import { RankTable } from "@/components/table/rank-table";
 
 export default function RankPage() {
@@ -19,9 +19,12 @@ export default function RankPage() {
   } = useGetUsersQuery(getParams());
 
   if (isLoading) {
-    return <LoadingPage />;
+    return (
+      <div className="w-full">
+        <Loading />
+      </div>
+    );
   }
-
   return (
     <div className="flex flex-1 flex-col">
       <div className="@container/main flex flex-1 flex-col gap-2">
