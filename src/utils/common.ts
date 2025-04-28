@@ -49,6 +49,23 @@ export type Guild = {
   description: string;
 };
 
+export type Role = {
+  guild: string;
+  icon: string | null;
+  unicodeEmoji: string | null;
+  id: string;
+  name: string;
+  color: number;
+  hoist: boolean;
+  rawPosition: number;
+  permissions: string;
+  managed: boolean;
+  mentionable: boolean;
+  flags: number;
+  tags: unknown | null;
+  createdTimestamp: number;
+};
+
 export type IconHash = string;
 
 export enum PermissionFlags {
@@ -306,6 +323,10 @@ export function getRandomElement(arr: any): any {
 
 export function getRandomNumber(min: number, max: number): number {
   return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+export function roleIconUrl(role: Role): string {
+  return `https://cdn.discordapp.com/role-icons/${role.id}/${role.icon}.png`;
 }
 
 export function iconUrl(guild: Guild) {

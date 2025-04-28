@@ -30,14 +30,14 @@ export default function UpdateFeaturePanel({
         </Alert>
         <div className="flex gap-2">
           <Button
-            className="bg-primary text-primary-foreground hover:bg-primary/90 px-4 py-2"
+            className="bg-primary text-primary-foreground hover:bg-primary/90 px-4 py-2 cursor-pointer"
             onClick={onSubmit}
             disabled={isLoading}
           >
             {isLoading ? "Saving..." : "Save"}
           </Button>
           <Button
-            className="bg-transparent text-muted-foreground hover:bg-muted/50 px-4 py-2"
+            className="bg-transparent text-muted-foreground hover:bg-muted/50 px-4 py-2 cursor-pointer"
             onClick={onReset}
             disabled={isLoading}
           >
