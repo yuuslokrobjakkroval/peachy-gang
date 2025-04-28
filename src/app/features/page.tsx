@@ -3,7 +3,6 @@
 import { usePathname, useRouter } from "next/navigation";
 import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
 import { useGetGuildQuery } from "@/redux/api/guild";
-import { LoadingPage } from "@/components/loading/circle";
 import { getFeatures, iconUrl, toCapitalCase } from "@/utils/common";
 import Features from "@/components/features";
 import { Button } from "@/components/ui/button";
@@ -15,13 +14,18 @@ import { CircleArrowLeft, Mailbox } from "lucide-react";
 import { Separator } from "@/components/ui/separator";
 import { getAbsoluteUrl } from "@/utils/get-absolute-url";
 import { usePeachy } from "@/context/peachy";
+import Loading from "@/components/loading/circle";
 
 export default function FeaturesPage() {
   const { guildId } = usePeachy();
 
   const { data: guild, isLoading, refetch } = useGetGuildQuery(guildId);
 
-  if (isLoading) return <LoadingPage />;
+  if (isLoading) {
+    <div className="w-full">
+      <Loading />
+    </div>;
+  }
 
   return (
     <SidebarProvider>

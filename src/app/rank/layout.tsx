@@ -19,9 +19,9 @@ import { Separator } from "@/components/ui/separator";
 import { ChevronRight } from "lucide-react";
 import { useFetchUserInfoQuery } from "@/redux/api/discord";
 import { useGetGuildsQuery } from "@/redux/api/discord";
-import { Guild, toCapitalCase, toUpperCase } from "@/utils/common";
-import { LoadingPage } from "@/components/loading/circle";
+import { Guild, toUpperCase } from "@/utils/common";
 import RTLNavbar from "@/components/navbar/RTL";
+import Loading from "@/components/loading/circle";
 
 export default function PeachyLayout({
   children,
@@ -48,7 +48,13 @@ export default function PeachyLayout({
     return segment;
   });
 
-  if (userLoading || guildLoading) return <LoadingPage />;
+  if (userLoading || guildLoading) {
+    return (
+      <div className="w-full">
+        <Loading />
+      </div>
+    );
+  }
 
   return (
     <SidebarProvider>

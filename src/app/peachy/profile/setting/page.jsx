@@ -16,8 +16,8 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Separator } from "@/components/ui/separator";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { LoadingPage } from "@/components/loading/circle";
 import Error from "@/components/handler/error";
+import Loading from "@/components/loading/circle";
 
 export default function ProfileSetting() {
   const { userInfoByDiscord } = usePeachy();
@@ -29,7 +29,13 @@ export default function ProfileSetting() {
     }
   );
 
-  if (isLoading) return <LoadingPage />;
+  if (isLoading) {
+    return (
+      <div className="w-full">
+        <Loading />
+      </div>
+    );
+  }
 
   if (!userInfoByDiscord) {
     return (

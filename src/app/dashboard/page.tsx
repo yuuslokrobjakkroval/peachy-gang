@@ -4,8 +4,7 @@ import React from "react";
 import { useGetUsersQuery } from "@/redux/api/users";
 import { SectionCards } from "@/components/applications/dashboard/section-cards";
 import { ChartAreaInteractive } from "@/components/applications/dashboard/chart-area-interactive";
-import { UsersTable } from "@/components/table/table";
-import { Loading } from "@/components/loading/circle";
+import Loading from "@/components/loading/circle";
 
 export default function DashboardPage() {
   const getParams = () => {
@@ -23,7 +22,7 @@ export default function DashboardPage() {
     isLoading,
   } = useGetUsersQuery(getParams());
 
- if (isLoading) {
+  if (isLoading) {
     return (
       <div className="w-full">
         <Loading />

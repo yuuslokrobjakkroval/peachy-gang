@@ -7,12 +7,12 @@ import General from "./components/General";
 import Inventory from "./components/Inventory";
 import Setting from "./components/Setting";
 
-import { Loading } from "@/components/loading/circle";
 import AuthError from "@/components/handler/auth-error";
 import {
   handleAuthError,
   AUTH_ERROR_CODES,
 } from "@/utils/auth/handleAuthError";
+import Loading from "@/components/loading/circle";
 
 export default function Profile() {
   const { userInfoByDiscord }: { userInfoByDiscord: any } = usePeachy();

@@ -20,8 +20,8 @@ import { ChevronRight } from "lucide-react";
 import { useFetchUserInfoQuery } from "@/redux/api/discord";
 import { useGetGuildsQuery } from "@/redux/api/discord";
 import { Guild, toUpperCase } from "@/utils/common";
-import { LoadingPage } from "@/components/loading/circle";
 import RTLNavbar from "@/components/navbar/RTL";
+import Loading from "@/components/loading/circle";
 
 export default function PeachyLayout({
   children,
@@ -48,7 +48,11 @@ export default function PeachyLayout({
     return segment;
   });
 
-  if (userLoading || guildLoading) return <LoadingPage />;
+  if (userLoading || guildLoading) {
+    <div className="w-full">
+      <Loading />
+    </div>;
+  }
 
   return (
     <SidebarProvider>
