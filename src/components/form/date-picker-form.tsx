@@ -1,76 +1,47 @@
-import React, { forwardRef } from "react";
-import { Label } from "@/components/ui/label";
+import React, { forwardRef, useEffect, useState } from "react";
 import { Card } from "@/components/ui/card";
+import { Label } from "@/components/ui/label";
+import { Input } from "@/components/ui/input";
 
 export type DatePickerFormProps = {
   control: {
     id: string;
     label: string;
-    error?: string;
     description?: string;
+    error?: string;
   };
-  value: string;
-  onChange: (value: string) => void;
-  className?: string;
+  value?: string;
+  onChange?: (value: string) => void;
+  theme?: "default" | "ghibli";
 };
 
-export const DatePickerForm = forwardRef<HTMLDivElement, DatePickerFormProps>(
-  ({ control, value, onChange, className }, ref) => {
+export const DatePickerForm = forwardRef<HTMLInputElement, DatePickerFormProps>(
+  ({ control, value, onChange, theme = "default", ...props }, ref) => {
+    const [isMounted, setIsMounted] = useState(false);
+
+    useEffect(() => {
+      setIsMounted(true);
+    }, []);
+
+    const ghibliStyles =
+      theme === "ghibli"
+        ? {
+            card: `bg-gradient-to-br from-green-100 to-blue-100 border-none shadow-md transform transition-all duration-500 ${
+              isMounted ? "scale-100 opacity-100" : "scale-95 opacity-0"
+            }`,
+            label: "text-green-800 font-handwritten animate-twinkle",
+          }
+        : {
+            card: "",
+            label: "text-primary",
+          };
+
     return (
-      <Card className="p-6 space-y-4" ref={ref}>
-        <div className="space-y-1">
-          <Label
-            htmlFor={control.id}
-            className="text-lg font-semibold text-primary"
-          >
-            {control.label}
-          </Label>
-          {control.description && (
-            <p className="text-sm text-muted-foreground">
-              {control.description}
-            </p>
-          )}
-        </div>
-        <input
-          type="date"
-          id={control.id}
-          value={value}
-          onChange={(e) => onChange(e.target.value)}
-          className={`form-input ${className}`}
-        />
-        {control.error && (
-          <p className="text-sm text-red-500 mt-2">{control.error}</p>
-        )}
-      </Card>
-    );
-  },
-);
-
-DatePickerForm.displayName = "DatePickerForm";
-import React, { forwardRef } from "react";
-import { Label } from "@/components/ui/label";
-import { Card } from "@/components/ui/card";
-
-export type ColorPickerFormProps = {
-  control: {
-    id: string;
-    label: string;
-    error?: string;
-    description?: string;
-  };
-  value: string;
-  onChange: (value: string) => void;
-  className?: string;
-};
-
-export const ColorPickerForm = forwardRef<HTMLDivElement, ColorPickerFormProps>(
-  ({ control, value, onChange, className }, ref) => {
-    return (
-      <Card className="p-4" ref={ref}>
+      <Card className={`p-4 ${ghibliStyles.card}`}>
         <div className="space-y-2">
           <Label
             htmlFor={control.id}
-            className="text-lg font-semibold text-primary"
+            className={`text-lg font-semibold ${ghibliStyles.label}`}
           >
             {control.label}
           </Label>
@@ -79,20 +50,22 @@ export const ColorPickerForm = forwardRef<HTMLDivElement, ColorPickerFormProps>(
               {control.description}
             </p>
           )}
-          <input
-            type="color"
+          <Input
             id={control.id}
+            type="date"
             value={value}
-            onChange={(e) => onChange(e.target.value)}
-            className={`w-12 h-12 p-0 border-none ${className}`}
+            onChange={(e) => onChange?.(e.target.value)}
+            className="w-full"
+            ref={ref}
+            {...props}
           />
           {control.error && (
-            <p className="text-sm text-red-500 mt-2">{control.error}</p>
+            <p className="pl-1 text-sm text-red-500">{control.error}</p>
           )}
         </div>
       </Card>
     );
-  },
+  }
 );
 
-ColorPickerForm.displayName = "ColorPickerForm";
+DatePickerForm.displayName = "DatePickerForm";

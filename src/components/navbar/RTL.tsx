@@ -34,6 +34,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { AllNotification } from "./Notification/All";
 import { UnreadNotification } from "./Notification/Unread";
 import { ArchiveNotification } from "./Notification/Archive";
+import ThemeChanger from "../home/DarkSwitch";
 
 const RTLNavbar = (props: {
   user: UserInfo;
@@ -85,18 +86,7 @@ const RTLNavbar = (props: {
         {/* Dark Mode Toggle */}
         <Tooltip>
           <TooltipTrigger asChild>
-            <Button
-              variant="ghost"
-              className="hover:bg-muted transition-colors duration-200"
-              onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-              aria-label="Toggle Theme"
-            >
-              {theme === "dark" ? (
-                <RiSunFill className="h-6 w-6 text-foreground" />
-              ) : (
-                <RiMoonFill className="h-6 w-6 text-foreground" />
-              )}
-            </Button>
+            <ThemeChanger />
           </TooltipTrigger>
           <TooltipContent className="text-sm text-secondary">
             <p>Theme</p>

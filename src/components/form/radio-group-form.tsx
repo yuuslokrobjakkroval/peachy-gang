@@ -1,29 +1,25 @@
 import React, { forwardRef } from "react";
-import { Label } from "@/components/ui/label";
 import { Card } from "@/components/ui/card";
+import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 
 export type RadioGroupFormProps = {
   control: {
     id: string;
     label: string;
-    error?: string;
     description?: string;
+    error?: string;
   };
-  options: { label: string; value: string }[];
-  value: string;
-  onChange: (value: string) => void;
-  className?: string;
+  options: { value: string; label: string }[];
+  value?: string;
+  onChange?: (value: string) => void;
   layout?: "row" | "column";
 };
 
 export const RadioGroupForm = forwardRef<HTMLDivElement, RadioGroupFormProps>(
-  (
-    { control, options, value, onChange, className, layout = "column" },
-    ref
-  ) => {
+  ({ control, options, value, onChange, layout = "column", ...props }, ref) => {
     return (
-      <Card className="p-4" ref={ref}>
+      <Card className="p-4">
         <div className="space-y-2">
           <Label
             htmlFor={control.id}
@@ -37,19 +33,25 @@ export const RadioGroupForm = forwardRef<HTMLDivElement, RadioGroupFormProps>(
             </p>
           )}
           <RadioGroup
-            className={`${className} flex ${
-              layout === "row" ? "flex-row gap-4" : "flex-col gap-2"
-            }`}
+            id={control.id}
             value={value}
             onValueChange={onChange}
+            className={`flex ${layout === "row" ? "flex-row space-x-4" : "flex-col space-y-2"}`}
+            ref={ref}
+            aria-labelledby={`${control.id}-label`}
+            {...props}
           >
             {options.map((option) => (
-              <div key={option.value} className="flex items-center gap-2">
+              <div key={option.value} className="flex items-center space-x-2">
                 <RadioGroupItem
-                  id={`${control.id}-${option.value}`}
                   value={option.value}
+                  id={`${control.id}-${option.value}`}
+                  aria-label={option.label}
                 />
-                <Label htmlFor={`${control.id}-${option.value}`}>
+                <Label
+                  htmlFor={`${control.id}-${option.value}`}
+                  className="text-sm font-medium"
+                >
                   {option.label}
                 </Label>
               </div>

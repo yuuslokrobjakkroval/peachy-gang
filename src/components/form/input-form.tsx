@@ -1,34 +1,64 @@
 import React, { forwardRef } from "react";
 import { Card } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { Input } from "@/components/ui/input";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@radix-ui/react-tooltip";
 
-export type InputFormProps = React.InputHTMLAttributes<HTMLInputElement> & {
+export type InputFormProps = {
   control: {
     id: string;
     label: string;
     description?: string;
     error?: string;
+    tooltip?: string;
   };
+  value?: string;
+  onChange?: (value: string) => void;
+  placeholder?: string;
+  type?: string;
 };
 
 export const InputForm = forwardRef<HTMLInputElement, InputFormProps>(
-  ({ control, ...props }, ref) => {
+  ({ control, value, onChange, placeholder, type = "text", ...props }, ref) => {
     return (
       <Card className="p-4">
         <div className="space-y-2">
-          <Label
-            htmlFor={control.id}
-            className="text-lg font-semibold text-primary"
-          >
-            {control.label}
-          </Label>
+          <TooltipProvider>
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <Label
+                  htmlFor={control.id}
+                  className="text-lg font-semibold text-primary cursor-help"
+                >
+                  {control.label}
+                </Label>
+              </TooltipTrigger>
+              {control.tooltip && (
+                <TooltipContent>
+                  <p>{control.tooltip}</p>
+                </TooltipContent>
+              )}
+            </Tooltip>
+          </TooltipProvider>
           {control.description && (
             <p className="text-sm text-muted-foreground">
               {control.description}
             </p>
           )}
-          <Input id={control.id} ref={ref} {...props} />
+          <Input
+            id={control.id}
+            type={type}
+            value={value}
+            onChange={(e) => onChange?.(e.target.value)}
+            placeholder={placeholder}
+            ref={ref}
+            {...props}
+          />
           {control.error && (
             <p className="pl-1 text-sm text-red-500">{control.error}</p>
           )}
