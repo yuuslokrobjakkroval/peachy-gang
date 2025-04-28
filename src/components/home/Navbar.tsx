@@ -28,12 +28,6 @@ export const Navbar = () => {
         {/* Get Started */}
         <div className="gap-3 nav__item mr-2 lg:flex ml-auto lg:ml-0 lg:order-2">
           <ThemeChanger />
-          <Link
-            href="/login"
-            className="px-6 py-2 text-primary-foreground bg-primary rounded-md font-ghibi hover:bg-primary/90 dark:bg-primary dark:text-primary-foreground dark:hover:bg-primary/90"
-          >
-            Get Started
-          </Link>
         </div>
 
         {/* Menu */}

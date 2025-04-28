@@ -5,8 +5,11 @@ import { useGetCustomersQuery } from "@/redux/api/users";
 import Image from "next/image";
 import { Container } from "@/components/home/Container";
 import Loading from "../loading/circle";
+import { Button } from "../ui/button";
+import { useRouter } from "next/navigation";
 
 export const Hero = () => {
+  const router = useRouter();
   const { data: customers, isLoading } = useGetCustomersQuery(null);
 
   if (isLoading) {
@@ -19,7 +22,7 @@ export const Hero = () => {
   return (
     <>
       <Container className="flex flex-wrap">
-        <div className="w-full flex justify-center items-center">
+        <div className="w-full flex flex-col justify-center items-center">
           <Image
             className="object-cover"
             src="/images/main.png"
@@ -27,6 +30,13 @@ export const Hero = () => {
             height={617}
             alt="main"
           />
+
+          <Button
+            onClick={() => router.push("/login")}
+            className="cursor-pointer"
+          >
+            Get Started
+          </Button>
         </div>
       </Container>
       <Container>
