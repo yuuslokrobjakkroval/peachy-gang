@@ -7,7 +7,7 @@ import General from "./components/General";
 import Inventory from "./components/Inventory";
 import Setting from "./components/Setting";
 
-import { LoadingPage } from "@/components/loading/circle";
+import { Loading } from "@/components/loading/circle";
 import AuthError from "@/components/handler/auth-error";
 import {
   handleAuthError,
@@ -25,7 +25,13 @@ export default function Profile() {
     skip: !userInfoByDiscord.id,
   });
 
-  if (isLoading) return <LoadingPage />;
+  if (isLoading) {
+    return (
+      <div className="w-full">
+        <Loading />
+      </div>
+    );
+  }
 
   if (!userInfoByDiscord) {
     return (
