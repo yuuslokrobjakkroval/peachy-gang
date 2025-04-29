@@ -7,9 +7,7 @@ export function DiscordLoginButton() {
   const handleDiscordLogin = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     const loginUrl = "/api/auth/login";
-    if (typeof window !== "undefined") {
-      window.location.href = loginUrl;
-    }
+    window.location.href = loginUrl;
   };
 
   return (
