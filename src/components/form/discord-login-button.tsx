@@ -2,12 +2,15 @@
 
 import React from "react";
 import { Button } from "@/components/ui/button";
+import { useRouter } from "next/navigation";
 
 export function DiscordLoginButton() {
+  const router = useRouter();
+
   const handleDiscordLogin = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     const loginUrl = "/api/auth/login";
-    window.location.href = loginUrl;
+    router.push(loginUrl);
   };
 
   return (
