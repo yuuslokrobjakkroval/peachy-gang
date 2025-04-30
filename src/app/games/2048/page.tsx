@@ -341,9 +341,14 @@ export default function Game2048() {
         </div>
         <div className="mt-4 text-sm text-[var(--muted-foreground)]">
           <p>
-            <strong>HOW TO PLAY:</strong> Use your <strong>arrow keys</strong>{" "}
-            to move the tiles. When two tiles with the same number touch, they{" "}
-            <strong>merge into one!</strong>
+            <strong className="flex flex-col text-center text-primary">
+              HOW TO PLAY:
+            </strong>
+            Use your <strong>arrow keys</strong> to move the tiles.
+            <br />
+            When two tiles with the same number touch,
+            <br />
+            they <strong>merge into one!</strong>
           </p>
         </div>
         <div className="mt-4">

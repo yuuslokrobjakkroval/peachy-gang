@@ -4,7 +4,6 @@ import React from "react";
 import { usePathname, useRouter } from "next/navigation";
 import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
 import { useGetGuildInfoQuery } from "@/redux/api/guild";
-import { LoadingPage } from "@/components/loading/circle";
 import { getFeatures, iconUrl, toCapitalCase } from "@/utils/common";
 import Features from "@/components/features";
 import { Button } from "@/components/ui/button";

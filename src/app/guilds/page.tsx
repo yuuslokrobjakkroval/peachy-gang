@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
 import { getOwnerGuild, Guild, iconUrl } from "@/utils/common";
 import { config, configPeach, configGoma } from "@/utils/config";
@@ -16,6 +16,11 @@ import { useRouter } from "next/navigation";
 export default function GuildPage() {
   const { guilds } = usePeachy();
   const router = useRouter();
+  const [hydratedGuilds, setHydratedGuilds] = useState<Guild[]>([]);
+
+  useEffect(() => {
+    setHydratedGuilds(guilds ?? []);
+  }, [guilds]);
 
   return (
     <SidebarProvider>
@@ -58,40 +63,42 @@ export default function GuildPage() {
               <Separator className="text-card-foreground" />
             </div>
 
-            <div className="grid grid-cols-1  md:grid-cols-3 gap-2 mt-3">
-              {getOwnerGuild(guilds ?? [])?.map((guild: Guild) => (
-                <Card
-                  key={guild.id}
-                  className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground md:p-2 cursor-pointer hover:border-primary transition-all duration-300 overflow-hidden"
-                  onClick={() => router.push(`/guilds/${guild.id}`)}
-                >
-                  <CardHeader className="p-4">
-                    <CardTitle className="flex items-start gap-3">
-                      <Avatar className="h-12 w-12 rounded-lg border-2 border-white dark:border-gray-600">
-                        <AvatarImage
-                          src={iconUrl(guild)}
-                          alt={guild.name}
-                          className="object-cover"
-                        />
-                        <AvatarFallback className="rounded-lg bg-gradient-to-br from-gray-300 to-gray-400 dark:from-gray-600 dark:to-gray-700 text-sm font-semibold">
-                          {guild.name?.[0]}
-                        </AvatarFallback>
-                      </Avatar>
-                      <div className="flex flex-col items-start">
-                        <span className="text-base font-semibold text-gray-900 dark:text-gray-100 truncate">
-                          {guild.name}
-                        </span>
-                        {guild?.description && (
-                          <p className="flex flex-col text-muted-foreground">
-                            {guild.description}
-                          </p>
-                        )}
-                      </div>
-                    </CardTitle>
-                  </CardHeader>
-                </Card>
-              ))}
-            </div>
+            {hydratedGuilds?.length > 0 && (
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-2 mt-3">
+                {getOwnerGuild(hydratedGuilds ?? [])?.map((guild: Guild) => (
+                  <Card
+                    key={guild.id}
+                    className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground md:p-2 cursor-pointer hover:border-primary transition-all duration-300 overflow-hidden"
+                    onClick={() => router.push(`/guilds/${guild.id}`)}
+                  >
+                    <CardHeader className="p-4">
+                      <CardTitle className="flex items-start gap-3">
+                        <Avatar className="h-12 w-12 rounded-lg border-2 border-white dark:border-gray-600">
+                          <AvatarImage
+                            src={iconUrl(guild)}
+                            alt={guild.name}
+                            className="object-cover"
+                          />
+                          <AvatarFallback className="rounded-lg bg-gradient-to-br from-gray-300 to-gray-400 dark:from-gray-600 dark:to-gray-700 text-sm font-semibold">
+                            {guild.name?.[0]}
+                          </AvatarFallback>
+                        </Avatar>
+                        <div className="flex flex-col items-start">
+                          <span className="text-base font-semibold text-gray-900 dark:text-gray-100 truncate">
+                            {guild.name}
+                          </span>
+                          {guild?.description && (
+                            <p className="flex flex-col text-muted-foreground">
+                              {guild.description}
+                            </p>
+                          )}
+                        </div>
+                      </CardTitle>
+                    </CardHeader>
+                  </Card>
+                ))}
+              </div>
+            )}
           </div>
         </div>
       </SidebarInset>
