@@ -238,7 +238,7 @@ const RTLNavbar = (props: {
                             alt={toCapitalCase(user.username)}
                           />
                           <AvatarFallback className="bg-muted text-foreground">
-                            {toCapitalCase(user.username)}
+                            {toCapitalCase(user.global_name?.[0])}
                           </AvatarFallback>
                         </Avatar>
                       </div>
