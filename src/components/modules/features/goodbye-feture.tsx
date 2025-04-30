@@ -2,7 +2,7 @@
 import React, { useEffect } from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
-import { usePeachy } from "@/context/peachy";
+import { usePeachy } from "@/contexts/peachy";
 import {
   useSendMessageFeatureMutation,
   useDisableFeatureMutation,

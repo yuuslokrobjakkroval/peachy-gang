@@ -9,7 +9,7 @@ import BannerPage from "@/components/applications/banner";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Card, CardHeader, CardTitle } from "@/components/ui/card";
 import { Bot, Castle } from "lucide-react";
-import { usePeachy } from "@/context/peachy";
+import { usePeachy } from "@/contexts/peachy";
 import { Separator } from "@/components/ui/separator";
 import { useRouter } from "next/navigation";
 

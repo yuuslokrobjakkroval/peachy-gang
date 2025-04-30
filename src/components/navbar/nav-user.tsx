@@ -20,7 +20,7 @@ import {
 } from "@/components/ui/sidebar";
 import { useRouter } from "next/navigation";
 import { avatarUrl } from "@/utils/common";
-import { usePeachy } from "@/context/peachy";
+import { usePeachy } from "@/contexts/peachy";
 
 export function NavUser() {
   const { userInfoByDiscord } = usePeachy();

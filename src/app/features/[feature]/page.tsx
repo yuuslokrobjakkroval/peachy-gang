@@ -1,7 +1,7 @@
 // app/feature/page.tsx
 "use client";
 import React from "react";
-import { usePeachy } from "@/context/peachy";
+import { usePeachy } from "@/contexts/peachy";
 import {
   useGetFeatureQuery,
   useEnableFeatureMutation,

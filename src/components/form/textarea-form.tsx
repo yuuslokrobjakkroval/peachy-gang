@@ -3,7 +3,7 @@ import { Card } from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
-import { usePeachy } from "@/context/peachy";
+import { usePeachy } from "@/contexts/peachy";
 import { useGetGuildEmojiQuery } from "@/redux/api/guild";
 import {
   Popover,
@@ -38,7 +38,7 @@ export const TextAreaForm = forwardRef<HTMLTextAreaElement, TextAreaFormProps>(
 
     const filteredEmojis = emojis
       ? emojis.filter((emoji: any) =>
-          emoji.name.toLowerCase().includes(searchQuery.toLowerCase()),
+          emoji.name.toLowerCase().includes(searchQuery.toLowerCase())
         )
       : [];
 
@@ -50,7 +50,7 @@ export const TextAreaForm = forwardRef<HTMLTextAreaElement, TextAreaFormProps>(
     const startIndex = (currentPage - 1) * emojisPerPage;
     const currentPageEmojis = filteredEmojis.slice(
       startIndex,
-      startIndex + emojisPerPage,
+      startIndex + emojisPerPage
     );
     const displayCurrentPage = totalPages > 0 ? currentPage : 0;
     const displayTotalPages = totalPages > 0 ? totalPages : 0;
@@ -182,7 +182,7 @@ export const TextAreaForm = forwardRef<HTMLTextAreaElement, TextAreaFormProps>(
         </div>
       </Card>
     );
-  },
+  }
 );
 
 TextAreaForm.displayName = "TextAreaForm";

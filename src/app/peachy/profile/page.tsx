@@ -1,7 +1,7 @@
 "use client";
 
 import { useGetUserByIdQuery } from "@/redux/api/users";
-import { usePeachy } from "@/context/peachy";
+import { usePeachy } from "@/contexts/peachy";
 import Information from "./components/Information";
 import General from "./components/General";
 import Inventory from "./components/Inventory";

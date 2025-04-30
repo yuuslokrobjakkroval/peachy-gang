@@ -1,6 +1,6 @@
 "use client";
 
-import { usePeachy } from "@/context/peachy";
+import { usePeachy } from "@/contexts/peachy";
 import { ChevronRight, Swords, type LucideIcon } from "lucide-react";
 import {
   Collapsible,

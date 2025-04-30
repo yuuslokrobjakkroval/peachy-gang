@@ -16,7 +16,7 @@ import {
 import { Separator } from "@/components/ui/separator";
 import { ChevronRight } from "lucide-react";
 import { usePathname } from "next/navigation";
-import { usePeachy } from "@/context/peachy";
+import { usePeachy } from "@/contexts/peachy";
 import { FeatureSidebar } from "@/components/sidebar/feature-sidebar";
 import RTLNavbar from "@/components/navbar/RTL";
 import { toUpperCase } from "@/utils/common";

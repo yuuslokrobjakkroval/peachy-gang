@@ -5,11 +5,13 @@ import { Nunito, PT_Sans } from "next/font/google";
 // import {routing} from '@/i18n/routing';
 import { ThemeProvider } from "@/components/provider/theme-provider";
 import ReduxProvider from "@/components/provider/redux-provider";
-import { PeachyProvider } from "@/context/peachy";
+import { PeachyProvider } from "@/contexts/peachy";
 import { Toaster } from "@/components/ui/sonner";
 import { Analytics } from "@vercel/analytics/react";
 
 import "./globals.css";
+import { SettingsProvider } from "@/contexts/settingsContext";
+import { getMode, getSettingsFromCookie } from "@/utils/serverHelpers";
 
 const nunito = Nunito({
   variable: "--font-nunito",
@@ -40,6 +42,9 @@ export default async function LocaleLayout({
   //   notFound();
   // }
 
+  const mode = await getMode();
+  const settingsCookie = await getSettingsFromCookie();
+
   return (
     <html lang="en" className="light" suppressHydrationWarning>
       <head>
@@ -59,21 +64,23 @@ export default async function LocaleLayout({
         cz-shortcut-listen="true"
       >
         {/*<NextIntlClientProvider>*/}
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="system"
-          enableSystem
-          disableTransitionOnChange
-        >
-          <ReduxProvider>
-            <PeachyProvider>
-              <div className="texture" />
-              {children}
-              <Analytics />
-              <Toaster position="top-right" />
-            </PeachyProvider>
-          </ReduxProvider>
-        </ThemeProvider>
+        <SettingsProvider settingsCookie={settingsCookie} mode={mode}>
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="system"
+            enableSystem
+            disableTransitionOnChange
+          >
+            <ReduxProvider>
+              <PeachyProvider>
+                <div className="texture" />
+                {children}
+                <Analytics />
+                <Toaster position="top-right" />
+              </PeachyProvider>
+            </ReduxProvider>
+          </ThemeProvider>
+        </SettingsProvider>
         {/*</NextIntlClientProvider>*/}
       </body>
     </html>

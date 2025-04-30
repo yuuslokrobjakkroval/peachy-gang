@@ -13,7 +13,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { CircleArrowLeft, Mailbox } from "lucide-react";
 import { Separator } from "@/components/ui/separator";
 import { getAbsoluteUrl } from "@/utils/get-absolute-url";
-import { usePeachy } from "@/context/peachy";
+import { usePeachy } from "@/contexts/peachy";
 import Loading from "@/components/loading/circle";
 
 export default function FeaturesPage() {

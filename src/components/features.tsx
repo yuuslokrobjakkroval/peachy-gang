@@ -15,7 +15,7 @@ import {
 } from "@/redux/api/guild";
 import { toast } from "sonner";
 import { X } from "lucide-react";
-import { usePeachy } from "@/context/peachy";
+import { usePeachy } from "@/contexts/peachy";
 
 const Features = ({
   guild,

@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
-import { usePeachy } from "@/context/peachy";
+import { usePeachy } from "@/contexts/peachy";
 import { IoMdNotifications } from "react-icons/io";
 import {
   DropdownMenu,
@@ -33,6 +33,17 @@ import { AllNotification } from "./Notification/All";
 import { UnreadNotification } from "./Notification/Unread";
 import { ArchiveNotification } from "./Notification/Archive";
 import ThemeChanger from "../theme.switch";
+import ThemeControlPanel from "../theme-control-panel";
+import {
+  Sheet,
+  SheetContent,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+  SheetClose,
+} from "../ui/sheet";
+import { RainbowButton } from "../ui/rainbow-button";
+import { Palette, X } from "lucide-react";
 
 const RTLNavbar = (props: {
   user: UserInfo;
@@ -41,6 +52,7 @@ const RTLNavbar = (props: {
   secondary?: boolean | string;
 }) => {
   const { user, onOpenSidenav, brandText } = props;
+  const [open, setOpen] = useState(false);
   const { setUserInfoByDiscord } = usePeachy();
   const router = useRouter();
   const [hasBeenOpened, setHasBeenOpened] = useState(false);
@@ -87,6 +99,39 @@ const RTLNavbar = (props: {
 
       {/* Right Side Actions */}
       <div className="flex items-center gap-3 ml-auto">
+        {/* Switch Mode Toggle */}
+        <Tooltip>
+          <TooltipTrigger asChild>
+            <Sheet>
+              <SheetTrigger asChild onClick={() => setOpen(true)}>
+                <Button
+                  variant="ghost"
+                  className="hover:bg-muted transition-colors duration-200"
+                  aria-label="Theme customizer"
+                  data-tour="theme-customizer"
+                >
+                  <Palette className="h-4 w-4" />
+                </Button>
+              </SheetTrigger>
+              <SheetContent className="h-full w-full gap-0 sm:max-w-[400px] [&>button]:hidden">
+                <SheetHeader className="min-h-(--header-height) flex-row items-center justify-between border-b border-dashed px-6">
+                  <SheetTitle>Theme Customizer</SheetTitle>
+                  <SheetClose
+                    className="hover:bg-muted flex size-7 cursor-pointer items-center justify-center rounded transition-colors"
+                    onClick={() => setOpen(false)}
+                  >
+                    <X className="size-4" />
+                  </SheetClose>
+                </SheetHeader>
+                <ThemeControlPanel />
+              </SheetContent>
+            </Sheet>
+          </TooltipTrigger>
+          <TooltipContent>
+            <p className="text-sm text-secondary">Switch Mode</p>
+          </TooltipContent>
+        </Tooltip>
+
         {/* Dark Mode Toggle */}
         <Tooltip>
           <TooltipTrigger asChild>
