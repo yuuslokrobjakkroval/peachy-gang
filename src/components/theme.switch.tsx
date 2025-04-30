@@ -5,6 +5,7 @@ import { useTheme } from "next-themes";
 import { Button } from "@/components/ui/button";
 import { Sun, Moon } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { IoMdMoon, IoMdSunny } from "react-icons/io";
 
 const ThemeChanger = () => {
   const [mounted, setMounted] = useState(false);
@@ -46,9 +47,9 @@ const ThemeChanger = () => {
       aria-label={isDark ? "Switch to light mode" : "Switch to dark mode"}
     >
       {isDark ? (
-        <Sun className="h-6 w-6 text-foreground" />
+        <IoMdSunny className="h-6 w-6 text-foreground" />
       ) : (
-        <Moon className="h-6 w-6 text-foreground" />
+        <IoMdMoon className="h-6 w-6 text-foreground" />
       )}
     </Button>
   );

@@ -303,3 +303,17 @@ body {
 .font-handwritten {
   font-family: var(--font-ghibi), serif;
 }
+
+@layer utilities {
+  .perspective-1000 {
+    perspective: 1000px;
+  }
+
+  .transform-style-3d {
+    transform-style: preserve-3d;
+  }
+
+  .backface-hidden {
+    backface-visibility: hidden;
+  }
+}

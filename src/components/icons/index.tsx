@@ -1,78 +1,4 @@
-"use client";
-
-import React from "react";
-import { useGetCustomersQuery } from "@/redux/api/users";
-import Image from "next/image";
-import { Container } from "@/components/home/Container";
-import Loading from "../loading/circle";
-import { Button } from "../ui/button";
-import { useRouter } from "next/navigation";
-
-export const Hero = () => {
-  const router = useRouter();
-  const { data: customers, isLoading } = useGetCustomersQuery(null);
-
-  if (isLoading) {
-    return (
-      <div className="w-full">
-        <Loading />
-      </div>
-    );
-  }
-  return (
-    <>
-      <Container className="flex flex-wrap">
-        <div className="w-full flex flex-col justify-center items-center">
-          <Image
-            className="object-cover"
-            src="/images/main.png"
-            width={616}
-            height={617}
-            alt="main"
-          />
-
-          <Button
-            onClick={() => router.push("/login")}
-            className="cursor-pointer"
-          >
-            Get Started
-          </Button>
-        </div>
-      </Container>
-      <Container>
-        <div className="flex flex-col justify-center">
-          <div className="text-xl text-center text-foreground dark:text-foreground font-ghibi">
-            Trusted by{" "}
-            <span className="text-primary font-ghibi-bold">
-              +{customers ? customers?.toLocaleString() : 0}
-            </span>{" "}
-            customers in discord
-          </div>
-
-          <div className="flex flex-wrap justify-center gap-5 mt-10 md:justify-around">
-            <div className="pt-2 text-muted-foreground dark:text-muted-foreground">
-              <AmazonLogo />
-            </div>
-            <div className="text-muted-foreground dark:text-muted-foreground">
-              <VerizonLogo />
-            </div>
-            <div className="text-muted-foreground dark:text-muted-foreground">
-              <MicrosoftLogo />
-            </div>
-            <div className="pt-1 text-muted-foreground dark:text-muted-foreground">
-              <NetflixLogo />
-            </div>
-            <div className="pt-2 text-muted-foreground dark:text-muted-foreground">
-              <SonyLogo />
-            </div>
-          </div>
-        </div>
-      </Container>
-    </>
-  );
-};
-
-function AmazonLogo() {
+export function AmazonLogo() {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -103,7 +29,7 @@ function AmazonLogo() {
   );
 }
 
-function MicrosoftLogo() {
+export function MicrosoftLogo() {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -126,7 +52,7 @@ function MicrosoftLogo() {
   );
 }
 
-function NetflixLogo() {
+export function NetflixLogo() {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -145,7 +71,7 @@ function NetflixLogo() {
   );
 }
 
-function SonyLogo() {
+export function SonyLogo() {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -163,7 +89,7 @@ function SonyLogo() {
   );
 }
 
-function VerizonLogo() {
+export function VerizonLogo() {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"

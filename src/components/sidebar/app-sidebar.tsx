@@ -7,6 +7,7 @@ import {
   GraduationCap,
   Castle,
   Library,
+  Gamepad,
 } from "lucide-react";
 
 import { NavMain } from "@/components/navbar/nav-main";
@@ -44,7 +45,6 @@ const data = {
       isActive: true,
       items: [],
     },
-
     {
       title: "Guilds",
       url: "/guilds",
@@ -52,70 +52,19 @@ const data = {
       isActive: true,
       items: [],
     },
-    // {
-    //   title: "Documentation",
-    //   url: "#",
-    //   icon: BookOpen,
-    //   items: [
-    //     {
-    //       title: "Introduction",
-    //       url: "#",
-    //     },
-    //     {
-    //       title: "Get Started",
-    //       url: "#",
-    //     },
-    //     {
-    //       title: "Tutorials",
-    //       url: "#",
-    //     },
-    //     {
-    //       title: "Changelog",
-    //       url: "#",
-    //     },
-    //   ],
-    // },
-    // {
-    //   title: "Commands",
-    //   url: "#",
-    //   icon: CommandIcon,
-    //   isActive: true,
-    //   items: [
-    //     {
-    //       title: "Moderator",
-    //       url: "#",
-    //     },
-    //     {
-    //       title: "Giveway",
-    //       url: "#",
-    //     },
-    //     {
-    //       title: "Utility",
-    //       url: "#",
-    //     },
-    //   ],
-    // },
     {
-      title: "Information",
-      url: "#",
-      icon: Library,
+      title: "Games",
+      url: "/games",
+      icon: Gamepad,
       isActive: true,
       items: [
         {
-          title: "About",
-          url: "/peachy/about",
+          title: "Memory",
+          url: "/games/memory",
         },
         {
-          title: "Contact",
-          url: "/peachy/contact",
-        },
-        {
-          title: "Privacy Policy",
-          url: "/peachy/privacy",
-        },
-        {
-          title: "Terms & Conditions",
-          url: "/peachy/terms-conditions",
+          title: "2048",
+          url: "/games/2048",
         },
       ],
     },

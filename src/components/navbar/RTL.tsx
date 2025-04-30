@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { usePeachy } from "@/contexts/peachy";
-import { IoMdNotifications } from "react-icons/io";
+import { IoMdNotifications, IoMdPlanet } from "react-icons/io";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -102,40 +102,42 @@ const RTLNavbar = (props: {
         {/* Switch Mode Toggle */}
         <Tooltip>
           <TooltipTrigger asChild>
-            <Sheet>
-              <SheetTrigger asChild onClick={() => setOpen(true)}>
-                <Button
-                  variant="ghost"
-                  className="hover:bg-muted transition-colors duration-200"
-                  aria-label="Theme customizer"
-                  data-tour="theme-customizer"
-                >
-                  <Palette className="h-4 w-4" />
-                </Button>
-              </SheetTrigger>
-              <SheetContent className="h-full w-full gap-0 sm:max-w-[400px] [&>button]:hidden">
-                <SheetHeader className="min-h-(--header-height) flex-row items-center justify-between border-b border-dashed px-6">
-                  <SheetTitle>Theme Customizer</SheetTitle>
-                  <SheetClose
-                    className="hover:bg-muted flex size-7 cursor-pointer items-center justify-center rounded transition-colors"
-                    onClick={() => setOpen(false)}
-                  >
-                    <X className="size-4" />
-                  </SheetClose>
-                </SheetHeader>
-                <ThemeControlPanel />
-              </SheetContent>
-            </Sheet>
+            <Button
+              variant="ghost"
+              className="hover:bg-muted transition-colors duration-200"
+              aria-label="Theme customizer"
+              data-tour="theme-customizer"
+              onClick={() => setOpen(true)}
+            >
+              <IoMdPlanet className="h-6 w-6 text-foreground" />
+            </Button>
           </TooltipTrigger>
           <TooltipContent>
             <p className="text-sm text-secondary">Switch Mode</p>
           </TooltipContent>
         </Tooltip>
 
+        <Sheet open={open} onOpenChange={setOpen}>
+          <SheetContent className="h-full w-full gap-0 sm:max-w-[400px] [&>button]:hidden">
+            <SheetHeader className="min-h-(--header-height) flex-row items-center justify-between border-b border-dashed px-6">
+              <SheetTitle>Theme Customizer</SheetTitle>
+              <SheetClose
+                className="hover:bg-muted flex size-7 cursor-pointer items-center justify-center rounded transition-colors"
+                onClick={() => setOpen(false)}
+              >
+                <X className="size-4" />
+              </SheetClose>
+            </SheetHeader>
+            <ThemeControlPanel />
+          </SheetContent>
+        </Sheet>
+
         {/* Dark Mode Toggle */}
         <Tooltip>
           <TooltipTrigger asChild>
-            <ThemeChanger />
+            <div className="relative">
+              <ThemeChanger />
+            </div>
           </TooltipTrigger>
           <TooltipContent>
             <p className="text-sm text-secondary">Theme</p>
