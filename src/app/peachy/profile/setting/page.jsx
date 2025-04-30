@@ -1,7 +1,7 @@
 "use client";
 
 import { useGetUserByIdQuery } from "@/redux/api/users";
-import { usePeachy } from "@/context/peachy";
+import { usePeachy } from "@/contexts/peachy";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import {
