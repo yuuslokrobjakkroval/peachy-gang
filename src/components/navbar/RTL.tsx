@@ -100,7 +100,7 @@ const RTLNavbar = (props: {
       {/* Right Side Actions */}
       <div className="flex items-center gap-3 ml-auto">
         {/* Switch Mode Toggle */}
-        <Tooltip>
+        {/* <Tooltip>
           <TooltipTrigger asChild>
             <Button
               variant="ghost"
@@ -130,7 +130,7 @@ const RTLNavbar = (props: {
             </SheetHeader>
             <ThemeControlPanel />
           </SheetContent>
-        </Sheet>
+        </Sheet> */}
 
         {/* Dark Mode Toggle */}
         <Tooltip>
