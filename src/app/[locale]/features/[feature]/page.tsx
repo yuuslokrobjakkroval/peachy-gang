@@ -1,6 +1,8 @@
 // app/feature/page.tsx
 "use client";
+
 import React from "react";
+import { useParams } from "next/navigation";
 import { usePeachy } from "@/contexts/peachy";
 import {
   useGetFeatureQuery,
@@ -11,12 +13,12 @@ import { toast } from "sonner";
 import { toCapitalCase } from "@/utils/common";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import { WelcomeMessageFeature } from "@/components/modules/features/welcome-feture";
-import { useParams } from "next/navigation";
-import { InviteTrackerFeature } from "@/components/modules/features/inviter-tracker-feture";
-import { BoosterMessageFeature } from "@/components/modules/features/booster-feture";
 import { UseFeaturesConfig } from "@/utils/features";
+import { WelcomeMessageFeature } from "@/components/modules/features/welcome-feture";
+import { BoosterMessageFeature } from "@/components/modules/features/booster-feture";
+import { InviteTrackerFeature } from "@/components/modules/features/inviter-tracker-feture";
 import { JoinRoleFeature } from "@/components/modules/features/join-roles";
+import { GiveawayScheduleFeature } from "@/components/modules/features/giveaway-shedule";
 
 export default function FeaturePage() {
   const { guildId, feature } = usePeachy();
@@ -106,7 +108,15 @@ export function IsEnabledPage({ featureInfo, guild, feature, refetch }: any) {
         );
 
       case "giveaway-schedule":
-        return "giveaway-schedule";
+        return (
+          <GiveawayScheduleFeature
+            featureConfig={featureConfig}
+            featureInfo={featureInfo}
+            guild={guild}
+            feature={feature}
+            refetch={refetch}
+          />
+        );
 
       case "goodbye-message":
         return (

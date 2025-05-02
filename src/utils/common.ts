@@ -144,6 +144,14 @@ export type BotApplicationInfo = {
   flags: number;
 };
 
+export interface GiveawayScheduleFeatureProps {
+  featureConfig: any;
+  featureInfo: any;
+  guild: string;
+  feature: string;
+  refetch: () => void;
+}
+
 export function getOwnerGuild(guilds: Guild[]) {
   return guilds?.filter((guild) => config.guild.filter(guild)) ?? [];
 }

@@ -51,6 +51,16 @@ const bot = emptySplitApi.injectEndpoints({
         { type: "FEATURE", id: `${arg.guild}-${arg.feature}` },
       ],
     }),
+    deleteSchedule: builder.mutation({
+      query: (body) => ({
+        url: `${process.env.NEXT_PUBLIC_API_ENDPOINT}/guilds/${body.guild}/features/${body.feature}/${body.scheduleId}`,
+        method: "DELETE",
+        body,
+      }),
+      invalidatesTags: (result, error, arg) => [
+        { type: "FEATURE", id: `${arg.guild}-${arg.feature}` },
+      ],
+    }),
     sendMessageFeature: builder.mutation({
       query: (body) => ({
         url: `${process.env.NEXT_PUBLIC_API_ENDPOINT}/guilds/${body.guild}/features/${body.feature}/send-message`,
@@ -92,6 +102,7 @@ export const {
   useEnableFeatureMutation,
   useDisableFeatureMutation,
   useUpdateFeatureMutation,
+  useDeleteScheduleMutation,
   useGetFeatureQuery,
   useGetGuildRolesQuery,
   useGetGuildChannelsQuery,
