@@ -3,8 +3,6 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { useTheme } from "next-themes";
 import { Button } from "@/components/ui/button";
-import { Sun, Moon } from "lucide-react";
-import { cn } from "@/lib/utils";
 import { IoMdMoon, IoMdSunny } from "react-icons/io";
 
 const ThemeChanger = () => {

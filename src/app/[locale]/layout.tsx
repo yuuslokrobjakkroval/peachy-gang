@@ -1,8 +1,8 @@
-// import {NextIntlClientProvider, hasLocale} from 'next-intl';
+import { NextIntlClientProvider, hasLocale } from "next-intl";
 import type { Metadata } from "next";
 import { Nunito, PT_Sans } from "next/font/google";
-// import {notFound} from 'next/navigation';
-// import {routing} from '@/i18n/routing';
+import { notFound } from "next/navigation";
+import { routing } from "@/i18n/routing";
 import { ThemeProvider } from "@/components/provider/theme-provider";
 import ReduxProvider from "@/components/provider/redux-provider";
 import { PeachyProvider } from "@/contexts/peachy";
@@ -32,15 +32,15 @@ export const metadata: Metadata = {
 
 export default async function LocaleLayout({
   children,
-}: // params
-{
+  params,
+}: {
   children: React.ReactNode;
-  // params: Promise<{locale: string}>;
+  params: Promise<{ locale: string }>;
 }) {
-  // const {locale} = await params;
-  // if (!hasLocale(routing.locales, locale)) {
-  //   notFound();
-  // }
+  const { locale } = await params;
+  if (!hasLocale(routing.locales, locale)) {
+    notFound();
+  }
 
   const mode = await getMode();
   const settingsCookie = await getSettingsFromCookie();
@@ -63,25 +63,25 @@ export default async function LocaleLayout({
         className={`${nunito.variable} ${ptSans.variable} antialiased relative`}
         cz-shortcut-listen="true"
       >
-        {/*<NextIntlClientProvider>*/}
-        <SettingsProvider settingsCookie={settingsCookie} mode={mode}>
-          <ThemeProvider
-            attribute="class"
-            defaultTheme="system"
-            enableSystem
-            disableTransitionOnChange
-          >
-            <ReduxProvider>
-              <PeachyProvider>
-                <div className="texture" />
-                {children}
-                <Analytics />
-                <Toaster position="top-right" />
-              </PeachyProvider>
-            </ReduxProvider>
-          </ThemeProvider>
-        </SettingsProvider>
-        {/*</NextIntlClientProvider>*/}
+        <NextIntlClientProvider>
+          <SettingsProvider settingsCookie={settingsCookie} mode={mode}>
+            <ThemeProvider
+              attribute="class"
+              defaultTheme="system"
+              enableSystem
+              disableTransitionOnChange
+            >
+              <ReduxProvider>
+                <PeachyProvider>
+                  <div className="texture" />
+                  {children}
+                  <Analytics />
+                  <Toaster position="top-right" />
+                </PeachyProvider>
+              </ReduxProvider>
+            </ThemeProvider>
+          </SettingsProvider>
+        </NextIntlClientProvider>
       </body>
     </html>
   );

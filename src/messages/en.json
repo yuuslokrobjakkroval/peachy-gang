@@ -1,6 +1,120 @@
 {
-  "HomePage": {
-    "title": "Hello world!",
-    "about": "Go to the about page"
+  "global": {},
+  "home": {
+    "title": "Welcome to the PEACHY GANG!",
+    "description": "This is the home page of our application.",
+    "get_started": "Get Started",
+    "trusted_by": "Trusted by",
+    "customers": "customers on Discord"
+  },
+  "about": {
+    "title": "About Us",
+    "description": "Learn more about our application and its features.",
+    "beginnings": "Our Beginnings",
+    "beginnings_description": "Peach and Goma came to life in 2017 when I designed the first 'Peach Cat ®' stickers for WeChat. This charming duo—a white cat named Peach and her gray cat boyfriend, Goma—was inspired by my own relationship and everyday moments with my boyfriend. Living together, they share a love that’s sometimes cuddly, sometimes playful, and always heartwarming—reflecting the ups and downs of love that so many of us experience.",
+    "global_reach": "From China to the World",
+    "global_reach_description": "What started on Weibo quickly spread beyond borders. Peach and Goma’s irresistible charm captured hearts globally, appearing on platforms like LINE, WeChat, KakaoTalk, Telegram, and WhatsApp. In 2021, I launched their official Telegram, Twitter, and YouTube channels to bring them closer to fans everywhere. It’s been an incredible journey seeing their cuteness connect with people worldwide!",
+    "join_telegram": "Join Our Telegram Group",
+    "mission": "Our Mission",
+    "mission_description": "Peach and Goma are more than just adorable characters—they’re a celebration of life’s simple joys, warmth, and love. My goal is to spread happiness through their stories while safeguarding their uniqueness from unauthorized use. Thank you for being part of this mission!"
+  },
+  "contact": {
+    "title": "We’d Love to Hear from You!",
+    "description": "Whether you have questions about Peach and Goma, want to share your love for their adventures, or have ideas for new stickers, reach out to us! Fill out the form below or connect with us on social media.",
+    "form_title": "Send Us a Message",
+    "name": "Name",
+    "name_placeholder": "Enter your name",
+    "name_required": "Name is required",
+    "email": "Email",
+    "email_placeholder": "Enter your email",
+    "email_required": "Email is required",
+    "email_invalid": "Invalid email address",
+    "message": "Message",
+    "message_placeholder": "What’s on your mind?",
+    "submit": "Send Message",
+    "sending": "Sending...",
+    "success": "Message sent successfully!",
+    "error": "Failed to send message"
+  },
+  "footer": {
+    "text": "© 2025 PEACHY GANG. All rights reserved.",
+    "tagline": "A Tale of Love, Laughter, and Adorable Cats",
+    "email_label": "Email",
+    "telegram_group": "Telegram Group",
+    "telegram_channel": "Telegram Channel",
+    "follow_us": "Follow us",
+    "copyright": "Copyright © 2025."
+  },
+  "error": {
+    "notFound": "Page not found",
+    "serverError": "Internal server error",
+    "unauthorized": "Unauthorized access",
+    "unknown": "Unknown error"
+  },
+  "login": {
+    "title": "Login",
+    "description": "Please enter your credentials to log in.",
+    "username": "Username",
+    "password": "Password",
+    "submit": "Login",
+    "forgotPassword": "Forgot password?"
+  },
+  "register": {
+    "title": "Register",
+    "description": "Create a new account.",
+    "username": "Username",
+    "email": "Email",
+    "password": "Password",
+    "confirmPassword": "Confirm Password",
+    "submit": "Register"
+  },
+  "profile": {
+    "title": "User Profile",
+    "description": "Manage your account settings and preferences.",
+    "username": "Username",
+    "email": "Email",
+    "password": "Password",
+    "updateProfile": "Update Profile",
+    "changePassword": "Change Password"
+  },
+  "faq": {
+    "title": "FAQ (Frequently Asked Questions)",
+    "who_created": "Who created Peach and Goma?",
+    "who_created_answer": "That would be me, Bu Jue Xiao Xiao!",
+    "where_from": "Where did they come from?",
+    "where_from_answer": "They were born from my imagination in China in 2017.",
+    "who_are": "Who are Peach and Goma?",
+    "who_are_answer": "A lovable cat couple—Peach (white) and Goma (gray)—madly in love!",
+    "get_stickers": "How can I get their stickers?",
+    "get_stickers_answer": "Check out 20+ FREE sticker packs on our",
+    "telegram_channel": "official Telegram channel"
+  },
+  "cta": {
+    "title": "Join Our Community!",
+    "description": "Become part of the Peach and Goma family! Join our Telegram channel for free stickers, updates, and tons of fun.",
+    "join": "Join Now"
+  },
+  "menu": {
+    "title": "Menu"
+  },
+  "language": {
+    "placeholder": "Select Language",
+    "english": "English",
+    "khmer": "Khmer"
+  },
+  "dashboard": {
+    "total_users": "Total Users",
+    "total_coin": "Total Coin",
+    "bank_reserves": "Bank Reserves",
+    "user_engagement": "User Engagement",
+    "active_this_week": "{count} active this week",
+    "based_on_last_login": "Based on last login activity",
+    "across_wallets": "Across {count} wallets",
+    "sum_of_balances": "Sum of all user balances",
+    "stored_securely": "Stored securely",
+    "total_banked_coins": "Total banked coins",
+    "average_level": "Average Level",
+    "based_on_xp": "Based on XP and activity",
+    "growth_percentage": "+{percentage}%"
   }
 }

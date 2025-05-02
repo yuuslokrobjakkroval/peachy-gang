@@ -33,17 +33,18 @@ import { AllNotification } from "./Notification/All";
 import { UnreadNotification } from "./Notification/Unread";
 import { ArchiveNotification } from "./Notification/Archive";
 import ThemeChanger from "../theme.switch";
-import ThemeControlPanel from "../theme-control-panel";
-import {
-  Sheet,
-  SheetContent,
-  SheetHeader,
-  SheetTitle,
-  SheetTrigger,
-  SheetClose,
-} from "../ui/sheet";
-import { RainbowButton } from "../ui/rainbow-button";
-import { Palette, X } from "lucide-react";
+// import ThemeControlPanel from "../theme-control-panel";
+// import {
+//   Sheet,
+//   SheetContent,
+//   SheetHeader,
+//   SheetTitle,
+//   SheetTrigger,
+//   SheetClose,
+// } from "../ui/sheet";
+// import { RainbowButton } from "../ui/rainbow-button";
+// import { Palette, X } from "lucide-react";
+import LanguageChanger from "../language.switch";
 
 const RTLNavbar = (props: {
   user: UserInfo;
@@ -219,6 +220,16 @@ const RTLNavbar = (props: {
             </Tabs>
           </DropdownMenuContent>
         </DropdownMenu>
+
+        {/* Language Toggle */}
+        <Tooltip>
+          <TooltipTrigger asChild>
+            <LanguageChanger />
+          </TooltipTrigger>
+          <TooltipContent>
+            <p className="text-sm text-secondary">Language</p>
+          </TooltipContent>
+        </Tooltip>
 
         {/* Profile Dropdown */}
         {user && (

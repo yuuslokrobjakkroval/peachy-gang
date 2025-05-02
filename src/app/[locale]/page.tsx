@@ -39,9 +39,18 @@ import {
   SheetTrigger,
   SheetContent,
 } from "@/components/ui/sheet";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import { Menu, X } from "lucide-react";
 import { motion } from "framer-motion";
 import { toast } from "sonner";
+import { useLocale, useTranslations } from "next-intl";
+import LanguageChanger from "@/components/language.switch";
 
 type FormData = {
   name: string;
@@ -65,6 +74,7 @@ export function Container(props: Readonly<ContainerProps>) {
     </div>
   );
 }
+
 const navigation = [
   { name: "About Us", href: "about", sectionId: "about" },
   { name: "FAQ", href: "faq", sectionId: "faq" },
@@ -73,37 +83,8 @@ const navigation = [
 
 const legal = ["Terms", "Privacy", "Legal"];
 
-const faqItems = [
-  {
-    question: "Who created Peach and Goma?",
-    answer: "That would be me, Bu Jue Xiao Xiao!",
-  },
-  {
-    question: "Where did they come from?",
-    answer: "They were born from my imagination in China in 2017.",
-  },
-  {
-    question: "Who are Peach and Goma?",
-    answer: "A lovable cat couple—Peach (white) and Goma (gray)—madly in love!",
-  },
-  {
-    question: "How can I get their stickers?",
-    answer: (
-      <>
-        Check out 20+ FREE sticker packs on our{" "}
-        <a
-          href="https://t.me/+9DqGFiLAe6k1MjBl"
-          className="text-primary hover:underline"
-        >
-          official Telegram channel
-        </a>
-        !
-      </>
-    ),
-  },
-];
-
 export default function Home() {
+  const t = useTranslations();
   const router = useRouter();
   const { data: customers, isLoading } = useGetCustomersQuery(null);
   const [activeSection, setActiveSection] = useState("");
@@ -118,6 +99,37 @@ export default function Home() {
 
   const [isSubmitting, setIsSubmitting] = useState(false);
 
+  const faqItems = [
+    {
+      question: t("faq.who_created"),
+      answer: t("faq.who_created_answer"),
+    },
+    {
+      question: t("faq.where_from"),
+      answer: t("faq.where_from_answer"),
+    },
+    {
+      question: t("faq.who_are"),
+      answer: t("faq.who_are_answer"),
+    },
+    {
+      question: t("faq.get_stickers"),
+      answer: (
+        <>
+          {t("faq.get_stickers_answer")}{" "}
+          <a
+            href="https://t.me/+9DqGFiLAe6k1MjBl"
+            className="text-primary hover:underline"
+            aria-label="Official Telegram channel"
+          >
+            {t("faq.telegram_channel")}
+          </a>
+          !
+        </>
+      ),
+    },
+  ];
+
   const onSubmit = async (data: FormData) => {
     setIsSubmitting(true);
     try {
@@ -129,7 +141,7 @@ export default function Home() {
       });
 
       if (response.ok) {
-        const toastId = toast.success("Message sent successfully!", {
+        const toastId = toast.success(t("contact.success"), {
           duration: 4000,
           position: "top-right",
           action: {
@@ -139,7 +151,7 @@ export default function Home() {
         });
         reset();
       } else {
-        const toastId = toast.error(`Failed to send message`, {
+        const toastId = toast.error(t("contact.error"), {
           duration: 6000,
           position: "top-right",
           action: {
@@ -150,7 +162,7 @@ export default function Home() {
       }
     } catch (error) {
       const toastId = toast.error(
-        `An error occurred: ${error instanceof Error ? error.message : "Unknown error"}`,
+        `${t("contact.error")}: ${error instanceof Error ? error.message : t("error.unknown")}`,
         {
           duration: 6000,
           position: "top-right",
@@ -168,7 +180,6 @@ export default function Home() {
   const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId);
     if (element) {
-      // Ensure smooth scrolling works on all devices
       element.scrollIntoView({ behavior: "smooth", block: "start" });
       setIsMobileMenuOpen(false);
     } else {
@@ -197,7 +208,7 @@ export default function Home() {
 
   if (isLoading) {
     return (
-      <div className="w-full">
+      <div className="w-full flex justify-center items-center min-h-screen">
         <Loading />
       </div>
     );
@@ -207,12 +218,13 @@ export default function Home() {
     <>
       <Container>
         <div className="w-full">
-          <nav className="container relative flex flex-wrap items-center justify-between p-8 mx-auto lg:justify-between xl:px-1">
+          <nav className="container relative flex flex-wrap items-center justify-between p-6 mx-auto lg:justify-between xl:px-2">
+            {/* Logo */}
             <Link href="/">
-              <span className="flex items-center space-x-2 text-2xl font-ghibi-bold text-primary dark:text-foreground">
+              <span className="flex items-center space-x-3 text-2xl font-ghibi-bold text-primary dark:text-foreground transition-transform hover:scale-105">
                 <span>
                   <Image
-                    className="w-8 mb-2"
+                    className="w-10 mb-1"
                     src="/images/favicon.ico"
                     alt="Peachy Logo"
                     width={48}
@@ -224,27 +236,28 @@ export default function Home() {
               </span>
             </Link>
 
-            <div className="gap-3 nav__item mr-2 lg:flex ml-auto lg:ml-0 lg:order-2">
-              <ThemeChanger />
-            </div>
-
+            {/* Mobile Menu Trigger */}
             <div className="lg:hidden">
               <Sheet open={isMobileMenuOpen} onOpenChange={setIsMobileMenuOpen}>
                 <SheetTrigger asChild>
-                  <Button variant="outline" size="icon" aria-label="Open menu">
+                  <Button
+                    variant="outline"
+                    size="icon"
+                    aria-label="Toggle mobile menu"
+                  >
                     <Menu className="h-6 w-6" />
                   </Button>
                 </SheetTrigger>
                 <SheetContent>
-                  <SheetTitle className="text-lg font-ghibi-bold text-foreground pl-3">
-                    Menu
+                  <SheetTitle className="text-xl font-ghibi-bold text-foreground pl-4 mb-6">
+                    {t("menu.title")}
                   </SheetTitle>
-                  <ul className="flex flex-col gap-4 pl-3">
+                  <ul className="flex flex-col gap-4 pl-4">
                     {navigation.map((menu, index) => (
                       <li key={index}>
                         <button
                           onClick={() => scrollToSection(menu.sectionId)}
-                          className={`text-lg font-ghibi text-foreground ${
+                          className={`text-lg font-ghibi text-foreground hover:text-primary transition-colors ${
                             activeSection === menu.sectionId
                               ? "text-primary"
                               : ""
@@ -255,18 +268,22 @@ export default function Home() {
                         </button>
                       </li>
                     ))}
+                    <li>
+                      <LanguageChanger />
+                    </li>
                   </ul>
                 </SheetContent>
               </Sheet>
             </div>
 
-            <div className="hidden text-center lg:flex lg:items-center">
-              <ul className="items-center justify-end flex-1 pt-6 list-none lg:pt-0 lg:flex">
+            {/* Desktop Navigation */}
+            <div className="hidden lg:flex lg:items-center lg:gap-6">
+              <ul className="flex items-center gap-4 list-none">
                 {navigation.map((menu, index) => (
-                  <li className="mr-3 nav__item" key={index}>
+                  <li key={index} className="nav__item">
                     <button
                       onClick={() => scrollToSection(menu.sectionId)}
-                      className={`inline-block px-4 py-2 text-lg font-ghibi text-foreground no-underline rounded-md dark:text-foreground hover:text-primary focus:text-primary dark:hover:text-primary ${
+                      className={`px-4 py-2 text-lg font-ghibi text-foreground rounded-md transition-colors hover:text-primary focus:text-primary dark:text-foreground dark:hover:text-primary ${
                         activeSection === menu.sectionId ? "text-primary" : ""
                       }`}
                       aria-label={`Scroll to ${menu.name} section`}
@@ -276,6 +293,10 @@ export default function Home() {
                   </li>
                 ))}
               </ul>
+              <div className="flex items-center gap-3">
+                <ThemeChanger />
+                <LanguageChanger />
+              </div>
             </div>
           </nav>
         </div>
@@ -288,12 +309,11 @@ export default function Home() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
         >
-          <h1 className="text-6xl md:text-6xl font-ghibi-bold text-center text-primary mb-6 animate-twinkle">
-            Welcome to the PEACHY GANG!
+          <h1 className="text-5xl md:text-6xl font-ghibi-bold text-center text-primary animate-twinkle">
+            {t("home.title")}
           </h1>
-
           <Image
-            className="object-cover"
+            className="object-cover rounded-lg"
             src="/images/main.png"
             width={616}
             height={617}
@@ -301,144 +321,149 @@ export default function Home() {
             priority
             sizes="(max-width: 768px) 100vw, 616px"
           />
-
           <Button
             onClick={() => router.push("/login")}
-            className="cursor-pointer"
-            aria-label="Get started with Peachy Gang"
+            className="bg-primary text-primary-foreground font-ghibi-bold px-6 py-3 rounded-md hover:bg-primary/90 transition-transform transform hover:scale-105"
+            aria-label={t("home.get_started")}
           >
-            Get Started
+            {t("home.get_started")}
           </Button>
         </motion.div>
       </Container>
 
       <Container>
         <motion.div
-          className="flex flex-col justify-center"
+          className="flex flex-col justify-center items-center rounded-lg"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.2 }}
         >
           <div className="text-xl text-center text-foreground dark:text-foreground font-ghibi">
-            Trusted by{" "}
+            {t("home.trusted_by")}{" "}
             <span className="text-primary font-ghibi-bold">
               +{customers ? customers.toLocaleString() : 0}
             </span>{" "}
-            customers in discord
+            {t("home.customers")}
           </div>
-
-          <div className="flex flex-wrap justify-center gap-5 mt-10 md:justify-around">
-            <div className="pt-2 text-muted-foreground dark:text-muted-foreground">
+          <div className="flex flex-wrap justify-center gap-8 mt-10 md:justify-around">
+            <div className="pt-2 text-muted-foreground dark:text-muted-foreground transform hover:scale-110 transition-transform">
               <AmazonLogo />
             </div>
-            <div className="text-muted-foreground dark:text-muted-foreground">
+            <div className="text-muted-foreground dark:text-muted-foreground transform hover:scale-110 transition-transform">
               <VerizonLogo />
             </div>
-            <div className="text-muted-foreground dark:text-muted-foreground">
+            <div className="text-muted-foreground dark:text-muted-foreground transform hover:scale-110 transition-transform">
               <MicrosoftLogo />
             </div>
-            <div className="pt-1 text-muted-foreground dark:text-muted-foreground">
+            <div className="pt-1 text-muted-foreground dark:text-muted-foreground transform hover:scale-110 transition-transform">
               <NetflixLogo />
             </div>
-            <div className="pt-2 text-muted-foreground dark:text-muted-foreground">
+            <div className="pt-2 text-muted-foreground dark:text-muted-foreground transform hover:scale-110 transition-transform">
               <SonyLogo />
             </div>
           </div>
         </motion.div>
       </Container>
 
+      {/* Call-to-Action Section */}
       <Container>
-        <div className="relative flex min-h-screen w-full flex-col items-center p-6 md:p-10 bg-background">
-          <div className="texture" />
+        <motion.div
+          className="flex flex-col items-center py-8 rounded-lg"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.3 }}
+        >
+          <h2 className="text-3xl font-ghibi-bold text-primary mb-4 text-center">
+            {t("cta.title")}
+          </h2>
+          <p className="text-muted-foreground font-ghibi max-w-2xl text-center mb-8">
+            {t("cta.description")}
+          </p>
+          <a
+            href="https://t.me/+Wn2SkWaTk6wyYTM1"
+            className="bg-primary text-primary-foreground font-ghibi-bold px-8 py-4 rounded-md hover:bg-primary/90 transition-transform transform hover:scale-105"
+            aria-label={t("cta.join")}
+          >
+            {t("cta.join")}
+          </a>
+        </motion.div>
+      </Container>
 
+      <Container>
+        <div className="relative flex min-h-screen w-full flex-col items-center md:p-10">
+          <div className="texture" />
           <div className="w-full max-w-3xl z-10">
             <motion.section
               id="about"
-              className="flex flex-col md:flex-row items-center mb-8 bg-card rounded-lg shadow-md p-6"
+              className="flex flex-col md:flex-row items-center mb-12 rounded-lg transition-shadow"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.3 }}
             >
-              <div className="md:w-1/2 p-4">
-                <h3 className="text-xl font-ghibi-bold text-foreground mb-2">
-                  Our Beginnings
+              <div className="md:w-1/2">
+                <h3 className="text-2xl font-ghibi-bold text-foreground mb-3">
+                  {t("about.beginnings")}
                 </h3>
                 <p className="text-muted-foreground font-ghibi">
-                  Peach and Goma came to life in 2017 when I designed the first
-                  "Peach Cat ®" stickers for WeChat. This charming duo—a white
-                  cat named Peach and her gray cat boyfriend, Goma—was inspired
-                  by my own relationship and everyday moments with my boyfriend.
-                  Living together, they share a love that’s sometimes cuddly,
-                  sometimes playful, and always heartwarming—reflecting the ups
-                  and downs of love that so many of us experience.
+                  {t("about.beginnings_description")}
                 </p>
               </div>
-              <div className="md:w-1/2 flex justify-center">
+              <div className="md:w-1/2 flex justify-center mt-3">
                 <Image
                   src={config.url}
                   alt="Peach and Goma Beginnings"
                   width={200}
                   height={200}
-                  className="rounded-full shadow-primary border border-border"
+                  className="rounded-full transform hover:scale-105 transition-transform"
                   sizes="(max-width: 768px) 100vw, 200px"
                 />
               </div>
             </motion.section>
 
             <motion.section
-              className="bg-card rounded-lg shadow-md p-6 mb-8"
+              className="rounded-lg mb-12 transition-shadow"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.4 }}
             >
-              <h3 className="text-xl font-ghibi-bold text-foreground mb-2">
-                From China to the World
+              <h3 className="text-2xl font-ghibi-bold text-foreground mb-3">
+                {t("about.global_reach")}
               </h3>
-              <p className="text-muted-foreground mb-4 font-ghibi">
-                What started on Weibo quickly spread beyond borders. Peach and
-                Goma’s irresistible charm captured hearts globally, appearing on
-                platforms like LINE, WeChat, KakaoTalk, Telegram, and WhatsApp.
-                In 2021, I launched their official Telegram, Twitter, and
-                YouTube channels to bring them closer to fans everywhere. It’s
-                been an incredible journey seeing their cuteness connect with
-                people worldwide!
+              <p className="text-muted-foreground mb-6 font-ghibi">
+                {t("about.global_reach_description")}
               </p>
               <a
                 href="https://t.me/+Wn2SkWaTk6wyYTM1"
-                className="inline-block bg-primary text-primary-foreground font-ghibi-bold py-2 px-4 rounded-md hover:bg-primary/90 transition shadow-primary"
-                aria-label="Join our Telegram Group"
+                className="inline-block bg-primary text-primary-foreground font-ghibi-bold py-2 px-4 rounded-md hover:bg-primary/90 transition"
+                aria-label={t("about.join_telegram")}
               >
-                Join Our Telegram Group
+                {t("about.join_telegram")}
               </a>
             </motion.section>
 
             <motion.section
-              className="bg-card rounded-lg shadow-md p-6 mb-8"
+              className="rounded-lg mb-12 transition-shadow"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.5 }}
             >
-              <h3 className="text-xl font-ghibi-bold text-foreground mb-2">
-                Our Mission
+              <h3 className="text-2xl font-ghibi-bold text-foreground mb-3">
+                {t("about.mission")}
               </h3>
               <p className="text-muted-foreground mb-4 font-ghibi">
-                Peach and Goma are more than just adorable characters—they’re a
-                celebration of life’s simple joys, warmth, and love. My goal is
-                to spread happiness through their stories while safeguarding
-                their uniqueness from unauthorized use. Thank you for being part
-                of this mission!
+                {t("about.mission_description")}
               </p>
             </motion.section>
 
             <motion.section
               id="faq"
-              className="bg-card rounded-lg shadow-md p-6 mb-8"
+              className="rounded-lg mb-12 transition-shadow"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.6 }}
             >
-              <h3 className="text-xl font-ghibi-bold text-primary mb-4 text-center">
-                FAQ (Frequently Asked Questions)
+              <h3 className="text-2xl font-ghibi-bold text-primary mb-6 text-center">
+                {t("faq.title")}
               </h3>
               <Accordion type="single" collapsible className="w-full">
                 {faqItems.map((item, index) => (
@@ -456,27 +481,24 @@ export default function Home() {
 
             <motion.section
               id="contact"
-              className="mb-8"
+              className="mb-12"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.7 }}
             >
               <section className="p-6 text-center">
-                <h2 className="text-2xl font-ghibi-bold text-primary mb-4">
-                  We’d Love to Hear from You!
+                <h2 className="text-3xl font-ghibi-bold text-primary mb-4">
+                  {t("contact.title")}
                 </h2>
                 <p className="text-muted-foreground max-w-2xl mx-auto font-ghibi">
-                  Whether you have questions about Peach and Goma, want to share
-                  your love for their adventures, or have ideas for new
-                  stickers, reach out to us! Fill out the form below or connect
-                  with us on social media.
+                  {t("contact.description")}
                 </p>
               </section>
 
-              <Card className="bg-card border border-border shadow-md">
+              <Card className="rounded-lg transition-shadow">
                 <CardHeader>
                   <CardTitle className="font-ghibi-bold text-foreground">
-                    Send Us a Message
+                    {t("contact.form_title")}
                   </CardTitle>
                 </CardHeader>
                 <CardContent>
@@ -487,15 +509,15 @@ export default function Home() {
                           htmlFor="name"
                           className="font-ghibi-bold text-foreground"
                         >
-                          Name *
+                          {t("contact.name")} *
                         </Label>
                         <Input
                           id="name"
                           {...register("name", {
-                            required: "Name is required",
+                            required: t("contact.name_required"),
                           })}
-                          placeholder="Enter your name"
-                          className="border-border bg-input text-foreground font-ghibi"
+                          placeholder={t("contact.name_placeholder")}
+                          className="bg-input text-foreground font-ghibi"
                           aria-invalid={errors.name ? "true" : "false"}
                         />
                         {errors.name && (
@@ -509,21 +531,21 @@ export default function Home() {
                           htmlFor="email"
                           className="font-ghibi-bold text-foreground"
                         >
-                          Email *
+                          {t("contact.email")} *
                         </Label>
                         <Input
                           id="email"
                           {...register("email", {
-                            required: "Email is required",
+                            required: t("contact.email_required"),
                             pattern: {
                               value:
                                 /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
-                              message: "Invalid email address",
+                              message: t("contact.email_invalid"),
                             },
                           })}
                           type="email"
-                          placeholder="Enter your email"
-                          className="border-border bg-input text-foreground font-ghibi"
+                          placeholder={t("contact.email_placeholder")}
+                          className="bg-input text-foreground font-ghibi"
                           aria-invalid={errors.email ? "true" : "false"}
                         />
                         {errors.email && (
@@ -537,23 +559,25 @@ export default function Home() {
                           htmlFor="message"
                           className="font-ghibi-bold text-foreground"
                         >
-                          Message
+                          {t("contact.message")}
                         </Label>
                         <Textarea
                           id="message"
                           {...register("message")}
-                          placeholder="What’s on your mind?"
-                          className="border-border bg-input text-foreground font-ghibi"
+                          placeholder={t("contact.message_placeholder")}
+                          className="bg-input text-foreground font-ghibi"
                         />
                       </div>
                       <div className="flex flex-col gap-3">
                         <Button
                           type="submit"
-                          className="w-full bg-primary text-primary-foreground font-ghibi-bold rounded-md hover:bg-primary/90 shadow-primary"
-                          aria-label="Send message"
+                          className="w-full bg-primary text-primary-foreground font-ghibi-bold rounded-md hover:bg-primary/90"
+                          aria-label={t("contact.submit")}
                           disabled={isSubmitting}
                         >
-                          {isSubmitting ? "Sending..." : "Send Message"}
+                          {isSubmitting
+                            ? t("contact.sending")
+                            : t("contact.submit")}
                         </Button>
                       </div>
                     </div>
@@ -587,41 +611,8 @@ export default function Home() {
               </Link>
 
               <h2 className="text-xl font-ghibi text-primary mb-4">
-                A Tale of Love, Laughter, and Adorable Cats
+                {t("footer.tagline")}
               </h2>
-              <p className="text-muted-foreground font-ghibi">
-                <strong className="font-ghibi-bold text-foreground">
-                  Email:
-                </strong>{" "}
-                <a
-                  href="mailto:mail@peachandgoma.com"
-                  className="text-primary hover:underline"
-                >
-                  mail@peachandgoma.com
-                </a>
-              </p>
-              <p className="text-muted-foreground font-ghibi">
-                <strong className="font-ghibi-bold text-foreground">
-                  Telegram Group:
-                </strong>{" "}
-                <a
-                  href="https://t.me/+Wn2SkWaTk6wyYTM1"
-                  className="text-primary hover:underline"
-                >
-                  Join our Telegram Group
-                </a>
-              </p>
-              <p className="text-muted-foreground font-ghibi">
-                <strong className="font-ghibi-bold text-foreground">
-                  Telegram Channel:
-                </strong>{" "}
-                <a
-                  href="https://t.me/+9DqGFiLAe6k1MjBl"
-                  className="text-primary hover:underline"
-                >
-                  Join our Telegram Channel
-                </a>
-              </p>
             </div>
           </div>
 
@@ -644,8 +635,9 @@ export default function Home() {
               {legal.map((item, index) => (
                 <Link
                   key={index}
-                  href="/"
+                  href={`/${item.toLowerCase()}`}
                   className="w-full px-4 py-2 text-muted-foreground font-ghibi rounded-md dark:text-muted-foreground hover:text-primary focus:text-primary dark:hover:text-primary"
+                  aria-label={`View ${item} page`}
                 >
                   {item}
                 </Link>
@@ -654,7 +646,7 @@ export default function Home() {
           </div>
           <div>
             <div className="font-ghibi-bold text-foreground dark:text-foreground">
-              Follow us
+              {t("footer.follow_us")}
             </div>
             <div className="flex mt-5 space-x-5 text-muted-foreground dark:text-muted-foreground">
               <a href="https://facebook.com/" target="_blank" rel="noopener">
@@ -718,13 +710,14 @@ export default function Home() {
         </footer>
 
         <div className="my-10 text-sm text-center text-muted-foreground font-ghibi dark:text-muted-foreground">
-          Copyright © 2025. Made by{" "}
+          {t("footer.copyright")} Made by{" "}
           <a
             href="https://discord.gg/kHVBQ5DAQd"
             target="_blank"
             rel="noopener"
+            className="text-primary hover:underline"
           >
-            PEACHY GANG.
+            PEACHY GANG
           </a>
         </div>
       </Container>
