@@ -7,7 +7,7 @@ import ReduxProvider from "@/components/provider/redux-provider";
 import { PeachyProvider } from "@/contexts/peachy";
 import { Toaster } from "@/components/ui/sonner";
 import { Analytics } from "@vercel/analytics/react";
-import "../globals.css";
+import "./globals.css";
 import { SettingsProvider } from "@/contexts/settingsContext";
 import { getMode, getSettingsFromCookie } from "@/utils/serverHelpers";
 import NotFound from "@/components/handler/404";
