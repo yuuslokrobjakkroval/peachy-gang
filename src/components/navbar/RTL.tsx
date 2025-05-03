@@ -124,7 +124,7 @@ const RTLNavbar = (props: {
       {/* Dark Mode Toggle */}
       <Tooltip>
         <TooltipTrigger asChild>
-          <div>
+          <div className="relative">
             <ThemeChanger />
           </div>
         </TooltipTrigger>
