@@ -22,6 +22,7 @@ import {
 } from "@/components/ui/select";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { CreditCard, CheckCircle, Calendar, Lock } from "lucide-react";
+import { Container } from "@/components/layouts/container";
 
 export default function BillingPage() {
   const [paymentMethod, setPaymentMethod] = useState("credit-card");
@@ -41,9 +42,8 @@ export default function BillingPage() {
   };
 
   return (
-    <div className="container mx-auto py-10 px-4 md:px-6 bg-background relative">
-      <div className="texture"></div>
-      <div className="max-w-5xl mx-auto relative z-10">
+    <Container>
+      <div className="w-full flex flex-col justify-center items-center p-4 sm:p-6">
         <div className="mb-8 text-center">
           <h1 className="text-3xl font-bold text-foreground-bold">
             Billing & Subscription
@@ -53,8 +53,8 @@ export default function BillingPage() {
           </p>
         </div>
 
-        <div>
-          <Card className="bg-card border-border shadow-primary">
+        <div className="w-full max-w-2xl p-4 sm:p-6">
+          <Card className="w-full bg-card border-border shadow-primary">
             <CardHeader>
               <CardTitle className="text-foreground-bold">
                 Subscription Plan
@@ -156,6 +156,6 @@ export default function BillingPage() {
           Your payment information is secure and encrypted
         </div>
       </div>
-    </div>
+    </Container>
   );
 }

@@ -1,17 +1,16 @@
 import { NextIntlClientProvider, hasLocale } from "next-intl";
 import type { Metadata } from "next";
 import { Nunito, PT_Sans } from "next/font/google";
-import { notFound } from "next/navigation";
 import { routing } from "@/i18n/routing";
 import { ThemeProvider } from "@/components/provider/theme-provider";
 import ReduxProvider from "@/components/provider/redux-provider";
 import { PeachyProvider } from "@/contexts/peachy";
 import { Toaster } from "@/components/ui/sonner";
 import { Analytics } from "@vercel/analytics/react";
-
-import "./globals.css";
+import "../globals.css";
 import { SettingsProvider } from "@/contexts/settingsContext";
 import { getMode, getSettingsFromCookie } from "@/utils/serverHelpers";
+import NotFound from "@/components/handler/404";
 
 const nunito = Nunito({
   variable: "--font-nunito",
@@ -38,8 +37,9 @@ export default async function LocaleLayout({
   params: Promise<{ locale: string }>;
 }) {
   const { locale } = await params;
+
   if (!hasLocale(routing.locales, locale)) {
-    notFound();
+    NotFound();
   }
 
   const mode = await getMode();

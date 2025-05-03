@@ -2,11 +2,9 @@
 
 import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
-import { usePeachy } from "@/contexts/peachy";
-
+import "./globals.css";
 export default function NotFound() {
   const router = useRouter();
-  const { userInfoByDiscord } = usePeachy();
 
   return (
     <div className="relative flex min-h-screen w-full flex-col items-center justify-center p-6 md:p-10 bg-background">
@@ -25,13 +23,7 @@ export default function NotFound() {
           <Button onClick={() => router.back()} variant="secondary" size="lg">
             Go back
           </Button>
-          <Button
-            onClick={() =>
-              router.push(`${!!userInfoByDiscord ? "/peachy" : "/login"}`)
-            }
-            variant="default"
-            size="lg"
-          >
+          <Button onClick={() => router.push("/")} variant="default" size="lg">
             Back to Home
           </Button>
         </div>

@@ -21,12 +21,12 @@ interface MaskedImageProps {
 
 const getMaskUrl = (variant: MaskedImageVariant): string => {
   const maskMap: Record<MaskedImageVariant, string> = {
-    shape1: "/mask-shape-1.svg",
-    shape2: "/mask-shape-2.svg",
-    shape3: "/mask-shape-3.svg",
-    shape4: "/mask-shape-4.svg",
-    shape5: "/mask-shape-5.svg",
-    shape6: "/mask-shape-6.svg",
+    shape1: "/shape/mask-shape-1.svg",
+    shape2: "/shape/mask-shape-2.svg",
+    shape3: "/shape/mask-shape-3.svg",
+    shape4: "/shape/mask-shape-4.svg",
+    shape5: "/shape/mask-shape-5.svg",
+    shape6: "/shape/mask-shape-6.svg",
   };
 
   return maskMap[variant];
