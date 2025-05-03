@@ -62,10 +62,10 @@ export default function PeachyLayout({
       <SidebarInset>
         <header className="flex justify-between h-16 shrink-0 items-center gap-2 transition-[width,height] ease-linear group-has-data-[collapsible=icon]/sidebar-wrapper:h-12 ml-8 mr-8">
           <div className="flex items-center gap-2 px-4">
-            <SidebarTrigger className="-ml-1" />
+            <SidebarTrigger className="-ml-1 mt-2" />
             <Separator orientation="vertical" className="mr-2 h-4" />
             <Breadcrumb>
-              <BreadcrumbList className="flex-wrap break-words sm:gap-2.5 flex items-center gap-1 text-sm text-foreground">
+              <BreadcrumbList className="flex-wrap break-words sm:gap-2.5 mt-3 flex items-center gap-1 text-sm text-foreground">
                 {breadcrumbPath.map((segment, index) => (
                   <div key={index}>
                     <BreadcrumbItem>
