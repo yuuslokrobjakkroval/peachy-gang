@@ -17,6 +17,7 @@ import {
   avatarUrl,
   decorationUrl,
   getRandomEmoji,
+  languages,
   toCapitalCase,
   UserInfo,
 } from "@/utils/common";
@@ -34,6 +35,7 @@ import { UnreadNotification } from "./Notification/Unread";
 import { ArchiveNotification } from "./Notification/Archive";
 import ThemeChanger from "../theme.switch";
 import LanguageChanger from "../language.switch";
+import { useLocale, useTranslations } from "next-intl";
 // import ThemeControlPanel from "../theme-control-panel";
 // import {
 //   Sheet,
@@ -52,11 +54,14 @@ const RTLNavbar = (props: {
   brandText?: string;
   secondary?: boolean | string;
 }) => {
+  const t = useTranslations();
+  const locale = useLocale();
   const { user } = props;
   const { setUserInfoByDiscord } = usePeachy();
   const router = useRouter();
   const [hasBeenOpened, setHasBeenOpened] = useState(false);
   const [isClient, setIsClient] = useState(false);
+  const [language, setLanguage] = useState(locale);
 
   const handleProfileClick = () => {
     setUserInfoByDiscord(user);
@@ -124,12 +129,28 @@ const RTLNavbar = (props: {
       {/* Dark Mode Toggle */}
       <Tooltip>
         <TooltipTrigger asChild>
-          <div className="relative">
+          <div>
             <ThemeChanger />
           </div>
         </TooltipTrigger>
         <TooltipContent>
           <p className="text-sm text-secondary">Theme</p>
+        </TooltipContent>
+      </Tooltip>
+
+      {/* Language Toggle */}
+      <Tooltip>
+        <TooltipTrigger asChild>
+          <div>
+            <LanguageChanger setLanguage={setLanguage} />
+          </div>
+        </TooltipTrigger>
+        <TooltipContent>
+          <p className="text-sm text-secondary">
+            {t(
+              languages.find((l) => l.code === language)?.nameKey || "Language"
+            )}
+          </p>
         </TooltipContent>
       </Tooltip>
 
@@ -209,18 +230,6 @@ const RTLNavbar = (props: {
         </DropdownMenuContent>
       </DropdownMenu>
 
-      {/* Language Toggle */}
-      <Tooltip>
-        <TooltipTrigger asChild>
-          <div className="relative">
-            <LanguageChanger />
-          </div>
-        </TooltipTrigger>
-        <TooltipContent>
-          <p className="text-sm text-secondary">Language</p>
-        </TooltipContent>
-      </Tooltip>
-
       {/* Profile Dropdown */}
       {user && (
         <DropdownMenu onOpenChange={handleOpenChange}>
@@ -229,7 +238,7 @@ const RTLNavbar = (props: {
               <DropdownMenuTrigger asChild>
                 <Button
                   variant="ghost"
-                  className="p-1 hover:bg-muted transition-colors duration-200 relative"
+                  className="p-1 hover:bg-muted transition-colors duration-200"
                 >
                   {/* Decoration and Avatar Wrapper */}
                   <div className="relative flex items-center justify-center">

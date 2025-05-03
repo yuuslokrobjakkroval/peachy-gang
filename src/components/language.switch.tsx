@@ -3,30 +3,16 @@
 import React, { useCallback } from "react";
 import { useLocale, useTranslations } from "next-intl";
 import { useRouter, usePathname } from "next/navigation";
-import Image from "next/image";
 import { Button } from "@/components/ui/button";
-
-interface Language {
-  code: string;
-  nameKey: string;
-  flag: string;
-}
+import { Languages } from "lucide-react";
+import { languages } from "@/utils/common";
 
 interface LanguageChangerProps {
   className?: string;
-  width?: string;
+  setLanguage?: any;
 }
 
-const languages: Language[] = [
-  { code: "en", nameKey: "language.english", flag: "/flags/en.png" },
-  { code: "km", nameKey: "language.khmer", flag: "/flags/km.png" },
-  { code: "zh", nameKey: "language.china", flag: "/flags/cn.png" },
-];
-
-const LanguageChanger: React.FC<LanguageChangerProps> = ({
-  className = "",
-  width = "w-10",
-}) => {
+const LanguageChanger: React.FC<LanguageChangerProps> = ({ setLanguage }) => {
   const t = useTranslations();
   const router = useRouter();
   const locale = useLocale();
@@ -36,6 +22,7 @@ const LanguageChanger: React.FC<LanguageChangerProps> = ({
     const currentIndex = languages.findIndex((lang) => lang.code === locale);
     const nextIndex = (currentIndex + 1) % languages.length;
     const newLocale = languages[nextIndex].code;
+    setLanguage(newLocale);
     const currentPath = pathname.replace(`/${locale}`, "");
     const newPath = `/${newLocale}${currentPath}`;
     router.push(newPath);
@@ -51,14 +38,15 @@ const LanguageChanger: React.FC<LanguageChangerProps> = ({
       onClick={handleLanguageChange}
       aria-label={t(currentLanguage.nameKey)}
     >
-      <Image
+      {/* <Image
         src={currentLanguage.flag}
         alt={`${t(currentLanguage.nameKey)} flag`}
         width={72}
         height={72}
         quality={100}
         className="w-full h-full text-foreground"
-      />
+      /> */}
+      <Languages className="h-6 w-6 text-foreground" />
     </Button>
   );
 };

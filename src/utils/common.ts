@@ -2,6 +2,18 @@ import { config } from "./config";
 import { CustomFeatures, FeatureConfig } from "@/utils/types";
 import { UseFeaturesConfig } from "@/utils/features";
 
+interface Language {
+  code: string;
+  nameKey: string;
+  flag: string;
+}
+
+export const languages: Language[] = [
+  { code: "en", nameKey: "language.english", flag: "/flags/en.png" },
+  { code: "km", nameKey: "language.khmer", flag: "/flags/km.png" },
+  { code: "zh", nameKey: "language.china", flag: "/flags/cn.png" },
+];
+
 export type IdFeature<K extends keyof CustomFeatures = keyof CustomFeatures> =
   FeatureConfig<K> & {
     id: K;

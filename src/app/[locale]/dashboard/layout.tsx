@@ -60,12 +60,12 @@ export default function PeachyLayout({
     <SidebarProvider>
       <AppSidebar />
       <SidebarInset>
-        <header className="flex justify-between h-16 shrink-0 items-center transition-[width,height] ease-linear group-has-data-[collapsible=icon]/sidebar-wrapper:h-12 mx-8">
+        <header className="flex sm:flex-row justify-between items-start sm:items-center gap-2 sm:gap-0 px-4 sm:px-8 py-2 sm:h-16 shrink-0 transition-[width,height] ease-linear group-has-data-[collapsible=icon]/sidebar-wrapper:h-12 mx-3">
           <div className="flex items-center gap-2 px-4">
             <SidebarTrigger className="-ml-3 mt-3" />
             <Separator orientation="vertical" />
             <Breadcrumb>
-              <BreadcrumbList className="flex-wrap break-words sm:gap-2.5 mt-3 flex items-center gap-1 text-sm text-foreground">
+              <BreadcrumbList className="flex flex-wrap items-center gap-x-2 gap-y-1 px-0 sm:px-4 w-full sm:w-auto mt-3">
                 {breadcrumbPath.map((segment, index) => (
                   <div key={index}>
                     <BreadcrumbItem>
@@ -91,11 +91,13 @@ export default function PeachyLayout({
             </Breadcrumb>
           </div>
 
-          <div className="flex items-center">
+          <div className="w-full sm:w-auto flex justify-end sm:justify-start">
             <RTLNavbar user={user} />
           </div>
         </header>
-        <main className="flex flex-1 flex-col gap-4 p-4 pt-0">{children}</main>
+        <main className="flex flex-1 flex-col gap-4 px-3 sm:px-6 pt-2">
+          {children}
+        </main>
       </SidebarInset>
     </SidebarProvider>
   );

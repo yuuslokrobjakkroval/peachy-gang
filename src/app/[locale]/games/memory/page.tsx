@@ -101,7 +101,7 @@ export default function MemoryGame() {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen p-4 space-y-8 bg-[var(--background)] text-[var(--foreground)] font-handwritten">
+    <div className="flex flex-col items-center justify-center p-4 space-y-8 bg-[var(--background)] text-[var(--foreground)] font-handwritten mt-8">
       <div className="text-center space-y-4">
         <h1 className="text-4xl font-bold text-[var(--primary)] animate-twinkle">
           Memory Match Game
