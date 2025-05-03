@@ -42,6 +42,7 @@ const dynamicTagTypes = [
   "GUILD",
   "GUILDS",
   "FEATURE",
+  "LEVELING",
   "MESSAGE",
   "MEMBER",
   "INVITE",

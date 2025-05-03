@@ -8,12 +8,12 @@ import {
   Castle,
   Library,
   Gamepad,
+  ArrowUpNarrowWide,
 } from "lucide-react";
 
 import { NavMain } from "@/components/navbar/nav-main";
 import { NavGuild } from "@/components/navbar/nav-guild";
 import { NavUser } from "@/components/navbar/nav-user";
-// import { TeamSwitcher } from "@/components/team-switcher";
 import {
   Sidebar,
   SidebarContent,

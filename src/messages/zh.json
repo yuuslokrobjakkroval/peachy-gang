@@ -1,0 +1,121 @@
+{
+  "global": {},
+  "home": {
+    "title": "欢迎加入 PEACHY GANG！",
+    "description": "这是我们应用程序的主页。",
+    "get_started": "开始使用",
+    "trusted_by": "受到以下用户的信任",
+    "customers": "在 Discord 上的用户"
+  },
+  "about": {
+    "title": "关于我们",
+    "description": "了解更多关于我们应用程序及其功能的信息。",
+    "beginnings": "我们的起源",
+    "beginnings_description": "Peach 和 Goma 于 2017 年诞生，当时我为微信设计了第一套“Peach Cat ®”贴纸。这对迷人的组合——一只名叫 Peach 的白猫和她的灰猫男友 Goma——灵感来自我与男友的日常生活。我们共同生活，分享着有时亲昵、有时调皮、始终温馨的爱情，反映了许多人经历的爱情起伏。",
+    "global_reach": "从中国走向世界",
+    "global_reach_description": "起初在微博上发布，Peach 和 Goma 的不可抗拒的魅力迅速跨越国界，出现在 LINE、微信、KakaoTalk、Telegram 和 WhatsApp 等平台上。2021 年，我开设了他们的官方 Telegram、Twitter 和 YouTube 频道，让他们更贴近全球粉丝。这是一段令人难以置信的旅程，看到他们的可爱与世界各地的人们建立联系！",
+    "join_telegram": "加入我们的 Telegram 群组",
+    "mission": "我们的使命",
+    "mission_description": "Peach 和 Goma 不仅仅是可爱的角色——他们是对生活中简单快乐、温暖和爱的庆祝。我的目标是通过他们的故事传播幸福，同时保护他们的独特性免受未经授权的使用。感谢您成为这一使命的一部分！"
+  },
+  "contact": {
+    "title": "我们期待您的来信！",
+    "description": "无论您对 Peach 和 Goma 有任何疑问，想分享您对他们冒险的喜爱，或有新的贴纸创意，请与我们联系！填写下方表格或通过社交媒体与我们联系。",
+    "form_title": "发送消息给我们",
+    "name": "姓名",
+    "name_placeholder": "请输入您的姓名",
+    "name_required": "姓名为必填项",
+    "email": "电子邮件",
+    "email_placeholder": "请输入您的电子邮件",
+    "email_required": "电子邮件为必填项",
+    "email_invalid": "无效的电子邮件地址",
+    "message": "消息",
+    "message_placeholder": "您想说些什么？",
+    "submit": "发送消息",
+    "sending": "正在发送...",
+    "success": "消息发送成功！",
+    "error": "消息发送失败"
+  },
+  "footer": {
+    "text": "© 2025 PEACHY GANG。保留所有权利。",
+    "tagline": "一个关于爱、欢笑和可爱猫咪的故事",
+    "email_label": "电子邮件",
+    "telegram_group": "Telegram 群组",
+    "telegram_channel": "Telegram 频道",
+    "follow_us": "关注我们",
+    "copyright": "版权所有 © 2025。"
+  },
+  "error": {
+    "notFound": "页面未找到",
+    "serverError": "内部服务器错误",
+    "unauthorized": "未经授权的访问",
+    "unknown": "未知错误"
+  },
+  "login": {
+    "title": "登录",
+    "description": "请输入您的凭据以登录。",
+    "username": "用户名",
+    "password": "密码",
+    "submit": "登录",
+    "forgotPassword": "忘记密码？"
+  },
+  "register": {
+    "title": "注册",
+    "description": "创建一个新账户。",
+    "username": "用户名",
+    "email": "电子邮件",
+    "password": "密码",
+    "confirmPassword": "确认密码",
+    "submit": "注册"
+  },
+  "profile": {
+    "title": "用户资料",
+    "description": "管理您的账户设置和偏好。",
+    "username": "用户名",
+    "email": "电子邮件",
+    "password": "密码",
+    "updateProfile": "更新资料",
+    "changePassword": "更改密码"
+  },
+  "faq": {
+    "title": "常见问题解答",
+    "who_created": "谁创造了 Peach 和 Goma？",
+    "who_created_answer": "那就是我，不觉小小！",
+    "where_from": "他们来自哪里？",
+    "where_from_answer": "他们于 2017 年在中国诞生于我的想象中。",
+    "who_are": "Peach 和 Goma 是谁？",
+    "who_are_answer": "一对可爱的猫咪情侣——Peach（白色）和 Goma（灰色）——深深相爱！",
+    "get_stickers": "我如何获得他们的贴纸？",
+    "get_stickers_answer": "请查看我们官方 Telegram 频道上的 20 多个免费贴纸包。",
+    "telegram_channel": "官方 Telegram 频道"
+  },
+  "cta": {
+    "title": "加入我们的社区！",
+    "description": "成为 Peach 和 Goma 家族的一员！加入我们的 Telegram 频道，获取免费贴纸、更新和大量乐趣。",
+    "join": "立即加入"
+  },
+  "menu": {
+    "title": "菜单"
+  },
+  "language": {
+    "placeholder": "选择语言",
+    "english": "英语",
+    "khmer": "高棉语",
+    "china": "中文"
+  },
+  "dashboard": {
+    "total_users": "用户总数",
+    "total_coin": "总金币",
+    "bank_reserves": "银行储备",
+    "user_engagement": "用户参与度",
+    "active_this_week": "本周活跃用户：{count}",
+    "based_on_last_login": "基于上次登录活动",
+    "across_wallets": "跨越 {count} 个钱包",
+    "sum_of_balances": "所有用户余额总和",
+    "stored_securely": "安全存储",
+    "total_banked_coins": "总存入金币",
+    "average_level": "平均等级",
+    "based_on_xp": "基于经验值和活动",
+    "growth_percentage": "增长率：+{percentage}%"
+  }
+}

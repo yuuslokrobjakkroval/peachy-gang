@@ -100,7 +100,8 @@
   "language": {
     "placeholder": "ជ្រើសរើសភាសា",
     "english": "អង់គ្លេស",
-    "khmer": "ខ្មែរ"
+    "khmer": "ខ្មែរ",
+    "china": "ចិន"
   },
   "dashboard": {
     "total_users": "អ្នកប្រើប្រាស់សរុប",

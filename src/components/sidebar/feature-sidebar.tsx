@@ -1,7 +1,6 @@
 "use client";
 
 import * as React from "react";
-import { useRouter } from "next/navigation";
 import { usePeachy } from "@/contexts/peachy";
 import {
   Cat,
@@ -11,6 +10,7 @@ import {
   Rocket,
   UserPlus,
   Waypoints,
+  ArrowUpNarrowWide,
   Gift,
   UserMinus,
   Bot,
@@ -76,6 +76,11 @@ export function FeatureSidebar({
             title: "Join Roles",
             url: "/features/join-roles",
             icon: Waypoints,
+          },
+          {
+            title: "Leveling System",
+            url: "/features/leveling-system",
+            icon: ArrowUpNarrowWide,
           },
           {
             title: "Giveaway Schedule",

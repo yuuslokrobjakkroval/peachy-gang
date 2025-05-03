@@ -11,7 +11,7 @@ export default function Loading() {
 
       {/* Moon Glow Effect */}
       <div
-        className="absolute z-5 w-64 h-64 rounded-full bg-primary/20 animate-[pulse_4s_ease-in-out_infinite]"
+        className="absolute z-5 w-64 h-64 rounded-full bg-background animate-[pulse_4s_ease-in-out_infinite]"
         style={{
           filter: "blur(50px)",
           top: "50%",
@@ -40,9 +40,7 @@ export default function Loading() {
           {/* Starry Elements */}
           <div className="flex gap-8 relative">
             <div className="relative">
-              {/* Background Star (static, glowing) */}
               <div className="w-10 h-10 rounded-full bg-secondary/60 animate-gentlePulse" />
-              {/* Foreground Moon (moving to simulate eclipse) */}
               <div className="w-10 h-10 rounded-full bg-primary/90 absolute top-0 left-0 animate-eclipse delay-300" />
             </div>
             <div className="relative">

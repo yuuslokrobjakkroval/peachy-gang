@@ -18,6 +18,7 @@ import { WelcomeMessageFeature } from "@/components/modules/features/welcome-fet
 import { BoosterMessageFeature } from "@/components/modules/features/booster-feture";
 import { InviteTrackerFeature } from "@/components/modules/features/inviter-tracker-feture";
 import { JoinRoleFeature } from "@/components/modules/features/join-roles";
+import { LevelingSystemFeature } from "@/components/modules/features/leveling-system";
 import { GiveawayScheduleFeature } from "@/components/modules/features/giveaway-shedule";
 
 export default function FeaturePage() {
@@ -99,6 +100,17 @@ export function IsEnabledPage({ featureInfo, guild, feature, refetch }: any) {
       case "join-roles":
         return (
           <JoinRoleFeature
+            featureConfig={featureConfig}
+            featureInfo={featureInfo}
+            guild={guild}
+            feature={feature}
+            refetch={refetch}
+          />
+        );
+
+      case "leveling-system":
+        return (
+          <LevelingSystemFeature
             featureConfig={featureConfig}
             featureInfo={featureInfo}
             guild={guild}

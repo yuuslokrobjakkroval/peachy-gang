@@ -115,18 +115,9 @@ export const ChannelSelectForm = forwardRef<
     },
     ref
   ) => {
-    const {
-      data: channels = [],
-      isLoading,
-      error: queryError,
-    } = useGetGuildChannelsQuery(guild);
+    const { data: channels = [], isLoading } = useGetGuildChannelsQuery(guild);
 
     const options = useMemo(() => mapOptions(channels, type), [channels, type]);
-
-    if (queryError) {
-      toast.error("Failed to load channels");
-      return <div className="text-red-400">Error loading channels</div>;
-    }
 
     return (
       <Card className="p-4" ref={ref}>

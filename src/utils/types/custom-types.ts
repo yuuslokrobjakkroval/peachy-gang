@@ -53,6 +53,7 @@ export type CustomFeatures = {
   "booster-message": BoosterMessageFeature;
   "invite-tracker-message": InviteTrackerMessageFeature;
   "join-roles": JoinRolesFeature;
+  "leveling-system": LevelingSystemFeature;
   "giveaway-schedule": GiveawayScheduleFeature;
   "goodbye-message": GoodByeMessageFeature;
 };
@@ -97,6 +98,12 @@ export type JoinRolesFeature = {
   isActive?: boolean;
   userRoles: string[];
   botRoles: string[];
+};
+
+export type LevelingSystemFeature = {
+  channel?: string;
+  isActive?: boolean;
+  content?: string;
 };
 
 export type GiveawayScheduleFeature = {

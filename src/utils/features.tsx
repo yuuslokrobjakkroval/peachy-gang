@@ -8,6 +8,7 @@ import {
   MdExitToApp,
 } from "react-icons/md";
 import { AiOutlineRobot } from "react-icons/ai";
+import { ArrowUpNarrowWide } from "lucide-react";
 
 export function UseFeaturesConfig(): FeaturesConfig {
   return {
@@ -35,6 +36,11 @@ export function UseFeaturesConfig(): FeaturesConfig {
       name: "Join Roles",
       description: "Assign roles automatically when a user joins the server",
       icon: <MdGroup />,
+    },
+    "leveling-system": {
+      name: "Leveling System",
+      description: "Level up your server with a leveling system",
+      icon: <ArrowUpNarrowWide />,
     },
     "giveaway-schedule": {
       name: "Giveaway Schedule",

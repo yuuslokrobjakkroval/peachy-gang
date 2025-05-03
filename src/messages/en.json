@@ -100,7 +100,8 @@
   "language": {
     "placeholder": "Select Language",
     "english": "English",
-    "khmer": "Khmer"
+    "khmer": "Khmer",
+    "china": "China"
   },
   "dashboard": {
     "total_users": "Total Users",

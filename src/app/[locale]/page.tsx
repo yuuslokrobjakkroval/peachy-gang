@@ -39,41 +39,18 @@ import {
   SheetTrigger,
   SheetContent,
 } from "@/components/ui/sheet";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
 import { Menu, X } from "lucide-react";
 import { motion } from "framer-motion";
 import { toast } from "sonner";
-import { useLocale, useTranslations } from "next-intl";
+import { useTranslations } from "next-intl";
 import LanguageChanger from "@/components/language.switch";
+import { Container } from "@/components/layouts/container";
 
 type FormData = {
   name: string;
   email: string;
   message: string;
 };
-
-interface ContainerProps {
-  children: React.ReactNode;
-  className?: string;
-}
-
-export function Container(props: Readonly<ContainerProps>) {
-  return (
-    <div
-      className={`container p-3 mx-auto xl:px-0 ${
-        props.className ? props.className : ""
-      }`}
-    >
-      {props.children}
-    </div>
-  );
-}
 
 const navigation = [
   { name: "About Us", href: "about", sectionId: "about" },
@@ -229,7 +206,6 @@ export default function Home() {
                     alt="Peachy Logo"
                     width={48}
                     height={48}
-                    sizes="48px"
                   />
                 </span>
                 <span>PEACHY</span>
@@ -434,7 +410,7 @@ export default function Home() {
               </p>
               <a
                 href="https://t.me/+Wn2SkWaTk6wyYTM1"
-                className="inline-block bg-primary text-primary-foreground font-ghibi-bold py-2 px-4 rounded-md hover:bg-primary/90 transition"
+                className="inline-block bg-primary text-primary-foreground font-ghibi-bold py-2 px-4 rounded-md hover:bg-primary/90 transition-transform transform hover:scale-105"
                 aria-label={t("about.join_telegram")}
               >
                 {t("about.join_telegram")}

@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { usePeachy } from "@/contexts/peachy";
-import { IoMdNotifications, IoMdPlanet } from "react-icons/io";
+import { IoMdNotifications } from "react-icons/io";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -33,6 +33,7 @@ import { AllNotification } from "./Notification/All";
 import { UnreadNotification } from "./Notification/Unread";
 import { ArchiveNotification } from "./Notification/Archive";
 import ThemeChanger from "../theme.switch";
+import LanguageChanger from "../language.switch";
 // import ThemeControlPanel from "../theme-control-panel";
 // import {
 //   Sheet,
@@ -44,7 +45,6 @@ import ThemeChanger from "../theme.switch";
 // } from "../ui/sheet";
 // import { RainbowButton } from "../ui/rainbow-button";
 // import { Palette, X } from "lucide-react";
-import LanguageChanger from "../language.switch";
 
 const RTLNavbar = (props: {
   user: UserInfo;
@@ -224,7 +224,9 @@ const RTLNavbar = (props: {
         {/* Language Toggle */}
         <Tooltip>
           <TooltipTrigger asChild>
-            <LanguageChanger />
+            <div className="relative">
+              <LanguageChanger />
+            </div>
           </TooltipTrigger>
           <TooltipContent>
             <p className="text-sm text-secondary">Language</p>
