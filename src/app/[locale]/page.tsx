@@ -15,7 +15,12 @@ import {
   SonyLogo,
   VerizonLogo,
 } from "@/components/icons";
-import { FaFacebook, FaInstagram } from "react-icons/fa6";
+import {
+  FaFacebook,
+  FaInstagram,
+  FaXTwitter,
+  FaYoutube,
+} from "react-icons/fa6";
 import { Button } from "@/components/ui/button";
 import {
   Tooltip,
@@ -147,7 +152,7 @@ export default function Home() {
             label: <X className="h-4 w-4" />,
             onClick: () => toast.dismiss(toastId),
           },
-        },
+        }
       );
     } finally {
       setIsSubmitting(false);
@@ -231,17 +236,13 @@ export default function Home() {
                   <ul className="flex flex-col gap-4 pl-4">
                     {navigation.map((menu, index) => (
                       <li key={index}>
-                        <button
+                        <Button
                           onClick={() => scrollToSection(menu.sectionId)}
-                          className={`text-lg font-ghibi text-foreground hover:text-primary transition-colors ${
-                            activeSection === menu.sectionId
-                              ? "text-primary"
-                              : ""
-                          }`}
+                          className="w-full px-4 py-2 text-muted-foreground font-ghibi rounded-md dark:text-muted-foreground hover:text-primary focus:text-primary dark:hover:text-primary"
                           aria-label={`Scroll to ${menu.name} section`}
                         >
                           {menu.name}
-                        </button>
+                        </Button>
                       </li>
                     ))}
                     <li>
@@ -256,7 +257,7 @@ export default function Home() {
             <div className="hidden lg:flex lg:items-center lg:gap-6">
               <ul className="flex items-center gap-4 list-none">
                 {navigation.map((menu, index) => (
-                  <li key={index} className="nav__item">
+                  <li key={index}>
                     <button
                       onClick={() => scrollToSection(menu.sectionId)}
                       className={`px-4 py-2 text-lg font-ghibi text-foreground rounded-md transition-colors hover:text-primary focus:text-primary dark:text-foreground dark:hover:text-primary ${
@@ -595,17 +596,19 @@ export default function Home() {
           <div>
             <div className="flex flex-wrap w-full -mt-2 -ml-3 lg:ml-0">
               {navigation.map((item, index) => (
-                <button
+                <Button
+                  variant="ghost"
                   key={index}
                   onClick={() => scrollToSection(item.sectionId)}
                   className="w-full px-4 py-2 text-muted-foreground font-ghibi rounded-md dark:text-muted-foreground hover:text-primary focus:text-primary dark:hover:text-primary"
                   aria-label={`Scroll to ${item.name} section`}
                 >
                   {item.name}
-                </button>
+                </Button>
               ))}
             </div>
           </div>
+
           <div>
             <div className="flex flex-wrap w-full -mt-2 -ml-3 lg:ml-0">
               {legal.map((item, index) => (
@@ -620,6 +623,7 @@ export default function Home() {
               ))}
             </div>
           </div>
+
           <div>
             <div className="font-ghibi-bold text-foreground dark:text-foreground">
               {t("footer.follow_us")}
@@ -643,7 +647,7 @@ export default function Home() {
                     <FaInstagram size={24} />
                   </TooltipTrigger>
                   <TooltipContent>
-                    <div className="flex items-center space-y-2">
+                    <div className="flex items-center space-x-2">
                       <span>Instagram</span>
                     </div>
                   </TooltipContent>
@@ -656,11 +660,11 @@ export default function Home() {
               >
                 <Tooltip>
                   <TooltipTrigger asChild>
-                    <span className="text-2xl">𝕏</span>
+                    <FaXTwitter size={24} />
                   </TooltipTrigger>
                   <TooltipContent>
                     <div className="flex items-center space-x-2">
-                      <span>Twitter</span>
+                      <span>X</span>
                     </div>
                   </TooltipContent>
                 </Tooltip>
@@ -672,7 +676,7 @@ export default function Home() {
               >
                 <Tooltip>
                   <TooltipTrigger asChild>
-                    <span className="text-2xl">📺</span>
+                    <FaYoutube size={24} />
                   </TooltipTrigger>
                   <TooltipContent>
                     <div className="flex items-center space-x-2">
