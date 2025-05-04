@@ -7,7 +7,7 @@ interface ContainerProps {
   className?: string;
 }
 
-export function Container(props: Readonly<ContainerProps>) {
+const Container = (props: Readonly<ContainerProps>) => {
   return (
     <div
       className={`container p-3 mx-auto xl:px-0 ${
@@ -17,4 +17,6 @@ export function Container(props: Readonly<ContainerProps>) {
       {props.children}
     </div>
   );
-}
+};
+
+export default Container;

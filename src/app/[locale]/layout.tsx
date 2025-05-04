@@ -42,6 +42,13 @@ export default async function LocaleLayout({
     NotFound();
   }
 
+  let messages;
+  try {
+    messages = (await import(`../../messages/${locale}.json`)).default;
+  } catch (error) {
+    NotFound();
+  }
+
   const mode = await getMode();
   const settingsCookie = await getSettingsFromCookie();
 
@@ -63,7 +70,7 @@ export default async function LocaleLayout({
         className={`${nunito.variable} ${ptSans.variable} antialiased relative`}
         cz-shortcut-listen="true"
       >
-        <NextIntlClientProvider>
+        <NextIntlClientProvider locale={locale} messages={messages}>
           <SettingsProvider settingsCookie={settingsCookie} mode={mode}>
             <ThemeProvider
               attribute="class"

@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import { Container } from "@/components/layouts/container";
+import Container from "@/components/layouts/container";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent } from "@/components/ui/card";
 import {
@@ -29,7 +29,7 @@ export default function BackgroundPage() {
 
   const filterBackgrounds = (backgrounds: typeof backgroundData) => {
     return backgrounds.filter((bg) =>
-      bg.name.toLowerCase().includes(searchTerm.toLowerCase())
+      bg.name.toLowerCase().includes(searchTerm.toLowerCase()),
     );
   };
 

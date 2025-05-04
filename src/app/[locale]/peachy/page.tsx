@@ -19,7 +19,7 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 import { Input } from "@/components/ui/input";
 import BotInformation from "@/components/contents/bot-info";
 import { CARD } from "@/utils/config";
-import { Container } from "@/components/layouts/container";
+import Container from "@/components/layouts/container";
 
 export default function PeachyPage() {
   const [isChatOpen, setIsChatOpen] = useState(false);

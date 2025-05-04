@@ -26,7 +26,7 @@ const LanguageChanger: React.FC<LanguageChangerProps> = ({ setLanguage }) => {
     const currentPath = pathname.replace(`/${locale}`, "");
     const newPath = `/${newLocale}${currentPath}`;
     router.push(newPath);
-  }, [router, locale, pathname]);
+  }, [router, locale, pathname, setLanguage]);
 
   const currentLanguage =
     languages.find((lang) => lang.code === locale) || languages[0];

@@ -43,8 +43,8 @@ import { Menu, X } from "lucide-react";
 import { motion } from "framer-motion";
 import { toast } from "sonner";
 import { useTranslations } from "next-intl";
+import Container from "@/components/layouts/container";
 import LanguageChanger from "@/components/language.switch";
-import { Container } from "@/components/layouts/container";
 
 type FormData = {
   name: string;
@@ -147,7 +147,7 @@ export default function Home() {
             label: <X className="h-4 w-4" />,
             onClick: () => toast.dismiss(toastId),
           },
-        }
+        },
       );
     } finally {
       setIsSubmitting(false);
