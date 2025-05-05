@@ -286,7 +286,7 @@ export default function Home() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
         >
-          <h1 className="text-5xl md:text-6xl font-ghibi-bold text-center text-primary animate-twinkle">
+          <h1 className="text-4xl md:text-5xl font-ghibi-bold text-center text-primary animate-twinkle">
             {t("home.title")}
           </h1>
           <Image
@@ -563,6 +563,34 @@ export default function Home() {
               </Card>
             </motion.section>
           </div>
+        </div>
+      </Container>
+
+      <Container>
+        <div className="relative w-full overflow-hidden bg-background">
+          <div className="absolute inset-0 bg-gradient-to-r from-background via-transparent to-background z-10" />
+          <motion.div
+            className="flex whitespace-nowrap"
+            animate={{ x: ["0%", "-50%"] }}
+            transition={{
+              repeat: Number.POSITIVE_INFINITY,
+              ease: "linear",
+              duration: 20,
+            }}
+          >
+            {[...Array(4)].map((_, index) => (
+              <div key={index} className="flex items-center mx-4">
+                <span
+                  className="text-7xl sm:text-8xl md:text-9xl font-bold text-transparent px-4"
+                  style={{
+                    WebkitTextStroke: "1px #a3a85e", // tailwind gray-400
+                  }}
+                >
+                  Peach & Goma
+                </span>
+              </div>
+            ))}
+          </motion.div>
         </div>
       </Container>
 
