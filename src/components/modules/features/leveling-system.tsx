@@ -148,7 +148,7 @@ export function LevelingSystemFeature({
                         feature,
                         userId: userInfoByDiscord.id,
                       }).unwrap();
-                      toast.success("Message sent  successfully!", {
+                      toast.success("Message sent successfully!", {
                         duration: 2000,
                       });
                     } catch (error) {

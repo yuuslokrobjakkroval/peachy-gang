@@ -95,7 +95,17 @@ export default function PeachyLayout({
             <RTLNavbar user={user} />
           </div>
         </header>
-        <main className="flex flex-1 flex-col gap-4 px-3 sm:px-6 pt-2">
+        <main
+          className="flex flex-1 flex-col gap-4 px-3 sm:px-6 pt-2"
+          style={{
+            margin: 15,
+            background: `url(/images/house.webp)`,
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+            backgroundRepeat: "no-repeat",
+            borderRadius: "0.8rem",
+          }}
+        >
           {children}
         </main>
       </SidebarInset>

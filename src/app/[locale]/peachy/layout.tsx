@@ -94,7 +94,7 @@ export default function PeachyLayout({
     <SidebarProvider>
       <AppSidebar className="bg-[var(--peach-sidebar-bg)] text-[var(--peach-foreground)] transition-all duration-300" />
       <SidebarInset className="transition-all duration-300">
-        <header className="flex justify-between h-16 shrink-0 items-center gap-2 transition-[width,height] ease-linear group-has-data-[collapsible=icon]/sidebar-wrapper:h-12 ml-8 mr-8">
+        <header className="flex justify-between h-16 shrink-0 items-center gap-2 transition-[width,height] ease-linear group-has-data-[collapsible=icon]/sidebar-wrapper:h-12 mx-8">
           <div className="flex items-center gap-2 px-4">
             <SidebarTrigger className="mt-3 -ml-1" />
             <ChevronRight className="mt-3 h-4 w-4 text-[var(--peach-muted)]" />
@@ -128,7 +128,17 @@ export default function PeachyLayout({
             <RTLNavbar user={user} />
           </div>
         </header>
-        <main className="flex flex-1 flex-col gap-4 p-4 pt-0 max-w-7xl mx-auto">
+        <main
+          className="flex flex-1 flex-col gap-4 px-3 sm:px-6 pt-2"
+          style={{
+            margin: 15,
+            background: `url(/images/house.webp)`,
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+            backgroundRepeat: "no-repeat",
+            borderRadius: "0.8rem",
+          }}
+        >
           {children}
         </main>
       </SidebarInset>
