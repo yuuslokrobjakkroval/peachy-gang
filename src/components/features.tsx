@@ -124,7 +124,7 @@ const Features = ({
       <CardHeader className="relative">
         <CardTitle className="flex items-center gap-2 @[250px]/card:text-4xl text-3xl font-bold tabular-nums text-primary">
           <Avatar className="size-10 sm:size-12 lg:size-14">
-            <AvatarFallback className="flex items-center justify-center text-xl sm:text-xl lg:text-3xl">
+            <AvatarFallback className="flex items-center justify-center text-xl sm:text-xl lg:text-3xl transition-transform duration-300 group-hover:scale-110">
               {feature.icon}
             </AvatarFallback>
           </Avatar>
