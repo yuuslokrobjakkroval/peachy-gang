@@ -1,3 +1,5 @@
+[Go to Backend](https://github.com/yuuslokrobjakkroval/peachy-dashboard-backend)
+
 <h1 align="center">
   <br>
   <a href="https://github.com/yuuslokrobjakkroval"><img alt="PEACHYBANNER" src="https://i.imgur.com/fFqwcK2.gif"/></a>
@@ -23,8 +25,6 @@
   •
   <a href="#--support-server--">Support</a>
 </p>
-
-[Go to Backend](https://github.com/yuuslokrobjakkroval/peachy-dashboard-backend)
 
 <br>
 
