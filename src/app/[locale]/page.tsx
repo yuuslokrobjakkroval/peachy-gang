@@ -188,14 +188,6 @@ export default function Home() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  if (isLoading) {
-    return (
-      <div className="w-full flex justify-center items-center min-h-screen">
-        <Loading />
-      </div>
-    );
-  }
-
   return (
     <>
       <Container>
