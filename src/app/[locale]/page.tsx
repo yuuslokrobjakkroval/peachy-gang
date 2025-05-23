@@ -615,22 +615,6 @@ export default function Home() {
 
           <div>
             <div className="flex flex-wrap w-full -mt-2 -ml-3 lg:ml-0">
-              {navigation.map((item, index) => (
-                <Button
-                  variant="ghost"
-                  key={index}
-                  onClick={() => scrollToSection(item.sectionId)}
-                  className="w-full px-4 py-2 text-muted-foreground font-ghibi rounded-md dark:text-muted-foreground hover:text-primary focus:text-primary dark:hover:text-primary"
-                  aria-label={`Scroll to ${item.name} section`}
-                >
-                  {item.name}
-                </Button>
-              ))}
-            </div>
-          </div>
-
-          <div>
-            <div className="flex flex-wrap w-full -mt-2 -ml-3 lg:ml-0">
               {legal.map((item, index) => (
                 <Link
                   key={index}
