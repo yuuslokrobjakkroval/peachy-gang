@@ -92,6 +92,35 @@ const bot = emptySplitApi.injectEndpoints({
       }),
       providesTags: (result, error, arg) => [{ type: "EMOJIS", id: arg }],
     }),
+    addAutoResponse: builder.mutation({
+      query: ({ guild, feature, ...body }) => ({
+        url: `${process.env.NEXT_PUBLIC_API_ENDPOINT}/guilds/${guild}/features/${feature}/create`,
+        method: "POST",
+        body,
+      }),
+      invalidatesTags: (result, error, arg) => [
+        { type: "AUTORESPONSE", id: `${arg.guild}-${arg.feature}` },
+      ],
+    }),
+    updateAutoResponse: builder.mutation({
+      query: ({ guild, feature, id, ...body }) => ({
+        url: `${process.env.NEXT_PUBLIC_API_ENDPOINT}/guilds/${guild}/features/${feature}/update/${id}`,
+        method: "PATCH",
+        body,
+      }),
+      invalidatesTags: (result, error, arg) => [
+        { type: "AUTORESPONSE", id: `${arg.guild}-${arg.feature}` },
+      ],
+    }),
+    deleteAutoResponse: builder.mutation({
+      query: ({ guild, feature, id }) => ({
+        url: `${process.env.NEXT_PUBLIC_API_ENDPOINT}/guilds/${guild}/features/${feature}/delete/${id}`,
+        method: "DELETE",
+      }),
+      invalidatesTags: (result, error, arg) => [
+        { type: "AUTORESPONSE", id: `${arg.guild}-${arg.feature}` },
+      ],
+    }),
   }),
 });
 
@@ -107,4 +136,9 @@ export const {
   useGetGuildRolesQuery,
   useGetGuildChannelsQuery,
   useGetGuildEmojiQuery,
+
+  // AUTO RESPONSE
+  useAddAutoResponseMutation,
+  useUpdateAutoResponseMutation,
+  useDeleteAutoResponseMutation,
 } = bot;

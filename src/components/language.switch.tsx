@@ -1,10 +1,10 @@
 "use client";
 
 import React, { useCallback } from "react";
+import Image from "next/image";
+import { motion } from "framer-motion";
 import { useLocale, useTranslations } from "next-intl";
 import { useRouter, usePathname } from "next/navigation";
-import { Button } from "@/components/ui/button";
-import { Languages } from "lucide-react";
 import { languages } from "@/utils/common";
 
 interface LanguageChangerProps {
@@ -12,7 +12,22 @@ interface LanguageChangerProps {
   setLanguage?: any;
 }
 
-const LanguageChanger: React.FC<LanguageChangerProps> = ({ setLanguage }) => {
+const buttonVariants = {
+  initial: {
+    gap: 0,
+    paddingLeft: ".5rem",
+    paddingRight: ".5rem",
+  },
+  animate: (isSelected: boolean) => ({
+    gap: isSelected ? ".5rem" : 0,
+    paddingLeft: isSelected ? "1rem" : ".5rem",
+    paddingRight: isSelected ? "1rem" : ".5rem",
+  }),
+};
+
+const transition = { delay: 0.1, type: "spring", bounce: 0, duration: 0.6 };
+
+const LanguageChanger: React.FC<LanguageChangerProps> = () => {
   const t = useTranslations();
   const router = useRouter();
   const locale = useLocale();
@@ -22,32 +37,34 @@ const LanguageChanger: React.FC<LanguageChangerProps> = ({ setLanguage }) => {
     const currentIndex = languages.findIndex((lang) => lang.code === locale);
     const nextIndex = (currentIndex + 1) % languages.length;
     const newLocale = languages[nextIndex].code;
-    setLanguage(newLocale);
     const currentPath = pathname.replace(`/${locale}`, "");
     const newPath = `/${newLocale}${currentPath}`;
     router.push(newPath);
-  }, [router, locale, pathname, setLanguage]);
+  }, [router, locale, pathname]);
 
   const currentLanguage =
     languages.find((lang) => lang.code === locale) || languages[0];
 
   return (
-    <Button
-      variant="ghost"
-      className="hover:bg-muted transition-colors duration-200"
+    <motion.button
+      variants={buttonVariants}
+      initial={false}
+      animate="animate"
       onClick={handleLanguageChange}
+      transition={transition}
+      className="relative flex items-center rounded-xl px-4 py-2 text-sm font-medium transition-colors duration-300 text-muted-foreground hover:bg-muted hover:text-foreground"
       aria-label={t(currentLanguage.nameKey)}
     >
-      {/* <Image
+      <Image
         src={currentLanguage.flag}
         alt={`${t(currentLanguage.nameKey)} flag`}
-        width={72}
-        height={72}
+        width={512}
+        height={512}
         quality={100}
-        className="w-full h-full text-foreground"
-      /> */}
-      <Languages className="h-6 w-6 text-foreground" />
-    </Button>
+        className="h-6 w-6 text-foreground"
+      />
+      {/* <Languages className="h-6 w-6 text-foreground" /> */}
+    </motion.button>
   );
 };
 

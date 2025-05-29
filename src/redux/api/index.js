@@ -49,6 +49,7 @@ const dynamicTagTypes = [
   "CHANNELS",
   "ROLES",
   "EMOJIS",
+  "AUTORESPONSE",
 ];
 
 export const emptySplitApi = createApi({

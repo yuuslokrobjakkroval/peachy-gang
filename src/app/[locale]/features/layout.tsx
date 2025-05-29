@@ -44,7 +44,7 @@ export default function PeachyLayout({
           <div className="flex items-center gap-2 px-4">
             <SidebarTrigger className="-ml-1" />
             <Separator orientation="vertical" className="mr-2 h-4" />
-            <Breadcrumb>
+            {/* <Breadcrumb>
               <BreadcrumbList className="flex-wrap break-words sm:gap-2.5 flex items-center gap-1 text-sm text-foreground">
                 {breadcrumbPath.map((segment, index) => (
                   <div key={index}>
@@ -68,7 +68,7 @@ export default function PeachyLayout({
                   </div>
                 ))}
               </BreadcrumbList>
-            </Breadcrumb>
+            </Breadcrumb> */}
           </div>
 
           <div className="flex items-center">

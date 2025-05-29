@@ -4,17 +4,8 @@ import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
-import { useGetCustomersQuery } from "@/redux/api/users";
-import Loading from "@/components/loading/circle";
-import ThemeChanger from "@/components/theme.switch";
+import { cn } from "@/lib/utils";
 import { config } from "@/utils/config";
-import {
-  AmazonLogo,
-  MicrosoftLogo,
-  NetflixLogo,
-  SonyLogo,
-  VerizonLogo,
-} from "@/components/icons";
 import {
   FaFacebook,
   FaInstagram,
@@ -39,17 +30,21 @@ import { Textarea } from "@/components/ui/textarea";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { useForm } from "react-hook-form";
 import {
-  Sheet,
-  SheetTitle,
-  SheetTrigger,
-  SheetContent,
-} from "@/components/ui/sheet";
-import { Menu, X } from "lucide-react";
+  Book,
+  Box,
+  Cat,
+  Contact,
+  Home,
+  Menu,
+  MessageCircleQuestion,
+  X,
+} from "lucide-react";
 import { motion } from "framer-motion";
 import { toast } from "sonner";
 import { useTranslations } from "next-intl";
 import Container from "@/components/layouts/container";
-import LanguageChanger from "@/components/language.switch";
+import { ExpandableTabs, TabItem } from "@/components/ui/expandable-tabs";
+import { SplashCursor } from "@/components/ui/splash-cursor";
 
 type FormData = {
   name: string;
@@ -65,12 +60,9 @@ const navigation = [
 
 const legal = ["Terms", "Privacy", "Legal"];
 
-export default function Home() {
+export default function Peachy() {
   const t = useTranslations();
   const router = useRouter();
-  const { data: customers, isLoading } = useGetCustomersQuery(null);
-  const [activeSection, setActiveSection] = useState("");
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const {
     register,
@@ -80,6 +72,14 @@ export default function Home() {
   } = useForm<FormData>();
 
   const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const tabs: TabItem[] = [
+    { title: "Peachy", icon: Home },
+    { type: "separator" },
+    { title: "About Us", icon: Book },
+    { title: "FAQ", icon: MessageCircleQuestion },
+    { title: "Contact", icon: Contact },
+  ];
 
   const faqItems = [
     {
@@ -163,7 +163,6 @@ export default function Home() {
     const element = document.getElementById(sectionId);
     if (element) {
       element.scrollIntoView({ behavior: "smooth", block: "start" });
-      setIsMobileMenuOpen(false);
     } else {
       console.warn(`Section with id '${sectionId}' not found.`);
     }
@@ -171,36 +170,31 @@ export default function Home() {
 
   useEffect(() => {
     const handleScroll = () => {
-      const scrollPosition = window.scrollY + 100;
-      navigation.forEach((item) => {
-        const section = document.getElementById(item.sectionId);
-        if (
-          section &&
-          section.offsetTop <= scrollPosition &&
-          section.offsetTop + section.offsetHeight > scrollPosition
-        ) {
-          setActiveSection(item.sectionId);
-        }
-      });
+      const scrollPosition = window.scrollY;
     };
 
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  if (isLoading) {
-    return (
-      <div className="w-full flex justify-center items-center min-h-screen">
-        <Loading />
-      </div>
-    );
-  }
+  const styles = {
+    top: "calc(100dvh - 96px)",
+    width: "fit-content",
+    height: "fit-content",
+    transform: "translateX(-50%)",
+  };
 
   return (
     <>
+      <div className="hidden lg:block">
+        {/* <NeonCursor /> */}
+        {/* <SplashCursor /> */}
+      </div>
       <Container>
-        <div className="w-full">
-          <nav className="container relative flex flex-wrap items-center justify-between p-6 mx-auto lg:justify-between xl:px-2">
+        <div className="w-full relative">
+          <nav
+            className={`container relative flex flex-wrap items-center justify-between p-6 mx-auto lg:justify-between xl:px-2 transition-shadow duration-300`}
+          >
             {/* Logo */}
             <Link href="/">
               <span className="flex items-center space-x-3 text-2xl font-ghibi-bold text-primary dark:text-foreground transition-transform hover:scale-105">
@@ -216,66 +210,34 @@ export default function Home() {
                 <span>PEACHY</span>
               </span>
             </Link>
-
-            {/* Mobile Menu Trigger */}
-            <div className="lg:hidden">
-              <Sheet open={isMobileMenuOpen} onOpenChange={setIsMobileMenuOpen}>
-                <SheetTrigger asChild>
-                  <Button
-                    variant="outline"
-                    size="icon"
-                    aria-label="Toggle mobile menu"
-                  >
-                    <Menu className="h-6 w-6" />
-                  </Button>
-                </SheetTrigger>
-                <SheetContent>
-                  <SheetTitle className="text-xl font-ghibi-bold text-foreground pl-4 mb-6">
-                    {t("menu.title")}
-                  </SheetTitle>
-                  <ul className="flex flex-col gap-4 pl-4">
-                    {navigation.map((menu, index) => (
-                      <li key={index}>
-                        <Button
-                          onClick={() => scrollToSection(menu.sectionId)}
-                          className="w-full px-4 py-2 text-muted-foreground font-ghibi rounded-md dark:text-muted-foreground hover:text-primary focus:text-primary dark:hover:text-primary"
-                          aria-label={`Scroll to ${menu.name} section`}
-                        >
-                          {menu.name}
-                        </Button>
-                      </li>
-                    ))}
-                    <li>
-                      <LanguageChanger />
-                    </li>
-                  </ul>
-                </SheetContent>
-              </Sheet>
-            </div>
-
-            {/* Desktop Navigation */}
-            <div className="hidden lg:flex lg:items-center lg:gap-6">
-              <ul className="flex items-center gap-4 list-none">
-                {navigation.map((menu, index) => (
-                  <li key={index}>
-                    <button
-                      onClick={() => scrollToSection(menu.sectionId)}
-                      className={`px-4 py-2 text-lg font-ghibi text-foreground rounded-md transition-colors hover:text-primary focus:text-primary dark:text-foreground dark:hover:text-primary ${
-                        activeSection === menu.sectionId ? "text-primary" : ""
-                      }`}
-                      aria-label={`Scroll to ${menu.name} section`}
-                    >
-                      {menu.name}
-                    </button>
-                  </li>
-                ))}
-              </ul>
-              <div className="flex items-center gap-3">
-                <ThemeChanger />
-                <LanguageChanger />
-              </div>
-            </div>
           </nav>
+
+          {/* ExpandableTabs for Mobile - Bottom Centered */}
+          <div
+            style={styles}
+            className={cn(
+              "fixed left-1/2 z-50 mx-auto rounded-2xl bg-zinc-700"
+            )}
+          >
+            <ExpandableTabs
+              tabs={tabs}
+              onChange={(index) => {
+                if (index === null) {
+                  window.scrollTo({ top: 0, behavior: "smooth" });
+                } else {
+                  const sectionId = navigation.find(
+                    (item) => item.name === tabs[index].title
+                  )?.sectionId;
+                  if (sectionId) {
+                    scrollToSection(sectionId);
+                  } else if (tabs[index].title === "Peachy") {
+                    window.scrollTo({ top: 0, behavior: "smooth" });
+                  }
+                }
+              }}
+              className="bg-card backdrop-blur-sm rounded-2xl shadow-md"
+            />
+          </div>
         </div>
       </Container>
 
@@ -305,64 +267,6 @@ export default function Home() {
           >
             {t("home.get_started")}
           </Button>
-        </motion.div>
-      </Container>
-
-      <Container>
-        <motion.div
-          className="flex flex-col justify-center items-center rounded-lg"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.2 }}
-        >
-          <div className="text-xl text-center text-foreground dark:text-foreground font-ghibi">
-            {t("home.trusted_by")}{" "}
-            <span className="text-primary font-ghibi-bold">
-              +{customers ? customers.toLocaleString() : 0}
-            </span>{" "}
-            {t("home.customers")}
-          </div>
-          <div className="flex flex-wrap justify-center gap-8 mt-10 md:justify-around">
-            <div className="pt-2 text-muted-foreground dark:text-muted-foreground transform hover:scale-110 transition-transform">
-              <AmazonLogo />
-            </div>
-            <div className="text-muted-foreground dark:text-muted-foreground transform hover:scale-110 transition-transform">
-              <VerizonLogo />
-            </div>
-            <div className="text-muted-foreground dark:text-muted-foreground transform hover:scale-110 transition-transform">
-              <MicrosoftLogo />
-            </div>
-            <div className="pt-1 text-muted-foreground dark:text-muted-foreground transform hover:scale-110 transition-transform">
-              <NetflixLogo />
-            </div>
-            <div className="pt-2 text-muted-foreground dark:text-muted-foreground transform hover:scale-110 transition-transform">
-              <SonyLogo />
-            </div>
-          </div>
-        </motion.div>
-      </Container>
-
-      {/* Call-to-Action Section */}
-      <Container>
-        <motion.div
-          className="flex flex-col items-center py-8 rounded-lg"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.3 }}
-        >
-          <h2 className="text-3xl font-ghibi-bold text-primary mb-4 text-center">
-            {t("cta.title")}
-          </h2>
-          <p className="text-muted-foreground font-ghibi max-w-2xl text-center mb-8">
-            {t("cta.description")}
-          </p>
-          <a
-            href="https://t.me/+Wn2SkWaTk6wyYTM1"
-            className="bg-primary text-primary-foreground font-ghibi-bold px-8 py-4 rounded-md hover:bg-primary/90 transition-transform transform hover:scale-105"
-            aria-label={t("cta.join")}
-          >
-            {t("cta.join")}
-          </a>
         </motion.div>
       </Container>
 
@@ -409,13 +313,6 @@ export default function Home() {
               <p className="text-muted-foreground mb-6 font-ghibi">
                 {t("about.global_reach_description")}
               </p>
-              <a
-                href="https://t.me/+Wn2SkWaTk6wyYTM1"
-                className="inline-block bg-primary text-primary-foreground font-ghibi-bold py-2 px-4 rounded-md hover:bg-primary/90 transition-transform transform hover:scale-105"
-                aria-label={t("about.join_telegram")}
-              >
-                {t("about.join_telegram")}
-              </a>
             </motion.section>
 
             <motion.section
@@ -618,22 +515,6 @@ export default function Home() {
               <h2 className="text-xl font-ghibi text-primary mb-4">
                 {t("footer.tagline")}
               </h2>
-            </div>
-          </div>
-
-          <div>
-            <div className="flex flex-wrap w-full -mt-2 -ml-3 lg:ml-0">
-              {navigation.map((item, index) => (
-                <Button
-                  variant="ghost"
-                  key={index}
-                  onClick={() => scrollToSection(item.sectionId)}
-                  className="w-full px-4 py-2 text-muted-foreground font-ghibi rounded-md dark:text-muted-foreground hover:text-primary focus:text-primary dark:hover:text-primary"
-                  aria-label={`Scroll to ${item.name} section`}
-                >
-                  {item.name}
-                </Button>
-              ))}
             </div>
           </div>
 

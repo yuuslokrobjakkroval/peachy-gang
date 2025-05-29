@@ -15,6 +15,7 @@ import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { UseFeaturesConfig } from "@/utils/features";
 import { WelcomeMessageFeature } from "@/components/modules/features/welcome-feture";
+import { AutoResponseFeature } from "@/components/modules/features/auto-response-feature";
 import { BoosterMessageFeature } from "@/components/modules/features/booster-feture";
 import { InviteTrackerFeature } from "@/components/modules/features/inviter-tracker-feture";
 import { JoinRoleFeature } from "@/components/modules/features/join-roles";
@@ -73,7 +74,15 @@ export function IsEnabledPage({ featureInfo, guild, feature, refetch }: any) {
         );
 
       case "auto-response":
-        return "auto-response";
+        return (
+          <AutoResponseFeature
+            featureConfig={featureConfig}
+            featureInfo={featureInfo}
+            guild={guild}
+            feature={feature}
+            refetch={refetch}
+          />
+        );
 
       case "booster-message":
         return (

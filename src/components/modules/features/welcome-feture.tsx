@@ -1,6 +1,6 @@
 // app/feature/page.tsx
 "use client";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { usePeachy } from "@/contexts/peachy";
@@ -21,6 +21,8 @@ import { toast } from "sonner";
 import { Card } from "@/components/ui/card";
 import { FaTerminal, FaWandSparkles } from "react-icons/fa6";
 import UpdateFeaturePanel from "../update-feature";
+import VariableDialog from "@/components/dialogs/variable";
+import { styles } from "@/styles";
 
 const validationSchema = Yup.object({
   isActive: Yup.boolean(),
@@ -37,6 +39,7 @@ export function WelcomeMessageFeature({
   refetch,
 }: any) {
   const { userInfoByDiscord } = usePeachy();
+  const [open, setOpen] = useState<boolean>(false);
   const [sendMessage, { isLoading: sendMessageLoading }] =
     useSendMessageFeatureMutation();
   const [disableFeature, { isLoading: disableLoading }] =
@@ -175,7 +178,11 @@ export function WelcomeMessageFeature({
               <div className="flex items-center justify-end gap-2">
                 <Button
                   className="cursor-pointer bg-primary text-primary-foreground hover:bg-primary/90 rounded-lg"
-                  aria-label="Pick an emoji"
+                  aria-label="pick variable"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    setOpen(true);
+                  }}
                 >
                   <FaTerminal size="20" />
                 </Button>
@@ -183,7 +190,8 @@ export function WelcomeMessageFeature({
                   className="cursor-pointer bg-primary text-primary-foreground hover:bg-primary/90 rounded-lg"
                   aria-label="Test message"
                   disabled={sendMessageLoading}
-                  onClick={async () => {
+                  onClick={async (e) => {
+                    e.preventDefault();
                     try {
                       await sendMessage({
                         test: true,
@@ -269,12 +277,12 @@ export function WelcomeMessageFeature({
                   }}
                   placeholder="Type in image URL"
                   value={formik.values.image?.backgroundImage || ""}
-                  onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                  onChange={(e: any) => {
                     formik.setFieldValue(
                       "image.backgroundImage",
                       e.target.value
-                    )
-                  }
+                    );
+                  }}
                 />
               </div>
 
@@ -296,7 +304,10 @@ export function WelcomeMessageFeature({
             </>
           )}
 
-          <div className="col-span-12 gap-4">
+          <div
+            style={styles}
+            className="fixed left-1/2 z-50 mx-auto rounded-2xl"
+          >
             {formik.dirty && (
               <UpdateFeaturePanel
                 onSubmit={formik.handleSubmit}
@@ -307,6 +318,13 @@ export function WelcomeMessageFeature({
           </div>
         </div>
       </form>
+
+      <VariableDialog
+        isOpen={open}
+        onClose={() => {
+          setOpen(false);
+        }}
+      />
     </motion.div>
   );
 }

@@ -120,7 +120,7 @@ const Features = ({
   };
 
   return (
-    <Card className="@container/card">
+    <Card className="@container/card border border-border hover:border-primary">
       <CardHeader className="relative">
         <CardTitle className="flex items-center gap-2 @[250px]/card:text-4xl text-3xl font-bold tabular-nums text-primary">
           <Avatar className="size-10 sm:size-12 lg:size-14">

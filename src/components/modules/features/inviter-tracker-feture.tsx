@@ -1,6 +1,6 @@
-// app/feature/page.tsx
 "use client";
-import React, { useEffect } from "react";
+
+import React, { useEffect, useState } from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { usePeachy } from "@/contexts/peachy";
@@ -21,6 +21,8 @@ import { toast } from "sonner";
 import { Card } from "@/components/ui/card";
 import { FaTerminal, FaWandSparkles } from "react-icons/fa6";
 import UpdateFeaturePanel from "../update-feature";
+import { styles } from "@/styles";
+import InviteTrackerVariableDialog from "@/components/dialogs/tracker-variable";
 
 const validationSchema = Yup.object({
   isActive: Yup.boolean(),
@@ -37,6 +39,7 @@ export function InviteTrackerFeature({
   refetch,
 }: any) {
   const { userInfoByDiscord } = usePeachy();
+  const [open, setOpen] = useState<boolean>(false);
   const [sendMessage, { isLoading: sendMessageLoading }] =
     useSendMessageFeatureMutation();
   const [disableFeature, { isLoading: disableLoading }] =
@@ -175,7 +178,11 @@ export function InviteTrackerFeature({
               <div className="flex items-center justify-end gap-2">
                 <Button
                   className="cursor-pointer bg-primary text-primary-foreground hover:bg-primary/90 rounded-lg"
-                  aria-label="Pick an emoji"
+                  aria-label="Pick varaible"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    setOpen(true);
+                  }}
                 >
                   <FaTerminal size="20" />
                 </Button>
@@ -269,7 +276,7 @@ export function InviteTrackerFeature({
                   }}
                   placeholder="Type in image URL"
                   value={formik.values.image?.backgroundImage || ""}
-                  onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                  onChange={(e: any) =>
                     formik.setFieldValue(
                       "image.backgroundImage",
                       e.target.value
@@ -296,7 +303,10 @@ export function InviteTrackerFeature({
             </>
           )}
 
-          <div className="col-span-12 gap-4">
+          <div
+            style={styles}
+            className="fixed left-1/2 z-50 mx-auto rounded-2xl"
+          >
             {formik.dirty && (
               <UpdateFeaturePanel
                 onSubmit={formik.handleSubmit}
@@ -307,6 +317,13 @@ export function InviteTrackerFeature({
           </div>
         </div>
       </form>
+
+      <InviteTrackerVariableDialog
+        isOpen={open}
+        onClose={() => {
+          setOpen(false);
+        }}
+      />
     </motion.div>
   );
 }

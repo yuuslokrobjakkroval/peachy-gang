@@ -11,7 +11,7 @@ interface Language {
 export const languages: Language[] = [
   { code: "en", nameKey: "language.english", flag: "/flags/en.png" },
   { code: "km", nameKey: "language.khmer", flag: "/flags/km.png" },
-  { code: "zh", nameKey: "language.china", flag: "/flags/cn.png" },
+  { code: "zh", nameKey: "language.china", flag: "/flags/zh.png" },
 ];
 
 export type IdFeature<K extends keyof CustomFeatures = keyof CustomFeatures> =

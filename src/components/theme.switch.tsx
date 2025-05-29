@@ -1,11 +1,26 @@
 "use client";
 
 import React, { useState, useEffect, useCallback } from "react";
+import { motion } from "framer-motion";
 import { useTheme } from "next-themes";
-import { Button } from "@/components/ui/button";
 import { IoMdMoon, IoMdSunny } from "react-icons/io";
 
-const ThemeChanger = () => {
+const buttonVariants = {
+  initial: {
+    gap: 0,
+    paddingLeft: ".5rem",
+    paddingRight: ".5rem",
+  },
+  animate: (isSelected: boolean) => ({
+    gap: isSelected ? ".5rem" : 0,
+    paddingLeft: isSelected ? "1rem" : ".5rem",
+    paddingRight: isSelected ? "1rem" : ".5rem",
+  }),
+};
+
+const transition = { delay: 0.1, type: "spring", bounce: 0, duration: 0.6 };
+
+const ThemeChanger = ({ activeColor = "text-primary" }) => {
   const [mounted, setMounted] = useState(false);
   const { resolvedTheme, setTheme } = useTheme();
   useEffect(() => {
@@ -34,14 +49,16 @@ const ThemeChanger = () => {
     [isDark, setTheme]
   );
 
-  // Return null until mounted to avoid hydration mismatch
   if (!mounted) return null;
 
   return (
-    <Button
-      variant="ghost"
-      className="hover:bg-muted transition-colors duration-200"
+    <motion.button
+      variants={buttonVariants}
+      initial={false}
+      animate="animate"
       onClick={handleThemeToggle}
+      transition={transition}
+      className="relative flex items-center rounded-xl px-4 py-2 text-sm font-medium transition-colors duration-300 text-muted-foreground hover:bg-muted hover:text-foreground"
       aria-label={isDark ? "Switch to light mode" : "Switch to dark mode"}
     >
       {isDark ? (
@@ -49,7 +66,7 @@ const ThemeChanger = () => {
       ) : (
         <IoMdMoon className="h-6 w-6 text-foreground" />
       )}
-    </Button>
+    </motion.button>
   );
 };
 
