@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
@@ -31,11 +31,8 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { useForm } from "react-hook-form";
 import {
   Book,
-  Box,
-  Cat,
   Contact,
   Home,
-  Menu,
   MessageCircleQuestion,
   X,
 } from "lucide-react";
@@ -45,6 +42,7 @@ import { useTranslations } from "next-intl";
 import Container from "@/components/layouts/container";
 import { ExpandableTabs, TabItem } from "@/components/ui/expandable-tabs";
 import { SplashCursor } from "@/components/ui/splash-cursor";
+import { styles } from "@/styles";
 
 type FormData = {
   name: string;
@@ -166,22 +164,6 @@ export default function Peachy() {
     } else {
       console.warn(`Section with id '${sectionId}' not found.`);
     }
-  };
-
-  useEffect(() => {
-    const handleScroll = () => {
-      const scrollPosition = window.scrollY;
-    };
-
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
-  const styles = {
-    top: "calc(100dvh - 96px)",
-    width: "fit-content",
-    height: "fit-content",
-    transform: "translateX(-50%)",
   };
 
   return (
