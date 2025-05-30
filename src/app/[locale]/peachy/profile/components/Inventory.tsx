@@ -20,7 +20,7 @@ const Inventory = ({
       .filter(Boolean) || [];
 
   return (
-    <Card className="w-full p-6 h-full bg-card text-card-foreground border-2 shadow-md transition-colors duration-200">
+    <Card className="w-full p-6 h-full bg-card text-card-foreground border-2 px-4 py-2 shadow-md transition-colors duration-200">
       <div className="w-full">
         <h4 className="text-2xl font-semibold tracking-tight text-primary">
           Inventory

@@ -173,6 +173,7 @@ export function toNumber(num: number): string {
 }
 
 export function toCapitalCase(text: string): string {
+  if (!text) return "";
   return text
     .split(/[\s-_]+/)
     .map((word) => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
@@ -180,6 +181,7 @@ export function toCapitalCase(text: string): string {
 }
 
 export function toUpperCase(text: string): string {
+  if (!text) return "";
   return text
     .split(/[\s-_]+/)
     .map((word) => word.toUpperCase())

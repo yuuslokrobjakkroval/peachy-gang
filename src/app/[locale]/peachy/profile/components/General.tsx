@@ -23,28 +23,28 @@ const General = ({
         <div className="flex flex-col rounded-lg bg-card p-4 border border-border hover:shadow-md transition-shadow duration-200">
           <p className="text-lg font-semibold text-primary">Bio</p>
           <p className="text-sm text-muted-foreground mt-1">
-            {userInfo?.profile?.bio}
+            {userInfo?.profile?.bio ?? "Not Set"}
           </p>
         </div>
 
         <div className="flex flex-col rounded-lg bg-card p-4 border border-border hover:shadow-md transition-shadow duration-200">
           <p className="text-lg font-semibold text-primary">Gender</p>
           <p className="text-sm text-muted-foreground mt-1">
-            {toCapitalCase(userInfo?.profile?.gender)}
+            {toCapitalCase(userInfo?.profile?.gender ?? "Not Set")}
           </p>
         </div>
 
         <div className="flex flex-col rounded-lg bg-card p-4 border border-border hover:shadow-md transition-shadow duration-200">
           <p className="text-lg font-semibold text-primary">Birthday</p>
           <p className="text-sm text-muted-foreground mt-1">
-            {toCapitalCase(userInfo?.profile?.birthday)}
+            {toCapitalCase(userInfo?.profile?.birthday ?? "Not Set")}
           </p>
         </div>
 
         <div className="flex flex-col rounded-lg bg-card p-4 border border-border hover:shadow-md transition-shadow duration-200">
           <p className="text-lg font-semibold text-primary">Zodiac Sign</p>
           <p className="text-sm text-muted-foreground mt-1">
-            {toCapitalCase(userInfo?.profile?.zodiacSign)}
+            {toCapitalCase(userInfo?.profile?.zodiacSign ?? "Not Set")}
           </p>
         </div>
 

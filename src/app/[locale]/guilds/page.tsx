@@ -3,15 +3,16 @@
 import React, { useEffect, useState } from "react";
 import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
 import { getOwnerGuild, Guild, iconUrl } from "@/utils/common";
-import { config, configPeach, configGoma } from "@/utils/config";
+import { CARD } from "@/utils/config";
 import { AppConfig } from "@/utils/types";
-import BannerPage from "@/components/applications/banner";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Card, CardHeader, CardTitle } from "@/components/ui/card";
 import { Bot, Castle } from "lucide-react";
 import { usePeachy } from "@/contexts/peachy";
 import { Separator } from "@/components/ui/separator";
 import { useRouter } from "next/navigation";
+import { AppdGlowingEffect } from "@/components/app-glowing-effect";
+import { GuildGlowingEffect } from "@/components/guild-glowing-effect";
 
 export default function GuildPage() {
   const { guilds } = usePeachy();
@@ -21,6 +22,18 @@ export default function GuildPage() {
   useEffect(() => {
     setHydratedGuilds(guilds ?? []);
   }, [guilds]);
+
+  const botCard = CARD.map((config: AppConfig, index: number) => ({
+    area: `area-${index + 1}`,
+    icon: config.icon,
+    title: config.name,
+    description: config.description,
+    url: config.url,
+    banner: config.banner,
+    inviteUrl: config.inviteUrl,
+  }));
+
+  const guildCard = getOwnerGuild(hydratedGuilds ?? []);
 
   return (
     <SidebarProvider>
@@ -40,16 +53,8 @@ export default function GuildPage() {
 
             <div className="w-ful mt-3 mb-3 flex h-fit flex-col gap-2 lg:grid lg:grid-cols-12">
               <div className="col-span-12 lg:!mb-0">
-                <BannerPage item={config} />
+                <AppdGlowingEffect items={botCard} />
               </div>
-
-              {[configPeach, configGoma].map(
-                (config: AppConfig, index: number) => (
-                  <div key={index} className="col-span-6 lg:!mb-0">
-                    <BannerPage item={config} />
-                  </div>
-                )
-              )}
             </div>
 
             <div className="mb-6">
@@ -65,38 +70,9 @@ export default function GuildPage() {
 
             {hydratedGuilds?.length > 0 && (
               <div className="grid grid-cols-1 md:grid-cols-3 gap-2 mt-3">
-                {getOwnerGuild(hydratedGuilds ?? [])?.map((guild: Guild) => (
-                  <Card
-                    key={guild.id}
-                    className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground md:p-2 cursor-pointer hover:border-primary transition-all duration-300 overflow-hidden"
-                    onClick={() => router.push(`/guilds/${guild.id}`)}
-                  >
-                    <CardHeader className="p-4">
-                      <CardTitle className="flex items-start gap-3">
-                        <Avatar className="h-12 w-12 rounded-lg border-2 border-white dark:border-gray-600">
-                          <AvatarImage
-                            src={iconUrl(guild)}
-                            alt={guild.name}
-                            className="object-cover"
-                          />
-                          <AvatarFallback className="rounded-lg bg-gradient-to-br from-gray-300 to-gray-400 dark:from-gray-600 dark:to-gray-700 text-sm font-semibold">
-                            {guild.name?.[0]}
-                          </AvatarFallback>
-                        </Avatar>
-                        <div className="flex flex-col items-start">
-                          <span className="text-base font-semibold text-gray-900 dark:text-gray-100 truncate">
-                            {guild.name}
-                          </span>
-                          {guild?.description && (
-                            <p className="flex flex-col text-muted-foreground">
-                              {guild.description}
-                            </p>
-                          )}
-                        </div>
-                      </CardTitle>
-                    </CardHeader>
-                  </Card>
-                ))}
+                <div className="col-span-12 lg:!mb-0">
+                  <GuildGlowingEffect items={guildCard} />
+                </div>
               </div>
             )}
           </div>

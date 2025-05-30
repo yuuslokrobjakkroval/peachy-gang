@@ -55,7 +55,7 @@ export default function Profile() {
   }
 
   return (
-    <div className="flex w-full flex-col gap-5">
+    <div className="flex w-full flex-col gap-5 px-4 py-2">
       {/* <RTLNavbar /> */}
       <div className="w-ful mt-3 flex h-fit flex-col gap-5 lg:grid lg:grid-cols-12">
         <div className="col-span-8 lg:!mb-0">
@@ -74,7 +74,7 @@ export default function Profile() {
         </div>
       </div>
 
-      <div className="grid h-full grid-cols-1 gap-5 lg:!grid-cols-12">
+      <div className="grid h-full grid-cols-1 gap-5 lg:!grid-cols-12 mb-4">
         <div className="col-span-12 lg:col-span-12 lg:mb-0 3xl:col-span-12">
           <Inventory
             userInfoByDiscord={userInfoByDiscord}

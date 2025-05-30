@@ -1,13 +1,13 @@
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { useGetGuildsQuery } from "@/redux/api/discord";
-import { LoadingPage } from "./loading/circle";
+import Loading from "@/components/loading/circle";
 import { getOwnerGuild, iconUrl } from "@/utils/common";
 import { Card, CardHeader, CardTitle } from "./ui/card";
 
 export const GuildsPage = ({}) => {
   const { data: guilds, isLoading } = useGetGuildsQuery(null);
 
-  if (isLoading) return <LoadingPage />;
+  if (isLoading) return <Loading />;
 
   return (
     <div className="w-full flex flex-col items-center gap-3 overflow-y-auto px-2">
