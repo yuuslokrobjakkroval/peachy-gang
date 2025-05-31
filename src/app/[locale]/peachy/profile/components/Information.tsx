@@ -20,7 +20,7 @@ const Information = ({
     ? {
         background: `url(${bannerUrl(
           userInfoByDiscord.id,
-          userInfoByDiscord.banner,
+          userInfoByDiscord.banner
         )})`,
         backgroundSize: "cover",
         backgroundPosition: "center",
@@ -79,19 +79,19 @@ const Information = ({
       <div className="mt-3 mb-3 flex gap-4 md:!gap-14">
         <div className="flex flex-col items-center justify-center">
           <p className="flex justify-center items-center text-lg font-bold text-navy-700 dark:text-white">
-            {formatCoinCompact(userInfo.balance?.coin ?? 0)}
+            {formatCoinCompact(userInfo?.balance?.coin ?? 0)}
           </p>
           <p className="text-sm font-normal text-muted-foreground">Coin</p>
         </div>
         <div className="flex flex-col items-center justify-center">
           <p className="flex justify-center items-center text-lg font-bold text-navy-700 dark:text-white">
-            {formatCoinCompact(userInfo.balance?.bank ?? 0)}
+            {formatCoinCompact(userInfo?.balance?.bank ?? 0)}
           </p>
           <p className="text-sm font-normal text-muted-foreground">Bank</p>
         </div>
         <div className="flex flex-col items-center justify-center">
           <p className="flex justify-center items-center text-lg font-bold text-navy-700 dark:text-white">
-            {formatCoinCompact(userInfo.balance?.slots ?? 0)}
+            {formatCoinCompact(userInfo?.balance?.slots ?? 0)}
           </p>
           <p className="flex justify-center items-center text-sm font-normal text-muted-foreground">
             Slot
@@ -99,7 +99,7 @@ const Information = ({
         </div>
         <div className="flex flex-col items-center justify-center">
           <p className="flex justify-center items-center text-lg font-bold text-navy-700 dark:text-white">
-            {formatCoinCompact(userInfo.balance?.blackjack ?? 0)}
+            {formatCoinCompact(userInfo?.balance?.blackjack ?? 0)}
           </p>
           <p className="flex justify-center items-center text-sm font-normal text-muted-foreground">
             Blackjack
@@ -108,7 +108,7 @@ const Information = ({
 
         <div className="flex flex-col items-center justify-center">
           <p className="flex justify-center items-center text-lg font-bold text-navy-700 dark:text-white">
-            {formatCoinCompact(userInfo.balance?.coinflip ?? 0)}
+            {formatCoinCompact(userInfo?.balance?.coinflip ?? 0)}
           </p>
           <p className="text-sm font-normal text-muted-foreground">Coin Flip</p>
         </div>

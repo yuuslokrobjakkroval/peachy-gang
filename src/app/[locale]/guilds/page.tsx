@@ -2,11 +2,9 @@
 
 import React, { useEffect, useState } from "react";
 import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
-import { getOwnerGuild, Guild, iconUrl } from "@/utils/common";
+import { getOwnerGuild, Guild } from "@/utils/common";
 import { CARD } from "@/utils/config";
 import { AppConfig } from "@/utils/types";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { Card, CardHeader, CardTitle } from "@/components/ui/card";
 import { Bot, Castle } from "lucide-react";
 import { usePeachy } from "@/contexts/peachy";
 import { Separator } from "@/components/ui/separator";
@@ -16,7 +14,6 @@ import { GuildGlowingEffect } from "@/components/guild-glowing-effect";
 
 export default function GuildPage() {
   const { guilds } = usePeachy();
-  const router = useRouter();
   const [hydratedGuilds, setHydratedGuilds] = useState<Guild[]>([]);
 
   useEffect(() => {

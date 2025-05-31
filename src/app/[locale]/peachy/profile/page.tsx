@@ -8,10 +8,7 @@ import Inventory from "./components/Inventory";
 import Setting from "./components/Setting";
 
 import AuthError from "@/components/handler/auth-error";
-import {
-  handleAuthError,
-  AUTH_ERROR_CODES,
-} from "@/utils/auth/handleAuthError";
+import { AUTH_ERROR_CODES } from "@/utils/auth/handleAuthError";
 import Loading from "@/components/loading/circle";
 
 export default function Profile() {
@@ -39,17 +36,6 @@ export default function Profile() {
         error="User not authenticated"
         code={AUTH_ERROR_CODES.NOT_AUTHENTICATED}
         redirectTo="/login"
-      />
-    );
-  }
-
-  if (error) {
-    const authError = handleAuthError(error);
-    return (
-      <AuthError
-        error={authError.message}
-        code={authError.code}
-        redirectTo={authError.redirectTo}
       />
     );
   }

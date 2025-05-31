@@ -15,6 +15,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import CountUp from "@/components/animations/CountUp";
 
 interface SectionCardsProps {
   users: any;
@@ -53,7 +54,14 @@ export function SectionCards({ users, meta }: SectionCardsProps) {
             {t("total_users")}
           </CardDescription>
           <CardTitle className="text-2xl font-bold tabular-nums text-primary @[250px]/card:text-3xl">
-            {(meta?.itemCount ?? usersArray.length)?.toLocaleString()}
+            <CountUp
+              from={0}
+              to={meta?.itemCount ?? usersArray?.length ?? 0}
+              separator=","
+              direction="up"
+              duration={1}
+              className="count-up-text"
+            />
           </CardTitle>
           <div className="absolute right-3 top-3">
             <Badge
@@ -97,7 +105,14 @@ export function SectionCards({ users, meta }: SectionCardsProps) {
             {t("total_coin")}
           </CardDescription>
           <CardTitle className="text-2xl font-bold tabular-nums text-yellow-600 dark:text-yellow-400 @[250px]/card:text-3xl">
-            {totalCoin.toLocaleString()}
+            <CountUp
+              from={0}
+              to={totalCoin ?? 0}
+              separator=","
+              direction="up"
+              duration={1}
+              className="count-up-text"
+            />
           </CardTitle>
         </CardHeader>
         <CardFooter className="flex-col items-start gap-1 text-xs">
@@ -128,7 +143,14 @@ export function SectionCards({ users, meta }: SectionCardsProps) {
             {t("bank_reserves")}
           </CardDescription>
           <CardTitle className="text-2xl font-bold tabular-nums text-blue-600 dark:text-blue-400 @[250px]/card:text-3xl">
-            {totalCoinInBank.toLocaleString()}
+            <CountUp
+              from={0}
+              to={totalCoinInBank ?? 0}
+              separator=","
+              direction="up"
+              duration={1}
+              className="count-up-text"
+            />
           </CardTitle>
         </CardHeader>
         <CardFooter className="flex-col items-start gap-1 text-xs">
@@ -147,7 +169,14 @@ export function SectionCards({ users, meta }: SectionCardsProps) {
             {t("user_engagement")}
           </CardDescription>
           <CardTitle className="text-2xl font-bold tabular-nums text-purple-600 dark:text-purple-400 @[250px]/card:text-3xl">
-            {averageLevel.toFixed(1)}
+            <CountUp
+              from={0}
+              to={averageLevel ?? 1}
+              separator=","
+              direction="up"
+              duration={1}
+              className="count-up-text"
+            />
           </CardTitle>
         </CardHeader>
         <CardFooter className="flex-col items-start gap-1 text-xs">

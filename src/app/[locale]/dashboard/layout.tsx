@@ -64,31 +64,6 @@ export default function PeachyLayout({
           <div className="flex items-center gap-2 px-4">
             <SidebarTrigger className="-ml-3 mt-3" />
             <Separator orientation="vertical" />
-            <Breadcrumb>
-              <BreadcrumbList className="flex flex-wrap items-center gap-x-2 gap-y-1 px-0 sm:px-4 w-full sm:w-auto mt-3">
-                {breadcrumbPath.map((segment, index) => (
-                  <div key={index}>
-                    <BreadcrumbItem>
-                      {index < breadcrumbPath.length - 1 ? (
-                        <BreadcrumbLink
-                          href={`/${breadcrumbPath
-                            .slice(0, index + 1)
-                            .join("/")}`}
-                          className="hover:text-primary transition-colors"
-                        >
-                          {toUpperCase(segment)}
-                          <ChevronRight className="w-6 h-6 hover:text-primary inline-block" />
-                        </BreadcrumbLink>
-                      ) : (
-                        <BreadcrumbPage className="font-semibold text-foreground">
-                          {toUpperCase(segment)}
-                        </BreadcrumbPage>
-                      )}
-                    </BreadcrumbItem>
-                  </div>
-                ))}
-              </BreadcrumbList>
-            </Breadcrumb>
           </div>
 
           <div className="w-full sm:w-auto flex justify-end sm:justify-start">

@@ -169,7 +169,8 @@ export function getOwnerGuild(guilds: Guild[]) {
 }
 
 export function toNumber(num: number): string {
-  return num.toFixed(0).replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,");
+  if (!num) return 'N/A';
+  return num?.toFixed(0)?.replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,");
 }
 
 export function toCapitalCase(text: string): string {

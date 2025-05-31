@@ -4,16 +4,23 @@ import React from "react";
 import { usePathname, useRouter } from "next/navigation";
 import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
 import { useGetGuildInfoQuery } from "@/redux/api/guild";
-import { getFeatures, iconUrl, toCapitalCase } from "@/utils/common";
+import {
+  bannerUrl,
+  getFeatures,
+  iconUrl,
+  toCapitalCase,
+  UserInfo,
+} from "@/utils/common";
 import Features from "@/components/features";
 import { Button } from "@/components/ui/button";
-import { config, configPeach, configGoma } from "@/utils/config";
-import BannerPage from "@/components/applications/banner";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { config } from "@/utils/config";
 import { CircleArrowLeft, Mailbox } from "lucide-react";
 import { Separator } from "@/components/ui/separator";
 import { getAbsoluteUrl } from "@/utils/get-absolute-url";
-import { Spinner } from "@/components/loading/spinner";
+import Image from "next/image";
+import Loading from "@/components/loading/circle";
+import { BackgroundMask } from "@tsparticles/engine";
+import { usePeachy } from "@/contexts/peachy";
 
 export default function FeaturesPage() {
   const pathname = usePathname();
@@ -23,12 +30,21 @@ export default function FeaturesPage() {
     guildIdIndex > 0 && guildIdIndex < currentPath.length
       ? currentPath[guildIdIndex]
       : "";
-  const { data: guild, isLoading, refetch } = useGetGuildInfoQuery(guildId);
+  const {
+    data: guild,
+    isLoading,
+    isError,
+    refetch,
+  } = useGetGuildInfoQuery(guildId);
 
   if (isLoading) {
+    return <Loading />;
+  }
+
+  if (isError) {
     return (
-      <div className="flex h-screen w-full items-center justify-center">
-        <Spinner variant="circle" />
+      <div className="w-full h-screen flex items-center justify-center bg-[var(--peach-bg)] text-[var(--peach-foreground)]">
+        Oops, something went wrong. Please try again!
       </div>
     );
   }
@@ -37,7 +53,7 @@ export default function FeaturesPage() {
     <SidebarProvider>
       {/* <FeatureSidebar /> */}
       <SidebarInset>
-        {!!guild ? (
+        {guild ? (
           <GuildPanel guild={guildId} info={guild} refetch={refetch} />
         ) : (
           <NotJoined guild={guildId} />
@@ -56,8 +72,20 @@ function GuildPanel({
   info: any;
   refetch: () => void;
 }) {
+  const { userInfoByDiscord }: { userInfoByDiscord: any } = usePeachy();
   const router = useRouter();
   const features = getFeatures();
+
+  const backgroundStyle = info.banner
+    ? {
+        background: `url(${bannerUrl(info.id, info.banner)})`,
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+      }
+    : {
+        backgroundColor: `${userInfoByDiscord.banner_color}`,
+      };
+
   return (
     <div className="flex flex-col gap-4 py-4 md:gap-8 md:p-6">
       <div className="w-full">
@@ -66,38 +94,43 @@ function GuildPanel({
             className="text-2xl font-semibold tracking-tight text-primary mt-2 cursor-pointer"
             onClick={() => router.back()}
           />
-          <Avatar className="mt-0.5 ml-1">
-            <AvatarImage src={iconUrl(info)} alt={toCapitalCase(info.name)} />
-            <AvatarFallback className="bg-muted text-foreground">
-              {toCapitalCase(info.name)}
-            </AvatarFallback>
-          </Avatar>
-          <h4 className="text-2xl font-semibold tracking-tight text-primary mt-1">
+          <h4 className="text-2xl font-semibold tracking-tight text-primary mt-1.5">
             {toCapitalCase(info.name)}
             <span className="w-full border-t border-border" />
           </h4>
         </div>
 
-        {info?.description && (
-          <p className="text-muted-foreground mt-3">{info.description}</p>
-        )}
-
         <div className="mt-3 mb-6">
           <Separator className="text-card-foreground" />
         </div>
 
-        <div className="w-ful mt-3 mb-3 flex h-fit flex-col gap-5 lg:grid lg:grid-cols-12">
-          <div className="col-span-12 lg:!mb-0">
-            <BannerPage item={config} />
+        <div className="relative mb-6">
+          {/* Background and profile */}
+          <div
+            className="relative mt-1 flex w-full rounded-xl bg-cover h-[clamp(160px,20vw,300px)]"
+            style={backgroundStyle}
+          >
+            <div className="absolute -bottom-12 left-18 -translate-x-1/2">
+              <div className="relative w-[96px] h-[96px]">
+                {/* Avatar */}
+                <div className="relative w-[87px] h-[87px] rounded-full border-[4px] border-white bg-pink-400 dark:!border-navy-700 overflow-hidden">
+                  <Image
+                    src={iconUrl(info)}
+                    alt="Profile Avatar"
+                    width={128}
+                    height={128}
+                    className="rounded-full object-cover"
+                  />
+                </div>
+              </div>
+            </div>
           </div>
+        </div>
 
-          <div className="col-span-6 lg:!mb-0">
-            <BannerPage item={configPeach} />
-          </div>
-
-          <div className="col-span-6 lg:!mb-0">
-            <BannerPage item={configGoma} />
-          </div>
+        <div className="mt-12 mb-3">
+          {info?.description && (
+            <p className="text-muted-foreground mt-3">{info.description}</p>
+          )}
         </div>
 
         <div className="relative mb-6">

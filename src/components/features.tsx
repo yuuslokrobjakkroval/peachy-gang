@@ -16,6 +16,7 @@ import {
 import { toast } from "sonner";
 import { X } from "lucide-react";
 import { usePeachy } from "@/contexts/peachy";
+import { GlowingEffect } from "./ui/glowing-effect";
 
 const Features = ({
   guild,
@@ -120,45 +121,55 @@ const Features = ({
   };
 
   return (
-    <Card className="@container/card border border-border hover:border-primary">
-      <CardHeader className="relative">
-        <CardTitle className="flex items-center gap-2 @[250px]/card:text-4xl text-3xl font-bold tabular-nums text-primary">
-          <Avatar className="size-10 sm:size-12 lg:size-14">
-            <AvatarFallback className="flex items-center justify-center text-xl sm:text-xl lg:text-3xl transition-transform duration-300 group-hover:scale-110">
-              {feature.icon}
-            </AvatarFallback>
-          </Avatar>
-          <span>{feature.name}</span>
-        </CardTitle>
-        <CardDescription className="flex items-center gap-2">
-          {feature.description}
-        </CardDescription>
-      </CardHeader>
-      <CardFooter className="flex justify-between items-start gap-1 text-sm">
-        <Button
-          className="cursor-pointer"
-          variant={enabled ? "default" : "outline"}
-          aria-label={
-            enabled ? `Configure ${feature.name}` : `Enable ${feature.name}`
-          }
-          disabled={enableLoading}
-          onClick={handleEnableClick}
-        >
-          {enableLoading ? "Enabling..." : enabled ? "Config" : "Enable"}
-        </Button>
-        {enabled && (
+    <div className="bg-card relative h-full rounded-[1.25rem] border-[0.75px] border-border p-2 md:rounded-[1.5rem] md:p-3">
+      <GlowingEffect
+        spread={40}
+        glow={true}
+        disabled={false}
+        proximity={64}
+        inactiveZone={0.01}
+        borderWidth={3}
+      />
+      <Card className="@container/card border border-border ">
+        <CardHeader className="relative">
+          <CardTitle className="flex items-center gap-2 @[250px]/card:text-4xl text-3xl font-bold tabular-nums text-primary">
+            <Avatar className="size-10 sm:size-12 lg:size-14">
+              <AvatarFallback className="flex items-center justify-center text-xl sm:text-xl lg:text-3xl transition-transform duration-300 group-hover:scale-110">
+                {feature.icon}
+              </AvatarFallback>
+            </Avatar>
+            <span>{feature.name}</span>
+          </CardTitle>
+          <CardDescription className="flex items-center gap-2">
+            {feature.description}
+          </CardDescription>
+        </CardHeader>
+        <CardFooter className="flex justify-between items-start gap-1 text-sm">
           <Button
             className="cursor-pointer"
-            variant="destructive"
-            aria-label={`Disable ${feature.name}`}
-            disabled={disableLoading}
-            onClick={handleDisableClick}
+            variant={enabled ? "default" : "outline"}
+            aria-label={
+              enabled ? `Configure ${feature.name}` : `Enable ${feature.name}`
+            }
+            disabled={enableLoading}
+            onClick={handleEnableClick}
           >
-            {disableLoading ? "Disabling..." : "Disable"}
+            {enableLoading ? "Enabling..." : enabled ? "Config" : "Enable"}
           </Button>
-        )}
-      </CardFooter>
-    </Card>
+          {enabled && (
+            <Button
+              className="cursor-pointer"
+              variant="destructive"
+              aria-label={`Disable ${feature.name}`}
+              disabled={disableLoading}
+              onClick={handleDisableClick}
+            >
+              {disableLoading ? "Disabling..." : "Disable"}
+            </Button>
+          )}
+        </CardFooter>
+      </Card>
+    </div>
   );
 };
 

@@ -289,7 +289,10 @@ export function WelcomeMessageFeature({
               {formik.values.image?.backgroundImage.startsWith("https:") ? (
                 <div className="col-span-12">
                   <Card className="p-4">
-                    <div className="rounded-xl" style={backgroundStyle} />
+                    <div
+                      className="flex w-full rounded-xl bg-cover"
+                      style={backgroundStyle}
+                    />
                   </Card>
                 </div>
               ) : (

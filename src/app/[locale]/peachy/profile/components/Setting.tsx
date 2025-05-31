@@ -3,8 +3,10 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Switch } from "@/components/ui/switch";
 import { useTheme } from "next-themes";
+import { useRouter } from "next/navigation";
 
 function Setting() {
+  const router = useRouter();
   const { theme, setTheme } = useTheme();
 
   const handleThemeToggle = () => {
@@ -61,6 +63,7 @@ function Setting() {
           variant="destructive"
           size="lg"
           className="w-full max-w-xs shadow-destructive-border hover:bg-destructive/90 transition-colors duration-200 ease-in-out"
+          onClick={() => router.push("/login")}
         >
           Logout
         </Button>
