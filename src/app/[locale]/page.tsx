@@ -520,7 +520,7 @@ export default function Peachy() {
               {t("footer.follow_us")}
             </div>
             <div className="flex mt-5 space-x-5 text-muted-foreground dark:text-muted-foreground">
-              <a href="https://facebook.com/" target="_blank" rel="noopener">
+              <a href="https://www.facebook.com/peachyganggg" target="_blank" rel="noopener">
                 <Tooltip>
                   <TooltipTrigger asChild>
                     <FaFacebook size={24} />
@@ -532,36 +532,8 @@ export default function Peachy() {
                   </TooltipContent>
                 </Tooltip>
               </a>
-              <a href="https://instagram.com/" target="_blank" rel="noopener">
-                <Tooltip>
-                  <TooltipTrigger asChild>
-                    <FaInstagram size={24} />
-                  </TooltipTrigger>
-                  <TooltipContent>
-                    <div className="flex items-center space-x-2">
-                      <span>Instagram</span>
-                    </div>
-                  </TooltipContent>
-                </Tooltip>
-              </a>
               <a
-                href="https://twitter.com/peachandgoma"
-                target="_blank"
-                rel="noopener"
-              >
-                <Tooltip>
-                  <TooltipTrigger asChild>
-                    <FaXTwitter size={24} />
-                  </TooltipTrigger>
-                  <TooltipContent>
-                    <div className="flex items-center space-x-2">
-                      <span>X</span>
-                    </div>
-                  </TooltipContent>
-                </Tooltip>
-              </a>
-              <a
-                href="https://www.youtube.com/@peachandgoma"
+                href="https://www.youtube.com/@peachyganggg"
                 target="_blank"
                 rel="noopener"
               >
@@ -583,7 +555,7 @@ export default function Peachy() {
         <div className="my-10 text-sm text-center text-muted-foreground font-ghibi dark:text-muted-foreground">
           {t("footer.copyright")} Made by{" "}
           <a
-            href="https://discord.gg/kHVBQ5DAQd"
+            href="https://discord.gg/peachyganggg"
             target="_blank"
             rel="noopener"
             className="text-primary hover:underline"
