@@ -24,7 +24,14 @@ export type InputFormProps = {
 };
 
 export const InputForm = forwardRef<HTMLInputElement, InputFormProps>(
-  ({ control, value, onChange, placeholder, type = "text", ...props }, ref) => {
+  ({ control, value = "", onChange, placeholder, type = "text", ...props }, ref) => {
+
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+      if (onChange) {
+        onChange(e.target.value);
+      }
+    };
+
     return (
       <Card className="p-4">
         <div className="space-y-2">
@@ -54,7 +61,7 @@ export const InputForm = forwardRef<HTMLInputElement, InputFormProps>(
             id={control.id}
             type={type}
             value={value}
-            onChange={(e) => onChange?.(e.target.value)}
+            onChange={handleChange}
             placeholder={placeholder}
             ref={ref}
             {...props}

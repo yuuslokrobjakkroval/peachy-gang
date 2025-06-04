@@ -103,9 +103,9 @@ export function FeatureSidebar({
         <NavMain items={data.navMain} />
         <NavGuild guilds={guilds} />
       </SidebarContent>
-      <SidebarFooter>
+      {/* <SidebarFooter>
         <NavUser />
-      </SidebarFooter>
+      </SidebarFooter> */}
       <SidebarRail />
     </Sidebar>
   );

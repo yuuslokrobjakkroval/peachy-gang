@@ -14,6 +14,7 @@ import { Spinner } from "@/components/loading/spinner";
 import { FaRegHeart } from "react-icons/fa6";
 import { Input } from "@/components/ui/input";
 import { emojiUrl } from "@/utils/common";
+import Image from "next/image";
 
 export type TextAreaFormProps =
   React.TextareaHTMLAttributes<HTMLTextAreaElement> & {
@@ -113,7 +114,10 @@ export const TextAreaForm = forwardRef<HTMLTextAreaElement, TextAreaFormProps>(
                     <Button
                       variant="ghost"
                       size="sm"
-                      onClick={() => setIsPopoverOpen(!isPopoverOpen)}
+                      onClick={(e) => {
+                        // e.preventDefault();
+                        setIsPopoverOpen(!isPopoverOpen);
+                      }}
                       aria-label="Pick an emoji"
                     >
                       <FaRegHeart className="h-4 w-4 text-red-500" />
@@ -137,10 +141,12 @@ export const TextAreaForm = forwardRef<HTMLTextAreaElement, TextAreaFormProps>(
                           className="w-16 h-16"
                           onClick={() => handleEmojiClick(emoji)}
                         >
-                          <img
+                          <Image
                             key={emoji.id}
                             src={emojiUrl(emoji)}
                             alt={emoji.name || "Emoji"}
+                            width={128}
+                            height={128}
                             className="object-contain"
                             onError={(e) =>
                               (e.currentTarget.src = "/fallback-emoji.png")

@@ -139,8 +139,8 @@ export function CustomImagePage({ userInfoByDiscord, formik }: any) {
           }}
           placeholder="Type in image URL"
           value={formik.values.image?.backgroundImage || ""}
-          onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-            formik.setFieldValue("image.backgroundImage", e.target.value)
+          onChange={(value) =>
+            formik.setFieldValue("image.backgroundImage", value)
           }
         />
       </div>
@@ -154,9 +154,7 @@ export function CustomImagePage({ userInfoByDiscord, formik }: any) {
           }}
           placeholder="Type in message"
           value={formik.values.image?.message || ""}
-          onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-            formik.setFieldValue("image.message", e.target.value)
-          }
+          onChange={(value) => formik.setFieldValue("image.message", value)}
         />
       </div>
 

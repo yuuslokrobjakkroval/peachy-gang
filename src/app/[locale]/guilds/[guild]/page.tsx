@@ -164,15 +164,7 @@ function GuildPanel({
 
 function NotJoined({ guild }: { guild: string }) {
   const router = useRouter();
-  const pathname = usePathname();
-
-  const redirectUrl = `${getAbsoluteUrl()}${pathname}`;
-
-  const inviteUrl = `${
-    config.inviteUrl
-  }&scope=bot&guild_id=${guild}&permissions=8&redirect_uri=${encodeURIComponent(
-    `${getAbsoluteUrl()}/api/invite/callback`
-  )}&response_type=code&state=${encodeURIComponent(redirectUrl)}`;
+  const inviteUrl = config.inviteUrl;
 
   return (
     <div className="flex min-h-svh w-full items-center justify-center">
