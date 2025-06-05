@@ -26,7 +26,7 @@ interface ExpandableTabsProps {
   tabs: TabItem[];
   className?: string;
   activeColor?: string;
-  onChange?: (index: number | null) => void;
+  onChange?: (index: number) => void;
 }
 
 const buttonVariants = {

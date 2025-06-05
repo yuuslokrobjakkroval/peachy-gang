@@ -133,6 +133,10 @@ export function LevelingSystemFeature({
                 <Button
                   className="cursor-pointer bg-primary text-primary-foreground hover:bg-primary/90 rounded-lg"
                   aria-label="Pick an emoji"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    console.log("hello");
+                  }}
                 >
                   <FaTerminal size="20" />
                 </Button>
@@ -140,7 +144,8 @@ export function LevelingSystemFeature({
                   className="cursor-pointer bg-primary text-primary-foreground hover:bg-primary/90 rounded-lg"
                   aria-label="Test message"
                   disabled={sendMessageLoading}
-                  onClick={async () => {
+                  onClick={async (e) => {
+                    e.preventDefault();
                     try {
                       await sendMessage({
                         test: true,

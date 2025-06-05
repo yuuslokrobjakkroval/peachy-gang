@@ -6,12 +6,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { cn } from "@/lib/utils";
 import { config } from "@/utils/config";
-import {
-  FaFacebook,
-  FaInstagram,
-  FaXTwitter,
-  FaYoutube,
-} from "react-icons/fa6";
+import { FaFacebook, FaYoutube, FaArrowUp } from "react-icons/fa";
 import { Button } from "@/components/ui/button";
 import {
   Tooltip,
@@ -29,19 +24,12 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { useForm } from "react-hook-form";
-import {
-  Book,
-  Contact,
-  Home,
-  MessageCircleQuestion,
-  X,
-} from "lucide-react";
+import { Book, Home, X } from "lucide-react";
 import { motion } from "framer-motion";
 import { toast } from "sonner";
 import { useTranslations } from "next-intl";
 import Container from "@/components/layouts/container";
 import { ExpandableTabs, TabItem } from "@/components/ui/expandable-tabs";
-import { SplashCursor } from "@/components/ui/splash-cursor";
 import { styles } from "@/styles";
 
 type FormData = {
@@ -56,7 +44,11 @@ const navigation = [
   { name: "Contact", href: "contact", sectionId: "contact" },
 ];
 
-const legal = ["Terms", "Privacy", "Legal"];
+const legal = [
+  { name: "Terms and Condition", href: "terms", icon: null },
+  { name: "Privacy Policy", href: "privacy", icon: null },
+  { name: "Legal", href: "legal", icon: null },
+];
 
 export default function Peachy() {
   const t = useTranslations();
@@ -72,11 +64,11 @@ export default function Peachy() {
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const tabs: TabItem[] = [
-    { title: "Peachy", icon: Home },
+    { title: "PEACHY", icon: Home },
     { type: "separator" },
     { title: "About Us", icon: Book },
-    { title: "FAQ", icon: MessageCircleQuestion },
-    { title: "Contact", icon: Contact },
+    // { title: "FAQ", icon: MessageCircleQuestion },
+    // { title: "Contact", icon: Contact },
   ];
 
   const faqItems = [
@@ -197,16 +189,12 @@ export default function Peachy() {
           {/* ExpandableTabs for Mobile - Bottom Centered */}
           <div
             style={styles}
-            className={cn(
-              "fixed left-1/2 z-50 mx-auto rounded-2xl bg-zinc-700"
-            )}
+            className={cn("fixed left-1/2 z-50 mx-auto rounded-2xl bg-card")}
           >
             <ExpandableTabs
               tabs={tabs}
-              onChange={(index) => {
-                if (index === null) {
-                  window.scrollTo({ top: 0, behavior: "smooth" });
-                } else {
+              onChange={(index: number) => {
+                if (!!index) {
                   const sectionId = navigation.find(
                     (item) => item.name === tabs[index].title
                   )?.sectionId;
@@ -474,59 +462,69 @@ export default function Peachy() {
       </Container>
 
       <Container>
-        <footer className="grid max-w-screen-xl grid-cols-1 gap-10 pt-10 mx-auto mt-5 border-t border-border dark:border-border lg:grid-cols-5">
-          <div className="lg:col-span-2">
-            <div className="flex flex-col w-full max-w-3xl mx-auto gap-3">
+        <footer className="relative grid max-w-screen-xl grid-cols-1 gap-8 pt-8 mx-auto mt-5 sm:grid-cols-2 lg:grid-cols-5 bg-gradient-to-r transition-all duration-500">
+          {/* Logo and Tagline */}
+          <div className="relative lg:col-span-2">
+            <div className="flex flex-col w-full max-w-3xl mx-auto gap-3 text-center sm:text-left">
               <Link
                 href="/"
-                className="flex items-center space-x-2 text-2xl font-ghibi-bold text-primary dark:text-foreground"
+                className="flex items-center justify-center sm:justify-start space-x-2 text-2xl font-ghibi-bold text-primary dark:text-foreground transform hover:scale-105 transition-transform duration-300 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
+                aria-label="Return to Peachy homepage"
               >
                 <Image
-                  className="w-8 mb-2"
+                  className="w-8 mb-2 hover:animate-pulse"
                   src="/images/favicon.ico"
                   alt="Peachy Logo"
                   width={48}
                   height={48}
                   sizes="48px"
+                  loading="lazy"
                 />
-                <span className="text-2xl font-ghibi-bold text-primary">
+                <span className="text-2xl font-ghibi-bold text-primary drop-shadow-md">
                   PEACHY
                 </span>
               </Link>
-
-              <h2 className="text-xl font-ghibi text-primary mb-4">
+              <h2 className="text-xl font-ghibi text-muted-foreground mb-4">
                 {t("footer.tagline")}
               </h2>
             </div>
           </div>
 
+          {/* Legal Links */}
           <div>
-            <div className="flex flex-wrap w-full -mt-2 -ml-3 lg:ml-0">
+            <div className="flex flex-col mt-4 space-x-4 justify-center sm:justify-start">
               {legal.map((item, index) => (
                 <Link
                   key={index}
-                  href={`/${item.toLowerCase()}`}
-                  className="w-full px-4 py-2 text-muted-foreground font-ghibi rounded-md dark:text-muted-foreground hover:text-primary focus:text-primary dark:hover:text-primary"
-                  aria-label={`View ${item} page`}
+                  href={item.href}
+                  className="py-2 text-muted-foreground font-ghibi rounded-md dark:text-muted-foreground hover:text-primary focus:text-primary dark:hover:text-primary transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-primary"
+                  aria-label={`View ${item.name} page`}
                 >
-                  {item}
+                  {item.name}
                 </Link>
               ))}
             </div>
           </div>
 
-          <div>
-            <div className="font-ghibi-bold text-foreground dark:text-foreground">
+          {/* Social Media Links */}
+          <div className="relative text-center sm:text-left">
+            <div className="font-ghibi-bold text-primary text-lg">
               {t("footer.follow_us")}
             </div>
-            <div className="flex mt-5 space-x-5 text-muted-foreground dark:text-muted-foreground">
-              <a href="https://www.facebook.com/peachyganggg" target="_blank" rel="noopener">
+            <div className="flex mt-4 space-x-4 justify-center sm:justify-start">
+              <a
+                href="https://www.facebook.com/peachyganggg"
+                target="_blank"
+                rel="noopener"
+                className="transform hover:scale-110 hover:rotate-12 transition-all duration-300"
+                aria-label="Follow Peachy on Facebook"
+              >
                 <Tooltip>
                   <TooltipTrigger asChild>
                     <FaFacebook size={24} />
                   </TooltipTrigger>
-                  <TooltipContent>
-                    <div className="flex items-center space-x-2">
+                  <TooltipContent className="rounded-lg">
+                    <div className="flex items-center">
                       <span>Facebook</span>
                     </div>
                   </TooltipContent>
@@ -536,13 +534,15 @@ export default function Peachy() {
                 href="https://www.youtube.com/@peachyganggg"
                 target="_blank"
                 rel="noopener"
+                className="bf-ctransform hover:scale-110 hover:rotate-12 transition-all duration-300"
+                aria-label="Follow Peachy on YouTube"
               >
                 <Tooltip>
                   <TooltipTrigger asChild>
                     <FaYoutube size={24} />
                   </TooltipTrigger>
-                  <TooltipContent>
-                    <div className="flex items-center space-x-2">
+                  <TooltipContent className="rounded-lg">
+                    <div className="flex items-center">
                       <span>YouTube</span>
                     </div>
                   </TooltipContent>
@@ -550,15 +550,48 @@ export default function Peachy() {
               </a>
             </div>
           </div>
+
+          {/* Newsletter Signup */}
+          {/* <div className="relative lg:col-span-2">
+            <div className="font-ghibi-bold text-foreground dark:text-foreground text-lg text-center sm:text-left">
+              {t("footer.newsletter")}
+            </div>
+            <form className="mt-4 flex flex-col sm:flex-row gap-2 justify-center sm:justify-start">
+              <input
+                type="email"
+                placeholder="Enter your email"
+                className="p-2 rounded-md border border-border dark:border-border bg-white dark:bg-gray-800 text-foreground dark:text-foreground focus:outline-none focus:ring-2 focus:ring-primary"
+                aria-label="Email for newsletter"
+              />
+              <button
+                type="submit"
+                className="p-2 bg-primary text-white rounded-md hover:bg-primary-dark transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-primary"
+              >
+                Subscribe
+              </button>
+            </form>
+          </div> */}
+
+          {/* Scroll-to-Top Button */}
+          <div className="fixed bottom-5 right-5 z-50">
+            <Button
+              onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+              className="p-3 bg-primary rounded-full shadow-lg hover:bg-primary-dark transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
+              aria-label="Scroll to top"
+            >
+              <FaArrowUp size={20} />
+            </Button>
+          </div>
         </footer>
 
+        {/* Copyright Section */}
         <div className="my-10 text-sm text-center text-muted-foreground font-ghibi dark:text-muted-foreground">
-          {t("footer.copyright")} Made by{" "}
+          © {new Date().getFullYear()} Made by{" "}
           <a
             href="https://discord.gg/peachyganggg"
             target="_blank"
             rel="noopener"
-            className="text-primary hover:underline"
+            className="text-primary hover:underline focus:outline-none focus:ring-2 focus:ring-primary"
           >
             PEACHY GANG
           </a>
