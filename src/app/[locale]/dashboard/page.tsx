@@ -33,22 +33,14 @@ export default function DashboardPage() {
 
   return (
     <div className="w-full h-full flex flex-1 flex-col rounded-lg">
-      <ClickSpark
-        sparkColor="#fff"
-        sparkSize={10}
-        sparkRadius={15}
-        sparkCount={8}
-        duration={400}
-      >
-        <div className="@container/main flex flex-1 flex-col gap-2">
-          <div className="flex flex-col gap-4 py-4 md:gap-6 md:py-6">
-            <SectionCards users={users} meta={meta} />
-            <div className="px-4 lg:px-6">
-              <ChartAreaInteractive users={users} />
-            </div>
+      <div className="@container/main flex flex-1 flex-col gap-2">
+        <div className="flex flex-col gap-4 py-4 md:gap-6 md:py-6">
+          <SectionCards users={users} meta={meta} />
+          <div className="px-4 lg:px-6">
+            <ChartAreaInteractive users={users} />
           </div>
         </div>
-      </ClickSpark>
+      </div>
     </div>
   );
 }

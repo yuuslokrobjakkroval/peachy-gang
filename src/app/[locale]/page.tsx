@@ -24,13 +24,15 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { useForm } from "react-hook-form";
-import { Book, Home, X } from "lucide-react";
+import { ArrowRightCircle, Book, Home, X } from "lucide-react";
 import { motion } from "framer-motion";
 import { toast } from "sonner";
 import { useTranslations } from "next-intl";
 import Container from "@/components/layouts/container";
 import { ExpandableTabs, TabItem } from "@/components/ui/expandable-tabs";
 import { styles } from "@/styles";
+import { AnimatedShinyText } from "@/components/animations/AnimatedShinyText";
+import { Badge } from "@/components/ui/badge";
 
 type FormData = {
   name: string;
@@ -160,28 +162,33 @@ export default function Peachy() {
 
   return (
     <>
-      <div className="hidden lg:block">
-        {/* <NeonCursor /> */}
-        {/* <SplashCursor /> */}
-      </div>
       <Container>
         <div className="w-full relative">
-          <nav
-            className={`container relative flex flex-wrap items-center justify-between p-6 mx-auto lg:justify-between xl:px-2 transition-shadow duration-300`}
-          >
+          <nav className="container relative flex flex-wrap items-center justify-between p-6 mx-auto lg:justify-between xl:px-2 transition-shadow duration-300">
             {/* Logo */}
             <Link href="/">
-              <span className="flex items-center space-x-3 text-2xl font-ghibi-bold text-primary dark:text-foreground transition-transform hover:scale-105">
-                <span>
-                  <Image
-                    className="w-10 mb-1"
-                    src="/images/favicon.ico"
-                    alt="Peachy Logo"
-                    width={48}
-                    height={48}
-                  />
-                </span>
-                <span>PEACHY</span>
+              <span className="relative inline-block">
+                {/* Badge positioned top-right */}
+                <Badge className="absolute -top-5 -right-8 text-xs px-2 z-10">
+                  BETA
+                </Badge>
+                <div
+                  className={cn(
+                    "inline-flex items-center space-x-3 rounded-full border px-4 py-2 transition-all ease-in hover:cursor-pointer"
+                  )}
+                >
+                  {/* Logo with text */}
+                  <span className="flex items-center space-x-3 text-2xl font-ghibi-bold text-primary dark:text-foreground transition-transform hover:scale-105">
+                    <Image
+                      className="w-10 mb-1"
+                      src="/images/favicon.ico"
+                      alt="Peachy Logo"
+                      width={48}
+                      height={48}
+                    />
+                    <span>PEACHY</span>
+                  </span>
+                </div>
               </span>
             </Link>
           </nav>

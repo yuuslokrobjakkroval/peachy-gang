@@ -1,8 +1,6 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 
-@custom-variant dark (&:is(.dark *));
-
 @font-face {
   font-family: "Ghibli";
   src: url("/fonts/Ghibli.otf") format("opentype");
@@ -13,6 +11,22 @@
 @font-face {
   font-family: "Ghibli-Bold";
   src: url("/fonts/Ghibli-Bold.otf") format("opentype");
+  font-weight: 600, 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "NotoSerifKhmer";
+  src: url("/fonts/NotoSerifKhmer-Regular.ttf") format("truetype");
+  font-weight: 600, 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Koulen";
+  src: url("/fonts/Koulen-Regular.ttf") format("truetype");
   font-weight: 600, 700;
   font-style: normal;
   font-display: swap;
@@ -119,8 +133,8 @@ body {
   --font-sans: Merriweather, serif;
   --font-serif: Source Serif 4, serif;
   --font-mono: JetBrains Mono, monospace;
-  --font-ghibi: Ghibli;
-  --font-ghibi-bold: Ghibli-Bold;
+  --font-ghibi: Ghibli, NotoSerifKhmer;
+  --font-ghibi-bold: Ghibli-Bold, Koulen;
   --radius: 0.625rem;
   --shadow-2xs: 3px 3px 2px 0px hsl(88 22% 35% / 0.07);
   --shadow-xs: 3px 3px 2px 0px hsl(88 22% 35% / 0.07);
@@ -180,8 +194,8 @@ body {
   --font-sans: Merriweather, serif;
   --font-serif: Source Serif 4, serif;
   --font-mono: JetBrains Mono, monospace;
-  --font-ghibi: Ghibli;
-  --font-ghibi-bold: Ghibli-Bold;
+  --font-ghibi: Ghibli, NotoSerifKhmer;
+  --font-ghibi-bold: Ghibli-Bold, Koulen;
   --radius: 0.425rem;
   --shadow-2xs: 3px 3px 2px 0px hsl(88 22% 35% / 0.07);
   --shadow-xs: 3px 3px 2px 0px hsl(88 22% 35% / 0.07);

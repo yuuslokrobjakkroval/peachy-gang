@@ -57,11 +57,10 @@ export function ExpandableTabs({
   onChange,
 }: ExpandableTabsProps) {
   const [selected, setSelected] = React.useState<number | null>(null);
-  const outsideClickRef = React.useRef(null);
+  const outsideClickRef = React.useRef<any>(null);
 
   useOnClickOutside(outsideClickRef, () => {
     setSelected(null);
-    onChange?.(null);
   });
 
   const handleSelect = (index: number) => {
