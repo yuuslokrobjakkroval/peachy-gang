@@ -87,10 +87,7 @@ const BoosterVariableDialog = ({
               onChange={(e) => setSearchQuery(e.target.value)}
               className="mb-4"
             />
-            <div className="space-y-1 mt-4 mb-4">
-              <p className="text-sm font-semibold text-gray-900 dark:text-gray-100">
-                Messages
-              </p>
+            <div className="space-y-1 mt-2 mb-2 max-h-[300px] overflow-y-auto">
               {filteredMessages.map((variable) => (
                 <div
                   key={variable.value}

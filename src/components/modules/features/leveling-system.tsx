@@ -1,7 +1,7 @@
 "use client";
 
-import React, { useEffect } from "react";
-
+import React, { useEffect, useState } from "react";
+import * as Yup from "yup";
 import { usePeachy } from "@/contexts/peachy";
 import {
   useSendMessageFeatureMutation,
@@ -18,6 +18,13 @@ import { toCapitalCase } from "@/utils/common";
 import { Button } from "@/components/ui/button";
 import { FaTerminal, FaWandSparkles } from "react-icons/fa6";
 import { SwitchForm } from "@/components/form/switch-form";
+import LevelingDialog from "@/components/dialogs/leveling-variable";
+
+const validationSchema = Yup.object({
+  isActive: Yup.boolean(),
+  channel: Yup.string().required("Channel is required"),
+  content: Yup.string().required("Content is required"),
+});
 
 export function LevelingSystemFeature({
   featureConfig,
@@ -27,6 +34,7 @@ export function LevelingSystemFeature({
   refetch,
 }: any) {
   const { userInfoByDiscord } = usePeachy();
+  const [open, setOpen] = useState<boolean>(false);
   const [sendMessage, { isLoading: sendMessageLoading }] =
     useSendMessageFeatureMutation();
   const [disableFeature, { isLoading: disableLoading }] =
@@ -42,7 +50,7 @@ export function LevelingSystemFeature({
       channel: featureInfo?.channel,
       content: featureInfo?.content ?? "",
     },
-    // validationSchema,
+    validationSchema,
     onSubmit: async (values) => {
       try {
         const body = {
@@ -135,7 +143,7 @@ export function LevelingSystemFeature({
                   aria-label="Pick an emoji"
                   onClick={(e) => {
                     e.preventDefault();
-                    console.log("hello");
+                    setOpen(true);
                   }}
                 >
                   <FaTerminal size="20" />
@@ -210,6 +218,12 @@ export function LevelingSystemFeature({
             )}
           </div>
         </div>
+        <LevelingDialog
+          isOpen={open}
+          onClose={() => {
+            setOpen(false);
+          }}
+        />
       </form>
     </motion.div>
   );

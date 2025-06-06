@@ -63,7 +63,7 @@ const VariableDialog = ({
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="sm:max-w-[425px] rounded-2xl">
+      <DialogContent className="sm:max-w-[425px] rounded-2xl mt-2 mb-2">
         <DialogHeader>
           <DialogTitle>Variables</DialogTitle>
           <DialogClose />
@@ -71,7 +71,7 @@ const VariableDialog = ({
         <div className="space-y-4">
           <div>
             <p className="text-sm font-medium text-gray-900 dark:text-gray-100 mb-2">
-              The following variables can be used in this message.
+              The following leveling variables can be used in this message.
               <br />
               Click to copy a variable.
             </p>
@@ -81,10 +81,7 @@ const VariableDialog = ({
               onChange={(e) => setSearchQuery(e.target.value)}
               className="mb-4"
             />
-            <div className="space-y-1 mt-4 mb-4">
-              <p className="text-sm font-semibold text-gray-900 dark:text-gray-100">
-                Messages
-              </p>
+            <div className="space-y-1 mt-2 mb-2 max-h-[300px] overflow-y-auto">
               {filteredMessages.map((variable) => (
                 <div
                   key={variable.value}

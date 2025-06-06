@@ -117,5 +117,47 @@
     "average_level": "កម្រិតជាមធ្យម",
     "based_on_xp": "ផ្អែកលើ XP និងសកម្មភាព",
     "growth_percentage": "+{percentage}%"
+  },
+  "dialog": {
+    "title": "អថេរ",
+    "description": "អថេរខាងក្រោមអាចត្រូវបានប្រើនៅក្នុងសារ។\nចុចដើម្បីចម្លងអថេរ។",
+    "searchPlaceholder": "វាយដើម្បីស្វែងរកអថេរ...",
+    "messages": "សារ",
+    "copied": "បានចម្លង!",
+    "close": "បិទ"
+  },
+  "levelingDialog": {
+    "title": "អថេរកម្រិត",
+    "description": "អថេរកម្រិតខាងក្រោមអាចត្រូវបានប្រើនៅក្នុងសារនេះ។<br />ចុចដើម្បីចម្លងអថេរ។",
+    "searchPlaceholder": "វាយបញ្ចូលដើម្បីស្វែងរកអថេរ...",
+    "variablesTitle": "អថេរកម្រិត",
+    "copiedToast": "បានចម្លង {variable} ទៅក្តារតម្បៀតខ្ទប់",
+    "closeButton": "បិទ"
+  },
+  "toast": {
+    "copied": "បានចម្លង {{variable}} ទៅកាន់ clipboard"
+  },
+  "user": {
+    "id": "លេខសម្គាល់អ្នកប្រើ",
+    "tag": "ស្លាកអ្នកប្រើ",
+    "username": "ឈ្មោះអ្នកប្រើ",
+    "mention": "ការបង្ហាញអ្នកប្រើ",
+    "avatarUrl": "អាសយដ្ឋានរូបភាពអ្នកប្រើ",
+    "serverAvatarUrl": "រូបភាពអ្នកប្រើក្នុងសេវើ",
+    "nickname": "ឈ្មោះលេង",
+    "displayName": "ឈ្មោះបង្ហាញ",
+    "createdAt": "កាលបរិច្ឆេទបង្កើត",
+    "createdTimestamp": "លេខសម្គាល់កាលបរិច្ឆេទបង្កើត",
+    "joinedAt": "ថ្ងៃចូលរួម",
+    "joinedTimestamp": "លេខសម្គាល់ថ្ងៃចូលរួម",
+    "globalNickname": "ឈ្មោះលេងសកល"
+  },
+  "guild": {
+    "id": "លេខសម្គាល់សេវើ",
+    "name": "ឈ្មោះសេវើ",
+    "iconUrl": "អាសយដ្ឋានរូបតំណាងសេវើ",
+    "bannerUrl": "អាសយដ្ឋានបដាសេវើ",
+    "memberCount": "ចំនួនសមាជិក",
+    "vanityCode": "កូដសេវើ"
   }
 }

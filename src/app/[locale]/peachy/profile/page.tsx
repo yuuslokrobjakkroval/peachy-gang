@@ -14,13 +14,12 @@ import Loading from "@/components/loading/circle";
 export default function Profile() {
   const { userInfoByDiscord }: { userInfoByDiscord: any } = usePeachy();
 
-  const {
-    data: userInfo,
-    isLoading,
-    error,
-  } = useGetUserByIdQuery(userInfoByDiscord?.id, {
-    skip: !userInfoByDiscord.id,
-  });
+  const { data: userInfo, isLoading } = useGetUserByIdQuery(
+    userInfoByDiscord?.id,
+    {
+      skip: !userInfoByDiscord.id,
+    }
+  );
 
   if (isLoading) {
     return (

@@ -1,6 +1,7 @@
 "use client";
 
 import * as React from "react";
+import { useFetchUserInfoQuery, useGetGuildsQuery } from "@/redux/api/discord";
 import {
   Cat,
   LayoutDashboard,
@@ -31,7 +32,7 @@ import {
 } from "@/components/ui/sidebar";
 import { usePeachy } from "@/contexts/peachy";
 
-const data = {
+const navigation = {
   navMain: [
     {
       title: "Dashboard",
@@ -135,16 +136,27 @@ const data = {
 };
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
-  const { guilds } = usePeachy();
+  const { setUserInfoByDiscord, setGuilds } = usePeachy();
+  const { data: user, isSuccess: userSuccess } = useFetchUserInfoQuery(null);
+  const { data: guilds, isSuccess: guildSuccess } = useGetGuildsQuery(null);
+
+  React.useEffect(() => {
+    if (userSuccess && guildSuccess) {
+      setUserInfoByDiscord(user);
+      setGuilds(guilds);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [user, guilds, setUserInfoByDiscord, setGuilds]);
+
   return (
     <Sidebar collapsible="icon" {...props}>
       <SidebarContent>
-        <NavMain items={data.navMain} />
+        <NavMain items={navigation.navMain} />
         <NavGuild guilds={guilds} />
       </SidebarContent>
-      {/* <SidebarFooter>
-        <NavUser />
-      </SidebarFooter> */}
+      <SidebarFooter>
+        <NavUser user={user} />
+      </SidebarFooter>
       <SidebarRail />
     </Sidebar>
   );

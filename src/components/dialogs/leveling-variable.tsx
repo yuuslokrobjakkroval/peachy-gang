@@ -54,7 +54,7 @@ const LevelingDialog = ({
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="sm:max-w-[425px] rounded-2xl">
+      <DialogContent className="sm:max-w-[425px] rounded-2xl mt-2 mb-2">
         <DialogHeader>
           <DialogTitle>Leveling Variables</DialogTitle>
           <DialogClose />
@@ -72,10 +72,7 @@ const LevelingDialog = ({
               onChange={(e) => setSearchQuery(e.target.value)}
               className="mb-4"
             />
-            <div className="space-y-1 mt-4 mb-4">
-              <p className="text-sm font-semibold text-gray-900 dark:text-gray-100">
-                Leveling Variables
-              </p>
+            <div className="space-y-1 mt-2 mb-2 max-h-[300px] overflow-y-auto">
               {filteredMessages.map((variable) => (
                 <div
                   key={variable.value}

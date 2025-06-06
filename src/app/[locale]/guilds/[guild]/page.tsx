@@ -56,7 +56,7 @@ export default function FeaturesPage() {
         {guild ? (
           <GuildPanel guild={guildId} info={guild} refetch={refetch} />
         ) : (
-          <NotJoined guild={guildId} />
+          <NotJoined guildId={guildId} />
         )}
       </SidebarInset>
     </SidebarProvider>
@@ -162,9 +162,9 @@ function GuildPanel({
   );
 }
 
-function NotJoined({ guild }: { guild: string }) {
+function NotJoined({ guildId }: { guildId: string }) {
   const router = useRouter();
-  const inviteUrl = config.inviteUrl;
+  const inviteUrl = `${config.inviteUrl}&guild_id=${guildId}&disable_guild_select=true`;
 
   return (
     <div className="flex min-h-svh w-full items-center justify-center">
@@ -185,8 +185,7 @@ function NotJoined({ guild }: { guild: string }) {
             </Button>
             <Button
               onClick={() => {
-                // Redirect to the Discord invite URL
-                window.location.href = inviteUrl;
+                window.open(inviteUrl, "_blank");
               }}
             >
               Invite Bot

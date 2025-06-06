@@ -117,5 +117,13 @@
     "average_level": "平均等级",
     "based_on_xp": "基于经验值和活动",
     "growth_percentage": "增长率：+{percentage}%"
+  },
+  "levelingDialog": {
+    "title": "等级变量",
+    "description": "以下等级变量可用于此消息。<br />点击复制变量。",
+    "searchPlaceholder": "输入以搜索变量...",
+    "variablesTitle": "等级变量",
+    "copiedToast": "已复制 {variable} 到剪贴板",
+    "closeButton": "关闭"
   }
 }

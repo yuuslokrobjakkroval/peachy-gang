@@ -2,19 +2,17 @@
 
 import React from "react";
 import { useGetUsersQuery } from "@/redux/api/users";
+import { usePeachy } from "@/contexts/peachy";
 import { SectionCards } from "@/components/applications/dashboard/section-cards";
 import { ChartAreaInteractive } from "@/components/applications/dashboard/chart-area-interactive";
 import Loading from "@/components/loading/circle";
-import ClickSpark from "@/components/animations/ClickSpark";
 
 export default function DashboardPage() {
+  const { userInfoByDiscord }: { userInfoByDiscord: any } = usePeachy();
   const getParams = () => {
     return {
-      // search: search || null,
       order: -1,
       orderBy: "coin",
-      // page: page,
-      // limit: rowsPerPage,
     };
   };
 

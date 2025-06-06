@@ -9,10 +9,10 @@ import {
   TooltipContent,
 } from "@/components/ui/tooltip";
 import { Guild, iconUrl } from "@/utils/common";
-import { Button } from "./ui/button";
 import { useRouter } from "next/navigation";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import Image from "next/image";
+import { usePeachy } from "@/contexts/peachy";
 
 export function GuildGlowingEffect({ items }: { items: Guild[] }) {
   return (
@@ -23,6 +23,7 @@ export function GuildGlowingEffect({ items }: { items: Guild[] }) {
 }
 
 const GridItem = ({ item }: { item: Guild }) => {
+  const { setGuildId } = usePeachy();
   const router = useRouter();
   return (
     <TooltipProvider>
@@ -32,7 +33,10 @@ const GridItem = ({ item }: { item: Guild }) => {
             <a
               className="cursor-pointer"
               rel="noopener noreferrer"
-              onClick={() => router.push(`/guilds/${item.id}`)}
+              onClick={() => {
+                setGuildId(item.id);
+                router.push(`/guilds/${item.id}`);
+              }}
             >
               <div className="bg-card relative h-full rounded-[1.25rem] border-[0.75px] border-border p-2 md:rounded-[1.5rem] md:p-3">
                 <GlowingEffect
