@@ -65,12 +65,12 @@ const RTLNavbar = (props: {
 
   const handleProfileClick = () => {
     setUserInfoByDiscord(user);
-    router.push("/peachy/profile");
+    router.push("/profile");
   };
 
   const handleProfileSettingClick = () => {
     setUserInfoByDiscord(user);
-    router.push("/peachy/profile/setting");
+    router.push("/profile/setting");
   };
 
   const handleLogoutClick = () => {

@@ -1,3 +1,6 @@
+"use client";
+
+import { useTranslations } from "next-intl";
 import Image from "next/image";
 import { Card } from "@/components/ui/card";
 import {
@@ -7,7 +10,7 @@ import {
   formatCoinCompact,
 } from "@/utils/common";
 import { MdVerified } from "react-icons/md";
-import { User } from "@/utils/types";
+import type { User } from "@/utils/types";
 
 const Information = ({
   userInfoByDiscord,
@@ -16,12 +19,11 @@ const Information = ({
   userInfoByDiscord: any;
   userInfo: User;
 }) => {
+  const t = useTranslations();
+
   const backgroundStyle = userInfoByDiscord.banner
     ? {
-        background: `url(${bannerUrl(
-          userInfoByDiscord.id,
-          userInfoByDiscord.banner
-        )})`,
+        background: `url(${bannerUrl(userInfoByDiscord.id, userInfoByDiscord.banner)})`,
         backgroundSize: "cover",
         backgroundPosition: "center",
       }
@@ -40,7 +42,7 @@ const Information = ({
             {/* Avatar */}
             <div className="relative w-[87px] h-[87px] rounded-full border-[4px] border-white bg-pink-400 dark:!border-navy-700 overflow-hidden">
               <Image
-                src={avatarUrl(userInfoByDiscord)}
+                src={avatarUrl(userInfoByDiscord) || "/placeholder.svg"}
                 alt="Profile Avatar"
                 width={87}
                 height={87}
@@ -52,7 +54,10 @@ const Information = ({
             {userInfoByDiscord.avatar_decoration_data?.asset && (
               <div className="absolute inset-0 z-10 flex items-center justify-center">
                 <Image
-                  src={decorationUrl(userInfoByDiscord.avatar_decoration_data)}
+                  src={
+                    decorationUrl(userInfoByDiscord.avatar_decoration_data) ||
+                    "/placeholder.svg"
+                  }
                   alt="Avatar Decoration"
                   width={96}
                   height={96}
@@ -81,20 +86,24 @@ const Information = ({
           <p className="flex justify-center items-center text-lg font-bold text-navy-700 dark:text-white">
             {formatCoinCompact(userInfo?.balance?.coin ?? 0)}
           </p>
-          <p className="text-sm font-normal text-muted-foreground">Coin</p>
+          <p className="text-sm font-normal text-muted-foreground">
+            {t("profile.information.coin")}
+          </p>
         </div>
         <div className="flex flex-col items-center justify-center">
           <p className="flex justify-center items-center text-lg font-bold text-navy-700 dark:text-white">
             {formatCoinCompact(userInfo?.balance?.bank ?? 0)}
           </p>
-          <p className="text-sm font-normal text-muted-foreground">Bank</p>
+          <p className="text-sm font-normal text-muted-foreground">
+            {t("profile.information.bank")}
+          </p>
         </div>
         <div className="flex flex-col items-center justify-center">
           <p className="flex justify-center items-center text-lg font-bold text-navy-700 dark:text-white">
             {formatCoinCompact(userInfo?.balance?.slots ?? 0)}
           </p>
           <p className="flex justify-center items-center text-sm font-normal text-muted-foreground">
-            Slot
+            {t("profile.information.slot")}
           </p>
         </div>
         <div className="flex flex-col items-center justify-center">
@@ -102,7 +111,7 @@ const Information = ({
             {formatCoinCompact(userInfo?.balance?.blackjack ?? 0)}
           </p>
           <p className="flex justify-center items-center text-sm font-normal text-muted-foreground">
-            Blackjack
+            {t("profile.information.blackjack")}
           </p>
         </div>
 
@@ -110,7 +119,9 @@ const Information = ({
           <p className="flex justify-center items-center text-lg font-bold text-navy-700 dark:text-white">
             {formatCoinCompact(userInfo?.balance?.coinflip ?? 0)}
           </p>
-          <p className="text-sm font-normal text-muted-foreground">Coin Flip</p>
+          <p className="text-sm font-normal text-muted-foreground">
+            {t("profile.information.coin_flip")}
+          </p>
         </div>
       </div>
     </Card>

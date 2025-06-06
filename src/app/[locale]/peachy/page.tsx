@@ -1,9 +1,10 @@
 "use client";
-
 import { useEffect, useRef, useState } from "react";
+import type React from "react";
+
+import { useTranslations } from "next-intl";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
-
 import { AnimatePresence, motion } from "framer-motion";
 import { useChat } from "@ai-sdk/react";
 import { Button } from "@/components/ui/button";
@@ -22,6 +23,7 @@ import { CARD } from "@/utils/config";
 import Container from "@/components/layouts/container";
 
 export default function PeachyPage() {
+  const t = useTranslations();
   const [isChatOpen, setIsChatOpen] = useState(false);
   const chatIconRef = useRef<HTMLButtonElement>(null);
   const {
@@ -33,7 +35,9 @@ export default function PeachyPage() {
     stop,
     reload,
     isLoading,
-  } = useChat({ api: "/api/gemini" });
+  } = useChat({
+    api: "/api/gemini",
+  });
 
   const scrollRef = useRef<HTMLDivElement>(null);
 
@@ -84,27 +88,25 @@ export default function PeachyPage() {
             <Card className="border-2">
               <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-3">
                 <CardTitle className="text-lg font-bold">
-                  Chat With Peachy
+                  {t("peachy.chat_title")}
                 </CardTitle>
                 <Button onClick={toggleChat} size="icon" className="px-2 py-0">
                   <X className="size-4" />
-                  <span className="sr-only">Close Chat</span>
+                  <span className="sr-only">{t("common.close")}</span>
                 </Button>
               </CardHeader>
               <CardContent>
                 <ScrollArea className="h-[300px] pr-4">
                   {messages?.length === 0 && (
                     <div className="w-full mt-32 text-gray-500 items-center justify-center flex gap-3">
-                      No message yet
+                      {t("peachy.no_messages")}
                     </div>
                   )}
 
                   {messages?.map((message: any, index: number) => (
                     <div
                       key={index}
-                      className={`mb-4 ${
-                        message.role === "user" ? "text-right" : "text-left"
-                      }`}
+                      className={`mb-4 ${message.role === "user" ? "text-right" : "text-left"}`}
                     >
                       <div
                         className={`inline-block p-4 rounded-lg ${
@@ -162,20 +164,22 @@ export default function PeachyPage() {
                         type="button"
                         onClick={() => stop()}
                       >
-                        abort
+                        {t("peachy.abort")}
                       </button>
                     </div>
                   )}
 
                   {error && (
                     <div className="w-full items-center flex justify-center gap-3">
-                      <div>Error: {error.message}</div>
+                      <div>
+                        {t("common.error")}: {error.message}
+                      </div>
                       <button
                         className="underline"
                         type="button"
                         onClick={() => reload()}
                       >
-                        Retry
+                        {t("peachy.retry")}
                       </button>
                     </div>
                   )}
@@ -192,9 +196,8 @@ export default function PeachyPage() {
                     value={input}
                     onChange={handleInputChange}
                     className="flex-1"
-                    placeholder="Type your message here..."
+                    placeholder={t("peachy.type_message")}
                   />
-
                   <Button
                     type="submit"
                     className="size-9"

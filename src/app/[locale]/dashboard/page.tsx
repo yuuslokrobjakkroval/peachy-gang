@@ -1,6 +1,5 @@
 "use client";
-
-import React from "react";
+import { useTranslations } from "next-intl";
 import { useGetUsersQuery } from "@/redux/api/users";
 import { usePeachy } from "@/contexts/peachy";
 import { SectionCards } from "@/components/applications/dashboard/section-cards";
@@ -8,7 +7,9 @@ import { ChartAreaInteractive } from "@/components/applications/dashboard/chart-
 import Loading from "@/components/loading/circle";
 
 export default function DashboardPage() {
+  const t = useTranslations();
   const { userInfoByDiscord }: { userInfoByDiscord: any } = usePeachy();
+
   const getParams = () => {
     return {
       order: -1,
@@ -23,8 +24,13 @@ export default function DashboardPage() {
 
   if (isLoading) {
     return (
-      <div className="w-full">
-        <Loading />
+      <div className="w-full flex items-center justify-center min-h-[400px]">
+        <div className="text-center">
+          <Loading />
+          <p className="mt-4 text-sm text-muted-foreground">
+            {t("dashboard.loading")}
+          </p>
+        </div>
       </div>
     );
   }
@@ -32,10 +38,35 @@ export default function DashboardPage() {
   return (
     <div className="w-full h-full flex flex-1 flex-col rounded-lg">
       <div className="@container/main flex flex-1 flex-col gap-2">
-        <div className="flex flex-col gap-4 py-4 md:gap-6 md:py-6">
-          <SectionCards users={users} meta={meta} />
+        <div className="flex flex-col gap-4 py-4">
+          {/* Page Header */}
           <div className="px-4 lg:px-6">
-            <ChartAreaInteractive users={users} />
+            <div className="flex flex-col gap-2">
+              <h1 className="text-2xl font-semibold tracking-tight">
+                {t("dashboard.title")}
+              </h1>
+              <p className="text-sm text-muted-foreground">
+                {t("dashboard.description")}
+              </p>
+            </div>
+          </div>
+
+          {/* Statistics Cards */}
+          <SectionCards users={users} meta={meta} />
+
+          {/* Chart Section */}
+          <div className="px-4 lg:px-6">
+            <div className="flex flex-col gap-4">
+              <div className="flex flex-col gap-2">
+                <h2 className="text-lg font-medium">
+                  {t("dashboard.analytics_title")}
+                </h2>
+                <p className="text-sm text-muted-foreground">
+                  {t("dashboard.analytics_description")}
+                </p>
+              </div>
+              <ChartAreaInteractive users={users} />
+            </div>
           </div>
         </div>
       </div>

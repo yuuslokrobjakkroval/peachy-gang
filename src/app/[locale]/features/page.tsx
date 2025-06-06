@@ -1,13 +1,12 @@
 "use client";
-
 import { usePathname, useRouter } from "next/navigation";
+import { useTranslations } from "next-intl";
 import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
 import { useGetGuildQuery } from "@/redux/api/guild";
 import { getFeatures, iconUrl, toCapitalCase } from "@/utils/common";
 import Features from "@/components/features";
 import { Button } from "@/components/ui/button";
 import { config, configPeach, configGoma } from "@/utils/config";
-import React from "react";
 import BannerPage from "@/components/applications/banner";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { CircleArrowLeft, Mailbox } from "lucide-react";
@@ -17,19 +16,25 @@ import { usePeachy } from "@/contexts/peachy";
 import Loading from "@/components/loading/circle";
 
 export default function FeaturesPage() {
+  const t = useTranslations();
   const { guildId } = usePeachy();
-
   const { data: guild, isLoading, refetch } = useGetGuildQuery(guildId);
 
   if (isLoading) {
-    <div className="w-full">
-      <Loading />
-    </div>;
+    return (
+      <div className="w-full flex items-center justify-center min-h-[400px]">
+        <div className="text-center">
+          <Loading />
+          <p className="mt-4 text-sm text-muted-foreground">
+            {t("common.loading")}
+          </p>
+        </div>
+      </div>
+    );
   }
 
   return (
     <SidebarProvider>
-      {/* <FeatureSidebar /> */}
       <SidebarInset>
         {!!guild ? (
           <GuildPanel guild={guildId} info={guild} refetch={refetch} />
@@ -50,8 +55,10 @@ function GuildPanel({
   info: any;
   refetch: () => void;
 }) {
+  const t = useTranslations();
   const router = useRouter();
   const features = getFeatures();
+
   return (
     <div className="flex flex-col gap-4 py-4 md:gap-8 md:p-6">
       <div className="w-full">
@@ -61,7 +68,10 @@ function GuildPanel({
             onClick={() => router.back()}
           />
           <Avatar className="mt-0.5 ml-1">
-            <AvatarImage src={iconUrl(info)} alt={toCapitalCase(info.name)} />
+            <AvatarImage
+              src={iconUrl(info) || "/placeholder.svg"}
+              alt={toCapitalCase(info.name)}
+            />
             <AvatarFallback className="bg-muted text-foreground">
               {toCapitalCase(info.name)}
             </AvatarFallback>
@@ -88,11 +98,9 @@ function GuildPanel({
           <div className="col-span-12 lg:!mb-0">
             <BannerPage item={config} />
           </div>
-
           <div className="col-span-6 lg:!mb-0">
             <BannerPage item={configPeach} />
           </div>
-
           <div className="col-span-6 lg:!mb-0">
             <BannerPage item={configGoma} />
           </div>
@@ -105,7 +113,7 @@ function GuildPanel({
           <div className="relative flex justify-center text-xs sm:text-sm uppercase">
             <span className="bg-background px-3 text-muted-foreground">
               <h4 className="text-2xl font-semibold tracking-tight text-primary">
-                FEATURES
+                {t("features.title")}
               </h4>
             </span>
           </div>
@@ -128,14 +136,11 @@ function GuildPanel({
 }
 
 function NotJoined({ guild }: { guild: string }) {
+  const t = useTranslations();
   const router = useRouter();
   const pathname = usePathname();
-
   const redirectUrl = `${getAbsoluteUrl()}${pathname}`;
-
-  const inviteUrl = `${
-    config.inviteUrl
-  }&scope=bot&guild_id=${guild}&permissions=8&redirect_uri=${encodeURIComponent(
+  const inviteUrl = `${config.inviteUrl}&scope=bot&guild_id=${guild}&permissions=8&redirect_uri=${encodeURIComponent(
     `${getAbsoluteUrl()}/api/invite/callback`
   )}&response_type=code&state=${encodeURIComponent(redirectUrl)}`;
 
@@ -147,22 +152,17 @@ function NotJoined({ guild }: { guild: string }) {
             <Mailbox width={72} height={72} />
           </div>
           <h1 className="text-center text-2xl font-semibold text-primary">
-            Where is it?
+            {t("guilds.bot_not_in_server")}
           </h1>
           <p className="text-sm text-muted-foreground">
-            The bot can't access the server, let's invite him!
+            {t("guilds.bot_not_in_server_description")}
           </p>
           <div className="flex justify-between gap-3">
             <Button variant="outline" onClick={() => router.back()}>
-              Go Back
+              {t("guilds.go_back")}
             </Button>
-            <Button
-              onClick={() => {
-                // Redirect to the Discord invite URL
-                window.location.href = inviteUrl;
-              }}
-            >
-              Invite Bot
+            <Button onClick={() => (window.location.href = inviteUrl)}>
+              {t("guilds.invite_bot")}
             </Button>
           </div>
         </div>

@@ -1,6 +1,7 @@
 "use client";
 
 import * as React from "react";
+import { useTranslations } from "next-intl";
 import { Area, AreaChart, CartesianGrid, XAxis } from "recharts";
 import { useIsMobile } from "@/hooks/use-mobile";
 import {
@@ -123,36 +124,38 @@ const generateChartData = (users: any) => {
 
 const chartConfig = {
   coin: {
-    label: "Coin",
+    label: "Coin", // Will be translated via t()
     color: "#ff6384", // Vibrant red-pink
   },
   bank: {
-    label: "Bank",
+    label: "Bank", // Will be translated via t()
     color: "#36a2eb", // Bright blue
   },
   slots: {
-    label: "Slots",
+    label: "Slots", // Will be translated via t()
     color: "#ffce56", // Warm yellow
   },
   blackjack: {
-    label: "Blackjack",
+    label: "Blackjack", // Will be translated via t()
     color: "#4bc0c0", // Teal
   },
   coinflip: {
-    label: "Coinflip",
+    label: "Coinflip", // Will be translated via t()
     color: "#9966ff", // Purple
   },
   klaklouk: {
-    label: "Klaklouk",
+    label: "Klaklouk", // Will be translated via t()
     color: "#ff9f40", // Orange
   },
   sponsor: {
-    label: "Sponsor",
+    label: "Sponsor", // Will be translated via t()
     color: "#c9cbcf", // Light gray
   },
 } satisfies ChartConfig;
 
 export function ChartAreaInteractive({ users }: { users: any }) {
+  const g = useTranslations();
+  const t = useTranslations("dashboard");
   const isMobile = useIsMobile();
   const [timeRange, setTimeRange] = React.useState("90d");
 
@@ -177,39 +180,57 @@ export function ChartAreaInteractive({ users }: { users: any }) {
     return date >= startDate;
   });
 
+  // Update chartConfig labels with translations
+  const translatedChartConfig = Object.keys(chartConfig).reduce(
+    (acc, key) => ({
+      ...acc,
+      [key]: {
+        ...chartConfig[key as keyof typeof chartConfig],
+        label: t(`information.${key}`), // Translate labels using dashboard.information
+      },
+    }),
+    {} as ChartConfig
+  );
+
   return (
-    <Card className="@container/card">
+    <Card className="@container/card font-ghibi">
       <CardHeader className="relative">
-        <CardTitle>Total Balance Trends</CardTitle>
+        <CardTitle>{t("title")}</CardTitle> {/* "Dashboard" */}
         <CardDescription>
           {chartData === fallbackChartData ? (
-            "No data available"
+            t("no_data") // Use a generic no_data key if available, or fallback
           ) : (
             <>
               <span className="@[540px]/card:block hidden">
-                Total balance accumulation over time
+                {t("description")}{" "}
+                {/* "Overview of your PEACHY GANG community statistics and analytics." */}
               </span>
-              <span className="@[540px]/card:hidden">Balance Trends</span>
+              <span className="@[540px]/card:hidden">
+                {t("analytics_title")} {/* "Community Analytics" */}
+              </span>
             </>
           )}
         </CardDescription>
         <div className="absolute right-4 top-4 mt-3">
           <Select value={timeRange} onValueChange={setTimeRange}>
-            <SelectTrigger className="w-40" aria-label="Select time range">
-              <SelectValue placeholder="Last 3 months" />
+            <SelectTrigger
+              className="w-40 border-2 shadow-primary"
+              aria-label={g("common.select")} // "Select"
+            >
+              <SelectValue placeholder={g("common.select")} />
             </SelectTrigger>
-            <SelectContent className="rounded-xl">
+            <SelectContent className="rounded-xl border-2">
               <SelectItem value="180d" className="rounded-lg">
-                Last 6 months
+                {t("last_six_months", { defaultMessage: "Last 6 months" })}
               </SelectItem>
               <SelectItem value="90d" className="rounded-lg">
-                Last 3 months
+                {t("last_three_months", { defaultMessage: "Last 3 months" })}
               </SelectItem>
               <SelectItem value="30d" className="rounded-lg">
-                Last 30 days
+                {t("last_thirty_days", { defaultMessage: "Last 30 days" })}
               </SelectItem>
               <SelectItem value="7d" className="rounded-lg">
-                Last 7 days
+                {t("last_seven_days", { defaultMessage: "Last 7 days" })}
               </SelectItem>
             </SelectContent>
           </Select>
@@ -217,17 +238,19 @@ export function ChartAreaInteractive({ users }: { users: any }) {
       </CardHeader>
       <CardContent className="px-2 pt-4 sm:px-6 sm:pt-6">
         {chartData === fallbackChartData ? (
-          <div className="flex h-[250px] items-center justify-center text-muted-foreground">
-            No user data available to display
+          <div className="flex h-[250px] items-center justify-center text-muted-foreground font-ghibi">
+            {t("no_data", {
+              defaultMessage: "No user data available to display",
+            })}
           </div>
         ) : (
           <ChartContainer
-            config={chartConfig}
-            className="aspect-auto h-[250px] w-full"
+            config={translatedChartConfig}
+            className="aspect-auto h-[250px] w-full px-2"
           >
             <AreaChart data={filteredData}>
               <defs>
-                {Object.keys(chartConfig).map((key) => (
+                {Object.keys(translatedChartConfig).map((key) => (
                   <linearGradient
                     key={key}
                     id={`fill${key.charAt(0).toUpperCase() + key.slice(1)}`}
@@ -239,14 +262,16 @@ export function ChartAreaInteractive({ users }: { users: any }) {
                     <stop
                       offset="5%"
                       stopColor={
-                        chartConfig[key as keyof typeof chartConfig].color
+                        translatedChartConfig[key as keyof typeof chartConfig]
+                          .color
                       }
                       stopOpacity={0.8}
                     />
                     <stop
                       offset="95%"
                       stopColor={
-                        chartConfig[key as keyof typeof chartConfig].color
+                        translatedChartConfig[key as keyof typeof chartConfig]
+                          .color
                       }
                       stopOpacity={0.1}
                     />
@@ -283,7 +308,7 @@ export function ChartAreaInteractive({ users }: { users: any }) {
                   />
                 }
               />
-              {Object.keys(chartConfig).map((key) => (
+              {Object.keys(translatedChartConfig).map((key) => (
                 <Area
                   key={key}
                   dataKey={key}
@@ -291,7 +316,9 @@ export function ChartAreaInteractive({ users }: { users: any }) {
                   fill={`url(#fill${
                     key.charAt(0).toUpperCase() + key.slice(1)
                   })`}
-                  stroke={chartConfig[key as keyof typeof chartConfig].color}
+                  stroke={
+                    translatedChartConfig[key as keyof typeof chartConfig].color
+                  }
                   stackId="a"
                   fillOpacity={0.4}
                 />

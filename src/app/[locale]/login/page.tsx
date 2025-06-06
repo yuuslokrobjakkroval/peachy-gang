@@ -1,11 +1,12 @@
 "use client";
-
-import * as React from "react";
 import Image from "next/image";
+import { useTranslations } from "next-intl";
 import { DiscordLoginButton } from "@/components/form/discord-login-button";
 import ThemeChanger from "@/components/theme.switch";
 
 export default function LoginPage() {
+  const t = useTranslations();
+
   return (
     <div className="grid min-h-svh lg:grid-cols-2">
       <div className="flex flex-col gap-4 p-6 md:p-10">
@@ -16,14 +17,18 @@ export default function LoginPage() {
           <ThemeChanger />
         </div>
         <div className="flex flex-1 items-center justify-center">
-          <DiscordLoginButton />
+          <div className="w-full max-w-xs">
+            <div className="flex flex-col gap-6">
+              <DiscordLoginButton />
+            </div>
+          </div>
         </div>
       </div>
       <div className="bg-muted relative hidden lg:block">
         <Image
           className="object-cover"
           src="/images/house.webp"
-          alt="Image"
+          alt="banner"
           fill
         />
       </div>

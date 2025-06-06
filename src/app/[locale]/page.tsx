@@ -225,17 +225,17 @@ export default function Peachy() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
         >
-          <h1 className="text-4xl md:text-5xl font-ghibi-bold text-center text-primary animate-twinkle">
+          <h1 className="text-3xl md:text-4xl font-ghibi-bold text-center text-primary animate-twinkle">
             {t("home.title")}
           </h1>
           <Image
             className="object-cover rounded-lg"
             src="/images/main.png"
-            width={616}
-            height={617}
+            width={512}
+            height={512}
             alt="Peach and Goma"
             priority
-            sizes="(max-width: 768px) 100vw, 616px"
+            sizes="(max-width: 768px) 100vw, 512px"
           />
           <Button
             onClick={() => router.push("/login")}
@@ -278,7 +278,7 @@ export default function Peachy() {
               </div>
             </motion.section>
 
-            <motion.section
+            {/* <motion.section
               className="rounded-lg mb-12 transition-shadow"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -290,7 +290,7 @@ export default function Peachy() {
               <p className="text-muted-foreground mb-6 font-ghibi">
                 {t("about.global_reach_description")}
               </p>
-            </motion.section>
+            </motion.section> */}
 
             <motion.section
               className="rounded-lg mb-12 transition-shadow"

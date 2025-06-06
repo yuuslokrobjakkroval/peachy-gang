@@ -1,7 +1,8 @@
-import React from "react";
+"use client";
+import { useTranslations } from "next-intl";
 import Image from "next/image";
 import { Card } from "@/components/ui/card";
-import { User } from "@/utils/types";
+import type { User } from "@/utils/types";
 import { wallpapers } from "@/assets/inventory/wallpaper";
 
 const Inventory = ({
@@ -11,6 +12,8 @@ const Inventory = ({
   userInfoByDiscord: any;
   userInfo: User;
 }) => {
+  const t = useTranslations();
+
   const userWallpapers: any =
     userInfo?.inventory
       ?.map((inv: any) => {
@@ -23,7 +26,7 @@ const Inventory = ({
     <Card className="w-full p-6 h-full bg-card text-card-foreground border-2 px-4 py-2 shadow-md transition-colors duration-200">
       <div className="w-full">
         <h4 className="text-2xl font-semibold tracking-tight text-primary">
-          Inventory
+          {t("profile.inventory.title")}
         </h4>
       </div>
       {userWallpapers.length > 0 ? (
@@ -37,7 +40,7 @@ const Inventory = ({
               <div className="relative w-full aspect-[16/9] overflow-hidden">
                 <Image
                   className="rounded-t-xl object-cover transition-transform duration-300 group-hover:scale-105"
-                  src={wallpaper.image}
+                  src={wallpaper.image || "/placeholder.svg"}
                   alt={wallpaper.name}
                   fill
                   quality={100}
@@ -62,7 +65,7 @@ const Inventory = ({
       ) : (
         <div className="flex items-center justify-center h-32">
           <p className="text-muted-foreground text-center text-lg">
-            No wallpapers in your inventory yet!
+            {t("profile.inventory.no_wallpapers")}
           </p>
         </div>
       )}
