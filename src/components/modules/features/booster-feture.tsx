@@ -22,6 +22,7 @@ import { Card } from "@/components/ui/card";
 import { FaTerminal, FaWandSparkles } from "react-icons/fa6";
 import UpdateFeaturePanel from "../update-feature";
 import { styles } from "@/styles";
+import { useTranslations } from "next-intl";
 
 const validationSchema = Yup.object({
   isActive: Yup.boolean(),
@@ -37,6 +38,11 @@ export function BoosterMessageFeature({
   feature,
   refetch,
 }: any) {
+  // Use two translation hooks: one for global and one for feature-specific
+  const tCommon = useTranslations("common");
+  const tFeature = useTranslations("features");
+  const t = useTranslations("boosterFeature");
+
   const { userInfoByDiscord } = usePeachy();
   const [open, setOpen] = useState<boolean>(false);
   const [sendMessage, { isLoading: sendMessageLoading }] =
@@ -51,16 +57,22 @@ export function BoosterMessageFeature({
   const handleDisableClick = async () => {
     try {
       await disableFeature({ enabled: false, guild, feature }).unwrap();
-      toast.success(`Disabled ${toCapitalCase(feature)}`, {
-        description: "You have successfully disabled this feature.",
-        duration: 1000,
-        className: "bg-gradient-to-r from-pink-500 to-purple-500 text-white",
-      });
+      toast.success(
+        tCommon("disableSuccess", { feature: toCapitalCase(feature) }),
+        {
+          description: tCommon("disableSuccessDescription"),
+          duration: 1000,
+          className: "bg-gradient-to-r from-pink-500 to-purple-500 text-white",
+        }
+      );
       refetch();
     } catch (error) {
-      toast.error(`Failed to disable ${toCapitalCase(feature)}`, {
-        duration: 1000,
-      });
+      toast.error(
+        tCommon("disableError", { feature: toCapitalCase(feature) }),
+        {
+          duration: 1000,
+        }
+      );
     }
   };
 
@@ -93,7 +105,12 @@ export function BoosterMessageFeature({
         message: featureInfo.image?.message ?? "",
       },
     },
-    validationSchema,
+    validationSchema: Yup.object({
+      isActive: Yup.boolean(),
+      channel: Yup.string().required(tCommon("validation.channelRequired")),
+      isCustomImage: Yup.boolean(),
+      content: Yup.string().required(tCommon("validation.contentRequired")),
+    }),
     onSubmit: async (values) => {
       try {
         const body = {
@@ -102,15 +119,23 @@ export function BoosterMessageFeature({
           ...values,
         };
         await updateFeature(body).unwrap();
-        toast.success(`Updated ${toCapitalCase(feature)}`, {
-          description: "Feature settings saved successfully.",
-          className: "bg-gradient-to-r from-pink-500 to-purple-500 text-white",
-        });
+        toast.success(
+          tCommon("updateSuccess", { feature: toCapitalCase(feature) }),
+          {
+            description: tCommon("updateSuccessDescription"),
+            duration: 2000,
+            className:
+              "bg-gradient-to-r from-pink-500 to-purple-500 text-white",
+          }
+        );
         refetch();
       } catch (error) {
-        toast.error(`Failed to update ${toCapitalCase(feature)}`, {
-          duration: 1000,
-        });
+        toast.error(
+          tCommon("updateError", { feature: toCapitalCase(feature) }),
+          {
+            duration: 1000,
+          }
+        );
       }
     },
   });
@@ -142,18 +167,20 @@ export function BoosterMessageFeature({
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6">
         <div className="flex flex-col">
           <h1 className="text-primary text-3xl md:text-4xl font-bold">
-            {featureConfig.name}
+            {tFeature("booster-message")}
           </h1>
-          <p className="text-muted-foreground">{featureConfig.description}</p>
+          <p className="text-muted-foreground">
+            {tFeature("booster-message_description")}
+          </p>
         </div>
         <Button
           variant="destructive"
-          aria-label={`Disable ${feature}`}
+          aria-label={tCommon("disableButtonLabel", { feature })}
           disabled={disableLoading}
           onClick={handleDisableClick}
           className="w-full sm:w-auto"
         >
-          {disableLoading ? "Disabling..." : "Disable"}
+          {disableLoading ? tCommon("disabling") : tCommon("disable")}
         </Button>
       </div>
 
@@ -165,8 +192,8 @@ export function BoosterMessageFeature({
                 <SwitchForm
                   control={{
                     id: "isActive",
-                    label: "Active",
-                    description: "Enable or Disable this feature",
+                    label: t("switch.activeLabel"),
+                    description: t("switch.activeDescription"),
                   }}
                   checked={formik.values.isActive}
                   onChange={(checked) =>
@@ -177,7 +204,7 @@ export function BoosterMessageFeature({
               <div className="flex items-center justify-end gap-2">
                 <Button
                   className="cursor-pointer bg-primary text-primary-foreground hover:bg-primary/90 rounded-lg"
-                  aria-label="Pick varaible"
+                  aria-label={tCommon("pickVariableLabel")}
                   onClick={(e) => {
                     e.preventDefault();
                     setOpen(true);
@@ -187,7 +214,7 @@ export function BoosterMessageFeature({
                 </Button>
                 <Button
                   className="cursor-pointer bg-primary text-primary-foreground hover:bg-primary/90 rounded-lg"
-                  aria-label="Test message"
+                  aria-label={tCommon("testMessageLabel")}
                   disabled={sendMessageLoading}
                   onClick={async (e) => {
                     e.preventDefault();
@@ -198,11 +225,11 @@ export function BoosterMessageFeature({
                         feature,
                         userId: userInfoByDiscord.id,
                       }).unwrap();
-                      toast.success("Message sent successfully!", {
+                      toast.success(tCommon("sendMessageSuccess"), {
                         duration: 2000,
                       });
                     } catch (error) {
-                      toast.error("Failed to send message.", {
+                      toast.error(tCommon("sendMessageError"), {
                         duration: 2000,
                       });
                     }
@@ -218,9 +245,9 @@ export function BoosterMessageFeature({
             <ChannelSelectForm
               control={{
                 id: "channel",
-                label: "Channel",
+                label: t("channel.label"),
               }}
-              description="Where to send the welcome message"
+              description={t("channel.description")}
               guild={guild}
               value={formik.values.channel}
               onChange={(value) => formik.setFieldValue("channel", value)}
@@ -233,10 +260,10 @@ export function BoosterMessageFeature({
             <TextAreaForm
               control={{
                 id: "content",
-                label: "Message Content",
-                description: "The content of the message",
+                label: t("content.label"),
+                description: t("content.description"),
               }}
-              placeholder="Type in the main content of the message"
+              placeholder={t("content.placeholder")}
               enableEmoji
               value={formik.values.content}
               onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) =>
@@ -249,8 +276,8 @@ export function BoosterMessageFeature({
             <SwitchForm
               control={{
                 id: "isCustomImage",
-                label: "Custom Image",
-                description: "Enable for customize image",
+                label: t("customImage.label"),
+                description: t("customImage.description"),
               }}
               checked={formik.values.isCustomImage}
               onChange={(checked) =>
@@ -271,10 +298,10 @@ export function BoosterMessageFeature({
                 <InputForm
                   control={{
                     id: "image.backgroundImage",
-                    label: "Background Image",
-                    description: "Provide a link to the background image",
+                    label: t("backgroundImage.label"),
+                    description: t("backgroundImage.description"),
                   }}
-                  placeholder="Type in image URL"
+                  placeholder={t("backgroundImage.placeholder")}
                   value={formik.values.image?.backgroundImage || ""}
                   onChange={(e: any) =>
                     formik.setFieldValue(
@@ -295,7 +322,7 @@ export function BoosterMessageFeature({
                 <div className="col-span-12">
                   <Card className="p-4">
                     <p className="text-sm text-muted-foreground">
-                      No background image provided
+                      {t("noBackgroundImage")}
                     </p>
                   </Card>
                 </div>

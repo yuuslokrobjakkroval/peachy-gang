@@ -4,7 +4,6 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import { usePeachy } from "@/contexts/peachy";
 import {
-  useSendMessageFeatureMutation,
   useDisableFeatureMutation,
   useUpdateFeatureMutation,
   useAddAutoResponseMutation,
@@ -14,7 +13,6 @@ import {
 import { toCapitalCase } from "@/utils/common";
 import { motion } from "framer-motion";
 import { SwitchForm } from "@/components/form/switch-form";
-import { ChannelSelectForm } from "@/components/form/channel-select-form";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
 import {
@@ -35,11 +33,12 @@ import {
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Card } from "@/components/ui/card";
-import { FaTerminal, FaWandSparkles } from "react-icons/fa6";
+import { FaTerminal } from "react-icons/fa6";
 import UpdateFeaturePanel from "../update-feature";
 import VariableDialog from "@/components/dialogs/variable";
 import { styles } from "@/styles";
 import { PencilRuler, Trash2 } from "lucide-react";
+import { useTranslations } from "next-intl";
 
 const validationSchema = Yup.object({
   responses: Yup.array().of(
@@ -63,6 +62,11 @@ export function AutoResponseFeature({
   feature,
   refetch,
 }: any) {
+  // Use two translation hooks: one for global and one for feature-specific
+  const tCommon = useTranslations("common");
+  const tFeature = useTranslations("features");
+  const t = useTranslations("autoResponseFeature");
+
   const { userInfoByDiscord } = usePeachy();
   const [dialogOpen, setDialogOpen] = useState(false);
   const [variableDialogOpen, setVariableDialogOpen] = useState(false);
@@ -90,15 +94,21 @@ export function AutoResponseFeature({
     onSubmit: async (values) => {
       try {
         await updateFeature({ guild, feature, ...values }).unwrap();
-        toast.success(`Updated ${toCapitalCase(feature)}`, {
-          description: "Feature settings saved successfully.",
-          duration: 2000,
-        });
+        toast.success(
+          tCommon("updateSuccess", { feature: toCapitalCase(feature) }),
+          {
+            description: tCommon("updateSuccessDescription"),
+            duration: 2000,
+          }
+        );
         refetch();
       } catch (error) {
-        toast.error(`Failed to update ${toCapitalCase(feature)}`, {
-          duration: 1000,
-        });
+        toast.error(
+          tCommon("updateError", { feature: toCapitalCase(feature) }),
+          {
+            duration: 1000,
+          }
+        );
       }
     },
   });
@@ -120,7 +130,7 @@ export function AutoResponseFeature({
             ...values,
           }).unwrap();
           refetch();
-          toast.success("Auto-response updated", { duration: 1500 });
+          toast.success(t("dialog.updateSuccess"), { duration: 1500 });
         } else {
           await addAutoResponse({
             guild,
@@ -130,15 +140,14 @@ export function AutoResponseFeature({
             createdAt: new Date().toISOString(),
           }).unwrap();
           refetch();
-
-          toast.success("Auto-response added", { duration: 1500 });
+          toast.success(t("dialog.addSuccess"), { duration: 1500 });
         }
         setDialogOpen(false);
         setEditingResponse(null);
         dialogFormik.resetForm();
       } catch (error) {
         toast.error(
-          `Failed to ${editingResponse ? "update" : "add"} auto-response`,
+          t("dialog.error", { action: editingResponse ? "update" : "add" }),
           {
             duration: 1000,
           }
@@ -167,26 +176,32 @@ export function AutoResponseFeature({
   const handleDisableClick = async () => {
     try {
       await disableFeature({ enabled: false, guild, feature }).unwrap();
-      toast.success(`Disabled ${toCapitalCase(feature)}`, {
-        description: "You have successfully disabled this feature.",
-        duration: 1000,
-        className: "bg-gradient-to-r from-pink-500 to-purple-500 text-white",
-      });
+      toast.success(
+        tCommon("disableSuccess", { feature: toCapitalCase(feature) }),
+        {
+          description: tCommon("disableSuccessDescription"),
+          duration: 1000,
+          className: "bg-gradient-to-r from-pink-500 to-purple-500 text-white",
+        }
+      );
       refetch();
     } catch (error) {
-      toast.error(`Failed to disable ${toCapitalCase(feature)}`, {
-        duration: 1000,
-      });
+      toast.error(
+        tCommon("disableError", { feature: toCapitalCase(feature) }),
+        {
+          duration: 1000,
+        }
+      );
     }
   };
 
   const handleDelete = async (id: string) => {
     try {
       await deleteAutoResponse({ guild, feature, id }).unwrap();
-      toast.success("Auto-response deleted", { duration: 1500 });
+      toast.success(t("deleteSuccess"), { duration: 1500 });
       refetch();
     } catch (error) {
-      toast.error("Failed to delete auto-response", { duration: 1000 });
+      toast.error(t("deleteError"), { duration: 1000 });
     }
   };
 
@@ -212,18 +227,20 @@ export function AutoResponseFeature({
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6">
         <div className="flex flex-col">
           <h1 className="text-primary text-3xl md:text-4xl font-bold">
-            {featureConfig.name}
+            {tFeature("auto-response")}
           </h1>
-          <p className="text-muted-foreground">{featureConfig.description}</p>
+          <p className="text-muted-foreground">
+            {tFeature("auto-response_description")}
+          </p>
         </div>
         <Button
           variant="destructive"
-          aria-label={`Disable ${feature}`}
+          aria-label={tCommon("disableButtonLabel", { feature })}
           disabled={disableLoading}
           onClick={handleDisableClick}
           className="w-full sm:w-auto"
         >
-          {disableLoading ? "Disabling..." : "Disable"}
+          {disableLoading ? tCommon("disabling") : tCommon("disable")}
         </Button>
       </div>
 
@@ -235,8 +252,8 @@ export function AutoResponseFeature({
                 <SwitchForm
                   control={{
                     id: "isActive",
-                    label: "Active",
-                    description: "Enable or Disable this feature",
+                    label: t("switch.activeLabel"),
+                    description: t("switch.activeDescription"),
                   }}
                   checked={formik.values.isActive}
                   onChange={(checked) =>
@@ -251,25 +268,25 @@ export function AutoResponseFeature({
             <Card className="p-4">
               <div className="flex justify-between items-center mb-4">
                 <h2 className="text-lg font-semibold text-primary">
-                  Auto-Responses
+                  {t("table.title")}
                 </h2>
                 <Button
                   type="button"
                   className="bg-primary text-primary-foreground hover:bg-primary/90"
                   onClick={() => setDialogOpen(true)}
                 >
-                  Add
+                  {t("table.addButton")}
                 </Button>
               </div>
               <Table>
                 <TableHeader>
                   <TableRow>
-                    <TableHead>No</TableHead>
-                    <TableHead>Trigger</TableHead>
-                    <TableHead>Response</TableHead>
-                    <TableHead>Created By</TableHead>
-                    <TableHead>Created At</TableHead>
-                    <TableHead>Action</TableHead>
+                    <TableHead>{t("table.headers.no")}</TableHead>
+                    <TableHead>{t("table.headers.trigger")}</TableHead>
+                    <TableHead>{t("table.headers.response")}</TableHead>
+                    <TableHead>{t("table.headers.createdBy")}</TableHead>
+                    <TableHead>{t("table.headers.createdAt")}</TableHead>
+                    <TableHead>{t("table.headers.action")}</TableHead>
                   </TableRow>
                 </TableHeader>
                 <TableBody>
@@ -314,7 +331,7 @@ export function AutoResponseFeature({
                   ) : (
                     <TableRow>
                       <TableCell colSpan={6} className="text-center">
-                        No auto-responses found
+                        {t("table.noResponses")}
                       </TableCell>
                     </TableRow>
                   )}
@@ -322,7 +339,7 @@ export function AutoResponseFeature({
               </Table>
               <div className="flex justify-between items-center mt-4">
                 <p className="text-sm text-muted-foreground">
-                  Page {currentPage} of {totalPages}
+                  {t("table.pagination", { currentPage, totalPages })}
                 </p>
                 <div className="space-x-2">
                   <Button
@@ -333,7 +350,7 @@ export function AutoResponseFeature({
                     }
                     disabled={currentPage === 1}
                   >
-                    Prev
+                    {t("table.prevButton")}
                   </Button>
                   <Button
                     variant="outline"
@@ -343,7 +360,7 @@ export function AutoResponseFeature({
                     }
                     disabled={currentPage === totalPages}
                   >
-                    Next
+                    {t("table.nextButton")}
                   </Button>
                 </div>
               </div>
@@ -378,7 +395,7 @@ export function AutoResponseFeature({
         <DialogContent className="sm:max-w-[425px] rounded-2xl">
           <DialogHeader>
             <DialogTitle>
-              {editingResponse ? "Edit Auto-Response" : "Add Auto-Response"}
+              {editingResponse ? t("dialog.editTitle") : t("dialog.addTitle")}
             </DialogTitle>
             <DialogClose />
           </DialogHeader>
@@ -386,7 +403,7 @@ export function AutoResponseFeature({
             <div>
               <Input
                 id="trigger"
-                placeholder="Enter trigger text"
+                placeholder={t("dialog.triggerPlaceholder")}
                 value={dialogFormik.values.trigger}
                 onChange={dialogFormik.handleChange}
                 className={dialogFormik.errors.trigger ? "border-red-500" : ""}
@@ -400,7 +417,7 @@ export function AutoResponseFeature({
             <div>
               <Textarea
                 id="response"
-                placeholder="Enter response text"
+                placeholder={t("dialog.responsePlaceholder")}
                 value={dialogFormik.values.response}
                 onChange={dialogFormik.handleChange}
                 className={dialogFormik.errors.response ? "border-red-500" : ""}
@@ -424,7 +441,9 @@ export function AutoResponseFeature({
                 className="bg-primary text-primary-foreground hover:bg-primary/90"
                 disabled={addLoading || updateResponseLoading}
               >
-                {editingResponse ? "Update" : "Add"}
+                {editingResponse
+                  ? t("dialog.updateButton")
+                  : t("dialog.addButton")}
               </Button>
             </div>
           </form>
@@ -437,12 +456,12 @@ export function AutoResponseFeature({
       >
         <DialogContent className="sm:max-w-[400px] rounded-2xl">
           <DialogHeader>
-            <DialogTitle>Confirm Deletion</DialogTitle>
+            <DialogTitle>{t("deleteDialog.title")}</DialogTitle>
           </DialogHeader>
-          <p>Are you sure you want to delete this auto-response?</p>
+          <p>{t("deleteDialog.message")}</p>
           <div className="flex justify-end gap-2 mt-4">
             <Button variant="outline" onClick={() => setConfirmDeleteId(null)}>
-              Cancel
+              {t("deleteDialog.cancelButton")}
             </Button>
             <Button
               variant="destructive"
@@ -451,7 +470,7 @@ export function AutoResponseFeature({
                 setConfirmDeleteId(null);
               }}
             >
-              Delete
+              {t("deleteDialog.deleteButton")}
             </Button>
           </div>
         </DialogContent>

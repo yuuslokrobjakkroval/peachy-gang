@@ -9,9 +9,12 @@ import { InputForm } from "@/components/form/input-form";
 import { Card } from "@/components/ui/card";
 import { ColorPickerForm } from "@/components/form/color-picker-form";
 import { cn } from "@/lib/utils";
-import { avatarUrl, decorationUrl } from "@/utils/common";
+import { avatarUrl } from "@/utils/common";
+import { useTranslations } from "next-intl";
 
 export function CustomImagePage({ userInfoByDiscord, formik }: any) {
+  const t = useTranslations("common"); // Use global "common" namespace
+
   const safeLayoutOptions =
     Array.isArray(layoutOptions) && layoutOptions.length > 0
       ? layoutOptions
@@ -23,14 +26,14 @@ export function CustomImagePage({ userInfoByDiscord, formik }: any) {
         <SelectForm
           control={{
             id: "image.layout",
-            label: "Layout",
-            description: "Choose the layout for the custom image",
+            label: t("customImage.layout.label"),
+            description: t("customImage.layout.description"),
             error:
               formik.touched.image?.layout && formik.errors.image?.layout
                 ? formik.errors.image.layout
                 : undefined,
           }}
-          placeholder="Select a layout"
+          placeholder={t("customImage.layout.placeholder")}
           options={safeLayoutOptions}
           value={formik.values.image?.layout || ""}
           onChange={(value) => formik.setFieldValue("image.layout", value)}
@@ -41,8 +44,8 @@ export function CustomImagePage({ userInfoByDiscord, formik }: any) {
         <RadioGroupForm
           control={{
             id: "image.avatarShape",
-            label: "Avatar Shape",
-            description: "Choose the shape of the avatar in the custom image",
+            label: t("customImage.avatarShape.label"),
+            description: t("customImage.avatarShape.description"),
             error:
               formik.touched.image?.avatarShape &&
               formik.errors.image?.avatarShape
@@ -60,8 +63,8 @@ export function CustomImagePage({ userInfoByDiscord, formik }: any) {
         <ColorPickerForm
           control={{
             id: "image.circleColor",
-            label: "Circle Color",
-            description: "Choose for the circle",
+            label: t("customImage.circleColor.label"),
+            description: t("customImage.circleColor.description"),
             error:
               formik.touched.image?.circleColor &&
               formik.errors.image?.circleColor
@@ -77,8 +80,8 @@ export function CustomImagePage({ userInfoByDiscord, formik }: any) {
         <ColorPickerForm
           control={{
             id: "image.featureColor",
-            label: "Welcome Color",
-            description: "Choose for the feature text",
+            label: t("customImage.featureColor.label"),
+            description: t("customImage.featureColor.description"),
             error:
               formik.touched.image?.featureColor &&
               formik.errors.image?.featureColor
@@ -96,8 +99,8 @@ export function CustomImagePage({ userInfoByDiscord, formik }: any) {
         <ColorPickerForm
           control={{
             id: "image.usernameColor",
-            label: "Username Color",
-            description: "Choose for the username text",
+            label: t("customImage.usernameColor.label"),
+            description: t("customImage.usernameColor.description"),
             error:
               formik.touched.image?.usernameColor &&
               formik.errors.image?.usernameColor
@@ -115,8 +118,8 @@ export function CustomImagePage({ userInfoByDiscord, formik }: any) {
         <ColorPickerForm
           control={{
             id: "image.messageColor",
-            label: "Message Color",
-            description: "Choose for the message text",
+            label: t("customImage.messageColor.label"),
+            description: t("customImage.messageColor.description"),
             error:
               formik.touched.image?.messageColor &&
               formik.errors.image?.messageColor
@@ -134,10 +137,10 @@ export function CustomImagePage({ userInfoByDiscord, formik }: any) {
         <InputForm
           control={{
             id: "image.backgroundImage",
-            label: "Background Image",
-            description: "Provide a link to the background image",
+            label: t("customImage.backgroundImage.label"),
+            description: t("customImage.backgroundImage.description"),
           }}
-          placeholder="Type in image URL"
+          placeholder={t("customImage.backgroundImage.placeholder")}
           value={formik.values.image?.backgroundImage || ""}
           onChange={(value) =>
             formik.setFieldValue("image.backgroundImage", value)
@@ -149,10 +152,10 @@ export function CustomImagePage({ userInfoByDiscord, formik }: any) {
         <InputForm
           control={{
             id: "image.message",
-            label: "Message",
-            description: "Provide message to the background image",
+            label: t("customImage.message.label"),
+            description: t("customImage.message.description"),
           }}
-          placeholder="Type in message"
+          placeholder={t("customImage.message.placeholder")}
           value={formik.values.image?.message || ""}
           onChange={(value) => formik.setFieldValue("image.message", value)}
         />
@@ -273,7 +276,7 @@ export function CustomImagePage({ userInfoByDiscord, formik }: any) {
         <div className="col-span-12">
           <Card className="p-4">
             <p className="text-sm text-muted-foreground">
-              No background image provided
+              {t("customImage.noBackgroundImage")}
             </p>
           </Card>
         </div>

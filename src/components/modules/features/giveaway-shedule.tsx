@@ -1,4 +1,5 @@
 "use client";
+
 import React, { useState } from "react";
 import { motion } from "framer-motion";
 import { toCapitalCase } from "@/utils/common";
@@ -28,6 +29,7 @@ import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
 import { CreateScheduleDialog } from "@/components/layouts/dialogs/create-schedule";
 import { FaEdit, FaTrash } from "react-icons/fa";
+import { useTranslations } from "next-intl";
 
 // Define TypeScript interfaces
 interface Schedule {
@@ -50,6 +52,11 @@ export function GiveawayScheduleFeature({
   feature,
   refetch,
 }: any) {
+  // Use two translation hooks: one for global and one for feature-specific
+  const tCommon = useTranslations("common");
+  const tFeature = useTranslations("features");
+  const t = useTranslations("giveawayScheduleFeature");
+
   const [disableFeature, { isLoading: disableLoading }] =
     useDisableFeatureMutation();
   const [deleteSchedule, { isLoading: deleteLoading }] =
@@ -65,16 +72,22 @@ export function GiveawayScheduleFeature({
   const handleDisableClick = async () => {
     try {
       await disableFeature({ enabled: false, guild, feature }).unwrap();
-      toast.success(`Disabled ${toCapitalCase(feature)}`, {
-        description: "You have successfully disabled this feature.",
-        duration: 1000,
-        className: "bg-gradient-to-r from-pink-500 to-purple-500 text-white",
-      });
+      toast.success(
+        tCommon("disableSuccess", { feature: toCapitalCase(feature) }),
+        {
+          description: tCommon("disableSuccessDescription"),
+          duration: 1000,
+          className: "bg-gradient-to-r from-pink-500 to-purple-500 text-white",
+        }
+      );
       refetch();
     } catch (error) {
-      toast.error(`Failed to disable ${toCapitalCase(feature)}`, {
-        duration: 1000,
-      });
+      toast.error(
+        tCommon("disableError", { feature: toCapitalCase(feature) }),
+        {
+          duration: 1000,
+        }
+      );
     }
   };
 
@@ -100,14 +113,17 @@ export function GiveawayScheduleFeature({
         scheduleId: deleteId,
       };
       await deleteSchedule(body).unwrap();
-      toast.success(`Deleted ${toCapitalCase(deleteScheduleType)} Schedule`, {
-        description: "Schedule deleted successfully.",
-        className: "bg-gradient-to-r from-pink-500 to-purple-500 text-white",
-      });
+      toast.success(
+        t("deleteSuccess", { type: toCapitalCase(deleteScheduleType) }),
+        {
+          description: t("deleteSuccessDescription"),
+          className: "bg-gradient-to-r from-pink-500 to-purple-500 text-white",
+        }
+      );
       refetch();
     } catch (error) {
       toast.error(
-        `Failed to delete ${toCapitalCase(deleteScheduleType)} schedule`,
+        t("deleteError", { type: toCapitalCase(deleteScheduleType) }),
         {
           duration: 1000,
         }
@@ -128,9 +144,11 @@ export function GiveawayScheduleFeature({
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6">
         <div className="flex flex-col">
           <h1 className="text-primary text-3xl md:text-4xl font-bold">
-            {featureConfig.name}
+            {tFeature("giveaway-schedule")}
           </h1>
-          <p className="text-muted-foreground">{featureConfig.description}</p>
+          <p className="text-muted-foreground">
+            {tFeature("giveaway-schedule_description")}
+          </p>
         </div>
         <div className="flex items-center gap-2">
           <Button
@@ -139,17 +157,17 @@ export function GiveawayScheduleFeature({
               setEditingSchedule(undefined);
               setDialogOpen(true);
             }}
-            aria-label="Add new schedule"
+            aria-label={t("addButtonLabel")}
           >
-            Add Schedule
+            {t("addButton")}
           </Button>
           <Button
             variant="destructive"
-            aria-label={`Disable ${feature}`}
+            aria-label={tCommon("disableButtonLabel", { feature })}
             disabled={disableLoading}
             onClick={handleDisableClick}
           >
-            {disableLoading ? "Disabling..." : "Disable"}
+            {disableLoading ? tCommon("disabling") : tCommon("disable")}
           </Button>
         </div>
       </div>
@@ -171,18 +189,19 @@ export function GiveawayScheduleFeature({
       <AlertDialog open={deleteDialogOpen} onOpenChange={setDeleteDialogOpen}>
         <AlertDialogContent>
           <AlertDialogHeader>
-            <AlertDialogTitle>Confirmation</AlertDialogTitle>
+            <AlertDialogTitle>{t("deleteDialog.title")}</AlertDialogTitle>
             <AlertDialogDescription>
-              are you sure you want to delete the{" "}
-              {deleteScheduleType.toLowerCase()} schedule?
+              {t("deleteDialog.description", {
+                type: deleteScheduleType.toLowerCase(),
+              })}
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>
             <AlertDialogCancel onClick={() => setDeleteDialogOpen(false)}>
-              Cancel
+              {t("deleteDialog.cancel")}
             </AlertDialogCancel>
             <AlertDialogAction onClick={confirmDelete}>
-              Delete
+              {t("deleteDialog.delete")}
             </AlertDialogAction>
           </AlertDialogFooter>
         </AlertDialogContent>
@@ -191,14 +210,14 @@ export function GiveawayScheduleFeature({
       <Table>
         <TableHeader>
           <TableRow>
-            <TableHead>Channel</TableHead>
-            <TableHead>Schedule Type</TableHead>
-            <TableHead>Time</TableHead>
-            <TableHead>Day/Date</TableHead>
-            <TableHead>Winners</TableHead>
-            <TableHead>Prize</TableHead>
-            <TableHead>Active</TableHead>
-            <TableHead>Actions</TableHead>
+            <TableHead>{t("table.headers.channel")}</TableHead>
+            <TableHead>{t("table.headers.scheduleType")}</TableHead>
+            <TableHead>{t("table.headers.time")}</TableHead>
+            <TableHead>{t("table.headers.dayDate")}</TableHead>
+            <TableHead>{t("table.headers.winners")}</TableHead>
+            <TableHead>{t("table.headers.prize")}</TableHead>
+            <TableHead>{t("table.headers.active")}</TableHead>
+            <TableHead>{t("table.headers.actions")}</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
@@ -223,7 +242,9 @@ export function GiveawayScheduleFeature({
                     variant="ghost"
                     size="sm"
                     onClick={() => handleEditClick(schedule)}
-                    aria-label={`Edit schedule ${schedule._id || index}`}
+                    aria-label={t("table.editLabel", {
+                      id: schedule._id || index,
+                    })}
                   >
                     <FaEdit />
                   </Button>
@@ -231,7 +252,9 @@ export function GiveawayScheduleFeature({
                     variant="ghost"
                     size="sm"
                     onClick={() => handleDeleteClick(schedule)}
-                    aria-label={`Delete schedule ${schedule._id || index}`}
+                    aria-label={t("table.deleteLabel", {
+                      id: schedule._id || index,
+                    })}
                     disabled={deleteLoading}
                   >
                     <FaTrash />
@@ -242,7 +265,7 @@ export function GiveawayScheduleFeature({
           ) : (
             <TableRow>
               <TableCell colSpan={8} className="text-center">
-                No schedules found.
+                {t("table.noSchedules")}
               </TableCell>
             </TableRow>
           )}

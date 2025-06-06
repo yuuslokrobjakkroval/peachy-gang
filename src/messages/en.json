@@ -4,51 +4,7 @@
     "khmer": "Khmer",
     "china": "China"
   },
-  "common": {
-    "loading": "Loading...",
-    "error": "Error",
-    "success": "Success",
-    "cancel": "Cancel",
-    "confirm": "Confirm",
-    "save": "Save",
-    "edit": "Edit",
-    "delete": "Delete",
-    "back": "Back",
-    "next": "Next",
-    "previous": "Previous",
-    "search": "Search",
-    "filter": "Filter",
-    "sort": "Sort",
-    "refresh": "Refresh",
-    "close": "Close",
-    "open": "Open",
-    "submit": "Submit",
-    "reset": "Reset",
-    "clear": "Clear",
-    "select": "Select",
-    "upload": "Upload",
-    "download": "Download",
-    "copy": "Copy",
-    "paste": "Paste",
-    "cut": "Cut",
-    "undo": "Undo",
-    "redo": "Redo",
-    "yes": "Yes",
-    "no": "No",
-    "ok": "OK",
-    "and": "and",
-    "or": "or",
-    "not": "not",
-    "all": "All",
-    "none": "None",
-    "other": "Other",
-    "more": "More",
-    "less": "Less",
-    "view": "View",
-    "hide": "Hide",
-    "show": "Show",
-    "not_set": "Not Set"
-  },
+
   "navigation": {
     "home": "Home",
     "dashboard": "Dashboard",
@@ -202,6 +158,18 @@
     "configure": "Configure",
     "enabled": "Enabled",
     "disabled": "Disabled",
+    "enableFeatureSuccess": "Enabled {featureName}",
+    "enableFeatureSuccessDescription": "You have successfully enabled this feature. Configure it now?",
+    "undoEnableSuccess": "Disabled {featureName}",
+    "undoEnableSuccessDescription": "You have successfully undone the enable action.",
+    "undoDisableError": "Failed to disable {featureName}",
+    "enableFeatureError": "Failed to enable {featureName}",
+    "undoDisableSuccess": "Enabled {featureName}",
+    "undoDisableSuccessDescription": "You have successfully undone the disable action.",
+    "undoEnableError": "Failed to enable {featureName}",
+    "enableButtonLabel": "Enable {featureName}",
+    "configureButtonLabel": "Configure {featureName}",
+    "configButton": "Config",
     "feature_disabled": "Feature is Disabled",
     "feature_disabled_description": "This feature is currently disabled. Enable it to configure settings.",
     "enable_feature": "Enable Feature",
@@ -223,7 +191,207 @@
     "goodbye-message": "Goodbye Message",
     "goodbye-message_description": "Send message when user leave the server"
   },
-
+  "welcomeFeature": {
+    "switch": {
+      "activeLabel": "Active",
+      "activeDescription": "Enable or Disable this feature"
+    },
+    "channel": {
+      "label": "Channel",
+      "description": "Where to send the welcome message"
+    },
+    "content": {
+      "label": "Message Content",
+      "description": "The content of the message",
+      "placeholder": "Type in the main content of the message"
+    },
+    "customImage": {
+      "label": "Custom Image",
+      "description": "Enable for customize image"
+    },
+    "backgroundImage": {
+      "label": "Background Image",
+      "description": "Provide a link to the background image",
+      "placeholder": "Type in image URL"
+    },
+    "noBackgroundImage": "No background image provided"
+  },
+  "autoResponseFeature": {
+    "switch": {
+      "activeLabel": "Active",
+      "activeDescription": "Enable or Disable this feature"
+    },
+    "table": {
+      "title": "Auto-Responses",
+      "addButton": "Add",
+      "headers": {
+        "no": "No",
+        "trigger": "Trigger",
+        "response": "Response",
+        "createdBy": "Created By",
+        "createdAt": "Created At",
+        "action": "Action"
+      },
+      "noResponses": "No auto-responses found",
+      "pagination": "Page {currentPage} of {totalPages}",
+      "prevButton": "Prev",
+      "nextButton": "Next"
+    },
+    "dialog": {
+      "addTitle": "Add Auto-Response",
+      "editTitle": "Edit Auto-Response",
+      "triggerPlaceholder": "Enter trigger text",
+      "responsePlaceholder": "Enter response text",
+      "addButton": "Add",
+      "updateButton": "Update",
+      "addSuccess": "Auto-response added",
+      "updateSuccess": "Auto-response updated",
+      "error": "Failed to {action} auto-response"
+    },
+    "deleteDialog": {
+      "title": "Confirm Deletion",
+      "message": "Are you sure you want to delete this auto-response?",
+      "cancelButton": "Cancel",
+      "deleteButton": "Delete"
+    },
+    "deleteSuccess": "Auto-response deleted",
+    "deleteError": "Failed to delete auto-response"
+  },
+  "boosterFeature": {
+    "switch": {
+      "activeLabel": "Active",
+      "activeDescription": "Enable or Disable this feature"
+    },
+    "channel": {
+      "label": "Channel",
+      "description": "Where to send the booster message"
+    },
+    "content": {
+      "label": "Message Content",
+      "description": "The content of the message",
+      "placeholder": "Type in the main content of the message"
+    },
+    "customImage": {
+      "label": "Custom Image",
+      "description": "Enable for customize image"
+    },
+    "backgroundImage": {
+      "label": "Background Image",
+      "description": "Provide a link to the background image",
+      "placeholder": "Type in image URL"
+    },
+    "noBackgroundImage": "No background image provided"
+  },
+  "inviteTrackerFeature": {
+    "switch": {
+      "activeLabel": "Active",
+      "activeDescription": "Enable or Disable this feature"
+    },
+    "channel": {
+      "label": "Channel",
+      "description": "Where to send the invite tracker message"
+    },
+    "content": {
+      "label": "Message Content",
+      "description": "The content of the message",
+      "placeholder": "Type in the main content of the message"
+    },
+    "customImage": {
+      "label": "Custom Image",
+      "description": "Enable for customize image"
+    },
+    "backgroundImage": {
+      "label": "Background Image",
+      "description": "Provide a link to the background image",
+      "placeholder": "Type in image URL"
+    },
+    "noBackgroundImage": "No background image provided"
+  },
+  "joinRoleFeature": {
+    "switch": {
+      "activeLabel": "Active",
+      "activeDescription": "Enable or Disable this feature"
+    },
+    "userRoles": {
+      "label": "User Roles",
+      "description": "Select roles to assign to users"
+    },
+    "botRoles": {
+      "label": "Bot Roles",
+      "description": "Select roles to assign to bots"
+    }
+  },
+  "levelingFeature": {
+    "switch": {
+      "activeLabel": "Active",
+      "activeDescription": "Enable or Disable this feature"
+    },
+    "channel": {
+      "label": "Channel",
+      "description": "Where to send the leveling up message"
+    },
+    "content": {
+      "label": "Message Content",
+      "description": "The content of the message",
+      "placeholder": "Type in the leveling up of the message"
+    },
+    "updateSuccess": "Updated Leveling",
+    "updateSuccessDescription": "Leveling settings saved successfully.",
+    "updateError": "Failed to update leveling"
+  },
+  "giveawayScheduleFeature": {
+    "addButton": "Add Schedule",
+    "addButtonLabel": "Add new schedule",
+    "table": {
+      "headers": {
+        "channel": "Channel",
+        "scheduleType": "Schedule Type",
+        "time": "Time",
+        "dayDate": "Day/Date",
+        "winners": "Winners",
+        "prize": "Prize",
+        "active": "Active",
+        "actions": "Actions"
+      },
+      "noSchedules": "No schedules found",
+      "editLabel": "Edit schedule {id}",
+      "deleteLabel": "Delete schedule {id}"
+    },
+    "deleteDialog": {
+      "title": "Confirmation",
+      "description": "Are you sure you want to delete the {type} schedule?",
+      "cancel": "Cancel",
+      "delete": "Delete"
+    },
+    "deleteSuccess": "Deleted {type} Schedule",
+    "deleteSuccessDescription": "Schedule deleted successfully.",
+    "deleteError": "Failed to delete {type} schedule"
+  },
+  "goodByeMessageFeature": {
+    "switch": {
+      "activeLabel": "Active",
+      "activeDescription": "Enable or Disable this feature"
+    },
+    "channel": {
+      "label": "Channel",
+      "description": "Where to send the goodbye message"
+    },
+    "content": {
+      "label": "Message Content",
+      "description": "The content of the message",
+      "placeholder": "Type in the main content of the message"
+    },
+    "customImage": {
+      "label": "Custom Image",
+      "description": "Enable for customize image"
+    },
+    "backgroundImage": {
+      "label": "Background Image",
+      "description": "Provide a link to the background image",
+      "placeholder": "Type in image URL"
+    },
+    "noBackgroundImage": "No background image provided"
+  },
   "games": {
     "title": "Games",
     "description": "Play fun games and earn rewards",
@@ -360,5 +528,107 @@
     "not_found": "Page not found",
     "unauthorized": "Unauthorized access",
     "forbidden": "Access forbidden"
+  },
+  "common": {
+    "loading": "Loading...",
+    "error": "Error",
+    "success": "Success",
+    "cancel": "Cancel",
+    "confirm": "Confirm",
+    "save": "Save",
+    "edit": "Edit",
+    "delete": "Delete",
+    "back": "Back",
+    "next": "Next",
+    "previous": "Previous",
+    "search": "Search",
+    "filter": "Filter",
+    "sort": "Sort",
+    "refresh": "Refresh",
+    "close": "Close",
+    "open": "Open",
+    "submit": "Submit",
+    "reset": "Reset",
+    "clear": "Clear",
+    "select": "Select",
+    "upload": "Upload",
+    "download": "Download",
+    "copy": "Copy",
+    "paste": "Paste",
+    "cut": "Cut",
+    "undo": "Undo",
+    "redo": "Redo",
+    "yes": "Yes",
+    "no": "No",
+    "ok": "OK",
+    "and": "and",
+    "or": "or",
+    "not": "not",
+    "all": "All",
+    "none": "None",
+    "other": "Other",
+    "more": "More",
+    "less": "Less",
+    "view": "View",
+    "hide": "Hide",
+    "show": "Show",
+    "not_set": "Not Set",
+    "disableSuccess": "Disabled {feature}",
+    "disableSuccessDescription": "You have successfully disabled this feature.",
+    "disableError": "Failed to disable {feature}",
+    "updateSuccess": "Updated {feature}",
+    "updateSuccessDescription": "Feature settings saved successfully.",
+    "updateError": "Failed to update {feature}",
+    "disableButtonLabel": "Disable {feature}",
+    "disabling": "Disabling...",
+    "disable": "Disable",
+    "pickVariableLabel": "Pick variable",
+    "testMessageLabel": "Test message",
+    "sendMessageSuccess": "Message sent successfully!",
+    "sendMessageError": "Failed to send message.",
+    "validation": {
+      "channelRequired": "Channel is required",
+      "contentRequired": "Content is required",
+      "userRolesRequired": "User Role is required",
+      "botRolesRequired": "Bot Role is required"
+    },
+    "customImage": {
+      "layout": {
+        "label": "Layout",
+        "description": "Choose the layout for the custom image",
+        "placeholder": "Select a layout"
+      },
+      "avatarShape": {
+        "label": "Avatar Shape",
+        "description": "Choose the shape of the avatar in the custom image"
+      },
+      "circleColor": {
+        "label": "Circle Color",
+        "description": "Choose for the circle"
+      },
+      "featureColor": {
+        "label": "Welcome Color",
+        "description": "Choose for the feature text"
+      },
+      "usernameColor": {
+        "label": "Username Color",
+        "description": "Choose for the username text"
+      },
+      "messageColor": {
+        "label": "Message Color",
+        "description": "Choose for the message text"
+      },
+      "backgroundImage": {
+        "label": "Background Image",
+        "description": "Provide a link to the background image",
+        "placeholder": "Type in image URL"
+      },
+      "message": {
+        "label": "Message",
+        "description": "Provide message to the background image",
+        "placeholder": "Type in message"
+      },
+      "noBackgroundImage": "No background image provided"
+    }
   }
 }

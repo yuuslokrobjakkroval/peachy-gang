@@ -14,6 +14,7 @@ import { MultiRoleSelectForm } from "@/components/form/multi-role-select-form";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
 import UpdateFeaturePanel from "../update-feature";
+import { useTranslations } from "next-intl";
 
 const validationSchema = Yup.object({
   isActive: Yup.boolean(),
@@ -32,6 +33,11 @@ export function JoinRoleFeature({
   feature,
   refetch,
 }: any) {
+  // Use two translation hooks: one for global and one for feature-specific
+  const tCommon = useTranslations("common");
+  const tFeature = useTranslations("features");
+  const t = useTranslations("joinRoleFeature");
+
   const [disableFeature, { isLoading: disableLoading }] =
     useDisableFeatureMutation();
   const [
@@ -42,16 +48,22 @@ export function JoinRoleFeature({
   const handleDisableClick = async () => {
     try {
       await disableFeature({ enabled: false, guild, feature }).unwrap();
-      toast.success(`Disabled ${toCapitalCase(feature)}`, {
-        description: "You have successfully disabled this feature.",
-        duration: 1000,
-        className: "bg-gradient-to-r from-pink-500 to-purple-500 text-white",
-      });
+      toast.success(
+        tCommon("disableSuccess", { feature: toCapitalCase(feature) }),
+        {
+          description: tCommon("disableSuccessDescription"),
+          duration: 1000,
+          className: "bg-gradient-to-r from-pink-500 to-purple-500 text-white",
+        }
+      );
       refetch();
     } catch (error) {
-      toast.error(`Failed to disable ${toCapitalCase(feature)}`, {
-        duration: 1000,
-      });
+      toast.error(
+        tCommon("disableError", { feature: toCapitalCase(feature) }),
+        {
+          duration: 1000,
+        }
+      );
     }
   };
 
@@ -61,7 +73,15 @@ export function JoinRoleFeature({
       userRoles: featureInfo?.userRoles ?? [],
       botRoles: featureInfo?.botRoles ?? [],
     },
-    validationSchema,
+    validationSchema: Yup.object({
+      isActive: Yup.boolean(),
+      userRoles: Yup.array()
+        .of(Yup.string())
+        .min(1, tCommon("validation.userRolesRequired")),
+      botRoles: Yup.array()
+        .of(Yup.string())
+        .min(1, tCommon("validation.botRolesRequired")),
+    }),
     onSubmit: async (values) => {
       try {
         const body = {
@@ -70,15 +90,21 @@ export function JoinRoleFeature({
           ...values,
         };
         await updateFeature(body).unwrap();
-        toast.success(`Updated ${toCapitalCase(feature)}`, {
-          description: "Feature settings saved successfully.",
-          duration: 2000,
-        });
+        toast.success(
+          tCommon("updateSuccess", { feature: toCapitalCase(feature) }),
+          {
+            description: tCommon("updateSuccessDescription"),
+            duration: 2000,
+          }
+        );
         refetch();
       } catch (error) {
-        toast.error(`Failed to update ${toCapitalCase(feature)}`, {
-          duration: 1000,
-        });
+        toast.error(
+          tCommon("updateError", { feature: toCapitalCase(feature) }),
+          {
+            duration: 1000,
+          }
+        );
       }
     },
   });
@@ -99,10 +125,6 @@ export function JoinRoleFeature({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [featureInfo]);
 
-  // Debug logs to verify state updates
-  console.log("User Roles:", formik.values.userRoles);
-  console.log("Bot Roles:", formik.values.botRoles);
-
   return (
     <motion.div
       className="w-full container mx-auto xl:px-0"
@@ -113,18 +135,20 @@ export function JoinRoleFeature({
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6">
         <div className="flex flex-col">
           <h1 className="text-primary text-3xl md:text-4xl font-bold">
-            {featureConfig.name}
+            {tFeature("join-roles")}
           </h1>
-          <p className="text-muted-foreground">{featureConfig.description}</p>
+          <p className="text-muted-foreground">
+            {tFeature("join-roles_description")}
+          </p>
         </div>
         <Button
           variant="destructive"
-          aria-label={`Disable ${feature}`}
+          aria-label={tCommon("disableButtonLabel", { feature })}
           disabled={disableLoading}
           onClick={handleDisableClick}
           className="w-full sm:w-auto"
         >
-          {disableLoading ? "Disabling..." : "Disable"}
+          {disableLoading ? tCommon("disabling") : tCommon("disable")}
         </Button>
       </div>
 
@@ -134,8 +158,8 @@ export function JoinRoleFeature({
             <SwitchForm
               control={{
                 id: "isActive",
-                label: "Active",
-                description: "Enable or Disable this feature",
+                label: t("switch.activeLabel"),
+                description: t("switch.activeDescription"),
               }}
               checked={formik.values.isActive}
               onChange={(checked) => formik.setFieldValue("isActive", checked)}
@@ -147,7 +171,7 @@ export function JoinRoleFeature({
               className="w-full"
               control={{
                 id: "userRoles",
-                label: "User Roles",
+                label: t("userRoles.label"),
                 error:
                   formik.touched.userRoles && formik.errors.userRoles
                     ? String(formik.errors.userRoles)
@@ -156,7 +180,7 @@ export function JoinRoleFeature({
               guild={guild}
               value={formik.values.userRoles}
               onChange={(values) => formik.setFieldValue("userRoles", values)}
-              description="Select roles to assign to users"
+              description={t("userRoles.description")}
             />
           </div>
 
@@ -165,7 +189,7 @@ export function JoinRoleFeature({
               className="w-full"
               control={{
                 id: "botRoles",
-                label: "Bot Roles",
+                label: t("botRoles.label"),
                 error:
                   formik.touched.botRoles && formik.errors.botRoles
                     ? String(formik.errors.botRoles)
@@ -174,7 +198,7 @@ export function JoinRoleFeature({
               guild={guild}
               value={formik.values.botRoles}
               onChange={(values) => formik.setFieldValue("botRoles", values)}
-              description="Select roles to assign to bots"
+              description={t("botRoles.description")}
             />
           </div>
 

@@ -4,51 +4,7 @@
     "khmer": "ភាសាខ្មែរ",
     "china": "ភាសាចិន"
   },
-  "common": {
-    "loading": "កំពុងផ្ទុក...",
-    "error": "កំហុស",
-    "success": "ជោគជ័យ",
-    "cancel": "បោះបង់",
-    "confirm": "បញ្ជាក់",
-    "save": "រក្សាទុក",
-    "edit": "កែសម្រួល",
-    "delete": "លុប",
-    "back": "ត្រឡប់",
-    "next": "បន្ទាប់",
-    "previous": "មុន",
-    "search": "ស្វែងរក",
-    "filter": "តម្រង",
-    "sort": "តម្រៀប",
-    "refresh": "ធ្វើឱ្យស្រស់",
-    "close": "បិទ",
-    "open": "បើក",
-    "submit": "ដាក់ស្នើ",
-    "reset": "កំណត់ឡើងវិញ",
-    "clear": "សម្អាត",
-    "select": "ជ្រើសរើស",
-    "upload": "បង្ហោះ",
-    "download": "ទាញយក",
-    "copy": "ចម្លង",
-    "paste": "បិទភ្ជាប់",
-    "cut": "កាត់",
-    "undo": "មិនធ្វើវិញ",
-    "redo": "ធ្វើឡើងវិញ",
-    "yes": "បាទ/ចាស",
-    "no": "ទេ",
-    "ok": "យល់ព្រម",
-    "and": "និង",
-    "or": "ឬ",
-    "not": "មិនមែន",
-    "all": "ទាំងអស់",
-    "none": "គ្មាន",
-    "other": "ផ្សេងទៀត",
-    "more": "ច្រើនទៀត",
-    "less": "តិចជាង",
-    "view": "មើល",
-    "hide": "លាក់",
-    "show": "បង្ហាញ",
-    "not_set": "មិនបានកំណត់"
-  },
+
   "navigation": {
     "home": "ទំព័រដើម",
     "dashboard": "ផ្ទាំងគ្រប់គ្រង",
@@ -197,6 +153,18 @@
   "features": {
     "title": "មុខងារ",
     "description": "គ្រប់គ្រងមុខងារ និងការកំណត់សហគមន៍របស់អ្នក",
+    "enableFeatureSuccess": "បានបើក {featureName}",
+    "enableFeatureSuccessDescription": "អ្នកបានបើកមុខងារនេះដោយជោគជ័យ។ កំណត់វាឥឡូវនេះ?",
+    "undoEnableSuccess": "បានបិទ {featureName}",
+    "undoEnableSuccessDescription": "អ្នកបានបិទសកម្មភាពបើកដោយជោគជ័យ។",
+    "undoDisableError": "បរាជ័យក្នុងការបិទ {featureName}",
+    "enableFeatureError": "បរាជ័យក្នុងការបើក {featureName}",
+    "undoDisableSuccess": "បានបើក {featureName}",
+    "undoDisableSuccessDescription": "អ្នកបានបើកសកម្មភាពបិទដោយជោគជ័យ។",
+    "undoEnableError": "បរាជ័យក្នុងការបើក {featureName}",
+    "enableButtonLabel": "បើក {featureName}",
+    "configureButtonLabel": "កំណត់ {featureName}",
+    "configButton": "កំណត់",
     "enable": "បើក",
     "disable": "បិទ",
     "configure": "កំណត់រចនាសម្ព័ន្ធ",
@@ -222,6 +190,207 @@
     "giveaway-schedule_description": "គ្រប់គ្រងការចែករំលែកដោយភាពងាយស្រួលសម្រាប់សហគមន៍របស់អ្នក",
     "goodbye-message": "សារលា",
     "goodbye-message_description": "ផ្ញើសារនៅពេលអ្នកប្រើចាកចេញពីសហគមន៍"
+  },
+  "welcomeFeature": {
+    "switch": {
+      "activeLabel": "សកម្ម",
+      "activeDescription": "បើក ឬបិទមុខងារនេះ"
+    },
+    "channel": {
+      "label": "ប៉ុស្តិ៍",
+      "description": "កន្លែងដែលត្រូវផ្ញើសារស្វាគមន៍"
+    },
+    "content": {
+      "label": "មាតិកាសារ",
+      "description": "មាតិកានៃសារ",
+      "placeholder": "វាយបញ្ចូលមាតិកាសំខាន់នៃសារ"
+    },
+    "customImage": {
+      "label": "រូបភាពផ្ទាល់ខ្លួន",
+      "description": "បើកដើម្បីកំណត់រូបភាពផ្ទាល់ខ្លួន"
+    },
+    "backgroundImage": {
+      "label": "រូបភាពផ្ទៃខាងក្រោយ",
+      "description": "ផ្តល់តំណភ្ជាប់ទៅរូបភាពផ្ទៃខាងក្រោយ",
+      "placeholder": "វាយបញ្ចូល URL រូបភាព"
+    },
+    "noBackgroundImage": "មិនមានរូបភាពផ្ទៃខាងក្រោយផ្តល់ឱ្យ"
+  },
+  "autoResponseFeature": {
+    "switch": {
+      "activeLabel": "សកម្ម",
+      "activeDescription": "បើក ឬបិទមុខងារនេះ"
+    },
+    "table": {
+      "title": "ការឆ្លើយតបស្វ័យប្រវត្តិ",
+      "addButton": "បន្ថែម",
+      "headers": {
+        "no": "ល.រ",
+        "trigger": "ផ្ទុក",
+        "response": "ការឆ្លើយតប",
+        "createdBy": "បង្កើតដោយ",
+        "createdAt": "បង្កើតនៅ",
+        "action": "សកម្មភាព"
+      },
+      "noResponses": "រកមិនឃើញការឆ្លើយតបស្វ័យប្រវត្តិ",
+      "pagination": "ទំព័រ {currentPage} នៃ {totalPages}",
+      "prevButton": "មុន",
+      "nextButton": "បន្ទាប់"
+    },
+    "dialog": {
+      "addTitle": "បន្ថែមការឆ្លើយតបស្វ័យប្រវត្តិ",
+      "editTitle": "កែសម្រួលការឆ្លើយតបស្វ័យប្រវត្តិ",
+      "triggerPlaceholder": "បញ្ចូលអត្ថបទផ្ទុក",
+      "responsePlaceholder": "បញ្ចូលអត្ថបទឆ្លើយតប",
+      "addButton": "បន្ថែម",
+      "updateButton": "ធ្វើបច្ចុប្បន្នភាព",
+      "addSuccess": "បានបន្ថែមការឆ្លើយតបស្វ័យប្រវត្តិ",
+      "updateSuccess": "បានធ្វើបច្ចុប្បន្នភាពការឆ្លើយតបស្វ័យប្រវត្តិ",
+      "error": "បរាជ័យក្នុងការផ្ទុក {action} ការឆ្លើយតបស្វ័យប្រវត្តិ"
+    },
+    "deleteDialog": {
+      "title": "បញ្ជាក់ការលុប",
+      "message": "តើអ្នកប្រាកដថាចង់លុបការឆ្លើយតបស្វ័យប្រវត្តិនេះទេ?",
+      "cancelButton": "បោះបង់",
+      "deleteButton": "លុប"
+    },
+    "deleteSuccess": "បានលុបការឆ្លើយតបស្វ័យប្រវត្តិ",
+    "deleteError": "បរាជ័យក្នុងការលុបការឆ្លើយតបស្វ័យប្រវត្តិ"
+  },
+  "boosterFeature": {
+    "switch": {
+      "activeLabel": "សកម្ម",
+      "activeDescription": "បើក ឬបិទមុខងារនេះ"
+    },
+    "channel": {
+      "label": "ប៉ុស្តិ៍",
+      "description": "កន្លែងដែលត្រូវផ្ញើសារបង្កើនកម្រិត"
+    },
+    "content": {
+      "label": "មាតិកាសារ",
+      "description": "មាតិកានៃសារ",
+      "placeholder": "វាយបញ្ចូលមាតិកាសំខាន់នៃសារ"
+    },
+    "customImage": {
+      "label": "រូបភាពផ្ទាល់ខ្លួន",
+      "description": "បើកដើម្បីកំណត់រូបភាពផ្ទាល់ខ្លួន"
+    },
+    "backgroundImage": {
+      "label": "រូបភាពផ្ទៃខាងក្រោយ",
+      "description": "ផ្តល់តំណភ្ជាប់ទៅរូបភាពផ្ទៃខាងក្រោយ",
+      "placeholder": "វាយបញ្ចូល URL រូបភាព"
+    },
+    "noBackgroundImage": "មិនមានរូបភាពផ្ទៃខាងក្រោយផ្តល់ឱ្យ"
+  },
+  "inviteTrackerFeature": {
+    "switch": {
+      "activeLabel": "សកម្ម",
+      "activeDescription": "បើក ឬបិទមុខងារនេះ"
+    },
+    "channel": {
+      "label": "ប៉ុស្តិ៍",
+      "description": "កន្លែងដែលត្រូវផ្ញើសារតាមដានក inviter"
+    },
+    "content": {
+      "label": "មាតិកាសារ",
+      "description": "មាតិកានៃសារ",
+      "placeholder": "វាយបញ្ចូលមាតិកាសំខាន់នៃសារ"
+    },
+    "customImage": {
+      "label": "រូបភាពផ្ទាល់ខ្លួន",
+      "description": "បើកដើម្បីកំណត់រូបភាពផ្ទាល់ខ្លួន"
+    },
+    "backgroundImage": {
+      "label": "រូបភាពផ្ទៃខាងក្រោយ",
+      "description": "ផ្តល់តំណភ្ជាប់ទៅរូបភាពផ្ទៃខាងក្រោយ",
+      "placeholder": "វាយបញ្ចូល URL រូបភាព"
+    },
+    "noBackgroundImage": "មិនមានរូបភាពផ្ទៃខាងក្រោយផ្តល់ឱ្យ"
+  },
+  "joinRoleFeature": {
+    "switch": {
+      "activeLabel": "សកម្ម",
+      "activeDescription": "បើក ឬបិទមុខងារនេះ"
+    },
+    "userRoles": {
+      "label": "តួនាទីអ្នកប្រើ",
+      "description": "ជ្រើសរើសតួនាទីដើម្បីផ្តល់ឱ្យអ្នកប្រើ"
+    },
+    "botRoles": {
+      "label": "តួនាទីប៊ីត",
+      "description": "ជ្រើសរើសតួនាទីដើម្បីផ្តល់ឱ្យប៊ីត"
+    }
+  },
+  "levelingFeature": {
+    "switch": {
+      "activeLabel": "សកម្ម",
+      "activeDescription": "បើក ឬបិទមុខងារនេះ"
+    },
+    "channel": {
+      "label": "ប៉ុស្តិ៍",
+      "description": "កន្លែងដែលត្រូវផ្ញើសារកើនកម្រិត"
+    },
+    "content": {
+      "label": "មាតិកាសារ",
+      "description": "មាតិកានៃសារ",
+      "placeholder": "វាយបញ្ចូលសារកើនកម្រិត"
+    },
+    "updateSuccess": "បានធ្វើបច្ចុប្បន្នភាពកម្រិត",
+    "updateSuccessDescription": "ការកំណត់កម្រិតត្រូវបានរក្សាទុកដោយជោគជ័យ។",
+    "updateError": "បរាជ័យក្នុងការធ្វើបច្ចុប្បន្នភាពកម្រិត"
+  },
+  "giveawayScheduleFeature": {
+    "addButton": "បន្ថែមកាលវិភាគ",
+    "addButtonLabel": "បន្ថែមកាលវិភាគថ្មី",
+    "table": {
+      "headers": {
+        "channel": "ប៉ុស្តិ៍",
+        "scheduleType": "ប្រភេទកាលវិភាគ",
+        "time": "ម៉ោង",
+        "dayDate": "ថ្ងៃ/កាលបរិច្ឆេទ",
+        "winners": "អ្នកឈ្នះ",
+        "prize": "រង្វាន់",
+        "active": "សកម្ម",
+        "actions": "សកម្មភាព"
+      },
+      "noSchedules": "រកមិនឃើញកាលវិភាគ",
+      "editLabel": "កែសម្រួលកាលវិភាគ {id}",
+      "deleteLabel": "លុបកាលវិភាគ {id}"
+    },
+    "deleteDialog": {
+      "title": "ការបញ្ជាក់",
+      "description": "តើអ្នកប្រាកដថាចង់លុបកាលវិភាគ {type} ឬអត់?",
+      "cancel": "បោះបង់",
+      "delete": "លុប"
+    },
+    "deleteSuccess": "បានលុបកាលវិភាគ {type}",
+    "deleteSuccessDescription": "កាលវិភាគត្រូវបានលុបដោយជោគជ័យ។",
+    "deleteError": "បរាជ័យក្នុងការលុបកាលវិភាគ {type}"
+  },
+  "goodByeMessageFeature": {
+    "switch": {
+      "activeLabel": "សកម្ម",
+      "activeDescription": "បើក ឬបិទមុខងារនេះ"
+    },
+    "channel": {
+      "label": "ប៉ុស្តិ៍",
+      "description": "កន្លែងដែលត្រូវផ្ញើសារលា"
+    },
+    "content": {
+      "label": "មាតិកាសារ",
+      "description": "មាតិកានៃសារ",
+      "placeholder": "វាយបញ្ចូលមាតិកាសំខាន់នៃសារ"
+    },
+    "customImage": {
+      "label": "រូបភាពផ្ទាល់ខ្លួន",
+      "description": "បើកដើម្បីកំណត់រូបភាពផ្ទាល់ខ្លួន"
+    },
+    "backgroundImage": {
+      "label": "រូបភាពផ្ទៃខាងក្រោយ",
+      "description": "ផ្តល់តំណភ្ជាប់ទៅរូបភាពផ្ទៃខាងក្រោយ",
+      "placeholder": "វាយបញ្ចូល URL រូបភាព"
+    },
+    "noBackgroundImage": "មិនមានរូបភាពផ្ទៃខាងក្រោយផ្តល់ឱ្យ"
   },
   "games": {
     "title": "ល្បែង",
@@ -359,5 +528,107 @@
     "not_found": "រកមិនឃើញទំព័រ",
     "unauthorized": "ការចូលប្រើគ្មានការអនុញ្ញាត",
     "forbidden": "ការចូលប្រើត្រូវបានហាមឃាត់"
+  },
+  "common": {
+    "loading": "កំពុងផ្ទុក...",
+    "error": "កំហុស",
+    "success": "ជោគជ័យ",
+    "cancel": "បោះបង់",
+    "confirm": "បញ្ជាក់",
+    "save": "រក្សាទុក",
+    "edit": "កែសម្រួល",
+    "delete": "លុប",
+    "back": "ត្រឡប់",
+    "next": "បន្ទាប់",
+    "previous": "មុន",
+    "search": "ស្វែងរក",
+    "filter": "តម្រង",
+    "sort": "តម្រៀប",
+    "refresh": "ធ្វើឱ្យស្រស់",
+    "close": "បិទ",
+    "open": "បើក",
+    "submit": "ដាក់ស្នើ",
+    "reset": "កំណត់ឡើងវិញ",
+    "clear": "សម្អាត",
+    "select": "ជ្រើសរើស",
+    "upload": "បង្ហោះ",
+    "download": "ទាញយក",
+    "copy": "ចម្លង",
+    "paste": "បិទភ្ជាប់",
+    "cut": "កាត់",
+    "undo": "មិនធ្វើវិញ",
+    "redo": "ធ្វើឡើងវិញ",
+    "yes": "បាទ/ចាស",
+    "no": "ទេ",
+    "ok": "យល់ព្រម",
+    "and": "និង",
+    "or": "ឬ",
+    "not": "មិនមែន",
+    "all": "ទាំងអស់",
+    "none": "គ្មាន",
+    "other": "ផ្សេងទៀត",
+    "more": "ច្រើនទៀត",
+    "less": "តិចជាង",
+    "view": "មើល",
+    "hide": "លាក់",
+    "show": "បង្ហាញ",
+    "not_set": "មិនបានកំណត់",
+    "disableSuccess": "បានបិទ {feature}",
+    "disableSuccessDescription": "អ្នកបានបិទមុខងារនេះដោយជោគជ័យ។",
+    "disableError": "បរាជ័យក្នុងការបិទ {feature}",
+    "updateSuccess": "បានធ្វើបច្ចុប្បន្នភាព {feature}",
+    "updateSuccessDescription": "ការកំណត់មុខងារត្រូវបានរក្សាទុកដោយជោគជ័យ។",
+    "updateError": "បរាជ័យក្នុងការធ្វើបច្ចុប្បន្នភាព {feature}",
+    "disableButtonLabel": "បិទ {feature}",
+    "disabling": "កំពុងបិទ...",
+    "disable": "បិទ",
+    "pickVariableLabel": "ជ្រើសយកអថេរ",
+    "testMessageLabel": "សាកល្បងសារ",
+    "sendMessageSuccess": "បានផ្ញើសារដោយជោគជ័យ!",
+    "sendMessageError": "បរាជ័យក្នុងការផ្ញើសារ។",
+    "validation": {
+      "channelRequired": "តម្រូវឱ្យមានប៉ុស្តិ៍",
+      "contentRequired": "តម្រូវឱ្យមានមាតិកា",
+      "userRolesRequired": "User តម្រូវឱ្យមាន Role",
+      "botRolesRequired": "Bot តម្រូវឱ្យមានមាតិកា Role"
+    },
+    "customImage": {
+      "layout": {
+        "label": "ប្លង់",
+        "description": "ជ្រើសរើសប្លង់សម្រាប់រូបភាពផ្ទាល់ខ្លួន",
+        "placeholder": "ជ្រើសរើសប្លង់"
+      },
+      "avatarShape": {
+        "label": "រូបរាង Avatar",
+        "description": "ជ្រើសរើសរូបរាងនៃ Avatar ក្នុងរូបភាពផ្ទាល់ខ្លួន"
+      },
+      "circleColor": {
+        "label": "ពណ៌រង្វង់",
+        "description": "ជ្រើសរើសពណ៌សម្រាប់រង្វង់"
+      },
+      "featureColor": {
+        "label": "ពណ៌ស្វាគមន៍",
+        "description": "ជ្រើសរើសពណ៌សម្រាប់អត្ថបទមុខងារ"
+      },
+      "usernameColor": {
+        "label": "ពណ៌ឈ្មោះអ្នកប្រើ",
+        "description": "ជ្រើសរើសពណ៌សម្រាប់អត្ថបទឈ្មោះអ្នកប្រើ"
+      },
+      "messageColor": {
+        "label": "ពណ៌សារ",
+        "description": "ជ្រើសរើសពណ៌សម្រាប់អត្ថបទសារ"
+      },
+      "backgroundImage": {
+        "label": "រូបភាពផ្ទៃខាងក្រោយ",
+        "description": "ផ្តល់តំណភ្ជាប់ទៅរូបភាពផ្ទៃខាងក្រោយ",
+        "placeholder": "វាយបញ្ចូល URL រូបភាព"
+      },
+      "message": {
+        "label": "សារ",
+        "description": "ផ្តល់សារសម្រាប់រូបភាពផ្ទៃខាងក្រោយ",
+        "placeholder": "វាយបញ្ចូលសារ"
+      },
+      "noBackgroundImage": "មិនមានរូបភាពផ្ទៃខាងក្រោយផ្តល់ឱ្យ"
+    }
   }
 }
