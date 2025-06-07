@@ -16,7 +16,6 @@ import Loading from "@/components/loading/circle";
 import { usePeachy } from "@/contexts/peachy";
 
 export default function FeaturesPage() {
-  const g = useTranslations("common");
   const t = useTranslations("guilds");
   const pathname = usePathname();
   const currentPath = pathname.split("/").filter(Boolean);
@@ -157,7 +156,6 @@ function GuildPanel({
               feature={feature}
               enabled={info.enabledFeatures.includes(feature.id)}
               refetch={refetch}
-              translations={f}
             />
           ))}
         </div>

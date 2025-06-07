@@ -40,7 +40,7 @@
   },
   "dashboard": {
     "title": "仪表板",
-    "description": "概述您的Peachy帮派社区统计和分析。",
+    "description": "概述您的 Peachy 帮派社区统计和分析。",
     "loading": "加载仪表板数据...",
     "analytics_title": "社区分析",
     "analytics_description": "跟踪用户参与度和随着时间的推移增长。",
@@ -60,7 +60,7 @@
     "total_banked_coins": "总银币",
     "average_level": "平均水平",
     "based_on_xp": "基于XP和活动",
-    "growth_percentage": "+{百分比}％",
+    "growth_percentage": "+{percentage}％",
     "last_six_months": "最近6个月",
     "last_three_months": "最近3个月",
     "last_thirty_days": "最近30天",
@@ -114,7 +114,7 @@
       "zodiac_sign": "十二生肖",
       "level": "等级",
       "exp": "经验",
-      "exp_format": "{当前} / {total}"
+      "exp_format": "{current} / {total}"
     },
     "information": {
       "coin": "硬币",
@@ -150,45 +150,37 @@
     "error_message": "糟糕，出了点问题。"
   },
   "features": {
-    "title": "特征",
-    "description": "管理您的服务器功能和设置",
-    "enable": "使能够",
-    "disable": "禁用",
-    "configure": "配置",
-    "enabled": "启用",
-    "disabled": "禁用",
-    "enableFeatureSuccess": "启用{featurename}",
-    "enableFeatureSuccessDescription": "您已成功启用了此功能。",
-    "undoEnableSuccess": "禁用{featurename}",
-    "undoEnableSuccessDescription": "您已经成功撤消了启用行动。",
-    "undoDisableError": "无法禁用{featurename}",
-    "enableFeatureError": "无法启用{featurename}",
-    "undoDisableSuccess": "启用{featurename}",
-    "undoDisableSuccessDescription": "您已经成功撤消了禁用动作。",
-    "undoEnableError": "无法启用{featurename}",
-    "enableButtonLabel": "启用{featurename}",
-    "configureButtonLabel": "配置{featurename}",
-    "configButton": "config",
-    "feature_disabled": "功能被禁用",
-    "feature_disabled_description": "此功能当前被禁用。",
-    "enable_feature": "启用功能",
-    "enabling": "启用...",
+    "enable_button": "启用",
+    "config_button": "配置",
+    "disable_button": "禁用",
+    "enabling": "正在启用...",
+    "disabling": "正在禁用...",
+    "enable_success": "已启用 {name}",
+    "enable_success_description": "您已成功启用此功能。现在要配置吗？",
+    "disable_success": "已禁用 {name}",
+    "disable_success_description": "您已成功禁用此功能。",
+    "undo_enable": "您已成功撤销启用操作。",
+    "undo_disable": "您已成功撤销禁用操作。",
+    "enable_error": "无法启用 {name}",
+    "disable_error": "无法禁用 {name}",
+    "enableButtonLabel": "启用 {name}",
+    "configureButtonLabel": "配置 {name}",
     "welcome-message": "欢迎消息",
-    "welcome-message_description": "用户加入服务器时发送消息",
-    "auto-response": "自动响应",
-    "auto-response_description": "特定触发器的自动响应",
-    "booster-message": "助推器消息",
-    "booster-message_description": "当用户增加服务器时发送消息",
-    "invite-tracker-message": "邀请跟踪器",
-    "invite-tracker-message_description": "当用户邀请成员加入服务器时发送消息",
+    "welcome-message_description": "当用户加入服务器时发送消息",
+    "auto-response": "自动回复",
+    "auto-response_description": "与机器人对话时发送消息",
+    "booster-message": "助力消息",
+    "booster-message_description": "当用户助力服务器时发送消息",
+    "invite-tracker-message": "邀请消息",
+    "invite-tracker-message_description": "当用户邀请的成员加入服务器时发送消息",
     "join-roles": "加入角色",
-    "join-roles_description": "当用户加入服务器时，会自动分配角色",
-    "leveling-system": "调平系统",
-    "leveling-system_description": "使用升级系统升级服务器",
-    "giveaway-schedule": "赠品时间表",
-    "giveaway-schedule_description": "轻松管理服务器的赠品",
-    "goodbye-message": "再见消息",
-    "goodbye-message_description": "用户离开服务器时发送消息"
+    "join-roles_description": "当用户加入服务器时自动分配角色",
+    "leveling-system": "等级系统",
+    "leveling-system_description": "通过等级系统提升您的服务器",
+    "giveaway-schedule": "抽奖计划",
+    "giveaway-schedule_description": "轻松管理您服务器的抽奖",
+    "goodbye-message": "告别消息",
+    "goodbye-message_description": "当用户离开服务器时发送消息"
   },
   "welcomeFeature": {
     "switch": {
@@ -232,7 +224,7 @@
         "action": "行动"
       },
       "noResponses": "找不到自动响应",
-      "pagination": "{TotalPages}的页{currentPage}}",
+      "pagination": "{TotalPages} 的页 {currentPage}}",
       "prevButton": "上一条",
       "nextButton": "下一个"
     },
@@ -245,7 +237,7 @@
       "updateButton": "更新",
       "addSuccess": "自动响应添加了",
       "updateSuccess": "自动反应更新",
-      "error": "无法{Action}自动反应"
+      "error": "无法 {action} 自动反应"
     },
     "deleteDialog": {
       "title": "确认删除",
@@ -353,18 +345,18 @@
         "actions": "动作"
       },
       "noSchedules": "找不到时间表",
-      "editLabel": "编辑时间表{id}",
-      "deleteLabel": "删除时间表{id}"
+      "editLabel": "编辑时间表 {id}",
+      "deleteLabel": "删除时间表 {id}"
     },
     "deleteDialog": {
       "title": "确认",
-      "description": "您确定要删除{type}时间表吗？",
+      "description": "您确定要删除 {type} 时间表吗？",
       "cancel": "取消",
       "delete": "删除"
     },
     "deleteSuccess": "删除{type}时间表",
     "deleteSuccessDescription": "计划成功删除。",
-    "deleteError": "无法删除{type}时间表"
+    "deleteError": "无法删除 {type} 时间表"
   },
   "goodByeMessageFeature": {
     "switch": {
@@ -488,7 +480,7 @@
   "faq": {
     "title": "常见问题",
     "who_created": "谁创造了桃子和戈马？",
-    "who_created_answer": "Peach和Goma是作为迷人角色系列的一部分而创建的，该系列吸引了全球粉丝的心。",
+    "who_created_answer": "Peach 和 Goma 是作为迷人角色系列的一部分而创建的，该系列吸引了全球粉丝的心。",
     "where_from": "这些角色来自哪里？",
     "where_from_answer": "这些可爱的角色源于创造性的讲故事，并为我们的社区发展成为心爱的吉祥物。",
     "who_are": "谁是桃子和戈玛？",

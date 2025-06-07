@@ -12,6 +12,9 @@ export const config: AppConfig = {
   id: 0,
   name: "PEACHY",
   description: "Feeling lucky, hun?\nLet’s spin those reels! 🎰🍑",
+  quote:
+    "Get ready to strike it lucky with PEACHY! 🎰🍑 Spin those reels and watch the wins roll in—admin-approved excitement awaits! 🌸",
+
   icon: Gamepad,
   url: "https://i.imgur.com/b75yC08.jpg",
   banner: "https://i.imgur.com/kYXE4No.gif",
@@ -27,6 +30,8 @@ export const configPeach: AppConfig = {
   name: "PEACH",
   description:
     "A vibrant music bot girl,\nbringing your favorite tunes to life!",
+  quote:
+    "Let PEACH serenade your server with vibrant tunes! 🎶 A music bot girl bringing your favorite melodies to life, one beat at a time. 🌺",
   icon: Music,
   url: "https://i.imgur.com/VoqnP9y.jpg",
   banner: "https://i.imgur.com/nDocQCG.gif",
@@ -41,6 +46,8 @@ export const configGoma: AppConfig = {
   id: 2,
   name: "GOMA",
   description: "A cool music bot boy,\nrocking your server with epic beats!",
+  quote:
+    "Turn up the volume with GOMA! 🎸 This cool music bot boy delivers epic beats to rock your server—admin-powered grooves guaranteed! 🔥",
   icon: Music,
   url: "https://i.imgur.com/dzqPppx.jpg",
   banner: "https://i.imgur.com/eIdHzUJ.gif",

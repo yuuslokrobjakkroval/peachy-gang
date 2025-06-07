@@ -23,8 +23,8 @@ export function getFeatures(): IdFeature<any>[] {
   const features = UseFeaturesConfig();
   return Object.entries(features).map(([k, v]) => {
     return {
-      id: k,
       ...v,
+      id: k,
     };
   });
 }
@@ -169,7 +169,7 @@ export function getOwnerGuild(guilds: Guild[]) {
 }
 
 export function toNumber(num: number): string {
-  if (!num) return 'N/A';
+  if (!num) return "N/A";
   return num?.toFixed(0)?.replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,");
 }
 

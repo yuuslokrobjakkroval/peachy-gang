@@ -9,6 +9,7 @@ export type AppConfig = {
    */
   name: string;
   description?: string;
+  quote?: string;
   /**
    * url for avatar
    */
@@ -61,9 +62,12 @@ export type FeaturesConfig = {
  * Internal Feature info
  */
 export interface FeatureConfig<K extends keyof CustomFeatures> {
-  name: ReactNode;
-  description?: ReactNode;
-  icon?: ReactElement;
+  id: string; // Assuming id is part of the feature object
+  nameKey: string;
+  descriptionKey: string;
+  icon: React.ReactNode;
+  name?: string; // Optional fallback
+  description?: string; // Optional fallback
   /**
    * Render content in Feature view
    */
