@@ -4,51 +4,6 @@
     "khmer": "高棉",
     "china": "中国"
   },
-  "common": {
-    "loading": "加载中...",
-    "error": "错误",
-    "success": "成功",
-    "cancel": "取消",
-    "confirm": "确认",
-    "save": "节省",
-    "edit": "编辑",
-    "delete": "删除",
-    "back": "后退",
-    "next": "下一个",
-    "previous": "以前的",
-    "search": "搜索",
-    "filter": "筛选",
-    "sort": "种类",
-    "refresh": "刷新",
-    "close": "关闭",
-    "open": "打开",
-    "submit": "提交",
-    "reset": "重置",
-    "clear": "清除",
-    "select": "选择",
-    "upload": "上传",
-    "download": "下载",
-    "copy": "复制",
-    "paste": "粘贴",
-    "cut": "切",
-    "undo": "撤消",
-    "redo": "重做",
-    "yes": "是的",
-    "no": "不",
-    "ok": "好的",
-    "and": "和",
-    "or": "或者",
-    "not": "不是",
-    "all": "全部",
-    "none": "没有任何",
-    "other": "其他",
-    "more": "更多的",
-    "less": "较少的",
-    "view": "看法",
-    "hide": "隐藏",
-    "show": "展示",
-    "not_set": "未设置"
-  },
   "navigation": {
     "home": "家",
     "dashboard": "仪表板",
@@ -202,6 +157,18 @@
     "configure": "配置",
     "enabled": "启用",
     "disabled": "禁用",
+    "enableFeatureSuccess": "启用{featurename}",
+    "enableFeatureSuccessDescription": "您已成功启用了此功能。",
+    "undoEnableSuccess": "禁用{featurename}",
+    "undoEnableSuccessDescription": "您已经成功撤消了启用行动。",
+    "undoDisableError": "无法禁用{featurename}",
+    "enableFeatureError": "无法启用{featurename}",
+    "undoDisableSuccess": "启用{featurename}",
+    "undoDisableSuccessDescription": "您已经成功撤消了禁用动作。",
+    "undoEnableError": "无法启用{featurename}",
+    "enableButtonLabel": "启用{featurename}",
+    "configureButtonLabel": "配置{featurename}",
+    "configButton": "config",
     "feature_disabled": "功能被禁用",
     "feature_disabled_description": "此功能当前被禁用。",
     "enable_feature": "启用功能",
@@ -222,6 +189,207 @@
     "giveaway-schedule_description": "轻松管理服务器的赠品",
     "goodbye-message": "再见消息",
     "goodbye-message_description": "用户离开服务器时发送消息"
+  },
+  "welcomeFeature": {
+    "switch": {
+      "activeLabel": "积极的",
+      "activeDescription": "启用或禁用此功能"
+    },
+    "channel": {
+      "label": "渠道",
+      "description": "在哪里发送欢迎消息"
+    },
+    "content": {
+      "label": "消息内容",
+      "description": "消息的内容",
+      "placeholder": "输入消息的主要内容"
+    },
+    "customImage": {
+      "label": "自定义图像",
+      "description": "启用自定义图像"
+    },
+    "backgroundImage": {
+      "label": "背景图像",
+      "description": "提供背景图像的链接",
+      "placeholder": "输入图像URL"
+    },
+    "noBackgroundImage": "没有提供背景图像"
+  },
+  "autoResponseFeature": {
+    "switch": {
+      "activeLabel": "积极的",
+      "activeDescription": "启用或禁用此功能"
+    },
+    "table": {
+      "title": "自动响应",
+      "addButton": "添加",
+      "headers": {
+        "no": "不",
+        "trigger": "扳机",
+        "response": "回复",
+        "createdBy": "由",
+        "createdAt": "创建在",
+        "action": "行动"
+      },
+      "noResponses": "找不到自动响应",
+      "pagination": "{TotalPages}的页{currentPage}}",
+      "prevButton": "上一条",
+      "nextButton": "下一个"
+    },
+    "dialog": {
+      "addTitle": "添加自动响应",
+      "editTitle": "编辑自动响应",
+      "triggerPlaceholder": "输入触发文本",
+      "responsePlaceholder": "输入响应文本",
+      "addButton": "添加",
+      "updateButton": "更新",
+      "addSuccess": "自动响应添加了",
+      "updateSuccess": "自动反应更新",
+      "error": "无法{Action}自动反应"
+    },
+    "deleteDialog": {
+      "title": "确认删除",
+      "message": "您确定要删除此自动响应吗？",
+      "cancelButton": "取消",
+      "deleteButton": "删除"
+    },
+    "deleteSuccess": "自动响应已删除",
+    "deleteError": "无法删除自动响应"
+  },
+  "boosterFeature": {
+    "switch": {
+      "activeLabel": "积极的",
+      "activeDescription": "启用或禁用此功能"
+    },
+    "channel": {
+      "label": "渠道",
+      "description": "在哪里发送助推器消息"
+    },
+    "content": {
+      "label": "消息内容",
+      "description": "消息的内容",
+      "placeholder": "输入消息的主要内容"
+    },
+    "customImage": {
+      "label": "自定义图像",
+      "description": "启用自定义图像"
+    },
+    "backgroundImage": {
+      "label": "背景图像",
+      "description": "提供背景图像的链接",
+      "placeholder": "输入图像URL"
+    },
+    "noBackgroundImage": "没有提供背景图像"
+  },
+  "inviteTrackerFeature": {
+    "switch": {
+      "activeLabel": "积极的",
+      "activeDescription": "启用或禁用此功能"
+    },
+    "channel": {
+      "label": "渠道",
+      "description": "在哪里发送邀请跟踪器消息"
+    },
+    "content": {
+      "label": "消息内容",
+      "description": "消息的内容",
+      "placeholder": "输入消息的主要内容"
+    },
+    "customImage": {
+      "label": "自定义图像",
+      "description": "启用自定义图像"
+    },
+    "backgroundImage": {
+      "label": "背景图像",
+      "description": "提供背景图像的链接",
+      "placeholder": "输入图像URL"
+    },
+    "noBackgroundImage": "没有提供背景图像"
+  },
+  "joinRoleFeature": {
+    "switch": {
+      "activeLabel": "积极的",
+      "activeDescription": "启用或禁用此功能"
+    },
+    "userRoles": {
+      "label": "用户角色",
+      "description": "选择要分配给用户的角色"
+    },
+    "botRoles": {
+      "label": "机器人角色",
+      "description": "选择要分配给机器人的角色"
+    }
+  },
+  "levelingFeature": {
+    "switch": {
+      "activeLabel": "积极的",
+      "activeDescription": "启用或禁用此功能"
+    },
+    "channel": {
+      "label": "渠道",
+      "description": "在哪里发送升级消息"
+    },
+    "content": {
+      "label": "消息内容",
+      "description": "消息的内容",
+      "placeholder": "输入消息的升级"
+    },
+    "updateSuccess": "更新的升级",
+    "updateSuccessDescription": "平整设置成功保存。",
+    "updateError": "无法更新升级"
+  },
+  "giveawayScheduleFeature": {
+    "addButton": "添加时间表",
+    "addButtonLabel": "添加新的时间表",
+    "table": {
+      "headers": {
+        "channel": "渠道",
+        "scheduleType": "时间表类型",
+        "time": "时间",
+        "dayDate": "日/日期",
+        "winners": "优胜者",
+        "prize": "奖",
+        "active": "积极的",
+        "actions": "动作"
+      },
+      "noSchedules": "找不到时间表",
+      "editLabel": "编辑时间表{id}",
+      "deleteLabel": "删除时间表{id}"
+    },
+    "deleteDialog": {
+      "title": "确认",
+      "description": "您确定要删除{type}时间表吗？",
+      "cancel": "取消",
+      "delete": "删除"
+    },
+    "deleteSuccess": "删除{type}时间表",
+    "deleteSuccessDescription": "计划成功删除。",
+    "deleteError": "无法删除{type}时间表"
+  },
+  "goodByeMessageFeature": {
+    "switch": {
+      "activeLabel": "积极的",
+      "activeDescription": "启用或禁用此功能"
+    },
+    "channel": {
+      "label": "渠道",
+      "description": "在哪里发送告别消息"
+    },
+    "content": {
+      "label": "消息内容",
+      "description": "消息的内容",
+      "placeholder": "输入消息的主要内容"
+    },
+    "customImage": {
+      "label": "自定义图像",
+      "description": "启用自定义图像"
+    },
+    "backgroundImage": {
+      "label": "背景图像",
+      "description": "提供背景图像的链接",
+      "placeholder": "输入图像URL"
+    },
+    "noBackgroundImage": "没有提供背景图像"
   },
   "games": {
     "2048": {
@@ -359,5 +527,107 @@
     "not_found": "找不到页面",
     "unauthorized": "未经授权的访问",
     "forbidden": "禁止访问"
+  },
+  "common": {
+    "loading": "加载中...",
+    "error": "错误",
+    "success": "成功",
+    "cancel": "取消",
+    "confirm": "确认",
+    "save": "节省",
+    "edit": "编辑",
+    "delete": "删除",
+    "back": "后退",
+    "next": "下一个",
+    "previous": "以前的",
+    "search": "搜索",
+    "filter": "筛选",
+    "sort": "种类",
+    "refresh": "刷新",
+    "close": "关闭",
+    "open": "打开",
+    "submit": "提交",
+    "reset": "重置",
+    "clear": "清除",
+    "select": "选择",
+    "upload": "上传",
+    "download": "下载",
+    "copy": "复制",
+    "paste": "粘贴",
+    "cut": "切",
+    "undo": "撤消",
+    "redo": "重做",
+    "yes": "是的",
+    "no": "不",
+    "ok": "好的",
+    "and": "和",
+    "or": "或者",
+    "not": "不是",
+    "all": "全部",
+    "none": "没有任何",
+    "other": "其他",
+    "more": "更多的",
+    "less": "较少的",
+    "view": "看法",
+    "hide": "隐藏",
+    "show": "展示",
+    "not_set": "未设置",
+    "disableSuccess": "禁用{功能}",
+    "disableSuccessDescription": "您已成功禁用此功能。",
+    "disableError": "无法禁用{功能}",
+    "updateSuccess": "更新{功能}",
+    "updateSuccessDescription": "功能设置成功保存。",
+    "updateError": "无法更新{功能}",
+    "disableButtonLabel": "禁用{功能}",
+    "disabling": "禁用...",
+    "disable": "禁用",
+    "pickVariableLabel": "选择变量",
+    "testMessageLabel": "测试消息",
+    "sendMessageSuccess": "消息已成功发送！",
+    "sendMessageError": "无法发送消息。",
+    "validation": {
+      "channelRequired": "需要频道",
+      "contentRequired": "需要内容",
+      "userRolesRequired": "需要用户角色",
+      "botRolesRequired": "需要机器人角色"
+    },
+    "customImage": {
+      "layout": {
+        "label": "布局",
+        "description": "选择自定义图像的布局",
+        "placeholder": "选择一个布局"
+      },
+      "avatarShape": {
+        "label": "头像形状",
+        "description": "在自定义图像中选择头像的形状"
+      },
+      "circleColor": {
+        "label": "圆形颜色",
+        "description": "选择圈子"
+      },
+      "featureColor": {
+        "label": "欢迎颜色",
+        "description": "选择功能文本"
+      },
+      "usernameColor": {
+        "label": "用户名颜色",
+        "description": "选择用户名文本"
+      },
+      "messageColor": {
+        "label": "消息颜色",
+        "description": "选择消息文字"
+      },
+      "backgroundImage": {
+        "label": "背景图像",
+        "description": "提供背景图像的链接",
+        "placeholder": "输入图像URL"
+      },
+      "message": {
+        "label": "信息",
+        "description": "向背景图像提供消息",
+        "placeholder": "输入消息"
+      },
+      "noBackgroundImage": "没有提供背景图像"
+    }
   }
 }
