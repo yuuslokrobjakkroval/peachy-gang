@@ -151,6 +151,9 @@
     "error_message": "Oops, something went wrong. Please try again!"
   },
   "features": {
+    "featureNotFoundTitle": "Feature Not Found",
+    "featureNotFoundDescription": "The feature {feature} is not available. Please check the feature list or refresh the page.",
+    "refreshPage": "Refresh",
     "welcome-message": "Welcome Message",
     "welcome-message_description": "Send message when user joined the server",
     "auto-response": "Auto Response",
@@ -159,6 +162,8 @@
     "booster-message_description": "Send message when a user boosts the server",
     "invite-tracker-message": "Invite Message",
     "invite-tracker-message_description": "Send message when user invite member joined the server",
+    "reaction-roles": "Reaction Roles",
+    "reaction-roles_description": "Allow users to assign themselves roles through message reactions",
     "join-roles": "Join Roles",
     "join-roles_description": "Assign roles automatically when a user joins the server",
     "leveling-system": "Leveling System",
@@ -298,6 +303,36 @@
       "placeholder": "Type in image URL"
     },
     "noBackgroundImage": "No background image provided"
+  },
+  "reactionRolesFeature": {
+    "table": {
+      "header": "Allow users to assign themselves roles through message reactions.",
+      "removeLabel": "Remove role at index {index}"
+    },
+    "switch": {
+      "activeLabel": "Active",
+      "activeDescription": "Enable or Disable this feature"
+    },
+    "channel": {
+      "label": "Channel",
+      "description": "Where to send the reaction roles message"
+    },
+    "content": {
+      "label": "Message Content",
+      "description": "The content of the reaction roles message",
+      "placeholder": "Type in the main content of the message"
+    },
+    "noReactionRolesFound": "No Reaction Roles found",
+    "addMessage": "Add message",
+    "newReactionRoles": "New Reaction Roles",
+    "getStartedDescription": "Let's get started by selecting a message. Did you already send a message to apply reaction roles on or should Sapphire create a new one for you?",
+    "useExistingMessage": "Use existing message",
+    "createNewMessage": "Create new message",
+    "rolesDescription": "Configure the roles and their corresponding emojis ({count} role(s) configured)",
+    "addRole": "Add Role",
+    "roleEmojiLabel": "Emoji",
+    "roleIdLabel": "Role ID",
+    "removeRole": "Remove Role"
   },
   "joinRoleFeature": {
     "switch": {

@@ -35,7 +35,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Card } from "@/components/ui/card";
 import { FaTerminal } from "react-icons/fa6";
 import UpdateFeaturePanel from "../update-feature";
-import VariableDialog from "@/components/dialogs/variable";
+import VariableDialog from "@/components/layouts/dialogs/variable";
 import { styles } from "@/styles";
 import { PencilRuler, Trash2 } from "lucide-react";
 import { useTranslations } from "next-intl";

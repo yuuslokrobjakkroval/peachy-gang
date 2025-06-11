@@ -10,7 +10,7 @@ import {
 } from "@/redux/api/guild";
 import { toCapitalCase } from "@/utils/common";
 import { motion } from "framer-motion";
-import BoosterVariableDialog from "@/components/dialogs/booster-variable";
+import BoosterVariableDialog from "@/components/layouts/dialogs/booster-variable";
 import { SwitchForm } from "@/components/form/switch-form";
 import { ChannelSelectForm } from "@/components/form/channel-select-form";
 import { TextAreaForm } from "@/components/form/textarea-form";

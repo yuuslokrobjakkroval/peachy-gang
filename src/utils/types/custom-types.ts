@@ -52,6 +52,7 @@ export type CustomFeatures = {
   "auto-response": AutoResponseFeature;
   "booster-message": BoosterMessageFeature;
   "invite-tracker-message": InviteTrackerMessageFeature;
+  "reaction-roles": JoinRolesFeature;
   "join-roles": JoinRolesFeature;
   "leveling-system": LevelingSystemFeature;
   "giveaway-schedule": GiveawayScheduleFeature;

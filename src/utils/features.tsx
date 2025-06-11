@@ -9,6 +9,7 @@ import {
 } from "react-icons/md";
 import { AiOutlineRobot } from "react-icons/ai";
 import { ArrowUpNarrowWide } from "lucide-react";
+import { FaThumbsUp } from "react-icons/fa6";
 
 export function UseFeaturesConfig(): FeaturesConfig {
   return {
@@ -43,6 +44,14 @@ export function UseFeaturesConfig(): FeaturesConfig {
       name: "Invite Message",
       description: "Send message when user invite member joined the server",
       icon: <MdPersonAdd />,
+    },
+    "reaction-roles": {
+      id: "reaction-roles",
+      nameKey: "reaction-roles",
+      descriptionKey: "reaction-roles_description",
+      name: "Reaction Roles",
+      description: "Allow users to assign themselves roles through message reactions",
+      icon: <FaThumbsUp />,
     },
     "join-roles": {
       id: "join-roles",

@@ -22,7 +22,7 @@ import { Card } from "@/components/ui/card";
 import { FaTerminal, FaWandSparkles } from "react-icons/fa6";
 import UpdateFeaturePanel from "../update-feature";
 import { styles } from "@/styles";
-import VariableDialog from "@/components/dialogs/variable";
+import VariableDialog from "@/components/layouts/dialogs/variable";
 import { useTranslations } from "next-intl";
 
 export function GoodByeMessageFeature({

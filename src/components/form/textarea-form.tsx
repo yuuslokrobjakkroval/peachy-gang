@@ -1,4 +1,9 @@
-import React, { useRef, forwardRef, useState } from "react";
+import React, {
+  useRef,
+  forwardRef,
+  useState,
+  useImperativeHandle,
+} from "react";
 import { Card } from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
@@ -25,17 +30,22 @@ export type TextAreaFormProps =
       error?: any;
     };
     enableEmoji: boolean;
+    onChange?: (e: React.ChangeEvent<HTMLTextAreaElement>) => void; // Add onChange prop
+    value?: string; // Add value prop for controlled component
   };
 
 export const TextAreaForm = forwardRef<HTMLTextAreaElement, TextAreaFormProps>(
-  ({ control, enableEmoji, ...props }, ref) => {
+  ({ control, enableEmoji, onChange, value, ...props }, ref) => {
     const { guildId } = usePeachy();
     const [searchQuery, setSearchQuery] = useState<string>("");
     const [currentPage, setCurrentPage] = useState<number>(1);
     const [isPopoverOpen, setIsPopoverOpen] = useState<boolean>(false);
-    const inputRef = useRef<any>(null);
+    const inputRef = useRef<HTMLTextAreaElement>(null);
     const emojisPerPage = 20;
     const { data: emojis, isLoading } = useGetGuildEmojiQuery(guildId);
+
+    // Expose the inputRef to the parent via ref
+    useImperativeHandle(ref, () => inputRef.current!);
 
     const filteredEmojis = emojis
       ? emojis.filter((emoji: any) =>
@@ -57,20 +67,38 @@ export const TextAreaForm = forwardRef<HTMLTextAreaElement, TextAreaFormProps>(
     const displayTotalPages = totalPages > 0 ? totalPages : 0;
 
     const handleEmojiClick = (emoji: any) => {
-      let emojiIdentifier = "";
-      if (emoji.identifier.startsWith("a")) {
-        emojiIdentifier = `<${emoji.identifier}>`;
-      } else {
-        emojiIdentifier = `<:${emoji.identifier}>`;
-      }
+      const emojiIdentifier = emoji.identifier.startsWith("a")
+        ? `<${emoji.identifier}>`
+        : `<:${emoji.identifier}>`;
       const inputElement = inputRef.current;
-      const cursorPosition = inputElement?.selectionStart || 0;
-      setTimeout(() => {
-        if (inputElement) {
-          inputElement.selectionStart = cursorPosition + emojiIdentifier.length;
-          inputElement.selectionEnd = cursorPosition + emojiIdentifier.length;
+
+      if (inputElement && value !== undefined) {
+        const cursorPosition = inputElement.selectionStart || 0;
+        const newValue =
+          value.slice(0, cursorPosition) +
+          emojiIdentifier +
+          value.slice(cursorPosition);
+        inputElement.value = newValue; // Update the input value directly
+
+        // Trigger onChange to update the form state
+        if (onChange) {
+          const syntheticEvent = {
+            target: { value: newValue, id: control.id },
+          } as React.ChangeEvent<HTMLTextAreaElement>;
+          onChange(syntheticEvent);
         }
-      }, 0);
+
+        // Update cursor position
+        setTimeout(() => {
+          if (inputElement) {
+            inputElement.selectionStart =
+              cursorPosition + emojiIdentifier.length;
+            inputElement.selectionEnd = cursorPosition + emojiIdentifier.length;
+            inputElement.focus();
+          }
+        }, 0);
+      }
+
       setSearchQuery("");
       setIsPopoverOpen(false);
     };
@@ -106,16 +134,23 @@ export const TextAreaForm = forwardRef<HTMLTextAreaElement, TextAreaFormProps>(
             </p>
           )}
           <div className="relative">
-            <Textarea className="pr-10" id={control.id} ref={ref} {...props} />
+            <Textarea
+              className="pr-10"
+              id={control.id}
+              ref={inputRef}
+              value={value} // Controlled component
+              onChange={(e) => onChange && onChange(e)} // Pass onChange to parent
+              {...props}
+            />
             {enableEmoji && (
-              <Popover>
+              <Popover open={isPopoverOpen} onOpenChange={setIsPopoverOpen}>
                 <PopoverTrigger asChild>
                   <div className="absolute right-1 top-1">
                     <Button
                       variant="ghost"
                       size="sm"
                       onClick={(e) => {
-                        // e.preventDefault();
+                        e.preventDefault();
                         setIsPopoverOpen(!isPopoverOpen);
                       }}
                       aria-label="Pick an emoji"

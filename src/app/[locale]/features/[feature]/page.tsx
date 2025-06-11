@@ -1,8 +1,8 @@
 // app/feature/page.tsx
 "use client";
 
-import React from "react";
-import { useParams } from "next/navigation";
+import React, { useEffect, useState } from "react";
+import { useParams, useRouter } from "next/navigation";
 import { usePeachy } from "@/contexts/peachy";
 import {
   useGetFeatureQuery,
@@ -18,11 +18,16 @@ import { WelcomeMessageFeature } from "@/components/modules/features/welcome-fet
 import { AutoResponseFeature } from "@/components/modules/features/auto-response-feature";
 import { BoosterMessageFeature } from "@/components/modules/features/booster-feture";
 import { InviteTrackerFeature } from "@/components/modules/features/inviter-tracker-feture";
+import { ReactionRolesFeature } from "@/components/modules/features/reaction-roles";
 import { JoinRoleFeature } from "@/components/modules/features/join-roles";
 import { LevelingSystemFeature } from "@/components/modules/features/leveling-system";
 import { GiveawayScheduleFeature } from "@/components/modules/features/giveaway-shedule";
+import { Card, CardFooter } from "@/components/ui/card";
+import { useTranslations } from "next-intl";
 
 export default function FeaturePage() {
+  const t = useTranslations("common");
+  const f = useTranslations("features");
   const { guildId, feature } = usePeachy();
 
   const {
@@ -43,18 +48,33 @@ export default function FeaturePage() {
           guild={guildId}
           feature={feature}
           refetch={refetch}
+          t={t}
+          f={f}
         />
       ) : (
-        <IsDisabledPage guild={guildId} feature={feature} refetch={refetch} />
+        <IsDisabledPage
+          guild={guildId}
+          feature={feature}
+          refetch={refetch}
+          t={t}
+          f={f}
+        />
       )}
     </div>
   );
 }
 
-export function IsEnabledPage({ featureInfo, guild, feature, refetch }: any) {
+export function IsEnabledPage({
+  featureInfo,
+  guild,
+  feature,
+  refetch,
+  t,
+  f,
+}: any) {
+  const router = useRouter();
   const features = UseFeaturesConfig();
   const { feature: featureParam } = useParams();
-
   const featureConfig =
     typeof featureParam === "string" && featureParam in features
       ? features[featureParam as keyof typeof features]
@@ -98,6 +118,17 @@ export function IsEnabledPage({ featureInfo, guild, feature, refetch }: any) {
       case "invite-tracker-message":
         return (
           <InviteTrackerFeature
+            featureConfig={featureConfig}
+            featureInfo={featureInfo}
+            guild={guild}
+            feature={feature}
+            refetch={refetch}
+          />
+        );
+
+      case "reactions-roles":
+        return (
+          <ReactionRolesFeature
             featureConfig={featureConfig}
             featureInfo={featureInfo}
             guild={guild}
@@ -151,7 +182,36 @@ export function IsEnabledPage({ featureInfo, guild, feature, refetch }: any) {
         );
 
       default:
-        return "hello";
+        return (
+          <motion.div
+            className="flex justify-center items-center"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+          >
+            <Card className="flex flex-col p-6">
+              <h1 className="text-2xl font-bold text-primary">
+                {f("featureNotFoundTitle")}
+              </h1>
+              <p className="text-muted-foreground">
+                {f("featureNotFoundDescription", { feature })}
+              </p>
+
+              <CardFooter className="flex justify-end items-start gap-3">
+                <Button variant="outline" onClick={() => router.back()}>
+                  {t("back")}
+                </Button>
+                <Button
+                  onClick={() => {
+                    refetch();
+                  }}
+                >
+                  {f("refreshPage")}
+                </Button>
+              </CardFooter>
+            </Card>
+          </motion.div>
+        );
     }
   }
 

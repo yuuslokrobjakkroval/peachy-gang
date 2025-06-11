@@ -14,6 +14,7 @@ import {
   Gift,
   UserMinus,
   Bot,
+  RollerCoaster,
 } from "lucide-react";
 import {
   Sidebar,
@@ -71,6 +72,11 @@ export function FeatureSidebar({
             title: "Invite Tracker Message",
             url: "/features/invite-tracker-message",
             icon: UserPlus,
+          },
+          {
+            title: "Reaction Roles",
+            url: "/features/reaction-roles",
+            icon: RollerCoaster,
           },
           {
             title: "Join Roles",

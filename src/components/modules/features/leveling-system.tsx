@@ -18,7 +18,7 @@ import { toCapitalCase } from "@/utils/common";
 import { Button } from "@/components/ui/button";
 import { FaTerminal, FaWandSparkles } from "react-icons/fa6";
 import { SwitchForm } from "@/components/form/switch-form";
-import LevelingDialog from "@/components/dialogs/leveling-variable";
+import LevelingDialog from "@/components/layouts/dialogs/leveling-variable";
 import { useTranslations } from "next-intl";
 
 const validationSchema = Yup.object({

@@ -14,6 +14,7 @@ import { Separator } from "@/components/ui/separator";
 import Image from "next/image";
 import Loading from "@/components/loading/circle";
 import { usePeachy } from "@/contexts/peachy";
+import { Card } from "@/components/ui/card";
 
 export default function FeaturesPage() {
   const t = useTranslations("guilds");
@@ -79,6 +80,8 @@ function GuildPanel({
         background: `url(${bannerUrl(info.id, info.banner)})`,
         backgroundSize: "cover",
         backgroundPosition: "center",
+        backgroundRepeat: "no-repeat",
+        aspectRatio: "16 / 9",
       }
     : {
         backgroundColor: `${userInfoByDiscord.banner_color}`,
@@ -104,27 +107,29 @@ function GuildPanel({
 
         <div className="relative mb-6">
           {/* Background and profile */}
-          <div
-            className="relative mt-1 flex w-full rounded-[var(--radius)] bg-cover h-[clamp(160px,20vw,300px)] border-2 shadow-primary"
-            style={backgroundStyle}
-          >
-            <div className="absolute -bottom-12 left-18 -translate-x-1/2">
-              <div className="relative w-[96px] h-[96px]">
-                {/* Avatar */}
-                <div className="relative w-[87px] h-[87px] rounded-full border-[4px] border-[var(--background)] bg-[var(--accent)] dark:!border-[var(--sidebar)] overflow-hidden">
-                  <Image
-                    src={iconUrl(info)}
-                    alt={t("server_icon_alt", {
-                      defaultMessage: "Server Icon",
-                    })}
-                    width={128}
-                    height={128}
-                    className="rounded-full object-cover"
-                  />
+          <Card className="p-4">
+            <div
+              className="flex w-full rounded-xl bg-cover"
+              style={backgroundStyle}
+            >
+              <div className="absolute -bottom-12 left-18 -translate-x-1/2">
+                <div className="relative w-[96px] h-[96px]">
+                  {/* Avatar */}
+                  <div className="relative w-[87px] h-[87px] rounded-full border-[4px] border-[var(--background)] bg-[var(--accent)] dark:!border-[var(--sidebar)] overflow-hidden ml-3">
+                    <Image
+                      src={iconUrl(info)}
+                      alt={t("server_icon_alt", {
+                        defaultMessage: "Server Icon",
+                      })}
+                      width={128}
+                      height={128}
+                      className="rounded-full object-cover"
+                    />
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
+          </Card>
         </div>
 
         <div className="mt-12 mb-3">

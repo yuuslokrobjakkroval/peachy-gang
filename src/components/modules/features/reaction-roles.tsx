@@ -1,4 +1,3 @@
-// app/feature/page.tsx
 "use client";
 import React, { useEffect, useState } from "react";
 import { useFormik } from "formik";
@@ -14,18 +13,23 @@ import { motion } from "framer-motion";
 import { SwitchForm } from "@/components/form/switch-form";
 import { ChannelSelectForm } from "@/components/form/channel-select-form";
 import { TextAreaForm } from "@/components/form/textarea-form";
-import { InputForm } from "@/components/form/input-form";
-import { CustomImagePage } from "@/components/modules/image-card";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
 import { Card } from "@/components/ui/card";
 import { FaTerminal, FaWandSparkles } from "react-icons/fa6";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableRow,
+} from "@/components/ui/table";
 import UpdateFeaturePanel from "../update-feature";
 import VariableDialog from "@/components/layouts/dialogs/variable";
-import { styles } from "@/styles";
 import { useTranslations } from "next-intl";
+import { styles } from "@/styles";
 
-export function WelcomeMessageFeature({
+export function ReactionRolesFeature({
   featureConfig,
   featureInfo,
   guild,
@@ -34,10 +38,12 @@ export function WelcomeMessageFeature({
 }: any) {
   const tCommon = useTranslations("common");
   const tFeature = useTranslations("features");
-  const t = useTranslations("welcomeFeature");
+  const t = useTranslations("reactionRolesFeature");
 
   const { userInfoByDiscord } = usePeachy();
   const [open, setOpen] = useState<boolean>(false);
+  const [showMessageSelection, setShowMessageSelection] =
+    useState<boolean>(false);
   const [sendMessage, { isLoading: sendMessageLoading }] =
     useSendMessageFeatureMutation();
   const [disableFeature, { isLoading: disableLoading }] =
@@ -55,7 +61,6 @@ export function WelcomeMessageFeature({
         {
           description: tCommon("disableSuccessDescription"),
           duration: 1000,
-          className: "bg-gradient-to-r from-pink-500 to-purple-500 text-white",
         }
       );
       refetch();
@@ -71,38 +76,21 @@ export function WelcomeMessageFeature({
 
   const formik = useFormik({
     initialValues: {
-      channel: featureInfo.channel,
+      channel: featureInfo.channel ?? "",
       isActive: featureInfo.isActive ?? true,
-      isEmbed: featureInfo.isEmbed ?? false,
       content: featureInfo.content ?? "",
-      isCustomImage: featureInfo.isCustomImage ?? true,
-      message: {
-        author: featureInfo.message?.author ?? { name: "", iconURL: "" },
-        title: featureInfo.message?.title ?? "",
-        description: featureInfo.message?.description ?? "",
-        color: featureInfo.message?.color ?? "#F582AE",
-        thumbnail: featureInfo.message?.thumbnail ?? "",
-        image: featureInfo.message?.image ?? "",
-        fields: featureInfo.message?.fields ?? [],
-        footer: featureInfo.message?.footer ?? { text: "", iconURL: "" },
-      },
-      image: {
-        layout: featureInfo.image?.layout ?? "classic",
-        feature: featureInfo.image?.feature ?? "WELCOME",
-        avatarShape: featureInfo.image?.avatarShape ?? "Circle",
-        circleColor: featureInfo.image?.circleColor ?? "#77CDFF",
-        featureColor: featureInfo.image?.featureColor ?? "#77CDFF",
-        usernameColor: featureInfo.image?.usernameColor ?? "#333333",
-        messageColor: featureInfo.image?.messageColor ?? "#333333",
-        backgroundImage: featureInfo.image?.backgroundImage ?? "",
-        message: featureInfo.image?.message ?? "",
-      },
+      messageId: featureInfo.messageId ?? "",
+      roles: featureInfo.roles ?? [],
     },
     validationSchema: Yup.object({
       isActive: Yup.boolean(),
       channel: Yup.string().required(tCommon("validation.channelRequired")),
-      isCustomImage: Yup.boolean(),
-      content: Yup.string().required(tCommon("validation.contentRequired")),
+      content: Yup.string().when("messageId", {
+        is: (messageId: string) => !messageId,
+        then: (schema) =>
+          schema.required(tCommon("validation.contentRequired")),
+        otherwise: (schema) => schema,
+      }),
     }),
     onSubmit: async (values) => {
       try {
@@ -138,15 +126,34 @@ export function WelcomeMessageFeature({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [updateSuccess]);
 
-  const backgroundStyle = formik.values.image?.backgroundImage
-    ? {
-        background: `url(${formik.values.image?.backgroundImage})`,
-        backgroundSize: "cover",
-        backgroundPosition: "center",
-        backgroundRepeat: "no-repeat",
-        aspectRatio: "16 / 9",
-      }
-    : { backgroundColor: "#77CDFF" };
+  const handleAddMessageClick = () => {
+    setShowMessageSelection(true);
+  };
+
+  const handleUseExistingMessage = () => {
+    formik.setFieldValue("messageId", "existing-message-id");
+    setShowMessageSelection(false);
+  };
+
+  const handleCreateNewMessage = async () => {
+    try {
+      await sendMessage({
+        test: false,
+        guild,
+        feature,
+        content: formik.values.content,
+        userId: userInfoByDiscord.id,
+      }).unwrap();
+      toast.success(tCommon("sendMessageSuccess"), {
+        duration: 2000,
+      });
+      setShowMessageSelection(false);
+    } catch (error) {
+      toast.error(tCommon("sendMessageError"), {
+        duration: 2000,
+      });
+    }
+  };
 
   return (
     <motion.div
@@ -158,10 +165,10 @@ export function WelcomeMessageFeature({
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6">
         <div className="flex flex-col">
           <h1 className="text-primary text-3xl md:text-4xl font-bold">
-            {tFeature("welcome-message")}
+            {tFeature("reaction-roles")}
           </h1>
           <p className="text-muted-foreground">
-            {tFeature("welcome-message_description")}
+            {tFeature("reaction-roles_description")}
           </p>
         </div>
         <Button
@@ -233,97 +240,98 @@ export function WelcomeMessageFeature({
           </div>
 
           <div className="col-span-12">
-            <ChannelSelectForm
-              control={{
-                id: "channel",
-                label: t("channel.label"),
-              }}
-              description={t("channel.description")}
-              guild={guild}
-              value={formik.values.channel}
-              onChange={(value) => formik.setFieldValue("channel", value)}
-              type={0}
-              className="w-full"
-            />
+            <Table>
+              <thead>
+                {" "}
+                {/* Use thead instead of TableHead for proper HTML structure */}
+                <tr>
+                  {" "}
+                  {/* Use tr as a direct child of thead */}
+                  <th colSpan={2}>{t("table.header")}</th>{" "}
+                  {/* Use th instead of TableCell */}
+                </tr>
+              </thead>
+              <TableBody>
+                {featureInfo?.roles?.length > 0 ? (
+                  featureInfo.roles.map((role: any, index: number) => (
+                    <TableRow key={index}>
+                      <TableCell>
+                        {role.emoji} - {role.roleId}
+                      </TableCell>
+                      <TableCell>
+                        <Button
+                          variant="ghost"
+                          size="sm"
+                          onClick={() =>
+                            formik.setFieldValue(
+                              "roles",
+                              formik.values.roles.filter(
+                                (_: any, i: number) => i !== index
+                              )
+                            )
+                          }
+                          aria-label={t("table.removeLabel", { index })}
+                        >
+                          Remove
+                        </Button>
+                      </TableCell>
+                    </TableRow>
+                  ))
+                ) : (
+                  <TableRow>
+                    <TableCell colSpan={2} className="text-center">
+                      {t("noReactionRolesFound")}
+                    </TableCell>
+                  </TableRow>
+                )}
+                <TableRow>
+                  <TableCell colSpan={2} className="text-center">
+                    <Button
+                      type="button"
+                      onClick={handleAddMessageClick}
+                      className="mt-2"
+                    >
+                      {t("addMessage")}
+                    </Button>
+                  </TableCell>
+                </TableRow>
+              </TableBody>
+            </Table>
           </div>
 
-          <div className="col-span-12">
-            <TextAreaForm
-              control={{
-                id: "content",
-                label: t("content.label"),
-                description: t("content.description"),
-              }}
-              placeholder={t("content.placeholder")}
-              enableEmoji
-              value={formik.values.content}
-              onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) =>
-                formik.setFieldValue("content", e.target.value)
-              }
-            />
-          </div>
-
-          <div className="col-span-12 sm:col-span-6 lg:col-span-4">
-            <SwitchForm
-              control={{
-                id: "isCustomImage",
-                label: t("customImage.label"),
-                description: t("customImage.description"),
-              }}
-              checked={formik.values.isCustomImage}
-              onChange={(checked) =>
-                formik.setFieldValue("isCustomImage", checked)
-              }
-            />
-          </div>
-          <div className="col-span-8" />
-
-          {formik.values.isCustomImage ? (
-            <CustomImagePage
-              userInfoByDiscord={userInfoByDiscord}
-              formik={formik}
-            />
-          ) : (
-            <>
-              <div className="col-span-6">
-                <InputForm
-                  control={{
-                    id: "image.backgroundImage",
-                    label: t("backgroundImage.label"),
-                    description: t("backgroundImage.description"),
-                  }}
-                  placeholder={t("backgroundImage.placeholder")}
-                  value={formik.values.image?.backgroundImage || ""}
-                  onChange={(value: string) => {
-                    formik.setFieldValue("image.backgroundImage", value);
-                  }}
-                />
-              </div>
-
-              {formik.values.image?.backgroundImage.startsWith("https:") ? (
-                <div className="col-span-12">
-                  <Card className="p-4">
-                    <div
-                      className="flex w-full rounded-xl bg-cover"
-                      style={backgroundStyle}
-                    />
-                  </Card>
+          {showMessageSelection && (
+            <div className="col-span-12">
+              <Card className="p-4">
+                <h2 className="text-lg font-semibold">
+                  {t("newReactionRoles")}
+                </h2>
+                <p className="text-sm text-muted-foreground">
+                  {t("getStartedDescription")}
+                </p>
+                <div className="flex gap-4 mt-4">
+                  <Button
+                    onClick={handleUseExistingMessage}
+                    className="bg-blue-500 text-white hover:bg-blue-600"
+                  >
+                    {t("useExistingMessage")}
+                  </Button>
+                  <Button
+                    onClick={handleCreateNewMessage}
+                    className="bg-green-500 text-white hover:bg-green-600"
+                    disabled={sendMessageLoading}
+                  >
+                    {sendMessageLoading
+                      ? tCommon("creating")
+                      : t("createNewMessage")}
+                  </Button>
                 </div>
-              ) : (
-                <div className="col-span-12">
-                  <Card className="p-4">
-                    <p className="text-sm text-muted-foreground">
-                      {t("noBackgroundImage")}
-                    </p>
-                  </Card>
-                </div>
-              )}
-            </>
+              </Card>
+            </div>
           )}
 
           <div
-            style={styles}
             className="fixed left-1/2 z-50 mx-auto rounded-2xl"
+            style={styles}
           >
             {formik.dirty && (
               <UpdateFeaturePanel

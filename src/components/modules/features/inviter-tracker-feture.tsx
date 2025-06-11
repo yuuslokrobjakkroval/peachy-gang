@@ -22,7 +22,7 @@ import { Card } from "@/components/ui/card";
 import { FaTerminal, FaWandSparkles } from "react-icons/fa6";
 import UpdateFeaturePanel from "../update-feature";
 import { styles } from "@/styles";
-import InviteTrackerVariableDialog from "@/components/dialogs/tracker-variable";
+import InviteTrackerVariableDialog from "@/components/layouts/dialogs/tracker-variable";
 import { useTranslations } from "next-intl";
 
 const validationSchema = Yup.object({
