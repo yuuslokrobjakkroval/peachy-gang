@@ -33,6 +33,7 @@ import { ExpandableTabs, TabItem } from "@/components/ui/expandable-tabs";
 import { styles } from "@/styles";
 import { AnimatedShinyText } from "@/components/animations/AnimatedShinyText";
 import { Badge } from "@/components/ui/badge";
+import { YoutubeLogo } from "@/components/icons/Social";
 
 type FormData = {
   name: string;
@@ -546,7 +547,7 @@ export default function Peachy() {
               >
                 <Tooltip>
                   <TooltipTrigger asChild>
-                    <FaYoutube size={24} />
+                    <YoutubeLogo />
                   </TooltipTrigger>
                   <TooltipContent className="rounded-lg">
                     <div className="flex items-center">
