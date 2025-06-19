@@ -196,7 +196,7 @@ function ColorSwatchPickerItem({
     <AriaColorSwatchPickerItem
       className={composeRenderProps(className, (className) =>
         cn(
-          "group/swatch-item cursor-pointer rounded-[var(--radius)] p-1 focus:outline-none focus:ring-2 focus:ring-[hsl(var(--hu-ring))] focus:ring-offset-2",
+          "group/swatch-item cursor-pointer rounded-[var(--radius)] p-1",
           className
         )
       )}
