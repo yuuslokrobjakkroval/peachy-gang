@@ -1,66 +1,69 @@
-import * as React from "react"
-import { cva, type VariantProps } from "class-variance-authority"
+"use client";
 
-import { cn } from "@/lib/utils"
+import React from "react";
+import { cn } from "@/lib/utils";
+import { motion } from "framer-motion";
 
-const alertVariants = cva(
-  "relative w-full rounded-lg border px-4 py-3 text-sm grid has-[>svg]:grid-cols-[calc(var(--spacing)*4)_1fr] grid-cols-[0_1fr] has-[>svg]:gap-x-3 gap-y-0.5 items-start [&>svg]:size-4 [&>svg]:translate-y-0.5 [&>svg]:text-current",
-  {
-    variants: {
-      variant: {
-        default: "bg-card text-card-foreground",
-        destructive:
-          "text-destructive bg-card [&>svg]:text-current *:data-[slot=alert-description]:text-destructive/90",
-      },
-    },
-    defaultVariants: {
-      variant: "default",
-    },
-  }
-)
+interface AlertProps {
+  type?: "success" | "error" | "warning" | "info";
+  message?: string;
+  onClick?: React.MouseEventHandler<HTMLDivElement>;
+}
 
-function Alert({
-  className,
-  variant,
-  ...props
-}: React.ComponentProps<"div"> & VariantProps<typeof alertVariants>) {
+const typeStyles = {
+  success: "bg-green-100 text-green-800 border-green-300",
+  error: "bg-red-100 text-red-800 border-red-300",
+  warning: "bg-yellow-100 text-yellow-800 border-yellow-300",
+  info: "bg-blue-100 text-blue-800 border-blue-300",
+};
+
+const fadeInBlur = {
+  initial: { opacity: 0, filter: "blur(10px)", y: 10, rotate: 0 },
+  animate: {
+    opacity: 1,
+    filter: "blur(0px)",
+    y: 0,
+    rotate: 0,
+    transition: { duration: 0.2, ease: "easeInOut" },
+  },
+};
+
+const Alert: React.FC<AlertProps> = ({
+  type = "info",
+  message = "This is an alert message.",
+  onClick,
+}) => {
   return (
-    <div
-      data-slot="alert"
+    <motion.div
+      className={cn(
+        "border px-4 py-3 flex gap-x-2 items-center rounded-2xl text-sm",
+        typeStyles[type]
+      )}
       role="alert"
-      className={cn(alertVariants({ variant }), className)}
-      {...props}
-    />
-  )
-}
+      variants={fadeInBlur}
+      initial="initial"
+      animate="animate"
+      whileHover={{
+        scale: 1.01,
+        rotate: 1,
+        transition: {
+          duration: 0.2,
+          ease: "easeInOut",
+        },
+      }}
+      whileTap={{
+        scale: 0.99,
+        transition: {
+          duration: 0.2,
+          ease: "easeInOut",
+        },
+      }}
+      onClick={onClick}
+    >
+      <span className="font-bold capitalize">{type}</span>
+      <span>{message}</span>
+    </motion.div>
+  );
+};
 
-function AlertTitle({ className, ...props }: React.ComponentProps<"div">) {
-  return (
-    <div
-      data-slot="alert-title"
-      className={cn(
-        "col-start-2 line-clamp-1 min-h-4 font-medium tracking-tight",
-        className
-      )}
-      {...props}
-    />
-  )
-}
-
-function AlertDescription({
-  className,
-  ...props
-}: React.ComponentProps<"div">) {
-  return (
-    <div
-      data-slot="alert-description"
-      className={cn(
-        "text-muted-foreground col-start-2 grid justify-items-start gap-1 text-sm [&_p]:leading-relaxed",
-        className
-      )}
-      {...props}
-    />
-  )
-}
-
-export { Alert, AlertTitle, AlertDescription }
+export default Alert;

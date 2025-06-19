@@ -26,6 +26,8 @@ const Information = ({
         background: `url(${bannerUrl(userInfoByDiscord.id, userInfoByDiscord.banner)})`,
         backgroundSize: "cover",
         backgroundPosition: "center",
+        backgroundRepeat: "no-repeat",
+        aspectRatio: "16 / 9",
       }
     : { backgroundColor: userInfoByDiscord.banner_color };
 
@@ -33,7 +35,7 @@ const Information = ({
     <Card className="items-center w-full h-full p-[16px] bg-cover">
       {/* Background and profile */}
       <div
-        className="relative mt-1 flex w-full justify-center rounded-xl bg-cover h-[clamp(160px,20vw,300px)]"
+        className="relative mt-1 flex w-full justify-center rounded-xl bg-cover "
         style={backgroundStyle}
       >
         <div className="absolute -bottom-12 left-1/2 -translate-x-1/2">

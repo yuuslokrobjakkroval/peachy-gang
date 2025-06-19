@@ -556,6 +556,33 @@
     "unauthorized": "Unauthorized access",
     "forbidden": "Access forbidden"
   },
+  "NotFound": {
+    "title": "Something's missing",
+    "description": "Sorry, the page you are looking for doesn't exist or has been moved.",
+    "goBack": "Go back",
+    "backToHome": "Back to Home"
+  },
+  "RTLNavbar": {
+    "themeTooltip": "Theme",
+    "languageTooltip": "Language",
+    "language": {
+      "english": "English",
+      "khmer": "Khmer"
+    },
+    "notificationsTooltip": "Notifications",
+    "notifications": "Notifications",
+    "markAllRead": "Mark all read",
+    "notificationFilters": "Notification filters",
+    "allTab": "All",
+    "unreadTab": "Unread",
+    "archiveTab": "Archive",
+    "userTooltip": "User",
+    "greeting": "Hey, {name}",
+    "avatarDecorationAlt": "Avatar Decoration",
+    "profile": "Profile",
+    "settings": "Settings",
+    "logOut": "Log Out"
+  },
   "common": {
     "loading": "Loading...",
     "error": "Error",
@@ -656,6 +683,45 @@
         "placeholder": "Type in message"
       },
       "noBackgroundImage": "No background image provided"
+    }
+  },
+  "StatusCodeList": {
+    "title": "HTTP Status Code Reference",
+    "title_description": "Explore categorized HTTP status codes with descriptions and filtering support.",
+    "searchPlaceholder": "Search status codes...",
+    "statusCode": "Status Code",
+    "category": "Category",
+    "description": "Description",
+    "previous": "Previous",
+    "next": "Next",
+    "page": "Page",
+    "of": "of",
+    "categories": {
+      "informational": "Informational",
+      "success": "Success",
+      "redirection": "Redirection",
+      "clientError": "Client Error",
+      "serverError": "Server Error"
+    },
+    "descriptions": {
+      "Continue": "Continue",
+      "Switching Protocols": "Switching Protocols",
+      "OK": "OK",
+      "Created": "Created",
+      "Accepted": "Accepted",
+      "No Content": "No Content",
+      "Multiple Choices": "Multiple Choices",
+      "Moved Permanently": "Moved Permanently",
+      "Found": "Found",
+      "Not Modified": "Not Modified",
+      "Bad Request": "Bad Request",
+      "Unauthorized": "Unauthorized",
+      "Forbidden": "Forbidden",
+      "Not Found": "Not Found",
+      "Internal Server Error": "Internal Server Error",
+      "Not Implemented": "Not Implemented",
+      "Bad Gateway": "Bad Gateway",
+      "Service Unavailable": "Service Unavailable"
     }
   }
 }

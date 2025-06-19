@@ -521,6 +521,33 @@
     "unauthorized": "ការចូលប្រើគ្មានការអនុញ្ញាត",
     "forbidden": "ការចូលប្រើត្រូវបានហាមឃាត់"
   },
+  "NotFound": {
+    "title": "អ្វីមួយបាត់",
+    "description": "សូមអភ័យទោស ទំព័រដែលអ្នកកំពុងស្វែងរកមិនមាន ឬត្រូវបានផ្លាស់ប្តូរ។",
+    "goBack": "ត្រឡប់ក្រោយ",
+    "backToHome": "ត្រឡប់ទៅទំព័រដើម"
+  },
+  "RTLNavbar": {
+    "themeTooltip": "ស្បែក",
+    "languageTooltip": "ភាសា",
+    "language": {
+      "english": "អង់គ្លេស",
+      "khmer": "ខ្មែរ"
+    },
+    "notificationsTooltip": "ការជូនដំណឹង",
+    "notifications": "ការជូនដំណឹង",
+    "markAllRead": "សម្គាល់ទាំងអស់ថាបានអាន",
+    "notificationFilters": "តម្រងការជូនដំណឹង",
+    "allTab": "ទាំងអស់",
+    "unreadTab": "មិនទាន់អាន",
+    "archiveTab": "បណ្ណសារ",
+    "userTooltip": "អ្នកប្រើប្រាស់",
+    "greeting": "សួស្តី, {name}",
+    "avatarDecorationAlt": "ការតុបតែងរូបភាព",
+    "profile": "ប្រវត្តិរូប",
+    "settings": "ការកំណត់",
+    "logOut": "ចាកចេញ"
+  },
   "common": {
     "loading": "កំពុងផ្ទុក...",
     "error": "កំហុស",
@@ -621,6 +648,45 @@
         "placeholder": "វាយបញ្ចូលសារ"
       },
       "noBackgroundImage": "មិនមានរូបភាពផ្ទៃខាងក្រោយផ្តល់ឱ្យ"
+    }
+  },
+  "StatusCodeList": {
+    "title": "សេចក្តីយោងកូដស្ថានភាព HTTP",
+    "title_description": "ស្វែងយល់ពីកូដស្ថានភាព HTTP ដែលបែងចែកជាប្រភេទជាមួយការពិពណ៌នា និងការគាំទ្រតម្រង។",
+    "searchPlaceholder": "ស្វែងរកកូដស្ថានភាព...",
+    "statusCode": "កូដស្ថានភាព",
+    "category": "ប្រភេទ",
+    "description": "ការពិពណ៌នា",
+    "previous": "មុន",
+    "next": "បន្ទាប់",
+    "page": "ទំព័រ",
+    "of": "នៃ",
+    "categories": {
+      "informational": "ព័ត៌មាន",
+      "success": "ជោគជ័យ",
+      "redirection": "ប្តូរទិស",
+      "clientError": "កំហុសអតិថិជន",
+      "serverError": "កំហុសម៉ាស៊ីនមេ"
+    },
+    "descriptions": {
+      "Continue": "បន្ត",
+      "Switching Protocols": "ការប្តូរពិធីការ",
+      "OK": "យល់ព្រម",
+      "Created": "បានបង្កើត",
+      "Accepted": "បានទទួលយក",
+      "No Content": "គ្មានមាតិកា",
+      "Multiple Choices": "ជម្រើសច្រើន",
+      "Moved Permanently": "ផ្លាស់ប្តូរជាអចិន្ត្រៃយ៍",
+      "Found": "បានរកឃើញ",
+      "Not Modified": "មិនបានកែប្រែ",
+      "Bad Request": "សំណើមិនល្អ",
+      "Unauthorized": "គ្មានសិទ្ធិ",
+      "Forbidden": "ហាមឃាត់",
+      "Not Found": "រកមិនឃើញ",
+      "Internal Server Error": "កំហុសម៉ាស៊ីនមេខាងក្នុង",
+      "Not Implemented": "មិនបានអនុវត្ត",
+      "Bad Gateway": "ច្រកផ្លូវមិនល្អ",
+      "Service Unavailable": "សេវាមិនអាចប្រើបាន"
     }
   }
 }

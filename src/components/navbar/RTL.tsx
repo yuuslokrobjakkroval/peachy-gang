@@ -36,17 +36,6 @@ import { ArchiveNotification } from "./Notification/Archive";
 import ThemeChanger from "../theme.switch";
 import LanguageChanger from "../language.switch";
 import { useLocale, useTranslations } from "next-intl";
-// import ThemeControlPanel from "../theme-control-panel";
-// import {
-//   Sheet,
-//   SheetContent,
-//   SheetHeader,
-//   SheetTitle,
-//   SheetTrigger,
-//   SheetClose,
-// } from "../ui/sheet";
-// import { RainbowButton } from "../ui/rainbow-button";
-// import { Palette, X } from "lucide-react";
 
 const RTLNavbar = (props: {
   user: UserInfo;
@@ -54,7 +43,7 @@ const RTLNavbar = (props: {
   brandText?: string;
   secondary?: boolean | string;
 }) => {
-  const t = useTranslations();
+  const t = useTranslations("RTLNavbar");
   const locale = useLocale();
   const { user } = props;
   const { setUserInfoByDiscord } = usePeachy();
@@ -92,40 +81,7 @@ const RTLNavbar = (props: {
   if (!isClient) return null;
 
   return (
-    <nav className="flex justify-end items-center gap-3 rounded-xl py-1 transition-all duration-300">
-      {/* Switch Mode Toggle */}
-      {/* <Tooltip>
-          <TooltipTrigger asChild>
-            <Button
-              variant="ghost"
-              className="hover:bg-muted transition-colors duration-200"
-              aria-label="Theme customizer"
-              data-tour="theme-customizer"
-              onClick={() => setOpen(true)}
-            >
-              <IoMdPlanet className="h-6 w-6 text-foreground" />
-            </Button>
-          </TooltipTrigger>
-          <TooltipContent>
-            <p className="text-sm text-secondary">Switch Mode</p>
-          </TooltipContent>
-        </Tooltip>
-
-        <Sheet open={open} onOpenChange={setOpen}>
-          <SheetContent className="h-full w-full gap-0 sm:max-w-[400px] [&>button]:hidden">
-            <SheetHeader className="min-h-(--header-height) flex-row items-center justify-between border-b border-dashed px-6">
-              <SheetTitle>Theme Customizer</SheetTitle>
-              <SheetClose
-                className="hover:bg-muted flex size-7 cursor-pointer items-center justify-center rounded transition-colors"
-                onClick={() => setOpen(false)}
-              >
-                <X className="size-4" />
-              </SheetClose>
-            </SheetHeader>
-            <ThemeControlPanel />
-          </SheetContent>
-        </Sheet> */}
-
+    <nav className="flex justify-end items-center gap-3 rounded-xl py-1 transition-all duration-300 font-handwritten">
       {/* Dark Mode Toggle */}
       <Tooltip>
         <TooltipTrigger asChild>
@@ -133,8 +89,8 @@ const RTLNavbar = (props: {
             <ThemeChanger />
           </div>
         </TooltipTrigger>
-        <TooltipContent>
-          <p className="text-sm text-secondary">Theme</p>
+        <TooltipContent className="bg-popover text-popover-foreground">
+          <p className="text-sm">{t("themeTooltip")}</p>
         </TooltipContent>
       </Tooltip>
 
@@ -145,10 +101,11 @@ const RTLNavbar = (props: {
             <LanguageChanger setLanguage={setLanguage} />
           </div>
         </TooltipTrigger>
-        <TooltipContent>
-          <p className="text-sm text-secondary">
+        <TooltipContent className="bg-popover text-popover-foreground">
+          <p className="text-sm">
             {t(
-              languages.find((l) => l.code === language)?.nameKey || "Language"
+              languages.find((l) => l.code === language)?.nameKey ||
+                "languageTooltip"
             )}
           </p>
         </TooltipContent>
@@ -162,50 +119,50 @@ const RTLNavbar = (props: {
               <Button
                 variant="ghost"
                 className="hover:bg-muted transition-colors duration-200"
-                aria-label="Notifications"
+                aria-label={t("notificationsTooltip")}
               >
-                <IoMdNotifications className="h-6 w-6 text-foreground" />
+                <IoMdNotifications className="h-6 w-6 text-foreground animate-twinkle" />
               </Button>
             </DropdownMenuTrigger>
           </TooltipTrigger>
-          <TooltipContent>
-            <p className="text-sm text-secondary">Notifications</p>
+          <TooltipContent className="bg-popover text-popover-foreground">
+            <p className="text-sm">{t("notificationsTooltip")}</p>
           </TooltipContent>
         </Tooltip>
         <DropdownMenuContent
-          className="w-[340px] max-h-[80vh] overflow-auto rounded-2xl bg-card p-6 border border-border shadow-lg transition-all duration-200"
+          className="w-[340px] max-h-[80vh] overflow-auto rounded-2xl bg-card p-6 border-border shadow-lg transition-all duration-200"
           align="end"
         >
           <div className="flex items-center justify-between mb-4">
-            <DropdownMenuLabel className="text-xl font-semibold text-foreground">
-              Notifications
+            <DropdownMenuLabel className="text-xl font-ghibi-bold text-foreground">
+              {t("notifications")}
             </DropdownMenuLabel>
             <Button
               variant="ghost"
-              className="text-sm text-primary hover:text-primary-dark"
+              className="text-sm text-primary hover:text-primary-foreground"
             >
-              Mark all read
+              {t("markAllRead")}
             </Button>
           </div>
-          <Tabs defaultValue="all" aria-label="Notification filters">
+          <Tabs defaultValue="all" aria-label={t("notificationFilters")}>
             <TabsList className="grid w-full grid-cols-3 bg-muted/50 rounded-lg">
               <TabsTrigger
                 value="all"
-                className="data-[state=active]:bg-background data-[state=active]:text-foreground rounded-md text-sm font-medium"
+                className="data-[state=active]:bg-background data-[state=active]:text-foreground rounded-md text-sm font-ghibi-bold"
               >
-                All
+                {t("allTab")}
               </TabsTrigger>
               <TabsTrigger
                 value="unread"
-                className="data-[state=active]:bg-background data-[state=active]:text-foreground rounded-md py-2 text-sm font-medium"
+                className="data-[state=active]:bg-background data-[state=active]:text-foreground rounded-md py-2 text-sm font-ghibi-bold"
               >
-                Unread
+                {t("unreadTab")}
               </TabsTrigger>
               <TabsTrigger
                 value="archive"
-                className="data-[state=active]:bg-background data-[state=active]:text-foreground rounded-md py-2 text-sm font-medium"
+                className="data-[state=active]:bg-background data-[state=active]:text-foreground rounded-md py-2 text-sm font-ghibi-bold"
               >
-                Archive
+                {t("archiveTab")}
               </TabsTrigger>
             </TabsList>
             <TabsContent
@@ -249,7 +206,7 @@ const RTLNavbar = (props: {
                           src={avatarUrl(user)}
                           alt={toCapitalCase(user.username)}
                         />
-                        <AvatarFallback className="bg-muted text-foreground">
+                        <AvatarFallback className="bg-muted text-foreground font-ghibi-bold">
                           {toCapitalCase(user.global_name?.[0])}
                         </AvatarFallback>
                       </Avatar>
@@ -260,7 +217,7 @@ const RTLNavbar = (props: {
                       <div className="absolute inset-0 flex items-center justify-center">
                         <Image
                           src={decorationUrl(user.avatar_decoration_data)}
-                          alt="Avatar Decoration"
+                          alt={t("avatarDecorationAlt")}
                           width={96}
                           height={96}
                           className="object-contain"
@@ -271,35 +228,36 @@ const RTLNavbar = (props: {
                 </Button>
               </DropdownMenuTrigger>
             </TooltipTrigger>
-            <TooltipContent>
-              <p className="text-sm text-secondary">User</p>
+            <TooltipContent className="bg-popover text-popover-foreground">
+              <p className="text-sm">{t("userTooltip")}</p>
             </TooltipContent>
           </Tooltip>
           <DropdownMenuContent
-            className="w-[220px] rounded-xl bg-card p-2 border border-border shadow-lg transition-all duration-200"
+            className="w-[220px] rounded-xl bg-card p-2 border-border shadow-lg transition-all duration-200"
             align="end"
           >
-            <DropdownMenuLabel className="px-2 py-1 text-sm text-foreground font-semibold">
-              Hey, {user.global_name} {hasBeenOpened && getRandomEmoji()}
+            <DropdownMenuLabel className="px-2 py-1 text-sm text-foreground font-ghibi-bold">
+              {t("greeting", { name: user.global_name })}{" "}
+              {hasBeenOpened && getRandomEmoji()}
             </DropdownMenuLabel>
             <DropdownMenuSeparator className="my-1 bg-border" />
             <DropdownMenuItem
               className="px-2 py-1 text-sm text-foreground hover:bg-muted transition-colors duration-200"
               onClick={handleProfileClick}
             >
-              Profile
+              {t("profile")}
             </DropdownMenuItem>
             <DropdownMenuItem
               className="px-2 py-1 text-sm text-foreground hover:bg-muted transition-colors duration-200"
               onClick={handleProfileSettingClick}
             >
-              Settings
+              {t("settings")}
             </DropdownMenuItem>
             <DropdownMenuItem
               className="px-2 py-1 text-sm text-destructive hover:bg-muted transition-colors duration-200"
               onClick={handleLogoutClick}
             >
-              Log Out
+              {t("logOut")}
             </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
