@@ -11,6 +11,7 @@ import { ColorPickerForm } from "@/components/form/color-picker-form";
 import { cn } from "@/lib/utils";
 import { avatarUrl } from "@/utils/common";
 import { useTranslations } from "next-intl";
+import { ColorPickerWithPresets } from "@/components/ui/ColorPicker/ColorPickerWithPresets";
 
 export function CustomImagePage({ userInfoByDiscord, formik }: any) {
   const t = useTranslations("common"); // Use global "common" namespace
@@ -92,6 +93,10 @@ export function CustomImagePage({ userInfoByDiscord, formik }: any) {
           onChange={(value) =>
             formik.setFieldValue("image.featureColor", value)
           }
+        />
+        <ColorPickerWithPresets
+          defaultValue="#3b82f6"
+          onChange={(color) => console.log("Selected color:", color)}
         />
       </div>
 

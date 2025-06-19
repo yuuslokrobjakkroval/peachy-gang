@@ -6,7 +6,15 @@ import Link from "next/link";
 import Image from "next/image";
 import { cn } from "@/lib/utils";
 import { config } from "@/utils/config";
-import { FaFacebook, FaYoutube, FaArrowUp } from "react-icons/fa";
+import { FaArrowUp } from "react-icons/fa";
+import {
+  FaFacebook,
+  FaYoutube,
+  FaDiscord,
+  FaXTwitter,
+  FaPatreon,
+} from "react-icons/fa6";
+
 import { Button } from "@/components/ui/button";
 import {
   Tooltip,
@@ -24,16 +32,14 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { useForm } from "react-hook-form";
-import { ArrowRightCircle, Book, Home, X } from "lucide-react";
+import { Book, Home, X } from "lucide-react";
 import { motion } from "framer-motion";
 import { toast } from "sonner";
 import { useTranslations } from "next-intl";
 import Container from "@/components/layouts/container";
 import { ExpandableTabs, TabItem } from "@/components/ui/expandable-tabs";
 import { styles } from "@/styles";
-import { AnimatedShinyText } from "@/components/animations/AnimatedShinyText";
 import { Badge } from "@/components/ui/badge";
-import { YoutubeLogo } from "@/components/icons/Social";
 
 type FormData = {
   name: string;
@@ -547,7 +553,7 @@ export default function Peachy() {
               >
                 <Tooltip>
                   <TooltipTrigger asChild>
-                    <YoutubeLogo />
+                    <FaYoutube size={24} />
                   </TooltipTrigger>
                   <TooltipContent className="rounded-lg">
                     <div className="flex items-center">
@@ -556,29 +562,62 @@ export default function Peachy() {
                   </TooltipContent>
                 </Tooltip>
               </a>
+              <a
+                href="https://discord.gg/peachyganggg"
+                target="_blank"
+                rel="noopener"
+                className="bf-ctransform hover:scale-110 hover:rotate-12 transition-all duration-300"
+                aria-label="Follow Peachy on Discord"
+              >
+                <Tooltip>
+                  <TooltipTrigger asChild>
+                    <FaDiscord size={24} />
+                  </TooltipTrigger>
+                  <TooltipContent className="rounded-lg">
+                    <div className="flex items-center">
+                      <span>Discord</span>
+                    </div>
+                  </TooltipContent>
+                </Tooltip>
+              </a>
+              <a
+                href="https://x.com/peachyganggg"
+                target="_blank"
+                rel="noopener"
+                className="bf-ctransform hover:scale-110 hover:rotate-12 transition-all duration-300"
+                aria-label="Follow Peachy on X"
+              >
+                <Tooltip>
+                  <TooltipTrigger asChild>
+                    <FaXTwitter size={24} />
+                  </TooltipTrigger>
+                  <TooltipContent className="rounded-lg">
+                    <div className="flex items-center">
+                      <span>X</span>
+                    </div>
+                  </TooltipContent>
+                </Tooltip>
+              </a>
+              <a
+                href="https://www.patreon.com/c/peachyganggg"
+                target="_blank"
+                rel="noopener"
+                className="bf-ctransform hover:scale-110 hover:rotate-12 transition-all duration-300"
+                aria-label="Follow Peachy on Patreon"
+              >
+                <Tooltip>
+                  <TooltipTrigger asChild>
+                    <FaPatreon size={24} />
+                  </TooltipTrigger>
+                  <TooltipContent className="rounded-lg">
+                    <div className="flex items-center">
+                      <span>Patreon</span>
+                    </div>
+                  </TooltipContent>
+                </Tooltip>
+              </a>
             </div>
           </div>
-
-          {/* Newsletter Signup */}
-          {/* <div className="relative lg:col-span-2">
-            <div className="font-ghibi-bold text-foreground dark:text-foreground text-lg text-center sm:text-left">
-              {t("footer.newsletter")}
-            </div>
-            <form className="mt-4 flex flex-col sm:flex-row gap-2 justify-center sm:justify-start">
-              <input
-                type="email"
-                placeholder="Enter your email"
-                className="p-2 rounded-md border border-border dark:border-border bg-white dark:bg-gray-800 text-foreground dark:text-foreground focus:outline-none focus:ring-2 focus:ring-primary"
-                aria-label="Email for newsletter"
-              />
-              <button
-                type="submit"
-                className="p-2 bg-primary text-white rounded-md hover:bg-primary-dark transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-primary"
-              >
-                Subscribe
-              </button>
-            </form>
-          </div> */}
 
           {/* Scroll-to-Top Button */}
           <div className="fixed bottom-5 right-5 z-50">
@@ -593,7 +632,7 @@ export default function Peachy() {
         </footer>
 
         {/* Copyright Section */}
-        <div className="my-10 text-sm text-center text-muted-foreground font-ghibi dark:text-muted-foreground">
+        <div className="my-25 text-sm text-center text-muted-foreground font-ghibi dark:text-muted-foreground">
           © {new Date().getFullYear()} Made by{" "}
           <a
             href="https://discord.gg/peachyganggg"
