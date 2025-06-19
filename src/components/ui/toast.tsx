@@ -21,7 +21,7 @@ const springConfig = {
 
 export function Toast({ state = "initial", onReset, onSave }: ToastProps) {
   const commonClasses =
-    "h-10 bg-[var(--card)] rounded-[var(--radius)] shadow-sm border border-[var(--border)] justify-center items-center inline-flex overflow-hidden font-handwritten relative";
+    "mt-6 h-12 bg-[var(--card)] rounded-[var(--radius)] shadow-sm border border-[var(--border)] justify-center items-center inline-flex overflow-hidden font-handwritten relative";
 
   return (
     <motion.div

@@ -33,7 +33,7 @@ import { cn } from "@/lib/utils";
 import { Pipette } from "lucide-react";
 
 const colorPickerVariants = cva(
-  "flex flex-col gap-2 rounded-[var(--radius)] border border-[hsl(var(--hu-border))] bg-[hsl(var(--hu-background))] p-4 ",
+  "flex flex-col gap-2 rounded-[var(--radius)] ",
   {
     variants: {
       size: {

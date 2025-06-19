@@ -7,11 +7,10 @@ import { SelectForm } from "@/components/form/select-form";
 import { RadioGroupForm } from "@/components/form/radio-group-form";
 import { InputForm } from "@/components/form/input-form";
 import { Card } from "@/components/ui/card";
-import { ColorPickerForm } from "@/components/form/color-picker-form";
 import { cn } from "@/lib/utils";
 import { avatarUrl } from "@/utils/common";
 import { useTranslations } from "next-intl";
-import { ColorPickerWithPresets } from "@/components/ui/ColorPicker/ColorPickerWithPresets";
+import { ColorPickerWithPresetsForm } from "@/components/form/color-picker-with-preset-form";
 
 export function CustomImagePage({ userInfoByDiscord, formik }: any) {
   const t = useTranslations("common"); // Use global "common" namespace
@@ -61,7 +60,7 @@ export function CustomImagePage({ userInfoByDiscord, formik }: any) {
       </div>
 
       <div className="col-span-12 xl:col-span-3 lg:col-span-6 sm:col-span-12">
-        <ColorPickerForm
+        <ColorPickerWithPresetsForm
           control={{
             id: "image.circleColor",
             label: t("customImage.circleColor.label"),
@@ -78,7 +77,7 @@ export function CustomImagePage({ userInfoByDiscord, formik }: any) {
       </div>
 
       <div className="col-span-12 xl:col-span-3 lg:col-span-6 sm:col-span-6">
-        <ColorPickerForm
+        <ColorPickerWithPresetsForm
           control={{
             id: "image.featureColor",
             label: t("customImage.featureColor.label"),
@@ -94,14 +93,10 @@ export function CustomImagePage({ userInfoByDiscord, formik }: any) {
             formik.setFieldValue("image.featureColor", value)
           }
         />
-        <ColorPickerWithPresets
-          defaultValue="#3b82f6"
-          onChange={(color) => console.log("Selected color:", color)}
-        />
       </div>
 
       <div className="col-span-12 xl:col-span-3 lg:col-span-6 sm:col-span-6">
-        <ColorPickerForm
+        <ColorPickerWithPresetsForm
           control={{
             id: "image.usernameColor",
             label: t("customImage.usernameColor.label"),
@@ -120,7 +115,7 @@ export function CustomImagePage({ userInfoByDiscord, formik }: any) {
       </div>
 
       <div className="col-span-12 xl:col-span-3 lg:col-span-6 sm:col-span-6 ">
-        <ColorPickerForm
+        <ColorPickerWithPresetsForm
           control={{
             id: "image.messageColor",
             label: t("customImage.messageColor.label"),

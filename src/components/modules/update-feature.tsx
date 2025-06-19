@@ -35,7 +35,7 @@ export default function UpdateFeaturePanel({
   };
 
   return (
-    <div className="flex items-center justify-center w-full py-4">
+    <div className="fixed flex items-center justify-center z-50">
       <Toast state={state} onSave={handleSave} onReset={handleReset} />
     </div>
   );
