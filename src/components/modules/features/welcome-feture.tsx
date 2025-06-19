@@ -13,7 +13,6 @@ import { toCapitalCase } from "@/utils/common";
 import { motion } from "framer-motion";
 import { SwitchForm } from "@/components/form/switch-form";
 import { ChannelSelectForm } from "@/components/form/channel-select-form";
-import { TextAreaForm } from "@/components/form/textarea-form";
 import { InputForm } from "@/components/form/input-form";
 import { CustomImagePage } from "@/components/modules/image-card";
 import { Button } from "@/components/ui/button";
@@ -24,6 +23,7 @@ import UpdateFeaturePanel from "../update-feature";
 import VariableDialog from "@/components/layouts/dialogs/variable";
 import { styles } from "@/styles";
 import { useTranslations } from "next-intl";
+import { TextAreaWithServerEmoji } from "@/components/form/textarea-with-emoji";
 
 export function WelcomeMessageFeature({
   featureConfig,
@@ -248,7 +248,7 @@ export function WelcomeMessageFeature({
           </div>
 
           <div className="col-span-12">
-            <TextAreaForm
+            <TextAreaWithServerEmoji
               control={{
                 id: "content",
                 label: t("content.label"),

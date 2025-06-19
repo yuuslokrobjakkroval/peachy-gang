@@ -19,6 +19,7 @@ import {
   ClipboardList,
   Brain,
   Puzzle,
+  Code,
 } from "lucide-react";
 
 import { NavMain } from "@/components/navbar/nav-main";
@@ -129,6 +130,11 @@ const navigation = {
           title: "Credits Transactions",
           url: "/other/transactions",
           icon: Banknote,
+        },
+        {
+          title: "Http Status Code",
+          url: "/other/http",
+          icon: Code,
         },
       ],
     },

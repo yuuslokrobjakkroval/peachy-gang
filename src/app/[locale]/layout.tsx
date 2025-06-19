@@ -9,7 +9,7 @@ import { Toaster } from "@/components/ui/sonner";
 import "./globals.css";
 import { SettingsProvider } from "@/contexts/settingsContext";
 import { getMode, getSettingsFromCookie } from "@/utils/serverHelpers";
-import NotFound from "@/components/handler/404";
+import NotFound from "./not-found";
 
 const nunito = Nunito({
   variable: "--font-nunito",

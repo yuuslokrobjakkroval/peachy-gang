@@ -349,6 +349,8 @@ export function getRandomNumber(min: number, max: number): number {
 }
 
 export function roleIconUrl(role: Role): string {
+  if (!role?.icon) return "";
+
   return `https://cdn.discordapp.com/role-icons/${role.id}/${role.icon}.png`;
 }
 
