@@ -58,10 +58,9 @@ const LanguageChanger: React.FC<LanguageChangerProps> = () => {
       <Image
         src={currentLanguage.flag}
         alt={`${t(currentLanguage.nameKey)} flag`}
-        width={512}
-        height={512}
-        quality={100}
-        className="h-6 w-6 text-foreground"
+        width={30}
+        height={30}
+        className="h-[30px] w-[30px] text-foreground"
       />
       {/* <Languages className="h-6 w-6 text-foreground" /> */}
     </motion.button>

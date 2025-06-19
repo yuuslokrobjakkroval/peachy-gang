@@ -92,7 +92,7 @@ const RTLNavbar = (props: {
   if (!isClient) return null;
 
   return (
-    <nav className="flex justify-end items-center gap-3 rounded-xl p-2 transition-all duration-300 mt-3">
+    <nav className="flex justify-end items-center gap-3 rounded-xl py-1 transition-all duration-300">
       {/* Switch Mode Toggle */}
       {/* <Tooltip>
           <TooltipTrigger asChild>
