@@ -20,7 +20,7 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 import { Input } from "@/components/ui/input";
 import { CARD } from "@/utils/config";
 import Container from "@/components/layouts/container";
-import AnimatedTestimonials from "@/components/spectrumui/animated_testimonials";
+import AnimatedTestimonials from "@/components/animations/spectrumui/animated-testimonials";
 
 export default function PeachyPage() {
   const t = useTranslations();
