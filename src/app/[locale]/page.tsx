@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
 import { cn } from "@/lib/utils";
-import { config } from "@/utils/config";
+import { config, youtubeVideo } from "@/utils/config";
 import { FaArrowUp } from "react-icons/fa";
 import {
   FaFacebook,

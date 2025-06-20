@@ -27,7 +27,4 @@ const discord = emptySplitApi.injectEndpoints({
   }),
 });
 
-export const {
-  useFetchUserInfoQuery,
-  useGetGuildsQuery,
-} = discord;
+export const { useFetchUserInfoQuery, useGetGuildsQuery } = discord;

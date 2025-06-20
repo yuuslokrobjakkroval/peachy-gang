@@ -20,6 +20,8 @@ import {
   Brain,
   Puzzle,
   Code,
+  Popcorn,
+  Clapperboard,
 } from "lucide-react";
 
 import { NavMain } from "@/components/navbar/nav-main";
@@ -121,6 +123,16 @@ const navigation = {
       icon: BookHeart,
       isActive: true,
       items: [
+        {
+          title: "Movies",
+          url: "/other/movies",
+          icon: Popcorn,
+        },
+        {
+          title: "Tutorial",
+          url: "/other/tutorials",
+          icon: Clapperboard,
+        },
         {
           title: "Daily Rewards",
           url: "/other/daily",

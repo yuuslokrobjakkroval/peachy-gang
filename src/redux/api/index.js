@@ -50,6 +50,8 @@ const dynamicTagTypes = [
   "ROLES",
   "EMOJIS",
   "AUTORESPONSE",
+  "YOUTUBE_VIDEOS",
+  "YOUTUBE_CHANNEL",
 ];
 
 export const emptySplitApi = createApi({

@@ -59,3 +59,20 @@ export const configGoma: AppConfig = {
 };
 
 export const CARD: AppConfig[] = [config, configPeach, configGoma];
+
+export const youtubeVideo: any[] = [
+  {
+    videoSrc: "https://www.youtube.com/embed/PfiqI9FqCq0",
+    thumbnailSrc:
+      "https://i.ytimg.com/vi/PfiqI9FqCq0/hqdefault.jpg?sqp=-oaymwEnCPYBEIoBSFryq4qpAxkIARUAAIhCGAHYAQHiAQoIGBACGAY4AUAB&rs=AOn4CLB09wJC3Jg0RJ2Bk2vb2FHuRjaUfA",
+    thumbnailAlt:
+      "How to Complete Discord Quests WITHOUT Playing or Owning The Game (Client) [UPDATED 2025] - PART 1",
+  },
+  {
+    videoSrc: "https://www.youtube.com/embed/WXL7H9YEV7o",
+    thumbnailSrc:
+      "https://i.ytimg.com/vi/WXL7H9YEV7o/hqdefault.jpg?sqp=-oaymwEnCPYBEIoBSFryq4qpAxkIARUAAIhCGAHYAQHiAQoIGBACGAY4AUAB&rs=AOn4CLC0pawJfMBX9iAT1pU8EZIaQdh23w",
+    thumbnailAlt:
+      "How to Complete Discord Quests WITHOUT Playing or Owning The Game (Browser) [UPDATED 2025] - PART 2",
+  },
+];

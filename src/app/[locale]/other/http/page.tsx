@@ -74,7 +74,7 @@ const categoryIcons: { [key in ResponseMessage["category"]]: JSX.Element } = {
 };
 
 export default function StatusCodeList() {
-  const t = useTranslations("StatusCodeList");
+  const t = useTranslations("http_status_code");
   const [searchTerm, setSearchTerm] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 10;

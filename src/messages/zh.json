@@ -621,5 +621,53 @@
       },
       "noBackgroundImage": "没有提供背景图像"
     }
+  },
+  "movies": {
+    "title": "探索我们的电影收藏",
+    "title_description": "深入体验我们精心挑选的电影。点击视频开始观看！",
+    "no_videos": "目前没有可用的电影。"
+  },
+  "tutorial_video": {
+    "title": "观看我们的教程视频",
+    "title_description": "探索分步指南和技巧，充分利用我们的平台。点击下面的视频开始学习！"
+  },
+  "http_status_code": {
+    "title": "HTTP状态码参考",
+    "title_description": "探索分类的HTTP状态码，包含描述和过滤支持。",
+    "searchPlaceholder": "搜索状态码...",
+    "statusCode": "状态码",
+    "category": "类别",
+    "description": "描述",
+    "previous": "上一页",
+    "next": "下一页",
+    "page": "页",
+    "of": "共",
+    "categories": {
+      "informational": "信息类",
+      "success": "成功",
+      "redirection": "重定向",
+      "clientError": "客户端错误",
+      "serverError": "服务器错误"
+    },
+    "descriptions": {
+      "Continue": "继续",
+      "Switching Protocols": "切换协议",
+      "OK": "成功",
+      "Created": "已创建",
+      "Accepted": "已接受",
+      "No Content": "无内容",
+      "Multiple Choices": "多种选择",
+      "Moved Permanently": "永久移动",
+      "Found": "已找到",
+      "Not Modified": "未修改",
+      "Bad Request": "错误请求",
+      "Unauthorized": "未授权",
+      "Forbidden": "禁止访问",
+      "Not Found": "未找到",
+      "Internal Server Error": "内部服务器错误",
+      "Not Implemented": "未实现",
+      "Bad Gateway": "错误网关",
+      "Service Unavailable": "服务不可用"
+    }
   }
 }

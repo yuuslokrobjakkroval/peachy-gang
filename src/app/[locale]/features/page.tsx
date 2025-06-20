@@ -94,18 +94,6 @@ function GuildPanel({
           <Separator className="text-card-foreground" />
         </div>
 
-        <div className="w-ful mt-3 mb-3 flex h-fit flex-col gap-5 lg:grid lg:grid-cols-12">
-          <div className="col-span-12 lg:!mb-0">
-            <BannerPage item={config} />
-          </div>
-          <div className="col-span-6 lg:!mb-0">
-            <BannerPage item={configPeach} />
-          </div>
-          <div className="col-span-6 lg:!mb-0">
-            <BannerPage item={configGoma} />
-          </div>
-        </div>
-
         <div className="relative mb-6">
           <div className="absolute inset-0 flex items-center">
             <span className="w-full border-t border-border" />

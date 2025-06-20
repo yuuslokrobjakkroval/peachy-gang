@@ -685,7 +685,16 @@
       "noBackgroundImage": "No background image provided"
     }
   },
-  "StatusCodeList": {
+  "movies": {
+    "title": "Explore Our Movie Collection",
+    "title_description": "Dive into our curated selection of movies. Click on a video to start watching!",
+    "no_videos": "No movies available at the moment."
+  },
+  "tutorial_video": {
+    "title": "Watch Our Tutorial Videos",
+    "title_description": "Explore step-by-step guides and tips to get the most out of our platform. Click on the videos below to start learning!"
+  },
+  "http_status_code": {
     "title": "HTTP Status Code Reference",
     "title_description": "Explore categorized HTTP status codes with descriptions and filtering support.",
     "searchPlaceholder": "Search status codes...",
