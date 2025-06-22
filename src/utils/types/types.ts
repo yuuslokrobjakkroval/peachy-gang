@@ -101,7 +101,7 @@ export type UseFormRenderResult = {
 
 export type UseFormRender<T = unknown> = (
   data: T,
-  onSubmit: SubmitFn<T>
+  onSubmit: SubmitFn<T>,
 ) => UseFormRenderResult;
 
 export interface GameConfig<K extends keyof CustomFeatures> {

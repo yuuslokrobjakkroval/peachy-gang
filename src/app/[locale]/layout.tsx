@@ -10,6 +10,7 @@ import "./globals.css";
 import { SettingsProvider } from "@/contexts/settingsContext";
 import { getMode, getSettingsFromCookie } from "@/utils/serverHelpers";
 import NotFound from "./not-found";
+import { TooltipProvider } from "@/components/ui/tooltip";
 
 const nunito = Nunito({
   variable: "--font-nunito",
@@ -80,7 +81,7 @@ export default async function LocaleLayout({
               <ReduxProvider>
                 <PeachyProvider>
                   <div className="texture" />
-                  {children}
+                  <TooltipProvider>{children}</TooltipProvider>
                   <Toaster position="top-right" />
                 </PeachyProvider>
               </ReduxProvider>

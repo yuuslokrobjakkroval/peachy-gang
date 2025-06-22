@@ -35,18 +35,18 @@ const ThemePresetSelect = ({
 
     // Separate presets with badges and those without
     const presetsWithBadges = allPresets.filter(
-      (name) => presets[name]?.meta?.badge
+      (name) => presets[name]?.meta?.badge,
     );
     const presetsWithoutBadges = allPresets.filter(
-      (name) => !presets[name]?.meta?.badge
+      (name) => !presets[name]?.meta?.badge,
     );
 
     // Sort each group alphabetically
     presetsWithBadges.sort((a, b) =>
-      a.localeCompare(b, undefined, { sensitivity: "base" })
+      a.localeCompare(b, undefined, { sensitivity: "base" }),
     );
     presetsWithoutBadges.sort((a, b) =>
-      a.localeCompare(b, undefined, { sensitivity: "base" })
+      a.localeCompare(b, undefined, { sensitivity: "base" }),
     );
 
     // Always keep 'default' as the first item in the list without badges

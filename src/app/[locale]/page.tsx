@@ -151,7 +151,7 @@ export default function Peachy() {
             label: <X className="h-4 w-4" />,
             onClick: () => toast.dismiss(toastId),
           },
-        }
+        },
       );
     } finally {
       setIsSubmitting(false);
@@ -181,7 +181,7 @@ export default function Peachy() {
                 </Badge>
                 <div
                   className={cn(
-                    "inline-flex items-center space-x-3 rounded-full border px-4 py-2 transition-all ease-in hover:cursor-pointer"
+                    "inline-flex items-center space-x-3 rounded-full border px-4 py-2 transition-all ease-in hover:cursor-pointer",
                   )}
                 >
                   {/* Logo with text */}
@@ -210,7 +210,7 @@ export default function Peachy() {
               onChange={(index: number) => {
                 if (!!index) {
                   const sectionId = navigation.find(
-                    (item) => item.name === tabs[index].title
+                    (item) => item.name === tabs[index].title,
                   )?.sectionId;
                   if (sectionId) {
                     scrollToSection(sectionId);

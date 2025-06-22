@@ -46,9 +46,7 @@ export async function GET(request: NextRequest) {
 
     const tokenData = (await tokenResponse.json()) as AccessToken;
 
-    const response = NextResponse.redirect(
-      `${getAbsoluteUrl()}/dashboard`
-    );
+    const response = NextResponse.redirect(`${getAbsoluteUrl()}/dashboard`);
 
     setCookie(TokenCookie, JSON.stringify(tokenData), {
       req: request,
@@ -64,7 +62,7 @@ export async function GET(request: NextRequest) {
   } catch (error) {
     console.error("Auth callback error:", error);
     return NextResponse.redirect(
-      `${getAbsoluteUrl()}/login?error=server_error`
+      `${getAbsoluteUrl()}/login?error=server_error`,
     );
   }
 }

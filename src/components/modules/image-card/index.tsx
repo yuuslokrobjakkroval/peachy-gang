@@ -13,7 +13,7 @@ import { useTranslations } from "next-intl";
 import { ColorPickerWithPresetsForm } from "@/components/form/color-picker-with-preset-form";
 
 export function CustomImagePage({ userInfoByDiscord, formik }: any) {
-  const t = useTranslations("common"); // Use global "common" namespace
+  const t = useTranslations("common");
 
   const safeLayoutOptions =
     Array.isArray(layoutOptions) && layoutOptions.length > 0
@@ -231,6 +231,7 @@ export function CustomImagePage({ userInfoByDiscord, formik }: any) {
                 )}
                 style={{
                   fontSize: "clamp(32px, 4vw, 64px)",
+                  color: formik.values.image?.featureColor || "#333333",
                 }}
               >
                 {formik.values.image?.feature}

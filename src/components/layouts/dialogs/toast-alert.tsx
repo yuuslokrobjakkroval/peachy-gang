@@ -109,7 +109,7 @@ export default function Toast({
               variantStyles[variant].bg,
               "border border-violet-100 dark:border-violet-900/50",
               "shadow-[0_1px_6px_0_rgba(139,92,246,0.06)]",
-              "rounded-xl p-4"
+              "rounded-xl p-4",
             )}
           >
             <div className="flex items-center gap-4">
@@ -126,7 +126,7 @@ export default function Toast({
                   className={cn(
                     "p-2.5 rounded-xl",
                     variantStyles[variant].iconBg,
-                    "dark:from-fuchsia-600 dark:via-violet-600 dark:to-indigo-600"
+                    "dark:from-fuchsia-600 dark:via-violet-600 dark:to-indigo-600",
                   )}
                 >
                   <Icon className="h-5 w-5 text-white" />
@@ -176,7 +176,7 @@ export default function Toast({
                   "px-2.5 py-0.5 rounded-full",
                   variantStyles[variant].badge,
                   variantStyles[variant].ring,
-                  variantStyles[variant].text
+                  variantStyles[variant].text,
                 )}
               >
                 {variant.charAt(0).toUpperCase() + variant.slice(1)}

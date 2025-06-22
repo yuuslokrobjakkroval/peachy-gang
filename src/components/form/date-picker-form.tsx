@@ -65,7 +65,7 @@ export const DatePickerForm = forwardRef<HTMLInputElement, DatePickerFormProps>(
         </div>
       </Card>
     );
-  }
+  },
 );
 
 DatePickerForm.displayName = "DatePickerForm";

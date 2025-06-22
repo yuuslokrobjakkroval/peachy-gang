@@ -72,11 +72,11 @@ const InviteTrackerVariableDialog = ({
   const allMessages = userMessages.concat(
     inviterMessages,
     guildMessages,
-    inviteMessages
+    inviteMessages,
   );
 
   const filteredMessages = allMessages.filter((variable) =>
-    variable.label.toLowerCase().includes(searchQuery.toLowerCase())
+    variable.label.toLowerCase().includes(searchQuery.toLowerCase()),
   );
 
   return (

@@ -26,7 +26,7 @@ export const TagsInputForm = forwardRef<HTMLInputElement, TagsInputFormProps>(
       placeholder = "Add a tag and press Enter...",
       ...props
     },
-    ref
+    ref,
   ) => {
     const [inputValue, setInputValue] = useState("");
 
@@ -89,7 +89,7 @@ export const TagsInputForm = forwardRef<HTMLInputElement, TagsInputFormProps>(
         </div>
       </Card>
     );
-  }
+  },
 );
 
 TagsInputForm.displayName = "TagsInputForm";

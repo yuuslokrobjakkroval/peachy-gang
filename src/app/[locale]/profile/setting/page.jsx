@@ -26,7 +26,7 @@ export default function ProfileSetting() {
     userInfoByDiscord?.id,
     {
       skip: !userInfoByDiscord.id,
-    }
+    },
   );
 
   if (isLoading) {

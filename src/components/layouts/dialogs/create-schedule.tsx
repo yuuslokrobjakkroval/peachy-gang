@@ -72,7 +72,7 @@ const validationSchema = Yup.object({
             "Saturday",
             "Sunday",
           ],
-          "Invalid day"
+          "Invalid day",
         )
         .required("Day of the week is required for weekly schedule"),
     otherwise: (schema) => schema.optional(),
@@ -140,7 +140,7 @@ export function CreateScheduleDialog({
             description: `Schedule ${isEditing ? "updated" : "saved"} successfully.`,
             className:
               "bg-gradient-to-r from-pink-500 to-purple-500 text-white",
-          }
+          },
         );
         refetch();
         onOpenChange(false);
@@ -150,7 +150,7 @@ export function CreateScheduleDialog({
           `Failed to ${isEditing ? "update" : "create"} ${toCapitalCase(feature)} schedule`,
           {
             duration: 1000,
-          }
+          },
         );
       }
     },

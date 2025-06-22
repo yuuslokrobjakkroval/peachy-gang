@@ -24,6 +24,11 @@ import VariableDialog from "@/components/layouts/dialogs/variable";
 import { styles } from "@/styles";
 import { useTranslations } from "next-intl";
 import { TextAreaWithServerEmoji } from "@/components/form/textarea-with-emoji";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 
 export function WelcomeMessageFeature({
   featureConfig,
@@ -193,41 +198,56 @@ export function WelcomeMessageFeature({
                 />
               </div>
               <div className="flex items-center justify-end gap-2">
-                <Button
-                  className="cursor-pointer bg-primary text-primary-foreground hover:bg-primary/90 rounded-lg"
-                  aria-label={tCommon("pickVariableLabel")}
-                  onClick={(e) => {
-                    e.preventDefault();
-                    setOpen(true);
-                  }}
-                >
-                  <FaTerminal size="20" />
-                </Button>
-                <Button
-                  className="cursor-pointer bg-primary text-primary-foreground hover:bg-primary/90 rounded-lg"
-                  aria-label={tCommon("testMessageLabel")}
-                  disabled={sendMessageLoading}
-                  onClick={async (e) => {
-                    e.preventDefault();
-                    try {
-                      await sendMessage({
-                        test: true,
-                        guild,
-                        feature,
-                        userId: userInfoByDiscord.id,
-                      }).unwrap();
-                      toast.success(tCommon("sendMessageSuccess"), {
-                        duration: 2000,
-                      });
-                    } catch (error) {
-                      toast.error(tCommon("sendMessageError"), {
-                        duration: 2000,
-                      });
-                    }
-                  }}
-                >
-                  <FaWandSparkles size="20" />
-                </Button>
+                <Tooltip>
+                  <TooltipTrigger asChild>
+                    <Button
+                      className="cursor-pointer bg-primary text-primary-foreground hover:bg-primary/90 rounded-lg"
+                      aria-label={tCommon("pickVariableLabel")}
+                      onClick={(e) => {
+                        e.preventDefault();
+                        setOpen(true);
+                      }}
+                    >
+                      <FaTerminal size="20" />
+                    </Button>
+                  </TooltipTrigger>
+                  <TooltipContent>
+                    <p>Pick Variable</p>
+                  </TooltipContent>
+                </Tooltip>
+
+                <Tooltip>
+                  <TooltipTrigger asChild>
+                    <Button
+                      className="cursor-pointer bg-primary text-primary-foreground hover:bg-primary/90 rounded-lg"
+                      aria-label={tCommon("testMessageLabel")}
+                      disabled={sendMessageLoading}
+                      onClick={async (e) => {
+                        e.preventDefault();
+                        try {
+                          await sendMessage({
+                            test: true,
+                            guild,
+                            feature,
+                            userId: userInfoByDiscord.id,
+                          }).unwrap();
+                          toast.success(tCommon("sendMessageSuccess"), {
+                            duration: 2000,
+                          });
+                        } catch (error) {
+                          toast.error(tCommon("sendMessageError"), {
+                            duration: 2000,
+                          });
+                        }
+                      }}
+                    >
+                      <FaWandSparkles size="20" />
+                    </Button>
+                  </TooltipTrigger>
+                  <TooltipContent>
+                    <p>Test Message</p>
+                  </TooltipContent>
+                </Tooltip>
               </div>
             </div>
           </div>

@@ -37,7 +37,7 @@ export const ColorPickerForm = forwardRef<
       className,
       name,
     },
-    forwardedRef
+    forwardedRef,
   ) => {
     const ref = useForwardedRef(forwardedRef);
     const [inputValue, setInputValue] = useState(value || "#FFFFFF");
@@ -111,7 +111,7 @@ export const ColorPickerForm = forwardRef<
         </div>
       </Card>
     );
-  }
+  },
 );
 
 ColorPickerForm.displayName = "ColorPickerForm";

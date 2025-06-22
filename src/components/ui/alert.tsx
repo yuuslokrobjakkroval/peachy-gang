@@ -37,7 +37,7 @@ const Alert: React.FC<AlertProps> = ({
     <motion.div
       className={cn(
         "border px-4 py-3 flex gap-x-2 items-center rounded-2xl text-sm",
-        typeStyles[type]
+        typeStyles[type],
       )}
       role="alert"
       variants={fadeInBlur}

@@ -64,7 +64,7 @@ const BoosterVariableDialog = ({
   const allMessages = userMessages.concat(guildMessages);
 
   const filteredMessages = allMessages.filter((variable) =>
-    variable.label.toLowerCase().includes(searchQuery.toLowerCase())
+    variable.label.toLowerCase().includes(searchQuery.toLowerCase()),
   );
 
   return (

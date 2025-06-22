@@ -30,7 +30,10 @@ export async function callDefault(url: string, init: Options) {
   return fetch(options.url, options.request).then((r) => handleError(r, init));
 }
 
-export async function callReturn<T>(url: string, init: ReturnOptions<T>): Promise<T> {
+export async function callReturn<T>(
+  url: string,
+  init: ReturnOptions<T>,
+): Promise<T> {
   const options = await parseOptions(url, init);
 
   const res = await fetch(options.url, options.request);

@@ -1,7 +1,10 @@
-import { NextMiddleware, NextResponse } from 'next/server';
-import { middleware_hasServerSession } from './server';
+import { NextMiddleware, NextResponse } from "next/server";
+import { middleware_hasServerSession } from "./server";
 
-export const withAuth = (authUrl: string, middleware: NextMiddleware): NextMiddleware => {
+export const withAuth = (
+  authUrl: string,
+  middleware: NextMiddleware,
+): NextMiddleware => {
   return (req, evt) => {
     const loggedin = middleware_hasServerSession(req);
 
@@ -16,4 +19,4 @@ export const withAuth = (authUrl: string, middleware: NextMiddleware): NextMiddl
   };
 };
 
-export default withAuth('/auth/signin', () => NextResponse.next());
+export default withAuth("/auth/signin", () => NextResponse.next());

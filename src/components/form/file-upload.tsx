@@ -28,7 +28,7 @@ export const FileUploadForm = forwardRef<HTMLInputElement, FileUploadFormProps>(
       onChange,
       ...props
     },
-    ref
+    ref,
   ) => {
     const onDrop = useCallback(
       (acceptedFiles: File[]) => {
@@ -38,7 +38,7 @@ export const FileUploadForm = forwardRef<HTMLInputElement, FileUploadFormProps>(
           onChange?.(acceptedFiles);
         }
       },
-      [value, onChange, multiple]
+      [value, onChange, multiple],
     );
 
     const { getRootProps, getInputProps, isDragActive } = useDropzone({
@@ -94,7 +94,7 @@ export const FileUploadForm = forwardRef<HTMLInputElement, FileUploadFormProps>(
         </div>
       </Card>
     );
-  }
+  },
 );
 
 FileUploadForm.displayName = "FileUploadForm";

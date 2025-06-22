@@ -45,7 +45,7 @@ const validationSchema = Yup.object({
     Yup.object({
       trigger: Yup.string().required("Trigger is required"),
       response: Yup.string().required("Response is required"),
-    })
+    }),
   ),
   isActive: Yup.boolean(),
 });
@@ -99,7 +99,7 @@ export function AutoResponseFeature({
           {
             description: tCommon("updateSuccessDescription"),
             duration: 2000,
-          }
+          },
         );
         refetch();
       } catch (error) {
@@ -107,7 +107,7 @@ export function AutoResponseFeature({
           tCommon("updateError", { feature: toCapitalCase(feature) }),
           {
             duration: 1000,
-          }
+          },
         );
       }
     },
@@ -150,7 +150,7 @@ export function AutoResponseFeature({
           t("dialog.error", { action: editingResponse ? "update" : "add" }),
           {
             duration: 1000,
-          }
+          },
         );
       }
     },
@@ -161,7 +161,7 @@ export function AutoResponseFeature({
 
   const paginatedResponses = formik.values.autoresponse.slice(
     (currentPage - 1) * rowsPerPage,
-    currentPage * rowsPerPage
+    currentPage * rowsPerPage,
   );
 
   const totalPages =
@@ -182,7 +182,7 @@ export function AutoResponseFeature({
           description: tCommon("disableSuccessDescription"),
           duration: 1000,
           className: "bg-gradient-to-r from-pink-500 to-purple-500 text-white",
-        }
+        },
       );
       refetch();
     } catch (error) {
@@ -190,7 +190,7 @@ export function AutoResponseFeature({
         tCommon("disableError", { feature: toCapitalCase(feature) }),
         {
           duration: 1000,
-        }
+        },
       );
     }
   };

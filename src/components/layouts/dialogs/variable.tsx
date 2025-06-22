@@ -58,7 +58,7 @@ const VariableDialog = ({
 
   // Filtered messages based on search query
   const filteredMessages = allMessages.filter((variable) =>
-    variable.label.toLowerCase().includes(searchQuery.toLowerCase())
+    variable.label.toLowerCase().includes(searchQuery.toLowerCase()),
   );
 
   return (

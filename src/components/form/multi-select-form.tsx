@@ -38,7 +38,7 @@ export const MultiSelectForm = forwardRef<
       placeholder = "Select options",
       ...props
     },
-    ref
+    ref,
   ) => {
     const [history, setHistory] = useState<string[][]>([value]);
     const [historyIndex, setHistoryIndex] = useState(0);
@@ -116,7 +116,8 @@ export const MultiSelectForm = forwardRef<
                 {value.length > 0
                   ? value
                       .map(
-                        (val) => options.find((opt) => opt.value === val)?.label
+                        (val) =>
+                          options.find((opt) => opt.value === val)?.label,
                       )
                       .filter(Boolean)
                       .join(", ")
@@ -151,7 +152,7 @@ export const MultiSelectForm = forwardRef<
         </div>
       </Card>
     );
-  }
+  },
 );
 
 MultiSelectForm.displayName = "MultiSelectForm";

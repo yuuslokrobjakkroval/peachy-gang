@@ -22,6 +22,7 @@ import { ReactionRolesFeature } from "@/components/modules/features/reaction-rol
 import { JoinRoleFeature } from "@/components/modules/features/join-roles";
 import { LevelingSystemFeature } from "@/components/modules/features/leveling-system";
 import { GiveawayScheduleFeature } from "@/components/modules/features/giveaway-shedule";
+import { GoodByeMessageFeature } from "@/components/modules/features/goodbye-feture";
 import { Card, CardFooter } from "@/components/ui/card";
 import { useTranslations } from "next-intl";
 
@@ -172,7 +173,7 @@ export function IsEnabledPage({
 
       case "goodbye-message":
         return (
-          <WelcomeMessageFeature
+          <GoodByeMessageFeature
             featureConfig={featureConfig}
             featureInfo={featureInfo}
             guild={guild}

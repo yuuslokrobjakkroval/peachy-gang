@@ -46,7 +46,7 @@ const ThemeChanger = ({ activeColor = "text-primary" }) => {
         setTheme(newMode);
       });
     },
-    [isDark, setTheme]
+    [isDark, setTheme],
   );
 
   if (!mounted) return null;

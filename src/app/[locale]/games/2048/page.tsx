@@ -121,7 +121,7 @@ export default function Game2048() {
         }
 
         const targetTile = newBoard.find(
-          (t) => t.row === newRow && t.col === newCol
+          (t) => t.row === newRow && t.col === newCol,
         );
         if (targetTile) {
           if (targetTile.value === tile.value && !targetTile.justMerged) {
@@ -171,19 +171,19 @@ export default function Game2048() {
       if (
         (row > 0 &&
           board.some(
-            (t) => t.row === row - 1 && t.col === col && t.value === value
+            (t) => t.row === row - 1 && t.col === col && t.value === value,
           )) ||
         (row < GRID_SIZE - 1 &&
           board.some(
-            (t) => t.row === row + 1 && t.col === col && t.value === value
+            (t) => t.row === row + 1 && t.col === col && t.value === value,
           )) ||
         (col > 0 &&
           board.some(
-            (t) => t.row === row && t.col === col - 1 && t.value === value
+            (t) => t.row === row && t.col === col - 1 && t.value === value,
           )) ||
         (col < GRID_SIZE - 1 &&
           board.some(
-            (t) => t.row === row && t.col === col + 1 && t.value === value
+            (t) => t.row === row && t.col === col + 1 && t.value === value,
           ))
       ) {
         return false;
@@ -320,7 +320,7 @@ export default function Game2048() {
                       : { x: { duration: 0.15 }, y: { duration: 0.15 } }
                   }
                   className={`absolute rounded-[var(--radius)] flex items-center justify-center text-2xl font-bold ${cellColor(
-                    tile.value
+                    tile.value,
                   )} border-2 border-[var(--border)] shadow-xs`}
                   style={{
                     width: `${CELL_SIZE}rem`,

@@ -274,7 +274,7 @@ export function UsersTable({
   const [columnVisibility, setColumnVisibility] =
     React.useState<VisibilityState>({});
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
-    []
+    [],
   );
   const [sorting, setSorting] = React.useState<SortingState>([]);
   const [pagination, setPagination] = React.useState({
@@ -285,15 +285,15 @@ export function UsersTable({
   const sensors = useSensors(
     useSensor(MouseSensor, {}),
     useSensor(TouchSensor, {}),
-    useSensor(KeyboardSensor, {})
+    useSensor(KeyboardSensor, {}),
   );
 
   const dataIds = React.useMemo<UniqueIdentifier[]>(
     () =>
       data.map(
-        (item) => item.userId ?? "fallback-id-" + Math.random().toString(36)
+        (item) => item.userId ?? "fallback-id-" + Math.random().toString(36),
       ),
-    [data]
+    [data],
   );
 
   const table = useReactTable({
@@ -426,7 +426,7 @@ export function UsersTable({
                             ? null
                             : flexRender(
                                 header.column.columnDef.header,
-                                header.getContext()
+                                header.getContext(),
                               )}
                         </TableHead>
                       );

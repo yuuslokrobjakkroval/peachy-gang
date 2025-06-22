@@ -66,7 +66,7 @@ export const ColorPickerWithPresetsForm = forwardRef<
       className,
       size = "default",
     },
-    ref
+    ref,
   ) => {
     // Initialize color state with error handling
     const [colorValue, setColorValue] = React.useState<Color>(() => {
@@ -74,7 +74,7 @@ export const ColorPickerWithPresetsForm = forwardRef<
         return value ? parseColor(value) : parseColor(defaultValue);
       } catch {
         console.warn(
-          `Invalid color value: ${value || defaultValue}. Falling back to default.`
+          `Invalid color value: ${value || defaultValue}. Falling back to default.`,
         );
         return parseColor(defaultValue);
       }
@@ -97,7 +97,7 @@ export const ColorPickerWithPresetsForm = forwardRef<
         setColorValue(color);
         onChange?.(color.toString("hex"));
       },
-      [onChange]
+      [onChange],
     );
 
     // Memoize preset swatches for performance
@@ -117,7 +117,7 @@ export const ColorPickerWithPresetsForm = forwardRef<
             }
           })
           .filter(Boolean),
-      [presets]
+      [presets],
     );
 
     // Check for EyeDropper API support
@@ -197,7 +197,7 @@ export const ColorPickerWithPresetsForm = forwardRef<
         </div>
       </Card>
     );
-  }
+  },
 );
 
 ColorPickerWithPresetsForm.displayName = "ColorPickerWithPresetsForm";

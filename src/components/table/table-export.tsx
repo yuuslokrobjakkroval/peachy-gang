@@ -1,34 +1,63 @@
-import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Checkbox } from "@/components/ui/checkbox"
-import { Input } from "@/components/ui/input"
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
-import { ChevronLeft, ChevronRight, Download, Search } from "lucide-react"
+import { Button } from "@/components/ui/button";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Checkbox } from "@/components/ui/checkbox";
+import { Input } from "@/components/ui/input";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table";
+import { ChevronLeft, ChevronRight, Download, Search } from "lucide-react";
 
 export function DataTableShowcase() {
   return (
     <div className="space-y-6">
       <div>
-        <h2 className="text-2xl font-bold text-card-foreground mb-2">Data Table</h2>
+        <h2 className="text-2xl font-bold text-card-foreground mb-2">
+          Data Table
+        </h2>
         <p className="text-muted-foreground mb-4">
-          A data table component for displaying and interacting with tabular data.
+          A data table component for displaying and interacting with tabular
+          data.
         </p>
       </div>
 
       <div className="space-y-4">
-        <h3 className="text-lg font-medium text-card-foreground">Basic Data Table</h3>
+        <h3 className="text-lg font-medium text-card-foreground">
+          Basic Data Table
+        </h3>
         <Card>
           <CardHeader>
             <CardTitle>Users</CardTitle>
-            <CardDescription>Manage your team members and their account permissions here.</CardDescription>
+            <CardDescription>
+              Manage your team members and their account permissions here.
+            </CardDescription>
           </CardHeader>
           <CardContent>
             <div className="flex items-center justify-between mb-4">
               <div className="flex items-center gap-2">
                 <div className="relative">
                   <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
-                  <Input placeholder="Search users..." className="pl-8 w-[250px]" />
+                  <Input
+                    placeholder="Search users..."
+                    className="pl-8 w-[250px]"
+                  />
                 </div>
                 <Select defaultValue="all">
                   <SelectTrigger className="w-[180px]">
@@ -104,7 +133,9 @@ export function DataTableShowcase() {
                     <TableCell>
                       <Checkbox />
                     </TableCell>
-                    <TableCell className="font-medium">Isabella Nguyen</TableCell>
+                    <TableCell className="font-medium">
+                      Isabella Nguyen
+                    </TableCell>
                     <TableCell>isabella.nguyen@email.com</TableCell>
                     <TableCell>Viewer</TableCell>
                     <TableCell>
@@ -162,7 +193,8 @@ export function DataTableShowcase() {
             </div>
             <div className="flex items-center justify-between mt-4">
               <div className="text-sm text-muted-foreground">
-                Showing <strong>1</strong> to <strong>5</strong> of <strong>100</strong> results
+                Showing <strong>1</strong> to <strong>5</strong> of{" "}
+                <strong>100</strong> results
               </div>
               <div className="flex items-center gap-2">
                 <Button variant="outline" size="sm">
@@ -186,5 +218,5 @@ export function DataTableShowcase() {
         </Card>
       </div>
     </div>
-  )
+  );
 }

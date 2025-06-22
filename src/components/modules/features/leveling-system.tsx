@@ -12,7 +12,6 @@ import { motion } from "framer-motion";
 import { useFormik } from "formik";
 import { ChannelSelectForm } from "@/components/form/channel-select-form";
 import { toast } from "sonner";
-import { TextAreaForm } from "@/components/form/textarea-form";
 import UpdateFeaturePanel from "@/components/modules/update-feature";
 import { toCapitalCase } from "@/utils/common";
 import { Button } from "@/components/ui/button";
@@ -20,6 +19,12 @@ import { FaTerminal, FaWandSparkles } from "react-icons/fa6";
 import { SwitchForm } from "@/components/form/switch-form";
 import LevelingDialog from "@/components/layouts/dialogs/leveling-variable";
 import { useTranslations } from "next-intl";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
+import { TextAreaWithServerEmoji } from "@/components/form/textarea-with-emoji";
 
 const validationSchema = Yup.object({
   isActive: Yup.boolean(),
@@ -156,41 +161,56 @@ export function LevelingSystemFeature({
                 />
               </div>
               <div className="flex items-center justify-end gap-2">
-                <Button
-                  className="cursor-pointer bg-primary text-primary-foreground hover:bg-primary/90 rounded-lg"
-                  aria-label={tCommon("pickVariableLabel")} // Updated to match common key
-                  onClick={(e) => {
-                    e.preventDefault();
-                    setOpen(true);
-                  }}
-                >
-                  <FaTerminal size="20" />
-                </Button>
-                <Button
-                  className="cursor-pointer bg-primary text-primary-foreground hover:bg-primary/90 rounded-lg"
-                  aria-label={tCommon("testMessageLabel")}
-                  disabled={sendMessageLoading}
-                  onClick={async (e) => {
-                    e.preventDefault();
-                    try {
-                      await sendMessage({
-                        test: true,
-                        guild,
-                        feature,
-                        userId: userInfoByDiscord.id,
-                      }).unwrap();
-                      toast.success(tCommon("sendMessageSuccess"), {
-                        duration: 2000,
-                      });
-                    } catch (error) {
-                      toast.error(tCommon("sendMessageError"), {
-                        duration: 2000,
-                      });
-                    }
-                  }}
-                >
-                  <FaWandSparkles size="20" />
-                </Button>
+                <Tooltip>
+                  <TooltipTrigger asChild>
+                    <Button
+                      className="cursor-pointer bg-primary text-primary-foreground hover:bg-primary/90 rounded-lg"
+                      aria-label={tCommon("pickVariableLabel")}
+                      onClick={(e) => {
+                        e.preventDefault();
+                        setOpen(true);
+                      }}
+                    >
+                      <FaTerminal size="20" />
+                    </Button>
+                  </TooltipTrigger>
+                  <TooltipContent>
+                    <p>Pick Variable</p>
+                  </TooltipContent>
+                </Tooltip>
+
+                <Tooltip>
+                  <TooltipTrigger asChild>
+                    <Button
+                      className="cursor-pointer bg-primary text-primary-foreground hover:bg-primary/90 rounded-lg"
+                      aria-label={tCommon("testMessageLabel")}
+                      disabled={sendMessageLoading}
+                      onClick={async (e) => {
+                        e.preventDefault();
+                        try {
+                          await sendMessage({
+                            test: true,
+                            guild,
+                            feature,
+                            userId: userInfoByDiscord.id,
+                          }).unwrap();
+                          toast.success(tCommon("sendMessageSuccess"), {
+                            duration: 2000,
+                          });
+                        } catch (error) {
+                          toast.error(tCommon("sendMessageError"), {
+                            duration: 2000,
+                          });
+                        }
+                      }}
+                    >
+                      <FaWandSparkles size="20" />
+                    </Button>
+                  </TooltipTrigger>
+                  <TooltipContent>
+                    <p>Test Message</p>
+                  </TooltipContent>
+                </Tooltip>
               </div>
             </div>
           </div>
@@ -211,7 +231,7 @@ export function LevelingSystemFeature({
           </div>
 
           <div className="col-span-12 sm:col-span-12 lg:col-span-6">
-            <TextAreaForm
+            <TextAreaWithServerEmoji
               control={{
                 id: "content",
                 label: t("content.label"),

@@ -45,7 +45,7 @@ export type ChannelSelectFormProps = {
 
 const renderChannel = (
   channel: GuildChannel,
-  categoryName?: string
+  categoryName?: string,
 ): Option => {
   const icon = () => {
     switch (channel.type) {
@@ -66,7 +66,7 @@ const renderChannel = (
 
 const mapOptions = (
   channels: GuildChannel[],
-  type: number | null
+  type: number | null,
 ): Option[] => {
   const categories = new Map<string, GuildChannel[]>();
   const roots: GuildChannel[] = [];
@@ -113,7 +113,7 @@ export const ChannelSelectForm = forwardRef<
       description,
       className,
     },
-    ref
+    ref,
   ) => {
     const { data: channels = [], isLoading } = useGetGuildChannelsQuery(guild);
 
@@ -171,7 +171,7 @@ export const ChannelSelectForm = forwardRef<
         </div>
       </Card>
     );
-  }
+  },
 );
 
 ChannelSelectForm.displayName = "ChannelSelectForm";

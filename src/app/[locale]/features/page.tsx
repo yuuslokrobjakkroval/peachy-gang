@@ -129,7 +129,7 @@ function NotJoined({ guild }: { guild: string }) {
   const pathname = usePathname();
   const redirectUrl = `${getAbsoluteUrl()}${pathname}`;
   const inviteUrl = `${config.inviteUrl}&scope=bot&guild_id=${guild}&permissions=8&redirect_uri=${encodeURIComponent(
-    `${getAbsoluteUrl()}/api/invite/callback`
+    `${getAbsoluteUrl()}/api/invite/callback`,
   )}&response_type=code&state=${encodeURIComponent(redirectUrl)}`;
 
   return (

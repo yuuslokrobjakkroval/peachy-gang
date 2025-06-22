@@ -36,7 +36,7 @@ interface PeachyContextType<T = any> {
 }
 
 const PeachyContext = createContext<PeachyContextType<any> | undefined>(
-  undefined
+  undefined,
 );
 
 // Props type for PeachyProvider
@@ -104,7 +104,7 @@ export function PeachyProvider<T>({ children }: PeachyProviderProps) {
     if (userInfoByDiscord !== null) {
       localStorage.setItem(
         "userInfoByDiscord",
-        JSON.stringify(userInfoByDiscord)
+        JSON.stringify(userInfoByDiscord),
       );
     } else {
       localStorage.removeItem("userInfoByDiscord");

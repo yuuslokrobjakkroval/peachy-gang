@@ -61,7 +61,7 @@ export function ReactionRolesFeature({
         {
           description: tCommon("disableSuccessDescription"),
           duration: 1000,
-        }
+        },
       );
       refetch();
     } catch (error) {
@@ -69,7 +69,7 @@ export function ReactionRolesFeature({
         tCommon("disableError", { feature: toCapitalCase(feature) }),
         {
           duration: 1000,
-        }
+        },
       );
     }
   };
@@ -105,7 +105,7 @@ export function ReactionRolesFeature({
           {
             description: tCommon("updateSuccessDescription"),
             duration: 2000,
-          }
+          },
         );
         refetch();
       } catch (error) {
@@ -113,7 +113,7 @@ export function ReactionRolesFeature({
           tCommon("updateError", { feature: toCapitalCase(feature) }),
           {
             duration: 1000,
-          }
+          },
         );
       }
     },
@@ -266,8 +266,8 @@ export function ReactionRolesFeature({
                             formik.setFieldValue(
                               "roles",
                               formik.values.roles.filter(
-                                (_: any, i: number) => i !== index
-                              )
+                                (_: any, i: number) => i !== index,
+                              ),
                             )
                           }
                           aria-label={t("table.removeLabel", { index })}

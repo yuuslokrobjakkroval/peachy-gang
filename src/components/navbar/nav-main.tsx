@@ -73,7 +73,7 @@ export function NavMain({
                           asChild
                           onClick={() => {
                             setFeature(
-                              subItem.title.toLowerCase().replace(/\s+/g, "-")
+                              subItem.title.toLowerCase().replace(/\s+/g, "-"),
                             );
                           }}
                         >

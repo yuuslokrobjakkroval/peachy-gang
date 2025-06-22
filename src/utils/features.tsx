@@ -50,7 +50,8 @@ export function UseFeaturesConfig(): FeaturesConfig {
       nameKey: "reaction-roles",
       descriptionKey: "reaction-roles_description",
       name: "Reaction Roles",
-      description: "Allow users to assign themselves roles through message reactions",
+      description:
+        "Allow users to assign themselves roles through message reactions",
       icon: <FaThumbsUp />,
     },
     "join-roles": {

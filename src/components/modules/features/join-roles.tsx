@@ -54,7 +54,7 @@ export function JoinRoleFeature({
           description: tCommon("disableSuccessDescription"),
           duration: 1000,
           className: "bg-gradient-to-r from-pink-500 to-purple-500 text-white",
-        }
+        },
       );
       refetch();
     } catch (error) {
@@ -62,7 +62,7 @@ export function JoinRoleFeature({
         tCommon("disableError", { feature: toCapitalCase(feature) }),
         {
           duration: 1000,
-        }
+        },
       );
     }
   };
@@ -95,7 +95,7 @@ export function JoinRoleFeature({
           {
             description: tCommon("updateSuccessDescription"),
             duration: 2000,
-          }
+          },
         );
         refetch();
       } catch (error) {
@@ -103,7 +103,7 @@ export function JoinRoleFeature({
           tCommon("updateError", { feature: toCapitalCase(feature) }),
           {
             duration: 1000,
-          }
+          },
         );
       }
     },

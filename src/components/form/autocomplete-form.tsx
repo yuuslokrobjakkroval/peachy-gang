@@ -42,7 +42,7 @@ export const AutocompleteForm = forwardRef<
       placeholder = "Search...",
       ...props
     },
-    ref
+    ref,
   ) => {
     const [open, setOpen] = useState(false);
 
@@ -105,7 +105,7 @@ export const AutocompleteForm = forwardRef<
         </div>
       </Card>
     );
-  }
+  },
 );
 
 AutocompleteForm.displayName = "AutocompleteForm";

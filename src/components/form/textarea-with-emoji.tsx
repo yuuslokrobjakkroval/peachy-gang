@@ -54,7 +54,7 @@ export const TextAreaWithServerEmoji = forwardRef<
   const [currentPage, setCurrentPage] = useState(1);
   const [isPopoverOpen, setIsPopoverOpen] = useState(false);
   const [selectedGuildId, setSelectedGuildId] = useState<string | null>(
-    guildId
+    guildId,
   );
 
   const emojisPerPage = 30;
@@ -73,14 +73,14 @@ export const TextAreaWithServerEmoji = forwardRef<
     if (!isSuccess || !emojis) return [];
 
     return emojis.filter((emoji: any) =>
-      emoji.name.toLowerCase().includes(searchQuery.toLowerCase())
+      emoji.name.toLowerCase().includes(searchQuery.toLowerCase()),
     );
   }, [emojis, searchQuery, isSuccess]);
 
   const totalPages = Math.ceil(filteredEmojis.length / emojisPerPage);
   const displayEmojis = filteredEmojis.slice(
     (currentPage - 1) * emojisPerPage,
-    currentPage * emojisPerPage
+    currentPage * emojisPerPage,
   );
 
   const handleEmojiClick = (emoji: any) => {
@@ -174,7 +174,7 @@ export const TextAreaWithServerEmoji = forwardRef<
                               (guild) =>
                                 (Number(guild.permissions) &
                                   PermissionFlags.ADMINISTRATOR) !==
-                                0
+                                0,
                             )
                             .map((guild: any) => (
                               <SelectItem key={guild.id} value={guild.id}>

@@ -58,7 +58,7 @@ const General = ({
           </p>
           <p className="text-sm text-muted-foreground mt-1">
             {toCapitalCase(
-              userInfo?.profile?.zodiacSign ?? t("common.not_set")
+              userInfo?.profile?.zodiacSign ?? t("common.not_set"),
             )}
           </p>
         </div>

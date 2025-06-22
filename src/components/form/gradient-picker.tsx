@@ -86,7 +86,7 @@ export function GradientPicker({
           className={cn(
             "w-[220px] justify-start text-left font-normal",
             !background && "text-muted-foreground",
-            className
+            className,
           )}
         >
           <div className="w-full flex items-center gap-2">

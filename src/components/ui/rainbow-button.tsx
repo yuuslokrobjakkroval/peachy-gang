@@ -16,7 +16,7 @@ export const RainbowButton = React.forwardRef<
 
         // bg styles
         "bg-[linear-gradient(var(--primary),var(--primary)),linear-gradient(var(--primary)_30%,rgba(0,0,0,0)),linear-gradient(90deg,#ff4242,#a1ff42,#42a1ff,#42d0ff,#a142ff)]",
-        className
+        className,
       )}
       {...props}
     >

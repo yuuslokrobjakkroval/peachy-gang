@@ -7,6 +7,9 @@ import {
 } from "@/utils/auth/server";
 import { Gamepad, Music } from "lucide-react";
 
+export const ownerId: string[] = process.env.NEXT_PUBLIC_OWNER_IDS?.split(
+  ","
+).map((id) => id.trim()) || ["966688007493140591", "765216076430180384"];
 // AppConfig definitions remain the same
 export const config: AppConfig = {
   id: 0,

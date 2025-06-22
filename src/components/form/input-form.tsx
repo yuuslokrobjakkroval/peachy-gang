@@ -24,8 +24,10 @@ export type InputFormProps = {
 };
 
 export const InputForm = forwardRef<HTMLInputElement, InputFormProps>(
-  ({ control, value = "", onChange, placeholder, type = "text", ...props }, ref) => {
-
+  (
+    { control, value = "", onChange, placeholder, type = "text", ...props },
+    ref,
+  ) => {
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
       if (onChange) {
         onChange(e.target.value);
@@ -72,7 +74,7 @@ export const InputForm = forwardRef<HTMLInputElement, InputFormProps>(
         </div>
       </Card>
     );
-  }
+  },
 );
 
 InputForm.displayName = "InputForm";

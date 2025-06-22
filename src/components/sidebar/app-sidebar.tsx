@@ -35,7 +35,7 @@ import {
   SidebarRail,
 } from "@/components/ui/sidebar";
 import { usePeachy } from "@/contexts/peachy";
-import { UserInfo } from "@/utils/common";
+import { ownerId } from "@/utils/config";
 
 const navigation = {
   navMain: [
@@ -180,6 +180,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   const { setUserInfoByDiscord, setGuilds } = usePeachy();
   const { data: user, isSuccess: userSuccess } = useFetchUserInfoQuery(null);
   const { data: guilds, isSuccess: guildSuccess } = useGetGuildsQuery(null);
+  const isOwner = React.useMemo(() => ownerId?.includes(user?.id), [user?.id]);
 
   React.useEffect(() => {
     if (userSuccess && guildSuccess) {
@@ -189,16 +190,12 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user, guilds, setUserInfoByDiscord, setGuilds]);
 
-  console.log(process.env.OWNER_IDS?.includes(user?.id));
-
   return (
     <Sidebar collapsible="icon" {...props}>
       <SidebarContent>
         <NavMain items={navigation.navMain} />
         <NavGuild guilds={guilds} />
-        {process.env.OWNER_IDS?.includes(user?.id) && (
-          <NavGlobalSetting items={navigation.navGlobalSetting} />
-        )}
+        {isOwner && <NavGlobalSetting items={navigation.navGlobalSetting} />}
       </SidebarContent>
       {/* <SidebarFooter>
         <NavUser user={user} />

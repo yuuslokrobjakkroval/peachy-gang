@@ -51,7 +51,7 @@ function ColorPickerWithPresets({
   size = "default",
 }: ColorPickerWithPresetsProps) {
   const [colorValue, setColorValue] = React.useState(
-    value ? parseColor(value) : parseColor(defaultValue)
+    value ? parseColor(value) : parseColor(defaultValue),
   );
 
   React.useEffect(() => {
@@ -65,7 +65,7 @@ function ColorPickerWithPresets({
       setColorValue(color);
       onChange?.(color.toString("hex"));
     },
-    [onChange]
+    [onChange],
   );
 
   return (

@@ -28,7 +28,7 @@ export const RangeSliderForm = forwardRef<HTMLDivElement, RangeSliderFormProps>(
       onChange,
       ...props
     },
-    ref
+    ref,
   ) => {
     return (
       <Card className="p-4">
@@ -64,7 +64,7 @@ export const RangeSliderForm = forwardRef<HTMLDivElement, RangeSliderFormProps>(
         </div>
       </Card>
     );
-  }
+  },
 );
 
 RangeSliderForm.displayName = "RangeSliderForm";

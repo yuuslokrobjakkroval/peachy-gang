@@ -64,7 +64,7 @@ const Notification: React.FC<NotificationProps> = ({
 
 const ContentLoader: React.FC = () => {
   const { error, loading, message, info, warning } = useSelector(
-    (state: { common: CommonState }) => state.common
+    (state: { common: CommonState }) => state.common,
   );
   const dispatch = useDispatch<AppDispatch>();
   const [openError, setOpenError] = useState<boolean>(false);

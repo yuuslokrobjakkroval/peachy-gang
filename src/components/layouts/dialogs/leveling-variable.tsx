@@ -49,7 +49,7 @@ const LevelingDialog = ({
 
   // Filtered messages based on search query
   const filteredMessages = levelingMessages.filter((variable) =>
-    variable.label.toLowerCase().includes(searchQuery.toLowerCase())
+    variable.label.toLowerCase().includes(searchQuery.toLowerCase()),
   );
 
   return (

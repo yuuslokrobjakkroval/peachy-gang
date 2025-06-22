@@ -42,7 +42,7 @@ export async function GET(request: NextRequest) {
 
     // Create response with redirect
     const response = NextResponse.redirect(`${getAbsoluteUrl()}/login`);
-    
+
     // Delete the token cookie
     response.cookies.delete(TokenCookie);
 
@@ -54,4 +54,4 @@ export async function GET(request: NextRequest) {
     response.cookies.delete(TokenCookie);
     return response;
   }
-} 
+}

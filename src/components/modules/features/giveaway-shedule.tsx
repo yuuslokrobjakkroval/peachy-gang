@@ -66,7 +66,7 @@ export function GiveawayScheduleFeature({
   const [deleteId, setDeleteId] = useState<string | null>(null);
   const [deleteScheduleType, setDeleteScheduleType] = useState<string>("");
   const [editingSchedule, setEditingSchedule] = useState<Schedule | undefined>(
-    undefined
+    undefined,
   );
 
   const handleDisableClick = async () => {
@@ -78,7 +78,7 @@ export function GiveawayScheduleFeature({
           description: tCommon("disableSuccessDescription"),
           duration: 1000,
           className: "bg-gradient-to-r from-pink-500 to-purple-500 text-white",
-        }
+        },
       );
       refetch();
     } catch (error) {
@@ -86,7 +86,7 @@ export function GiveawayScheduleFeature({
         tCommon("disableError", { feature: toCapitalCase(feature) }),
         {
           duration: 1000,
-        }
+        },
       );
     }
   };
@@ -118,7 +118,7 @@ export function GiveawayScheduleFeature({
         {
           description: t("deleteSuccessDescription"),
           className: "bg-gradient-to-r from-pink-500 to-purple-500 text-white",
-        }
+        },
       );
       refetch();
     } catch (error) {
@@ -126,7 +126,7 @@ export function GiveawayScheduleFeature({
         t("deleteError", { type: toCapitalCase(deleteScheduleType) }),
         {
           duration: 1000,
-        }
+        },
       );
     }
     setDeleteDialogOpen(false);

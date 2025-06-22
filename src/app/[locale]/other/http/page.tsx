@@ -87,7 +87,7 @@ export default function StatusCodeList() {
         .includes(searchTerm.toLowerCase()) ||
       t(`descriptions.${code.description}`)
         .toLowerCase()
-        .includes(searchTerm.toLowerCase())
+        .includes(searchTerm.toLowerCase()),
   );
 
   const totalPages = Math.ceil(filteredCodes.length / itemsPerPage);

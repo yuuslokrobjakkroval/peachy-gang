@@ -63,7 +63,7 @@ export const RadioGroupForm = forwardRef<HTMLDivElement, RadioGroupFormProps>(
         </div>
       </Card>
     );
-  }
+  },
 );
 
 RadioGroupForm.displayName = "RadioGroupForm";

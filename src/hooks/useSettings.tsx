@@ -10,7 +10,7 @@ export const useSettings = () => {
 
   if (!context) {
     throw new Error(
-      "useSettingsContext must be used within a SettingsProvider"
+      "useSettingsContext must be used within a SettingsProvider",
     );
   }
 

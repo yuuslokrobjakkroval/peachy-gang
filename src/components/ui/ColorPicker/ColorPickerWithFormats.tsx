@@ -68,7 +68,7 @@ function ColorPickerWithFormats({
   size = "default",
 }: ColorPickerWithFormatsProps) {
   const [colorValue, setColorValue] = React.useState(
-    value ? parseColor(value) : parseColor(defaultValue)
+    value ? parseColor(value) : parseColor(defaultValue),
   );
   const [currentFormat, setCurrentFormat] =
     React.useState<ColorFormat>(defaultFormat);
@@ -93,7 +93,7 @@ function ColorPickerWithFormats({
       setInputValue(formattedValue);
       onChange?.(color.toString("hex"));
     },
-    [onChange, currentFormat]
+    [onChange, currentFormat],
   );
 
   const handleInputChange = React.useCallback(
@@ -105,7 +105,7 @@ function ColorPickerWithFormats({
         onChange?.(parsed.toString("hex"));
       }
     },
-    [currentFormat, onChange]
+    [currentFormat, onChange],
   );
 
   const handleFormatChange = React.useCallback(
@@ -113,7 +113,7 @@ function ColorPickerWithFormats({
       setCurrentFormat(format);
       setInputValue(formatColorValue(colorValue, format));
     },
-    [colorValue]
+    [colorValue],
   );
 
   return (

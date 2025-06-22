@@ -32,7 +32,7 @@ export const SelectForm = forwardRef<HTMLSelectElement, SelectFormProps>(
       placeholder = "Select an option",
       ...props
     },
-    ref
+    ref,
   ) => {
     return (
       <Card className="p-4">
@@ -72,7 +72,7 @@ export const SelectForm = forwardRef<HTMLSelectElement, SelectFormProps>(
         </div>
       </Card>
     );
-  }
+  },
 );
 
 SelectForm.displayName = "SelectForm";

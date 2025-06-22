@@ -46,7 +46,7 @@ export const ComboSelectForm = React.forwardRef<
       placeholder = "Select an option",
       ...props
     },
-    ref
+    ref,
   ) => {
     const [open, setOpen] = React.useState(false);
 
@@ -108,7 +108,9 @@ export const ComboSelectForm = React.forwardRef<
                           strokeWidth="0.25"
                           className={cn(
                             "mr-2 size-6",
-                            value === option.value ? "opacity-100" : "opacity-0"
+                            value === option.value
+                              ? "opacity-100"
+                              : "opacity-0",
                           )}
                           aria-label="check"
                         >
@@ -191,7 +193,7 @@ export const ComboSelectForm = React.forwardRef<
         </div>
       </Card>
     );
-  }
+  },
 );
 
 ComboSelectForm.displayName = "ComboSelectForm";

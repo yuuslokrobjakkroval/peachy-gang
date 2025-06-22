@@ -83,13 +83,13 @@ export const SettingsProvider = (props: Props) => {
     "shadcn-studio-mode",
     JSON.stringify(props.settingsCookie) !== "{}"
       ? props.settingsCookie
-      : updatedInitialModeSettings
+      : updatedInitialModeSettings,
   );
 
   // localStorage for theme settings
   const [themeSettings, setThemeSettings] = useLocalStorage<ThemeSettings>(
     "shadcn-studio-theme",
-    initialThemeSettings
+    initialThemeSettings,
   );
 
   // Combined settings state

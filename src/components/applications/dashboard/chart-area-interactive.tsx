@@ -51,7 +51,7 @@ const generateChartData = (users: any) => {
 
   // Filter users with required fields
   const validUsers = usersArray.filter(
-    (user) => user?.createdAt && user?.updatedAt && user?.balance
+    (user) => user?.createdAt && user?.updatedAt && user?.balance,
   );
 
   if (validUsers.length === 0) {
@@ -78,15 +78,15 @@ const generateChartData = (users: any) => {
       coinflip: 0,
       klaklouk: 0,
       sponsor: 0,
-    }
+    },
   );
 
   // Find earliest createdAt and latest updatedAt
   const startDate = new Date(
-    Math.min(...validUsers.map((user) => new Date(user.createdAt).getTime()))
+    Math.min(...validUsers.map((user) => new Date(user.createdAt).getTime())),
   );
   const endDate = new Date(
-    Math.max(...validUsers.map((user) => new Date(user.updatedAt).getTime()))
+    Math.max(...validUsers.map((user) => new Date(user.updatedAt).getTime())),
   );
   const daysDiff =
     Math.ceil((endDate.getTime() - startDate.getTime()) / (1000 * 3600 * 24)) ||
@@ -189,7 +189,7 @@ export function ChartAreaInteractive({ users }: { users: any }) {
         label: t(`information.${key}`), // Translate labels using dashboard.information
       },
     }),
-    {} as ChartConfig
+    {} as ChartConfig,
   );
 
   return (

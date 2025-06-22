@@ -15,7 +15,7 @@ export default function UpdateFeaturePanel({
   isLoading,
 }: UpdateFeaturePanelProps) {
   const [state, setState] = useState<"initial" | "loading" | "success">(
-    isLoading ? "loading" : "initial"
+    isLoading ? "loading" : "initial",
   );
 
   const handleSave = () => {

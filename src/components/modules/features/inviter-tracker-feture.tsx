@@ -13,7 +13,6 @@ import { toCapitalCase } from "@/utils/common";
 import { motion } from "framer-motion";
 import { SwitchForm } from "@/components/form/switch-form";
 import { ChannelSelectForm } from "@/components/form/channel-select-form";
-import { TextAreaForm } from "@/components/form/textarea-form";
 import { InputForm } from "@/components/form/input-form";
 import { CustomImagePage } from "@/components/modules/image-card";
 import { Button } from "@/components/ui/button";
@@ -24,6 +23,12 @@ import UpdateFeaturePanel from "../update-feature";
 import { styles } from "@/styles";
 import InviteTrackerVariableDialog from "@/components/layouts/dialogs/tracker-variable";
 import { useTranslations } from "next-intl";
+import { TextAreaWithServerEmoji } from "@/components/form/textarea-with-emoji";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 
 const validationSchema = Yup.object({
   isActive: Yup.boolean(),
@@ -203,41 +208,56 @@ export function InviteTrackerFeature({
                 />
               </div>
               <div className="flex items-center justify-end gap-2">
-                <Button
-                  className="cursor-pointer bg-primary text-primary-foreground hover:bg-primary/90 rounded-lg"
-                  aria-label={tCommon("pickVariableLabel")}
-                  onClick={(e) => {
-                    e.preventDefault();
-                    setOpen(true);
-                  }}
-                >
-                  <FaTerminal size="20" />
-                </Button>
-                <Button
-                  className="cursor-pointer bg-primary text-primary-foreground hover:bg-primary/90 rounded-lg"
-                  aria-label={tCommon("testMessageLabel")}
-                  disabled={sendMessageLoading}
-                  onClick={async (e) => {
-                    e.preventDefault();
-                    try {
-                      await sendMessage({
-                        test: true,
-                        guild,
-                        feature,
-                        userId: userInfoByDiscord.id,
-                      }).unwrap();
-                      toast.success(tCommon("sendMessageSuccess"), {
-                        duration: 2000,
-                      });
-                    } catch (error) {
-                      toast.error(tCommon("sendMessageError"), {
-                        duration: 2000,
-                      });
-                    }
-                  }}
-                >
-                  <FaWandSparkles size="20" />
-                </Button>
+                <Tooltip>
+                  <TooltipTrigger asChild>
+                    <Button
+                      className="cursor-pointer bg-primary text-primary-foreground hover:bg-primary/90 rounded-lg"
+                      aria-label={tCommon("pickVariableLabel")}
+                      onClick={(e) => {
+                        e.preventDefault();
+                        setOpen(true);
+                      }}
+                    >
+                      <FaTerminal size="20" />
+                    </Button>
+                  </TooltipTrigger>
+                  <TooltipContent>
+                    <p>Pick Variable</p>
+                  </TooltipContent>
+                </Tooltip>
+
+                <Tooltip>
+                  <TooltipTrigger asChild>
+                    <Button
+                      className="cursor-pointer bg-primary text-primary-foreground hover:bg-primary/90 rounded-lg"
+                      aria-label={tCommon("testMessageLabel")}
+                      disabled={sendMessageLoading}
+                      onClick={async (e) => {
+                        e.preventDefault();
+                        try {
+                          await sendMessage({
+                            test: true,
+                            guild,
+                            feature,
+                            userId: userInfoByDiscord.id,
+                          }).unwrap();
+                          toast.success(tCommon("sendMessageSuccess"), {
+                            duration: 2000,
+                          });
+                        } catch (error) {
+                          toast.error(tCommon("sendMessageError"), {
+                            duration: 2000,
+                          });
+                        }
+                      }}
+                    >
+                      <FaWandSparkles size="20" />
+                    </Button>
+                  </TooltipTrigger>
+                  <TooltipContent>
+                    <p>Test Message</p>
+                  </TooltipContent>
+                </Tooltip>
               </div>
             </div>
           </div>
@@ -258,7 +278,7 @@ export function InviteTrackerFeature({
           </div>
 
           <div className="col-span-12">
-            <TextAreaForm
+            <TextAreaWithServerEmoji
               control={{
                 id: "content",
                 label: t("content.label"),

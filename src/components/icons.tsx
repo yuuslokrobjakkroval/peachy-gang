@@ -87,7 +87,12 @@ export const Icons = {
     </svg>
   ),
   nextJS: (props: IconProps) => (
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 180 180" width="18" {...props}>
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 180 180"
+      width="18"
+      {...props}
+    >
       <mask
         height="180"
         id=":r8:mask0_408_134"
@@ -105,7 +110,13 @@ export const Icons = {
           d="M149.508 157.52L69.142 54H54V125.97H66.1136V69.3836L139.999 164.845C143.333 162.614 146.509 160.165 149.508 157.52Z"
           fill="url(#:r8:paint0_linear_408_134)"
         ></path>
-        <rect fill="url(#:r8:paint1_linear_408_134)" height="72" width="12" x="115" y="54"></rect>
+        <rect
+          fill="url(#:r8:paint1_linear_408_134)"
+          height="72"
+          width="12"
+          x="115"
+          y="54"
+        ></rect>
       </g>
       <defs>
         <linearGradient
@@ -251,7 +262,12 @@ export const Icons = {
     </svg>
   ),
   framerMotion: (props: IconProps) => (
-    <svg xmlns="http:www.w3.org/2000/svg" viewBox="0 0 14 21" role="presentation" {...props}>
+    <svg
+      xmlns="http:www.w3.org/2000/svg"
+      viewBox="0 0 14 21"
+      role="presentation"
+      {...props}
+    >
       <path d="M0 0h14v7H7zm0 7h7l7 7H7v7l-7-7z" fill="currentColor"></path>
     </svg>
   ),
