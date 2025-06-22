@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useEffect } from "react";
 import { usePeachy } from "@/contexts/peachy";
 import { AppSidebar } from "@/components/sidebar/app-sidebar";
 import {
@@ -10,6 +10,7 @@ import {
 } from "@/components/ui/sidebar";
 import { Separator } from "@/components/ui/separator";
 import RTLNavbar from "@/components/navbar/RTL";
+import { useRouter } from "next/navigation";
 
 export default function PeachyLayout({
   children,
@@ -17,6 +18,14 @@ export default function PeachyLayout({
   children: React.ReactNode;
 }) {
   const { userInfoByDiscord } = usePeachy();
+  const router = useRouter();
+
+  useEffect(() => {
+    if (!userInfoByDiscord) {
+      router.push("/login");
+    }
+  }, [userInfoByDiscord, router]);
+
   return (
     <SidebarProvider>
       <AppSidebar />

@@ -20,7 +20,6 @@ import {
 } from "@/components/ui/sidebar";
 import { useRouter } from "next/navigation";
 import { avatarUrl, UserInfo } from "@/utils/common";
-import { usePeachy } from "@/contexts/peachy";
 
 export function NavUser({ user }: { user: UserInfo }) {
   const router = useRouter();

@@ -89,8 +89,8 @@ const RTLNavbar = (props: {
             <ThemeChanger />
           </div>
         </TooltipTrigger>
-        <TooltipContent className="bg-popover text-popover-foreground">
-          <p className="text-sm">{t("themeTooltip")}</p>
+        <TooltipContent>
+          <p>{t("themeTooltip")}</p>
         </TooltipContent>
       </Tooltip>
 
@@ -101,11 +101,11 @@ const RTLNavbar = (props: {
             <LanguageChanger setLanguage={setLanguage} />
           </div>
         </TooltipTrigger>
-        <TooltipContent className="bg-popover text-popover-foreground">
-          <p className="text-sm">
+        <TooltipContent>
+          <p>
             {t(
               languages.find((l) => l.code === language)?.nameKey ||
-                "languageTooltip",
+                "languageTooltip"
             )}
           </p>
         </TooltipContent>
@@ -125,8 +125,8 @@ const RTLNavbar = (props: {
               </Button>
             </DropdownMenuTrigger>
           </TooltipTrigger>
-          <TooltipContent className="bg-popover text-popover-foreground">
-            <p className="text-sm">{t("notificationsTooltip")}</p>
+          <TooltipContent>
+            <p>{t("notificationsTooltip")}</p>
           </TooltipContent>
         </Tooltip>
         <DropdownMenuContent
@@ -228,8 +228,8 @@ const RTLNavbar = (props: {
                 </Button>
               </DropdownMenuTrigger>
             </TooltipTrigger>
-            <TooltipContent className="bg-popover text-popover-foreground">
-              <p className="text-sm">{t("userTooltip")}</p>
+            <TooltipContent>
+              <p>{t("userTooltip")}</p>
             </TooltipContent>
           </Tooltip>
           <DropdownMenuContent
