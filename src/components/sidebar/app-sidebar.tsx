@@ -14,7 +14,6 @@ import {
   Store,
   User,
   Wallpaper,
-  CreditCard,
   Coins,
   ClipboardList,
   Brain,
@@ -22,11 +21,13 @@ import {
   Code,
   Popcorn,
   Clapperboard,
+  ShoppingBag,
+  PanelTopOpen,
 } from "lucide-react";
 
 import { NavMain } from "@/components/navbar/nav-main";
 import { NavGuild } from "@/components/navbar/nav-guild";
-import { NavUser } from "@/components/navbar/nav-user";
+import { NavGlobalSetting } from "../navbar/nav-global-setting";
 import {
   Sidebar,
   SidebarContent,
@@ -34,6 +35,7 @@ import {
   SidebarRail,
 } from "@/components/ui/sidebar";
 import { usePeachy } from "@/contexts/peachy";
+import { UserInfo } from "@/utils/common";
 
 const navigation = {
   navMain: [
@@ -87,6 +89,11 @@ const navigation = {
       icon: Store,
       isActive: true,
       items: [
+        {
+          title: "Discord Shop",
+          url: "/store/discord",
+          icon: ShoppingBag,
+        },
         {
           title: "Profile",
           url: "/store/profile",
@@ -151,6 +158,22 @@ const navigation = {
       ],
     },
   ],
+  navGlobalSetting: [
+    {
+      title: "User Managemnet",
+      url: "/users",
+      icon: User,
+      isActive: true,
+      items: [],
+    },
+    {
+      title: "Role Management",
+      url: "/roles",
+      icon: PanelTopOpen,
+      isActive: true,
+      items: [],
+    },
+  ],
 };
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
@@ -166,11 +189,16 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user, guilds, setUserInfoByDiscord, setGuilds]);
 
+  console.log(process.env.OWNER_IDS?.includes(user?.id));
+
   return (
     <Sidebar collapsible="icon" {...props}>
       <SidebarContent>
         <NavMain items={navigation.navMain} />
         <NavGuild guilds={guilds} />
+        {process.env.OWNER_IDS?.includes(user?.id) && (
+          <NavGlobalSetting items={navigation.navGlobalSetting} />
+        )}
       </SidebarContent>
       {/* <SidebarFooter>
         <NavUser user={user} />
