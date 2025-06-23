@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import { Toast } from "@/components/ui/toast";
+import { UpdateFeatureToast } from "./update-feature-toast";
 
 interface UpdateFeaturePanelProps {
   onSubmit: () => void;
@@ -15,7 +15,7 @@ export default function UpdateFeaturePanel({
   isLoading,
 }: UpdateFeaturePanelProps) {
   const [state, setState] = useState<"initial" | "loading" | "success">(
-    isLoading ? "loading" : "initial",
+    isLoading ? "loading" : "initial"
   );
 
   const handleSave = () => {
@@ -36,7 +36,11 @@ export default function UpdateFeaturePanel({
 
   return (
     <div className="fixed flex items-center justify-center z-50">
-      <Toast state={state} onSave={handleSave} onReset={handleReset} />
+      <UpdateFeatureToast
+        state={state}
+        onSave={handleSave}
+        onReset={handleReset}
+      />
     </div>
   );
 }

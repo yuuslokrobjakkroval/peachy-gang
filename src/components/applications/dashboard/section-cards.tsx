@@ -15,7 +15,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import CountUp from "@/components/animations/CountUp";
+import CountUp from "@/components/ui/Animations/CountUp";
 
 interface SectionCardsProps {
   users: any;
@@ -27,11 +27,11 @@ export function SectionCards({ users, meta }: SectionCardsProps) {
   const usersArray = Array.isArray(users) ? users : [users];
   const totalCoin = usersArray.reduce(
     (sum, user) => sum + (user?.balance?.coin || 0),
-    0,
+    0
   );
   const totalCoinInBank = usersArray.reduce(
     (sum, user) => sum + (user?.balance?.bank || 0),
-    0,
+    0
   );
   const averageLevel =
     usersArray.reduce((sum, user) => sum + (user?.profile?.level || 0), 0) /

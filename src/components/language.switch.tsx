@@ -6,6 +6,7 @@ import { motion } from "framer-motion";
 import { useLocale, useTranslations } from "next-intl";
 import { useRouter, usePathname } from "next/navigation";
 import { languages } from "@/utils/common";
+import { Languages } from "lucide-react";
 
 interface LanguageChangerProps {
   className?: string;
@@ -60,7 +61,7 @@ const LanguageChanger: React.FC<LanguageChangerProps> = () => {
         alt={`${t(currentLanguage.nameKey)} flag`}
         width={30}
         height={30}
-        className="h-[30px] w-[30px] text-foreground"
+        className="w-auto h-auto text-foreground"
       />
       {/* <Languages className="h-6 w-6 text-foreground" /> */}
     </motion.button>

@@ -36,6 +36,7 @@ import {
 } from "@/components/ui/sidebar";
 import { usePeachy } from "@/contexts/peachy";
 import { ownerId } from "@/utils/config";
+import { NavFooter } from "../navbar/nav-footer";
 
 const navigation = {
   navMain: [
@@ -197,9 +198,9 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
         <NavGuild guilds={guilds} />
         {isOwner && <NavGlobalSetting items={navigation.navGlobalSetting} />}
       </SidebarContent>
-      {/* <SidebarFooter>
-        <NavUser user={user} />
-      </SidebarFooter> */}
+      <SidebarFooter>
+        <NavFooter />
+      </SidebarFooter>
       <SidebarRail />
     </Sidebar>
   );

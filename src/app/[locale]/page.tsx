@@ -40,6 +40,7 @@ import Container from "@/components/layouts/container";
 import { ExpandableTabs, TabItem } from "@/components/ui/expandable-tabs";
 import { styles } from "@/styles";
 import { Badge } from "@/components/ui/badge";
+import { SplashCursor } from "@/components/ui/Effect/SplashCursor";
 
 type FormData = {
   name: string;
@@ -75,7 +76,7 @@ export default function Peachy() {
   const tabs: TabItem[] = [
     { title: "PEACHY", icon: Home },
     { type: "separator" },
-    { title: "About Us", icon: Book },
+    // { title: "About Us", icon: Book },
     // { title: "FAQ", icon: MessageCircleQuestion },
     // { title: "Contact", icon: Contact },
   ];
@@ -151,7 +152,7 @@ export default function Peachy() {
             label: <X className="h-4 w-4" />,
             onClick: () => toast.dismiss(toastId),
           },
-        },
+        }
       );
     } finally {
       setIsSubmitting(false);
@@ -169,6 +170,7 @@ export default function Peachy() {
 
   return (
     <>
+      <SplashCursor />
       <Container>
         <div className="w-full relative">
           <nav className="container relative flex flex-wrap items-center justify-between p-6 mx-auto lg:justify-between xl:px-2 transition-shadow duration-300">
@@ -181,7 +183,7 @@ export default function Peachy() {
                 </Badge>
                 <div
                   className={cn(
-                    "inline-flex items-center space-x-3 rounded-full border px-4 py-2 transition-all ease-in hover:cursor-pointer",
+                    "inline-flex items-center space-x-3 rounded-full px-4 transition-all ease-in hover:cursor-pointer"
                   )}
                 >
                   {/* Logo with text */}
@@ -210,7 +212,7 @@ export default function Peachy() {
               onChange={(index: number) => {
                 if (!!index) {
                   const sectionId = navigation.find(
-                    (item) => item.name === tabs[index].title,
+                    (item) => item.name === tabs[index].title
                   )?.sectionId;
                   if (sectionId) {
                     scrollToSection(sectionId);

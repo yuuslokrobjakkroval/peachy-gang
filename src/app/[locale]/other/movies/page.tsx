@@ -4,7 +4,7 @@ import React from "react";
 import { useTranslations } from "next-intl";
 import { Card, CardContent } from "@/components/ui/card";
 import { youtubeVideo } from "@/utils/config";
-import { HeroVideoDialog } from "@/components/animations/magicui/hero-video-dialog";
+import { HeroVideoDialog } from "@/components/ui/Animations/magic/hero-video-dialog";
 
 export default function Movies() {
   const t = useTranslations("movies");

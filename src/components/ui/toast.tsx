@@ -1,100 +1,80 @@
 "use client";
 
-import React from "react";
-import { Check, InfoIcon } from "lucide-react";
-import { motion, AnimatePresence } from "framer-motion";
-import { Spinner } from "../loading/spinner";
-import { Button } from "./button";
+import * as React from "react";
+import { Toaster as Sonner } from "sonner";
+import { cva, type VariantProps } from "class-variance-authority";
+import { cn } from "@/lib/utils";
 
-interface ToastProps {
-  state: "initial" | "loading" | "success";
-  onReset?: () => void;
-  onSave?: () => void;
-}
+const toastVariants = cva(
+  "group toast group-[.toaster]:bg-[hsl(var(--hu-card))] group-[.toaster]:text-[hsl(var(--hu-foreground))] group-[.toaster]:border-[hsl(var(--hu-border))] group-[.toaster]:rounded-[var(--radius)]",
+  {
+    variants: {
+      variant: {
+        default: "group-[.toaster]:border-[hsl(var(--hu-border))]",
+        destructive:
+          "group-[.toaster]:border-[hsl(var(--hu-destructive))] group-[.toaster]:text-[hsl(var(--hu-destructive))] group-[.toaster]:bg-[hsl(var(--hu-destructive))]/5",
+        success:
+          "group-[.toaster]:border-green-500 group-[.toaster]:text-green-600 group-[.toaster]:bg-green-50 dark:group-[.toaster]:bg-green-950/20",
+        warning:
+          "group-[.toaster]:border-yellow-500 group-[.toaster]:text-yellow-600 group-[.toaster]:bg-yellow-50 dark:group-[.toaster]:bg-yellow-950/20",
+        info: "group-[.toaster]:border-blue-500 group-[.toaster]:text-blue-600 group-[.toaster]:bg-blue-50 dark:group-[.toaster]:bg-blue-950/20",
+      },
+    },
+    defaultVariants: {
+      variant: "default",
+    },
+  }
+);
 
-const springConfig = {
-  type: "spring",
-  stiffness: 500,
-  damping: 30,
-  mass: 1,
+type ToasterProps = React.ComponentProps<typeof Sonner>;
+
+const Toaster = ({ ...props }: ToasterProps) => {
+  return (
+    <Sonner
+      className="toaster group"
+      toastOptions={{
+        classNames: {
+          toast:
+            "group toast group-[.toaster]:bg-[hsl(var(--hu-card))] group-[.toaster]:text-[hsl(var(--hu-foreground))] group-[.toaster]:border-[hsl(var(--hu-border))] group-[.toaster]:rounded-[var(--radius)] group-[.toaster]:p-4",
+          description:
+            "group-[.toast]:text-[hsl(var(--hu-muted-foreground))] group-[.toast]:text-sm",
+          actionButton:
+            "group-[.toast]:bg-[hsl(var(--hu-primary))] group-[.toast]:text-[hsl(var(--hu-primary-foreground))] group-[.toast]:rounded-[var(--radius)] group-[.toast]:px-3 group-[.toast]:py-1.5 group-[.toast]:text-xs group-[.toast]:font-medium group-[.toast]:transition-colors group-[.toast]:hover:bg-[hsl(var(--hu-primary))]/90",
+          cancelButton:
+            "group-[.toast]:bg-[hsl(var(--hu-accent))] group-[.toast]:text-[hsl(var(--hu-accent-foreground))] group-[.toast]:rounded-[var(--radius)] group-[.toast]:px-3 group-[.toast]:py-1.5 group-[.toast]:text-xs group-[.toast]:font-medium group-[.toast]:transition-colors group-[.toast]:hover:bg-[hsl(var(--hu-accent))]/80",
+          closeButton:
+            "group-[.toast]:bg-transparent group-[.toast]:border-0 group-[.toast]:text-[hsl(var(--hu-muted-foreground))] group-[.toast]:hover:text-[hsl(var(--hu-foreground))] group-[.toast]:hover:bg-[hsl(var(--hu-accent))] group-[.toast]:rounded-[var(--radius)] group-[.toast]:w-6 group-[.toast]:h-6 group-[.toast]:flex group-[.toast]:items-center group-[.toast]:justify-center",
+          title: "group-[.toast]:text-sm group-[.toast]:font-semibold",
+          success:
+            "group-[.toaster]:border-green-500 group-[.toaster]:text-green-600 group-[.toaster]:bg-green-50 dark:group-[.toaster]:bg-green-950/20 dark:group-[.toaster]:text-green-400",
+          error:
+            "group-[.toaster]:border-[hsl(var(--hu-destructive))] group-[.toaster]:text-[hsl(var(--hu-destructive))] group-[.toaster]:bg-[hsl(var(--hu-destructive))]/5",
+          warning:
+            "group-[.toaster]:border-yellow-500 group-[.toaster]:text-yellow-600 group-[.toaster]:bg-yellow-50 dark:group-[.toaster]:bg-yellow-950/20 dark:group-[.toaster]:text-yellow-400",
+          info: "group-[.toaster]:border-blue-500 group-[.toaster]:text-blue-600 group-[.toaster]:bg-blue-50 dark:group-[.toaster]:bg-blue-950/20 dark:group-[.toaster]:text-blue-400",
+          loading:
+            "group-[.toaster]:border-[hsl(var(--hu-border))] group-[.toaster]:text-[hsl(var(--hu-muted-foreground))]",
+        },
+      }}
+      {...props}
+    />
+  );
 };
 
-export function Toast({ state = "initial", onReset, onSave }: ToastProps) {
-  const commonClasses =
-    "mt-6 h-12 bg-[var(--card)] rounded-[var(--radius)] shadow-sm border border-[var(--border)] justify-center items-center inline-flex overflow-hidden font-handwritten relative";
-
-  return (
-    <motion.div
-      className={commonClasses}
-      initial={false}
-      animate={{ width: "auto" }}
-      transition={springConfig}
-    >
-      <div className="absolute inset-0 opacity-0.12 mix-blend-multiply z-10" />
-      <div className="flex items-center justify-between h-full px-3 relative z-20">
-        <AnimatePresence mode="wait">
-          <motion.div
-            key={state}
-            className="flex items-center gap-2"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0 }}
-          >
-            {state === "loading" && (
-              <>
-                <Spinner variant="pinwheel" className="text-[var(--primary)]" />
-                <div className="text-[var(--foreground)] text-[13px] font-normal leading-tight whitespace-nowrap">
-                  Saving
-                </div>
-              </>
-            )}
-            {state === "success" && (
-              <>
-                <div className="p-0.5 bg-[var(--muted)] rounded-[var(--radius-sm)] shadow-sm border border-[var(--border)] justify-center items-center gap-1.5 flex overflow-hidden">
-                  <Check className="w-3.5 h-3.5 text-[var(--primary)]" />
-                </div>
-                <div className="text-[var(--foreground)] text-[13px] font-normal leading-tight whitespace-nowrap">
-                  Changes Saved
-                </div>
-              </>
-            )}
-            {state === "initial" && (
-              <>
-                <InfoIcon className="h-4 w-4" />
-                <div className="text-[var(--foreground)] text-[13px] font-normal leading-tight whitespace-nowrap">
-                  Unsaved changes
-                </div>
-              </>
-            )}
-          </motion.div>
-        </AnimatePresence>
-        <AnimatePresence>
-          {state === "initial" && (
-            <motion.div
-              className="flex items-center h-12 gap-2 ml-2"
-              initial={{ opacity: 0, width: 0 }}
-              animate={{ opacity: 1, width: "auto" }}
-              exit={{ opacity: 0, width: 0 }}
-              transition={{ ...springConfig, opacity: { duration: 0 } }}
-            >
-              <Button
-                variant="ghost"
-                onClick={onReset}
-                className="h-7 px-3 rounded-[var(--radius)] justify-center items-center inline-flex overflow-hidden cursor-pointer transition-all duration-200"
-              >
-                Reset
-              </Button>
-              <Button
-                onClick={onSave}
-                className="h-7 px-3 rounded-[var(--radius)] justify-center items-center inline-flex overflow-hidden cursor-pointer transition-all duration-200"
-              >
-                Save
-              </Button>
-            </motion.div>
-          )}
-        </AnimatePresence>
-      </div>
-    </motion.div>
-  );
+export interface ToastProps extends VariantProps<typeof toastVariants> {
+  title?: string;
+  description?: string;
+  action?: {
+    label: string;
+    onClick: () => void;
+  };
+  cancel?: {
+    label: string;
+    onClick?: () => void;
+  };
+  duration?: number;
+  id?: string | number;
 }
+
+export { Toaster, toastVariants };
+export type { ToasterProps };

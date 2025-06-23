@@ -112,7 +112,7 @@ const RTLNavbar = (props: {
       </Tooltip>
 
       {/* Notification Dropdown */}
-      <DropdownMenu>
+      {/* <DropdownMenu>
         <Tooltip>
           <TooltipTrigger asChild>
             <DropdownMenuTrigger asChild>
@@ -185,7 +185,7 @@ const RTLNavbar = (props: {
             </TabsContent>
           </Tabs>
         </DropdownMenuContent>
-      </DropdownMenu>
+      </DropdownMenu> */}
 
       {/* Profile Dropdown */}
       {user && (
