@@ -1,17 +1,15 @@
-import { Skeleton } from "@/components/ui/skeleton";
-
 export default function Loading() {
   return (
-    <div className="relative flex items-center justify-center min-h-screen bg-background overflow-hidden">
+    <div className="relative flex items-center justify-center min-h-screen overflow-hidden">
       {/* Texture Overlay */}
       <div className="texture" />
 
       {/* Starry Sky Background */}
-      <div className="absolute inset-0 z-0 bg-background animate-[shimmer_6s_ease-in-out_infinite]" />
+      <div className="absolute inset-0 z-0 animate-[shimmer_6s_ease-in-out_infinite]" />
 
       {/* Moon Glow Effect */}
       <div
-        className="absolute z-5 w-64 h-64 rounded-full bg-background animate-[pulse_4s_ease-in-out_infinite]"
+        className="absolute z-5 w-64 h-64 rounded-full animate-[pulse_4s_ease-in-out_infinite]"
         style={{
           filter: "blur(50px)",
           top: "50%",

@@ -8,7 +8,6 @@ import Loading from "@/components/loading/circle";
 
 export default function DashboardPage() {
   const t = useTranslations();
-  const { userInfoByDiscord }: { userInfoByDiscord: any } = usePeachy();
 
   const getParams = () => {
     return {

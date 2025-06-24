@@ -44,7 +44,6 @@ import {
   LoaderIcon,
 } from "lucide-react";
 import { z } from "zod";
-import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import {
@@ -248,7 +247,7 @@ export function RankTable({
   const [columnVisibility, setColumnVisibility] =
     React.useState<VisibilityState>({});
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
-    [],
+    []
   );
   const [sorting, setSorting] = React.useState<SortingState>([]);
   const [pagination, setPagination] = React.useState({
@@ -259,15 +258,15 @@ export function RankTable({
   const sensors = useSensors(
     useSensor(MouseSensor, {}),
     useSensor(TouchSensor, {}),
-    useSensor(KeyboardSensor, {}),
+    useSensor(KeyboardSensor, {})
   );
 
   const dataIds = React.useMemo<UniqueIdentifier[]>(
     () =>
       data.map(
-        (item) => item.userId ?? "fallback-id-" + Math.random().toString(36),
+        (item) => item.userId ?? "fallback-id-" + Math.random().toString(36)
       ),
-    [data],
+    [data]
   );
 
   const table = useReactTable({
@@ -306,6 +305,7 @@ export function RankTable({
       return arrayMove(currentData, oldIndex, newIndex);
     });
   }
+
   React.useEffect(() => {
     setData(initialData);
   }, [initialData]);
@@ -339,7 +339,7 @@ export function RankTable({
                           ? null
                           : flexRender(
                               header.column.columnDef.header,
-                              header.getContext(),
+                              header.getContext()
                             )}
                       </TableHead>
                     );

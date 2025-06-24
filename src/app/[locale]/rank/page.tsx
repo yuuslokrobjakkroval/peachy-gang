@@ -25,7 +25,7 @@ export default function RankPage() {
         <div className="text-center">
           <Loading />
           <p className="mt-4 text-sm text-muted-foreground">
-            {t("common.loading")}
+            {t("dashboard.loading")}
           </p>
         </div>
       </div>

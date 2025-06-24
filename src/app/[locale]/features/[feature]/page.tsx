@@ -25,6 +25,7 @@ import { GiveawayScheduleFeature } from "@/components/modules/features/giveaway-
 import { GoodByeMessageFeature } from "@/components/modules/features/goodbye-feture";
 import { Card, CardFooter } from "@/components/ui/card";
 import { useTranslations } from "next-intl";
+import Loading from "@/components/loading/circle";
 
 export default function FeaturePage() {
   const t = useTranslations("common");
@@ -38,7 +39,13 @@ export default function FeaturePage() {
   } = useGetFeatureQuery({ guild: guildId, feature });
 
   if (isLoading) {
-    return <Spinner variant="circle" />;
+    return (
+      <div className="w-full flex items-center justify-center min-h-[400px]">
+        <div className="text-center">
+          <Loading />
+        </div>
+      </div>
+    );
   }
 
   return (

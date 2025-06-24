@@ -10,7 +10,7 @@ import {
   useUpdateAutoResponseMutation,
   useDeleteAutoResponseMutation,
 } from "@/redux/api/guild";
-import { toCapitalCase } from "@/utils/common";
+import { toCapitalCase, UserInfo } from "@/utils/common";
 import { motion } from "framer-motion";
 import { SwitchForm } from "@/components/form/switch-form";
 import { Button } from "@/components/ui/button";
@@ -39,6 +39,8 @@ import VariableDialog from "@/components/layouts/dialogs/variable";
 import { PencilRuler, Trash2 } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { TextAreaWithServerEmoji } from "@/components/form/textarea-with-emoji";
+import { useGetUsersQuery } from "@/redux/api/users";
+import Loading from "@/components/loading/circle";
 
 const validationSchema = Yup.object({
   responses: Yup.array().of(
@@ -62,11 +64,16 @@ export function AutoResponseFeature({
   feature,
   refetch,
 }: any) {
+  const tGlobal = useTranslations("dashboard");
   const tCommon = useTranslations("common");
   const tFeature = useTranslations("features");
   const t = useTranslations("autoResponseFeature");
 
   const { userInfoByDiscord } = usePeachy();
+  const {
+    data: { items: users = [], meta } = { items: [], meta: {} },
+    isSuccess,
+  } = useGetUsersQuery(null);
   const [searchQuery, setSearchQuery] = useState("");
   const [dialogOpen, setDialogOpen] = useState(false);
   const [variableDialogOpen, setVariableDialogOpen] = useState(false);
@@ -126,6 +133,8 @@ export function AutoResponseFeature({
             feature,
             id: editingResponse.id,
             ...values,
+            createdBy: userInfoByDiscord.id,
+            createdAt: new Date().toISOString(),
           }).unwrap();
           toast.success(t("dialog.updateSuccess"), { duration: 1500 });
         } else {
@@ -317,7 +326,13 @@ export function AutoResponseFeature({
                         </TableCell>
                         <TableCell>{response.trigger}</TableCell>
                         <TableCell>{response.response}</TableCell>
-                        <TableCell>{response.createdBy}</TableCell>
+                        <TableCell>
+                          {(isSuccess &&
+                            users?.find(
+                              (user: any) => user.userId === response.createdBy
+                            )?.username) ??
+                            ""}
+                        </TableCell>
                         <TableCell>
                           {new Date(response.createdAt).toLocaleString()}
                         </TableCell>
