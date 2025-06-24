@@ -1,11 +1,11 @@
 "use client";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { usePeachy } from "@/contexts/peachy";
 import {
-  useSendMessageFeatureMutation,
-  useUpdateFeatureMutation,
+  useAddGiveawayScheduleMutation,
+  useUpdateGiveawayScheduleMutation,
 } from "@/redux/api/guild";
 import { toCapitalCase } from "@/utils/common";
 import {
@@ -16,38 +16,13 @@ import {
 } from "@/components/ui/dialog";
 import { SwitchForm } from "@/components/form/switch-form";
 import { ChannelSelectForm } from "@/components/form/channel-select-form";
-import { TextAreaForm } from "@/components/form/textarea-form";
 import { SelectForm } from "@/components/form/select-form";
 import { InputForm } from "@/components/form/input-form";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
-import { FaTerminal, FaWandSparkles } from "react-icons/fa6";
-import UpdateFeaturePanel from "@/components/modules/update-feature";
+import { useTranslations } from "next-intl";
+import { TextAreaWithServerEmoji } from "@/components/form/textarea-with-emoji";
 
-// Define TypeScript interfaces
-interface Schedule {
-  _id?: string;
-  channel: string;
-  isActive: boolean;
-  content: string;
-  scheduleType: "DAILY" | "WEEKLY" | "MONTHLY";
-  scheduleTime: string;
-  scheduleDay?: string;
-  scheduleDate?: number;
-  winners: number;
-  prize: number;
-}
-
-interface CreateScheduleDialogProps {
-  guild: string;
-  feature: string;
-  refetch: () => void;
-  open: boolean;
-  onOpenChange: (open: boolean) => void;
-  schedule?: Schedule;
-}
-
-// Validation schema
 const validationSchema = Yup.object({
   isActive: Yup.boolean(),
   channel: Yup.string().required("Channel is required"),
@@ -72,7 +47,7 @@ const validationSchema = Yup.object({
             "Saturday",
             "Sunday",
           ],
-          "Invalid day",
+          "Invalid day"
         )
         .required("Day of the week is required for weekly schedule"),
     otherwise: (schema) => schema.optional(),
@@ -101,14 +76,16 @@ export function CreateScheduleDialog({
   open,
   onOpenChange,
   schedule,
-}: CreateScheduleDialogProps) {
+}: any) {
+  const t = useTranslations("common");
   const { userInfoByDiscord } = usePeachy();
-  const [sendMessage, { isLoading: sendMessageLoading }] =
-    useSendMessageFeatureMutation();
+  const [editing, setEditing] = useState<any>(null);
+  const [addSchedule, { isLoading: addLoading }] =
+    useAddGiveawayScheduleMutation();
   const [
-    updateFeature,
+    updateSchedule,
     { isLoading: updateLoading, isSuccess: updateSuccess },
-  ] = useUpdateFeatureMutation();
+  ] = useUpdateGiveawayScheduleMutation();
 
   const isEditing = !!schedule?._id;
 
@@ -128,29 +105,34 @@ export function CreateScheduleDialog({
     validationSchema,
     onSubmit: async (values) => {
       try {
-        const body = {
-          guild,
-          feature,
-          schedule: [{ ...values }],
-        };
-        await updateFeature(body).unwrap();
-        toast.success(
-          `${isEditing ? "Updated" : "Created"} ${toCapitalCase(feature)} Schedule`,
-          {
-            description: `Schedule ${isEditing ? "updated" : "saved"} successfully.`,
-            className:
-              "bg-gradient-to-r from-pink-500 to-purple-500 text-white",
-          },
-        );
+        if (editing) {
+          await updateSchedule({
+            guild,
+            feature,
+
+            schedule: [{ ...values, id: editing.id }],
+            updateSchedule,
+          }).unwrap();
+          toast.success(t("dialog.updateSuccess"), { duration: 1500 });
+        } else {
+          await addSchedule({
+            guild,
+            feature,
+            schedule: [{ ...values }],
+            createdBy: userInfoByDiscord.id,
+            createdAt: new Date().toISOString(),
+          }).unwrap();
+          toast.success(t("dialog.addSuccess"), { duration: 1500 });
+        }
         refetch();
-        onOpenChange(false);
+        setEditing(null);
         formik.resetForm();
       } catch (error) {
         toast.error(
           `Failed to ${isEditing ? "update" : "create"} ${toCapitalCase(feature)} schedule`,
           {
             duration: 1000,
-          },
+          }
         );
       }
     },
@@ -165,7 +147,7 @@ export function CreateScheduleDialog({
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="sm:max-w-[600px]">
+      <DialogContent className="sm:max-w-4xl rounded-2xl max-h-[80vh] flex flex-col">
         <DialogHeader>
           <DialogTitle>
             {isEditing
@@ -173,58 +155,23 @@ export function CreateScheduleDialog({
               : "Create New Giveaway Schedule"}
           </DialogTitle>
         </DialogHeader>
-        <form onSubmit={formik.handleSubmit} className="space-y-6">
+        <form
+          onSubmit={formik.handleSubmit}
+          className="flex-1 overflow-y-auto space-y-6"
+        >
           <div className="grid grid-cols-1 md:grid-cols-12 gap-4">
             <div className="col-span-12">
-              <div className="flex flex-row items-center justify-between gap-2 min-w-0">
-                <div className="flex-1 min-w-0">
-                  <SwitchForm
-                    control={{
-                      id: "isActive",
-                      label: "Active",
-                      description: "Enable or Disable this schedule",
-                    }}
-                    checked={formik.values.isActive}
-                    onChange={(checked) =>
-                      formik.setFieldValue("isActive", checked)
-                    }
-                  />
-                </div>
-                <div className="flex items-center justify-end gap-2">
-                  <Button
-                    className="cursor-pointer bg-primary text-primary-foreground hover:bg-primary/90 rounded-lg"
-                    aria-label="Pick an emoji"
-                    type="button"
-                  >
-                    <FaTerminal size="20" />
-                  </Button>
-                  <Button
-                    className="cursor-pointer bg-primary text-primary-foreground hover:bg-primary/90 rounded-lg"
-                    aria-label="test message"
-                    type="button"
-                    disabled={sendMessageLoading}
-                    onClick={async () => {
-                      try {
-                        await sendMessage({
-                          test: true,
-                          guild,
-                          feature,
-                          userId: userInfoByDiscord.id,
-                        }).unwrap();
-                        toast.success("Message sent successfully!", {
-                          duration: 2000,
-                        });
-                      } catch (error) {
-                        toast.error("Failed to send message.", {
-                          duration: 2000,
-                        });
-                      }
-                    }}
-                  >
-                    <FaWandSparkles size="20" />
-                  </Button>
-                </div>
-              </div>
+              <SwitchForm
+                control={{
+                  id: "isActive",
+                  label: "Active",
+                  description: "Enable or Disable this schedule",
+                }}
+                checked={formik.values.isActive}
+                onChange={(checked) =>
+                  formik.setFieldValue("isActive", checked)
+                }
+              />
             </div>
 
             <div className="col-span-12">
@@ -242,16 +189,12 @@ export function CreateScheduleDialog({
               />
             </div>
 
-            <div className="col-span-12 sm:col-span-6 lg:col-span-4">
+            <div className="col-span-12">
               <InputForm
                 control={{
                   id: "winners",
                   label: "Number of Winners",
                   description: "How many winners for the giveaway",
-                  error:
-                    formik.touched.winners && formik.errors.winners
-                      ? formik.errors.winners
-                      : undefined,
                 }}
                 type="number"
                 value={formik.values.winners?.toString()}
@@ -261,16 +204,12 @@ export function CreateScheduleDialog({
               />
             </div>
 
-            <div className="col-span-12 sm:col-span-6 lg:col-span-4">
+            <div className="col-span-12">
               <InputForm
                 control={{
                   id: "prize",
                   label: "Prize Amount",
                   description: "The prize amount or value for the giveaway",
-                  error:
-                    formik.touched.prize && formik.errors.prize
-                      ? formik.errors.prize
-                      : undefined,
                 }}
                 type="number"
                 value={formik.values.prize?.toString()}
@@ -281,7 +220,7 @@ export function CreateScheduleDialog({
             </div>
 
             <div className="col-span-12">
-              <TextAreaForm
+              <TextAreaWithServerEmoji
                 control={{
                   id: "content",
                   label: "Message Content",
@@ -296,16 +235,12 @@ export function CreateScheduleDialog({
               />
             </div>
 
-            <div className="col-span-12 sm:col-span-6 lg:col-span-4">
+            <div className="col-span-12">
               <SelectForm
                 control={{
                   id: "scheduleType",
                   label: "Schedule Type",
                   description: "Choose how often the giveaway runs",
-                  error:
-                    formik.touched.scheduleType && formik.errors.scheduleType
-                      ? formik.errors.scheduleType
-                      : undefined,
                 }}
                 options={[
                   { value: "DAILY", label: "Daily" },
@@ -319,16 +254,12 @@ export function CreateScheduleDialog({
               />
             </div>
 
-            <div className="col-span-12 sm:col-span-6 lg:col-span-4">
+            <div className="col-span-12">
               <InputForm
                 control={{
                   id: "scheduleTime",
                   label: "Time (24h)",
                   description: "Set the time for the giveaway (HH:MM)",
-                  error:
-                    formik.touched.scheduleTime && formik.errors.scheduleTime
-                      ? formik.errors.scheduleTime
-                      : undefined,
                 }}
                 placeholder="e.g., 18:00"
                 value={formik.values.scheduleTime}
@@ -339,16 +270,12 @@ export function CreateScheduleDialog({
             </div>
 
             {formik.values.scheduleType === "WEEKLY" && (
-              <div className="col-span-12 sm:col-span-6 lg:col-span-4">
+              <div className="col-span-12">
                 <SelectForm
                   control={{
                     id: "scheduleDay",
                     label: "Day of Week",
                     description: "Choose the day for weekly giveaways",
-                    error:
-                      formik.touched.scheduleDay && formik.errors.scheduleDay
-                        ? formik.errors.scheduleDay
-                        : undefined,
                   }}
                   options={[
                     { value: "Monday", label: "Monday" },
@@ -368,16 +295,12 @@ export function CreateScheduleDialog({
             )}
 
             {formik.values.scheduleType === "MONTHLY" && (
-              <div className="col-span-12 sm:col-span-6 lg:col-span-4">
+              <div className="col-span-12">
                 <InputForm
                   control={{
                     id: "scheduleDate",
                     label: "Date of Month",
                     description: "Choose the date (1-28) for monthly giveaways",
-                    error:
-                      formik.touched.scheduleDate && formik.errors.scheduleDate
-                        ? formik.errors.scheduleDate
-                        : undefined,
                   }}
                   type="number"
                   value={formik.values.scheduleDate?.toString()}
@@ -387,16 +310,25 @@ export function CreateScheduleDialog({
                 />
               </div>
             )}
+          </div>
 
-            <div className="col-span-12 gap-4">
-              {formik.dirty && (
-                <UpdateFeaturePanel
-                  onSubmit={formik.handleSubmit}
-                  onReset={formik.resetForm}
-                  isLoading={updateLoading}
-                />
-              )}
-            </div>
+          <div className="flex justify-between mx-4 mb-12">
+            <Button
+              variant="outline"
+              onClick={(e) => {
+                e.preventDefault();
+                onOpenChange(false);
+              }}
+            >
+              {t("cancel")}
+            </Button>
+            <Button
+              type="submit"
+              className="bg-primary text-primary-foreground hover:bg-primary/90"
+              disabled={addLoading || updateLoading}
+            >
+              {editing ? t("update") : t("add")}
+            </Button>
           </div>
         </form>
       </DialogContent>

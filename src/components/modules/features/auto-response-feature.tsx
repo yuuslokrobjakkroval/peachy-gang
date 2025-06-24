@@ -30,13 +30,12 @@ import {
   DialogTitle,
   DialogClose,
 } from "@/components/ui/dialog";
+import { Search } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Card } from "@/components/ui/card";
 import { FaTerminal } from "react-icons/fa6";
-import UpdateFeaturePanel from "../update-feature";
 import VariableDialog from "@/components/layouts/dialogs/variable";
-import { styles } from "@/styles";
 import { PencilRuler, Trash2 } from "lucide-react";
 import { useTranslations } from "next-intl";
 
@@ -45,7 +44,7 @@ const validationSchema = Yup.object({
     Yup.object({
       trigger: Yup.string().required("Trigger is required"),
       response: Yup.string().required("Response is required"),
-    }),
+    })
   ),
   isActive: Yup.boolean(),
 });
@@ -62,22 +61,20 @@ export function AutoResponseFeature({
   feature,
   refetch,
 }: any) {
-  // Use two translation hooks: one for global and one for feature-specific
   const tCommon = useTranslations("common");
   const tFeature = useTranslations("features");
   const t = useTranslations("autoResponseFeature");
 
   const { userInfoByDiscord } = usePeachy();
+  const [searchQuery, setSearchQuery] = useState("");
   const [dialogOpen, setDialogOpen] = useState(false);
   const [variableDialogOpen, setVariableDialogOpen] = useState(false);
   const [editingResponse, setEditingResponse] = useState<any>(null);
   const [confirmDeleteId, setConfirmDeleteId] = useState<string | null>(null);
   const [disableFeature, { isLoading: disableLoading }] =
     useDisableFeatureMutation();
-  const [
-    updateFeature,
-    { isLoading: updateLoading, isSuccess: updateSuccess },
-  ] = useUpdateFeatureMutation();
+  const [updateFeature, { isSuccess: updateSuccess }] =
+    useUpdateFeatureMutation();
   const [addAutoResponse, { isLoading: addLoading }] =
     useAddAutoResponseMutation();
   const [updateAutoResponse, { isLoading: updateResponseLoading }] =
@@ -99,7 +96,7 @@ export function AutoResponseFeature({
           {
             description: tCommon("updateSuccessDescription"),
             duration: 2000,
-          },
+          }
         );
         refetch();
       } catch (error) {
@@ -107,7 +104,7 @@ export function AutoResponseFeature({
           tCommon("updateError", { feature: toCapitalCase(feature) }),
           {
             duration: 1000,
-          },
+          }
         );
       }
     },
@@ -129,7 +126,6 @@ export function AutoResponseFeature({
             id: editingResponse.id,
             ...values,
           }).unwrap();
-          refetch();
           toast.success(t("dialog.updateSuccess"), { duration: 1500 });
         } else {
           await addAutoResponse({
@@ -139,9 +135,9 @@ export function AutoResponseFeature({
             createdBy: userInfoByDiscord.id,
             createdAt: new Date().toISOString(),
           }).unwrap();
-          refetch();
           toast.success(t("dialog.addSuccess"), { duration: 1500 });
         }
+        refetch(); // Trigger refetch to update featureInfo
         setDialogOpen(false);
         setEditingResponse(null);
         dialogFormik.resetForm();
@@ -150,7 +146,7 @@ export function AutoResponseFeature({
           t("dialog.error", { action: editingResponse ? "update" : "add" }),
           {
             duration: 1000,
-          },
+          }
         );
       }
     },
@@ -159,19 +155,35 @@ export function AutoResponseFeature({
   const [currentPage, setCurrentPage] = useState(1);
   const rowsPerPage = 10;
 
-  const paginatedResponses = formik.values.autoresponse.slice(
-    (currentPage - 1) * rowsPerPage,
-    currentPage * rowsPerPage,
+  const filteredResponses = formik.values.autoresponse.filter((response: any) =>
+    `${response.trigger} ${response.response}`
+      .toLowerCase()
+      .includes(searchQuery.toLowerCase())
   );
 
-  const totalPages =
-    Math.ceil(formik.values.autoresponse.length / rowsPerPage) || 1;
+  const paginatedResponses = filteredResponses.slice(
+    (currentPage - 1) * rowsPerPage,
+    currentPage * rowsPerPage
+  );
+
+  const totalPages = Math.ceil(filteredResponses.length / rowsPerPage) || 1;
+
+  useEffect(() => {
+    if (featureInfo) {
+      formik.setValues(featureInfo, false); // Update values without marking form as dirty
+      formik.resetForm({ values: featureInfo }); // Reset dirty state
+    }
+  }, [featureInfo]);
 
   useEffect(() => {
     if (updateSuccess) {
-      formik.resetForm({ values: formik.values });
+      formik.resetForm({ values: formik.values }); // Reset dirty state with current values
     }
   }, [updateSuccess]);
+
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [searchQuery]);
 
   const handleDisableClick = async () => {
     try {
@@ -182,7 +194,7 @@ export function AutoResponseFeature({
           description: tCommon("disableSuccessDescription"),
           duration: 1000,
           className: "bg-gradient-to-r from-pink-500 to-purple-500 text-white",
-        },
+        }
       );
       refetch();
     } catch (error) {
@@ -190,7 +202,7 @@ export function AutoResponseFeature({
         tCommon("disableError", { feature: toCapitalCase(feature) }),
         {
           duration: 1000,
-        },
+        }
       );
     }
   };
@@ -209,13 +221,6 @@ export function AutoResponseFeature({
     setEditingResponse(response);
     setDialogOpen(true);
   };
-
-  useEffect(() => {
-    if (featureInfo) {
-      formik.setValues({ ...featureInfo });
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [featureInfo]);
 
   return (
     <motion.div
@@ -256,9 +261,10 @@ export function AutoResponseFeature({
                     description: t("switch.activeDescription"),
                   }}
                   checked={formik.values.isActive}
-                  onChange={(checked) =>
-                    formik.setFieldValue("isActive", checked)
-                  }
+                  onChange={(checked) => {
+                    formik.setFieldValue("isActive", checked);
+                    formik.setFieldTouched("isActive", true); // Mark as touched to trigger dirty state
+                  }}
                 />
               </div>
             </div>
@@ -266,17 +272,29 @@ export function AutoResponseFeature({
 
           <div className="col-span-12">
             <Card className="p-4">
-              <div className="flex justify-between items-center mb-4">
+              <div className="flex flex-col sm:flex-row justify-between items-center mb-4 gap-4">
                 <h2 className="text-lg font-semibold text-primary">
                   {t("table.title")}
                 </h2>
-                <Button
-                  type="button"
-                  className="bg-primary text-primary-foreground hover:bg-primary/90"
-                  onClick={() => setDialogOpen(true)}
-                >
-                  {t("table.addButton")}
-                </Button>
+                <div className="flex items-center gap-2 w-full sm:w-auto">
+                  {/* NEW: Search input */}
+                  <div className="relative flex-1 sm:w-64">
+                    <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-muted-foreground" />
+                    <Input
+                      placeholder={t("table.searchPlaceholder")}
+                      value={searchQuery}
+                      onChange={(e) => setSearchQuery(e.target.value)}
+                      className="pl-10"
+                    />
+                  </div>
+                  <Button
+                    type="button"
+                    className="bg-primary text-primary-foreground hover:bg-primary/90"
+                    onClick={() => setDialogOpen(true)}
+                  >
+                    {t("table.addButton")}
+                  </Button>
+                </div>
               </div>
               <Table>
                 <TableHeader>
@@ -293,7 +311,9 @@ export function AutoResponseFeature({
                   {paginatedResponses.length > 0 ? (
                     paginatedResponses.map((response: any, index: number) => (
                       <TableRow key={response.id}>
-                        <TableCell>{index + 1}</TableCell>
+                        <TableCell>
+                          {(currentPage - 1) * rowsPerPage + index + 1}
+                        </TableCell>
                         <TableCell>{response.trigger}</TableCell>
                         <TableCell>{response.response}</TableCell>
                         <TableCell>{response.createdBy}</TableCell>
@@ -331,7 +351,9 @@ export function AutoResponseFeature({
                   ) : (
                     <TableRow>
                       <TableCell colSpan={6} className="text-center">
-                        {t("table.noResponses")}
+                        {searchQuery
+                          ? t("table.noMatchingResponses")
+                          : t("table.noResponses")}
                       </TableCell>
                     </TableRow>
                   )}
@@ -366,19 +388,6 @@ export function AutoResponseFeature({
               </div>
             </Card>
           </div>
-
-          <div
-            style={styles}
-            className="fixed left-1/2 z-50 mx-auto rounded-2xl"
-          >
-            {formik.dirty && (
-              <UpdateFeaturePanel
-                onSubmit={formik.handleSubmit}
-                onReset={formik.resetForm}
-                isLoading={updateLoading}
-              />
-            )}
-          </div>
         </div>
       </form>
 
@@ -408,11 +417,6 @@ export function AutoResponseFeature({
                 onChange={dialogFormik.handleChange}
                 className={dialogFormik.errors.trigger ? "border-red-500" : ""}
               />
-              {/* {dialogFormik.errors.trigger && (
-                <p className="text-sm text-red-500 mt-1">
-                  {dialogFormik.errors.trigger}
-                </p>
-              )} */}
             </div>
             <div>
               <Textarea
@@ -422,11 +426,6 @@ export function AutoResponseFeature({
                 onChange={dialogFormik.handleChange}
                 className={dialogFormik.errors.response ? "border-red-500" : ""}
               />
-              {/* {dialogFormik.errors.response && (
-                <p className="text-sm text-red-500 mt-1">
-                  {dialogFormik.errors.response}
-                </p>
-              )} */}
             </div>
             <div className="flex justify-between">
               <Button

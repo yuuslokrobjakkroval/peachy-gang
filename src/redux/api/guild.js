@@ -121,6 +121,36 @@ const bot = emptySplitApi.injectEndpoints({
         { type: "AUTORESPONSE", id: `${arg.guild}-${arg.feature}` },
       ],
     }),
+
+    addGiveawaySchedule: builder.mutation({
+      query: ({ guild, feature, ...body }) => ({
+        url: `${process.env.NEXT_PUBLIC_API_ENDPOINT}/guilds/${guild}/features/${feature}/create`,
+        method: "POST",
+        body,
+      }),
+      invalidatesTags: (result, error, arg) => [
+        { type: "GIVEAWAYS", id: `${arg.guild}-${arg.feature}` },
+      ],
+    }),
+    updateGiveawaySchedule: builder.mutation({
+      query: ({ guild, feature, id, ...body }) => ({
+        url: `${process.env.NEXT_PUBLIC_API_ENDPOINT}/guilds/${guild}/features/${feature}/update/${id}`,
+        method: "PATCH",
+        body,
+      }),
+      invalidatesTags: (result, error, arg) => [
+        { type: "GIVEAWAYS", id: `${arg.guild}-${arg.feature}` },
+      ],
+    }),
+    deleteGiveawaySchedule: builder.mutation({
+      query: ({ guild, feature, id }) => ({
+        url: `${process.env.NEXT_PUBLIC_API_ENDPOINT}/guilds/${guild}/features/${feature}/delete/${id}`,
+        method: "DELETE",
+      }),
+      invalidatesTags: (result, error, arg) => [
+        { type: "GIVEAWAYS", id: `${arg.guild}-${arg.feature}` },
+      ],
+    }),
   }),
 });
 
@@ -141,4 +171,9 @@ export const {
   useAddAutoResponseMutation,
   useUpdateAutoResponseMutation,
   useDeleteAutoResponseMutation,
+
+  // GIVEAWAY SCHEDULE
+  useAddGiveawayScheduleMutation,
+  useUpdateGiveawayScheduleMutation,
+  useDeleteGiveawayScheduleMutation,
 } = bot;

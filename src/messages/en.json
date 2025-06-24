@@ -4,7 +4,6 @@
     "khmer": "Khmer",
     "china": "China"
   },
-
   "navigation": {
     "home": "Home",
     "dashboard": "Dashboard",
@@ -221,6 +220,8 @@
     "table": {
       "title": "Auto-Responses",
       "addButton": "Add",
+      "searchPlaceholder": "Search",
+      "noMatchingResponses": "No responses match your search.",
       "headers": {
         "no": "No",
         "trigger": "Trigger",
@@ -367,9 +368,14 @@
     "updateError": "Failed to update leveling"
   },
   "giveawayScheduleFeature": {
-    "addButton": "Add Schedule",
-    "addButtonLabel": "Add new schedule",
     "table": {
+      "searchPlaceholder": "Search",
+      "noMatchingSchedules": "No schedules match your search.",
+      "title": "Giveaway Schedules",
+      "pagination": "Page {currentPage} of {totalPages}",
+      "prevButton": "Previous",
+      "nextButton": "Next",
+      "noSchedules": "No giveaway schedules configured.",
       "headers": {
         "channel": "Channel",
         "scheduleType": "Schedule Type",
@@ -380,19 +386,20 @@
         "active": "Active",
         "actions": "Actions"
       },
-      "noSchedules": "No schedules found",
       "editLabel": "Edit schedule {id}",
       "deleteLabel": "Delete schedule {id}"
     },
+    "addButton": "Add Schedule",
+    "addButtonLabel": "Add giveaway schedule",
     "deleteDialog": {
-      "title": "Confirmation",
-      "description": "Are you sure you want to delete the {type} schedule?",
+      "title": "Delete Giveaway Schedule",
+      "description": "Are you sure you want to delete this {type} giveaway schedule?",
       "cancel": "Cancel",
       "delete": "Delete"
     },
-    "deleteSuccess": "Deleted {type} Schedule",
-    "deleteSuccessDescription": "Schedule deleted successfully.",
-    "deleteError": "Failed to delete {type} schedule"
+    "deleteSuccess": "{type} giveaway schedule deleted successfully.",
+    "deleteSuccessDescription": "The giveaway schedule has been successfully removed.",
+    "deleteError": "Failed to delete {type} giveaway schedule."
   },
   "goodByeMessageFeature": {
     "switch": {
@@ -589,6 +596,7 @@
     "success": "Success",
     "cancel": "Cancel",
     "confirm": "Confirm",
+    "add": "Add",
     "save": "Save",
     "edit": "Edit",
     "delete": "Delete",

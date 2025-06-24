@@ -50,6 +50,7 @@ const dynamicTagTypes = [
   "ROLES",
   "EMOJIS",
   "AUTORESPONSE",
+  "GIVEAWAYS",
   "YOUTUBE_VIDEOS",
   "YOUTUBE_CHANNEL",
 ];

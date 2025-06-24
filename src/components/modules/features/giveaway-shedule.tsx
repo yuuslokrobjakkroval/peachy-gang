@@ -1,11 +1,14 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { useFormik } from "formik";
+import * as Yup from "yup";
 import { motion } from "framer-motion";
 import { toCapitalCase } from "@/utils/common";
 import {
   useDisableFeatureMutation,
   useDeleteScheduleMutation,
+  useUpdateFeatureMutation,
 } from "@/redux/api/guild";
 import {
   Table,
@@ -15,21 +18,14 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import {
-  AlertDialog,
-  AlertDialogAction,
-  AlertDialogCancel,
-  AlertDialogContent,
-  AlertDialogDescription,
-  AlertDialogFooter,
-  AlertDialogHeader,
-  AlertDialogTitle,
-} from "@/components/ui/alert-dialog";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
 import { CreateScheduleDialog } from "@/components/layouts/dialogs/create-schedule";
 import { FaEdit, FaTrash } from "react-icons/fa";
 import { useTranslations } from "next-intl";
+import { Search } from "lucide-react";
+import { Input } from "@/components/ui/input";
+import { Card } from "@/components/ui/card";
 
 // Define TypeScript interfaces
 interface Schedule {
@@ -52,7 +48,6 @@ export function GiveawayScheduleFeature({
   feature,
   refetch,
 }: any) {
-  // Use two translation hooks: one for global and one for feature-specific
   const tCommon = useTranslations("common");
   const tFeature = useTranslations("features");
   const t = useTranslations("giveawayScheduleFeature");
@@ -61,13 +56,101 @@ export function GiveawayScheduleFeature({
     useDisableFeatureMutation();
   const [deleteSchedule, { isLoading: deleteLoading }] =
     useDeleteScheduleMutation();
+  const [
+    updateFeature,
+    { isLoading: updateLoading, isSuccess: updateSuccess },
+  ] = useUpdateFeatureMutation();
   const [dialogOpen, setDialogOpen] = useState(false);
   const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
   const [deleteId, setDeleteId] = useState<string | null>(null);
   const [deleteScheduleType, setDeleteScheduleType] = useState<string>("");
   const [editingSchedule, setEditingSchedule] = useState<Schedule | undefined>(
-    undefined,
+    undefined
   );
+  const [searchQuery, setSearchQuery] = useState("");
+  const [currentPage, setCurrentPage] = useState(1);
+  const rowsPerPage = 10;
+
+  const formik = useFormik({
+    initialValues: {
+      isActive: featureInfo.isActive ?? true,
+      schedules: featureInfo.schedules ?? [],
+    },
+    validationSchema: Yup.object({
+      isActive: Yup.boolean(),
+      schedules: Yup.array().of(
+        Yup.object({
+          channel: Yup.string().required("Channel is required"),
+          isActive: Yup.boolean(),
+          content: Yup.string().required("Content is required"),
+          scheduleType: Yup.string()
+            .oneOf(["DAILY", "WEEKLY", "MONTHLY"])
+            .required("Schedule type is required"),
+          scheduleTime: Yup.string().required("Schedule time is required"),
+          winners: Yup.number().required("Winners is required"),
+          prize: Yup.number().required("Prize is required"),
+        })
+      ),
+    }),
+    onSubmit: async (values) => {
+      try {
+        await updateFeature({ guild, feature, ...values }).unwrap();
+        toast.success(
+          tCommon("updateSuccess", { feature: toCapitalCase(feature) }),
+          {
+            description: tCommon("updateSuccessDescription"),
+            duration: 2000,
+            className:
+              "bg-gradient-to-r from-pink-500 to-purple-500 text-white",
+          }
+        );
+        refetch();
+      } catch (error) {
+        toast.error(
+          tCommon("updateError", { feature: toCapitalCase(feature) }),
+          {
+            duration: 1000,
+          }
+        );
+      }
+    },
+  });
+
+  // Sync form initialValues after refetch or successful update
+  useEffect(() => {
+    if (featureInfo) {
+      formik.setValues(featureInfo, false);
+      formik.resetForm({ values: featureInfo });
+    }
+  }, [featureInfo]);
+
+  // Handle successful update to reset dirty state
+  useEffect(() => {
+    if (updateSuccess) {
+      formik.resetForm({ values: formik.values });
+    }
+  }, [updateSuccess]);
+
+  // Filter schedules based on search query
+  const filteredSchedules =
+    formik.values.schedules?.filter((schedule: Schedule) =>
+      `${schedule.content} ${schedule.channel} ${schedule.scheduleType}`
+        .toLowerCase()
+        .includes(searchQuery.toLowerCase())
+    ) || [];
+
+  // Paginate filtered schedules
+  const paginatedSchedules = filteredSchedules.slice(
+    (currentPage - 1) * rowsPerPage,
+    currentPage * rowsPerPage
+  );
+
+  const totalPages = Math.ceil(filteredSchedules.length / rowsPerPage) || 1;
+
+  // Reset currentPage when searchQuery changes
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [searchQuery]);
 
   const handleDisableClick = async () => {
     try {
@@ -78,7 +161,7 @@ export function GiveawayScheduleFeature({
           description: tCommon("disableSuccessDescription"),
           duration: 1000,
           className: "bg-gradient-to-r from-pink-500 to-purple-500 text-white",
-        },
+        }
       );
       refetch();
     } catch (error) {
@@ -86,7 +169,7 @@ export function GiveawayScheduleFeature({
         tCommon("disableError", { feature: toCapitalCase(feature) }),
         {
           duration: 1000,
-        },
+        }
       );
     }
   };
@@ -118,7 +201,7 @@ export function GiveawayScheduleFeature({
         {
           description: t("deleteSuccessDescription"),
           className: "bg-gradient-to-r from-pink-500 to-purple-500 text-white",
-        },
+        }
       );
       refetch();
     } catch (error) {
@@ -126,7 +209,7 @@ export function GiveawayScheduleFeature({
         t("deleteError", { type: toCapitalCase(deleteScheduleType) }),
         {
           duration: 1000,
-        },
+        }
       );
     }
     setDeleteDialogOpen(false);
@@ -172,12 +255,120 @@ export function GiveawayScheduleFeature({
         </div>
       </div>
 
+      <Card className="p-4">
+        <div className="flex flex-col sm:flex-row justify-between items-center mb-4 gap-4">
+          <h2 className="text-lg font-semibold text-primary">
+            {t("table.title")}
+          </h2>
+          <div className="relative flex-1 sm:w-64">
+            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 Tmuted-foreground" />
+            <Input
+              placeholder={t("table.searchPlaceholder")}
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              className="pl-10"
+            />
+          </div>
+        </div>
+        <Table>
+          <TableHeader>
+            <TableRow>
+              <TableHead>{t("table.headers.channel")}</TableHead>
+              <TableHead>{t("table.headers.scheduleType")}</TableHead>
+              <TableHead>{t("table.headers.time")}</TableHead>
+              <TableHead>{t("table.headers.dayDate")}</TableHead>
+              <TableHead>{t("table.headers.winners")}</TableHead>
+              <TableHead>{t("table.headers.prize")}</TableHead>
+              <TableHead>{t("table.headers.active")}</TableHead>
+              <TableHead>{t("table.headers.actions")}</TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
+            {paginatedSchedules.length > 0 ? (
+              paginatedSchedules.map((schedule: Schedule, index: number) => (
+                <TableRow key={schedule._id || index}>
+                  <TableCell>{schedule.channel}</TableCell>
+                  <TableCell>{schedule.scheduleType}</TableCell>
+                  <TableCell>{schedule.scheduleTime}</TableCell>
+                  <TableCell>
+                    {schedule.scheduleType === "WEEKLY"
+                      ? schedule.scheduleDay
+                      : schedule.scheduleType === "MONTHLY"
+                        ? schedule.scheduleDate
+                        : "-"}
+                  </TableCell>
+                  <TableCell>{schedule.winners}</TableCell>
+                  <TableCell>{schedule.prize}</TableCell>
+                  <TableCell>{schedule.isActive ? "Yes" : "No"}</TableCell>
+                  <TableCell className="flex gap-2">
+                    <Button
+                      variant="ghost"
+                      size="sm"
+                      onClick={() => handleEditClick(schedule)}
+                      aria-label={t("table.editLabel", {
+                        id: schedule._id || index,
+                      })}
+                    >
+                      <FaEdit />
+                    </Button>
+                    <Button
+                      variant="ghost"
+                      size="sm"
+                      onClick={() => handleDeleteClick(schedule)}
+                      aria-label={t("table.deleteLabel", {
+                        id: schedule._id || index,
+                      })}
+                      disabled={deleteLoading}
+                    >
+                      <FaTrash />
+                    </Button>
+                  </TableCell>
+                </TableRow>
+              ))
+            ) : (
+              <TableRow>
+                <TableCell colSpan={8} className="text-center">
+                  {searchQuery
+                    ? t("table.noMatchingSchedules")
+                    : t("table.noSchedules")}
+                </TableCell>
+              </TableRow>
+            )}
+          </TableBody>
+        </Table>
+        <div className="flex justify-between items-center mt-4">
+          <p className="text-sm text-muted-foreground">
+            {t("table.pagination", { currentPage, totalPages })}
+          </p>
+          <div className="space-x-2">
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={() => setCurrentPage((prev) => Math.max(1, prev - 1))}
+              disabled={currentPage === 1}
+            >
+              {t("table.prevButton")}
+            </Button>
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={() =>
+                setCurrentPage((prev) => Math.min(totalPages, prev + 1))
+              }
+              disabled={currentPage === totalPages}
+            >
+              {t("table.nextButton")}
+            </Button>
+          </div>
+        </div>
+      </Card>
+
       <CreateScheduleDialog
         guild={guild}
         feature={feature}
         refetch={refetch}
         open={dialogOpen}
-        onOpenChange={(open) => {
+        onOpenChange={(open: any) => {
           setDialogOpen(open);
           if (!open) {
             setEditingSchedule(undefined);
@@ -185,92 +376,6 @@ export function GiveawayScheduleFeature({
         }}
         schedule={editingSchedule}
       />
-
-      <AlertDialog open={deleteDialogOpen} onOpenChange={setDeleteDialogOpen}>
-        <AlertDialogContent>
-          <AlertDialogHeader>
-            <AlertDialogTitle>{t("deleteDialog.title")}</AlertDialogTitle>
-            <AlertDialogDescription>
-              {t("deleteDialog.description", {
-                type: deleteScheduleType.toLowerCase(),
-              })}
-            </AlertDialogDescription>
-          </AlertDialogHeader>
-          <AlertDialogFooter>
-            <AlertDialogCancel onClick={() => setDeleteDialogOpen(false)}>
-              {t("deleteDialog.cancel")}
-            </AlertDialogCancel>
-            <AlertDialogAction onClick={confirmDelete}>
-              {t("deleteDialog.delete")}
-            </AlertDialogAction>
-          </AlertDialogFooter>
-        </AlertDialogContent>
-      </AlertDialog>
-
-      <Table>
-        <TableHeader>
-          <TableRow>
-            <TableHead>{t("table.headers.channel")}</TableHead>
-            <TableHead>{t("table.headers.scheduleType")}</TableHead>
-            <TableHead>{t("table.headers.time")}</TableHead>
-            <TableHead>{t("table.headers.dayDate")}</TableHead>
-            <TableHead>{t("table.headers.winners")}</TableHead>
-            <TableHead>{t("table.headers.prize")}</TableHead>
-            <TableHead>{t("table.headers.active")}</TableHead>
-            <TableHead>{t("table.headers.actions")}</TableHead>
-          </TableRow>
-        </TableHeader>
-        <TableBody>
-          {featureInfo?.schedules?.length > 0 ? (
-            featureInfo.schedules.map((schedule: Schedule, index: number) => (
-              <TableRow key={schedule._id || index}>
-                <TableCell>{schedule.channel}</TableCell>
-                <TableCell>{schedule.scheduleType}</TableCell>
-                <TableCell>{schedule.scheduleTime}</TableCell>
-                <TableCell>
-                  {schedule.scheduleType === "WEEKLY"
-                    ? schedule.scheduleDay
-                    : schedule.scheduleType === "MONTHLY"
-                      ? schedule.scheduleDate
-                      : "-"}
-                </TableCell>
-                <TableCell>{schedule.winners}</TableCell>
-                <TableCell>{schedule.prize}</TableCell>
-                <TableCell>{schedule.isActive ? "Yes" : "No"}</TableCell>
-                <TableCell className="flex gap-2">
-                  <Button
-                    variant="ghost"
-                    size="sm"
-                    onClick={() => handleEditClick(schedule)}
-                    aria-label={t("table.editLabel", {
-                      id: schedule._id || index,
-                    })}
-                  >
-                    <FaEdit />
-                  </Button>
-                  <Button
-                    variant="ghost"
-                    size="sm"
-                    onClick={() => handleDeleteClick(schedule)}
-                    aria-label={t("table.deleteLabel", {
-                      id: schedule._id || index,
-                    })}
-                    disabled={deleteLoading}
-                  >
-                    <FaTrash />
-                  </Button>
-                </TableCell>
-              </TableRow>
-            ))
-          ) : (
-            <TableRow>
-              <TableCell colSpan={8} className="text-center">
-                {t("table.noSchedules")}
-              </TableCell>
-            </TableRow>
-          )}
-        </TableBody>
-      </Table>
     </motion.div>
   );
 }

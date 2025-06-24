@@ -216,6 +216,8 @@
     "table": {
       "title": "ការឆ្លើយតបស្វ័យប្រវត្តិ",
       "addButton": "បន្ថែម",
+      "searchPlaceholder": "ស្វែងរក",
+      "noMatchingResponses": "រកមិនឃើញ",
       "headers": {
         "no": "ល.រ",
         "trigger": "ផ្ទុក",
@@ -332,11 +334,16 @@
     "updateError": "បរាជ័យក្នុងការធ្វើបច្ចុប្បន្នភាពកម្រិត"
   },
   "giveawayScheduleFeature": {
-    "addButton": "បន្ថែមកាលវិភាគ",
-    "addButtonLabel": "បន្ថែមកាលវិភាគថ្មី",
     "table": {
+      "searchPlaceholder": "ស្វែងរក",
+      "noMatchingSchedules": "គ្មានកាលវិភាគណាមួយត្រូវនឹងការស្វែងរករបស់អ្នកទេ។",
+      "title": "កាលវិភាគផ្តល់រង្វាន់",
+      "pagination": "ទំព័រទី {currentPage} នៃ {totalPages}",
+      "prevButton": "មុន",
+      "nextButton": "បន្ទាប់",
+      "noSchedules": "គ្មានកាលវិភាគផ្តល់រង្វាន់ត្រូវបានកំណត់ទេ។",
       "headers": {
-        "channel": "ប៉ុស្តិ៍",
+        "channel": "ឆានែល",
         "scheduleType": "ប្រភេទកាលវិភាគ",
         "time": "ម៉ោង",
         "dayDate": "ថ្ងៃ/កាលបរិច្ឆេទ",
@@ -345,19 +352,20 @@
         "active": "សកម្ម",
         "actions": "សកម្មភាព"
       },
-      "noSchedules": "រកមិនឃើញកាលវិភាគ",
       "editLabel": "កែសម្រួលកាលវិភាគ {id}",
       "deleteLabel": "លុបកាលវិភាគ {id}"
     },
+    "addButton": "បន្ថែមកាលវិភាគ",
+    "addButtonLabel": "បន្ថែមកាលវិភាគផ្តល់រង្វាន់",
     "deleteDialog": {
-      "title": "ការបញ្ជាក់",
-      "description": "តើអ្នកប្រាកដថាចង់លុបកាលវិភាគ {type} ឬអត់?",
+      "title": "លុបកាលវិភាគផ្តល់រង្វាន់",
+      "description": "តើអ្នកប្រាកដទេថាចង់លុបកាលួភាគផ្តល់រង្វាន់ {type} នេះ?",
       "cancel": "បោះបង់",
       "delete": "លុប"
     },
-    "deleteSuccess": "បានលុបកាលវិភាគ {type}",
-    "deleteSuccessDescription": "កាលវិភាគត្រូវបានលុបដោយជោគជ័យ។",
-    "deleteError": "បរាជ័យក្នុងការលុបកាលវិភាគ {type}"
+    "deleteSuccess": "កាលវិភាគផ្តល់រង្វាន់ {type} ត្រូវបានលុបដោយជោគជ័យ។",
+    "deleteSuccessDescription": "កាលវិភាគផ្តល់រង្វាន់ត្រូវបានលុបចេញដោយជោគជ័យ។",
+    "deleteError": "បរាជ័យក្នុងការលុបកាលវិភាគផ្តល់រង្វាន់ {type}។"
   },
   "goodByeMessageFeature": {
     "switch": {

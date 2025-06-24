@@ -215,6 +215,8 @@
     "table": {
       "title": "自动响应",
       "addButton": "添加",
+      "searchPlaceholder": "搜索",
+      "noMatchingResponses": "没有与您的搜索匹配的响应。",
       "headers": {
         "no": "不",
         "trigger": "扳机",
@@ -331,32 +333,36 @@
     "updateError": "无法更新升级"
   },
   "giveawayScheduleFeature": {
-    "addButton": "添加时间表",
-    "addButtonLabel": "添加新的时间表",
     "table": {
+      "searchPlaceholder": "搜索",
+      "noMatchingSchedules": "没有与您的搜索匹配的计划。",
+      "title": "抽奖计划",
+      "pagination": "第 {currentPage} 页，共 {totalPages} 页",
+      "prevButton": "上一页",
+      "nextButton": "下一页",
+      "noSchedules": "没有配置抽奖计划。",
       "headers": {
-        "channel": "渠道",
-        "scheduleType": "时间表类型",
+        "channel": "频道",
+        "scheduleType": "计划类型",
         "time": "时间",
-        "dayDate": "日/日期",
-        "winners": "优胜者",
-        "prize": "奖",
-        "active": "积极的",
-        "actions": "动作"
-      },
-      "noSchedules": "找不到时间表",
-      "editLabel": "编辑时间表 {id}",
-      "deleteLabel": "删除时间表 {id}"
+        "dayDate": "日期/星期",
+        "winners": "获奖者",
+        "prize": "奖品",
+        "active": "启用",
+        "actions": "操作"
+      }
     },
+    "addButton": "添加计划",
+    "addButtonLabel": "添加抽奖计划",
     "deleteDialog": {
-      "title": "确认",
-      "description": "您确定要删除 {type} 时间表吗？",
+      "title": "删除抽奖计划",
+      "description": "您确定要删除此 {type} 抽奖计划吗？",
       "cancel": "取消",
       "delete": "删除"
     },
-    "deleteSuccess": "删除{type}时间表",
-    "deleteSuccessDescription": "计划成功删除。",
-    "deleteError": "无法删除 {type} 时间表"
+    "deleteSuccess": "{type} 抽奖计划删除成功。",
+    "deleteSuccessDescription": "抽奖计划已成功移除。",
+    "deleteError": "删除 {type} 抽奖计划失败。"
   },
   "goodByeMessageFeature": {
     "switch": {

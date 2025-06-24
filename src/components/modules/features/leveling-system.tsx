@@ -24,6 +24,7 @@ import {
   TooltipContent,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
+import { styles } from "@/styles";
 import { TextAreaWithServerEmoji } from "@/components/form/textarea-with-emoji";
 
 const validationSchema = Yup.object({
@@ -246,7 +247,10 @@ export function LevelingSystemFeature({
             />
           </div>
 
-          <div className="col-span-12 gap-4">
+          <div
+            style={styles}
+            className="fixed left-1/2 z-50 mx-auto rounded-2xl"
+          >
             {formik.dirty && (
               <UpdateFeaturePanel
                 onSubmit={formik.handleSubmit}
