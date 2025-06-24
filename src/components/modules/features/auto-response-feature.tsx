@@ -38,6 +38,7 @@ import { FaTerminal } from "react-icons/fa6";
 import VariableDialog from "@/components/layouts/dialogs/variable";
 import { PencilRuler, Trash2 } from "lucide-react";
 import { useTranslations } from "next-intl";
+import { TextAreaWithServerEmoji } from "@/components/form/textarea-with-emoji";
 
 const validationSchema = Yup.object({
   responses: Yup.array().of(
@@ -401,7 +402,7 @@ export function AutoResponseFeature({
           }
         }}
       >
-        <DialogContent className="sm:max-w-[425px] rounded-2xl">
+        <DialogContent className="sm:max-w-[650px] rounded-2xl">
           <DialogHeader>
             <DialogTitle>
               {editingResponse ? t("dialog.editTitle") : t("dialog.addTitle")}
@@ -410,21 +411,31 @@ export function AutoResponseFeature({
           </DialogHeader>
           <form onSubmit={dialogFormik.handleSubmit} className="space-y-4">
             <div>
-              <Input
-                id="trigger"
+              <TextAreaWithServerEmoji
+                className={dialogFormik.errors.trigger ? "border-red-500" : ""}
+                control={{
+                  id: "trigger",
+                  label: "Trigger Message",
+                  description: "The message of the trigger",
+                }}
                 placeholder={t("dialog.triggerPlaceholder")}
+                enableEmoji
                 value={dialogFormik.values.trigger}
                 onChange={dialogFormik.handleChange}
-                className={dialogFormik.errors.trigger ? "border-red-500" : ""}
               />
             </div>
             <div>
-              <Textarea
-                id="response"
+              <TextAreaWithServerEmoji
+                className={dialogFormik.errors.response ? "border-red-500" : ""}
+                control={{
+                  id: "response",
+                  label: "Response Message",
+                  description: "The message of the response",
+                }}
                 placeholder={t("dialog.responsePlaceholder")}
+                enableEmoji
                 value={dialogFormik.values.response}
                 onChange={dialogFormik.handleChange}
-                className={dialogFormik.errors.response ? "border-red-500" : ""}
               />
             </div>
             <div className="flex justify-between">

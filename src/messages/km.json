@@ -540,7 +540,8 @@
     "languageTooltip": "ភាសា",
     "language": {
       "english": "អង់គ្លេស",
-      "khmer": "ខ្មែរ"
+      "khmer": "ខ្មែរ",
+      "china": "ចិន"
     },
     "notificationsTooltip": "ការជូនដំណឹង",
     "notifications": "ការជូនដំណឹង",
@@ -562,6 +563,7 @@
     "success": "ជោគជ័យ",
     "cancel": "បោះបង់",
     "confirm": "បញ្ជាក់",
+    "add": "បន្ថែម",
     "save": "រក្សាទុក",
     "edit": "កែសម្រួល",
     "delete": "លុប",

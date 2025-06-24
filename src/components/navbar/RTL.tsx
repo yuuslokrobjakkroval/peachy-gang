@@ -29,10 +29,6 @@ import {
   TooltipContent,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { AllNotification } from "./Notification/All";
-import { UnreadNotification } from "./Notification/Unread";
-import { ArchiveNotification } from "./Notification/Archive";
 import ThemeChanger from "../theme.switch";
 import LanguageChanger from "../language.switch";
 import { useLocale, useTranslations } from "next-intl";

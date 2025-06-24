@@ -6,7 +6,6 @@ import { motion } from "framer-motion";
 import { useLocale, useTranslations } from "next-intl";
 import { useRouter, usePathname } from "next/navigation";
 import { languages } from "@/utils/common";
-import { Languages } from "lucide-react";
 
 interface LanguageChangerProps {
   className?: string;

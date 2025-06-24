@@ -574,7 +574,8 @@
     "languageTooltip": "Language",
     "language": {
       "english": "English",
-      "khmer": "Khmer"
+      "khmer": "Khmer",
+      "china": "China"
     },
     "notificationsTooltip": "Notifications",
     "notifications": "Notifications",
