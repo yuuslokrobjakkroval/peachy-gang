@@ -320,7 +320,7 @@ export function AutoResponseFeature({
                 <TableBody>
                   {paginatedResponses.length > 0 ? (
                     paginatedResponses.map((response: any, index: number) => (
-                      <TableRow key={response.id}>
+                      <TableRow key={response._id}>
                         <TableCell>
                           {(currentPage - 1) * rowsPerPage + index + 1}
                         </TableCell>
