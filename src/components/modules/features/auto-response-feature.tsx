@@ -131,7 +131,7 @@ export function AutoResponseFeature({
           await updateAutoResponse({
             guild,
             feature,
-            id: editingResponse.id,
+            id: editingResponse._id,
             ...values,
             createdBy: userInfoByDiscord.id,
             createdAt: new Date().toISOString(),
