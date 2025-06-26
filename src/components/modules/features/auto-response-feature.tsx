@@ -354,7 +354,7 @@ export function AutoResponseFeature({
                               size="sm"
                               onClick={(e) => {
                                 e.preventDefault();
-                                setConfirmDeleteId(response.id);
+                                setConfirmDeleteId(response._id);
                               }}
                               disabled={deleteLoading || updateResponseLoading}
                             >
