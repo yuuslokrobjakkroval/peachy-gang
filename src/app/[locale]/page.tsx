@@ -201,8 +201,6 @@ export default function Peachy() {
               </span>
             </Link>
           </nav>
-
-          {/* ExpandableTabs for Mobile - Bottom Centered */}
           <div
             style={styles}
             className={cn("fixed left-1/2 z-50 mx-auto rounded-2xl bg-card")}
