@@ -23,6 +23,7 @@ import {
   Clapperboard,
   ShoppingBag,
   PanelTopOpen,
+  Settings2,
 } from "lucide-react";
 
 import { NavMain } from "@/components/navbar/nav-main";
@@ -37,6 +38,7 @@ import {
 import { usePeachy } from "@/contexts/peachy";
 import { ownerId } from "@/utils/config";
 import { NavFooter } from "../navbar/nav-footer";
+import { NavUser } from "../navbar/nav-user";
 
 const navigation = {
   navMain: [
@@ -161,18 +163,40 @@ const navigation = {
   ],
   navGlobalSetting: [
     {
-      title: "User Managemnet",
-      url: "/users",
-      icon: User,
+      title: "General Settings",
+      url: "/general",
+      icon: Settings2,
       isActive: true,
-      items: [],
-    },
-    {
-      title: "Role Management",
-      url: "/roles",
-      icon: PanelTopOpen,
-      isActive: true,
-      items: [],
+      items: [
+        {
+          title: "Clip Management",
+          url: "/general/tutorials",
+          icon: Clapperboard,
+          isActive: true,
+          items: [],
+        },
+        {
+          title: "Movie Management",
+          url: "/general/movies",
+          icon: Popcorn,
+          isActive: true,
+          items: [],
+        },
+        {
+          title: "Role Management",
+          url: "/general/roles",
+          icon: ClipboardList,
+          isActive: true,
+          items: [],
+        },
+        {
+          title: "User Managemnet",
+          url: "/general/users",
+          icon: User,
+          isActive: true,
+          items: [],
+        },
+      ],
     },
   ],
 };
@@ -199,7 +223,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
         {isOwner && <NavGlobalSetting items={navigation.navGlobalSetting} />}
       </SidebarContent>
       <SidebarFooter>
-        <NavFooter />
+        <NavUser user={user} />
       </SidebarFooter>
       <SidebarRail />
     </Sidebar>

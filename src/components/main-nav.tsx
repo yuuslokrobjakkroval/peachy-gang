@@ -29,37 +29,85 @@ const transition = { delay: 0.1, type: "spring", bounce: 0, duration: 0.6 };
 export function MainNav() {
   const router = useRouter();
   return (
-    <motion.button
-      variants={buttonVariants}
-      initial={false}
-      animate="animate"
-      onClick={() => {
-        router.push("/");
-      }}
-      transition={transition}
-      className="relative flex items-center rounded-xl px-4 py-2 text-sm font-medium transition-colors duration-300 text-muted-foreground hover:bg-muted hover:text-foreground"
-    >
-      <div className="px-2">
-        <Image
-          src="/images/favicon.ico"
-          alt="Peachy Logo"
-          width={48}
-          height={48}
-          className="w-6 h-6 text-foreground"
-        />
-      </div>
-      <AnimatePresence initial={false}>
-        <motion.span
-          variants={spanVariants}
-          initial="initial"
-          animate="animate"
-          exit="exit"
-          transition={transition}
-          className="overflow-hidden"
-        >
-          PEACHY
-        </motion.span>
-      </AnimatePresence>
-    </motion.button>
+    <div className="flex flex-col gap-2">
+      <motion.button
+        variants={buttonVariants}
+        initial={false}
+        animate="animate"
+        onClick={() => {
+          router.push("/");
+        }}
+        transition={transition}
+        className="relative flex items-center rounded-xl px-4 py-2 text-sm font-medium transition-colors duration-300 text-muted-foreground hover:bg-muted hover:text-foreground"
+      >
+        <div className="px-2">
+          <Image
+            src="/images/favicon.ico"
+            alt="Peachy Logo"
+            width={48}
+            height={48}
+            className="w-6 h-6 text-foreground"
+          />
+        </div>
+        <AnimatePresence initial={false}>
+          <motion.span
+            variants={spanVariants}
+            initial="initial"
+            animate="animate"
+            exit="exit"
+            transition={transition}
+            className="overflow-hidden"
+          >
+            PEACHY
+          </motion.span>
+        </AnimatePresence>
+      </motion.button>
+      <motion.button
+        variants={buttonVariants}
+        initial={false}
+        animate="animate"
+        onClick={() => {
+          router.push("/admin/user-management");
+        }}
+        transition={transition}
+        className="relative flex items-center rounded-xl px-4 py-2 text-sm font-medium transition-colors duration-300 text-muted-foreground hover:bg-muted hover:text-foreground"
+      >
+        <AnimatePresence initial={false}>
+          <motion.span
+            variants={spanVariants}
+            initial="initial"
+            animate="animate"
+            exit="exit"
+            transition={transition}
+            className="overflow-hidden"
+          >
+            User Management
+          </motion.span>
+        </AnimatePresence>
+      </motion.button>
+      <motion.button
+        variants={buttonVariants}
+        initial={false}
+        animate="animate"
+        onClick={() => {
+          router.push("/roles");
+        }}
+        transition={transition}
+        className="relative flex items-center rounded-xl px-4 py-2 text-sm font-medium transition-colors duration-300 text-muted-foreground hover:bg-muted hover:text-foreground"
+      >
+        <AnimatePresence initial={false}>
+          <motion.span
+            variants={spanVariants}
+            initial="initial"
+            animate="animate"
+            exit="exit"
+            transition={transition}
+            className="overflow-hidden"
+          >
+            Role Management
+          </motion.span>
+        </AnimatePresence>
+      </motion.button>
+    </div>
   );
 }
