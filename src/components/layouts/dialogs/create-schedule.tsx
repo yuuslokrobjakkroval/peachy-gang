@@ -109,8 +109,7 @@ export function CreateScheduleDialog({
           await updateSchedule({
             guild,
             feature,
-
-            schedule: [{ ...values, id: editing.id }],
+            schedules: [{ ...values, id: editing.id }],
             updateSchedule,
           }).unwrap();
           toast.success(t("dialog.updateSuccess"), { duration: 1500 });
@@ -118,7 +117,7 @@ export function CreateScheduleDialog({
           await addSchedule({
             guild,
             feature,
-            schedule: [{ ...values }],
+            schedules: [{ ...values }],
             createdBy: userInfoByDiscord.id,
             createdAt: new Date().toISOString(),
           }).unwrap();
@@ -127,6 +126,7 @@ export function CreateScheduleDialog({
         refetch();
         setEditing(null);
         formik.resetForm();
+        onOpenChange(false);
       } catch (error) {
         toast.error(
           `Failed to ${isEditing ? "update" : "create"} ${toCapitalCase(feature)} schedule`,

@@ -323,12 +323,9 @@ export function BoosterMessageFeature({
                   }}
                   placeholder={t("backgroundImage.placeholder")}
                   value={formik.values.image?.backgroundImage || ""}
-                  onChange={(e: any) =>
-                    formik.setFieldValue(
-                      "image.backgroundImage",
-                      e.target.value
-                    )
-                  }
+                  onChange={(value: string) => {
+                    formik.setFieldValue("image.backgroundImage", value);
+                  }}
                 />
               </div>
 

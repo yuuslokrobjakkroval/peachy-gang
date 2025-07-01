@@ -107,84 +107,8 @@ const RTLNavbar = (props: {
         </TooltipContent>
       </Tooltip>
 
-      {/* Notification Dropdown */}
-      {/* <DropdownMenu>
-        <Tooltip>
-          <TooltipTrigger asChild>
-            <DropdownMenuTrigger asChild>
-              <Button
-                variant="ghost"
-                className="hover:bg-muted transition-colors duration-200"
-                aria-label={t("notificationsTooltip")}
-              >
-                <IoMdNotifications className="h-6 w-6 text-foreground animate-twinkle" />
-              </Button>
-            </DropdownMenuTrigger>
-          </TooltipTrigger>
-          <TooltipContent>
-            <p>{t("notificationsTooltip")}</p>
-          </TooltipContent>
-        </Tooltip>
-        <DropdownMenuContent
-          className="w-[340px] max-h-[80vh] overflow-auto rounded-2xl bg-card p-6 border-border shadow-lg transition-all duration-200"
-          align="end"
-        >
-          <div className="flex items-center justify-between mb-4">
-            <DropdownMenuLabel className="text-xl font-ghibi-bold text-foreground">
-              {t("notifications")}
-            </DropdownMenuLabel>
-            <Button
-              variant="ghost"
-              className="text-sm text-primary hover:text-primary-foreground"
-            >
-              {t("markAllRead")}
-            </Button>
-          </div>
-          <Tabs defaultValue="all" aria-label={t("notificationFilters")}>
-            <TabsList className="grid w-full grid-cols-3 bg-muted/50 rounded-lg">
-              <TabsTrigger
-                value="all"
-                className="data-[state=active]:bg-background data-[state=active]:text-foreground rounded-md text-sm font-ghibi-bold"
-              >
-                {t("allTab")}
-              </TabsTrigger>
-              <TabsTrigger
-                value="unread"
-                className="data-[state=active]:bg-background data-[state=active]:text-foreground rounded-md py-2 text-sm font-ghibi-bold"
-              >
-                {t("unreadTab")}
-              </TabsTrigger>
-              <TabsTrigger
-                value="archive"
-                className="data-[state=active]:bg-background data-[state=active]:text-foreground rounded-md py-2 text-sm font-ghibi-bold"
-              >
-                {t("archiveTab")}
-              </TabsTrigger>
-            </TabsList>
-            <TabsContent
-              value="all"
-              className="space-y-4 pt-2 max-h-[450px] overflow-auto rounded-2xl bg-card scrollbar-thin scrollbar-thumb-primary scrollbar-track-muted"
-            >
-              <AllNotification />
-            </TabsContent>
-            <TabsContent
-              value="unread"
-              className="space-y-4 pt-2 max-h-[450px] overflow-auto rounded-2xl bg-card scrollbar-thin scrollbar-thumb-primary scrollbar-track-muted"
-            >
-              <UnreadNotification />
-            </TabsContent>
-            <TabsContent
-              value="archive"
-              className="space-y-4 pt-2 max-h-[450px] overflow-auto rounded-2xl bg-card scrollbar-thin scrollbar-thumb-primary scrollbar-track-muted"
-            >
-              <ArchiveNotification />
-            </TabsContent>
-          </Tabs>
-        </DropdownMenuContent>
-      </DropdownMenu> */}
-
       {/* Profile Dropdown */}
-      {user && (
+      {user ? (
         <DropdownMenu onOpenChange={handleOpenChange}>
           <Tooltip>
             <TooltipTrigger asChild>
@@ -257,6 +181,16 @@ const RTLNavbar = (props: {
             </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
+      ) : (
+        <Tooltip>
+          <TooltipTrigger asChild>
+            <div>
+              
+          
+            </div>
+          </TooltipTrigger>
+          <TooltipContent>{t("logOut")}</TooltipContent>
+        </Tooltip>
       )}
     </nav>
   );

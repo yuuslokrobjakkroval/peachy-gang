@@ -692,6 +692,15 @@
         "placeholder": "Type in message"
       },
       "noBackgroundImage": "No background image provided"
+    },
+    "dialog": {
+      "addTitle": "Add",
+      "editTitle": "Edit",
+      "addButton": "Add",
+      "updateButton": "Update",
+      "addSuccess": "data was added successfully.",
+      "updateSuccess": "data was updated successfully.",
+      "error": "Failed to added/update data"
     }
   },
   "movies": {

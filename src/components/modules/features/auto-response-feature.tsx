@@ -10,7 +10,7 @@ import {
   useUpdateAutoResponseMutation,
   useDeleteAutoResponseMutation,
 } from "@/redux/api/guild";
-import { toCapitalCase, UserInfo } from "@/utils/common";
+import { toCapitalCase } from "@/utils/common";
 import { motion } from "framer-motion";
 import { SwitchForm } from "@/components/form/switch-form";
 import { Button } from "@/components/ui/button";
@@ -32,7 +32,6 @@ import {
 } from "@/components/ui/dialog";
 import { Search } from "lucide-react";
 import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
 import { Card } from "@/components/ui/card";
 import { FaTerminal } from "react-icons/fa6";
 import VariableDialog from "@/components/layouts/dialogs/variable";
@@ -40,7 +39,6 @@ import { PencilRuler, Trash2 } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { TextAreaWithServerEmoji } from "@/components/form/textarea-with-emoji";
 import { useGetUsersQuery } from "@/redux/api/users";
-import Loading from "@/components/loading/circle";
 
 const validationSchema = Yup.object({
   responses: Yup.array().of(
@@ -64,7 +62,6 @@ export function AutoResponseFeature({
   feature,
   refetch,
 }: any) {
-  const tGlobal = useTranslations("dashboard");
   const tCommon = useTranslations("common");
   const tFeature = useTranslations("features");
   const t = useTranslations("autoResponseFeature");
@@ -165,11 +162,12 @@ export function AutoResponseFeature({
   const [currentPage, setCurrentPage] = useState(1);
   const rowsPerPage = 10;
 
-  const filteredResponses = formik.values.autoresponse.filter((response: any) =>
-    `${response.trigger} ${response.response}`
-      .toLowerCase()
-      .includes(searchQuery.toLowerCase())
-  );
+  const filteredResponses =
+    formik.values.autoresponse?.filter((response: any) =>
+      `${response.trigger} ${response.response}`
+        .toLowerCase()
+        .includes(searchQuery.toLowerCase())
+    ) ?? [];
 
   const paginatedResponses = filteredResponses.slice(
     (currentPage - 1) * rowsPerPage,

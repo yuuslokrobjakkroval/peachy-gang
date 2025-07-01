@@ -161,7 +161,6 @@ export const {
   useEnableFeatureMutation,
   useDisableFeatureMutation,
   useUpdateFeatureMutation,
-  useDeleteScheduleMutation,
   useGetFeatureQuery,
   useGetGuildRolesQuery,
   useGetGuildChannelsQuery,

@@ -7,8 +7,8 @@ import { motion } from "framer-motion";
 import { toCapitalCase } from "@/utils/common";
 import {
   useDisableFeatureMutation,
-  useDeleteScheduleMutation,
   useUpdateFeatureMutation,
+  useDeleteGiveawayScheduleMutation,
 } from "@/redux/api/guild";
 import {
   Table,
@@ -18,6 +18,12 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
 import { CreateScheduleDialog } from "@/components/layouts/dialogs/create-schedule";
@@ -26,8 +32,6 @@ import { useTranslations } from "next-intl";
 import { Search } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Card } from "@/components/ui/card";
-
-// Define TypeScript interfaces
 interface Schedule {
   _id?: string;
   channel: string;
@@ -51,17 +55,14 @@ export function GiveawayScheduleFeature({
   const tCommon = useTranslations("common");
   const tFeature = useTranslations("features");
   const t = useTranslations("giveawayScheduleFeature");
-
+  const [updateFeature, { isSuccess: updateSuccess }] =
+    useUpdateFeatureMutation();
   const [disableFeature, { isLoading: disableLoading }] =
     useDisableFeatureMutation();
   const [deleteSchedule, { isLoading: deleteLoading }] =
-    useDeleteScheduleMutation();
-  const [
-    updateFeature,
-    { isLoading: updateLoading, isSuccess: updateSuccess },
-  ] = useUpdateFeatureMutation();
+    useDeleteGiveawayScheduleMutation();
+
   const [dialogOpen, setDialogOpen] = useState(false);
-  const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
   const [deleteId, setDeleteId] = useState<string | null>(null);
   const [deleteScheduleType, setDeleteScheduleType] = useState<string>("");
   const [editingSchedule, setEditingSchedule] = useState<Schedule | undefined>(
@@ -99,24 +100,17 @@ export function GiveawayScheduleFeature({
           tCommon("updateSuccess", { feature: toCapitalCase(feature) }),
           {
             description: tCommon("updateSuccessDescription"),
-            duration: 2000,
-            className:
-              "bg-gradient-to-r from-pink-500 to-purple-500 text-white",
           }
         );
         refetch();
       } catch (error) {
         toast.error(
-          tCommon("updateError", { feature: toCapitalCase(feature) }),
-          {
-            duration: 1000,
-          }
+          tCommon("updateError", { feature: toCapitalCase(feature) })
         );
       }
     },
   });
 
-  // Sync form initialValues after refetch or successful update
   useEffect(() => {
     if (featureInfo) {
       formik.setValues(featureInfo, false);
@@ -124,14 +118,12 @@ export function GiveawayScheduleFeature({
     }
   }, [featureInfo]);
 
-  // Handle successful update to reset dirty state
   useEffect(() => {
     if (updateSuccess) {
       formik.resetForm({ values: formik.values });
     }
   }, [updateSuccess]);
 
-  // Filter schedules based on search query
   const filteredSchedules =
     formik.values.schedules?.filter((schedule: Schedule) =>
       `${schedule.content} ${schedule.channel} ${schedule.scheduleType}`
@@ -139,7 +131,6 @@ export function GiveawayScheduleFeature({
         .includes(searchQuery.toLowerCase())
     ) || [];
 
-  // Paginate filtered schedules
   const paginatedSchedules = filteredSchedules.slice(
     (currentPage - 1) * rowsPerPage,
     currentPage * rowsPerPage
@@ -147,7 +138,6 @@ export function GiveawayScheduleFeature({
 
   const totalPages = Math.ceil(filteredSchedules.length / rowsPerPage) || 1;
 
-  // Reset currentPage when searchQuery changes
   useEffect(() => {
     setCurrentPage(1);
   }, [searchQuery]);
@@ -159,18 +149,11 @@ export function GiveawayScheduleFeature({
         tCommon("disableSuccess", { feature: toCapitalCase(feature) }),
         {
           description: tCommon("disableSuccessDescription"),
-          duration: 1000,
-          className: "bg-gradient-to-r from-pink-500 to-purple-500 text-white",
         }
       );
       refetch();
     } catch (error) {
-      toast.error(
-        tCommon("disableError", { feature: toCapitalCase(feature) }),
-        {
-          duration: 1000,
-        }
-      );
+      toast.error(tCommon("disableError", { feature: toCapitalCase(feature) }));
     }
   };
 
@@ -183,36 +166,25 @@ export function GiveawayScheduleFeature({
     if (schedule._id) {
       setDeleteId(schedule._id);
       setDeleteScheduleType(schedule.scheduleType);
-      setDeleteDialogOpen(true);
     }
   };
 
-  const confirmDelete = async () => {
-    if (deleteId === null) return;
+  const confirmDelete = async (id: any) => {
+    if (!id) return;
     try {
-      const body = {
-        guild,
-        feature,
-        scheduleId: deleteId,
-      };
-      await deleteSchedule(body).unwrap();
+      await deleteSchedule({ guild, feature, id }).unwrap();
       toast.success(
         t("deleteSuccess", { type: toCapitalCase(deleteScheduleType) }),
         {
           description: t("deleteSuccessDescription"),
-          className: "bg-gradient-to-r from-pink-500 to-purple-500 text-white",
         }
       );
       refetch();
     } catch (error) {
       toast.error(
-        t("deleteError", { type: toCapitalCase(deleteScheduleType) }),
-        {
-          duration: 1000,
-        }
+        t("deleteError", { type: toCapitalCase(deleteScheduleType) })
       );
     }
-    setDeleteDialogOpen(false);
     setDeleteId(null);
     setDeleteScheduleType("");
   };
@@ -368,14 +340,39 @@ export function GiveawayScheduleFeature({
         feature={feature}
         refetch={refetch}
         open={dialogOpen}
+        schedule={editingSchedule}
         onOpenChange={(open: any) => {
           setDialogOpen(open);
-          if (!open) {
-            setEditingSchedule(undefined);
-          }
+          if (!open) setEditingSchedule(undefined);
         }}
-        schedule={editingSchedule}
       />
+
+      <Dialog open={!!deleteId} onOpenChange={() => setDeleteId(null)}>
+        <DialogContent className="sm:max-w-[400px] rounded-2xl">
+          <DialogHeader>
+            <DialogTitle>{t("deleteDialog.title")}</DialogTitle>
+          </DialogHeader>
+          <p>
+            {t("deleteDialog.description", {
+              type: toCapitalCase(deleteScheduleType),
+            })}
+          </p>
+          <div className="flex justify-end gap-2 mt-4">
+            <Button variant="outline" onClick={() => setDeleteId(null)}>
+              {t("deleteDialog.cancel")}
+            </Button>
+            <Button
+              variant="destructive"
+              onClick={() => {
+                confirmDelete(deleteId!);
+                setDeleteId(null);
+              }}
+            >
+              {t("deleteDialog.delete")}
+            </Button>
+          </div>
+        </DialogContent>
+      </Dialog>
     </motion.div>
   );
 }
