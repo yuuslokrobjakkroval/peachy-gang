@@ -4,7 +4,7 @@ import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { useTranslations } from "next-intl";
 
-export default function NotFound() {
+export default function NotFoundAuthPage() {
   const t = useTranslations("NotFound");
   const router = useRouter();
 

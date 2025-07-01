@@ -9,7 +9,9 @@ import { Toaster } from "@/components/ui/sonner";
 import "./globals.css";
 import { SettingsProvider } from "@/contexts/settingsContext";
 import { getMode, getSettingsFromCookie } from "@/utils/serverHelpers";
-import NotFound from "./not-found";
+import { Analytics } from "@vercel/analytics/next";
+import { SpeedInsights } from "@vercel/speed-insights/next";
+import NotFoundAuthPage from "./not-found";
 
 const nunito = Nunito({
   variable: "--font-nunito",
@@ -38,14 +40,14 @@ export default async function LocaleLayout({
   const { locale } = await params;
 
   if (!hasLocale(routing.locales, locale)) {
-    NotFound();
+    NotFoundAuthPage();
   }
 
   let messages;
   try {
     messages = (await import(`../../messages/${locale}.json`)).default;
   } catch (error) {
-    NotFound();
+    NotFoundAuthPage();
   }
 
   const mode = await getMode();
@@ -82,6 +84,8 @@ export default async function LocaleLayout({
                   <div className="texture" />
                   {children}
                   <Toaster position="top-right" />
+                  <Analytics />
+                  <SpeedInsights />
                 </PeachyProvider>
               </ReduxProvider>
             </ThemeProvider>
