@@ -35,14 +35,12 @@ export default function UpdateFeaturePanel({
   };
 
   return (
-    <div className="fixed inset-0 flex items-center justify-center z-50 bg-gray-900 bg-opacity-50">
-      <div className="w-full max-w-md p-4">
-        <UpdateFeatureToast
-          state={state}
-          onSave={handleSave}
-          onReset={handleReset}
-        />
-      </div>
+    <div className="w-full max-w-md p-4">
+      <UpdateFeatureToast
+        state={state}
+        onSave={handleSave}
+        onReset={handleReset}
+      />
     </div>
   );
 }
