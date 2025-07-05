@@ -1,6 +1,6 @@
 {
   "buildCommand": "npx prisma generate && npm run build",
-  "installCommand": "npm install --force",
+  "installCommand": "npm install @prisma/client better-auth --force",
   "outputDirectory": "dist",
   "ignoreCommand": "false",
   "framework": "nextjs"
