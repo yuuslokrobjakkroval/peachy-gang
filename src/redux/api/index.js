@@ -1,18 +1,19 @@
+import { authClient } from "@/lib/auth-client";
 import { createApi } from "@reduxjs/toolkit/query/react";
 import axios from "axios";
-import { getCookie } from "cookies-next";
 
 const axiosBaseQuery =
   () =>
   async ({ url, method, body, params }) => {
-    const tokenCookie = getCookie("ts-token");
-    const accessToken = tokenCookie
-      ? JSON.parse(tokenCookie).access_token
-      : null;
+    const { data: getListAccount } = await authClient.listAccounts();
 
+    const { data: account } = await authClient.getAccessToken({
+      providerId: getListAccount[0].provider,
+    });
+    
     const headers = {
       "Content-Type": "application/json",
-      Authorization: `Bearer ${accessToken}`,
+      Authorization: `Bearer ${account.accessToken}`,
     };
 
     try {

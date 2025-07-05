@@ -99,10 +99,6 @@ export function NavUser({ user }: { user: UserInfo }) {
               </DropdownMenuLabel>
               <DropdownMenuSeparator />
               <DropdownMenuGroup>
-                <DropdownMenuItem onClick={handleProfileClick}>
-                  <BadgeCheck />
-                  Profile
-                </DropdownMenuItem>
                 <DropdownMenuItem onClick={handleBillingClick}>
                   <CreditCard />
                   Billing

@@ -53,7 +53,7 @@ const GridItem = ({ item }: { item: Guild }) => {
                       <Avatar className="h-12 w-12 rounded-lg border-2 mr-3">
                         {item.icon ? (
                           <Image
-                            className="rounded-lg object-cover"
+                            className="rounded-xs object-cover"
                             src={iconUrl(item)}
                             alt={item.name}
                             width={128}
@@ -62,13 +62,13 @@ const GridItem = ({ item }: { item: Guild }) => {
                             sizes="(max-width: 768px) 50vw, 128px"
                           />
                         ) : (
-                          <AvatarFallback className="rounded-lg bg-gradient-to-br from-gray-300 to-gray-400 dark:from-gray-600 dark:to-gray-700 text-sm font-semibold">
+                          <AvatarFallback className="rounded-xs bg-primary text-sm font-semibold">
                             {item.name?.[0]}
                           </AvatarFallback>
                         )}
                       </Avatar>
                       <div className="flex flex-col items-start">
-                        <span className="text-primary text-base font-semibold  dark:text-gray-100 truncate">
+                        <span className="text-primary text-base font-semibold truncate">
                           {item.name}
                         </span>
                         {item?.description && (

@@ -11,7 +11,7 @@ import { SettingsProvider } from "@/contexts/settingsContext";
 import { getMode, getSettingsFromCookie } from "@/utils/serverHelpers";
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
-import NotFoundAuthPage from "./not-found";
+import { notFound } from "next/navigation";
 
 const nunito = Nunito({
   variable: "--font-nunito",
@@ -40,14 +40,14 @@ export default async function LocaleLayout({
   const { locale } = await params;
 
   if (!hasLocale(routing.locales, locale)) {
-    NotFoundAuthPage();
+    notFound();
   }
 
   let messages;
   try {
     messages = (await import(`../../messages/${locale}.json`)).default;
   } catch (error) {
-    NotFoundAuthPage();
+    notFound();
   }
 
   const mode = await getMode();

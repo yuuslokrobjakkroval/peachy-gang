@@ -27,7 +27,6 @@ const Information = ({
         backgroundSize: "cover",
         backgroundPosition: "center",
         backgroundRepeat: "no-repeat",
-        aspectRatio: "16 / 9",
       }
     : { backgroundColor: userInfoByDiscord.banner_color };
 
@@ -35,7 +34,7 @@ const Information = ({
     <Card className="items-center w-full h-full p-[16px] bg-cover">
       {/* Background and profile */}
       <div
-        className="relative mt-1 flex w-full justify-center rounded-xl bg-cover "
+        className="relative flex w-full items-center justify-center mt-4 h-[250px] sm:h-[120px] md:h-[140px] lg:h-[180px] rounded-2xl bg-cover bg-center shadow-md"
         style={backgroundStyle}
       >
         <div className="absolute -bottom-12 left-1/2 -translate-x-1/2">
@@ -73,7 +72,7 @@ const Information = ({
 
       {/* Global Name and Username */}
       <div className="mt-8 flex flex-col">
-        <h4 className="flex justify-center text-xl font-bold text-navy-700 dark:text-white gap-1">
+        <h4 className="flex justify-center text-xl font-bold text-navy-700 gap-1">
           {userInfoByDiscord?.global_name}
           {userInfoByDiscord?.verified && <MdVerified className="mt-0.5" />}
         </h4>
@@ -85,7 +84,7 @@ const Information = ({
       {/* Post followers */}
       <div className="mt-3 mb-3 flex gap-4 md:!gap-14">
         <div className="flex flex-col items-center justify-center">
-          <p className="flex justify-center items-center text-lg font-bold text-navy-700 dark:text-white">
+          <p className="flex justify-center items-center text-lg font-bold text-navy-700 ">
             {formatCoinCompact(userInfo?.balance?.coin ?? 0)}
           </p>
           <p className="text-sm font-normal text-muted-foreground">
@@ -93,7 +92,7 @@ const Information = ({
           </p>
         </div>
         <div className="flex flex-col items-center justify-center">
-          <p className="flex justify-center items-center text-lg font-bold text-navy-700 dark:text-white">
+          <p className="flex justify-center items-center text-lg font-bold text-navy-700">
             {formatCoinCompact(userInfo?.balance?.bank ?? 0)}
           </p>
           <p className="text-sm font-normal text-muted-foreground">
@@ -101,7 +100,7 @@ const Information = ({
           </p>
         </div>
         <div className="flex flex-col items-center justify-center">
-          <p className="flex justify-center items-center text-lg font-bold text-navy-700 dark:text-white">
+          <p className="flex justify-center items-center text-lg font-bold text-navy-700">
             {formatCoinCompact(userInfo?.balance?.slots ?? 0)}
           </p>
           <p className="flex justify-center items-center text-sm font-normal text-muted-foreground">
@@ -109,7 +108,7 @@ const Information = ({
           </p>
         </div>
         <div className="flex flex-col items-center justify-center">
-          <p className="flex justify-center items-center text-lg font-bold text-navy-700 dark:text-white">
+          <p className="flex justify-center items-center text-lg font-bold text-navy-700">
             {formatCoinCompact(userInfo?.balance?.blackjack ?? 0)}
           </p>
           <p className="flex justify-center items-center text-sm font-normal text-muted-foreground">
@@ -118,7 +117,7 @@ const Information = ({
         </div>
 
         <div className="flex flex-col items-center justify-center">
-          <p className="flex justify-center items-center text-lg font-bold text-navy-700 dark:text-white">
+          <p className="flex justify-center items-center text-lg font-bold text-navy-700">
             {formatCoinCompact(userInfo?.balance?.coinflip ?? 0)}
           </p>
           <p className="text-sm font-normal text-muted-foreground">
