@@ -2,6 +2,15 @@ import { NextConfig } from "next";
 import createNextIntlPlugin from "next-intl/plugin";
 
 const nextConfig: NextConfig = {
+  env: {
+    APP_URL: process.env.APP_URL,
+    BOT_CLIENT_ID: process.env.BOT_CLIENT_ID,
+    BOT_CLIENT_SECRET: process.env.BOT_CLIENT_SECRET,
+    FIRST_SUB_CLIENT_ID: process.env.FIRST_SUB_BOT_CLIENT_ID,
+    SECOND_SUB_CLIENT_ID: process.env.SECOND_SUB_BOT_CLIENT_ID,
+    BETTER_AUTH_URL: process.env.BETTER_AUTH_URL,
+    BETTER_AUTH_SECRET: process.env.BETTER_AUTH_SECRET,
+  },
   reactStrictMode: true,
   images: {
     remotePatterns: [

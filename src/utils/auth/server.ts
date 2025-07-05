@@ -5,17 +5,15 @@ import { NextRequest } from "next/server";
 import { z } from "zod";
 import type { IncomingMessage } from "http";
 
-export const APP_URL = process.env.APP_URL ?? "https://peachygang.xyz";
+export const APP_URL = process.env.APP_URL as string;
 export const API_ENDPOINT = "https://discord.com/api/v10";
-export const CLIENT_ID = process.env.BOT_CLIENT_ID ?? "1342317947573633077";
-export const CLIENT_SECRET =
-  process.env.BOT_CLIENT_SECRET ?? "U4tRAzv47CaZTv1u3F9jyRlDd87k_aja";
-export const FIRST_SUB_CLIENT_ID =
-  process.env.FIRST_SUB_BOT_CLIENT_ID ?? "1304244002987446383";
-export const SECOND_SUB_CLIENT_ID =
-  process.env.SECOND_SUB_BOT_CLIENT_ID ?? "1304247206290915399";
-export const BETTER_AUTH_URL =
-  process.env.BETTER_AUTH_URL ?? "https://peachygang.xyz";
+export const CLIENT_ID = process.env.BOT_CLIENT_ID as string;
+export const CLIENT_SECRET = process.env.BOT_CLIENT_SECRET as string;
+export const FIRST_SUB_CLIENT_ID = process.env
+  .FIRST_SUB_BOT_CLIENT_ID as string;
+export const SECOND_SUB_CLIENT_ID = process.env
+  .SECOND_SUB_BOT_CLIENT_ID as string;
+export const BETTER_AUTH_URL = process.env.BETTER_AUTH_URL as string;
 
 const TokenCookie = "ts-token";
 
