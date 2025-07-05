@@ -3,10 +3,10 @@
   "version": "1.0.1",
   "private": true,
   "scripts": {
-    "dev": "next dev --turbopack",
+    "postinstall": "prisma generate",
     "build": "next build",
-    "start": "next start",
-    "postinstall": "prisma generate"
+    "dev": "next dev --turbopack",
+    "start": "next start"
   },
   "dependencies": {
     "@ai-sdk/google": "^1.2.10",
