@@ -1,7 +1,7 @@
 import { APP_URL, BETTER_AUTH_URL } from "./auth/server";
 
 export function getAbsoluteUrl(): string {
-  const defaultUrl = "http://localhost:3000";
+  const defaultUrl = "https://peachygang.xyz";
   console.log(APP_URL);
   return APP_URL ?? defaultUrl;
 }
