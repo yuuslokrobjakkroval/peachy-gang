@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
 import { cn } from "@/lib/utils";
-import { config, youtubeVideo } from "@/utils/config";
+import { config } from "@/utils/config";
 import { FaArrowUp } from "react-icons/fa";
 import {
   FaFacebook,
@@ -32,16 +32,24 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { useForm } from "react-hook-form";
-import { Book, Home, X } from "lucide-react";
+import { X } from "lucide-react";
 import { motion } from "framer-motion";
 import { toast } from "sonner";
 import { useTranslations } from "next-intl";
 import Container from "@/components/layouts/container";
-import { ExpandableTabs, TabItem } from "@/components/ui/expandable-tabs";
+import { ExpandableTabs } from "@/components/ui/expandable-tabs";
 import { styles } from "@/styles";
 import { Badge } from "@/components/ui/badge";
 import { SplashCursor } from "@/components/ui/Effect/SplashCursor";
-import { IconCloud } from "@/components/magicui/icon-cloud";
+import { IconCloud } from "@/components/ui/Animations/magic/icon-cloud";
+import { expandableTabs, slugs } from "@/utils/common";
+import {
+  EMAILJS_PUBLIC_KEY,
+  EMAILJS_SERVICE_ID,
+  EMAILJS_TEMPLATE_ID,
+} from "@/utils/email/constand";
+import emailjs from "emailjs-com";
+import { PeachyAnimatedBeam } from "@/components/ui/Animations/PeachyAnimatedBeam";
 
 type FormData = {
   name: string;
@@ -73,36 +81,6 @@ export default function Peachy() {
   } = useForm<FormData>();
 
   const [isSubmitting, setIsSubmitting] = useState(false);
-
-  const tabs: TabItem[] = [
-    { title: "PEACHY", icon: Home },
-    { type: "separator" },
-    // { title: "About Us", icon: Book },
-    // { title: "FAQ", icon: MessageCircleQuestion },
-    // { title: "Contact", icon: Contact },
-  ];
-
-  const slugs = [
-    "typescript",
-    "javascript",
-    "react",
-    "html5",
-    "css3",
-    "nodedotjs",
-    "express",
-    "nextdotjs",
-    "prisma",
-    "amazonaws",
-    "firebase",
-    "nginx",
-    "vercel",
-    "docker",
-    "git",
-    "github",
-    "gitlab",
-    "visualstudiocode",
-    "figma",
-  ];
 
   const images = slugs.map(
     (slug) => `https://cdn.simpleicons.org/${slug}/${slug}`
@@ -142,14 +120,20 @@ export default function Peachy() {
   const onSubmit = async (data: FormData) => {
     setIsSubmitting(true);
     try {
-      console.log("Form data:", data);
-      const response = await fetch("/api/contact", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data),
-      });
+      const templateParams = {
+        name: data.name,
+        email: data.email,
+        message: data.message,
+      };
 
-      if (response.ok) {
+      const result = await emailjs.send(
+        EMAILJS_SERVICE_ID,
+        EMAILJS_TEMPLATE_ID,
+        templateParams,
+        EMAILJS_PUBLIC_KEY
+      );
+
+      if (result.status === 200) {
         const toastId = toast.success(t("contact.success"), {
           duration: 4000,
           position: "top-right",
@@ -199,7 +183,7 @@ export default function Peachy() {
     <>
       <SplashCursor />
       <Container>
-        <div className="w-full relative">
+        <div className="w-full relative mt-3">
           <nav className="container relative flex flex-wrap items-center justify-between p-6 mx-auto lg:justify-between xl:px-2 transition-shadow duration-300">
             {/* Logo */}
             <Link href="/">
@@ -233,15 +217,15 @@ export default function Peachy() {
             className={cn("fixed left-1/2 z-50 mx-auto rounded-2xl bg-card")}
           >
             <ExpandableTabs
-              tabs={tabs}
+              tabs={expandableTabs}
               onChange={(index: number) => {
                 if (!!index) {
                   const sectionId = navigation.find(
-                    (item) => item.name === tabs[index].title
+                    (item) => item.name === expandableTabs[index].title
                   )?.sectionId;
                   if (sectionId) {
                     scrollToSection(sectionId);
-                  } else if (tabs[index].title === "Peachy") {
+                  } else if (expandableTabs[index].title === "Peachy") {
                     window.scrollTo({ top: 0, behavior: "smooth" });
                   }
                 }
@@ -282,200 +266,235 @@ export default function Peachy() {
       </Container>
 
       <Container>
-        <div className="relative flex min-h-screen w-full flex-col items-center md:p-10">
-          <div className="texture" />
-          <div className="w-full max-w-3xl z-10">
-            <motion.section
-              id="about"
-              className="flex flex-col md:flex-row items-center mb-12 rounded-lg transition-shadow"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.3 }}
-            >
-              <div className="md:w-1/2">
-                <h3 className="text-2xl font-ghibi-bold text-foreground mb-3">
-                  {t("about.beginnings")}
-                </h3>
-                <p className="text-muted-foreground font-ghibi">
-                  {t("about.beginnings_description")}
-                </p>
-              </div>
-              <div className="md:w-1/2 flex justify-center mt-3">
-                <Image
-                  src={config.url}
-                  alt="Peach and Goma Beginnings"
-                  width={200}
-                  height={200}
-                  className="rounded-full transform hover:scale-105 transition-transform"
-                  sizes="(max-width: 768px) 100vw, 200px"
-                />
-              </div>
-            </motion.section>
-
-            {/* <motion.section
-              className="rounded-lg mb-12 transition-shadow"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.4 }}
-            >
-              <h3 className="text-2xl font-ghibi-bold text-foreground mb-3">
-                {t("about.global_reach")}
-              </h3>
-              <p className="text-muted-foreground mb-6 font-ghibi">
-                {t("about.global_reach_description")}
-              </p>
-            </motion.section> */}
-
-            <motion.section
-              className="rounded-lg mb-12 transition-shadow"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.5 }}
-            >
-              <h3 className="text-2xl font-ghibi-bold text-foreground mb-3">
-                {t("about.mission")}
-              </h3>
-              <p className="text-muted-foreground mb-4 font-ghibi">
-                {t("about.mission_description")}
-              </p>
-            </motion.section>
-
-            <motion.section
-              id="faq"
-              className="rounded-lg mb-12 transition-shadow"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.6 }}
-            >
-              <h3 className="text-2xl font-ghibi-bold text-primary mb-6 text-center">
-                {t("faq.title")}
-              </h3>
-              <Accordion type="single" collapsible className="w-full">
-                {faqItems.map((item, index) => (
-                  <AccordionItem key={index} value={`item-${index}`}>
-                    <AccordionTrigger className="font-ghibi-bold text-foreground">
-                      {item.question}
-                    </AccordionTrigger>
-                    <AccordionContent className="text-muted-foreground font-ghibi">
-                      {item.answer}
-                    </AccordionContent>
-                  </AccordionItem>
-                ))}
-              </Accordion>
-            </motion.section>
-
-            <motion.section
-              id="contact"
-              className="mb-12"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.7 }}
-            >
-              <section className="p-6 text-center">
-                <h2 className="text-3xl font-ghibi-bold text-primary mb-4">
-                  {t("contact.title")}
-                </h2>
-                <p className="text-muted-foreground max-w-2xl mx-auto font-ghibi">
-                  {t("contact.description")}
-                </p>
-              </section>
-
-              <Card className="rounded-lg transition-shadow">
-                <CardHeader>
-                  <CardTitle className="font-ghibi-bold text-foreground">
-                    {t("contact.form_title")}
-                  </CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <form onSubmit={handleSubmit(onSubmit)} className="space-y-2">
-                    <div className="flex flex-col gap-6">
-                      <div className="grid gap-3">
-                        <Label
-                          htmlFor="name"
-                          className="font-ghibi-bold text-foreground"
-                        >
-                          {t("contact.name")} *
-                        </Label>
-                        <Input
-                          id="name"
-                          {...register("name", {
-                            required: t("contact.name_required"),
-                          })}
-                          placeholder={t("contact.name_placeholder")}
-                          className="bg-input text-foreground font-ghibi"
-                          aria-invalid={errors.name ? "true" : "false"}
-                        />
-                        {errors.name && (
-                          <p className="text-sm text-destructive">
-                            {errors.name.message}
-                          </p>
-                        )}
-                      </div>
-                      <div className="grid gap-3">
-                        <Label
-                          htmlFor="email"
-                          className="font-ghibi-bold text-foreground"
-                        >
-                          {t("contact.email")} *
-                        </Label>
-                        <Input
-                          id="email"
-                          {...register("email", {
-                            required: t("contact.email_required"),
-                            pattern: {
-                              value:
-                                /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
-                              message: t("contact.email_invalid"),
-                            },
-                          })}
-                          type="email"
-                          placeholder={t("contact.email_placeholder")}
-                          className="bg-input text-foreground font-ghibi"
-                          aria-invalid={errors.email ? "true" : "false"}
-                        />
-                        {errors.email && (
-                          <p className="text-sm text-destructive">
-                            {errors.email.message}
-                          </p>
-                        )}
-                      </div>
-                      <div className="grid gap-3">
-                        <Label
-                          htmlFor="message"
-                          className="font-ghibi-bold text-foreground"
-                        >
-                          {t("contact.message")}
-                        </Label>
-                        <Textarea
-                          id="message"
-                          {...register("message")}
-                          placeholder={t("contact.message_placeholder")}
-                          className="bg-input text-foreground font-ghibi"
-                        />
-                      </div>
-                      <div className="flex flex-col gap-3">
-                        <Button
-                          type="submit"
-                          className="w-full bg-primary text-primary-foreground font-ghibi-bold rounded-md hover:bg-primary/90"
-                          aria-label={t("contact.submit")}
-                          disabled={isSubmitting}
-                        >
-                          {isSubmitting
-                            ? t("contact.sending")
-                            : t("contact.submit")}
-                        </Button>
-                      </div>
-                    </div>
-                  </form>
-                </CardContent>
-              </Card>
-            </motion.section>
+        <motion.section
+          id="about"
+          className="flex flex-col md:flex-row items-center rounded-lg transition-shadow"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.3 }}
+        >
+          <div className="md:w-1/2">
+            <h3 className="text-2xl font-ghibi-bold text-foreground mb-3">
+              {t("about.beginnings")}
+            </h3>
+            <p className="text-muted-foreground font-ghibi">
+              {t("about.beginnings_description")}
+            </p>
           </div>
-        </div>
+          <div className="md:w-1/2 flex justify-center mt-3">
+            <Image
+              src={config.url}
+              alt="Peach and Goma Beginnings"
+              width={200}
+              height={200}
+              className="rounded-full transform hover:scale-105 transition-transform"
+              sizes="(max-width: 768px) 100vw, 200px"
+            />
+          </div>
+        </motion.section>
+
+        <motion.section
+          className="rounded-lg mb-12 transition-shadow"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.4 }}
+        >
+          <h3 className="text-2xl font-ghibi-bold text-foreground mb-3">
+            {t("about.global_reach")}
+          </h3>
+          <p className="text-muted-foreground mb-6 font-ghibi">
+            {t("about.global_reach_description")}
+          </p>
+        </motion.section>
+
+        <motion.section
+          className="rounded-lg mb-12 transition-shadow"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.5 }}
+        >
+          <h3 className="text-2xl font-ghibi-bold text-foreground mb-3">
+            {t("about.mission")}
+          </h3>
+          <p className="text-muted-foreground mb-4 font-ghibi">
+            {t("about.mission_description")}
+          </p>
+        </motion.section>
       </Container>
 
       <Container>
-        <div className="flex items-center justify-between">
+        <>
+          <div className="flex items-center justify-between">
+            <div className="relative flex flex-col size-full items-center justify-center">
+              <section className="p-3 text-center">
+                <h2 className="text-3xl font-ghibi-bold text-primary mb-3">
+                  {t("footer.features")}
+                </h2>
+                <p className="text-muted-foreground max-w-2xl mx-auto font-ghibi whitespace-pre-line">
+                  {t("footer.features_description")}
+                </p>
+              </section>
+            </div>
+            <div className="relative flex flex-col size-full items-center justify-center">
+              <section className="p-3 text-center">
+                <h2 className="text-3xl font-ghibi-bold text-primary mb-3">
+                  {t("footer.techno_language")}
+                </h2>
+                <p className="text-muted-foreground max-w-2xl mx-auto font-ghibi whitespace-pre-line">
+                  {t("footer.techno_language_description")}
+                </p>
+              </section>
+            </div>
+          </div>
+
+          <div className="flex justify-between mt-[-100px]">
+            <div className="relative size-full flex items-center justify-center">
+              <PeachyAnimatedBeam />
+            </div>
+            <div className="relative size-full flex items-center justify-center">
+              <IconCloud images={images} />
+            </div>
+          </div>
+        </>
+      </Container>
+
+      <Container>
+        <motion.section
+          id="faq"
+          className="rounded-lg mb-12 transition-shadow"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.6 }}
+        >
+          <h3 className="text-2xl font-ghibi-bold text-primary mb-6 text-center">
+            {t("faq.title")}
+          </h3>
+          <Accordion type="single" collapsible className="w-full">
+            {faqItems.map((item, index) => (
+              <AccordionItem key={index} value={`item-${index}`}>
+                <AccordionTrigger className="font-ghibi-bold text-foreground">
+                  {item.question}
+                </AccordionTrigger>
+                <AccordionContent className="text-muted-foreground font-ghibi">
+                  {item.answer}
+                </AccordionContent>
+              </AccordionItem>
+            ))}
+          </Accordion>
+        </motion.section>
+      </Container>
+
+      <Container>
+        <motion.section
+          id="contact"
+          className="mb-12"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.7 }}
+        >
+          <section className="p-6 text-center">
+            <h2 className="text-3xl font-ghibi-bold text-primary mb-4">
+              {t("contact.title")}
+            </h2>
+            <p className="text-muted-foreground max-w-2xl mx-auto font-ghibi">
+              {t("contact.description")}
+            </p>
+          </section>
+
+          <Card className="rounded-lg transition-shadow">
+            <CardHeader>
+              <CardTitle className="font-ghibi-bold text-foreground">
+                {t("contact.form_title")}
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              <form onSubmit={handleSubmit(onSubmit)} className="space-y-2">
+                <div className="flex flex-col gap-6">
+                  <div className="grid gap-3">
+                    <Label
+                      htmlFor="name"
+                      className="font-ghibi-bold text-foreground"
+                    >
+                      {t("contact.name")} *
+                    </Label>
+                    <Input
+                      id="name"
+                      {...register("name", {
+                        required: t("contact.name_required"),
+                      })}
+                      placeholder={t("contact.name_placeholder")}
+                      className="bg-input text-foreground font-ghibi"
+                      aria-invalid={errors.name ? "true" : "false"}
+                    />
+                    {errors.name && (
+                      <p className="text-sm text-destructive">
+                        {errors.name.message}
+                      </p>
+                    )}
+                  </div>
+                  <div className="grid gap-3">
+                    <Label
+                      htmlFor="email"
+                      className="font-ghibi-bold text-foreground"
+                    >
+                      {t("contact.email")} *
+                    </Label>
+                    <Input
+                      id="email"
+                      {...register("email", {
+                        required: t("contact.email_required"),
+                        pattern: {
+                          value:
+                            /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
+                          message: t("contact.email_invalid"),
+                        },
+                      })}
+                      type="email"
+                      placeholder={t("contact.email_placeholder")}
+                      className="bg-input text-foreground font-ghibi"
+                      aria-invalid={errors.email ? "true" : "false"}
+                    />
+                    {errors.email && (
+                      <p className="text-sm text-destructive">
+                        {errors.email.message}
+                      </p>
+                    )}
+                  </div>
+                  <div className="grid gap-3">
+                    <Label
+                      htmlFor="message"
+                      className="font-ghibi-bold text-foreground"
+                    >
+                      {t("contact.message")}
+                    </Label>
+                    <Textarea
+                      id="message"
+                      {...register("message")}
+                      placeholder={t("contact.message_placeholder")}
+                      className="bg-input text-foreground font-ghibi"
+                    />
+                  </div>
+                  <div className="flex flex-col gap-3">
+                    <Button
+                      type="submit"
+                      className="w-full bg-primary text-primary-foreground font-ghibi-bold rounded-md hover:bg-primary/90"
+                      aria-label={t("contact.submit")}
+                      disabled={isSubmitting}
+                    >
+                      {isSubmitting
+                        ? t("contact.sending")
+                        : t("contact.submit")}
+                    </Button>
+                  </div>
+                </div>
+              </form>
+            </CardContent>
+          </Card>
+        </motion.section>
+      </Container>
+
+      <Container>
+        <div className="flex items-center ">
           <div className="relative w-full overflow-hidden bg-background">
             <div className="absolute inset-0 bg-gradient-to-r from-background via-transparent to-background z-10" />
             <motion.div
@@ -490,7 +509,7 @@ export default function Peachy() {
               {[...Array(4)].map((_, index) => (
                 <div key={index} className="flex items-center mx-4">
                   <span
-                    className="text-7xl sm:text-8xl md:text-9xl font-bold text-transparent px-4"
+                    className="text-7xl font-bold text-transparent px-4"
                     style={{
                       WebkitTextStroke: "1px #a3a85e", // tailwind gray-400
                     }}
@@ -500,9 +519,6 @@ export default function Peachy() {
                 </div>
               ))}
             </motion.div>
-          </div>
-          <div className="relative flex size-full items-center justify-center overflow-hidden">
-            <IconCloud images={images} />
           </div>
         </div>
       </Container>

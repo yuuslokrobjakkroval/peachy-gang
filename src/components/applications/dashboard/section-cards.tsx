@@ -3,7 +3,6 @@
 import { useTranslations } from "next-intl";
 import {
   AwardIcon,
-  TrendingDownIcon,
   TrendingUpIcon,
   UserIcon,
 } from "lucide-react";

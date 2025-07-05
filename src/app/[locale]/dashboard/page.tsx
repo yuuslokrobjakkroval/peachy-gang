@@ -5,6 +5,7 @@ import { usePeachy } from "@/contexts/peachy";
 import { SectionCards } from "@/components/applications/dashboard/section-cards";
 import { ChartAreaInteractive } from "@/components/applications/dashboard/chart-area-interactive";
 import Loading from "@/components/loading/circle";
+import { Meteors } from "@/components/ui/Animations/magic/meteors";
 
 export default function DashboardPage() {
   const t = useTranslations();
@@ -35,7 +36,8 @@ export default function DashboardPage() {
   }
 
   return (
-    <div className="w-full h-full flex flex-1 flex-col rounded-lg">
+    <div className="relative w-full items-center justify-center overflow-hidden rounded-lg">
+      <Meteors />
       <div className="@container/main flex flex-1 flex-col gap-2">
         <div className="flex flex-col gap-4 py-4">
           {/* Page Header */}

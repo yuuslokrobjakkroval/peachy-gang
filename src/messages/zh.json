@@ -514,9 +514,13 @@
     "error": "无法发送消息"
   },
   "footer": {
-    "tagline": "桃子和戈玛最初是深受喜爱的角色，他们可爱的冒险和温馨的故事俘获了全世界的观众的心。",
-    "follow_us": "跟着我们",
-    "newsletter": "通讯"
+    "tagline": "Peach 和 Goma 起初是深受喜爱的角色，以其可爱冒险和温馨故事俘获全球人心。",
+    "follow_us": "关注我们",
+    "newsletter": "新闻通讯",
+    "features": "Peachy 的出色功能",
+    "features_description": "Peachy 为您的服务器增添乐趣，包含表情、经济、游戏等。\n是您参与的首选机器人！",
+    "techno_language": "技术与语言",
+    "techno_language_description": "由 Node.js、React 等技术驱动。\n支持多种语言，提供无缝全球体验！"
   },
   "error": {
     "unknown": "发生未知错误",

@@ -167,21 +167,21 @@
     "enableButtonLabel": "បើក {name}",
     "configureButtonLabel": "កំណត់រចនាសម្ព័ន្ធ {name}",
     "welcome-message": "សារស្វាគមន៍",
-    "welcome-message_description": "ផ្ញើសារនៅពេលអ្នកប្រើប្រាស់ចូលរួមម៉ាស៊ីនមេ",
+    "welcome-message_description": "ផ្ញើសារនៅពេលអ្នកប្រើប្រាស់ចូលរួម Server  មេ",
     "auto-response": "ការឆ្លើយតបស្វ័យប្រវត្តិ",
     "auto-response_description": "ផ្ញើសារសម្រាប់ការសន្ទនាជាមួយបុតស្តែត",
     "booster-message": "សារជំរុញ",
-    "booster-message_description": "ផ្ញើសារនៅពេលអ្នកប្រើប្រាស់ជំរុញម៉ាស៊ីនមេ",
+    "booster-message_description": "ផ្ញើសារនៅពេលអ្នកប្រើប្រាស់ជំរុញ Server  មេ",
     "invite-tracker-message": "សារអញ្ជើញ",
-    "invite-tracker-message_description": "ផ្ញើសារនៅពេលអ្នកប្រើប្រាស់អញ្ជើញសមាជិកចូលរួមម៉ាស៊ីនមេ",
+    "invite-tracker-message_description": "ផ្ញើសារនៅពេលអ្នកប្រើប្រាស់អញ្ជើញសមាជិកចូលរួម Server  មេ",
     "join-roles": "តួនាទីចូលរួម",
-    "join-roles_description": "ចាត់តាំងតួនាទីដោយស្វ័យប្រវត្តិនៅពេលអ្នកប្រើប្រាស់ចូលរួមម៉ាស៊ីនមេ",
+    "join-roles_description": "ចាត់តាំងតួនាទីដោយស្វ័យប្រវត្តិនៅពេលអ្នកប្រើប្រាស់ចូលរួម Server  មេ",
     "leveling-system": "ប្រព័ន្ធកម្រិត",
-    "leveling-system_description": "បង្កើនកម្រិតម៉ាស៊ីនមេរបស់អ្នកជាមួយប្រព័ន្ធកម្រិត",
+    "leveling-system_description": "បង្កើនកម្រិត Server  មេរបស់អ្នកជាមួយប្រព័ន្ធកម្រិត",
     "giveaway-schedule": "កាលវិភាគអំណោយ",
-    "giveaway-schedule_description": "គ្រប់គ្រងអំណោយដោយភាពងាយស្រួលសម្រាប់ម៉ាស៊ីនមេរបស់អ្នក",
+    "giveaway-schedule_description": "គ្រប់គ្រងអំណោយដោយភាពងាយស្រួលសម្រាប់ Server  មេរបស់អ្នក",
     "goodbye-message": "សារលា",
-    "goodbye-message_description": "ផ្ញើសារនៅពេលអ្នកប្រើប្រាស់ចាកចេញពីម៉ាស៊ីនមេ"
+    "goodbye-message_description": "ផ្ញើសារនៅពេលអ្នកប្រើប្រាស់ចាកចេញពី Server  មេ"
   },
   "welcomeFeature": {
     "switch": {
@@ -517,14 +517,18 @@
     "error": "បរាជ័យក្នុងការផ្ញើសារ"
   },
   "footer": {
-    "tagline": "Peach និង Goma បានចាប់ផ្តើមជាតួអង្គជាទីស្រឡាញ់ ដែលបានទាក់ទាញបេះដូងទូទាំងពិភពលោក ជាមួយនឹងដំណើរផ្សងព្រេងដ៏គួរឱ្យស្រលាញ់ និងរឿងរ៉ាវដ៏កក់ក្តៅរបស់ពួកគេ។",
-    "follow_us": "តាមដានយើង",
-    "newsletter": "ព្រឹត្តិប័ត្រព័ត៌មាន"
+    "tagline": "Peach និង Goma គឺជាតួអង្គដ៏ចូលចិត្តដែលបានគាប់ចិត្តពិភពលោកជាមួយនឹងផ្សងព្រេងគួរឱ្យស្រឡាញ់ និងរឿងរ៉ាវរំភើបចិត្ត។",
+    "follow_us": "តាមដានយើងខ្ញុំ",
+    "newsletter": "សារព័ត៌មាន",
+    "features": "លក្ខណៈពិសេសរបស់ Peachy",
+    "features_description": "Peachy បន្ថែមរសជាតិដល់ Server របស់អ្នកជាមួយនឹងអារម្មណ៍សប្បាយ សេដ្ឋកិច្ច ហ្គេម និងច្រើនទៀត។\nជាប្រព័ន្ធផ្ទេរទិន្នន័យដ៏ល្អសម្រាប់ការចូលរួម!",
+    "techno_language": "បច្ចេកវិទ្យា និងភាសា",
+    "techno_language_description": "ជាប់ភ្ជាប់ជាមួយ Node.js, React និងច្រើនទៀត។\nគាំទ្រភាសាជាច្រើនសម្រាប់បទពិសោធន៍សកលដ៏រលូន!"
   },
   "error": {
     "unknown": "កំហុសមិនស្គាល់កើតឡើង",
     "network": "កំហុសបណ្តាញ",
-    "server": "កំហុសម៉ាស៊ីនបម្រើ",
+    "server": "កំហុស Server  បម្រើ",
     "not_found": "រកមិនឃើញទំព័រ",
     "unauthorized": "ការចូលប្រើគ្មានការអនុញ្ញាត",
     "forbidden": "ការចូលប្រើត្រូវបានហាមឃាត់"
@@ -685,7 +689,7 @@
       "success": "ជោគជ័យ",
       "redirection": "ប្តូរទិស",
       "clientError": "កំហុសអតិថិជន",
-      "serverError": "កំហុសម៉ាស៊ីនមេ"
+      "serverError": "កំហុស Server  មេ"
     },
     "descriptions": {
       "Continue": "បន្ត",
@@ -702,7 +706,7 @@
       "Unauthorized": "គ្មានសិទ្ធិ",
       "Forbidden": "ហាមឃាត់",
       "Not Found": "រកមិនឃើញ",
-      "Internal Server Error": "កំហុសម៉ាស៊ីនមេខាងក្នុង",
+      "Internal Server Error": "កំហុស Server  មេខាងក្នុង",
       "Not Implemented": "មិនបានអនុវត្ត",
       "Bad Gateway": "ច្រកផ្លូវមិនល្អ",
       "Service Unavailable": "សេវាមិនអាចប្រើបាន"

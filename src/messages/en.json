@@ -553,7 +553,11 @@
   "footer": {
     "tagline": "Peach and Goma started as beloved characters that captured hearts worldwide with their adorable adventures and heartwarming stories.",
     "follow_us": "Follow Us",
-    "newsletter": "Newsletter"
+    "newsletter": "Newsletter",
+    "features": "Peachy’s Features",
+    "features_description": "Peachy spices up your server with fun emotes, economy, games, and more.\nYour go-to bot for engagement!",
+    "techno_language": "Tech & Languages",
+    "techno_language_description": "Powered by Node.js, React, and more.\nSupports multiple languages for a seamless global experience!"
   },
   "error": {
     "unknown": "An unknown error occurred",

@@ -1,6 +1,8 @@
 import { config } from "./config";
 import { CustomFeatures, FeatureConfig } from "@/utils/types";
 import { UseFeaturesConfig } from "@/utils/features";
+import { TabItem } from "@/components/ui/expandable-tabs";
+import { Home } from "lucide-react";
 
 interface Language {
   code: string;
@@ -435,3 +437,33 @@ export const getRandomEmoji = (): string => {
   ];
   return getRandomElement(emojis);
 };
+
+export const expandableTabs: TabItem[] = [
+  { title: "PEACHY", icon: Home },
+  { type: "separator" },
+  // { title: "About Us", icon: Book },
+  // { title: "FAQ", icon: MessageCircleQuestion },
+  // { title: "Contact", icon: Contact },
+];
+
+export const slugs = [
+  "typescript",
+  "javascript",
+  "react",
+  "html5",
+  "css3",
+  "nodedotjs",
+  "express",
+  "nextdotjs",
+  "prisma",
+  "amazonaws",
+  "firebase",
+  "nginx",
+  "vercel",
+  "docker",
+  "git",
+  "github",
+  "gitlab",
+  "visualstudiocode",
+  "figma",
+];
