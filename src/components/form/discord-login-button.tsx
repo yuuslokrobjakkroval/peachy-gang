@@ -18,7 +18,6 @@ export function DiscordLoginButton() {
       await authClient.signIn.social({
         provider: "discord",
         callbackURL: "/dashboard",
-        errorCallbackURL: "/auth/error",
       });
     } catch (err) {
       console.error("Discord login failed:", err);
