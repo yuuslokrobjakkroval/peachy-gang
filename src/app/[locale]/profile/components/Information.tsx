@@ -6,11 +6,15 @@ import { Card } from "@/components/ui/card";
 import {
   avatarUrl,
   bannerUrl,
+  clanUrl,
   decorationUrl,
   formatCoinCompact,
+  toCapitalCase,
 } from "@/utils/common";
 import { MdVerified } from "react-icons/md";
 import type { User } from "@/utils/types";
+import { Badge } from "@/components/ui/badge";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 const Information = ({
   userInfoByDiscord,
@@ -34,19 +38,19 @@ const Information = ({
     <Card className="items-center w-full h-full p-[16px] bg-cover">
       {/* Background and profile */}
       <div
-        className="relative flex w-full items-center justify-center mt-4 h-[250px] sm:h-[120px] md:h-[140px] lg:h-[180px] rounded-2xl bg-cover bg-center shadow-md"
+        className="relative w-full h-48 sm:h-32 md:h-40 lg:h-56 rounded-lg bg-cover bg-center"
         style={backgroundStyle}
       >
         <div className="absolute -bottom-12 left-1/2 -translate-x-1/2">
           {/* Decoration and Avatar Wrapper */}
           <div className="relative w-[96px] h-[96px] flex items-center justify-center">
             {/* Avatar */}
-            <div className="relative w-[87px] h-[87px] rounded-full border-[4px] border-white bg-pink-400 dark:!border-navy-700 overflow-hidden">
+            <div className="relative w-[87px] h-[87px] rounded-full border-[4px] overflow-hidden">
               <Image
                 src={avatarUrl(userInfoByDiscord) || "/placeholder.svg"}
                 alt="Profile Avatar"
-                width={87}
-                height={87}
+                width={88}
+                height={88}
                 className="rounded-full object-cover"
               />
             </div>
@@ -60,31 +64,48 @@ const Information = ({
                     "/placeholder.svg"
                   }
                   alt="Avatar Decoration"
-                  width={96}
-                  height={96}
+                  width={100}
+                  height={100}
                   className="object-contain"
                 />
               </div>
             )}
           </div>
         </div>
+
+        {/* Clan Badge */}
+        {userInfoByDiscord.clan.tag && (
+          <Badge className="absolute top-4 right-4 flex items-center gap-2 px-3 py-1 text-xs font-medium bg-primary/90 text-primary-foreground rounded-full shadow-sm hover:bg-primary/80 transition-colors z-10 sm:top-2 sm:right-2">
+            <Avatar className="h-6 w-6">
+              <AvatarImage
+                className="rounded-full"
+                src={clanUrl(userInfoByDiscord)}
+                alt={toCapitalCase(userInfoByDiscord.clan.tag)}
+              />
+              <AvatarFallback className="bg-muted text-foreground font-ghibi-bold text-xs">
+                {toCapitalCase(userInfoByDiscord.clan.tag?.[0])}
+              </AvatarFallback>
+            </Avatar>
+            <span>{toCapitalCase(userInfoByDiscord.clan.tag)}</span>
+          </Badge>
+        )}
       </div>
 
       {/* Global Name and Username */}
-      <div className="mt-8 flex flex-col">
-        <h4 className="flex justify-center text-xl font-bold text-navy-700 gap-1">
+      <div className="mt-12 flex flex-col items-center">
+        <h4 className="flex items-center text-xl font-bold text-navy-700 gap-1">
           {userInfoByDiscord?.global_name}
           {userInfoByDiscord?.verified && <MdVerified className="mt-0.5" />}
         </h4>
-        <p className="flex justify-center text-base font-normal text-muted-foreground">
+        <p className="text-base font-normal text-muted-foreground">
           {userInfoByDiscord?.username}
         </p>
       </div>
 
       {/* Post followers */}
-      <div className="mt-3 mb-3 flex gap-4 md:!gap-14">
+      <div className="mt-3 mb-3 flex flex-wrap justify-center gap-4 md:gap-14">
         <div className="flex flex-col items-center justify-center">
-          <p className="flex justify-center items-center text-lg font-bold text-navy-700 ">
+          <p className="text-lg font-bold text-navy-700">
             {formatCoinCompact(userInfo?.balance?.coin ?? 0)}
           </p>
           <p className="text-sm font-normal text-muted-foreground">
@@ -92,7 +113,7 @@ const Information = ({
           </p>
         </div>
         <div className="flex flex-col items-center justify-center">
-          <p className="flex justify-center items-center text-lg font-bold text-navy-700">
+          <p className="text-lg font-bold text-navy-700">
             {formatCoinCompact(userInfo?.balance?.bank ?? 0)}
           </p>
           <p className="text-sm font-normal text-muted-foreground">
@@ -100,24 +121,23 @@ const Information = ({
           </p>
         </div>
         <div className="flex flex-col items-center justify-center">
-          <p className="flex justify-center items-center text-lg font-bold text-navy-700">
+          <p className="text-lg font-bold text-navy-700">
             {formatCoinCompact(userInfo?.balance?.slots ?? 0)}
           </p>
-          <p className="flex justify-center items-center text-sm font-normal text-muted-foreground">
+          <p className="text-sm font-normal text-muted-foreground">
             {t("profile.information.slot")}
           </p>
         </div>
         <div className="flex flex-col items-center justify-center">
-          <p className="flex justify-center items-center text-lg font-bold text-navy-700">
+          <p className="text-lg font-bold text-navy-700">
             {formatCoinCompact(userInfo?.balance?.blackjack ?? 0)}
           </p>
-          <p className="flex justify-center items-center text-sm font-normal text-muted-foreground">
+          <p className="text-sm font-normal text-muted-foreground">
             {t("profile.information.blackjack")}
           </p>
         </div>
-
         <div className="flex flex-col items-center justify-center">
-          <p className="flex justify-center items-center text-lg font-bold text-navy-700">
+          <p className="text-lg font-bold text-navy-700">
             {formatCoinCompact(userInfo?.balance?.coinflip ?? 0)}
           </p>
           <p className="text-sm font-normal text-muted-foreground">

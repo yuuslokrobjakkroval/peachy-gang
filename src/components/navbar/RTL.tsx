@@ -184,10 +184,7 @@ const RTLNavbar = (props: {
       ) : (
         <Tooltip>
           <TooltipTrigger asChild>
-            <div>
-              
-          
-            </div>
+            <div></div>
           </TooltipTrigger>
           <TooltipContent>{t("logOut")}</TooltipContent>
         </Tooltip>

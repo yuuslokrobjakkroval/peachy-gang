@@ -37,7 +37,8 @@ export type UserInfo = {
   global_name: string;
   discriminator: string;
   avatar: string;
-  email: string;
+  avatar_decoration_data: Decoration;
+  clan: Clan;
   mfa_enabled?: boolean;
   banner?: string;
   accent_color?: number;
@@ -45,7 +46,6 @@ export type UserInfo = {
   flags?: number;
   premium_type?: number;
   public_flags?: number;
-  avatar_decoration_data?: any;
 };
 
 export type Decoration = {
@@ -165,6 +165,13 @@ export interface GiveawayScheduleFeatureProps {
   feature: string;
   refetch: () => void;
 }
+
+export type Clan = {
+  badge: string;
+  identity_enabled: boolean;
+  identity_guild_id: string;
+  tag: string;
+};
 
 export function getOwnerGuild(guilds: Guild[]) {
   return guilds?.filter((guild) => config.guild.filter(guild)) ?? [];
@@ -382,6 +389,10 @@ export function bannerUrl(id: string, banner: string): string {
 
 export function decorationUrl(decoration: Decoration) {
   return `https://cdn.discordapp.com/avatar-decoration-presets/${decoration.asset}.png?size=128`;
+}
+
+export function clanUrl(user: UserInfo) {
+  return `https://cdn.discordapp.com/clan-badges/${user.clan.identity_guild_id}/${user.clan.badge}.png?size=128`;
 }
 
 export function emojiUrl(emoji: any): string {

@@ -186,7 +186,7 @@ export default function Peachy() {
             <Link href="/">
               <span className="relative inline-block">
                 {/* Badge positioned top-right */}
-                <Badge className="absolute -top-3 -right-6 sm:-top-5 sm:-right-8 text-xs px-2 z-10">
+                <Badge className="absolute -top-5 -right-8 text-xs px-2 z-10">
                   BETA
                 </Badge>
                 <div
