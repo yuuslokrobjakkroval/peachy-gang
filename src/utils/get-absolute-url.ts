@@ -1,17 +1,13 @@
-import dotenv from "dotenv";
-
-dotenv.config();
+import { APP_URL, BETTER_AUTH_URL } from "./auth/server";
 
 export function getAbsoluteUrl(): string {
   const defaultUrl = "http://localhost:3000";
-  console.log(process.env.APP_URL);
-
-  return process.env.APP_URL ?? defaultUrl;
+  console.log(APP_URL);
+  return APP_URL ?? defaultUrl;
 }
 
 export function getBetterAuthUrl(): string {
   const defaultUrl = "https://peachygang.xyz";
-  console.log(process.env.BETTER_AUTH_URL);
-
-  return process.env.BETTER_AUTH_URL ?? defaultUrl;
+  console.log(BETTER_AUTH_URL);
+  return BETTER_AUTH_URL ?? defaultUrl;
 }
