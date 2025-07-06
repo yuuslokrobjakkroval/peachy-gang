@@ -37,11 +37,21 @@ const extendedApi = emptySplitApi.injectEndpoints({
       }),
       invalidatesTags: (result, error, arg) => [{ type: "USER", id: arg.id }],
     }),
+
+    getTopUsers: builder.query({
+      query: (params) => ({
+        url: `${process.env.NEXT_PUBLIC_API_ENDPOINT}/peachy/top-coins`,
+        method: "GET",
+        params,
+      }),
+      providesTags: [{ type: "USER", id: "LIST" }],
+    }),
   }),
 });
 
 export const {
   useGetCustomersQuery,
+  useGetTopUsersQuery,
 
   useGetUsersQuery,
   useGetUserByIdQuery,

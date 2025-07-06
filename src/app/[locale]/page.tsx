@@ -41,7 +41,7 @@ import { ExpandableTabs } from "@/components/ui/expandable-tabs";
 import { styles } from "@/styles";
 import { Badge } from "@/components/ui/badge";
 import { IconCloud } from "@/components/ui/Animations/magic/icon-cloud";
-import { expandableTabs, slugs } from "@/utils/common";
+import { expandableTabs, slugs, toNumber } from "@/utils/common";
 import {
   EMAILJS_PUBLIC_KEY,
   EMAILJS_SERVICE_ID,
@@ -50,6 +50,10 @@ import {
 import emailjs from "emailjs-com";
 import { PeachyAnimatedBeam } from "@/components/ui/Animations/PeachyAnimatedBeam";
 import { SplashCursor } from "@/components/ui/Effect/SplashCursor";
+import { HeroPill } from "@/components/ui/hero-pill";
+import { AwardBadge } from "@/components/ui/award-badge";
+import { useGetTopUsersQuery } from "@/redux/api/users";
+import Loading from "@/components/loading/circle";
 
 type FormData = {
   name: string;
@@ -78,6 +82,11 @@ export default function Peachy() {
     formState: { errors },
     reset,
   } = useForm<FormData>();
+  const {
+    data: { items: topUser = [], meta } = { items: [], meta: {} },
+    isSuccess,
+  } = useGetTopUsersQuery(null);
+
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const images = slugs.map(
@@ -178,6 +187,9 @@ export default function Peachy() {
   return (
     <>
       <SplashCursor />
+      <div className="flex flex-wrap items-center justify-center gap-4">
+        <AwardBadge type="golden-kitty" content="PEACHY in Your Area 🌸" />
+      </div>
       <Container>
         <div className="w-full relative mt-3">
           {/* Navigation */}
@@ -372,6 +384,32 @@ export default function Peachy() {
           </div>
         </motion.section>
       </Container>
+
+      {isSuccess && (
+        <Container>
+          <motion.div
+            className="rounded-lg mb-8 sm:mb-12 transition-shadow px-4 sm:px-6"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.6 }}
+          >
+            <div className="flex flex-col justify-center items-center gap-8">
+              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-ghibi-bold text-primary text-center">
+                {t("user.top_global")}
+              </h2>
+              {topUser?.map((user: any, index: number) => (
+                <div key={index}>
+                  <AwardBadge
+                    type="user-coin-top-one"
+                    place={user?.rank ?? index}
+                    content={`${user?.discord?.displayName ?? user.username} - ${toNumber(user?.balance?.coin)} coins`}
+                  />
+                </div>
+              ))}
+            </div>
+          </motion.div>
+        </Container>
+      )}
 
       {/* FAQ Section */}
       <Container>

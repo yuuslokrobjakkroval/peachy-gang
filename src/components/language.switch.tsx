@@ -58,8 +58,8 @@ const LanguageChanger: React.FC<LanguageChangerProps> = () => {
       <Image
         src={currentLanguage.flag}
         alt={`${t(currentLanguage.nameKey)} flag`}
-        width={30}
-        height={30}
+        width={36}
+        height={36}
         className="w-auto h-auto text-foreground"
       />
       {/* <Languages className="h-6 w-6 text-foreground" /> */}

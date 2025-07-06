@@ -82,6 +82,7 @@ export default async function LocaleLayout({
               <ReduxProvider>
                 <PeachyProvider>
                   <div className="texture" />
+                  
                   {children}
                   <Toaster position="top-right" />
                   <Analytics />
