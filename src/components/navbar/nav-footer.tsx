@@ -24,7 +24,7 @@ import {
 } from "@/components/ui/sidebar";
 import { useRouter } from "next/navigation";
 import packageInfo from "../../../package.json";
-import { avatarUrl, toUpperCase, UserInfo } from "@/utils/common";
+import { toUpperCase, UserInfo } from "@/utils/common";
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
 
 const APP_NAME = packageInfo.name || "Peachy";
@@ -81,7 +81,7 @@ export function NavFooter({ user }: { user: UserInfo }) {
               <Avatar className="h-8 w-8 rounded-lg">
                 <AvatarImage src="/images/favicon.ico" alt={"peachy"} />
                 <AvatarFallback className="rounded-lg">
-                  {user.global_name?.[0]}
+                  {user?.global_name?.[0]}
                 </AvatarFallback>
               </Avatar>
               <div className="grid flex-1 text-left text-sm leading-tight">
