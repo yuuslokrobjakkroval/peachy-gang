@@ -1,6 +1,7 @@
 "use client";
 
 import * as React from "react";
+import { usePeachy } from "@/contexts/peachy";
 import { useFetchUserInfoQuery, useGetGuildsQuery } from "@/redux/api/discord";
 import {
   Cat,
@@ -22,23 +23,21 @@ import {
   Popcorn,
   Clapperboard,
   ShoppingBag,
-  PanelTopOpen,
   Settings2,
 } from "lucide-react";
 
 import { NavMain } from "@/components/navbar/nav-main";
 import { NavGuild } from "@/components/navbar/nav-guild";
 import { NavGlobalSetting } from "../navbar/nav-global-setting";
+import { NavFooter } from "../navbar/nav-footer";
+
 import {
   Sidebar,
   SidebarContent,
   SidebarFooter,
   SidebarRail,
 } from "@/components/ui/sidebar";
-import { usePeachy } from "@/contexts/peachy";
 import { ownerId } from "@/utils/config";
-import { NavFooter } from "../navbar/nav-footer";
-import { NavUser } from "../navbar/nav-user";
 
 const navigation = {
   navMain: [
@@ -223,7 +222,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
         {isOwner && <NavGlobalSetting items={navigation.navGlobalSetting} />}
       </SidebarContent>
       <SidebarFooter>
-        <NavUser user={user} />
+        <NavFooter user={user} />
       </SidebarFooter>
       <SidebarRail />
     </Sidebar>

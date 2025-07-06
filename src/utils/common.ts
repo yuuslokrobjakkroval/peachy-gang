@@ -36,6 +36,7 @@ export type UserInfo = {
   username: string;
   global_name: string;
   discriminator: string;
+  email?: string;
   avatar: string;
   avatar_decoration_data: Decoration;
   clan: Clan;

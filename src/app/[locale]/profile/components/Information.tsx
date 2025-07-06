@@ -75,18 +75,19 @@ const Information = ({
 
         {/* Clan Badge */}
         {userInfoByDiscord.clan.tag && (
-          <Badge className="absolute top-4 right-4 flex items-center gap-2 px-3 py-1 text-xs font-medium bg-primary/90 text-primary-foreground rounded-full shadow-sm hover:bg-primary/80 transition-colors z-10 sm:top-2 sm:right-2">
-            <Avatar className="h-6 w-6">
-              <AvatarImage
-                className="rounded-full"
-                src={clanUrl(userInfoByDiscord)}
-                alt={toCapitalCase(userInfoByDiscord.clan.tag)}
-              />
-              <AvatarFallback className="bg-muted text-foreground font-ghibi-bold text-xs">
-                {toCapitalCase(userInfoByDiscord.clan.tag?.[0])}
-              </AvatarFallback>
-            </Avatar>
-            <span>{toCapitalCase(userInfoByDiscord.clan.tag)}</span>
+          <Badge className="absolute top-1 right-1 flex items-center gap-2 px-3 py-1 text-xs font-medium bg-primary/90 text-primary-foreground rounded-full shadow-sm hover:bg-primary/80 transition-colors z-10 sm:top-2 sm:right-2">
+            <Image
+              className="rounded-xs object-cover"
+              src={clanUrl(userInfoByDiscord)}
+              alt={toCapitalCase(userInfoByDiscord.clan.tag)}
+              width={32}
+              height={32}
+              priority
+              sizes="(max-width: 32px) 50vw, 32px"
+            />
+            <span className="text-xl font-bold mt-1">
+              {toCapitalCase(userInfoByDiscord.clan.tag)}
+            </span>
           </Badge>
         )}
       </div>
