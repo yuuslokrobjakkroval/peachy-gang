@@ -33,10 +33,14 @@ interface PeachyContextType<T = any> {
   // FEATURE
   feature: string;
   setFeature: (feature: string) => void;
+
+  // ACCOUNT
+  account: any; // You might want to define a more specific type
+  setAccount: (account: any) => void;
 }
 
 const PeachyContext = createContext<PeachyContextType<any> | undefined>(
-  undefined,
+  undefined
 );
 
 // Props type for PeachyProvider
@@ -99,12 +103,21 @@ export function PeachyProvider<T>({ children }: PeachyProviderProps) {
     return null;
   });
 
+  // State for account
+  const [account, setAccount] = useState<any>(() => {
+    if (typeof window !== "undefined") {
+      const storedAccount = localStorage.getItem("account");
+      return storedAccount ? JSON.parse(storedAccount) : null;
+    }
+    return null;
+  });
+
   // Sync user info by discord to localStorage
   useEffect(() => {
     if (userInfoByDiscord !== null) {
       localStorage.setItem(
         "userInfoByDiscord",
-        JSON.stringify(userInfoByDiscord),
+        JSON.stringify(userInfoByDiscord)
       );
     } else {
       localStorage.removeItem("userInfoByDiscord");
@@ -156,6 +169,15 @@ export function PeachyProvider<T>({ children }: PeachyProviderProps) {
     }
   }, [feature]);
 
+  // Sync account to localStorage
+  useEffect(() => {
+    if (account) {
+      localStorage.setItem("account", JSON.stringify(account));
+    } else {
+      localStorage.removeItem("account");
+    }
+  }, [account]);
+
   return (
     <PeachyContext.Provider
       value={{
@@ -182,6 +204,10 @@ export function PeachyProvider<T>({ children }: PeachyProviderProps) {
         // FEATURE
         feature,
         setFeature,
+
+        // ACCOUNT
+        account,
+        setAccount,
       }}
     >
       {children}

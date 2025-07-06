@@ -103,40 +103,6 @@ const columns: ColumnDef<z.infer<typeof schema>>[] = [
     header: () => null,
     cell: ({ row }) => <DragHandle id={row.original.userId} />,
   },
-  // {
-  //   id: "select",
-  //   header: ({ table }) => (
-  //     <div className="flex items-center justify-center">
-  //       <Checkbox
-  //         checked={
-  //           table.getIsAllPageRowsSelected() ||
-  //           (table.getIsSomePageRowsSelected() && "indeterminate")
-  //         }
-  //         onCheckedChange={(value) => table.toggleAllPageRowsSelected(!!value)}
-  //         aria-label="Select all"
-  //       />
-  //     </div>
-  //   ),
-  //   cell: ({ row }) => (
-  //     <div className="flex items-center justify-center">
-  //       <Checkbox
-  //         checked={row.getIsSelected()}
-  //         onCheckedChange={(value) => row.toggleSelected(!!value)}
-  //         aria-label="Select row"
-  //       />
-  //     </div>
-  //   ),
-  //   enableSorting: false,
-  //   enableHiding: false,
-  // },
-  // {
-  //   accessorKey: "userId",
-  //   header: "ID",
-  //   cell: ({ row }) => {
-  //     return <TableCellViewer item={row.original} />;
-  //   },
-  //   enableHiding: false,
-  // },
   {
     accessorKey: "no",
     header: "Rank",
@@ -166,42 +132,6 @@ const columns: ColumnDef<z.infer<typeof schema>>[] = [
       </div>
     ),
   },
-  // {
-  //   accessorKey: "balance.bank",
-  //   header: "Bank",
-  //   cell: ({ row }) => (
-  //     <Badge
-  //       variant="outline"
-  //       className="flex gap-1 px-1.5 text-muted-foreground [&_svg]:size-3"
-  //     >
-  //       {(row.original.balance?.bank ?? 0).toLocaleString()}
-  //     </Badge>
-  //   ),
-  // },
-  // {
-  //   id: "actions",
-  //   cell: () => (
-  //     <DropdownMenu>
-  //       <DropdownMenuTrigger asChild>
-  //         <Button
-  //           variant="ghost"
-  //           className="flex size-8 text-muted-foreground data-[state=open]:bg-muted"
-  //           size="icon"
-  //         >
-  //           <MoreVerticalIcon />
-  //           <span className="sr-only">Open menu</span>
-  //         </Button>
-  //       </DropdownMenuTrigger>
-  //       <DropdownMenuContent align="end" className="w-32">
-  //         <DropdownMenuItem>Edit</DropdownMenuItem>
-  //         <DropdownMenuItem>Make a copy</DropdownMenuItem>
-  //         <DropdownMenuItem>Favorite</DropdownMenuItem>
-  //         <DropdownMenuSeparator />
-  //         <DropdownMenuItem>Delete</DropdownMenuItem>
-  //       </DropdownMenuContent>
-  //     </DropdownMenu>
-  //   ),
-  // },
 ];
 
 function DraggableRow({

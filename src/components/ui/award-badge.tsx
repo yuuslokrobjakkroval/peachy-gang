@@ -1,12 +1,12 @@
 import React, { MouseEvent, useEffect, useRef, useState } from "react";
 
-type AwardBadgeType =
+export type AwardBadgeType =
   | "golden-kitty"
-  | "user-coin-top-one"
-  | "user-coin-top-two"
-  | "user-coin-top-three";
+  | "user-coin-top-1"
+  | "user-coin-top-2"
+  | "user-coin-top-3";
 
-interface AwardBadgeProps {
+export interface AwardBadgeProps {
   content?: React.ReactNode;
   type: AwardBadgeType;
   place?: number;
@@ -25,9 +25,9 @@ const backgroundColor = ["#f3e3ac", "#ddd", "#f1cfa6"];
 
 const title = {
   "golden-kitty": "Golden Awards",
-  "user-coin-top-one": "Top 1 Awards",
-  "user-coin-top-two": "Top 2 Awards",
-  "user-coin-top-three": "Top 3 Awards",
+  "user-coin-top-1": "Top 1 Awards",
+  "user-coin-top-2": "Top 2 Awards",
+  "user-coin-top-3": "Top 3 Awards",
 };
 
 export const AwardBadge = ({ content, type, place, link }: AwardBadgeProps) => {

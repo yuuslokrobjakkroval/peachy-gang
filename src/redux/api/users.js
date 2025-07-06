@@ -46,6 +46,14 @@ const extendedApi = emptySplitApi.injectEndpoints({
       }),
       providesTags: [{ type: "USER", id: "LIST" }],
     }),
+
+    getUserInfo: builder.query({
+      query: ({ id }) => ({
+        url: `${process.env.NEXT_PUBLIC_API_ENDPOINT}/peachy/user/${id}`,
+        method: "GET",
+      }),
+      providesTags: [{ type: "USER", id: "LIST" }],
+    }),
   }),
 });
 
@@ -55,5 +63,8 @@ export const {
 
   useGetUsersQuery,
   useGetUserByIdQuery,
+
   useUpdateUserMutation,
+
+  useGetUserInfoQuery,
 } = extendedApi;

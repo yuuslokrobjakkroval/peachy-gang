@@ -5,15 +5,10 @@ import axios from "axios";
 const axiosBaseQuery =
   () =>
   async ({ url, method, body, params }) => {
-    const { data: getListAccount } = await authClient.listAccounts();
-
-    const { data: account } = await authClient.getAccessToken({
-      providerId: getListAccount[0].provider,
-    });
-    
+    const storedAccount = localStorage.getItem("account");
     const headers = {
       "Content-Type": "application/json",
-      Authorization: `Bearer ${account.accessToken}`,
+      Authorization: `Bearer ${JSON.parse(storedAccount).accessToken}`,
     };
 
     try {

@@ -26,6 +26,9 @@ interface ExpandableTabsProps {
   tabs: TabItem[];
   className?: string;
   activeColor?: string;
+  isTheme?: boolean;
+  isLanguage?: boolean;
+  initialIndex?: number;
   onChange?: (index: number) => void;
 }
 
@@ -54,9 +57,12 @@ export function ExpandableTabs({
   tabs,
   className,
   activeColor = "text-primary",
+  isTheme,
+  isLanguage,
+  initialIndex = 0,
   onChange,
 }: ExpandableTabsProps) {
-  const [selected, setSelected] = React.useState<number | null>(null);
+  const [selected, setSelected] = React.useState<number | null>(initialIndex);
   const outsideClickRef = React.useRef<any>(null);
 
   useOnClickOutside(outsideClickRef, () => {
@@ -120,8 +126,8 @@ export function ExpandableTabs({
           </motion.button>
         );
       })}
-      <ThemeChanger />
-      <LanguageChanger />
+      {isTheme && <ThemeChanger />}
+      {isLanguage && <LanguageChanger />}
     </div>
   );
 }

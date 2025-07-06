@@ -50,10 +50,12 @@ import {
 import emailjs from "emailjs-com";
 import { PeachyAnimatedBeam } from "@/components/ui/Animations/PeachyAnimatedBeam";
 import { SplashCursor } from "@/components/ui/Effect/SplashCursor";
-import { HeroPill } from "@/components/ui/hero-pill";
-import { AwardBadge } from "@/components/ui/award-badge";
+import {
+  AwardBadge,
+  AwardBadgeProps,
+  AwardBadgeType,
+} from "@/components/ui/award-badge";
 import { useGetTopUsersQuery } from "@/redux/api/users";
-import Loading from "@/components/loading/circle";
 
 type FormData = {
   name: string;
@@ -230,7 +232,10 @@ export default function Peachy() {
             )}
           >
             <ExpandableTabs
+              className="bg-card backdrop-blur-sm rounded-2xl shadow-md"
               tabs={expandableTabs}
+              isTheme={true}
+              isLanguage={true}
               onChange={(index: number) => {
                 if (!!index) {
                   const sectionId = navigation.find(
@@ -243,7 +248,6 @@ export default function Peachy() {
                   }
                 }
               }}
-              className="bg-card backdrop-blur-sm rounded-2xl shadow-md"
             />
           </div>
         </div>
@@ -400,7 +404,9 @@ export default function Peachy() {
               {topUser?.map((user: any, index: number) => (
                 <div key={index}>
                   <AwardBadge
-                    type="user-coin-top-one"
+                    type={
+                      `user-coin-top-${user.rank || index + 1}` as AwardBadgeType
+                    }
                     place={user?.rank ?? index}
                     content={`${user?.discord?.displayName ?? user.username} - ${toNumber(user?.balance?.coin)} coins`}
                   />
@@ -738,7 +744,7 @@ export default function Peachy() {
         </TooltipProvider>
 
         {/* Copyright Section */}
-        <div className="my-8 sm:my-12 text-xs sm:text-sm text-center text-muted-foreground font-ghibi dark:text-muted-foreground px-4">
+        <div className="my-32 sm:my-8 text-xs sm:text-sm text-center text-muted-foreground font-ghibi dark:text-muted-foreground px-4">
           © {new Date().getFullYear()} Made by{" "}
           <a
             href="https://discord.gg/peachyganggg"

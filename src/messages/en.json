@@ -44,7 +44,7 @@
   "dashboard": {
     "title": "Dashboard",
     "description": "Overview of your PEACHY GANG community statistics and analytics.",
-    "loading": "Loading dashboard data...",
+    "loading": "Loading data, please wait...",
     "analytics_title": "Community Analytics",
     "analytics_description": "Track user engagement and growth over time.",
     "welcome_back": "Welcome back",
@@ -77,7 +77,8 @@
       "klaklouk": "Klaklouk",
       "sponsor": "Sponsor"
     },
-    "no_data": "No user data available to display"
+    "no_data": "No user data available to display",
+    "error": "An error occurred while fetching data. Please try again."
   },
   "peachy": {
     "title": "Peachy",
@@ -468,13 +469,19 @@
   },
   "rank": {
     "title": "Leaderboard",
-    "description": "Top users by coins and experience",
-    "rank": "Rank",
-    "user": "User",
-    "coins": "Coins",
-    "level": "Level",
-    "experience": "Experience",
-    "no_data": "No ranking data available"
+    "description": "View the top users ranked by their balance.",
+    "searchPlaceholder": "Search users...",
+    "columns": {
+      "rank": "Rank",
+      "user": "User",
+      "coin": "Coin",
+      "bank": "Bank",
+      "slots": "Slots",
+      "sponsor": "Sponsor",
+      "blackjack": "Blackjack",
+      "coinflip": "Coinflip",
+      "klaklouk": "KlaKlouk"
+    }
   },
   "other": {
     "title": "Other",
@@ -757,5 +764,12 @@
       "Bad Gateway": "Bad Gateway",
       "Service Unavailable": "Service Unavailable"
     }
+  },
+
+  "table": {
+    "emptyMessage": "No data available",
+    "emptySuggestion": "Try adjusting your search or filter criteria",
+    "activeFilters": "Active filters:",
+    "paginationSummary": "Showing {start} to {end} of {total} results"
   }
 }

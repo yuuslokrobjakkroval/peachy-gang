@@ -2,7 +2,16 @@ import { config } from "./config";
 import { CustomFeatures, FeatureConfig } from "@/utils/types";
 import { UseFeaturesConfig } from "@/utils/features";
 import { TabItem } from "@/components/ui/expandable-tabs";
-import { Home } from "lucide-react";
+import {
+  Banana,
+  BicepsFlexed,
+  Coins,
+  Donut,
+  Home,
+  PawPrint,
+  PiggyBank,
+  Spade,
+} from "lucide-react";
 
 interface Language {
   code: string;
@@ -52,6 +61,14 @@ export type UserInfo = {
 export type Decoration = {
   sku_id: string;
   asset: string;
+  expires_at: Date;
+};
+
+export type Nameplate = {
+  sku_id: string;
+  asset: string;
+  label: string;
+  palette: string;
   expires_at: Date;
 };
 
@@ -389,7 +406,12 @@ export function bannerUrl(id: string, banner: string): string {
 }
 
 export function decorationUrl(decoration: Decoration) {
-  return `https://cdn.discordapp.com/avatar-decoration-presets/${decoration.asset}.png?size=128`;
+  return `https://cdn.discordapp.com/avatar-decoration-presets/${decoration.asset}.png`;
+}
+
+export function nameplateUrl(nameplate: Nameplate) {
+  const cleanedAsset = nameplate.asset.replace(/\/$/, "");
+  return `https://cdn.discordapp.com/assets/collectibles/${cleanedAsset}/static.png`;
 }
 
 export function clanUrl(user: UserInfo) {
@@ -456,6 +478,17 @@ export const expandableTabs: TabItem[] = [
   // { title: "About Us", icon: Book },
   // { title: "FAQ", icon: MessageCircleQuestion },
   // { title: "Contact", icon: Contact },
+];
+
+export const expandableRankTabs: TabItem[] = [
+  { title: "Coin", icon: Coins },
+  { type: "separator" },
+  { title: "Bank", icon: PiggyBank },
+  { title: "Sponsor", icon: Donut },
+  { title: "Slots", icon: Banana },
+  { title: "Blackjack", icon: Spade },
+  { title: "Coinflip", icon: BicepsFlexed },
+  { title: "KlaKlouk", icon: PawPrint },
 ];
 
 export const slugs = [

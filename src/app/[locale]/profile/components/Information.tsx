@@ -14,7 +14,6 @@ import {
 import { MdVerified } from "react-icons/md";
 import type { User } from "@/utils/types";
 import { Badge } from "@/components/ui/badge";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 const Information = ({
   userInfoByDiscord,

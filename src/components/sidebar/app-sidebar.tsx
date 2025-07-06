@@ -38,6 +38,7 @@ import {
   SidebarRail,
 } from "@/components/ui/sidebar";
 import { ownerId } from "@/utils/config";
+import { authClient } from "@/lib/auth-client";
 
 const navigation = {
   navMain: [
@@ -201,18 +202,69 @@ const navigation = {
 };
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
-  const { setUserInfoByDiscord, setGuilds } = usePeachy();
+  const { setUserInfoByDiscord, setGuilds, setAccount, account } = usePeachy();
   const { data: user, isSuccess: userSuccess } = useFetchUserInfoQuery(null);
   const { data: guilds, isSuccess: guildSuccess } = useGetGuildsQuery(null);
-  const isOwner = React.useMemo(() => ownerId?.includes(user?.id), [user?.id]);
+  const [isOwner, setIsOwner] = React.useState(false);
+
+  // Load account from localStorage on mount
+  React.useEffect(() => {
+    if (typeof window !== "undefined") {
+      const storedAccount = localStorage.getItem("account");
+      if (storedAccount && !account) {
+        setAccount(JSON.parse(storedAccount));
+      }
+    }
+  }, [setAccount]);
+
+  React.useEffect(() => {
+    const fetchAccount = async () => {
+      try {
+        const { data: accounts } = await authClient.listAccounts();
+        if (accounts && accounts.length > 0) {
+          const { data: accountData } = await authClient.getAccessToken({
+            providerId: accounts[0].provider,
+          });
+          setAccount(accountData);
+          if (typeof window !== "undefined") {
+            localStorage.setItem("account", JSON.stringify(accountData));
+          }
+        }
+      } catch (error) {
+        console.error("Error fetching account:", error);
+      }
+    };
+
+    if (!account) {
+      fetchAccount();
+    }
+  }, [account, setAccount]);
+
+  React.useEffect(() => {
+    if (account && typeof window !== "undefined") {
+      localStorage.setItem("account", JSON.stringify(account));
+    } else if (typeof window !== "undefined") {
+      localStorage.removeItem("account");
+    }
+  }, [account]);
 
   React.useEffect(() => {
     if (userSuccess && guildSuccess) {
       setUserInfoByDiscord(user);
       setGuilds(guilds);
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [user, guilds, setUserInfoByDiscord, setGuilds]);
+  }, [
+    user,
+    guilds,
+    userSuccess,
+    guildSuccess,
+    setUserInfoByDiscord,
+    setGuilds,
+  ]);
+
+  React.useEffect(() => {
+    setIsOwner(ownerId?.includes(user?.id));
+  }, [user]);
 
   return (
     <Sidebar collapsible="icon" {...props}>
