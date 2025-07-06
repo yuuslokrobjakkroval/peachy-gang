@@ -187,7 +187,7 @@ export default function Peachy() {
   return (
     <>
       <SplashCursor />
-      <div className="flex flex-wrap items-center justify-center gap-4">
+      <div className="flex flex-wrap items-center justify-center gap-4 my-2">
         <AwardBadge type="golden-kitty" content="PEACHY in Your Area 🌸" />
       </div>
       <Container>
