@@ -17,6 +17,7 @@ import {
   Facebook,
   Edit,
   MoreHorizontal,
+  Instagram,
 } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -39,7 +40,7 @@ import {
 } from "@/utils/common";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "../ui/tabs";
 import Link from "next/link";
-import { FaDiscord } from "react-icons/fa6";
+import { FaDiscord, FaTiktok } from "react-icons/fa6";
 
 export default function UserDiscordDailog({ user, open, onCancel }: any) {
   const t = useTranslations();
@@ -85,7 +86,7 @@ export default function UserDiscordDailog({ user, open, onCancel }: any) {
         </DialogHeader>
         {/* Avatar with decoration */}
         <div
-          className="relative w-full h-36 rounded-lg bg-cover bg-center"
+          className="relative w-full h-48 rounded-lg bg-cover bg-center"
           style={backgroundStyle}
         >
           <div className="absolute -bottom-12 ml-3">
@@ -130,23 +131,10 @@ export default function UserDiscordDailog({ user, open, onCancel }: any) {
 
         <div className="flex justify-between">
           <div className="flex flex-col">
-            <div className="flex items-center mt-3">
-              {userInfo?.collectibles?.nameplate && (
-                <div
-                  className="relative w-full h-14 rounded-md overflow-hidden flex items-center px-4 bg-cover bg-center"
-                  style={{
-                    backgroundImage: `url(${nameplateUrl(userInfo?.collectibles?.nameplate)})`,
-                    backgroundSize: "cover",
-                    backgroundPosition: "center",
-                  }}
-                />
-              )}
-
-              {/* Username & Display Name */}
-              <h2 className="text-2xl font-extrabold text-white drop-shadow-sm">
-                {userInfo?.global_name || userInfo?.username}
-              </h2>
-            </div>
+            {/* Username */}
+            <h2 className="relative text-2xl font-extrabold">
+              {userInfo?.global_name || userInfo?.username}
+            </h2>
             <p className="text-sm">
               @{userInfo?.username} • He/Him •{" "}
               {userInfo?.clan?.tag && (
@@ -177,7 +165,7 @@ export default function UserDiscordDailog({ user, open, onCancel }: any) {
 
         <div>
           {/* Tabs */}
-          <Tabs defaultValue="about" className="mt-[-15px]">
+          <Tabs defaultValue="about" className="mt-[-35px]">
             <TabsList className="bg-transparent border-b border-white/20 rounded-none p-0 h-auto w-full justify-start">
               <TabsTrigger
                 value="about"
@@ -197,91 +185,58 @@ export default function UserDiscordDailog({ user, open, onCancel }: any) {
               {/* Social Links */}
               <div className="space-y-3">
                 <div className="flex items-start gap-3">
-                  <FaDiscord className="w-4 h-4 mt-0.5 text-white/80" />
-                  <div>
-                    <p className="text-white/90 text-sm font-medium">Discord</p>
-                    <p className="text-white/60 text-xs">
-                      https://link.to/peachy.com
-                    </p>
-                  </div>
-                </div>
-
-                <div className="flex items-start gap-3">
                   <Facebook className="w-4 h-4 mt-0.5 text-white/80" />
                   <div>
                     <p className="text-white/90 text-sm font-medium">
                       Facebook
                     </p>
-                    <p className="text-white/60 text-xs">
-                      https://link.to/fb.com
-                    </p>
+                    <a
+                      href={
+                        userInfo?.localUser?.social?.facebook?.link ??
+                        "/rank/coin"
+                      }
+                      className="text-white/60 text-xs"
+                    >
+                      {userInfo?.localUser?.social?.facebook?.name ?? "Not Set"}
+                    </a>
                   </div>
                 </div>
 
                 <div className="flex items-start gap-3">
-                  <Youtube className="w-4 h-4 mt-0.5 text-white/80" />
+                  <Instagram className="w-4 h-4 mt-0.5 text-white/80" />
                   <div>
-                    <p className="text-white/90 text-sm font-medium">YouTube</p>
-                    <p className="text-white/60 text-xs">
-                      https://link.to/yt.com
+                    <p className="text-white/90 text-sm font-medium">
+                      Instagram
                     </p>
+                    <a
+                      href={
+                        userInfo?.localUser?.social?.instagram?.link ??
+                        "/rank/coin"
+                      }
+                      className="text-white/60 text-xs"
+                    >
+                      {userInfo?.localUser?.social?.instagram?.name ??
+                        "Not Set"}
+                    </a>
                   </div>
                 </div>
 
                 <div className="flex items-start gap-3">
-                  <Globe className="w-4 h-4 mt-0.5 text-white/80" />
+                  <FaTiktok className="w-4 h-4 mt-0.5 text-white/80" />
                   <div>
-                    <p className="text-white/90 text-sm font-medium">Website</p>
-                    <p className="text-white/60 text-xs">
-                      https://peachygang.xyz/en
-                    </p>
+                    <p className="text-white/90 text-sm font-medium">Tik Tok</p>
+                    <a
+                      href={
+                        userInfo?.localUser?.social?.tiktok?.link ??
+                        "/rank/coin"
+                      }
+                      className="text-white/60 text-xs"
+                    >
+                      {userInfo?.localUser?.social?.tiktok?.name ?? "Not Set"}
+                    </a>
                   </div>
                 </div>
               </div>
-
-              {/* Member Since */}
-              {/* <div className="pt-2">
-                <h3 className="text-white font-medium mb-2">Member Since</h3>
-                <p className="text-white/70">21 Apr 2022</p>
-              </div> */}
-
-              {/* Connections */}
-              {/* <div className="flex pt-2">
-                <h3 className="text-white font-medium mb-3">Connections</h3>
-                <div className="space-y-2">
-                  <div className="flex items-center justify-between bg-black/20 backdrop-blur-sm rounded-lg p-3">
-                    <div className="flex items-center gap-3">
-                      <Github className="w-5 h-5 text-white" />
-                      <div>
-                        <p className="text-white text-sm font-medium">
-                          yuusloukrobjakkroval
-                        </p>
-                        <div className="flex items-center gap-1">
-                          <div className="w-2 h-2 bg-green-500 rounded-full" />
-                          <span className="text-white/70 text-xs">✓</span>
-                        </div>
-                      </div>
-                    </div>
-                    <ExternalLink className="w-4 h-4 text-white/70" />
-                  </div>
-
-                  <div className="flex items-center justify-between bg-black/20 backdrop-blur-sm rounded-lg p-3">
-                    <div className="flex items-center gap-3">
-                      <Youtube className="w-5 h-5 text-red-500" />
-                      <div>
-                        <p className="text-white text-sm font-medium">
-                          PEACHYGANG
-                        </p>
-                        <div className="flex items-center gap-1">
-                          <div className="w-2 h-2 bg-green-500 rounded-full" />
-                          <span className="text-white/70 text-xs">✓</span>
-                        </div>
-                      </div>
-                    </div>
-                    <ExternalLink className="w-4 h-4 text-white/70" />
-                  </div>
-                </div>
-              </div> */}
 
               {/* Note section */}
               <div className="pt-4">
@@ -289,7 +244,9 @@ export default function UserDiscordDailog({ user, open, onCancel }: any) {
                   Note (only visible to you)
                 </h3>
                 <div className="bg-black/20 backdrop-blur-sm rounded-lg p-3">
-                  <p className="text-white/50 text-sm">Click to add a note</p>
+                  <p className="text-white/50 text-sm">
+                    {userInfo?.localUser?.profile?.bio ?? "Not Set"}
+                  </p>
                 </div>
               </div>
             </TabsContent>
