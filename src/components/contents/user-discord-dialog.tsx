@@ -95,7 +95,7 @@ export default function UserDiscordDailog({ user, open, onCancel }: any) {
               {/* Avatar */}
               <div className="relative w-[87px] h-[87px] rounded-full border-[4px] overflow-hidden">
                 <Image
-                  src={avatarUrl(userInfo) || "/placeholder.svg"}
+                  src={avatarUrl(userInfo)}
                   alt="Profile Avatar"
                   width={88}
                   height={88}
@@ -107,10 +107,7 @@ export default function UserDiscordDailog({ user, open, onCancel }: any) {
               {userInfo?.avatar_decoration_data?.asset && (
                 <div className="absolute inset-0 z-10 flex items-center justify-center">
                   <Image
-                    src={
-                      decorationUrl(userInfo?.avatar_decoration_data) ||
-                      "/placeholder.svg"
-                    }
+                    src={decorationUrl(userInfo?.avatar_decoration_data)}
                     alt="Avatar Decoration"
                     width={100}
                     height={100}
