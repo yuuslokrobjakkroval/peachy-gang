@@ -49,6 +49,7 @@ const dynamicTagTypes = [
   "GIVEAWAYS",
   "YOUTUBE_VIDEOS",
   "YOUTUBE_CHANNEL",
+  "PAYMENT",
 ];
 
 export const emptySplitApi = createApi({

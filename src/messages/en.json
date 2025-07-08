@@ -78,7 +78,24 @@
       "sponsor": "Sponsor"
     },
     "no_data": "No user data available to display",
-    "error": "An error occurred while fetching data. Please try again."
+    "error": "An error occurred while fetching data. Please try again.",
+    "sponsorTitle": "Sponsor",
+    "enterAmountPrompt": "Enter the amount you would like to sponsor.",
+    "scanQrPrompt": "Scan the QR code to complete your sponsorship.",
+    "amountLabel": "Amount",
+    "amountPlaceholder": "Enter amount",
+    "qrCodeAlt": "Sponsor QR Code",
+    "checkingPayment": "Checking payment status...",
+    "paymentSuccess": "Payment successful!",
+    "paymentFailed": "Payment failed. Please try again.",
+    "qrGenerationFailed": "Error generating QR code. Please try again.",
+    "awaitingPayment": "Awaiting payment...",
+    "tryAgain": "Try Again",
+    "errors": {
+      "missingUserData": "User email or username is missing",
+      "invalidAmount": "Please enter a valid amount",
+      "qrGenerationFailed": "Failed to generate QR code"
+    }
   },
   "peachy": {
     "title": "Peachy",
