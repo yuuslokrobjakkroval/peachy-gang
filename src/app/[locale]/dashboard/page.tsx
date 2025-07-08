@@ -108,7 +108,7 @@ export default function DashboardPage() {
         email: userInfoByDiscord.email,
         username: userInfoByDiscord.username,
       }).unwrap();
-      setQrCode(response.qrCodeData);
+      setQrCode(response.qr);
     } catch (error: any) {
       console.error("Error generating QR code or transaction ID:", error);
       setErrorMessage(
