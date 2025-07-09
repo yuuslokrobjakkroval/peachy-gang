@@ -1,7 +1,9 @@
 import { NextConfig } from "next";
 import createNextIntlPlugin from "next-intl/plugin";
 
+/** @type {import('next-sitemap').IConfig} */
 const nextConfig: NextConfig = {
+  siteUrl: "https://peachygang.xyz",
   env: {
     APP_URL: process.env.APP_URL,
     BOT_CLIENT_ID: process.env.BOT_CLIENT_ID,
@@ -41,6 +43,7 @@ const nextConfig: NextConfig = {
     ignoreDuringBuilds: true,
   },
   devIndicators: false,
+  generateRobotsTxt: true,
 };
 
 const withNextIntl = createNextIntlPlugin();
