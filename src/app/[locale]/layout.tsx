@@ -62,7 +62,7 @@ export default async function LocaleLayout({
         {/*<link rel="apple-touch-icon" href="/apple-touch-icon.png" />*/}
         {/* <meta name="theme-color" content="#000000" /> */}
         <meta name="google-site-verification" content="R2Yfe67ddlF9A6UTmMbSAz-t1zTWIs7PjVFYA4w3GMQ" />
-        <meta name="robots" content="noindex">
+        <meta name="robots" content="noindex" />
         <meta
           name="keywords"
           content="nextjs, react, typescript, tailwindcss, peachy gang"
