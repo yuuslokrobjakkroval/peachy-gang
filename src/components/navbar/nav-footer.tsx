@@ -51,12 +51,6 @@ export function NavFooter({ user }: { user: UserInfo }) {
       url: "/settings",
       icon: Settings,
     },
-    {
-      title: "Logout",
-      url: "/",
-      icon: LogOut,
-      separator: true,
-    },
   ];
 
   // Handle navigation click
@@ -78,17 +72,17 @@ export function NavFooter({ user }: { user: UserInfo }) {
               size="lg"
               className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground"
             >
-              <Avatar className="h-8 w-8 rounded-lg">
+              <Avatar className="w-8 h-8 rounded-lg">
                 <AvatarImage src="/images/favicon.ico" alt={"peachy"} />
                 <AvatarFallback className="rounded-lg">
                   {user?.global_name?.[0]}
                 </AvatarFallback>
               </Avatar>
-              <div className="grid flex-1 text-left text-sm leading-tight">
-                <span className="truncate font-medium">
+              <div className="grid flex-1 text-sm leading-tight text-left">
+                <span className="font-medium truncate">
                   {toUpperCase(APP_NAME)}
                 </span>
-                <span className="truncate text-xs">{`${toUpperCase("version")} ${APP_VERSION}`}</span>
+                <span className="text-xs truncate">{`${toUpperCase("version")} ${APP_VERSION}`}</span>
               </div>
               <ChevronsUpDown className="ml-auto size-4" />
             </SidebarMenuButton>
@@ -100,11 +94,11 @@ export function NavFooter({ user }: { user: UserInfo }) {
             sideOffset={4}
           >
             <DropdownMenuGroup>
-              {navMain.map((item, index) => (
+              {navMain.map((item: any, index) => (
                 <React.Fragment key={index}>
                   {item.separator && <DropdownMenuSeparator />}
                   <DropdownMenuItem onClick={() => handleNavClick(item.url)}>
-                    <item.icon className="mr-2 h-4 w-4" />
+                    <item.icon className="w-4 h-4 mr-2" />
                     <span className="text-sm font-medium">{item.title}</span>
                   </DropdownMenuItem>
                 </React.Fragment>

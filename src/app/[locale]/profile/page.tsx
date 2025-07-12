@@ -19,8 +19,8 @@ export default function Profile() {
   const { data: userInfo, isLoading } = useGetUserByIdQuery(
     userInfoByDiscord?.id,
     {
-      skip: !userInfoByDiscord.id,
-    },
+      skip: !userInfoByDiscord,
+    }
   );
 
   if (isLoading) {
@@ -47,8 +47,8 @@ export default function Profile() {
   }
 
   return (
-    <div className="flex w-full flex-col gap-5 px-4 py-2">
-      <div className="w-full mt-3 flex h-fit flex-col gap-5 lg:grid lg:grid-cols-12">
+    <div className="flex flex-col w-full gap-5 px-4 py-2">
+      <div className="flex flex-col w-full gap-5 mt-3 h-fit lg:grid lg:grid-cols-12">
         <div className="col-span-8 lg:!mb-0">
           <Information
             userInfoByDiscord={userInfoByDiscord}

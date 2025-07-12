@@ -41,6 +41,9 @@ import {
 } from "@/components/ui/sidebar";
 import { ownerId } from "@/utils/config";
 import { authClient } from "@/lib/auth-client";
+import { useRouter } from "next/navigation";
+import { toast } from "sonner";
+import { setInterval } from "timers/promises";
 
 const navigation = {
   navMain: [
@@ -236,6 +239,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   const { data: user, isSuccess: userSuccess } = useFetchUserInfoQuery(null);
   const { data: guilds, isSuccess: guildSuccess } = useGetGuildsQuery(null);
   const [isOwner, setIsOwner] = React.useState(false);
+  const router = useRouter();
 
   // Load account from localStorage on mount
   React.useEffect(() => {
@@ -251,14 +255,32 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
     const fetchAccount = async () => {
       try {
         const { data: accounts } = await authClient.listAccounts();
+        console.log("Accounts:", accounts);
+
         if (accounts && accounts.length > 0) {
           const { data: accountData } = await authClient.getAccessToken({
             providerId: accounts[0].provider,
           });
+
           setAccount(accountData);
+
           if (typeof window !== "undefined") {
             localStorage.setItem("account", JSON.stringify(accountData));
           }
+        } else {
+          // No account found → toast + delay + redirect
+          toast.error("Oopsie! 🌸 You’re not logged in yet…", {
+            description: (
+              <>
+                <p>Hang tight! 🌼</p>
+                <p>We’re taking you to the login page in 3 seconds 🐾</p>
+              </>
+            ),
+          });
+
+          setTimeout(() => {
+            router.push("/login");
+          }, 3000);
         }
       } catch (error) {
         console.error("Error fetching account:", error);

@@ -790,5 +790,10 @@
     "emptySuggestion": "Try adjusting your search or filter criteria",
     "activeFilters": "Active filters:",
     "paginationSummary": "Showing {start} to {end} of {total} results"
+  },
+  "notFound": {
+    "title": "Page Not Found",
+    "description": "The page you are looking for does not exist.",
+    "backHome": "Back to Home"
   }
 }

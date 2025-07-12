@@ -18,7 +18,7 @@ export default function LoginPage() {
           <Link href="/">
             <span className="relative inline-block">
               {/* Badge positioned top-right */}
-              <Badge className="absolute -top-5 -right-8 text-xs px-2 z-10">
+              <Badge className="absolute z-10 px-2 text-xs -top-5 -right-8">
                 BETA
               </Badge>
               <div
@@ -27,7 +27,7 @@ export default function LoginPage() {
                 )}
               >
                 {/* Logo with text */}
-                <span className="flex items-center space-x-3 text-2xl font-ghibi-bold text-primary dark:text-foreground transition-transform hover:scale-105">
+                <span className="flex items-center space-x-3 text-2xl transition-transform font-ghibi-bold text-primary dark:text-foreground hover:scale-105">
                   <Image
                     className="w-10 mb-1"
                     src="/images/favicon.ico"
@@ -42,7 +42,7 @@ export default function LoginPage() {
           </Link>
           <ThemeChanger />
         </div>
-        <div className="flex flex-1 items-center justify-center">
+        <div className="flex items-center justify-center flex-1">
           <div className="w-full max-w-xs">
             <div className="flex flex-col gap-6">
               <DiscordLoginButton />
@@ -50,7 +50,7 @@ export default function LoginPage() {
           </div>
         </div>
       </div>
-      <div className="bg-muted relative hidden lg:block">
+      <div className="relative hidden bg-muted lg:block">
         <Image
           className="object-cover"
           src="/images/house.webp"

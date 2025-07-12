@@ -31,6 +31,7 @@ import {
 import ThemeChanger from "../theme.switch";
 import LanguageChanger from "../language.switch";
 import { useLocale, useTranslations } from "next-intl";
+import { authClient } from "@/lib/auth-client";
 
 const RTLNavbar = (props: {
   user: UserInfo;
@@ -41,7 +42,7 @@ const RTLNavbar = (props: {
   const t = useTranslations("RTLNavbar");
   const locale = useLocale();
   const { user } = props;
-  const { setUserInfoByDiscord } = usePeachy();
+  const { setUserInfoByDiscord, setAccount } = usePeachy();
   const router = useRouter();
   const [hasBeenOpened, setHasBeenOpened] = useState(false);
   const [isClient, setIsClient] = useState(false);
@@ -57,8 +58,12 @@ const RTLNavbar = (props: {
     router.push("/profile/setting");
   };
 
-  const handleLogoutClick = () => {
+  const handleLogoutClick = async () => {
+    await authClient.signOut();
     router.push("/login");
+    setTimeout(() => {
+      setAccount(null);
+    }, 3000);
   };
 
   const handleOpenChange = (open: boolean) => {
@@ -76,7 +81,7 @@ const RTLNavbar = (props: {
   if (!isClient) return null;
 
   return (
-    <nav className="flex justify-end items-center gap-3 rounded-xl py-1 transition-all duration-300 font-handwritten">
+    <nav className="flex items-center justify-end gap-3 py-1 transition-all duration-300 rounded-xl font-handwritten">
       {/* Dark Mode Toggle */}
       <Tooltip>
         <TooltipTrigger asChild>
@@ -114,7 +119,7 @@ const RTLNavbar = (props: {
               <DropdownMenuTrigger asChild>
                 <Button
                   variant="ghost"
-                  className="p-1 hover:bg-muted transition-colors duration-200"
+                  className="p-1 transition-colors duration-200 hover:bg-muted"
                 >
                   {/* Decoration and Avatar Wrapper */}
                   <div className="relative flex items-center justify-center">
@@ -162,19 +167,19 @@ const RTLNavbar = (props: {
             </DropdownMenuLabel>
             <DropdownMenuSeparator className="my-1 bg-border" />
             <DropdownMenuItem
-              className="px-2 py-1 text-sm text-foreground hover:bg-muted transition-colors duration-200"
+              className="px-2 py-1 text-sm transition-colors duration-200 text-foreground hover:bg-muted"
               onClick={handleProfileClick}
             >
               {t("profile")}
             </DropdownMenuItem>
             <DropdownMenuItem
-              className="px-2 py-1 text-sm text-foreground hover:bg-muted transition-colors duration-200"
+              className="px-2 py-1 text-sm transition-colors duration-200 text-foreground hover:bg-muted"
               onClick={handleProfileSettingClick}
             >
               {t("settings")}
             </DropdownMenuItem>
             <DropdownMenuItem
-              className="px-2 py-1 text-sm text-destructive hover:bg-muted transition-colors duration-200"
+              className="px-2 py-1 text-sm transition-colors duration-200 text-destructive hover:bg-muted"
               onClick={handleLogoutClick}
             >
               {t("logOut")}
