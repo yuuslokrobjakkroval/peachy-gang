@@ -38,9 +38,27 @@ const extendedApi = emptySplitApi.injectEndpoints({
       invalidatesTags: (result, error, arg) => [{ type: "USER", id: arg.id }],
     }),
 
-    getTopUsers: builder.query({
+    getTopCredit: builder.query({
       query: (params) => ({
-        url: `${process.env.NEXT_PUBLIC_API_ENDPOINT}/peachy/top-coins`,
+        url: `${process.env.NEXT_PUBLIC_API_ENDPOINT}/peachy/top-credit`,
+        method: "GET",
+        params,
+      }),
+      providesTags: [{ type: "USER", id: "LIST" }],
+    }),
+
+    getTopCoin: builder.query({
+      query: (params) => ({
+        url: `${process.env.NEXT_PUBLIC_API_ENDPOINT}/peachy/top-coin`,
+        method: "GET",
+        params,
+      }),
+      providesTags: [{ type: "USER", id: "LIST" }],
+    }),
+
+    getTopLevel: builder.query({
+      query: (params) => ({
+        url: `${process.env.NEXT_PUBLIC_API_ENDPOINT}/peachy/top-level`,
         method: "GET",
         params,
       }),
@@ -59,7 +77,9 @@ const extendedApi = emptySplitApi.injectEndpoints({
 
 export const {
   useGetCustomersQuery,
-  useGetTopUsersQuery,
+  useGetTopCreditQuery,
+  useGetTopCoinQuery,
+  useGetTopLevelQuery,
 
   useGetUsersQuery,
   useGetUserByIdQuery,

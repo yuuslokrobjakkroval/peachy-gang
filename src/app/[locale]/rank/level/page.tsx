@@ -1,66 +1,40 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import type React from "react";
+import { useState } from "react";
 import { useTranslations } from "next-intl";
-import { useGetUsersQuery } from "@/redux/api/users";
 import Loading from "@/components/loading/circle";
-import { ExpandableTabs } from "@/components/ui/expandable-tabs";
-import {
-  decorationUrl,
-  expandableRankTabs,
-  toCapitalCase,
-  toNumber,
-} from "@/utils/common";
+import { decorationUrl, toCapitalCase, toNumber } from "@/utils/common";
 import {
   HextaTable,
   HextaTableColumn,
 } from "@/components/ui/Animations/hexta/Table/table";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import type React from "react";
 
 import Image from "next/image";
 import UserDiscordDailog from "@/components/contents/user-discord-dialog";
-
-type BalanceType =
-  | "coin"
-  | "bank"
-  | "slots"
-  | "sponsor"
-  | "blackjack"
-  | "coinflip"
-  | "klaklouk";
+import { useGetTopLevelQuery } from "@/redux/api/users";
 
 interface User {
   id: string;
   no: number;
   username: string;
-  balance: Record<BalanceType, number>;
+  balance: Record<string, number>;
 }
 
 export default function RankPage() {
   const t = useTranslations();
-  const [selectedIndex, setSelectedIndex] = useState<number>(0);
   const [selectedUser, setSelectedUser] = useState<any>(null);
-  const [balanceType, setBalanceType] = useState<BalanceType>("coin");
   const [openDialog, setOpenDialog] = useState<boolean>(false);
 
   const getParams = () => ({
-    order: -1,
-    orderBy: `balance.${balanceType}`,
-    limit: 100,
+    limit: 50,
   });
 
   const {
-    data: { items: users = [], meta } = { items: [], meta: {} },
+    data: { items: topLevelUsers = [], meta } = { items: [], meta: {} },
     isLoading,
-    refetch,
-  } = useGetUsersQuery(getParams());
-
-  useEffect(() => {
-    if (balanceType) {
-      refetch();
-    }
-  }, [balanceType]);
+  } = useGetTopLevelQuery(getParams());
 
   if (isLoading) {
     return (
@@ -136,8 +110,8 @@ export default function RankPage() {
       ),
     },
     {
-      key: `balance.${balanceType}`,
-      header: t(`rank.columns.${balanceType}`),
+      key: `profile.level`,
+      header: t(`rank.columns.level`),
       sortable: true,
       align: "center",
       render: (value) => (
@@ -151,21 +125,6 @@ export default function RankPage() {
   return (
     <div className="flex flex-col flex-1">
       <div className="@container/main flex flex-1 flex-col gap-2">
-        <div className="flex flex-col justify-start gap-4 p-6 mx-auto md:p-10">
-          <ExpandableTabs
-            className="shadow-md bg-card backdrop-blur-sm rounded-2xl"
-            tabs={expandableRankTabs}
-            initialIndex={selectedIndex}
-            onChange={(index: number) => {
-              const tab = expandableRankTabs[index];
-              if (tab?.title && tab.title !== "All") {
-                const newBalance = tab.title.toLowerCase() as BalanceType;
-                setSelectedIndex(index);
-                setBalanceType(newBalance);
-              }
-            }}
-          />
-        </div>
         <div className="flex flex-col items-center w-full min-h-screen p-6 md:p-10">
           <div className="w-full">
             <div className="mb-6 text-center">
@@ -175,7 +134,7 @@ export default function RankPage() {
               <p className="text-muted-foreground">{t("rank.description")}</p>
             </div>
             <HextaTable
-              data={users}
+              data={topLevelUsers}
               columns={columns}
               searchPlaceholder={t("rank.searchPlaceholder")}
               hoverable

@@ -50,12 +50,8 @@ import {
 import emailjs from "emailjs-com";
 import { PeachyAnimatedBeam } from "@/components/ui/Animations/PeachyAnimatedBeam";
 import { SplashCursor } from "@/components/ui/Effect/SplashCursor";
-import {
-  AwardBadge,
-  AwardBadgeProps,
-  AwardBadgeType,
-} from "@/components/ui/award-badge";
-import { useGetTopUsersQuery } from "@/redux/api/users";
+import { AwardBadge } from "@/components/ui/award-badge";
+import { useGetTopCoinQuery } from "@/redux/api/users";
 
 type FormData = {
   name: string;
@@ -84,10 +80,14 @@ export default function Peachy() {
     formState: { errors },
     reset,
   } = useForm<FormData>();
+
+  const getParams = () => ({
+    limit: 3,
+  });
   const {
     data: { items: topUser = [], meta } = { items: [], meta: {} },
     isSuccess,
-  } = useGetTopUsersQuery(null);
+  } = useGetTopCoinQuery(getParams());
 
   const [isSubmitting, setIsSubmitting] = useState(false);
 
@@ -145,7 +145,7 @@ export default function Peachy() {
           duration: 4000,
           position: "top-right",
           action: {
-            label: <X className="h-4 w-4" />,
+            label: <X className="w-4 h-4" />,
             onClick: () => toast.dismiss(toastId),
           },
         });
@@ -155,7 +155,7 @@ export default function Peachy() {
           duration: 6000,
           position: "top-right",
           action: {
-            label: <X className="h-4 w-4" />,
+            label: <X className="w-4 h-4" />,
             onClick: () => toast.dismiss(toastId),
           },
         });
@@ -167,7 +167,7 @@ export default function Peachy() {
           duration: 6000,
           position: "top-right",
           action: {
-            label: <X className="h-4 w-4" />,
+            label: <X className="w-4 h-4" />,
             onClick: () => toast.dismiss(toastId),
           },
         }
@@ -190,17 +190,17 @@ export default function Peachy() {
     <>
       <SplashCursor />
       <div className="flex flex-wrap items-center justify-center gap-4 my-2">
-        <AwardBadge type="golden-kitty" content="PEACHY in Your Area 🌸" />
+        <AwardBadge title="Golden Award" content="PEACHY in Your Area 🌸" />
       </div>
       <Container>
-        <div className="w-full relative mt-3">
+        <div className="relative w-full mt-3">
           {/* Navigation */}
-          <nav className="container relative flex flex-wrap items-center justify-between p-4 lg:p-6 mx-auto transition-shadow duration-300">
+          <nav className="container relative flex flex-wrap items-center justify-between p-4 mx-auto transition-shadow duration-300 lg:p-6">
             {/* Logo */}
             <Link href="/">
               <span className="relative inline-block">
                 {/* Badge positioned top-right */}
-                <Badge className="absolute -top-5 -right-8 text-xs px-2 z-10">
+                <Badge className="absolute z-10 px-2 text-xs -top-5 -right-8">
                   BETA
                 </Badge>
                 <div
@@ -209,9 +209,9 @@ export default function Peachy() {
                   )}
                 >
                   {/* Logo with text */}
-                  <span className="flex items-center space-x-2 sm:space-x-3 text-xl sm:text-2xl font-ghibi-bold text-primary dark:text-foreground transition-transform hover:scale-105">
+                  <span className="flex items-center space-x-2 text-xl transition-transform sm:space-x-3 sm:text-2xl font-ghibi-bold text-primary dark:text-foreground hover:scale-105">
                     <Image
-                      className="w-8 sm:w-10 mb-1"
+                      className="w-8 mb-1 sm:w-10"
                       src="/images/favicon.ico"
                       alt="Peachy Logo"
                       width={48}
@@ -232,7 +232,7 @@ export default function Peachy() {
             )}
           >
             <ExpandableTabs
-              className="bg-card backdrop-blur-sm rounded-2xl shadow-md"
+              className="shadow-md bg-card backdrop-blur-sm rounded-2xl"
               tabs={expandableTabs}
               isTheme={true}
               isLanguage={true}
@@ -256,17 +256,17 @@ export default function Peachy() {
       {/* Hero Section */}
       <Container className="flex flex-wrap">
         <motion.div
-          className="w-full flex flex-col justify-center items-center px-4 sm:px-6"
+          className="flex flex-col items-center justify-center w-full px-4 sm:px-6"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
         >
-          <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-ghibi-bold text-center text-primary animate-twinkle mb-6 sm:mb-8">
+          <h1 className="mb-6 text-2xl text-center sm:text-3xl md:text-4xl lg:text-5xl font-ghibi-bold text-primary animate-twinkle sm:mb-8">
             {t("home.title")}
           </h1>
-          <div className="w-full max-w-md sm:max-w-lg md:max-w-xl lg:max-w-2xl mb-6 sm:mb-8">
+          <div className="w-full max-w-md mb-6 sm:max-w-lg md:max-w-xl lg:max-w-2xl sm:mb-8">
             <Image
-              className="object-cover rounded-lg w-full h-auto"
+              className="object-cover w-full h-auto rounded-lg"
               src="/images/main.png"
               width={512}
               height={512}
@@ -277,7 +277,7 @@ export default function Peachy() {
           </div>
           <Button
             onClick={() => router.push("/login")}
-            className="bg-primary text-primary-foreground font-ghibi-bold px-6 py-3 sm:px-8 sm:py-4 text-sm sm:text-base rounded-md hover:bg-primary/90 transition-transform transform hover:scale-105"
+            className="px-6 py-3 text-sm transition-transform transform rounded-md bg-primary text-primary-foreground font-ghibi-bold sm:px-8 sm:py-4 sm:text-base hover:bg-primary/90 hover:scale-105"
             aria-label={t("home.get_started")}
           >
             {t("home.get_started")}
@@ -289,55 +289,55 @@ export default function Peachy() {
       <Container>
         <motion.section
           id="about"
-          className="flex flex-col lg:flex-row items-center gap-6 lg:gap-12 rounded-lg transition-shadow px-4 sm:px-6 py-8 sm:py-12"
+          className="flex flex-col items-center gap-6 px-4 py-8 transition-shadow rounded-lg lg:flex-row lg:gap-12 sm:px-6 sm:py-12"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.3 }}
         >
-          <div className="w-full lg:w-1/2 text-center lg:text-left">
-            <h3 className="text-2xl sm:text-3xl lg:text-4xl font-ghibi-bold text-primary mb-3 sm:mb-4">
+          <div className="w-full text-center lg:w-1/2 lg:text-left">
+            <h3 className="mb-3 text-2xl sm:text-3xl lg:text-4xl font-ghibi-bold text-primary sm:mb-4">
               {t("about.beginnings")}
             </h3>
-            <p className="text-sm sm:text-base text-muted-foreground font-ghibi leading-relaxed">
+            <p className="text-sm leading-relaxed sm:text-base text-muted-foreground font-ghibi">
               {t("about.beginnings_description")}
             </p>
           </div>
-          <div className="w-full lg:w-1/2 flex justify-center">
+          <div className="flex justify-center w-full lg:w-1/2">
             <Image
               src={config.url || "/placeholder.svg"}
               alt="Peach and Goma Beginnings"
               width={200}
               height={200}
-              className="rounded-full transform hover:scale-105 transition-transform w-32 h-32 sm:w-48 sm:h-48 lg:w-52 lg:h-52"
+              className="w-32 h-32 transition-transform transform rounded-full hover:scale-105 sm:w-48 sm:h-48 lg:w-52 lg:h-52"
               sizes="(max-width: 640px) 128px, (max-width: 1024px) 192px, 208px"
             />
           </div>
         </motion.section>
 
         <motion.section
-          className="rounded-lg mb-8 sm:mb-12 transition-shadow px-4 sm:px-6"
+          className="px-4 mb-8 transition-shadow rounded-lg sm:mb-12 sm:px-6"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.4 }}
         >
-          <h3 className="text-2xl sm:text-3xl lg:text-4xl font-ghibi-bold text-primary mb-3 sm:mb-4">
+          <h3 className="mb-3 text-2xl sm:text-3xl lg:text-4xl font-ghibi-bold text-primary sm:mb-4">
             {t("about.global_reach")}
           </h3>
-          <p className="text-sm sm:text-base text-muted-foreground mb-6 font-ghibi leading-relaxed text-center lg:text-left">
+          <p className="mb-6 text-sm leading-relaxed text-center sm:text-base text-muted-foreground font-ghibi lg:text-left">
             {t("about.global_reach_description")}
           </p>
         </motion.section>
 
         <motion.section
-          className="rounded-lg mb-8 sm:mb-12 transition-shadow px-4 sm:px-6"
+          className="px-4 mb-8 transition-shadow rounded-lg sm:mb-12 sm:px-6"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.5 }}
         >
-          <h3 className="text-2xl sm:text-3xl lg:text-4xl font-ghibi-bold text-primary mb-3 sm:mb-4">
+          <h3 className="mb-3 text-2xl sm:text-3xl lg:text-4xl font-ghibi-bold text-primary sm:mb-4">
             {t("about.mission")}
           </h3>
-          <p className="text-sm sm:text-base text-muted-foreground mb-4 font-ghibi leading-relaxed text-center lg:text-left">
+          <p className="mb-4 text-sm leading-relaxed text-center sm:text-base text-muted-foreground font-ghibi lg:text-left">
             {t("about.mission_description")}
           </p>
         </motion.section>
@@ -345,7 +345,7 @@ export default function Peachy() {
 
       <Container>
         <motion.section
-          className="rounded-lg mb-8 sm:mb-12 transition-shadow px-4 sm:px-6"
+          className="px-4 mb-8 transition-shadow rounded-lg sm:mb-12 sm:px-6"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.5 }}
@@ -353,13 +353,13 @@ export default function Peachy() {
           {/* Animated Components */}
           <div className="flex flex-col ">
             {/* First Item: Text on Left, Animation on Right */}
-            <div className="flex flex-col lg:flex-row items-center justify-between">
-              <div className="w-full lg:w-1/2 flex flex-col items-center lg:items-start text-center lg:text-left">
+            <div className="flex flex-col items-center justify-between lg:flex-row">
+              <div className="flex flex-col items-center w-full text-center lg:w-1/2 lg:items-start lg:text-left">
                 <section className="p-3">
-                  <h2 className="text-2xl sm:text-3xl lg:text-4xl font-ghibi-bold text-primary mb-3 sm:mb-4">
+                  <h2 className="mb-3 text-2xl sm:text-3xl lg:text-4xl font-ghibi-bold text-primary sm:mb-4">
                     {t("footer.features")}
                   </h2>
-                  <p className="text-sm sm:text-base text-muted-foreground font-ghibi whitespace-pre-line leading-relaxed">
+                  <p className="text-sm leading-relaxed whitespace-pre-line sm:text-base text-muted-foreground font-ghibi">
                     {t("footer.features_description")}
                   </p>
                 </section>
@@ -370,13 +370,13 @@ export default function Peachy() {
             </div>
 
             {/* Second Item: Animation on Left, Text on Right */}
-            <div className="flex flex-col lg:flex-row-reverse items-center justify-between">
-              <div className="w-full lg:w-1/2 flex flex-col items-center lg:items-end text-center lg:text-right   ">
+            <div className="flex flex-col items-center justify-between lg:flex-row-reverse">
+              <div className="flex flex-col items-center w-full text-center lg:w-1/2 lg:items-end lg:text-right ">
                 <section className="p-3">
-                  <h2 className="text-2xl sm:text-3xl lg:text-4xl font-ghibi-bold text-primary mb-3 sm:mb-4">
+                  <h2 className="mb-3 text-2xl sm:text-3xl lg:text-4xl font-ghibi-bold text-primary sm:mb-4">
                     {t("footer.techno_language")}
                   </h2>
-                  <p className="text-sm sm:text-base text-muted-foreground font-ghibi whitespace-pre-line leading-relaxed">
+                  <p className="text-sm leading-relaxed whitespace-pre-line sm:text-base text-muted-foreground font-ghibi">
                     {t("footer.techno_language_description")}
                   </p>
                 </section>
@@ -392,21 +392,18 @@ export default function Peachy() {
       {isSuccess && (
         <Container>
           <motion.div
-            className="rounded-lg mb-8 sm:mb-12 transition-shadow px-4 sm:px-6"
+            className="px-4 mb-8 transition-shadow rounded-lg sm:mb-12 sm:px-6"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.6 }}
           >
-            <div className="flex flex-col justify-center items-center gap-8">
-              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-ghibi-bold text-primary text-center">
+            <div className="flex flex-col items-center justify-center gap-8">
+              <h2 className="text-2xl text-center sm:text-3xl lg:text-4xl font-ghibi-bold text-primary">
                 {t("user.top_global")}
               </h2>
               {topUser?.map((user: any, index: number) => (
                 <div key={index}>
                   <AwardBadge
-                    type={
-                      `user-coin-top-${user.rank || index + 1}` as AwardBadgeType
-                    }
                     place={user?.rank ?? index}
                     content={`${user?.discord?.displayName ?? user.username} - ${toNumber(user?.balance?.coin)} coins`}
                   />
@@ -421,12 +418,12 @@ export default function Peachy() {
       <Container>
         <motion.section
           id="faq"
-          className="rounded-lg mb-8 sm:mb-12 transition-shadow px-4 sm:px-6"
+          className="px-4 mb-8 transition-shadow rounded-lg sm:mb-12 sm:px-6"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.6 }}
         >
-          <h3 className="text-2xl sm:text-3xl lg:text-4xl font-ghibi-bold text-primary mb-6 sm:mb-8 text-center">
+          <h3 className="mb-6 text-2xl text-center sm:text-3xl lg:text-4xl font-ghibi-bold text-primary sm:mb-8">
             {t("faq.title")}
           </h3>
           <Accordion
@@ -436,10 +433,10 @@ export default function Peachy() {
           >
             {faqItems.map((item, index) => (
               <AccordionItem key={index} value={`item-${index}`}>
-                <AccordionTrigger className="font-ghibi-bold text-foreground text-left text-sm sm:text-base">
+                <AccordionTrigger className="text-sm text-left font-ghibi-bold text-foreground sm:text-base">
                   {item.question}
                 </AccordionTrigger>
-                <AccordionContent className="text-muted-foreground font-ghibi text-sm sm:text-base leading-relaxed">
+                <AccordionContent className="text-sm leading-relaxed text-muted-foreground font-ghibi sm:text-base">
                   {item.answer}
                 </AccordionContent>
               </AccordionItem>
@@ -452,23 +449,23 @@ export default function Peachy() {
       <Container>
         <motion.section
           id="contact"
-          className="mb-8 sm:mb-12 px-4 sm:px-6"
+          className="px-4 mb-8 sm:mb-12 sm:px-6"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.7 }}
         >
-          <section className="p-4 sm:p-6 text-center">
-            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-ghibi-bold text-primary mb-4 sm:mb-6">
+          <section className="p-4 text-center sm:p-6">
+            <h2 className="mb-4 text-2xl sm:text-3xl lg:text-4xl font-ghibi-bold text-primary sm:mb-6">
               {t("contact.title")}
             </h2>
-            <p className="text-sm sm:text-base text-muted-foreground max-w-2xl mx-auto font-ghibi leading-relaxed">
+            <p className="max-w-2xl mx-auto text-sm leading-relaxed sm:text-base text-muted-foreground font-ghibi">
               {t("contact.description")}
             </p>
           </section>
 
-          <Card className="rounded-lg transition-shadow max-w-2xl mx-auto">
+          <Card className="max-w-2xl mx-auto transition-shadow rounded-lg">
             <CardHeader className="px-4 sm:px-6">
-              <CardTitle className="font-ghibi-bold text-foreground text-lg sm:text-xl">
+              <CardTitle className="text-lg font-ghibi-bold text-foreground sm:text-xl">
                 {t("contact.form_title")}
               </CardTitle>
             </CardHeader>
@@ -481,7 +478,7 @@ export default function Peachy() {
                   <div className="grid gap-2 sm:gap-3">
                     <Label
                       htmlFor="name"
-                      className="font-ghibi-bold text-foreground text-sm sm:text-base"
+                      className="text-sm font-ghibi-bold text-foreground sm:text-base"
                     >
                       {t("contact.name")} *
                     </Label>
@@ -491,7 +488,7 @@ export default function Peachy() {
                         required: t("contact.name_required"),
                       })}
                       placeholder={t("contact.name_placeholder")}
-                      className="bg-input text-foreground font-ghibi text-sm sm:text-base"
+                      className="text-sm bg-input text-foreground font-ghibi sm:text-base"
                       aria-invalid={errors.name ? "true" : "false"}
                     />
                     {errors.name && (
@@ -504,7 +501,7 @@ export default function Peachy() {
                   <div className="grid gap-2 sm:gap-3">
                     <Label
                       htmlFor="email"
-                      className="font-ghibi-bold text-foreground text-sm sm:text-base"
+                      className="text-sm font-ghibi-bold text-foreground sm:text-base"
                     >
                       {t("contact.email")} *
                     </Label>
@@ -520,7 +517,7 @@ export default function Peachy() {
                       })}
                       type="email"
                       placeholder={t("contact.email_placeholder")}
-                      className="bg-input text-foreground font-ghibi text-sm sm:text-base"
+                      className="text-sm bg-input text-foreground font-ghibi sm:text-base"
                       aria-invalid={errors.email ? "true" : "false"}
                     />
                     {errors.email && (
@@ -533,7 +530,7 @@ export default function Peachy() {
                   <div className="grid gap-2 sm:gap-3">
                     <Label
                       htmlFor="message"
-                      className="font-ghibi-bold text-foreground text-sm sm:text-base"
+                      className="text-sm font-ghibi-bold text-foreground sm:text-base"
                     >
                       {t("contact.message")}
                     </Label>
@@ -548,7 +545,7 @@ export default function Peachy() {
                   <div className="flex flex-col gap-3">
                     <Button
                       type="submit"
-                      className="w-full bg-primary text-primary-foreground font-ghibi-bold rounded-md hover:bg-primary/90 py-2 sm:py-3 text-sm sm:text-base"
+                      className="w-full py-2 text-sm rounded-md bg-primary text-primary-foreground font-ghibi-bold hover:bg-primary/90 sm:py-3 sm:text-base"
                       aria-label={t("contact.submit")}
                       disabled={isSubmitting}
                     >
@@ -568,7 +565,7 @@ export default function Peachy() {
       <Container>
         <div className="flex items-center px-4 sm:px-6">
           <div className="relative w-full overflow-hidden bg-background">
-            <div className="absolute inset-0 bg-gradient-to-r from-background via-transparent to-background z-10" />
+            <div className="absolute inset-0 z-10 bg-gradient-to-r from-background via-transparent to-background" />
             <motion.div
               className="flex whitespace-nowrap"
               animate={{ x: ["0%", "-50%"] }}
@@ -581,7 +578,7 @@ export default function Peachy() {
               {[...Array(4)].map((_, index) => (
                 <div key={index} className="flex items-center mx-2 sm:mx-4">
                   <span
-                    className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-transparent px-2 sm:px-4"
+                    className="px-2 text-4xl font-bold text-transparent sm:text-5xl md:text-6xl lg:text-7xl sm:px-4"
                     style={{
                       WebkitTextStroke: "1px #a3a85e",
                     }}
@@ -598,17 +595,17 @@ export default function Peachy() {
       {/* Footer */}
       <Container>
         <TooltipProvider>
-          <footer className="relative grid max-w-screen-xl grid-cols-1 gap-6 sm:gap-8 pt-6 sm:pt-8 mx-auto mt-5 sm:grid-cols-2 lg:grid-cols-5 bg-gradient-to-r transition-all duration-500 px-4 sm:px-6">
+          <footer className="relative grid max-w-screen-xl grid-cols-1 gap-6 px-4 pt-6 mx-auto mt-5 transition-all duration-500 sm:gap-8 sm:pt-8 sm:grid-cols-2 lg:grid-cols-5 bg-gradient-to-r sm:px-6">
             {/* Logo and Tagline */}
             <div className="relative lg:col-span-2">
-              <div className="flex flex-col w-full max-w-3xl mx-auto gap-3 text-center sm:text-left">
+              <div className="flex flex-col w-full max-w-3xl gap-3 mx-auto text-center sm:text-left">
                 <Link
                   href="/"
-                  className="flex items-center justify-center sm:justify-start space-x-2 text-xl sm:text-2xl font-ghibi-bold text-primary dark:text-foreground transform hover:scale-105 transition-transform duration-300 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
+                  className="flex items-center justify-center space-x-2 text-xl transition-transform duration-300 transform sm:justify-start sm:text-2xl font-ghibi-bold text-primary dark:text-foreground hover:scale-105 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
                   aria-label="Return to Peachy homepage"
                 >
                   <Image
-                    className="w-6 sm:w-8 mb-2 hover:animate-pulse"
+                    className="w-6 mb-2 sm:w-8 hover:animate-pulse"
                     src="/images/favicon.ico"
                     alt="Peachy Logo"
                     width={48}
@@ -620,7 +617,7 @@ export default function Peachy() {
                     PEACHY
                   </span>
                 </Link>
-                <h2 className="text-lg sm:text-xl font-ghibi text-muted-foreground mb-4">
+                <h2 className="mb-4 text-lg sm:text-xl font-ghibi text-muted-foreground">
                   {t("footer.tagline")}
                 </h2>
               </div>
@@ -628,12 +625,12 @@ export default function Peachy() {
 
             {/* Legal Links */}
             <div className="text-center sm:text-left">
-              <div className="flex flex-col mt-4 space-y-2 justify-center sm:justify-start">
+              <div className="flex flex-col justify-center mt-4 space-y-2 sm:justify-start">
                 {legal.map((item, index) => (
                   <Link
                     key={index}
                     href={item.href}
-                    className="py-2 text-sm sm:text-base text-muted-foreground font-ghibi rounded-md dark:text-muted-foreground hover:text-primary focus:text-primary dark:hover:text-primary transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-primary"
+                    className="py-2 text-sm transition-colors duration-300 rounded-md sm:text-base text-muted-foreground font-ghibi dark:text-muted-foreground hover:text-primary focus:text-primary dark:hover:text-primary focus:outline-none focus:ring-2 focus:ring-primary"
                     aria-label={`View ${item.name} page`}
                   >
                     {item.name}
@@ -644,15 +641,15 @@ export default function Peachy() {
 
             {/* Social Media Links */}
             <div className="relative text-center sm:text-left lg:col-span-2">
-              <div className="font-ghibi-bold text-primary text-base sm:text-lg mb-4">
+              <div className="mb-4 text-base font-ghibi-bold text-primary sm:text-lg">
                 {t("footer.follow_us")}
               </div>
-              <div className="flex mt-4 space-x-3 sm:space-x-4 justify-center sm:justify-start flex-wrap gap-2">
+              <div className="flex flex-wrap justify-center gap-2 mt-4 space-x-3 sm:space-x-4 sm:justify-start">
                 <a
                   href="https://www.facebook.com/peachyganggg"
                   target="_blank"
                   rel="noreferrer noopener"
-                  className="transform hover:scale-110 hover:rotate-12 transition-all duration-300"
+                  className="transition-all duration-300 transform hover:scale-110 hover:rotate-12"
                   aria-label="Follow Peachy on Facebook"
                 >
                   <Tooltip>
@@ -670,7 +667,7 @@ export default function Peachy() {
                   href="https://www.youtube.com/@peachyganggg"
                   target="_blank"
                   rel="noreferrer noopener"
-                  className="transform hover:scale-110 hover:rotate-12 transition-all duration-300"
+                  className="transition-all duration-300 transform hover:scale-110 hover:rotate-12"
                   aria-label="Follow Peachy on YouTube"
                 >
                   <Tooltip>
@@ -688,7 +685,7 @@ export default function Peachy() {
                   href="https://discord.gg/peachyganggg"
                   target="_blank"
                   rel="noreferrer noopener"
-                  className="transform hover:scale-110 hover:rotate-12 transition-all duration-300"
+                  className="transition-all duration-300 transform hover:scale-110 hover:rotate-12"
                   aria-label="Follow Peachy on Discord"
                 >
                   <Tooltip>
@@ -706,7 +703,7 @@ export default function Peachy() {
                   href="https://x.com/peachyganggg"
                   target="_blank"
                   rel="noreferrer noopener"
-                  className="transform hover:scale-110 hover:rotate-12 transition-all duration-300"
+                  className="transition-all duration-300 transform hover:scale-110 hover:rotate-12"
                   aria-label="Follow Peachy on X"
                 >
                   <Tooltip>
@@ -724,7 +721,7 @@ export default function Peachy() {
                   href="https://www.patreon.com/c/peachyganggg"
                   target="_blank"
                   rel="noreferrer noopener"
-                  className="transform hover:scale-110 hover:rotate-12 transition-all duration-300"
+                  className="transition-all duration-300 transform hover:scale-110 hover:rotate-12"
                   aria-label="Follow Peachy on Patreon"
                 >
                   <Tooltip>
@@ -744,7 +741,7 @@ export default function Peachy() {
         </TooltipProvider>
 
         {/* Copyright Section */}
-        <div className="my-32 sm:my-8 text-xs sm:text-sm text-center text-muted-foreground font-ghibi dark:text-muted-foreground px-4">
+        <div className="px-4 my-32 text-xs text-center sm:my-8 sm:text-sm text-muted-foreground font-ghibi dark:text-muted-foreground">
           © {new Date().getFullYear()} Made by{" "}
           <a
             href="https://discord.gg/peachyganggg"
@@ -758,10 +755,10 @@ export default function Peachy() {
       </Container>
 
       {/* Scroll-to-Top Button */}
-      <div className="fixed bottom-4 right-4 sm:bottom-5 sm:right-5 z-50">
+      <div className="fixed z-50 bottom-4 right-4 sm:bottom-5 sm:right-5">
         <Button
           onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-          className="p-2 sm:p-3 bg-primary rounded-full shadow-lg hover:bg-primary-dark transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
+          className="p-2 transition-colors duration-300 rounded-full shadow-lg sm:p-3 bg-primary hover:bg-primary-dark focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
           aria-label="Scroll to top"
         >
           <FaArrowUp size={16} className="sm:w-5 sm:h-5" />

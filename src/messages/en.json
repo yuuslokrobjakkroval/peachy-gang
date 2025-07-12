@@ -492,12 +492,14 @@
       "rank": "Rank",
       "user": "User",
       "coin": "Coin",
+      "credit": "Credit",
       "bank": "Bank",
       "slots": "Slots",
       "sponsor": "Sponsor",
       "blackjack": "Blackjack",
       "coinflip": "Coinflip",
-      "klaklouk": "KlaKlouk"
+      "klaklouk": "KlaKlouk",
+      "level": "Level"
     }
   },
   "other": {
