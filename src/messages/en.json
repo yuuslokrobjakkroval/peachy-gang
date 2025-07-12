@@ -499,7 +499,8 @@
       "blackjack": "Blackjack",
       "coinflip": "Coinflip",
       "klaklouk": "KlaKlouk",
-      "level": "Level"
+      "levelChat": "Text Level",
+      "levelVoice": "Voice Level"
     }
   },
   "other": {
@@ -784,7 +785,6 @@
       "Service Unavailable": "Service Unavailable"
     }
   },
-
   "table": {
     "emptyMessage": "No data available",
     "emptySuggestion": "Try adjusting your search or filter criteria",

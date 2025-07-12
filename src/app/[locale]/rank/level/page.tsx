@@ -111,7 +111,18 @@ export default function RankPage() {
     },
     {
       key: `profile.level`,
-      header: t(`rank.columns.level`),
+      header: t(`rank.columns.levelChat`),
+      sortable: true,
+      align: "center",
+      render: (value) => (
+        <div className="flex items-center justify-center gap-1">
+          <span className="font-medium">{toNumber(value) ?? 0}</span>
+        </div>
+      ),
+    },
+    {
+      key: `profile.voiceLevel`,
+      header: t(`rank.columns.levelVoice`),
       sortable: true,
       align: "center",
       render: (value) => (
