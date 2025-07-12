@@ -69,7 +69,6 @@ function GuildPanel({
   refetch: () => void;
 }) {
   const t = useTranslations("guilds");
-  const f = useTranslations("features");
   const { userInfoByDiscord }: { userInfoByDiscord: any } = usePeachy();
   const router = useRouter();
 
@@ -109,10 +108,10 @@ function GuildPanel({
           {/* Background and profile */}
           <Card className="p-4">
             <div
-              className="flex w-full rounded-xl bg-cover"
+              className="flex w-full bg-cover rounded-xl"
               style={backgroundStyle}
             >
-              <div className="absolute -bottom-12 left-18 -translate-x-1/2">
+              <div className="absolute -translate-x-1/2 -bottom-12 left-18">
                 <div className="relative w-[96px] h-[96px]">
                   {/* Avatar */}
                   <div className="relative w-[87px] h-[87px] rounded-full border-[4px] border-[var(--background)] bg-[var(--accent)] dark:!border-[var(--sidebar)] overflow-hidden ml-3">
@@ -123,7 +122,7 @@ function GuildPanel({
                       })}
                       width={128}
                       height={128}
-                      className="rounded-full object-cover"
+                      className="object-cover rounded-full"
                     />
                   </div>
                 </div>
@@ -144,7 +143,7 @@ function GuildPanel({
           <div className="absolute inset-0 flex items-center">
             <span className="w-full border-t border-[var(--border)]" />
           </div>
-          <div className="relative flex justify-center text-xs sm:text-sm uppercase">
+          <div className="relative flex justify-center text-xs uppercase sm:text-sm">
             <span className="bg-[var(--background)] px-3 text-[var(--muted-foreground)]">
               <h4 className="text-2xl font-ghibi-bold tracking-tight text-[var(--primary)]">
                 {t("features_title", { defaultMessage: "Features" })}
@@ -153,7 +152,7 @@ function GuildPanel({
           </div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-3">
+        <div className="grid grid-cols-1 gap-4 mt-3 md:grid-cols-3">
           {features.map((feature: any) => (
             <Features
               key={feature.id}
@@ -178,7 +177,7 @@ function NotJoined({ guildId }: { guildId: string }) {
   return (
     <div className="flex min-h-svh w-full items-center justify-center bg-[var(--background)] font-ghibi">
       <section className="rounded-[var(--radius)] p-6 mb-8 border-2 shadow-primary">
-        <div className="w-full items-center flex flex-col justify-center gap-3">
+        <div className="flex flex-col items-center justify-center w-full gap-3">
           <div className="text-center text-2xl font-ghibi-bold text-[var(--primary)]">
             <Mailbox width={72} height={72} />
           </div>

@@ -24,6 +24,8 @@ import {
   Clapperboard,
   ShoppingBag,
   Settings2,
+  Smile,
+  Sticker,
 } from "lucide-react";
 
 import { NavMain } from "@/components/navbar/nav-main";
@@ -134,6 +136,20 @@ const navigation = {
       isActive: true,
       items: [
         {
+          title: "Emojis",
+          url: "/other/emoji",
+          icon: BookHeart,
+          isActive: true,
+          items: [],
+        },
+        {
+          title: "Sticker",
+          url: "/other/sticker",
+          icon: Sticker,
+          isActive: true,
+          items: [],
+        },
+        {
           title: "Movies",
           url: "/other/movies",
           icon: Popcorn,
@@ -168,6 +184,20 @@ const navigation = {
       icon: Settings2,
       isActive: true,
       items: [
+        {
+          title: "Emoji Management",
+          url: "/general/emoji",
+          icon: BookHeart,
+          isActive: true,
+          items: [],
+        },
+        {
+          title: "Sticker Management",
+          url: "/general/sticker",
+          icon: Sticker,
+          isActive: true,
+          items: [],
+        },
         {
           title: "Clip Management",
           url: "/general/tutorials",

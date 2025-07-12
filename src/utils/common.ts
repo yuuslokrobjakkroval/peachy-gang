@@ -426,6 +426,14 @@ export function emojiUrl(emoji: any): string {
   }
 }
 
+export function stickerUrl(sticker: any): string {
+  if (sticker?.format === 4) {
+    return `https://media.discordapp.net/stickers/${sticker.id}.gif?size=128`;
+  } else {
+    return `https://media.discordapp.net/stickers/${sticker.id}.png?size=128`;
+  }
+}
+
 export const getRandomEmoji = (): string => {
   const emojis: string[] = [
     "😊", // Smiling face

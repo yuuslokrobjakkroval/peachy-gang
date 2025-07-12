@@ -92,6 +92,13 @@ const bot = emptySplitApi.injectEndpoints({
       }),
       providesTags: (result, error, arg) => [{ type: "EMOJIS", id: arg }],
     }),
+    getGuildSticker: builder.query({
+      query: (guild) => ({
+        url: `${process.env.NEXT_PUBLIC_API_ENDPOINT}/guilds/${guild}/stickers`,
+        method: "GET",
+      }),
+      providesTags: (result, error, arg) => [{ type: "EMOJIS", id: arg }],
+    }),
     addAutoResponse: builder.mutation({
       query: ({ guild, feature, ...body }) => ({
         url: `${process.env.NEXT_PUBLIC_API_ENDPOINT}/guilds/${guild}/features/${feature}/create`,
@@ -165,6 +172,7 @@ export const {
   useGetGuildRolesQuery,
   useGetGuildChannelsQuery,
   useGetGuildEmojiQuery,
+  useGetGuildStickerQuery,
 
   // AUTO RESPONSE
   useAddAutoResponseMutation,

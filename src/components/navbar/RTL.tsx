@@ -3,7 +3,6 @@
 import React, { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { usePeachy } from "@/contexts/peachy";
-import { IoMdNotifications } from "react-icons/io";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -140,6 +139,7 @@ const RTLNavbar = (props: {
                           alt={t("avatarDecorationAlt")}
                           width={96}
                           height={96}
+                          unoptimized
                           className="object-contain"
                         />
                       </div>
