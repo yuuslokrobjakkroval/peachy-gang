@@ -14,6 +14,7 @@ import {
   LucideIcon,
 } from "lucide-react";
 import { toast } from "sonner";
+import confetti from "canvas-confetti";
 
 type MemoryCard = {
   id: number;
@@ -37,7 +38,7 @@ const createCards = () => {
   iconConfigs.forEach(({ icon, color }, index) => {
     cards.push(
       { id: index * 2, icon, color, isMatched: false },
-      { id: index * 2 + 1, icon, color, isMatched: false },
+      { id: index * 2 + 1, icon, color, isMatched: false }
     );
   });
 
@@ -70,15 +71,43 @@ export default function MemoryGame() {
             cards.map((card, index) =>
               index === firstIndex || index === secondIndex
                 ? { ...card, isMatched: true }
-                : card,
-            ),
+                : card
+            )
           );
           setFlippedIndexes([]);
           setMatches((m) => m + 1);
           setIsChecking(false);
 
           if (matches === cards.length / 2 - 1) {
+            const end = Date.now() + 3 * 1000; // 3 seconds
+            const colors = ["#a786ff", "#fd8bbc", "#eca184", "#f8deb1"];
+
+            const frame = () => {
+              if (Date.now() > end) return;
+
+              confetti({
+                particleCount: 2,
+                angle: 60,
+                spread: 55,
+                startVelocity: 60,
+                origin: { x: 0, y: 0.5 },
+                colors: colors,
+              });
+              confetti({
+                particleCount: 2,
+                angle: 120,
+                spread: 55,
+                startVelocity: 60,
+                origin: { x: 1, y: 0.5 },
+                colors: colors,
+              });
+
+              requestAnimationFrame(frame);
+            };
+
+            frame();
             toast("🎉 Congratulations! You've found all the matches! 🎈", {
+              position: "top-center",
               className:
                 "bg-[var(--primary)] text-[var(--primary-foreground)] border-[var(--primary-border)]",
             });
@@ -102,7 +131,7 @@ export default function MemoryGame() {
 
   return (
     <div className="flex flex-col items-center justify-center p-4 space-y-8 bg-[var(--background)] text-[var(--foreground)] font-handwritten mt-8">
-      <div className="text-center space-y-4">
+      <div className="space-y-4 text-center">
         <h1 className="text-4xl font-bold text-[var(--primary)] animate-twinkle">
           Memory Match Game
         </h1>
