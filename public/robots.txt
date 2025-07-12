@@ -1,4 +1,9 @@
+# *
 User-agent: *
 Allow: /
 
+# Host
+Host: https://peachygang.xyz
+
+# Sitemaps
 Sitemap: https://peachygang.xyz/sitemap.xml
