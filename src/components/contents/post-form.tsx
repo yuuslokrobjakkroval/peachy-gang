@@ -46,11 +46,11 @@ export default function PostForm({
         onChange={(e) => setContent(e.target.value)}
         placeholder="What's on your mind?"
       />
-      <Input
+      {/* <Input
         type="file"
         accept="image/*"
         onChange={(e) => setImage(e.target.files?.[0] || null)}
-      />
+      /> */}
       <Button onClick={handleSubmit} disabled={loading} className="w-full">
         {loading ? "Posting..." : "Post"}
       </Button>
