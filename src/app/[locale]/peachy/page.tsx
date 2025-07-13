@@ -32,8 +32,6 @@ export default function PeachyPage() {
     setOpen(false);
   };
 
-  const scrollRef = useRef<HTMLDivElement>(null);
-
   if (isTimelineLoading) {
     return (
       <div className="w-full flex items-center justify-center min-h-[50vh]">
@@ -83,10 +81,7 @@ export default function PeachyPage() {
           transition={{ duration: 0.2 }}
           className="flex items-center justify-center w-full mx-auto my-3"
         >
-          <div
-            className="w-full max-w-xl px-2 pb-10 mx-auto space-y-6 rounded-lg bg-background/50"
-            ref={scrollRef}
-          >
+          <div className="w-full max-w-xl px-2 pb-10 mx-auto space-y-6 rounded-lg bg-background/50">
             {posts?.length > 0 ? (
               posts.map((post: any) => <PostCard key={post._id} data={post} />)
             ) : (
