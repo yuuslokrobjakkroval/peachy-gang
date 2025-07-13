@@ -79,9 +79,9 @@ export default function PeachyPage() {
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: 100 }}
           transition={{ duration: 0.2 }}
-          className="flex w-full mx-auto my-3"
+          className="flex w-full my-3"
         >
-          <div className="w-full max-w-xl px-2 pb-10 mx-auto space-y-6 rounded-lg bg-background/50">
+          <div className="w-full max-w-xl space-y-6 rounded-lg bg-background/50">
             {posts?.length > 0 ? (
               posts.map((post: any) => <PostCard key={post._id} data={post} />)
             ) : (
