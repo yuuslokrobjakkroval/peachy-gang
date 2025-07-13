@@ -1,217 +1,101 @@
 "use client";
-import { useEffect, useRef, useState } from "react";
-import type React from "react";
 
+import type React from "react";
+import { useEffect, useRef, useState } from "react";
 import { useTranslations } from "next-intl";
-import ReactMarkdown from "react-markdown";
-import remarkGfm from "remark-gfm";
 import { AnimatePresence, motion } from "framer-motion";
-import { useChat } from "@ai-sdk/react";
 import { Button } from "@/components/ui/button";
-import { ArrowDownCircle, Loader2, MessageCircle, Send, X } from "lucide-react";
+
 import {
-  Card,
-  CardContent,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
-import { ScrollArea } from "@/components/ui/scroll-area";
-import { Input } from "@/components/ui/input";
-import { CARD } from "@/utils/config";
+  Dialog,
+  DialogTrigger,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogDescription,
+} from "@/components/ui/dialog";
 import Container from "@/components/layouts/container";
-import AnimatedTestimonials from "@/components/ui/Animations/spectrum/animated-testimonials";
+import PostForm from "@/components/contents/post-form";
+import { usePeachy } from "@/contexts/peachy";
+import { useGetTimelineQuery } from "@/redux/api/post";
+import Loading from "@/components/loading/circle";
+import { PostCard } from "@/components/ui/Animations/hexta/Table/post-card";
 
 export default function PeachyPage() {
   const t = useTranslations();
-  const [isChatOpen, setIsChatOpen] = useState(false);
-  const chatIconRef = useRef<HTMLButtonElement>(null);
-  const {
-    messages,
-    input,
-    handleInputChange,
-    handleSubmit,
-    error,
-    stop,
-    reload,
-    isLoading,
-  } = useChat({
-    api: "/api/gemini",
-  });
+  const { userInfoByDiscord } = usePeachy();
+  const [open, setOpen] = useState(false);
+  const { data: posts, isLoading: isTimelineLoading } =
+    useGetTimelineQuery(null);
+
+  const handleNewPost = async () => {
+    setOpen(false);
+  };
 
   const scrollRef = useRef<HTMLDivElement>(null);
 
-  const toggleChat = () => {
-    setIsChatOpen(!isChatOpen);
-  };
-
-  useEffect(() => {
-    if (scrollRef.current) {
-      scrollRef.current.scrollIntoView({ behavior: "smooth" });
-    }
-  }, [messages]);
+  if (isTimelineLoading) {
+    return (
+      <div className="w-full flex items-center justify-center min-h-[50vh]">
+        <Loading />
+      </div>
+    );
+  }
 
   return (
     <Container>
-      {/* <EventIdcard Cards={CARD} /> */}
-      <AnimatedTestimonials cards={CARD} />
       <AnimatePresence>
         <motion.div
           initial={{ opacity: 0, y: 100 }}
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: 100 }}
           transition={{ duration: 0.2 }}
-          className="fixed bottom-4 right-4 z-50 mx-8 my-8"
+          className="z-50 flex items-center justify-center w-[140px] ml-auto"
         >
-          <Button
-            ref={chatIconRef}
-            onClick={toggleChat}
-            size="icon"
-            className="rounded-full size-14 p-2 shadow-lg"
-          >
-            {!isChatOpen ? (
-              <MessageCircle className="size-8" />
-            ) : (
-              <ArrowDownCircle className="size-8" />
-            )}
-          </Button>
+          <div className="w-full max-w-xl p-4 mx-auto mt-8 space-y-4 border shadow-md animate-fade-in rounded-xl bg-card border-border">
+            <Dialog open={open} onOpenChange={setOpen}>
+              <DialogTrigger asChild>
+                <Button className="w-full font-ghibi-bold bg-primary text-primary-foreground hover:opacity-90">
+                  + Create Post
+                </Button>
+              </DialogTrigger>
+              <DialogContent className="border rounded-lg shadow-xl bg-popover text-popover-foreground border-border">
+                <DialogHeader>
+                  <DialogTitle className="text-xl font-ghibi-bold">
+                    Create Post
+                  </DialogTitle>
+                  <DialogDescription className="text-muted-foreground">
+                    Share your thoughts with the world 🌸
+                  </DialogDescription>
+                </DialogHeader>
+                <PostForm user={userInfoByDiscord} onSuccess={handleNewPost} />
+              </DialogContent>
+            </Dialog>
+          </div>
         </motion.div>
       </AnimatePresence>
+
       <AnimatePresence>
-        {isChatOpen && (
-          <motion.div
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={{ opacity: 1, scale: 1 }}
-            exit={{ opacity: 0, scale: 0.8 }}
-            transition={{ duration: 0.2 }}
-            className="fixed bottom-20 right-4 z-50 w-[95%] md:w-[500px]"
+        <motion.div
+          initial={{ opacity: 0, y: 100 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: 100 }}
+          transition={{ duration: 0.2 }}
+          className="flex items-center justify-center w-full mx-auto my-3"
+        >
+          <div
+            className="w-full max-w-xl px-2 pb-10 mx-auto space-y-6 rounded-lg bg-background/50"
+            ref={scrollRef}
           >
-            <Card className="border-2">
-              <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-3">
-                <CardTitle className="text-lg font-bold">
-                  {t("peachy.chat_title")}
-                </CardTitle>
-                <Button onClick={toggleChat} size="icon" className="px-2 py-0">
-                  <X className="size-4" />
-                  <span className="sr-only">{t("common.close")}</span>
-                </Button>
-              </CardHeader>
-              <CardContent>
-                <ScrollArea className="h-[300px] pr-4">
-                  {messages?.length === 0 && (
-                    <div className="w-full mt-32 text-gray-500 items-center justify-center flex gap-3">
-                      {t("peachy.no_messages")}
-                    </div>
-                  )}
-
-                  {messages?.map((message: any, index: number) => (
-                    <div
-                      key={index}
-                      className={`mb-4 ${message.role === "user" ? "text-right" : "text-left"}`}
-                    >
-                      <div
-                        className={`inline-block p-4 rounded-lg ${
-                          message.role === "user"
-                            ? "bg-primary text-primary-foreground"
-                            : "bg-muted"
-                        }`}
-                      >
-                        <ReactMarkdown
-                          remarkPlugins={[remarkGfm]}
-                          components={{
-                            code({
-                              inline,
-                              className,
-                              children,
-                              ...props
-                            }: React.HTMLAttributes<HTMLElement> & {
-                              inline?: boolean;
-                            }) {
-                              return inline ? (
-                                <code
-                                  {...props}
-                                  className="bg-gray-200 px-1 rounded"
-                                >
-                                  {children}
-                                </code>
-                              ) : (
-                                <pre
-                                  {...props}
-                                  className="bg-gray-200 p-2 rounded"
-                                >
-                                  <code>{children}</code>
-                                </pre>
-                              );
-                            },
-                            ul: ({ children }) => (
-                              <ul className="list-disc ml-4">{children}</ul>
-                            ),
-                            li: ({ children }) => (
-                              <li className="list-decimal ml-4">{children}</li>
-                            ),
-                          }}
-                        >
-                          {message.content}
-                        </ReactMarkdown>
-                      </div>
-                    </div>
-                  ))}
-
-                  {isLoading && (
-                    <div className="w-full items-center flex justify-center gap-3">
-                      <Loader2 className="animate-spin h-5 w-5 text-primary" />
-                      <button
-                        className="underline"
-                        type="button"
-                        onClick={() => stop()}
-                      >
-                        {t("peachy.abort")}
-                      </button>
-                    </div>
-                  )}
-
-                  {error && (
-                    <div className="w-full items-center flex justify-center gap-3">
-                      <div>
-                        {t("common.error")}: {error.message}
-                      </div>
-                      <button
-                        className="underline"
-                        type="button"
-                        onClick={() => reload()}
-                      >
-                        {t("peachy.retry")}
-                      </button>
-                    </div>
-                  )}
-
-                  <div ref={scrollRef}></div>
-                </ScrollArea>
-              </CardContent>
-              <CardFooter>
-                <form
-                  onSubmit={handleSubmit}
-                  className="flex w-full items-center space-x-2"
-                >
-                  <Input
-                    value={input}
-                    onChange={handleInputChange}
-                    className="flex-1"
-                    placeholder={t("peachy.type_message")}
-                  />
-                  <Button
-                    type="submit"
-                    className="size-9"
-                    disabled={isLoading}
-                    size="icon"
-                  >
-                    <Send className="size-4" />
-                  </Button>
-                </form>
-              </CardFooter>
-            </Card>
-          </motion.div>
-        )}
+            {posts?.length > 0 ? (
+              posts.map((post: any) => <PostCard key={post._id} data={post} />)
+            ) : (
+              <div className="italic text-center text-muted-foreground font-ghibi">
+                No posts yet. Be the first to share something! 🌿
+              </div>
+            )}
+          </div>
+        </motion.div>
       </AnimatePresence>
     </Container>
   );

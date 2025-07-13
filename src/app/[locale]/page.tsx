@@ -106,6 +106,7 @@ export default function Peachy() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const userIds = useMemo(
     () => [...new Set([...ownerId, ...staffId])],
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     [ownerId, staffId]
   );
   const { data: fetchUser } = useGetFetchUserByIdQuery(userIds);
@@ -759,27 +760,31 @@ export default function Peachy() {
           </footer>
         </TooltipProvider>
         <div className="flex items-center justify-center my-32 text-xs text-center px-0-4 sm:my-8 sm:text-sm text-muted-foreground font-ghibi dark:text-muted-foreground">
-          {fetchUser?.length > 0 && (
-            <AvatarGroup
-              invertOverlap
-              align="start"
-              translate={50}
-              tooltipProps={{ side: "bottom", sideOffset: 12 }}
-            >
-              {fetchUser?.map((user: any, index: number) => (
-                <Avatar key={index}>
-                  <AvatarImage
-                    src={avatarUrl(user)}
-                    alt={toCapitalCase(user.username)}
-                  />
-                  <AvatarFallback>{user.global_name?.[0]}</AvatarFallback>
-                  <AvatarGroupTooltip>
-                    <p>{toCapitalCase(user.global_name)}</p>
-                  </AvatarGroupTooltip>
-                </Avatar>
-              ))}
-            </AvatarGroup>
-          )}
+          <h2 className="text-lg sm:text-xl font-ghibi text-muted-foreground">
+            Top Role
+            {fetchUser?.length > 0 && (
+              <AvatarGroup
+                className="mt-3"
+                invertOverlap
+                align="start"
+                translate={50}
+                tooltipProps={{ side: "bottom", sideOffset: 12 }}
+              >
+                {fetchUser?.map((user: any, index: number) => (
+                  <Avatar key={index}>
+                    <AvatarImage
+                      src={avatarUrl(user)}
+                      alt={toCapitalCase(user.username)}
+                    />
+                    <AvatarFallback>{user.global_name?.[0]}</AvatarFallback>
+                    <AvatarGroupTooltip>
+                      <p>{toCapitalCase(user.global_name)}</p>
+                    </AvatarGroupTooltip>
+                  </Avatar>
+                ))}
+              </AvatarGroup>
+            )}
+          </h2>
         </div>
 
         {/* Copyright Section */}
