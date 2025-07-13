@@ -32,6 +32,8 @@ import ThemeChanger from "../theme.switch";
 import LanguageChanger from "../language.switch";
 import { useLocale, useTranslations } from "next-intl";
 import { authClient } from "@/lib/auth-client";
+import { AnimateIcon } from "../animate-ui/icons/icon";
+import { LogOut, Settings, User } from "lucide-react";
 
 const RTLNavbar = (props: {
   user: UserInfo;
@@ -59,7 +61,6 @@ const RTLNavbar = (props: {
   };
 
   const handleLogoutClick = async () => {
-    await authClient.signOut();
     router.push("/login");
     setTimeout(() => {
       setAccount(null);
@@ -170,18 +171,27 @@ const RTLNavbar = (props: {
               className="px-2 py-1 text-sm transition-colors duration-200 text-foreground hover:bg-muted"
               onClick={handleProfileClick}
             >
+              <AnimateIcon animateOnHover>
+                <User />
+              </AnimateIcon>
               {t("profile")}
             </DropdownMenuItem>
             <DropdownMenuItem
               className="px-2 py-1 text-sm transition-colors duration-200 text-foreground hover:bg-muted"
               onClick={handleProfileSettingClick}
             >
+              <AnimateIcon animateOnHover>
+                <Settings />
+              </AnimateIcon>
               {t("settings")}
             </DropdownMenuItem>
             <DropdownMenuItem
               className="px-2 py-1 text-sm transition-colors duration-200 text-destructive hover:bg-muted"
               onClick={handleLogoutClick}
             >
+              <AnimateIcon animateOnHover>
+                <LogOut />
+              </AnimateIcon>
               {t("logOut")}
             </DropdownMenuItem>
           </DropdownMenuContent>

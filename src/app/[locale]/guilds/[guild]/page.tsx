@@ -108,7 +108,7 @@ function GuildPanel({
           {/* Background and profile */}
           <Card className="p-4">
             <div
-              className="flex w-full bg-cover rounded-xl"
+              className="flex w-full bg-cover h-48 sm:h-32 md:h-56 lg:h-64 xl:h-[480px] rounded-xl"
               style={backgroundStyle}
             >
               <div className="absolute -translate-x-1/2 -bottom-12 left-18">

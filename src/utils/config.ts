@@ -7,9 +7,14 @@ import {
 } from "@/utils/auth/server";
 import { Gamepad, Music } from "lucide-react";
 
-export const ownerId: string[] = process.env.NEXT_PUBLIC_OWNER_IDS?.split(
-  ","
-).map((id) => id.trim()) || ["966688007493140591", "765216076430180384"];
+export const ownerId: string[] = process.env.OWNER_IDS?.split(",").map((id) =>
+  id.trim()
+) || ["966688007493140591", "946079190971732041"];
+
+export const staffId: string[] = process.env.STAFF_IDS?.split(",").map((id) =>
+  id.trim()
+) || ["765216076430180384", "1206564732388118558", "982564593039736842"];
+
 // AppConfig definitions remain the same
 export const config: AppConfig = {
   id: 0,

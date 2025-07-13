@@ -11,6 +11,8 @@ const nextConfig: NextConfig = {
     SECOND_SUB_CLIENT_ID: process.env.SECOND_SUB_BOT_CLIENT_ID,
     BETTER_AUTH_URL: process.env.BETTER_AUTH_URL,
     BETTER_AUTH_SECRET: process.env.BETTER_AUTH_SECRET,
+    OWNER_IDS: process.env.OWNER_IDS,
+    STAFF_IDS: process.env.STAFF_IDS,
   },
   reactStrictMode: true,
   images: {

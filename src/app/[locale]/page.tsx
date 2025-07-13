@@ -1,11 +1,11 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
 import { cn } from "@/lib/utils";
-import { config } from "@/utils/config";
+import { config, ownerId, staffId } from "@/utils/config";
 import { FaArrowUp } from "react-icons/fa";
 import {
   FaFacebook,
@@ -41,7 +41,13 @@ import { ExpandableTabs } from "@/components/ui/expandable-tabs";
 import { styles } from "@/styles";
 import { Badge } from "@/components/ui/badge";
 import { IconCloud } from "@/components/ui/Animations/magic/icon-cloud";
-import { expandableTabs, slugs, toNumber } from "@/utils/common";
+import {
+  avatarUrl,
+  expandableTabs,
+  slugs,
+  toCapitalCase,
+  toNumber,
+} from "@/utils/common";
 import {
   EMAILJS_PUBLIC_KEY,
   EMAILJS_SERVICE_ID,
@@ -51,7 +57,15 @@ import emailjs from "emailjs-com";
 import { PeachyAnimatedBeam } from "@/components/ui/Animations/PeachyAnimatedBeam";
 import { SplashCursor } from "@/components/ui/Effect/SplashCursor";
 import { AwardBadge } from "@/components/ui/award-badge";
-import { useGetTopCoinQuery } from "@/redux/api/users";
+import {
+  useGetFetchUserByIdQuery,
+  useGetTopCoinQuery,
+} from "@/redux/api/users";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import {
+  AvatarGroup,
+  AvatarGroupTooltip,
+} from "@/components/animate-ui/components/avatar-group-mask";
 
 type FormData = {
   name: string;
@@ -90,6 +104,11 @@ export default function Peachy() {
   } = useGetTopCoinQuery(getParams());
 
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const userIds = useMemo(
+    () => [...new Set([...ownerId, ...staffId])],
+    [ownerId, staffId]
+  );
+  const { data: fetchUser } = useGetFetchUserByIdQuery(userIds);
 
   const images = slugs.map(
     (slug) => `https://cdn.simpleicons.org/${slug}/${slug}`
@@ -188,7 +207,7 @@ export default function Peachy() {
 
   return (
     <>
-      <SplashCursor />
+      {/* <SplashCursor /> */}
       <div className="flex flex-wrap items-center justify-center gap-4 my-2">
         <AwardBadge title="Golden Award" content="PEACHY in Your Area 🌸" />
       </div>
@@ -593,7 +612,7 @@ export default function Peachy() {
       </Container>
 
       {/* Footer */}
-      <Container>
+      <Container className="mb-30">
         <TooltipProvider>
           <footer className="relative grid max-w-screen-xl grid-cols-1 gap-6 px-4 pt-6 mx-auto mt-5 transition-all duration-500 sm:gap-8 sm:pt-8 sm:grid-cols-2 lg:grid-cols-5 bg-gradient-to-r sm:px-6">
             {/* Logo and Tagline */}
@@ -739,6 +758,29 @@ export default function Peachy() {
             </div>
           </footer>
         </TooltipProvider>
+        <div className="flex items-center justify-center my-32 text-xs text-center px-0-4 sm:my-8 sm:text-sm text-muted-foreground font-ghibi dark:text-muted-foreground">
+          {fetchUser?.length > 0 && (
+            <AvatarGroup
+              invertOverlap
+              align="start"
+              translate={50}
+              tooltipProps={{ side: "bottom", sideOffset: 12 }}
+            >
+              {fetchUser?.map((user: any, index: number) => (
+                <Avatar key={index}>
+                  <AvatarImage
+                    src={avatarUrl(user)}
+                    alt={toCapitalCase(user.username)}
+                  />
+                  <AvatarFallback>{user.global_name?.[0]}</AvatarFallback>
+                  <AvatarGroupTooltip>
+                    <p>{toCapitalCase(user.global_name)}</p>
+                  </AvatarGroupTooltip>
+                </Avatar>
+              ))}
+            </AvatarGroup>
+          )}
+        </div>
 
         {/* Copyright Section */}
         <div className="px-4 my-32 text-xs text-center sm:my-8 sm:text-sm text-muted-foreground font-ghibi dark:text-muted-foreground">
@@ -747,7 +789,7 @@ export default function Peachy() {
             href="https://discord.gg/peachyganggg"
             target="_blank"
             rel="noreferrer noopener"
-            className="text-primary hover:underline focus:outline-none focus:ring-2 focus:ring-primary"
+            className="text-primary hover:underline focus:outline-none focus:ring-2 focus:ring-primary mb-30"
           >
             PEACHY GANG
           </a>
