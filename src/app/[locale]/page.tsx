@@ -55,7 +55,6 @@ import {
 } from "@/utils/email/constand";
 import emailjs from "emailjs-com";
 import { PeachyAnimatedBeam } from "@/components/ui/Animations/PeachyAnimatedBeam";
-import { SplashCursor } from "@/components/ui/Effect/SplashCursor";
 import { AwardBadge } from "@/components/ui/award-badge";
 import {
   useGetFetchUserByIdQuery,
@@ -66,6 +65,9 @@ import {
   AvatarGroup,
   AvatarGroupTooltip,
 } from "@/components/animate-ui/components/avatar-group-mask";
+import { Timeline } from "@/components/ui/timeline";
+import moment from "moment";
+import ImagePreview from "@/components/spectrumui/image-preview-dependecies";
 
 type FormData = {
   name: string;
@@ -105,7 +107,7 @@ export default function Peachy() {
 
   const [isSubmitting, setIsSubmitting] = useState(false);
   const userIds = useMemo(
-    () => [...new Set([...ownerId, ...staffId])],
+    () => Array.from(new Set([...ownerId, ...staffId])),
     // eslint-disable-next-line react-hooks/exhaustive-deps
     [ownerId, staffId]
   );
@@ -114,6 +116,186 @@ export default function Peachy() {
   const images = slugs.map(
     (slug) => `https://cdn.simpleicons.org/${slug}/${slug}`
   );
+
+  const changelogTimeline = [
+    {
+      title: moment("2024-07-27T06:40:24Z").format("Do MMM YYYY"),
+      content: (
+        <div className="space-y-4">
+          <p className="text-muted-foreground text-xs md:text-sm font-normal mb-8">
+            Built and launched Peachy, a community-driven platform for discord
+          </p>
+          <div className="grid grid-cols-2 gap-4">
+            <ImagePreview
+              src="https://pbs.twimg.com/media/GqLoDwhaUAAj7i5?format=jpg&name=4096x4096"
+              alt="home page"
+              width={500}
+              height={500}
+              className="rounded-lg object-cover h-20 md:h-44 lg:h-60 w-full shadow-[0_0_24px_rgba(34,_42,_53,_0.06),_0_1px_1px_rgba(0,_0,_0,_0.05),_0_0_0_1px_rgba(34,_42,_53,_0.04),_0_0_4px_rgba(34,_42,_53,_0.08),_0_16px_68px_rgba(47,_48,_55,_0.05),_0_1px_0_rgba(255,_255,_255,_0.1)_inset]"
+            />
+            <ImagePreview
+              src="https://pbs.twimg.com/media/GqLoa3QakAAaNb_?format=jpg&name=4096x4096"
+              alt="dashboard"
+              width={500}
+              height={500}
+              className="rounded-lg object-cover h-20 md:h-44 lg:h-60 w-full shadow-[0_0_24px_rgba(34,_42,_53,_0.06),_0_1px_1px_rgba(0,_0,_0,_0.05),_0_0_0_1px_rgba(34,_42,_53,_0.04),_0_0_4px_rgba(34,_42,_53,_0.08),_0_16px_68px_rgba(47,_48,_55,_0.05),_0_1px_0_rgba(255,_255,_255,_0.1)_inset]"
+            />
+            <ImagePreview
+              src="https://pbs.twimg.com/media/GqLoiW4bcAAiUP8?format=jpg&name=4096x4096"
+              alt="feature"
+              width={500}
+              height={500}
+              className="rounded-lg object-cover h-20 md:h-44 lg:h-60 w-full shadow-[0_0_24px_rgba(34,_42,_53,_0.06),_0_1px_1px_rgba(0,_0,_0,_0.05),_0_0_0_1px_rgba(34,_42,_53,_0.04),_0_0_4px_rgba(34,_42,_53,_0.08),_0_16px_68px_rgba(47,_48,_55,_0.05),_0_1px_0_rgba(255,_255,_255,_0.1)_inset]"
+            />
+            <ImagePreview
+              src="https://pbs.twimg.com/media/GqLoorbbkAAd0Cw?format=jpg&name=4096x4096"
+              alt="configuration"
+              width={500}
+              height={500}
+              className="rounded-lg object-cover h-20 md:h-44 lg:h-60 w-full shadow-[0_0_24px_rgba(34,_42,_53,_0.06),_0_1px_1px_rgba(0,_0,_0,_0.05),_0_0_0_1px_rgba(34,_42,_53,_0.04),_0_0_4px_rgba(34,_42,_53,_0.08),_0_16px_68px_rgba(47,_48,_55,_0.05),_0_1px_0_rgba(255,_255,_255,_0.1)_inset]"
+            />
+          </div>
+        </div>
+      ),
+    },
+    {
+      title: moment("2024-09-28T06:40:24Z").format("Do MMM YYYY"),
+      content: (
+        <div className="space-y-4">
+          <p className="text-muted-foreground text-xs md:text-sm font-normal">
+            I cloned an open-source Discord bot dashboard from{" "}
+            <a
+              className="text-primary hover:underline"
+              href="https://github.com/fuma-nama"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Fuma Nama
+            </a>
+            . <br />
+            The Front-End (
+            <a
+              className="text-primary hover:underline"
+              href="https://github.com/fuma-nama/discord-bot-dashboard-next"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Repo here
+            </a>
+            ) uses Next.js (Pages Router) and Chakra UI v2 for a responsive UI.{" "}
+            <br />
+            The Back-End (
+            <a
+              className="text-primary hover:underline"
+              href="https://github.com/fuma-nama/discord-dashboard-backend-next"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Repo here
+            </a>
+            ) handles API logic with Next.js.
+          </p>
+        </div>
+      ),
+    },
+    {
+      title: moment("2025-04-06T06:21:33Z").format("Do MMM YYYY"),
+      content: (
+        <div className="space-y-4">
+          <p className="text-muted-foreground text-xs md:text-sm font-normal">
+            I created my own dashboard using Next.js (App Router) and Shadcn UI
+            with Ghibli for a responsive UI.
+          </p>
+          <p className="text-muted-foreground text-xs md:text-sm font-normal">
+            The theme is sourced from{" "}
+            <a
+              className="text-primary hover:underline"
+              href="https://matsu-theme.vercel.app/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Matsu Theme
+            </a>
+            , created by{" "}
+            <a
+              className="text-primary hover:underline"
+              href="https://x.com/matsugfx"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              @matsugfx
+            </a>
+            —huge shout-out for an exceptional UI theme!
+          </p>
+          <p className="text-muted-foreground text-xs md:text-sm font-normal">
+            Also inspired by amazing UI libraries:
+          </p>
+          <ul className="list-disc pl-5 space-y-2 text-xs md:text-sm text-muted-foreground">
+            <li>
+              <a
+                className="text-primary hover:underline"
+                href="https://magicui.design/"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Magic UI
+              </a>
+            </li>
+            <li>
+              <a
+                className="text-primary hover:underline"
+                href="https://ui.aceternity.com/"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Aceternity UI
+              </a>
+            </li>
+            <li>
+              <a
+                className="text-primary hover:underline"
+                href="https://21st.dev/"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                21st.dev
+              </a>
+            </li>
+            <li>
+              <a
+                className="text-primary hover:underline"
+                href="https://github.com/arihantcodes/spectrum-ui"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Spectrum UI
+              </a>
+            </li>
+            <li>
+              <a
+                className="text-primary hover:underline"
+                href="https://github.com/arihantcodes/hexta-ui"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Hexta UI
+              </a>
+            </li>
+            <li>
+              <a
+                className="text-primary hover:underline"
+                href="https://github.com/arihantcodes/animate"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Animate
+              </a>
+            </li>
+          </ul>
+        </div>
+      ),
+    },
+  ];
 
   const faqItems = [
     {
@@ -433,6 +615,24 @@ export default function Peachy() {
           </motion.div>
         </Container>
       )}
+
+      {/* Timeline Section */}
+      <Container>
+        <motion.div
+          className="px-4 mb-8 transition-shadow rounded-lg sm:mb-12 sm:px-6"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.6 }}
+        >
+          <div className="flex flex-col items-center justify-center gap-8">
+            <Timeline
+              title="Changelog from my journey"
+              description="I've been working on Peachy for the past 1 years. Here's a timeline of my journey."
+              items={changelogTimeline}
+            />
+          </div>
+        </motion.div>
+      </Container>
 
       {/* FAQ Section */}
       <Container>

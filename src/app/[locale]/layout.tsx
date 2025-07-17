@@ -13,17 +13,6 @@ import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { notFound } from "next/navigation";
 
-const nunito = Nunito({
-  variable: "--font-nunito",
-  subsets: ["latin"],
-});
-
-const ptSans = PT_Sans({
-  variable: "--font-pt-sans",
-  subsets: ["latin"],
-  weight: ["400", "700"],
-});
-
 export const metadata: Metadata = {
   title: "PEACHY GANG",
   description:
@@ -71,10 +60,7 @@ export default async function LocaleLayout({
           content="nextjs, react, typescript, tailwindcss, peachy gang"
         />
       </head>
-      <body
-        className={`${nunito.variable} ${ptSans.variable} antialiased relative`}
-        cz-shortcut-listen="true"
-      >
+      <body cz-shortcut-listen="true">
         <NextIntlClientProvider locale={locale} messages={messages}>
           <SettingsProvider settingsCookie={settingsCookie} mode={mode}>
             <ThemeProvider

@@ -8,6 +8,7 @@ import { useGetGuildInfoQuery, useGetGuildEmojiQuery } from "@/redux/api/guild";
 import Image from "next/image";
 import Loading from "@/components/loading/circle";
 import NotJoined from "@/components/modules/guilds/not-join";
+import Link from "next/link";
 
 const EmojiManagementPage = () => {
   const { guilds } = usePeachy();
@@ -86,23 +87,20 @@ const EmojiManagementPage = () => {
                   key={emoji.id}
                   className="flex flex-col items-center space-y-1 text-center"
                 >
-                  <Image
-                    src={emojiUrl(emoji)}
-                    width={48}
-                    height={48}
-                    alt={emoji.name}
-                    unoptimized
-                    className="object-contain w-10 h-10 xs:w-12 xs:h-12 sm:w-14 sm:h-14"
-                  />
-                  <a
+                  <Link
                     href={emojiUrl(emoji)}
-                    download={emojiUrl(emoji)}
-                    target="_blank"
-                    rel="noopener noreferrer"
+                    download
                     className="text-[10px] xs:text-xs sm:text-sm hover:underline break-all"
                   >
-                    Download
-                  </a>
+                    <Image
+                      src={emojiUrl(emoji)}
+                      width={48}
+                      height={48}
+                      alt={emoji.name}
+                      unoptimized
+                      className="object-contain w-10 h-10 xs:w-12 xs:h-12 sm:w-14 sm:h-14"
+                    />
+                  </Link>
                 </div>
               ))}
             </div>
