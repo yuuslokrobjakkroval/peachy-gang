@@ -64,10 +64,10 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import {
   AvatarGroup,
   AvatarGroupTooltip,
-} from "@/components/animate-ui/components/avatar-group-mask";
+} from "@/components/ui/Animations/animate/avatar-group-mask";
 import { Timeline } from "@/components/ui/timeline";
 import moment from "moment";
-import ImagePreview from "@/components/spectrumui/image-preview-dependecies";
+import ImagePreview from "@/components/ui/Animations/spectrum/image-preview-dependecies";
 
 type FormData = {
   name: string;
