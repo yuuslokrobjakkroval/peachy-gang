@@ -2,13 +2,22 @@
 
 import React, { useEffect, useState } from "react";
 import { usePeachy } from "@/contexts/peachy";
-import { emojiUrl, iconUrl, PermissionFlags } from "@/utils/common";
+import {
+  emojiUrl,
+  iconUrl,
+  PermissionFlags,
+  toCapitalCase,
+} from "@/utils/common";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 import { LimelightGuild } from "@/components/limelight-guild";
 import { useGetGuildInfoQuery, useGetGuildEmojiQuery } from "@/redux/api/guild";
 import Image from "next/image";
 import Loading from "@/components/loading/circle";
 import NotJoined from "@/components/modules/guilds/not-join";
-import Link from "next/link";
 
 const EmojiManagementPage = () => {
   const { guilds } = usePeachy();
@@ -87,20 +96,30 @@ const EmojiManagementPage = () => {
                   key={emoji.id}
                   className="flex flex-col items-center space-y-1 text-center"
                 >
-                  <Link
-                    href={emojiUrl(emoji)}
-                    download
-                    className="text-[10px] xs:text-xs sm:text-sm hover:underline break-all"
-                  >
-                    <Image
-                      src={emojiUrl(emoji)}
-                      width={48}
-                      height={48}
-                      alt={emoji.name}
-                      unoptimized
-                      className="object-contain w-10 h-10 xs:w-12 xs:h-12 sm:w-14 sm:h-14"
-                    />
-                  </Link>
+                  <Tooltip>
+                    <TooltipTrigger asChild>
+                      <a
+                        href={emojiUrl(emoji)}
+                        download
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-[10px] xs:text-xs sm:text-sm hover:underline break-all"
+                      >
+                        <Image
+                          src={emojiUrl(emoji)}
+                          width={48}
+                          height={48}
+                          alt={emoji.name}
+                          className="object-contain w-10 h-10 xs:w-12 xs:h-12 sm:w-14 sm:h-14"
+                          unoptimized
+                        />
+                        {toCapitalCase(emoji.name)}
+                      </a>
+                    </TooltipTrigger>
+                    <TooltipContent>
+                      <p>Download</p>
+                    </TooltipContent>
+                  </Tooltip>
                 </div>
               ))}
             </div>
