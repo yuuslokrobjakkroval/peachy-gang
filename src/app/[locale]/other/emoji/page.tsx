@@ -101,17 +101,14 @@ const EmojiManagementPage = () => {
                       <a
                         href={emojiUrl(emoji)}
                         download
-                        target="_blank"
-                        rel="noopener noreferrer"
                         className="text-[10px] xs:text-xs sm:text-sm hover:underline break-all"
                       >
-                        <Image
+                        <img
                           src={emojiUrl(emoji)}
+                          alt={emoji.name}
                           width={48}
                           height={48}
-                          alt={emoji.name}
                           className="object-contain w-10 h-10 xs:w-12 xs:h-12 sm:w-14 sm:h-14"
-                          unoptimized
                         />
                         {toCapitalCase(emoji.name)}
                       </a>
