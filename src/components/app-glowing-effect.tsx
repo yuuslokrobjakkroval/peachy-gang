@@ -13,7 +13,9 @@ import Image from "next/image";
 export function AppdGlowingEffect({ items }: { items: any[] }) {
   return (
     <ul className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
-      {items?.map((item, index) => <GridItem key={index} item={item} />)}
+      {items?.map((item, index) => (
+        <GridItem key={index} item={item} />
+      ))}
     </ul>
   );
 }

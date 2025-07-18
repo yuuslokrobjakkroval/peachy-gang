@@ -17,7 +17,9 @@ import { usePeachy } from "@/contexts/peachy";
 export function GuildGlowingEffect({ items }: { items: Guild[] }) {
   return (
     <ul className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
-      {items?.map((item: Guild, index) => <GridItem key={index} item={item} />)}
+      {items?.map((item: Guild, index) => (
+        <GridItem key={index} item={item} />
+      ))}
     </ul>
   );
 }

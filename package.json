@@ -3,11 +3,15 @@
   "version": "1.0.1",
   "private": true,
   "scripts": {
-    "postbuild": "next-sitemap",
-    "postinstall": "prisma generate",
+    "start": "next start",
     "build": "next build",
     "dev": "next dev --turbopack",
-    "start": "next start"
+    "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
+    "postbuild": "next-sitemap",
+    "postinstall": "prisma generate",
+     "format": "prettier --write .",
+    "prettier": "prettier --write .",
+    "prettier-check": "prettier --check ."
   },
   "dependencies": {
     "@ai-sdk/google": "^1.2.10",

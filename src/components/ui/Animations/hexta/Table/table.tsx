@@ -72,7 +72,7 @@ export function HextaTable<T extends Record<string, any>>({
   }>({ key: null, direction: "asc" });
   const [currentPage, setCurrentPage] = useState(1);
   const [columnFilters, setColumnFilters] = useState<Record<string, string>>(
-    {}
+    {},
   );
 
   // Helper to access nested properties
@@ -92,7 +92,7 @@ export function HextaTable<T extends Record<string, any>>({
           const key = column.searchKey || column.key;
           const value = getNestedValue(row, key as any);
           return value?.toString().toLowerCase().includes(search.toLowerCase());
-        })
+        }),
       );
     }
     Object.entries(columnFilters).forEach(([key, value]) => {
@@ -186,7 +186,7 @@ export function HextaTable<T extends Record<string, any>>({
         className={cn(
           "w-full bg-card rounded-ele overflow-hidden",
           bordered && "border border-border",
-          className
+          className,
         )}
       >
         <div className="animate-pulse p-6">
@@ -222,7 +222,7 @@ export function HextaTable<T extends Record<string, any>>({
         "w-full bg-card rounded-ele overflow-hidden",
         bordered && "border border-border",
         variant === "minimal" && "bg-transparent border-none",
-        className
+        className,
       )}
       role="table"
       aria-label="Data table"
@@ -270,7 +270,7 @@ export function HextaTable<T extends Record<string, any>>({
           "overflow-hidden",
           variant === "bordered" && "border border-border rounded-ele",
           variant === "minimal" && "border-none",
-          !searchable && variant !== "minimal" && "rounded-ele"
+          !searchable && variant !== "minimal" && "rounded-ele",
         )}
       >
         <div className="overflow-x-auto">
@@ -278,7 +278,8 @@ export function HextaTable<T extends Record<string, any>>({
             <thead
               className={cn(
                 "bg-muted/20",
-                variant === "minimal" && "bg-transparent border-b border-border"
+                variant === "minimal" &&
+                  "bg-transparent border-b border-border",
               )}
             >
               <tr>
@@ -294,7 +295,7 @@ export function HextaTable<T extends Record<string, any>>({
                         "cursor-pointer hover:bgfeet/30 transition-colors",
                       column.align === "center" && "text-center",
                       column.align === "right" && "text-right",
-                      column.width && `w-[${column.width}]`
+                      column.width && `w-[${column.width}]`,
                     )}
                     onClick={() => column.sortable && handleSort(column.key)}
                     style={column.width ? { width: column.width } : undefined}
@@ -303,7 +304,7 @@ export function HextaTable<T extends Record<string, any>>({
                       className={cn(
                         "flex items-center gap-2",
                         column.align === "center" && "justify-center",
-                        column.align === "right" && "justify-end"
+                        column.align === "right" && "justify-end",
                       )}
                     >
                       <span>{column.header}</span>
@@ -315,7 +316,7 @@ export function HextaTable<T extends Record<string, any>>({
                               sortConfig.key === column.key &&
                                 sortConfig.direction === "asc"
                                 ? "text-primary"
-                                : "text-muted-foreground/40"
+                                : "text-muted-foreground/40",
                             )}
                           />
                           <ChevronDown
@@ -324,7 +325,7 @@ export function HextaTable<T extends Record<string, any>>({
                               sortConfig.key === column.key &&
                                 sortConfig.direction === "desc"
                                 ? "text-primary"
-                                : "text-muted-foreground/40"
+                                : "text-muted-foreground/40",
                             )}
                           />
                         </div>
@@ -347,7 +348,7 @@ export function HextaTable<T extends Record<string, any>>({
                           onChange={(e) =>
                             handleColumnFilter(
                               String(column.searchKey || column.key),
-                              e.target.value
+                              e.target.value,
                             )
                           }
                           onClick={(e) => e.stopPropagation()}
@@ -355,7 +356,7 @@ export function HextaTable<T extends Record<string, any>>({
                           clearable
                           onClear={() =>
                             clearColumnFilter(
-                              String(column.searchKey || column.key)
+                              String(column.searchKey || column.key),
                             )
                           }
                         />
@@ -374,7 +375,7 @@ export function HextaTable<T extends Record<string, any>>({
                       "text-center text-muted-foreground bg-card",
                       size === "sm" && "px-3 py-8",
                       size === "default" && "px-4 py-12",
-                      size === "lg" && "px-6 py-16"
+                      size === "lg" && "px-6 py-16",
                     )}
                   >
                     <div className="flex flex-col items-center space-y-3">
@@ -395,7 +396,7 @@ export function HextaTable<T extends Record<string, any>>({
                       striped && index % 2 === 0 && "bg-muted/10",
                       hoverable && "hover:bg-muted/20",
                       onRowClick && "cursor-pointer",
-                      "group"
+                      "group",
                     )}
                     onClick={() => onRowClick?.(row, index)}
                   >
@@ -408,7 +409,7 @@ export function HextaTable<T extends Record<string, any>>({
                           size === "default" && "px-4 py-3 text-sm",
                           size === "lg" && "px-6 py-4 text-base",
                           column.align === "center" && "text-center",
-                          column.align === "right" && "text-right"
+                          column.align === "right" && "text-right",
                         )}
                       >
                         {column.render

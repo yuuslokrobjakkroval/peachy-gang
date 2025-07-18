@@ -38,7 +38,7 @@ const createCards = () => {
   iconConfigs.forEach(({ icon, color }, index) => {
     cards.push(
       { id: index * 2, icon, color, isMatched: false },
-      { id: index * 2 + 1, icon, color, isMatched: false }
+      { id: index * 2 + 1, icon, color, isMatched: false },
     );
   });
 
@@ -71,8 +71,8 @@ export default function MemoryGame() {
             cards.map((card, index) =>
               index === firstIndex || index === secondIndex
                 ? { ...card, isMatched: true }
-                : card
-            )
+                : card,
+            ),
           );
           setFlippedIndexes([]);
           setMatches((m) => m + 1);

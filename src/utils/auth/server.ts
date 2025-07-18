@@ -52,7 +52,7 @@ export function middleware_hasServerSession(req: NextRequest) {
 export function getServerSession(
   req: IncomingMessage & {
     cookies: NextApiRequestCookies;
-  }
+  },
 ) {
   const raw = req.cookies[TokenCookie];
   return tokenSchema.safeParse(raw == null ? raw : JSON.parse(raw));
@@ -61,7 +61,7 @@ export function getServerSession(
 export function setServerSession(
   req: NextApiRequest,
   res: NextApiResponse,
-  data: AccessToken
+  data: AccessToken,
 ) {
   setCookie(TokenCookie, data, { req, res, ...options });
 }

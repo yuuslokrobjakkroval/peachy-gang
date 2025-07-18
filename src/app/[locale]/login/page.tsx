@@ -23,7 +23,7 @@ export default function LoginPage() {
               </Badge>
               <div
                 className={cn(
-                  "inline-flex items-center space-x-3 rounded-full px-4 transition-all ease-in hover:cursor-pointer"
+                  "inline-flex items-center space-x-3 rounded-full px-4 transition-all ease-in hover:cursor-pointer",
                 )}
               >
                 {/* Logo with text */}

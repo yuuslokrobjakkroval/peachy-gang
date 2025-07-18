@@ -54,7 +54,7 @@ import {
   EMAILJS_TEMPLATE_ID,
 } from "@/utils/email/constand";
 import emailjs from "emailjs-com";
-import { PeachyAnimatedBeam } from "@/components/ui/Animations/PeachyAnimatedBeam";
+import { PeachyAnimatedBeam } from "@/components/ui/Animations/peachy-animated-beam";
 import { AwardBadge } from "@/components/ui/award-badge";
 import {
   useGetFetchUserByIdQuery,
@@ -109,12 +109,12 @@ export default function Peachy() {
   const userIds = useMemo(
     () => Array.from(new Set([...ownerId, ...staffId])),
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [ownerId, staffId]
+    [ownerId, staffId],
   );
   const { data: fetchUser } = useGetFetchUserByIdQuery(userIds);
 
   const images = slugs.map(
-    (slug) => `https://cdn.simpleicons.org/${slug}/${slug}`
+    (slug) => `https://cdn.simpleicons.org/${slug}/${slug}`,
   );
 
   const changelogTimeline = [
@@ -340,7 +340,7 @@ export default function Peachy() {
         EMAILJS_SERVICE_ID,
         EMAILJS_TEMPLATE_ID,
         templateParams,
-        EMAILJS_PUBLIC_KEY
+        EMAILJS_PUBLIC_KEY,
       );
       if (result.status === 200) {
         const toastId = toast.success(t("contact.success"), {
@@ -372,7 +372,7 @@ export default function Peachy() {
             label: <X className="w-4 h-4" />,
             onClick: () => toast.dismiss(toastId),
           },
-        }
+        },
       );
     } finally {
       setIsSubmitting(false);
@@ -407,7 +407,7 @@ export default function Peachy() {
                 </Badge>
                 <div
                   className={cn(
-                    "inline-flex items-center space-x-2 sm:space-x-3 rounded-full px-2 sm:px-4 transition-all ease-in hover:cursor-pointer"
+                    "inline-flex items-center space-x-2 sm:space-x-3 rounded-full px-2 sm:px-4 transition-all ease-in hover:cursor-pointer",
                   )}
                 >
                   {/* Logo with text */}
@@ -430,7 +430,7 @@ export default function Peachy() {
           <div
             style={styles}
             className={cn(
-              "fixed left-1/2 z-50 mx-auto rounded-2xl bg-card hidden lg:block"
+              "fixed left-1/2 z-50 mx-auto rounded-2xl bg-card hidden lg:block",
             )}
           >
             <ExpandableTabs
@@ -441,7 +441,7 @@ export default function Peachy() {
               onChange={(index: number) => {
                 if (!!index) {
                   const sectionId = navigation.find(
-                    (item) => item.name === expandableTabs[index].title
+                    (item) => item.name === expandableTabs[index].title,
                   )?.sectionId;
                   if (sectionId) {
                     scrollToSection(sectionId);

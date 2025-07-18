@@ -87,7 +87,7 @@ export default function DashboardPage() {
       setErrorMessage(
         !userInfoByDiscord?.email || !userInfoByDiscord?.username
           ? t("dashboard.errors.missingUserData")
-          : t("dashboard.errors.invalidAmount")
+          : t("dashboard.errors.invalidAmount"),
       );
       return;
     }
@@ -112,7 +112,7 @@ export default function DashboardPage() {
     } catch (error: any) {
       console.error("Error generating QR code or transaction ID:", error);
       setErrorMessage(
-        error?.data?.details || t("dashboard.errors.qrGenerationFailed")
+        error?.data?.details || t("dashboard.errors.qrGenerationFailed"),
       );
       setPaymentStatus("error");
     } finally {

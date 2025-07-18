@@ -105,7 +105,7 @@ const RTLNavbar = (props: {
           <p>
             {t(
               languages.find((l) => l.code === language)?.nameKey ||
-                "languageTooltip"
+                "languageTooltip",
             )}
           </p>
         </TooltipContent>

@@ -166,7 +166,7 @@ export function CustomImagePage({ userInfoByDiscord, formik }: any) {
           <Card className="p-4 flex justify-center items-center">
             <div
               className={cn(
-                "relative rounded-xl w-full flex flex-col items-center justify-center overflow-hidden"
+                "relative rounded-xl w-full flex flex-col items-center justify-center overflow-hidden",
               )}
               style={{
                 background: `url(${formik.values.image?.backgroundImage})`,
@@ -182,7 +182,7 @@ export function CustomImagePage({ userInfoByDiscord, formik }: any) {
                   "relative overflow-hidden object-cover rounded-[8px]",
                   formik.values.image?.layout === "classic" && "mx-auto",
                   formik.values.image?.layout === "left" && "mr-auto ml-4",
-                  formik.values.image?.layout === "right" && "ml-auto mr-4"
+                  formik.values.image?.layout === "right" && "ml-auto mr-4",
                 )}
                 style={{
                   display: "flex",
@@ -227,7 +227,7 @@ export function CustomImagePage({ userInfoByDiscord, formik }: any) {
                   formik.values.image?.layout === "classic" &&
                     "text-center mx-auto",
                   formik.values.image?.layout === "left" && "mr-auto ml-4",
-                  formik.values.image?.layout === "right" && "ml-auto mr-4"
+                  formik.values.image?.layout === "right" && "ml-auto mr-4",
                 )}
                 style={{
                   fontSize: "clamp(32px, 4vw, 64px)",
@@ -244,7 +244,7 @@ export function CustomImagePage({ userInfoByDiscord, formik }: any) {
                   formik.values.image?.layout === "classic" &&
                     "text-center mx-auto",
                   formik.values.image?.layout === "left" && "mr-auto ml-4",
-                  formik.values.image?.layout === "right" && "ml-auto mr-4"
+                  formik.values.image?.layout === "right" && "ml-auto mr-4",
                 )}
                 style={{
                   fontSize: "clamp(16px, 2vw, 32px)",
@@ -261,7 +261,7 @@ export function CustomImagePage({ userInfoByDiscord, formik }: any) {
                   formik.values.image?.layout === "classic" &&
                     "text-center mx-auto",
                   formik.values.image?.layout === "left" && "mr-auto ml-4",
-                  formik.values.image?.layout === "right" && "ml-auto mr-4"
+                  formik.values.image?.layout === "right" && "ml-auto mr-4",
                 )}
                 style={{
                   fontSize: "clamp(12px, 1.2vw, 20px)",

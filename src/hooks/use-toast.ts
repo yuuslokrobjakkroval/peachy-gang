@@ -17,7 +17,7 @@ interface ToastFunction {
       loading: string;
       success: string | ((data: T) => string);
       error: string | ((error: any) => string);
-    }
+    },
   ) => string | number;
 }
 
@@ -169,7 +169,7 @@ toast.promise = <T>(
     loading: string;
     success: string | ((data: T) => string);
     error: string | ((error: any) => string);
-  }
+  },
 ) => {
   return sonnerToast.promise(promise, options) as string | number;
 };

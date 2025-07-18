@@ -140,7 +140,7 @@ export default function CoverUpload({
             ? "border-dashed border-primary bg-primary/5"
             : hasImage
               ? "border-border bg-background hover:border-primary/50"
-              : "border-dashed border-muted-foreground/25 bg-muted/30 hover:border-primary hover:bg-primary/5"
+              : "border-dashed border-muted-foreground/25 bg-muted/30 hover:border-primary hover:bg-primary/5",
         )}
         onDragEnter={handleDragEnter}
         onDragLeave={handleDragLeave}
@@ -170,7 +170,7 @@ export default function CoverUpload({
                 alt="Cover"
                 className={cn(
                   "h-full w-full object-cover transition-opacity duration-300",
-                  imageLoading ? "opacity-0" : "opacity-100"
+                  imageLoading ? "opacity-0" : "opacity-100",
                 )}
                 onLoad={() => setImageLoading(false)}
                 onError={() => setImageLoading(false)}

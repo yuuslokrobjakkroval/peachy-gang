@@ -50,7 +50,7 @@ export default function UserDiscordDailog({ user, open, onCancel }: any) {
     },
     {
       skip: !user?.discordId,
-    }
+    },
   );
 
   const backgroundStyle = userInfo?.banner

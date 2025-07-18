@@ -21,6 +21,8 @@ import { MeshLineGeometry, MeshLineMaterial } from "meshline";
 import * as THREE from "three";
 
 // replace with your own imports, see the usage snippet for details
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore
 import cardGLB from "./card.glb";
 import lanyard from "./lanyard.png";
 

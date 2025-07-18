@@ -68,7 +68,7 @@ export function BoosterMessageFeature({
           description: tCommon("disableSuccessDescription"),
           duration: 1000,
           className: "bg-gradient-to-r from-pink-500 to-purple-500 text-white",
-        }
+        },
       );
       refetch();
     } catch (error) {
@@ -76,7 +76,7 @@ export function BoosterMessageFeature({
         tCommon("disableError", { feature: toCapitalCase(feature) }),
         {
           duration: 1000,
-        }
+        },
       );
     }
   };
@@ -131,7 +131,7 @@ export function BoosterMessageFeature({
             duration: 2000,
             className:
               "bg-gradient-to-r from-pink-500 to-purple-500 text-white",
-          }
+          },
         );
         refetch();
       } catch (error) {
@@ -139,7 +139,7 @@ export function BoosterMessageFeature({
           tCommon("updateError", { feature: toCapitalCase(feature) }),
           {
             duration: 1000,
-          }
+          },
         );
       }
     },
