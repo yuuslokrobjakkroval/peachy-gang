@@ -25,7 +25,7 @@ const buttonVariants = {
   }),
 };
 
-const transition = { delay: 0.1, type: "spring", bounce: 0, duration: 0.6 };
+const transition = { delay: 0.1, bounce: 0, duration: 0.6 };
 
 const LanguageChanger: React.FC<LanguageChangerProps> = () => {
   const t = useTranslations();
