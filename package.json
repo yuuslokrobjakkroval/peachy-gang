@@ -9,7 +9,7 @@
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
     "postbuild": "next-sitemap",
     "postinstall": "prisma generate",
-     "format": "prettier --write .",
+    "format": "prettier --write .",
     "prettier": "prettier --write .",
     "prettier-check": "prettier --check ."
   },
@@ -67,6 +67,7 @@
     "formik": "^2.4.6",
     "framer-motion": "^12.23.6",
     "gray-matter": "^4.0.3",
+    "gsap": "^3.13.0",
     "install": "^0.13.0",
     "leva": "^0.10.0",
     "lucide-react": "^0.487.0",
