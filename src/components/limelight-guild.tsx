@@ -64,17 +64,19 @@ export const LimelightGuild = ({
 
   return (
     <nav
-      className={`relative flex flex-row items-center h-14 sm:h-16 rounded-lg bg-card text-foreground border-2 ${className}`}
+      className={`relative flex flex-row items-center h-14 sm:h-16 rounded-lg bg-card text-foreground overflow-hidden border-2 ${className}`}
     >
       {items.map(({ id, icon, label, onClick }, index) => (
         <a
           key={id}
-          ref={(el) => (navItemRefs.current[index] = el)}
+          ref={(el) => {
+            navItemRefs.current[index] = el;
+          }}
           className={`relative z-20 flex h-full cursor-pointer items-center justify-center p-2 sm:p-4 md:p-5 shrink-0 ${iconContainerClassName}`}
           onClick={() => handleItemClick(index, onClick)}
           aria-label={label}
         >
-          <Avatar className="rounded-lg border-2 w-8 h-8 sm:w-10 sm:h-10">
+          <Avatar className="w-8 h-8 border-2 rounded-lg sm:w-10 sm:h-10">
             {icon ? (
               <Image
                 src={icon}
@@ -85,7 +87,7 @@ export const LimelightGuild = ({
                 unoptimized
               />
             ) : (
-              <AvatarFallback className="rounded-xs bg-primary text-xs sm:text-sm font-semibold">
+              <AvatarFallback className="text-xs font-semibold rounded-xs bg-primary sm:text-sm">
                 {label?.[0]}
               </AvatarFallback>
             )}
