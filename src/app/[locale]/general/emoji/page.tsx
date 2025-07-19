@@ -43,11 +43,7 @@ const EmojiManagementPage = () => {
 
   useEffect(() => {
     if (!selectedGuildId) {
-      const filtered = guilds.filter(
-        (guild) =>
-          (Number(guild.permissions) & PermissionFlags.ADMINISTRATOR) !== 0
-      );
-      setSelectedGuildId(filtered[0]?.id ?? null);
+      setSelectedGuildId(guilds[0]?.id ?? null);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedGuildId]);
