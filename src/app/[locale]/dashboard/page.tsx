@@ -28,6 +28,7 @@ import { Label } from "@/components/ui/label";
 import Image from "next/image";
 import { UserBalancePieChart } from "@/components/applications/dashboard/user-balance-pie-chart";
 import { TotalBalanceAreaChart } from "@/components/applications/dashboard/total-balance-area-chart";
+import { FeatureUsageLineChart } from "@/components/applications/dashboard/feature-usage-line-chart";
 
 const DashboardErrorBoundary: React.FC<{ children: React.ReactNode }> = ({
   children,
@@ -197,11 +198,14 @@ export default function DashboardPage() {
                   </p>
                 </div>
                 <div className="grid grid-cols-1 gap-3 sm:gap-4 md:grid-cols-12">
-                  <div className="col-span-1 md:col-span-7">
+                  <div className="col-span-1 md:col-span-12 lg:col-span-12">
+                    <UserBalancePieChart />
+                  </div>
+                  <div className="col-span-1 md:col-span-12 lg:col-span-12">
                     <TotalBalanceAreaChart />
                   </div>
-                  <div className="col-span-1 md:col-span-5">
-                    <UserBalancePieChart />
+                  <div className="col-span-1 md:col-span-12 lg:col-span-12">
+                    <FeatureUsageLineChart />
                   </div>
                 </div>
               </div>

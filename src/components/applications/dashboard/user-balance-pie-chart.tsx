@@ -128,18 +128,17 @@ export function UserBalancePieChart() {
   return (
     <Card className="@container/card font-ghibi">
       <CardHeader className="relative">
-        <CardTitle>{t("title")}</CardTitle> {/* "Dashboard" */}
+        <CardTitle>{t("user_title")}</CardTitle>
         <CardDescription>
           {chartData === fallbackChartData ? (
-            t("no_data") // Use a generic no_data key if available, or fallback
+            t("no_data")
           ) : (
             <>
               <span className="@[540px]/card:block hidden">
-                {t("description")}{" "}
-                {/* "Overview of your PEACHY GANG community statistics and analytics." */}
+                {t("user_info_description")}
               </span>
               <span className="@[540px]/card:hidden">
-                {t("analytics_title")} {/* "Community Analytics" */}
+                {t("user_info_description")}
               </span>
             </>
           )}

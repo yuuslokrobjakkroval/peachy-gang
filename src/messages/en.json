@@ -43,6 +43,8 @@
   },
   "dashboard": {
     "title": "Dashboard",
+    "user_title": "User Information",
+    "user_info_description": "Overview of your user information and balance statistics",
     "description": "Overview of your PEACHY GANG community statistics and analytics.",
     "loading": "Loading data, please wait...",
     "analytics_title": "Community Analytics",
@@ -79,6 +81,20 @@
       "klaklouk": "Klaklouk",
       "sponsor": "Sponsor",
       "credit": "Credit"
+    },
+    "feature_usage_title": "Feature Usage",
+    "feature_usage_description": "Showing feature usage statistics over time",
+    "features": {
+      "usage": "Usage",
+      "autoresponse": "Auto Response",
+      "boostermessage": "Booster Message",
+      "giveawayschedule": "Giveaway Schedule",
+      "goodbyemessage": "Goodbye Message",
+      "invitetrackermessage": "Invite Tracker Message",
+      "joinroles": "Join Roles",
+      "leveling": "Leveling",
+      "reactionroles": "Reaction Roles",
+      "welcomemessage": "Welcome Message"
     },
     "no_data": "No user data available to display",
     "error": "An error occurred while fetching data. Please try again.",

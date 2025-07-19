@@ -29,6 +29,15 @@ const extendedApi = emptySplitApi.injectEndpoints({
       providesTags: [{ type: "USER", id: "LIST" }],
     }),
 
+    getFeatureUsageChart: builder.query({
+      query: (params) => ({
+        url: `${process.env.NEXT_PUBLIC_API_ENDPOINT}/api/chart/feature-usage`,
+        method: "GET",
+        params,
+      }),
+      providesTags: [{ type: "USER", id: "LIST" }],
+    }),
+
     getCustomers: builder.query({
       query: (params) => ({
         url: `${process.env.NEXT_PUBLIC_API_ENDPOINT}/peachy/my/customers`,
@@ -113,8 +122,9 @@ const extendedApi = emptySplitApi.injectEndpoints({
 
 export const {
   useGetDashboardQuery,
-  useGetUserBalanceChartQuery,
   useGetTotalUsersBalanceChartQuery,
+  useGetFeatureUsageChartQuery,
+  useGetUserBalanceChartQuery,
   useGetCustomersQuery,
   useGetTopCreditQuery,
   useGetTopCoinQuery,
