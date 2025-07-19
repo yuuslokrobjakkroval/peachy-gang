@@ -156,77 +156,61 @@ export function FeatureUsageLineChart() {
   }
 
   return (
-    <ErrorBoundary
-      fallback={
-        <Card>
-          <CardContent className="flex items-center justify-center h-[250px] sm:h-[300px] md:h-[350px]">
-            <div className="text-center">
-              <p className="text-sm text-red-500">
-                {t("error", {
-                  defaultMessage: "An error occurred while rendering the chart",
-                })}
-              </p>
-            </div>
-          </CardContent>
-        </Card>
-      }
-    >
-      <Card className="pt-0">
-        <CardHeader className="flex items-center gap-2 px-2 py-4 space-y-0 border-b sm:py-5 sm:px-4 md:px-6 sm:flex-row">
-          <div className="grid flex-1 gap-1">
-            <CardTitle className="text-lg sm:text-xl">
-              {t("feature_usage_title", { defaultMessage: "Feature Usage" })}
-            </CardTitle>
-            <CardDescription className="text-sm">
-              {t("feature_usage_description", {
-                defaultMessage: "Showing feature usage statistics",
-              })}
-            </CardDescription>
-          </div>
-        </CardHeader>
-        <CardContent className="px-2 pt-4 sm:px-4 md:px-6 sm:pt-6">
-          <ChartContainer
-            config={translatedChartConfig}
-            className="aspect-auto w-full h-[250px] sm:h-[300px] md:h-[350px]"
+    <Card className="pt-0">
+      <CardHeader className="flex items-center gap-2 px-2 py-4 space-y-0 border-b sm:py-5 sm:px-4 md:px-6 sm:flex-row">
+        <div className="grid flex-1 gap-1">
+          <CardTitle className="text-lg sm:text-xl">
+            {t("feature_usage_title", { defaultMessage: "Feature Usage" })}
+          </CardTitle>
+          <CardDescription className="text-sm">
+            {t("feature_usage_description", {
+              defaultMessage: "Showing feature usage statistics",
+            })}
+          </CardDescription>
+        </div>
+      </CardHeader>
+      <CardContent className="px-2 pt-4 sm:px-4 md:px-6 sm:pt-6">
+        <ChartContainer
+          config={translatedChartConfig}
+          className="aspect-auto w-full h-[250px] sm:h-[300px] md:h-[350px]"
+        >
+          <LineChart
+            data={chartData}
+            margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
           >
-            <LineChart
-              data={chartData}
-              margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
-            >
-              <CartesianGrid vertical={false} strokeOpacity={0.3} />
-              <XAxis
-                dataKey="feature"
-                tickLine={false}
-                axisLine={false}
-                tickMargin={8}
-                minTickGap={16}
-                tickFormatter={(value) =>
-                  t(`features.${value}`, { defaultMessage: value })
-                }
-              />
-              <YAxis />
-              <ChartTooltip
-                cursor={false}
-                content={
-                  <ChartTooltipContent
-                    labelFormatter={(value) =>
-                      t(`features.${value}`, { defaultMessage: value })
-                    }
-                    indicator="dot"
-                  />
-                }
-              />
-              <Line
-                dataKey="value"
-                type="monotone"
-                stroke={translatedChartConfig.value.color}
-                activeDot={{ r: 8 }}
-              />
-              <ChartLegend content={<ChartLegendContent />} />
-            </LineChart>
-          </ChartContainer>
-        </CardContent>
-      </Card>
-    </ErrorBoundary>
+            <CartesianGrid vertical={false} strokeOpacity={0.3} />
+            <XAxis
+              dataKey="feature"
+              tickLine={false}
+              axisLine={false}
+              tickMargin={8}
+              minTickGap={16}
+              tickFormatter={(value) =>
+                t(`features.${value}`, { defaultMessage: value })
+              }
+            />
+            <YAxis />
+            <ChartTooltip
+              cursor={false}
+              content={
+                <ChartTooltipContent
+                  labelFormatter={(value) =>
+                    t(`features.${value}`, { defaultMessage: value })
+                  }
+                  indicator="dot"
+                />
+              }
+            />
+            <Line
+              dataKey="value"
+              type="monotone"
+              stroke={translatedChartConfig.value.color}
+              activeDot={{ r: 8 }}
+            />
+            <ChartLegend content={<ChartLegendContent />} />
+          </LineChart>
+        </ChartContainer>
+      </CardContent>
+    </Card>
   );
 }

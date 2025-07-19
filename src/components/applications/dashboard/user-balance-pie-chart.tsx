@@ -98,17 +98,8 @@ export function UserBalancePieChart() {
   const { userInfoByDiscord } = usePeachy();
   const t = useTranslations("dashboard");
   const isMobile = useIsMobile();
-  const [timeRange, setTimeRange] = React.useState("all");
 
-  const { data: user, isLoading: ChartLoading } = useGetUserBalanceChartQuery(
-    userInfoByDiscord?.id
-  );
-
-  React.useEffect(() => {
-    if (isMobile) {
-      setTimeRange("all");
-    }
-  }, [isMobile]);
+  const { data: user } = useGetUserBalanceChartQuery(userInfoByDiscord?.id);
 
   const chartData = React.useMemo(() => generateChartData(user), [user]);
 

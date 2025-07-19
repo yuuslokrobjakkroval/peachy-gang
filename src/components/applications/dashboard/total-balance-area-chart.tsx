@@ -247,138 +247,122 @@ export function TotalBalanceAreaChart() {
   }
 
   return (
-    <ErrorBoundary
-      fallback={
-        <Card>
-          <CardContent className="flex items-center justify-center h-[250px] sm:h-[300px] md:h-[350px]">
-            <div className="text-center">
-              <p className="text-sm text-red-500">
-                {t("error", {
-                  defaultMessage: "An error occurred while rendering the chart",
-                })}
-              </p>
-            </div>
-          </CardContent>
-        </Card>
-      }
-    >
-      <Card className="pt-0">
-        <CardHeader className="flex items-center gap-2 px-2 py-4 space-y-0 border-b sm:py-5 sm:px-4 md:px-6 sm:flex-row">
-          <div className="grid flex-1 gap-1">
-            <CardTitle className="text-lg sm:text-xl">
-              {t("total_balance_title", { defaultMessage: "Total Balance" })}
-            </CardTitle>
-            <CardDescription className="text-sm">
-              {t("total_balance_description", {
-                defaultMessage: "Showing total balance for all users over time",
-              })}
-            </CardDescription>
-          </div>
-          <Select value={timeRange} onValueChange={setTimeRange}>
-            <SelectTrigger
-              className="w-[140px] sm:w-[160px] rounded-lg sm:ml-auto"
-              aria-label={g("common.select", { defaultMessage: "Select" })}
-            >
-              <SelectValue
-                placeholder={t("last_three_months", {
-                  defaultMessage: "Last 3 months",
-                })}
-              />
-            </SelectTrigger>
-            <SelectContent className="rounded-xl">
-              <SelectItem value="90" className="rounded-lg">
-                {t("last_three_months", { defaultMessage: "Last 3 months" })}
-              </SelectItem>
-              <SelectItem value="30" className="rounded-lg">
-                {t("last_thirty_days", { defaultMessage: "Last 30 days" })}
-              </SelectItem>
-              <SelectItem value="7" className="rounded-lg">
-                {t("last_seven_days", { defaultMessage: "Last 7 days" })}
-              </SelectItem>
-            </SelectContent>
-          </Select>
-        </CardHeader>
-        <CardContent className="px-2 pt-4 sm:px-4 md:px-6 sm:pt-6">
-          <ChartContainer
-            config={translatedChartConfig}
-            className="aspect-auto w-full h-[250px] sm:h-[300px] md:h-[350px]"
+    <Card className="pt-0">
+      <CardHeader className="flex items-center gap-2 px-2 py-4 space-y-0 border-b sm:py-5 sm:px-4 md:px-6 sm:flex-row">
+        <div className="grid flex-1 gap-1">
+          <CardTitle className="text-lg sm:text-xl">
+            {t("total_balance_title", { defaultMessage: "Total Balance" })}
+          </CardTitle>
+          <CardDescription className="text-sm">
+            {t("total_balance_description", {
+              defaultMessage: "Showing total balance for all users over time",
+            })}
+          </CardDescription>
+        </div>
+        <Select value={timeRange} onValueChange={setTimeRange}>
+          <SelectTrigger
+            className="w-[140px] sm:w-[160px] rounded-lg sm:ml-auto"
+            aria-label={g("common.select", { defaultMessage: "Select" })}
           >
-            <AreaChart data={filteredData}>
-              <defs>
-                {Object.keys(translatedChartConfig).map((key) => (
-                  <linearGradient
-                    key={key}
-                    id={`fill${key.charAt(0).toUpperCase() + key.slice(1)}`}
-                    x1="0"
-                    y1="0"
-                    x2="0"
-                    y2="1"
-                  >
-                    <stop
-                      offset="5%"
-                      stopColor={
-                        translatedChartConfig[key as keyof typeof chartConfig]
-                          .color
-                      }
-                      stopOpacity={0.8}
-                    />
-                    <stop
-                      offset="95%"
-                      stopColor={
-                        translatedChartConfig[key as keyof typeof chartConfig]
-                          .color
-                      }
-                      stopOpacity={0.1}
-                    />
-                  </linearGradient>
-                ))}
-              </defs>
-              <CartesianGrid vertical={false} strokeOpacity={0.3} />
-              <XAxis
-                dataKey="date"
-                tickLine={false}
-                axisLine={false}
-                tickMargin={8}
-                minTickGap={16}
-                tickFormatter={(value) => {
-                  const date = new Date(value);
-                  return date.toLocaleDateString("en-US", {
-                    month: "short",
-                    day: "numeric",
-                  });
-                }}
-              />
-              <ChartTooltip
-                cursor={false}
-                content={
-                  <ChartTooltipContent
-                    labelFormatter={(value) => {
-                      return new Date(value).toLocaleDateString("en-US", {
-                        month: "short",
-                        day: "numeric",
-                      });
-                    }}
-                    indicator="dot"
-                  />
-                }
-              />
+            <SelectValue
+              placeholder={t("last_three_months", {
+                defaultMessage: "Last 3 months",
+              })}
+            />
+          </SelectTrigger>
+          <SelectContent className="rounded-xl">
+            <SelectItem value="90" className="rounded-lg">
+              {t("last_three_months", { defaultMessage: "Last 3 months" })}
+            </SelectItem>
+            <SelectItem value="30" className="rounded-lg">
+              {t("last_thirty_days", { defaultMessage: "Last 30 days" })}
+            </SelectItem>
+            <SelectItem value="7" className="rounded-lg">
+              {t("last_seven_days", { defaultMessage: "Last 7 days" })}
+            </SelectItem>
+          </SelectContent>
+        </Select>
+      </CardHeader>
+      <CardContent className="px-2 pt-4 sm:px-4 md:px-6 sm:pt-6">
+        <ChartContainer
+          config={translatedChartConfig}
+          className="aspect-auto w-full h-[250px] sm:h-[300px] md:h-[350px]"
+        >
+          <AreaChart data={filteredData}>
+            <defs>
               {Object.keys(translatedChartConfig).map((key) => (
-                <Area
+                <linearGradient
                   key={key}
-                  dataKey={key}
-                  type="natural"
-                  fill={`url(#fill${key.charAt(0).toUpperCase() + key.slice(1)})`}
-                  stroke={
-                    translatedChartConfig[key as keyof typeof chartConfig].color
-                  }
-                  stackId="a"
-                />
+                  id={`fill${key.charAt(0).toUpperCase() + key.slice(1)}`}
+                  x1="0"
+                  y1="0"
+                  x2="0"
+                  y2="1"
+                >
+                  <stop
+                    offset="5%"
+                    stopColor={
+                      translatedChartConfig[key as keyof typeof chartConfig]
+                        .color
+                    }
+                    stopOpacity={0.8}
+                  />
+                  <stop
+                    offset="95%"
+                    stopColor={
+                      translatedChartConfig[key as keyof typeof chartConfig]
+                        .color
+                    }
+                    stopOpacity={0.1}
+                  />
+                </linearGradient>
               ))}
-              <ChartLegend content={<ChartLegendContent />} />
-            </AreaChart>
-          </ChartContainer>
-        </CardContent>
-      </Card>
-    </ErrorBoundary>
+            </defs>
+            <CartesianGrid vertical={false} strokeOpacity={0.3} />
+            <XAxis
+              dataKey="date"
+              tickLine={false}
+              axisLine={false}
+              tickMargin={8}
+              minTickGap={16}
+              tickFormatter={(value) => {
+                const date = new Date(value);
+                return date.toLocaleDateString("en-US", {
+                  month: "short",
+                  day: "numeric",
+                });
+              }}
+            />
+            <ChartTooltip
+              cursor={false}
+              content={
+                <ChartTooltipContent
+                  labelFormatter={(value) => {
+                    return new Date(value).toLocaleDateString("en-US", {
+                      month: "short",
+                      day: "numeric",
+                    });
+                  }}
+                  indicator="dot"
+                />
+              }
+            />
+            {Object.keys(translatedChartConfig).map((key) => (
+              <Area
+                key={key}
+                dataKey={key}
+                type="natural"
+                fill={`url(#fill${key.charAt(0).toUpperCase() + key.slice(1)})`}
+                stroke={
+                  translatedChartConfig[key as keyof typeof chartConfig].color
+                }
+                stackId="a"
+              />
+            ))}
+            <ChartLegend content={<ChartLegendContent />} />
+          </AreaChart>
+        </ChartContainer>
+      </CardContent>
+    </Card>
   );
 }
