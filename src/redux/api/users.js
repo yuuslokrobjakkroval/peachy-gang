@@ -2,6 +2,15 @@ import { emptySplitApi } from ".";
 
 const extendedApi = emptySplitApi.injectEndpoints({
   endpoints: (builder) => ({
+    getDashboard: builder.query({
+      query: (params) => ({
+        url: `${process.env.NEXT_PUBLIC_API_ENDPOINT}/dashboard/stats`,
+        method: "GET",
+        params,
+      }),
+      providesTags: [{ type: "USER", id: "LIST" }],
+    }),
+
     getCustomers: builder.query({
       query: (params) => ({
         url: `${process.env.NEXT_PUBLIC_API_ENDPOINT}/peachy/my/customers`,
@@ -85,6 +94,7 @@ const extendedApi = emptySplitApi.injectEndpoints({
 });
 
 export const {
+  useGetDashboardQuery,
   useGetCustomersQuery,
   useGetTopCreditQuery,
   useGetTopCoinQuery,

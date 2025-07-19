@@ -64,7 +64,7 @@ export default function CountUp({
             onEnd();
           }
         },
-        delay * 1000 + duration * 1000,
+        delay * 1000 + duration * 1000
       );
 
       return () => {
@@ -96,7 +96,7 @@ export default function CountUp({
         };
 
         const formattedNumber = Intl.NumberFormat("en-US", options).format(
-          Number(latest.toFixed(0)),
+          Number(latest.toFixed(0))
         );
 
         ref.current.textContent = separator

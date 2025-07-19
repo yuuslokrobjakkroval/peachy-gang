@@ -4,7 +4,7 @@ import type React from "react";
 
 import { AnimatePresence, motion } from "framer-motion";
 import { useTranslations } from "next-intl";
-import { useGetUsersQuery } from "@/redux/api/users";
+import { useGetDashboardQuery } from "@/redux/api/users";
 import {
   useGenerateKHQRMutation,
   useGenerateTransactionIdMutation,
@@ -14,15 +14,7 @@ import { SectionCards } from "@/components/applications/dashboard/section-cards"
 import { ChartAreaInteractive } from "@/components/applications/dashboard/chart-area-interactive";
 import Loading from "@/components/loading/circle";
 import { Meteors } from "@/components/ui/Animations/magic/meteors";
-import {
-  ArrowDownCircle,
-  Gift,
-  Loader2,
-  MessageCircle,
-  PawPrint,
-  Send,
-  X,
-} from "lucide-react";
+import { Gift, Loader2, PawPrint, Send, X } from "lucide-react";
 import {
   Card,
   CardAction,
@@ -40,7 +32,7 @@ import Image from "next/image";
 export default function DashboardPage() {
   const chatIconRef = useRef<HTMLButtonElement>(null);
   const t = useTranslations();
-  const { userInfoByDiscord } = usePeachy(); // Assuming user has email and username
+  const { userInfoByDiscord } = usePeachy();
   const [amount, setAmount] = useState<number>(0);
   const [isChatOpen, setIsChatOpen] = useState(false);
   const [qrLoading, setQrLoading] = useState(false);
@@ -64,17 +56,7 @@ export default function DashboardPage() {
     }
   };
 
-  const getParams = () => {
-    return {
-      order: -1,
-      orderBy: "coin",
-    };
-  };
-
-  const {
-    data: { items: users = [], meta } = { items: [], meta: {} },
-    isLoading,
-  } = useGetUsersQuery(getParams());
+  const { data: stats, isLoading } = useGetDashboardQuery(null);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -87,7 +69,7 @@ export default function DashboardPage() {
       setErrorMessage(
         !userInfoByDiscord?.email || !userInfoByDiscord?.username
           ? t("dashboard.errors.missingUserData")
-          : t("dashboard.errors.invalidAmount"),
+          : t("dashboard.errors.invalidAmount")
       );
       return;
     }
@@ -112,7 +94,7 @@ export default function DashboardPage() {
     } catch (error: any) {
       console.error("Error generating QR code or transaction ID:", error);
       setErrorMessage(
-        error?.data?.details || t("dashboard.errors.qrGenerationFailed"),
+        error?.data?.details || t("dashboard.errors.qrGenerationFailed")
       );
       setPaymentStatus("error");
     } finally {
@@ -143,7 +125,7 @@ export default function DashboardPage() {
   }
 
   return (
-    <div className="relative w-full items-center justify-center overflow-hidden rounded-lg">
+    <div className="relative items-center justify-center w-full overflow-hidden rounded-lg">
       <Meteors />
       <div className="@container/main flex flex-1 flex-col gap-2">
         <div className="flex flex-col gap-4 py-4">
@@ -157,7 +139,7 @@ export default function DashboardPage() {
               </p>
             </div>
           </div>
-          <SectionCards users={users} meta={meta} />
+          <SectionCards stats={stats} />
           <div className="px-4 lg:px-6">
             <div className="flex flex-col gap-4">
               <div className="flex flex-col gap-2">
@@ -168,7 +150,7 @@ export default function DashboardPage() {
                   {t("dashboard.analytics_description")}
                 </p>
               </div>
-              <ChartAreaInteractive users={users} />
+              {/* <ChartAreaInteractive users={users} /> */}
             </div>
           </div>
         </div>
@@ -179,13 +161,13 @@ export default function DashboardPage() {
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: 100 }}
           transition={{ duration: 0.2 }}
-          className="fixed bottom-4 right-2 z-50"
+          className="fixed z-50 bottom-4 right-2"
         >
           <Button
             ref={chatIconRef}
             onClick={toggleChat}
             size="icon"
-            className="rounded-full size-8 p-2 shadow-lg"
+            className="p-2 rounded-full shadow-lg size-8"
           >
             {!isChatOpen ? (
               <Gift className="size-4" />
@@ -223,14 +205,14 @@ export default function DashboardPage() {
               </CardHeader>
               <CardContent>
                 {errorMessage && (
-                  <p className="text-sm text-red-500 mb-4">{errorMessage}</p>
+                  <p className="mb-4 text-sm text-red-500">{errorMessage}</p>
                 )}
                 {!qrCode ? (
                   <form
                     onSubmit={handleSubmit}
-                    className="flex w-full items-center space-x-2"
+                    className="flex items-center w-full space-x-2"
                   >
-                    <div className="grid gap-3 flex-1">
+                    <div className="grid flex-1 gap-3">
                       <Label htmlFor="amount">
                         {t("dashboard.amountLabel")}
                       </Label>

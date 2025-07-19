@@ -25,15 +25,20 @@ const EmojiManagementPage = () => {
   const [page, setPage] = useState(1);
   const emojisPerPage = 30;
 
-  const guildsTabs = guilds.map((guild) => ({
-    id: guild.id,
-    icon: guild.icon ? iconUrl(guild) : null,
-    label: guild.name,
-    onClick: () => {
-      setSelectedGuildId(guild.id);
-      setPage(1);
-    },
-  }));
+  const guildsTabs = guilds
+    .filter(
+      (guild) =>
+        (Number(guild.permissions) & PermissionFlags.ADMINISTRATOR) !== 0
+    )
+    .map((guild) => ({
+      id: guild.id,
+      icon: guild.icon ? iconUrl(guild) : null,
+      label: guild.name,
+      onClick: () => {
+        setSelectedGuildId(guild.id);
+        setPage(1);
+      },
+    }));
 
   const { data: guild, isLoading: isGuildLoading } =
     useGetGuildInfoQuery(selectedGuildId);
@@ -43,7 +48,11 @@ const EmojiManagementPage = () => {
 
   useEffect(() => {
     if (!selectedGuildId) {
-      setSelectedGuildId(guilds[0]?.id ?? null);
+      const filtered = guilds.filter(
+        (guild) =>
+          (Number(guild.permissions) & PermissionFlags.ADMINISTRATOR) !== 0
+      );
+      setSelectedGuildId(filtered[0]?.id ?? null);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedGuildId]);
@@ -63,7 +72,7 @@ const EmojiManagementPage = () => {
   }
 
   return (
-    <div className="px-4 py-6 sm:px-6 lg:px-8 sm:py-8 lg:py-10">
+    <div className="px-4 py-6 overflow-x-hidden sm:px-6 lg:px-8 sm:py-8 lg:py-10">
       <h1 className="mb-4 text-lg font-bold sm:text-xl md:text-2xl">
         Emoji Management :{" "}
         <span className="text-primary">
@@ -71,7 +80,7 @@ const EmojiManagementPage = () => {
         </span>
       </h1>
 
-      <div className="mx-auto mb-6">
+      <div className="py-6 mx-auto mb-6 overflow-x-hidden">
         <LimelightGuild
           className="overflow-x-auto overflow-y-hidden"
           iconClassName="rounded-md object-cover w-8 h-8 sm:w-10 sm:h-10"
@@ -85,7 +94,7 @@ const EmojiManagementPage = () => {
               {paginatedEmojis.map((emoji: any) => (
                 <div
                   key={emoji.id}
-                  className="flex flex-col items-center space-y-1 text-center"
+                  className="flex flex-col items-center justify-center space-y-1 text-center ju"
                 >
                   <Tooltip>
                     <TooltipTrigger asChild>
@@ -96,15 +105,17 @@ const EmojiManagementPage = () => {
                         rel="noopener noreferrer"
                         className="text-[10px] xs:text-xs sm:text-sm hover:underline break-all"
                       >
-                        <Image
-                          src={emojiUrl(emoji)}
-                          alt={emoji.name}
-                          width={48}
-                          height={48}
-                          unoptimized
-                          className="flex items-center justify-center object-contain w-10 h-10 xs:w-12 xs:h-12 sm:w-14 sm:h-14"
-                        />
-                        {toCapitalCase(emoji.name)}
+                        <div className="flex flex-col items-center">
+                          <Image
+                            src={emojiUrl(emoji)}
+                            alt={emoji.name}
+                            width={48}
+                            height={48}
+                            unoptimized
+                            className="flex items-center justify-center object-contain w-10 h-10 xs:w-12 xs:h-12 sm:w-14 sm:h-14"
+                          />
+                          {toCapitalCase(emoji.name)}
+                        </div>
                       </a>
                     </TooltipTrigger>
                     <TooltipContent>

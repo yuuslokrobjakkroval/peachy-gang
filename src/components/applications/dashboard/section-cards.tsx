@@ -13,31 +13,11 @@ import {
 import CountUp from "@/components/ui/Animations/count-up";
 
 interface SectionCardsProps {
-  users: any;
-  meta: any;
+  stats: any;
 }
 
-export function SectionCards({ users, meta }: SectionCardsProps) {
+export function SectionCards({ stats }: SectionCardsProps) {
   const t = useTranslations("dashboard");
-  const usersArray = Array.isArray(users) ? users : [users];
-  const totalCoin = usersArray.reduce(
-    (sum, user) => sum + (user?.balance?.coin || 0),
-    0,
-  );
-  const totalCoinInBank = usersArray.reduce(
-    (sum, user) => sum + (user?.balance?.bank || 0),
-    0,
-  );
-  const averageLevel =
-    usersArray.reduce((sum, user) => sum + (user?.profile?.level || 0), 0) /
-      usersArray.length || 0;
-  const activeUsers = usersArray.filter((user) => {
-    const lastLogin = new Date(user?.activity?.lastLogin);
-    const now = new Date();
-    const diffInDays =
-      (now.getTime() - lastLogin.getTime()) / (1000 * 3600 * 24);
-    return diffInDays <= 7;
-  }).length;
 
   return (
     <div className="grid grid-cols-1 gap-4 px-4 @xl/main:grid-cols-2 @5xl/main:grid-cols-4 lg:px-6">
@@ -45,13 +25,13 @@ export function SectionCards({ users, meta }: SectionCardsProps) {
       <Card className="@container/card min-w-[250px] bg-gradient-to-t from-primary/5 to-card dark:bg-card">
         <CardHeader className="relative">
           <CardDescription className="flex items-center gap-2 text-sm">
-            <UserIcon className="h-4 w-4 text-muted-foreground" />
+            <UserIcon className="w-4 h-4 text-muted-foreground" />
             {t("total_users")}
           </CardDescription>
           <CardTitle className="text-2xl font-bold tabular-nums text-primary @[250px]/card:text-3xl">
             <CountUp
               from={0}
-              to={meta?.itemCount ?? usersArray?.length ?? 0}
+              to={stats?.totalUsers ?? 0}
               separator=","
               direction="up"
               duration={1}
@@ -61,18 +41,18 @@ export function SectionCards({ users, meta }: SectionCardsProps) {
           <div className="absolute right-3 top-3">
             <Badge
               variant="secondary"
-              className="flex gap-1 rounded-full bg-green-100 px-2 py-1 text-xs text-green-800 dark:bg-green-900 dark:text-green-200"
+              className="flex gap-1 px-2 py-1 text-xs text-green-800 bg-green-100 rounded-full dark:bg-green-900 dark:text-green-200"
             >
-              <TrendingUpIcon className="h-3 w-3" />
-              {t("growth_percentage", {
+              <TrendingUpIcon className="w-3 h-3" />
+              {/* {t("growth_percentage", {
                 percentage: usersArray.length > 1 ? 5 : 0,
-              })}
+              })} */}
             </Badge>
           </div>
         </CardHeader>
         <CardFooter className="flex-col items-start gap-1 text-xs">
           <div className="flex gap-2 font-medium text-green-600 dark:text-green-400">
-            {t("active_this_week", { count: activeUsers })}
+            {/* {t("active_this_week", { count: activeUsers })} */}
           </div>
           <div className="text-muted-foreground">
             {t("based_on_last_login")}
@@ -85,7 +65,7 @@ export function SectionCards({ users, meta }: SectionCardsProps) {
         <CardHeader className="relative">
           <CardDescription className="flex items-center gap-2 text-sm">
             <svg
-              className="h-4 w-4 text-muted-foreground"
+              className="w-4 h-4 text-muted-foreground"
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"
@@ -102,7 +82,7 @@ export function SectionCards({ users, meta }: SectionCardsProps) {
           <CardTitle className="text-2xl font-bold tabular-nums text-yellow-600 dark:text-yellow-400 @[250px]/card:text-3xl">
             <CountUp
               from={0}
-              to={totalCoin ?? 0}
+              to={stats.totalBalanceCoin ?? 0}
               separator=","
               direction="up"
               duration={1}
@@ -112,7 +92,7 @@ export function SectionCards({ users, meta }: SectionCardsProps) {
         </CardHeader>
         <CardFooter className="flex-col items-start gap-1 text-xs">
           <div className="flex gap-2 font-medium text-yellow-600 dark:text-yellow-400">
-            {t("across_wallets", { count: usersArray.length })}
+            {/* {t("across_wallets", { count: usersArray.length })} */}
           </div>
           <div className="text-muted-foreground">{t("sum_of_balances")}</div>
         </CardFooter>
@@ -123,7 +103,7 @@ export function SectionCards({ users, meta }: SectionCardsProps) {
         <CardHeader className="relative">
           <CardDescription className="flex items-center gap-2 text-sm">
             <svg
-              className="h-4 w-4 text-muted-foreground"
+              className="w-4 h-4 text-muted-foreground"
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"
@@ -140,7 +120,7 @@ export function SectionCards({ users, meta }: SectionCardsProps) {
           <CardTitle className="text-2xl font-bold tabular-nums text-blue-600 dark:text-blue-400 @[250px]/card:text-3xl">
             <CountUp
               from={0}
-              to={totalCoinInBank ?? 0}
+              to={stats.totalBalanceBank ?? 0}
               separator=","
               direction="up"
               duration={1}
@@ -160,13 +140,13 @@ export function SectionCards({ users, meta }: SectionCardsProps) {
       <Card className="@container/card min-w-[250px] bg-gradient-to-t from-primary/5 to-card dark:bg-card">
         <CardHeader className="relative">
           <CardDescription className="flex items-center gap-2 text-sm">
-            <AwardIcon className="h-4 w-4 text-muted-foreground" />
+            <AwardIcon className="w-4 h-4 text-muted-foreground" />
             {t("user_engagement")}
           </CardDescription>
           <CardTitle className="text-2xl font-bold tabular-nums text-purple-600 dark:text-purple-400 @[250px]/card:text-3xl">
             <CountUp
               from={0}
-              to={averageLevel ?? 1}
+              to={stats.averageLevel ?? 1}
               separator=","
               direction="up"
               duration={1}
