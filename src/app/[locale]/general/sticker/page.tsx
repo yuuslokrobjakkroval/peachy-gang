@@ -11,27 +11,27 @@ import {
 import Image from "next/image";
 import Loading from "@/components/loading/circle";
 import NotJoined from "@/components/modules/guilds/not-join";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 
 const EmojiManagementPage = () => {
   const { guilds } = usePeachy();
   const [selectedGuildId, setSelectedGuildId] = useState<string | null>(null);
   const [page, setPage] = useState(1);
-  const emojisPerPage = 100;
+  const emojisPerPage = 30;
 
-  const guildsTabs = guilds
-    .filter(
-      (guild) =>
-        (Number(guild.permissions) & PermissionFlags.ADMINISTRATOR) !== 0,
-    )
-    .map((guild) => ({
-      id: guild.id,
-      icon: guild.icon ? iconUrl(guild) : null,
-      label: guild.name,
-      onClick: () => {
-        setSelectedGuildId(guild.id);
-        setPage(1);
-      },
-    }));
+  const guildsTabs = guilds.map((guild) => ({
+    id: guild.id,
+    icon: guild.icon ? iconUrl(guild) : null,
+    label: guild.name,
+    onClick: () => {
+      setSelectedGuildId(guild.id);
+      setPage(1);
+    },
+  }));
 
   const { data: guild, isLoading: isGuildLoading } =
     useGetGuildInfoQuery(selectedGuildId);
@@ -43,7 +43,7 @@ const EmojiManagementPage = () => {
     if (!selectedGuildId) {
       const filtered = guilds.filter(
         (guild) =>
-          (Number(guild.permissions) & PermissionFlags.ADMINISTRATOR) !== 0,
+          (Number(guild.permissions) & PermissionFlags.ADMINISTRATOR) !== 0
       );
       setSelectedGuildId(filtered[0]?.id ?? null);
     }
@@ -52,7 +52,7 @@ const EmojiManagementPage = () => {
 
   const paginatedEmojis = stickers.slice(
     (page - 1) * emojisPerPage,
-    page * emojisPerPage,
+    page * emojisPerPage
   );
   const totalPages = Math.ceil(stickers.length / emojisPerPage);
 
@@ -84,28 +84,35 @@ const EmojiManagementPage = () => {
         stickers?.length > 0 ? (
           <>
             <div className="grid grid-cols-3 gap-3 xs:grid-cols-3 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-8 xl:grid-cols-10 xs:gap-4 sm:gap-6 md:gap-8">
-              {paginatedEmojis.map((emoji: any) => (
+              {paginatedEmojis.map((sticker: any) => (
                 <div
-                  key={emoji.id}
+                  key={sticker.id}
                   className="flex flex-col items-center space-y-1 text-center"
                 >
-                  <Image
-                    src={stickerUrl(emoji)}
-                    width={48}
-                    height={48}
-                    alt={emoji.name}
-                    unoptimized
-                    className="object-contain w-10 h-10 xs:w-12 xs:h-12 sm:w-14 sm:h-14"
-                  />
-                  <a
-                    href={stickerUrl(emoji)}
-                    download={stickerUrl(emoji)}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-[10px] xs:text-xs sm:text-sm hover:underline break-all"
-                  >
-                    Download
-                  </a>
+                  <Tooltip>
+                    <TooltipTrigger asChild>
+                      <a
+                        href={stickerUrl(sticker)}
+                        download
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-[10px] xs:text-xs sm:text-sm hover:underline break-all"
+                      >
+                        <Image
+                          src={stickerUrl(sticker)}
+                          width={48}
+                          height={48}
+                          alt={sticker.name}
+                          className="object-contain w-10 h-10 xs:w-12 xs:h-12 sm:w-14 sm:h-14"
+                          unoptimized
+                        />
+                        {stickerUrl(sticker.name)}
+                      </a>
+                    </TooltipTrigger>
+                    <TooltipContent>
+                      <p>Download</p>
+                    </TooltipContent>
+                  </Tooltip>
                 </div>
               ))}
             </div>

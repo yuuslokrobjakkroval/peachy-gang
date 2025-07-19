@@ -2,7 +2,17 @@
 
 import React, { useEffect, useState } from "react";
 import { usePeachy } from "@/contexts/peachy";
-import { emojiUrl, iconUrl, PermissionFlags } from "@/utils/common";
+import {
+  emojiUrl,
+  iconUrl,
+  PermissionFlags,
+  toCapitalCase,
+} from "@/utils/common";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 import { LimelightGuild } from "@/components/limelight-guild";
 import { useGetGuildInfoQuery, useGetGuildEmojiQuery } from "@/redux/api/guild";
 import Image from "next/image";
@@ -13,22 +23,17 @@ const EmojiManagementPage = () => {
   const { guilds } = usePeachy();
   const [selectedGuildId, setSelectedGuildId] = useState<string | null>(null);
   const [page, setPage] = useState(1);
-  const emojisPerPage = 100;
+  const emojisPerPage = 30;
 
-  const guildsTabs = guilds
-    .filter(
-      (guild) =>
-        (Number(guild.permissions) & PermissionFlags.ADMINISTRATOR) !== 0,
-    )
-    .map((guild) => ({
-      id: guild.id,
-      icon: guild.icon ? iconUrl(guild) : null,
-      label: guild.name,
-      onClick: () => {
-        setSelectedGuildId(guild.id);
-        setPage(1);
-      },
-    }));
+  const guildsTabs = guilds.map((guild) => ({
+    id: guild.id,
+    icon: guild.icon ? iconUrl(guild) : null,
+    label: guild.name,
+    onClick: () => {
+      setSelectedGuildId(guild.id);
+      setPage(1);
+    },
+  }));
 
   const { data: guild, isLoading: isGuildLoading } =
     useGetGuildInfoQuery(selectedGuildId);
@@ -40,7 +45,7 @@ const EmojiManagementPage = () => {
     if (!selectedGuildId) {
       const filtered = guilds.filter(
         (guild) =>
-          (Number(guild.permissions) & PermissionFlags.ADMINISTRATOR) !== 0,
+          (Number(guild.permissions) & PermissionFlags.ADMINISTRATOR) !== 0
       );
       setSelectedGuildId(filtered[0]?.id ?? null);
     }
@@ -49,7 +54,7 @@ const EmojiManagementPage = () => {
 
   const paginatedEmojis = emojis.slice(
     (page - 1) * emojisPerPage,
-    page * emojisPerPage,
+    page * emojisPerPage
   );
   const totalPages = Math.ceil(emojis.length / emojisPerPage);
 
@@ -86,23 +91,30 @@ const EmojiManagementPage = () => {
                   key={emoji.id}
                   className="flex flex-col items-center space-y-1 text-center"
                 >
-                  <Image
-                    src={emojiUrl(emoji)}
-                    width={48}
-                    height={48}
-                    alt={emoji.name}
-                    unoptimized
-                    className="object-contain w-10 h-10 xs:w-12 xs:h-12 sm:w-14 sm:h-14"
-                  />
-                  <a
-                    href={emojiUrl(emoji)}
-                    download={emojiUrl(emoji)}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-[10px] xs:text-xs sm:text-sm hover:underline break-all"
-                  >
-                    Download
-                  </a>
+                  <Tooltip>
+                    <TooltipTrigger asChild>
+                      <a
+                        href={emojiUrl(emoji)}
+                        download
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-[10px] xs:text-xs sm:text-sm hover:underline break-all"
+                      >
+                        <Image
+                          src={emojiUrl(emoji)}
+                          alt={emoji.name}
+                          width={48}
+                          height={48}
+                          unoptimized
+                          className="flex items-center justify-center object-contain w-10 h-10 xs:w-12 xs:h-12 sm:w-14 sm:h-14"
+                        />
+                        {toCapitalCase(emoji.name)}
+                      </a>
+                    </TooltipTrigger>
+                    <TooltipContent>
+                      <p>Download</p>
+                    </TooltipContent>
+                  </Tooltip>
                 </div>
               ))}
             </div>

@@ -21,22 +21,17 @@ const EmojiManagementPage = () => {
   const { guilds } = usePeachy();
   const [selectedGuildId, setSelectedGuildId] = useState<string | null>(null);
   const [page, setPage] = useState(1);
-  const emojisPerPage = 100;
+  const emojisPerPage = 30;
 
-  const guildsTabs = guilds
-    .filter(
-      (guild) =>
-        (Number(guild.permissions) & PermissionFlags.ADMINISTRATOR) !== 0,
-    )
-    .map((guild) => ({
-      id: guild.id,
-      icon: guild.icon ? iconUrl(guild) : null,
-      label: guild.name,
-      onClick: () => {
-        setSelectedGuildId(guild.id);
-        setPage(1);
-      },
-    }));
+  const guildsTabs = guilds.map((guild) => ({
+    id: guild.id,
+    icon: guild.icon ? iconUrl(guild) : null,
+    label: guild.name,
+    onClick: () => {
+      setSelectedGuildId(guild.id);
+      setPage(1);
+    },
+  }));
 
   const { data: guild, isLoading: isGuildLoading } =
     useGetGuildInfoQuery(selectedGuildId);
@@ -48,7 +43,7 @@ const EmojiManagementPage = () => {
     if (!selectedGuildId) {
       const filtered = guilds.filter(
         (guild) =>
-          (Number(guild.permissions) & PermissionFlags.ADMINISTRATOR) !== 0,
+          (Number(guild.permissions) & PermissionFlags.ADMINISTRATOR) !== 0
       );
       setSelectedGuildId(filtered[0]?.id ?? null);
     }
@@ -57,7 +52,7 @@ const EmojiManagementPage = () => {
 
   const paginatedEmojis = stickers.slice(
     (page - 1) * emojisPerPage,
-    page * emojisPerPage,
+    page * emojisPerPage
   );
   const totalPages = Math.ceil(stickers.length / emojisPerPage);
 
