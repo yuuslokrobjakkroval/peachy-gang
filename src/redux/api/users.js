@@ -31,7 +31,7 @@ const extendedApi = emptySplitApi.injectEndpoints({
 
     getFeatureUsageChart: builder.query({
       query: (params) => ({
-        url: `${process.env.NEXT_PUBLIC_API_ENDPOINT}/api/chart/feature-usage`,
+        url: `${process.env.NEXT_PUBLIC_API_ENDPOINT}/api/chart/feature/usage`,
         method: "GET",
         params,
       }),
@@ -122,9 +122,9 @@ const extendedApi = emptySplitApi.injectEndpoints({
 
 export const {
   useGetDashboardQuery,
+  useGetUserBalanceChartQuery,
   useGetTotalUsersBalanceChartQuery,
   useGetFeatureUsageChartQuery,
-  useGetUserBalanceChartQuery,
   useGetCustomersQuery,
   useGetTopCreditQuery,
   useGetTopCoinQuery,
