@@ -25,7 +25,6 @@ const EmojiManagementPage = () => {
   const [page, setPage] = useState(1);
   const emojisPerPage = 30;
 
-<<<<<<< HEAD
   const guildsTabs = guilds.map((guild) => ({
     id: guild.id,
     icon: guild.icon ? iconUrl(guild) : null,
@@ -35,22 +34,6 @@ const EmojiManagementPage = () => {
       setPage(1);
     },
   }));
-=======
-  const guildsTabs = guilds
-    .filter(
-      (guild) =>
-        (Number(guild.permissions) & PermissionFlags.ADMINISTRATOR) !== 0,
-    )
-    .map((guild) => ({
-      id: guild.id,
-      icon: guild.icon ? iconUrl(guild) : null,
-      label: guild.name,
-      onClick: () => {
-        setSelectedGuildId(guild.id);
-        setPage(1);
-      },
-    }));
->>>>>>> c60932dcad69caa84dad43722564183384984626
 
   const { data: guild, isLoading: isGuildLoading } =
     useGetGuildInfoQuery(selectedGuildId);
@@ -62,7 +45,7 @@ const EmojiManagementPage = () => {
     if (!selectedGuildId) {
       const filtered = guilds.filter(
         (guild) =>
-          (Number(guild.permissions) & PermissionFlags.ADMINISTRATOR) !== 0,
+          (Number(guild.permissions) & PermissionFlags.ADMINISTRATOR) !== 0
       );
       setSelectedGuildId(filtered[0]?.id ?? null);
     }
@@ -71,7 +54,7 @@ const EmojiManagementPage = () => {
 
   const paginatedEmojis = emojis.slice(
     (page - 1) * emojisPerPage,
-    page * emojisPerPage,
+    page * emojisPerPage
   );
   const totalPages = Math.ceil(emojis.length / emojisPerPage);
 
@@ -117,12 +100,13 @@ const EmojiManagementPage = () => {
                         rel="noopener noreferrer"
                         className="text-[10px] xs:text-xs sm:text-sm hover:underline break-all"
                       >
-                        <img
+                        <Image
                           src={emojiUrl(emoji)}
                           alt={emoji.name}
                           width={48}
                           height={48}
-                          className="object-contain w-10 h-10 xs:w-12 xs:h-12 sm:w-14 sm:h-14"
+                          unoptimized
+                          className="flex items-center justify-center object-contain w-10 h-10 xs:w-12 xs:h-12 sm:w-14 sm:h-14"
                         />
                         {toCapitalCase(emoji.name)}
                       </a>
