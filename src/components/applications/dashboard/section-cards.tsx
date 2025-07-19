@@ -82,7 +82,7 @@ export function SectionCards({ stats }: SectionCardsProps) {
           <CardTitle className="text-2xl font-bold tabular-nums text-yellow-600 dark:text-yellow-400 @[250px]/card:text-3xl">
             <CountUp
               from={0}
-              to={stats.totalBalanceCoin ?? 0}
+              to={stats?.totalBalanceCoin ?? 0}
               separator=","
               direction="up"
               duration={1}
@@ -120,7 +120,7 @@ export function SectionCards({ stats }: SectionCardsProps) {
           <CardTitle className="text-2xl font-bold tabular-nums text-blue-600 dark:text-blue-400 @[250px]/card:text-3xl">
             <CountUp
               from={0}
-              to={stats.totalBalanceBank ?? 0}
+              to={stats?.totalBalanceBank ?? 0}
               separator=","
               direction="up"
               duration={1}
@@ -146,7 +146,7 @@ export function SectionCards({ stats }: SectionCardsProps) {
           <CardTitle className="text-2xl font-bold tabular-nums text-purple-600 dark:text-purple-400 @[250px]/card:text-3xl">
             <CountUp
               from={0}
-              to={stats.averageLevel ?? 1}
+              to={stats?.averageLevel ?? 1}
               separator=","
               direction="up"
               duration={1}

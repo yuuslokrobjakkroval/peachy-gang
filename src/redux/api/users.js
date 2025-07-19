@@ -4,7 +4,25 @@ const extendedApi = emptySplitApi.injectEndpoints({
   endpoints: (builder) => ({
     getDashboard: builder.query({
       query: (params) => ({
-        url: `${process.env.NEXT_PUBLIC_API_ENDPOINT}/dashboard/stats`,
+        url: `${process.env.NEXT_PUBLIC_API_ENDPOINT}/api/dashboard/stats`,
+        method: "GET",
+        params,
+      }),
+      providesTags: [{ type: "USER", id: "LIST" }],
+    }),
+
+    getUserBalanceChart: builder.query({
+      query: (id, params) => ({
+        url: `${process.env.NEXT_PUBLIC_API_ENDPOINT}/api/chart/user/${id}`,
+        method: "GET",
+        params,
+      }),
+      providesTags: [{ type: "USER", id: "LIST" }],
+    }),
+
+    getTotalUsersBalanceChart: builder.query({
+      query: (params) => ({
+        url: `${process.env.NEXT_PUBLIC_API_ENDPOINT}/api/chart/total/balance`,
         method: "GET",
         params,
       }),
@@ -95,6 +113,8 @@ const extendedApi = emptySplitApi.injectEndpoints({
 
 export const {
   useGetDashboardQuery,
+  useGetUserBalanceChartQuery,
+  useGetTotalUsersBalanceChartQuery,
   useGetCustomersQuery,
   useGetTopCreditQuery,
   useGetTopCoinQuery,

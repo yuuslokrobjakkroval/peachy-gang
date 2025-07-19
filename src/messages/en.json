@@ -64,6 +64,8 @@
     "average_level": "Average Level",
     "based_on_xp": "Based on XP and activity",
     "growth_percentage": "+{percentage}%",
+    "total_balance_title": "Total Balance",
+    "total_balance_description": "Showing total balance for all users over time",
     "last_six_months": "Last 6 months",
     "last_three_months": "Last 3 months",
     "last_thirty_days": "Last 30 days",
@@ -75,7 +77,8 @@
       "blackjack": "Blackjack",
       "coinflip": "Coinflip",
       "klaklouk": "Klaklouk",
-      "sponsor": "Sponsor"
+      "sponsor": "Sponsor",
+      "credit": "Credit"
     },
     "no_data": "No user data available to display",
     "error": "An error occurred while fetching data. Please try again.",

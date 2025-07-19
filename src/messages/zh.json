@@ -62,6 +62,8 @@
     "based_on_xp": "基于XP和活动",
     "growth_percentage": "+{percentage}％",
     "last_six_months": "最近6个月",
+    "total_balance_title": "总余额",
+    "total_balance_description": "显示所有用户的总余额随时间变化",
     "last_three_months": "最近3个月",
     "last_thirty_days": "最近30天",
     "last_seven_days": "最近7天",

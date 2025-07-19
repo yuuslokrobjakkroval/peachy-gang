@@ -65,19 +65,20 @@
     "average_level": "កម្រិតជាមធ្យម",
     "based_on_xp": "ផ្អែកលើ XP និងសកម្មភាព",
     "growth_percentage": "+{percentage}%",
-    "last_six_months": "៦ ខែចុងក្រោយ",
-    "last_three_months": "៣ ខែចុងក្រោយ",
-    "last_thirty_days": "៣០ ថ្ងៃចុងក្រោយ",
-    "last_seven_days": "៧ ថ្ងៃចុងក្រោយ",
+    "total_balance_title": "សមតុល្យសរុប",
+    "total_balance_description": "បង្ហាញសមតុល្យសរុបសម្រាប់អ្នកប្រើប្រាស់ទាំងអស់តាមពេលវេលា",
     "information": {
       "coin": "កាក់",
       "bank": "ធនាគារ",
+      "sponsor": "អ្នកឧបត្ថម្ភ",
       "slots": "ស្លត",
-      "blackjack": "ប្លែកជែក",
-      "coinflip": "កាក់ស៊ើ",
-      "klaklouk": "ក្លាក្លូក",
-      "sponsor": "អ្នកឧបត្ថម្ភ"
+      "blackjack": "ប្ល៊ែកជែក",
+      "coinflip": "កាក់ហ្វ្លិប",
+      "klaklouk": "ក្លាក់ឡុក"
     },
+    "last_three_months": "៣ ខែចុងក្រោយ",
+    "last_thirty_days": "៣០ ថ្ងៃចុងក្រោយ",
+    "last_seven_days": "៧ ថ្ងៃចុងក្រោយ",
     "no_data": "គ្មានទិន្នន័យអ្នកប្រើអាចប្រើបាន"
   },
   "peachy": {

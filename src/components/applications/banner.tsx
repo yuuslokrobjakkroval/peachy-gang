@@ -22,10 +22,10 @@ const BannerPage = ({ item }: BannerPageProps) => {
   };
 
   return (
-    <div className="flex flex-col w-full rounded-xl bg-card border border-border hover:border-primary transition-all duration-300 overflow-hidden">
+    <div className="flex flex-col w-full overflow-hidden transition-all duration-300 border rounded-xl bg-card border-border hover:border-primary">
       {/* Content Container */}
       <div className="flex flex-col flex-1">
-        <p className="text-lg font-medium text-primary pl-5 pt-3 pb-3">
+        <p className="pt-3 pb-3 pl-5 text-lg font-medium text-primary">
           {item.name}
         </p>
       </div>
