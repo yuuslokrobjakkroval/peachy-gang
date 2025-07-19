@@ -224,8 +224,6 @@ export function HextaTable<T extends Record<string, any>>({
         variant === "minimal" && "bg-transparent border-none",
         className
       )}
-      role="table"
-      aria-label="Data table"
     >
       {searchable && (
         <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 p-6 pb-4">

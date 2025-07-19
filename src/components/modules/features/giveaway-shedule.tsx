@@ -66,7 +66,7 @@ export function GiveawayScheduleFeature({
   const [deleteId, setDeleteId] = useState<string | null>(null);
   const [deleteScheduleType, setDeleteScheduleType] = useState<string>("");
   const [editingSchedule, setEditingSchedule] = useState<Schedule | undefined>(
-    undefined
+    undefined,
   );
   const [searchQuery, setSearchQuery] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
@@ -90,7 +90,7 @@ export function GiveawayScheduleFeature({
           scheduleTime: Yup.string().required("Schedule time is required"),
           winners: Yup.number().required("Winners is required"),
           prize: Yup.number().required("Prize is required"),
-        })
+        }),
       ),
     }),
     onSubmit: async (values) => {
@@ -100,12 +100,12 @@ export function GiveawayScheduleFeature({
           tCommon("updateSuccess", { feature: toCapitalCase(feature) }),
           {
             description: tCommon("updateSuccessDescription"),
-          }
+          },
         );
         refetch();
       } catch (error) {
         toast.error(
-          tCommon("updateError", { feature: toCapitalCase(feature) })
+          tCommon("updateError", { feature: toCapitalCase(feature) }),
         );
       }
     },
@@ -128,12 +128,12 @@ export function GiveawayScheduleFeature({
     formik.values.schedules?.filter((schedule: Schedule) =>
       `${schedule.content} ${schedule.channel} ${schedule.scheduleType}`
         .toLowerCase()
-        .includes(searchQuery.toLowerCase())
+        .includes(searchQuery.toLowerCase()),
     ) || [];
 
   const paginatedSchedules = filteredSchedules.slice(
     (currentPage - 1) * rowsPerPage,
-    currentPage * rowsPerPage
+    currentPage * rowsPerPage,
   );
 
   const totalPages = Math.ceil(filteredSchedules.length / rowsPerPage) || 1;
@@ -149,7 +149,7 @@ export function GiveawayScheduleFeature({
         tCommon("disableSuccess", { feature: toCapitalCase(feature) }),
         {
           description: tCommon("disableSuccessDescription"),
-        }
+        },
       );
       refetch();
     } catch (error) {
@@ -177,12 +177,12 @@ export function GiveawayScheduleFeature({
         t("deleteSuccess", { type: toCapitalCase(deleteScheduleType) }),
         {
           description: t("deleteSuccessDescription"),
-        }
+        },
       );
       refetch();
     } catch (error) {
       toast.error(
-        t("deleteError", { type: toCapitalCase(deleteScheduleType) })
+        t("deleteError", { type: toCapitalCase(deleteScheduleType) }),
       );
     }
     setDeleteId(null);

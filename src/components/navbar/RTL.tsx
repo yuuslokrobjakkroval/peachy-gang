@@ -31,7 +31,6 @@ import {
 import ThemeChanger from "../theme.switch";
 import LanguageChanger from "../language.switch";
 import { useLocale, useTranslations } from "next-intl";
-import { authClient } from "@/lib/auth-client";
 import { AnimateIcon } from "../ui/Animations/animate/icons/icon";
 import { LogOut, Settings, User } from "lucide-react";
 
@@ -106,7 +105,7 @@ const RTLNavbar = (props: {
           <p>
             {t(
               languages.find((l) => l.code === language)?.nameKey ||
-                "languageTooltip"
+                "languageTooltip",
             )}
           </p>
         </TooltipContent>

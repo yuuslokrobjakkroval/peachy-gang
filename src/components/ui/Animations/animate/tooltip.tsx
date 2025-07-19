@@ -196,10 +196,10 @@ function TooltipProvider({
       const delay = now - lastCloseTimeRef.current < closeDelay ? 0 : openDelay;
       timeoutRef.current = window.setTimeout(
         () => setCurrentTooltip(data),
-        delay
+        delay,
       );
     },
-    [openDelay, closeDelay, currentTooltip]
+    [openDelay, closeDelay, currentTooltip],
   );
 
   const hideTooltip = React.useCallback(() => {
@@ -251,7 +251,7 @@ function TooltipArrow({ side }: TooltipArrowProps) {
         side === "top" && "-bottom-[3px]",
         side === "bottom" && "-top-[3px]",
         side === "left" && "-right-[3px]",
-        side === "right" && "-left-[3px]"
+        side === "right" && "-left-[3px]",
       )}
     />
   );
@@ -329,7 +329,7 @@ type TooltipContextType = {
 };
 
 const TooltipContext = React.createContext<TooltipContextType | undefined>(
-  undefined
+  undefined,
 );
 
 const useTooltip = () => {
@@ -422,7 +422,7 @@ function TooltipTrigger({ children }: TooltipTriggerProps) {
       (children.props as React.HTMLAttributes<HTMLElement>)?.onMouseEnter?.(e);
       handleOpen();
     },
-    [handleOpen, children.props]
+    [handleOpen, children.props],
   );
 
   const handleMouseLeave = React.useCallback(
@@ -430,7 +430,7 @@ function TooltipTrigger({ children }: TooltipTriggerProps) {
       (children.props as React.HTMLAttributes<HTMLElement>)?.onMouseLeave?.(e);
       hideTooltip();
     },
-    [hideTooltip, children.props]
+    [hideTooltip, children.props],
   );
 
   const handleFocus = React.useCallback(
@@ -438,7 +438,7 @@ function TooltipTrigger({ children }: TooltipTriggerProps) {
       (children.props as React.HTMLAttributes<HTMLElement>)?.onFocus?.(e);
       handleOpen();
     },
-    [handleOpen, children.props]
+    [handleOpen, children.props],
   );
 
   const handleBlur = React.useCallback(
@@ -446,7 +446,7 @@ function TooltipTrigger({ children }: TooltipTriggerProps) {
       (children.props as React.HTMLAttributes<HTMLElement>)?.onBlur?.(e);
       hideTooltip();
     },
-    [hideTooltip, children.props]
+    [hideTooltip, children.props],
   );
 
   React.useEffect(() => {

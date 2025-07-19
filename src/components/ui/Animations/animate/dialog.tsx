@@ -56,7 +56,7 @@ type DialogBackdropProps<TTag extends React.ElementType = typeof motion.div> =
   };
 
 function DialogBackdrop<TTag extends React.ElementType = typeof motion.div>(
-  props: DialogBackdropProps<TTag>
+  props: DialogBackdropProps<TTag>,
 ) {
   const { className, as = motion.div, ...rest } = props;
 
@@ -85,7 +85,7 @@ type DialogPanelProps<TTag extends React.ElementType = typeof motion.div> =
     };
 
 function DialogPanel<TTag extends React.ElementType = typeof motion.div>(
-  props: DialogPanelProps<TTag>
+  props: DialogPanelProps<TTag>,
 ) {
   const {
     children,
@@ -107,7 +107,7 @@ function DialogPanel<TTag extends React.ElementType = typeof motion.div>(
       data-slot="dialog-panel"
       className={cn(
         "fixed left-[50%] top-[50%] z-50 grid w-[calc(100%-2rem)] max-w-lg translate-x-[-50%] translate-y-[-50%] gap-4 border bg-background p-6 shadow-lg rounded-xl",
-        className
+        className,
       )}
       as={as as React.ElementType}
       initial={{
@@ -162,7 +162,7 @@ function DialogHeader<TTag extends React.ElementType = "div">({
       data-slot="dialog-header"
       className={cn(
         "flex flex-col space-y-1.5 text-center sm:text-left",
-        className
+        className,
       )}
       {...props}
     />
@@ -184,7 +184,7 @@ function DialogFooter({
       data-slot="dialog-footer"
       className={cn(
         "flex flex-col-reverse sm:flex-row sm:justify-end gap-2",
-        className
+        className,
       )}
       {...props}
     />
@@ -206,7 +206,7 @@ function DialogTitle<TTag extends React.ElementType = "h2">({
       data-slot="dialog-title"
       className={cn(
         "text-lg font-semibold leading-none tracking-tight",
-        className
+        className,
       )}
       {...props}
     />

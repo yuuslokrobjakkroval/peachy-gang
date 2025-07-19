@@ -19,7 +19,11 @@ const springConfig = {
   mass: 1,
 };
 
-export function UpdateFeatureToast({ state = "initial", onReset, onSave }: ToastProps) {
+export function UpdateFeatureToast({
+  state = "initial",
+  onReset,
+  onSave,
+}: ToastProps) {
   const commonClasses =
     "mt-6 h-12 bg-[var(--card)] rounded-[var(--radius)] shadow-sm border border-[var(--border)] justify-center items-center inline-flex overflow-hidden font-handwritten relative";
 

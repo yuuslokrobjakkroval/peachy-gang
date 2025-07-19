@@ -50,7 +50,7 @@ function Input({
           "aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive aria-invalid:!shadow-destructive",
           leftIcon && "pl-10",
           clearable && props.value && "pr-10",
-          className
+          className,
         )}
         {...props}
       />

@@ -1,7 +1,14 @@
-'use client';
+"use client";
 
-import type React from 'react';
-import { useCallback, useRef, useState, type ChangeEvent, type DragEvent, type InputHTMLAttributes } from 'react';
+import type React from "react";
+import {
+  useCallback,
+  useRef,
+  useState,
+  type ChangeEvent,
+  type DragEvent,
+  type InputHTMLAttributes,
+} from "react";
 
 export type FileMetadata = {
   name: string;
@@ -44,16 +51,20 @@ export type FileUploadActions = {
   handleDrop: (e: DragEvent<HTMLElement>) => void;
   handleFileChange: (e: ChangeEvent<HTMLInputElement>) => void;
   openFileDialog: () => void;
-  getInputProps: (props?: InputHTMLAttributes<HTMLInputElement>) => InputHTMLAttributes<HTMLInputElement> & {
+  getInputProps: (
+    props?: InputHTMLAttributes<HTMLInputElement>,
+  ) => InputHTMLAttributes<HTMLInputElement> & {
     ref: React.Ref<HTMLInputElement>;
   };
 };
 
-export const useFileUpload = (options: FileUploadOptions = {}): [FileUploadState, FileUploadActions] => {
+export const useFileUpload = (
+  options: FileUploadOptions = {},
+): [FileUploadState, FileUploadActions] => {
   const {
     maxFiles = Infinity,
     maxSize = Infinity,
-    accept = '*',
+    accept = "*",
     multiple = false,
     initialFiles = [],
     onFilesChange,
@@ -84,17 +95,17 @@ export const useFileUpload = (options: FileUploadOptions = {}): [FileUploadState
         }
       }
 
-      if (accept !== '*') {
-        const acceptedTypes = accept.split(',').map((type) => type.trim());
-        const fileType = file instanceof File ? file.type || '' : file.type;
-        const fileExtension = `.${file instanceof File ? file.name.split('.').pop() : file.name.split('.').pop()}`;
+      if (accept !== "*") {
+        const acceptedTypes = accept.split(",").map((type) => type.trim());
+        const fileType = file instanceof File ? file.type || "" : file.type;
+        const fileExtension = `.${file instanceof File ? file.name.split(".").pop() : file.name.split(".").pop()}`;
 
         const isAccepted = acceptedTypes.some((type) => {
-          if (type.startsWith('.')) {
+          if (type.startsWith(".")) {
             return fileExtension.toLowerCase() === type.toLowerCase();
           }
-          if (type.endsWith('/*')) {
-            const baseType = type.split('/')[0];
+          if (type.endsWith("/*")) {
+            const baseType = type.split("/")[0];
             return fileType.startsWith(`${baseType}/`);
           }
           return fileType === type;
@@ -110,12 +121,15 @@ export const useFileUpload = (options: FileUploadOptions = {}): [FileUploadState
     [accept, maxSize],
   );
 
-  const createPreview = useCallback((file: File | FileMetadata): string | undefined => {
-    if (file instanceof File) {
-      return URL.createObjectURL(file);
-    }
-    return file.url;
-  }, []);
+  const createPreview = useCallback(
+    (file: File | FileMetadata): string | undefined => {
+      if (file instanceof File) {
+        return URL.createObjectURL(file);
+      }
+      return file.url;
+    },
+    [],
+  );
 
   const generateUniqueId = useCallback((file: File | FileMetadata): string => {
     if (file instanceof File) {
@@ -128,13 +142,17 @@ export const useFileUpload = (options: FileUploadOptions = {}): [FileUploadState
     setState((prev) => {
       // Clean up object URLs
       prev.files.forEach((file) => {
-        if (file.preview && file.file instanceof File && file.file.type.startsWith('image/')) {
+        if (
+          file.preview &&
+          file.file instanceof File &&
+          file.file.type.startsWith("image/")
+        ) {
           URL.revokeObjectURL(file.preview);
         }
       });
 
       if (inputRef.current) {
-        inputRef.current.value = '';
+        inputRef.current.value = "";
       }
 
       const newState = {
@@ -164,7 +182,11 @@ export const useFileUpload = (options: FileUploadOptions = {}): [FileUploadState
       }
 
       // Check if adding these files would exceed maxFiles (only in multiple mode)
-      if (multiple && maxFiles !== Infinity && state.files.length + newFilesArray.length > maxFiles) {
+      if (
+        multiple &&
+        maxFiles !== Infinity &&
+        state.files.length + newFilesArray.length > maxFiles
+      ) {
         errors.push(`You can only upload a maximum of ${maxFiles} files.`);
         setState((prev) => ({ ...prev, errors }));
         return;
@@ -176,7 +198,9 @@ export const useFileUpload = (options: FileUploadOptions = {}): [FileUploadState
         // Only check for duplicates if multiple files are allowed
         if (multiple) {
           const isDuplicate = state.files.some(
-            (existingFile) => existingFile.file.name === file.name && existingFile.file.size === file.size,
+            (existingFile) =>
+              existingFile.file.name === file.name &&
+              existingFile.file.size === file.size,
           );
 
           // Skip duplicate files silently
@@ -213,7 +237,9 @@ export const useFileUpload = (options: FileUploadOptions = {}): [FileUploadState
         onFilesAdded?.(validFiles);
 
         setState((prev) => {
-          const newFiles = !multiple ? validFiles : [...prev.files, ...validFiles];
+          const newFiles = !multiple
+            ? validFiles
+            : [...prev.files, ...validFiles];
           onFilesChange?.(newFiles);
           return {
             ...prev,
@@ -230,7 +256,7 @@ export const useFileUpload = (options: FileUploadOptions = {}): [FileUploadState
 
       // Reset input value after handling files
       if (inputRef.current) {
-        inputRef.current.value = '';
+        inputRef.current.value = "";
       }
     },
     [
@@ -255,7 +281,7 @@ export const useFileUpload = (options: FileUploadOptions = {}): [FileUploadState
           fileToRemove &&
           fileToRemove.preview &&
           fileToRemove.file instanceof File &&
-          fileToRemove.file.type.startsWith('image/')
+          fileToRemove.file.type.startsWith("image/")
         ) {
           URL.revokeObjectURL(fileToRemove.preview);
         }
@@ -345,7 +371,7 @@ export const useFileUpload = (options: FileUploadOptions = {}): [FileUploadState
     (props: InputHTMLAttributes<HTMLInputElement> = {}) => {
       return {
         ...props,
-        type: 'file' as const,
+        type: "file" as const,
         onChange: handleFileChange,
         accept: props.accept || accept,
         multiple: props.multiple !== undefined ? props.multiple : multiple,
@@ -375,11 +401,11 @@ export const useFileUpload = (options: FileUploadOptions = {}): [FileUploadState
 
 // Helper function to format bytes to human-readable format
 export const formatBytes = (bytes: number, decimals = 2): string => {
-  if (bytes === 0) return '0 Bytes';
+  if (bytes === 0) return "0 Bytes";
 
   const k = 1024;
   const dm = decimals < 0 ? 0 : decimals;
-  const sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
+  const sizes = ["Bytes", "KB", "MB", "GB", "TB", "PB", "EB", "ZB", "YB"];
 
   const i = Math.floor(Math.log(bytes) / Math.log(k));
 

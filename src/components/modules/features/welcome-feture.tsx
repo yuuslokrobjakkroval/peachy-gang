@@ -61,7 +61,7 @@ export function WelcomeMessageFeature({
           description: tCommon("disableSuccessDescription"),
           duration: 1000,
           className: "bg-gradient-to-r from-pink-500 to-purple-500 text-white",
-        }
+        },
       );
       refetch();
     } catch (error) {
@@ -69,7 +69,7 @@ export function WelcomeMessageFeature({
         tCommon("disableError", { feature: toCapitalCase(feature) }),
         {
           duration: 1000,
-        }
+        },
       );
     }
   };
@@ -122,7 +122,7 @@ export function WelcomeMessageFeature({
           {
             description: tCommon("updateSuccessDescription"),
             duration: 2000,
-          }
+          },
         );
         refetch();
       } catch (error) {
@@ -130,7 +130,7 @@ export function WelcomeMessageFeature({
           tCommon("updateError", { feature: toCapitalCase(feature) }),
           {
             duration: 1000,
-          }
+          },
         );
       }
     },

@@ -143,7 +143,7 @@ export const SplittingText: React.FC<SplittingTextProps> = ({
               </motion.span>
               {type === "words" && " "}
             </React.Fragment>
-          )
+          ),
       )}
     </motion.span>
   );

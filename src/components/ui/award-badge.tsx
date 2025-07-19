@@ -95,7 +95,7 @@ export const AwardBadge = ({
   const getOppositeMatrix = (
     _matrix: string,
     clientY: number,
-    onMouseEnter?: boolean
+    onMouseEnter?: boolean,
   ) => {
     const { top, bottom } = getDimensions();
     const oppositeY = bottom - clientY + top;
@@ -148,12 +148,12 @@ export const AwardBadge = ({
     setDisableInOutOverlayAnimation(false);
     enterTimeout.current = setTimeout(
       () => setDisableInOutOverlayAnimation(true),
-      350
+      350,
     );
     requestAnimationFrame(() => {
       requestAnimationFrame(() => {
         setFirstOverlayPosition(
-          (Math.abs(xCenter - e.clientX) + Math.abs(yCenter - e.clientY)) / 1.5
+          (Math.abs(xCenter - e.clientX) + Math.abs(yCenter - e.clientY)) / 1.5,
         );
       });
     });
@@ -176,9 +176,9 @@ export const AwardBadge = ({
     setTimeout(
       () =>
         setFirstOverlayPosition(
-          (Math.abs(xCenter - e.clientX) + Math.abs(yCenter - e.clientY)) / 1.5
+          (Math.abs(xCenter - e.clientX) + Math.abs(yCenter - e.clientY)) / 1.5,
         ),
-      150
+      150,
     );
 
     if (isTimeoutFinished) {
@@ -201,11 +201,11 @@ export const AwardBadge = ({
         setDisableInOutOverlayAnimation(false);
         leaveTimeout1.current = setTimeout(
           () => setFirstOverlayPosition(-firstOverlayPosition / 4),
-          150
+          150,
         );
         leaveTimeout2.current = setTimeout(
           () => setFirstOverlayPosition(0),
-          300
+          300,
         );
         leaveTimeout3.current = setTimeout(() => {
           setDisableOverlayAnimation(false);
@@ -236,7 +236,7 @@ export const AwardBadge = ({
         transform: rotate(${e * 10}deg);
       }
     }
-    `
+    `,
     )
     .join(" ");
 

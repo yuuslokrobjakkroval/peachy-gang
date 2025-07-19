@@ -23,7 +23,7 @@ export function HeroPill({
       className={cn(
         "flex justify-center items-center space-x-2 rounded-full",
         "px-2 py-1 whitespace-pre",
-        className
+        className,
       )}
       initial={{ opacity: 0, y: -20 }}
       animate={{ opacity: 1, y: 0 }}
@@ -33,7 +33,7 @@ export function HeroPill({
         className={cn(
           "w-fit rounded-full bg-accent px-2 py-0.5",
           "text-xs font-medium text-primary sm:text-sm",
-          "text-center"
+          "text-center",
         )}
       >
         {announcement}

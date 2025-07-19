@@ -69,7 +69,7 @@ export function InviteTrackerFeature({
           description: tCommon("disableSuccessDescription"),
           duration: 1000,
           className: "bg-gradient-to-r from-pink-500 to-purple-500 text-white",
-        }
+        },
       );
       refetch();
     } catch (error) {
@@ -77,7 +77,7 @@ export function InviteTrackerFeature({
         tCommon("disableError", { feature: toCapitalCase(feature) }),
         {
           duration: 1000,
-        }
+        },
       );
     }
   };
@@ -132,7 +132,7 @@ export function InviteTrackerFeature({
             duration: 2000,
             className:
               "bg-gradient-to-r from-pink-500 to-purple-500 text-white",
-          }
+          },
         );
         refetch();
       } catch (error) {
@@ -140,7 +140,7 @@ export function InviteTrackerFeature({
           tCommon("updateError", { feature: toCapitalCase(feature) }),
           {
             duration: 1000,
-          }
+          },
         );
       }
     },

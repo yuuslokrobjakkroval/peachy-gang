@@ -26,7 +26,7 @@ const EmojiManagementPage = () => {
   const guildsTabs = guilds
     .filter(
       (guild) =>
-        (Number(guild.permissions) & PermissionFlags.ADMINISTRATOR) !== 0
+        (Number(guild.permissions) & PermissionFlags.ADMINISTRATOR) !== 0,
     )
     .map((guild) => ({
       id: guild.id,
@@ -48,7 +48,7 @@ const EmojiManagementPage = () => {
     if (!selectedGuildId) {
       const filtered = guilds.filter(
         (guild) =>
-          (Number(guild.permissions) & PermissionFlags.ADMINISTRATOR) !== 0
+          (Number(guild.permissions) & PermissionFlags.ADMINISTRATOR) !== 0,
       );
       setSelectedGuildId(filtered[0]?.id ?? null);
     }
@@ -57,7 +57,7 @@ const EmojiManagementPage = () => {
 
   const paginatedEmojis = stickers.slice(
     (page - 1) * emojisPerPage,
-    page * emojisPerPage
+    page * emojisPerPage,
   );
   const totalPages = Math.ceil(stickers.length / emojisPerPage);
 

@@ -22,7 +22,9 @@ const AnimatedCard = ({
           height={128}
         />
         <div className="text-center space-y-1">
-          <div className="text-2xl font-bold tracking-tight text-foreground">{title}</div>
+          <div className="text-2xl font-bold tracking-tight text-foreground">
+            {title}
+          </div>
 
           <p className="text-sm text-muted-foreground mt-2">{aboutProduct}</p>
         </div>

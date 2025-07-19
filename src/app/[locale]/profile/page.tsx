@@ -20,7 +20,7 @@ export default function Profile() {
     userInfoByDiscord?.id,
     {
       skip: !userInfoByDiscord,
-    }
+    },
   );
 
   if (isLoading) {

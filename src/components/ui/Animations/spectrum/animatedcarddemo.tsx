@@ -1,33 +1,35 @@
-import AnimatedCard from './animatedCard';
-import { easeInOut, motion } from 'framer-motion';
-import { useState } from 'react';
-
+import AnimatedCard from "./animatedCard";
+import { easeInOut, motion } from "framer-motion";
+import { useState } from "react";
 
 const tools = [
   {
-    imgSrc: '/tailwind.svg',
-    title: 'Tailwind CSS',
-
-    aboutProduct: 'A utility-first CSS framework for rapidly building custom UIs.',
-  },
-  {
-    imgSrc: '/nextjs.svg',
-    title: 'Next.js',
+    imgSrc: "/tailwind.svg",
+    title: "Tailwind CSS",
 
     aboutProduct:
-      'A React framework for production with server-side rendering and static site generation.',
+      "A utility-first CSS framework for rapidly building custom UIs.",
   },
   {
-    imgSrc: '/shadcn.svg',
-    title: 'Shadcn UI',
+    imgSrc: "/nextjs.svg",
+    title: "Next.js",
 
-    aboutProduct: 'Beautiful, accessible components built using Radix UI and Tailwind CSS.',
+    aboutProduct:
+      "A React framework for production with server-side rendering and static site generation.",
   },
   {
-    imgSrc: 'aceternity.svg',
-    title: 'Aceternity UI',
+    imgSrc: "/shadcn.svg",
+    title: "Shadcn UI",
 
-    aboutProduct: 'Beautiful, accessible components built using Shadcn UI and Tailwind CSS.',
+    aboutProduct:
+      "Beautiful, accessible components built using Radix UI and Tailwind CSS.",
+  },
+  {
+    imgSrc: "aceternity.svg",
+    title: "Aceternity UI",
+
+    aboutProduct:
+      "Beautiful, accessible components built using Shadcn UI and Tailwind CSS.",
   },
 ];
 
@@ -61,7 +63,11 @@ export default function AnimatedCardDemo() {
           }}
           className="absolute flex justify-center items-center "
         >
-          <AnimatedCard imgSrc={tool.imgSrc} title={tool.title} aboutProduct={tool.aboutProduct} />
+          <AnimatedCard
+            imgSrc={tool.imgSrc}
+            title={tool.title}
+            aboutProduct={tool.aboutProduct}
+          />
         </motion.div>
       ))}
     </div>
