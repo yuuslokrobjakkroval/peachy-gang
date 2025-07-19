@@ -23,22 +23,17 @@ const EmojiManagementPage = () => {
   const { guilds } = usePeachy();
   const [selectedGuildId, setSelectedGuildId] = useState<string | null>(null);
   const [page, setPage] = useState(1);
-  const emojisPerPage = 100;
+  const emojisPerPage = 30;
 
-  const guildsTabs = guilds
-    .filter(
-      (guild) =>
-        (Number(guild.permissions) & PermissionFlags.ADMINISTRATOR) !== 0
-    )
-    .map((guild) => ({
-      id: guild.id,
-      icon: guild.icon ? iconUrl(guild) : null,
-      label: guild.name,
-      onClick: () => {
-        setSelectedGuildId(guild.id);
-        setPage(1);
-      },
-    }));
+  const guildsTabs = guilds.map((guild) => ({
+    id: guild.id,
+    icon: guild.icon ? iconUrl(guild) : null,
+    label: guild.name,
+    onClick: () => {
+      setSelectedGuildId(guild.id);
+      setPage(1);
+    },
+  }));
 
   const { data: guild, isLoading: isGuildLoading } =
     useGetGuildInfoQuery(selectedGuildId);
@@ -101,6 +96,8 @@ const EmojiManagementPage = () => {
                       <a
                         href={emojiUrl(emoji)}
                         download
+                        target="_blank"
+                        rel="noopener noreferrer"
                         className="text-[10px] xs:text-xs sm:text-sm hover:underline break-all"
                       >
                         <img
