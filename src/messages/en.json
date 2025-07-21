@@ -36,7 +36,9 @@
     "privacy_policy": "Privacy Policy"
   },
   "home": {
-    "title": "Welcome to Peachy Gang",
+    "welcome": "Welcome",
+    "to": "to",
+    "peachy_gang": "PEACHY GANG",
     "get_started": "Get Started",
     "learn_more": "Learn More",
     "background_alt": "Peach and Goma illustration"
@@ -117,9 +119,9 @@
     }
   },
   "peachy": {
-    "title": "Peachy",
-    "description": "Chat with Peachy AI assistant",
-    "chat_title": "Chat With Peachy",
+    "title": "PEACHY",
+    "description": "Chat with PEACHY AI assistant",
+    "chat_title": "Chat With PEACHY",
     "type_message": "Type your message here...",
     "no_messages": "No messages yet",
     "send": "Send",
@@ -604,7 +606,7 @@
     "follow_us": "Follow Us",
     "newsletter": "Newsletter",
     "features": "Peachy’s Features",
-    "features_description": "Peachy spices up your server with fun emotes, economy, games, and more.\nYour go-to bot for engagement!",
+    "features_description": "PEACHY spices up your server with fun emotes, economy, games, and more.\nYour go-to bot for engagement!",
     "techno_language": "Tech & Languages",
     "techno_language_description": "Powered by Node.js, React, and more.\nSupports multiple languages for a seamless global experience!"
   },

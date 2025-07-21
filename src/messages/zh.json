@@ -33,14 +33,17 @@
     "privacy_policy": "隐私政策"
   },
   "home": {
-    "title": "欢迎来到 Peachy Gang",
+    "welcome": "欢迎",
+    "to": "来到",
+    "peachy_gang": "PEACHY GANG",
+    "title": "欢迎来到 PEACHY GANG",
     "get_started": "开始",
     "learn_more": "了解更多",
     "background_alt": "桃子和戈马插图"
   },
   "dashboard": {
     "title": "仪表板",
-    "description": "概述您的 Peachy 帮派社区统计和分析。",
+    "description": "概述您的 PEACHY 帮派社区统计和分析。",
     "loading": "加载仪表板数据...",
     "analytics_title": "社区分析",
     "analytics_description": "跟踪用户参与度和随着时间的推移增长。",
@@ -519,8 +522,8 @@
     "tagline": "Peach 和 Goma 起初是深受喜爱的角色，以其可爱冒险和温馨故事俘获全球人心。",
     "follow_us": "关注我们",
     "newsletter": "新闻通讯",
-    "features": "Peachy 的出色功能",
-    "features_description": "Peachy 为您的服务器增添乐趣，包含表情、经济、游戏等。\n是您参与的首选机器人！",
+    "features": "PEACHY 的出色功能",
+    "features_description": "PEACHY 为您的服务器增添乐趣，包含表情、经济、游戏等。\n是您参与的首选机器人！",
     "techno_language": "技术与语言",
     "techno_language_description": "由 Node.js、React 等技术驱动。\n支持多种语言，提供无缝全球体验！"
   },

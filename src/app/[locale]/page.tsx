@@ -68,6 +68,7 @@ import {
 import { Timeline } from "@/components/ui/timeline";
 import moment from "moment";
 import ImagePreview from "@/components/ui/Animations/spectrum/image-preview-dependecies";
+import TextMorphAnimation from "@/components/ui/Animations/bundui/text-morph";
 
 type FormData = {
   name: string;
@@ -100,6 +101,7 @@ export default function Peachy() {
   const getParams = () => ({
     limit: 3,
   });
+
   const {
     data: { items: topUser = [], meta } = { items: [], meta: {} },
     isSuccess,
@@ -109,12 +111,12 @@ export default function Peachy() {
   const userIds = useMemo(
     () => Array.from(new Set([...ownerId, ...staffId])),
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [ownerId, staffId],
+    [ownerId, staffId]
   );
   const { data: fetchUser } = useGetFetchUserByIdQuery(userIds);
 
   const images = slugs.map(
-    (slug) => `https://cdn.simpleicons.org/${slug}/${slug}`,
+    (slug) => `https://cdn.simpleicons.org/${slug}/${slug}`
   );
 
   const changelogTimeline = [
@@ -340,7 +342,7 @@ export default function Peachy() {
         EMAILJS_SERVICE_ID,
         EMAILJS_TEMPLATE_ID,
         templateParams,
-        EMAILJS_PUBLIC_KEY,
+        EMAILJS_PUBLIC_KEY
       );
       if (result.status === 200) {
         const toastId = toast.success(t("contact.success"), {
@@ -372,7 +374,7 @@ export default function Peachy() {
             label: <X className="w-4 h-4" />,
             onClick: () => toast.dismiss(toastId),
           },
-        },
+        }
       );
     } finally {
       setIsSubmitting(false);
@@ -407,7 +409,7 @@ export default function Peachy() {
                 </Badge>
                 <div
                   className={cn(
-                    "inline-flex items-center space-x-2 sm:space-x-3 rounded-full px-2 sm:px-4 transition-all ease-in hover:cursor-pointer",
+                    "inline-flex items-center space-x-2 sm:space-x-3 rounded-full px-2 sm:px-4 transition-all ease-in hover:cursor-pointer"
                   )}
                 >
                   {/* Logo with text */}
@@ -430,7 +432,7 @@ export default function Peachy() {
           <div
             style={styles}
             className={cn(
-              "fixed left-1/2 z-50 mx-auto rounded-2xl bg-card hidden lg:block",
+              "fixed left-1/2 z-50 mx-auto rounded-2xl bg-card hidden lg:block"
             )}
           >
             <ExpandableTabs
@@ -441,7 +443,7 @@ export default function Peachy() {
               onChange={(index: number) => {
                 if (!!index) {
                   const sectionId = navigation.find(
-                    (item) => item.name === expandableTabs[index].title,
+                    (item) => item.name === expandableTabs[index].title
                   )?.sectionId;
                   if (sectionId) {
                     scrollToSection(sectionId);
@@ -463,9 +465,10 @@ export default function Peachy() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
         >
-          <h1 className="mb-6 text-2xl text-center sm:text-3xl md:text-4xl lg:text-5xl font-ghibi-bold text-primary animate-twinkle sm:mb-8">
-            {t("home.title")}
-          </h1>
+          <TextMorphAnimation
+            className="mb-6 text-primary font-ghibi-bold text-4xl sm:text-5xl lg:text-6xl"
+            texts={[t("home.welcome"), t("home.to"), t("home.peachy_gang")]}
+          />
           <div className="w-full max-w-md mb-6 sm:max-w-lg md:max-w-xl lg:max-w-2xl sm:mb-8">
             <Image
               className="object-cover w-full h-auto rounded-lg"

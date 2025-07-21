@@ -37,7 +37,10 @@
     "privacy_policy": "គោលការណ៍ឯកជនភាព"
   },
   "home": {
-    "title": "សូមស្វាគមន៍មកកាន់ Peachy Gang",
+    "welcome": "សូមស្វាគមន៍",
+    "to": "មកកាន់",
+    "peachy_gang": "PEACHY GANG",
+    "title": " PEACHY GANG",
     "get_started": "ចាប់ផ្តើម",
     "learn_more": "ស្វែងយល់បន្ថែម",
     "background_alt": "រូបភាព Peach និង Goma"
@@ -82,9 +85,9 @@
     "no_data": "គ្មានទិន្នន័យអ្នកប្រើអាចប្រើបាន"
   },
   "peachy": {
-    "title": "Peachy",
-    "description": "ជជែកជាមួយជំនួយការ AI Peachy",
-    "chat_title": "ជជែកជាមួយ Peachy",
+    "title": "PEACHY",
+    "description": "ជជែកជាមួយជំនួយការ AI PEACHY",
+    "chat_title": "ជជែកជាមួយ PEACHY",
     "type_message": "វាយសាររបស់អ្នកនៅទីនេះ...",
     "no_messages": "មិនទាន់មានសារទេ",
     "send": "ផ្ញើ",
@@ -524,8 +527,8 @@
     "tagline": "Peach និង Goma គឺជាតួអង្គដ៏ចូលចិត្តដែលបានគាប់ចិត្តពិភពលោកជាមួយនឹងផ្សងព្រេងគួរឱ្យស្រឡាញ់ និងរឿងរ៉ាវរំភើបចិត្ត។",
     "follow_us": "តាមដានយើងខ្ញុំ",
     "newsletter": "សារព័ត៌មាន",
-    "features": "លក្ខណៈពិសេសរបស់ Peachy",
-    "features_description": "Peachy បន្ថែមរសជាតិដល់ Server របស់អ្នកជាមួយនឹងអារម្មណ៍សប្បាយ សេដ្ឋកិច្ច ហ្គេម និងច្រើនទៀត។\nជាប្រព័ន្ធផ្ទេរទិន្នន័យដ៏ល្អសម្រាប់ការចូលរួម!",
+    "features": "លក្ខណៈពិសេសរបស់ PEACHY",
+    "features_description": "PEACHY បន្ថែមរសជាតិដល់ Server របស់អ្នកជាមួយនឹងអារម្មណ៍សប្បាយ សេដ្ឋកិច្ច ហ្គេម និងច្រើនទៀត។\nជាប្រព័ន្ធផ្ទេរទិន្នន័យដ៏ល្អសម្រាប់ការចូលរួម!",
     "techno_language": "បច្ចេកវិទ្យា និងភាសា",
     "techno_language_description": "ជាប់ភ្ជាប់ជាមួយ Node.js, React និងច្រើនទៀត។\nគាំទ្រភាសាជាច្រើនសម្រាប់បទពិសោធន៍សកលដ៏រលូន!"
   },
