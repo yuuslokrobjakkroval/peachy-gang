@@ -56,7 +56,7 @@ const GridItem = ({ item }: GridItemProps) => {
                   borderWidth={3}
                 />
                 <div className="relative flex h-full flex-col justify-between gap-6 overflow-hidden rounded-xl border-[0.75px] bg-background/80 p-6 shadow-sm dark:shadow-[0px_0px_27px_0px_rgba(45,45,45,0.3)] md:p-6">
-                  <div className="relative flex flex-1 flex-col justify-between gap-3">
+                  <div className="relative flex flex-col justify-between flex-1 gap-3">
                     <div className="flex items-center justify-between">
                       <div className="space-y-3">
                         <h3 className="text-xl font-medium text-primary pt-0.5 leading-[1.375rem] tracking-[-0.04em] md:text-2xl md:leading-[1.875rem] text-balance">
@@ -68,7 +68,7 @@ const GridItem = ({ item }: GridItemProps) => {
                       </div>
                       {url && (
                         <Image
-                          className="rounded-lg object-cover"
+                          className="object-cover rounded-lg"
                           src={url}
                           alt={title}
                           width={128}

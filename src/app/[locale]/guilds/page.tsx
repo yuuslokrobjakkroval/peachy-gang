@@ -38,9 +38,9 @@ export default function GuildPage() {
         <div className="flex flex-col gap-4 py-4 md:gap-8 md:p-6">
           <div className="w-full">
             <div className="mb-6">
-              <div className="flex justify-start text-xs sm:text-sm uppercase">
-                <span className="text-muted-foreground rounded-md">
-                  <h2 className="flex text-2xl font-semibold tracking-tight text-primary gap-2 mb-2">
+              <div className="flex justify-start text-xs uppercase sm:text-sm">
+                <span className="rounded-md text-muted-foreground">
+                  <h2 className="flex gap-2 mb-2 text-2xl font-semibold tracking-tight text-primary">
                     {t("navigation.bots").toUpperCase()} <Bot />
                   </h2>
                 </span>
@@ -48,16 +48,16 @@ export default function GuildPage() {
               <Separator className="text-card-foreground" />
             </div>
 
-            <div className="w-ful mt-3 mb-3 flex h-fit flex-col gap-2 lg:grid lg:grid-cols-12">
+            <div className="flex flex-col gap-2 mt-3 mb-3 w-ful h-fit lg:grid lg:grid-cols-12">
               <div className="col-span-12 lg:!mb-0">
                 <AppdGlowingEffect items={botCard} />
               </div>
             </div>
 
             <div className="mb-6">
-              <div className="flex justify-start text-xs sm:text-sm uppercase">
-                <span className="text-muted-foreground rounded-md">
-                  <h2 className="flex text-2xl font-semibold tracking-tight text-primary gap-2 mb-2">
+              <div className="flex justify-start text-xs uppercase sm:text-sm">
+                <span className="rounded-md text-muted-foreground">
+                  <h2 className="flex gap-2 mb-2 text-2xl font-semibold tracking-tight text-primary">
                     {t("guilds.title").toUpperCase()} <Castle />
                   </h2>
                 </span>
@@ -66,13 +66,13 @@ export default function GuildPage() {
             </div>
 
             {hydratedGuilds?.length > 0 ? (
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-2 mt-3">
+              <div className="grid grid-cols-1 gap-2 mt-3 md:grid-cols-3">
                 <div className="col-span-12 lg:!mb-0">
                   <GuildGlowingEffect items={guildCard} />
                 </div>
               </div>
             ) : (
-              <div className="text-center py-8">
+              <div className="py-8 text-center">
                 <p className="text-muted-foreground">{t("guilds.no_guilds")}</p>
               </div>
             )}

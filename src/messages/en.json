@@ -419,7 +419,9 @@
       "nextButton": "Next",
       "noSchedules": "No giveaway schedules configured.",
       "headers": {
+        "no": "No.",
         "channel": "Channel",
+        "description": "Description",
         "scheduleType": "Schedule Type",
         "time": "Time",
         "dayDate": "Day/Date",
@@ -655,6 +657,7 @@
     "add": "Add",
     "save": "Save",
     "edit": "Edit",
+    "update": "Update",
     "delete": "Delete",
     "back": "Back",
     "next": "Next",

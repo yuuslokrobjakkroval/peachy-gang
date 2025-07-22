@@ -130,7 +130,7 @@ const bot = emptySplitApi.injectEndpoints({
     }),
 
     addGiveawaySchedule: builder.mutation({
-      query: ({ guild, feature, ...body }) => ({
+      query: ({ guild, feature, body }) => ({
         url: `${process.env.NEXT_PUBLIC_API_ENDPOINT}/guilds/${guild}/features/${feature}/create`,
         method: "POST",
         body,
@@ -140,7 +140,7 @@ const bot = emptySplitApi.injectEndpoints({
       ],
     }),
     updateGiveawaySchedule: builder.mutation({
-      query: ({ guild, feature, id, ...body }) => ({
+      query: ({ guild, feature, id, body }) => ({
         url: `${process.env.NEXT_PUBLIC_API_ENDPOINT}/guilds/${guild}/features/${feature}/update/${id}`,
         method: "PATCH",
         body,

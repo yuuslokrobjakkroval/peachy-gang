@@ -1,18 +1,14 @@
 import { AppConfig } from "./types";
 import { PermissionFlags } from "@/utils/common";
-import {
-  CLIENT_ID,
-  FIRST_SUB_CLIENT_ID,
-  SECOND_SUB_CLIENT_ID,
-} from "@/utils/auth/server";
 import { Gamepad, Music } from "lucide-react";
+import { CLIENT_ID, FIRST_SUB_CLIENT_ID, SECOND_SUB_CLIENT_ID } from "./auth/server";
 
 export const ownerId: string[] = process.env.OWNER_IDS?.split(",").map((id) =>
-  id.trim(),
+  id.trim()
 ) || ["966688007493140591", "946079190971732041"];
 
 export const staffId: string[] = process.env.STAFF_IDS?.split(",").map((id) =>
-  id.trim(),
+  id.trim()
 ) || ["765216076430180384", "1206564732388118558", "982564593039736842"];
 
 // AppConfig definitions remain the same
@@ -26,7 +22,7 @@ export const config: AppConfig = {
   icon: Gamepad,
   url: "https://i.imgur.com/b75yC08.jpg",
   banner: "https://i.imgur.com/kYXE4No.gif",
-  inviteUrl: `https://discord.com/api/oauth2/authorize?client_id=${CLIENT_ID}`,
+  inviteUrl: `https://discord.com/api/oauth2/authorize?client_id=${process.env.BOT_CLIENT_ID ?? CLIENT_ID}&permissions=8&scope=bot%20applications.commands`,
   guild: {
     filter: (guild) =>
       (Number(guild.permissions) & PermissionFlags.ADMINISTRATOR) !== 0,
@@ -43,7 +39,7 @@ export const configPeach: AppConfig = {
   icon: Music,
   url: "https://i.imgur.com/VoqnP9y.jpg",
   banner: "https://i.imgur.com/nDocQCG.gif",
-  inviteUrl: `https://discord.com/oauth2/authorize?client_id=${FIRST_SUB_CLIENT_ID}`,
+  inviteUrl: `https://discord.com/oauth2/authorize?client_id=${process.env.FIRST_SUB_BOT_CLIENT_ID ?? FIRST_SUB_CLIENT_ID}&permissions=8&scope=bot%20applications.commands`,
   guild: {
     filter: (guild) =>
       (Number(guild.permissions) & PermissionFlags.ADMINISTRATOR) !== 0,
@@ -59,7 +55,7 @@ export const configGoma: AppConfig = {
   icon: Music,
   url: "https://i.imgur.com/dzqPppx.jpg",
   banner: "https://i.imgur.com/eIdHzUJ.gif",
-  inviteUrl: `https://discord.com/oauth2/authorize?client_id=${SECOND_SUB_CLIENT_ID}`,
+  inviteUrl: `https://discord.com/oauth2/authorize?client_id=${process.env.SECOND_SUB_BOT_CLIENT_ID ?? SECOND_SUB_CLIENT_ID}&permissions=8&scope=bot%20applications.commands`,
   guild: {
     filter: (guild) =>
       (Number(guild.permissions) & PermissionFlags.ADMINISTRATOR) !== 0,

@@ -4,11 +4,12 @@ import React, { useEffect, useState } from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { motion } from "framer-motion";
-import { toCapitalCase } from "@/utils/common";
+import { toCapitalCase, toNumber } from "@/utils/common";
 import {
   useDisableFeatureMutation,
   useUpdateFeatureMutation,
   useDeleteGiveawayScheduleMutation,
+  useGetGuildChannelsQuery,
 } from "@/redux/api/guild";
 import {
   Table,
@@ -32,15 +33,13 @@ import { useTranslations } from "next-intl";
 import { Search } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Card } from "@/components/ui/card";
+
 interface Schedule {
   _id?: string;
   channel: string;
   isActive: boolean;
   content: string;
   scheduleType: "DAILY" | "WEEKLY" | "MONTHLY";
-  scheduleTime: string;
-  scheduleDay?: string;
-  scheduleDate?: number;
   winners: number;
   prize: number;
 }
@@ -55,6 +54,7 @@ export function GiveawayScheduleFeature({
   const tCommon = useTranslations("common");
   const tFeature = useTranslations("features");
   const t = useTranslations("giveawayScheduleFeature");
+  const { data: channels } = useGetGuildChannelsQuery(guild);
   const [updateFeature, { isSuccess: updateSuccess }] =
     useUpdateFeatureMutation();
   const [disableFeature, { isLoading: disableLoading }] =
@@ -66,7 +66,7 @@ export function GiveawayScheduleFeature({
   const [deleteId, setDeleteId] = useState<string | null>(null);
   const [deleteScheduleType, setDeleteScheduleType] = useState<string>("");
   const [editingSchedule, setEditingSchedule] = useState<Schedule | undefined>(
-    undefined,
+    undefined
   );
   const [searchQuery, setSearchQuery] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
@@ -87,10 +87,9 @@ export function GiveawayScheduleFeature({
           scheduleType: Yup.string()
             .oneOf(["DAILY", "WEEKLY", "MONTHLY"])
             .required("Schedule type is required"),
-          scheduleTime: Yup.string().required("Schedule time is required"),
           winners: Yup.number().required("Winners is required"),
-          prize: Yup.number().required("Prize is required"),
-        }),
+          prize: Yup.string().required("Prize is required"),
+        })
       ),
     }),
     onSubmit: async (values) => {
@@ -100,12 +99,12 @@ export function GiveawayScheduleFeature({
           tCommon("updateSuccess", { feature: toCapitalCase(feature) }),
           {
             description: tCommon("updateSuccessDescription"),
-          },
+          }
         );
         refetch();
       } catch (error) {
         toast.error(
-          tCommon("updateError", { feature: toCapitalCase(feature) }),
+          tCommon("updateError", { feature: toCapitalCase(feature) })
         );
       }
     },
@@ -128,12 +127,12 @@ export function GiveawayScheduleFeature({
     formik.values.schedules?.filter((schedule: Schedule) =>
       `${schedule.content} ${schedule.channel} ${schedule.scheduleType}`
         .toLowerCase()
-        .includes(searchQuery.toLowerCase()),
+        .includes(searchQuery.toLowerCase())
     ) || [];
 
   const paginatedSchedules = filteredSchedules.slice(
     (currentPage - 1) * rowsPerPage,
-    currentPage * rowsPerPage,
+    currentPage * rowsPerPage
   );
 
   const totalPages = Math.ceil(filteredSchedules.length / rowsPerPage) || 1;
@@ -149,7 +148,7 @@ export function GiveawayScheduleFeature({
         tCommon("disableSuccess", { feature: toCapitalCase(feature) }),
         {
           description: tCommon("disableSuccessDescription"),
-        },
+        }
       );
       refetch();
     } catch (error) {
@@ -177,12 +176,12 @@ export function GiveawayScheduleFeature({
         t("deleteSuccess", { type: toCapitalCase(deleteScheduleType) }),
         {
           description: t("deleteSuccessDescription"),
-        },
+        }
       );
       refetch();
     } catch (error) {
       toast.error(
-        t("deleteError", { type: toCapitalCase(deleteScheduleType) }),
+        t("deleteError", { type: toCapitalCase(deleteScheduleType) })
       );
     }
     setDeleteId(null);
@@ -191,14 +190,14 @@ export function GiveawayScheduleFeature({
 
   return (
     <motion.div
-      className="w-full container mx-auto xl:px-0"
+      className="container w-full mx-auto xl:px-0"
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
     >
-      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6">
+      <div className="flex flex-col gap-4 mb-6 sm:flex-row sm:items-center sm:justify-between">
         <div className="flex flex-col">
-          <h1 className="text-primary text-3xl md:text-4xl font-bold">
+          <h1 className="text-3xl font-bold text-primary md:text-4xl">
             {tFeature("giveaway-schedule")}
           </h1>
           <p className="text-muted-foreground">
@@ -228,12 +227,9 @@ export function GiveawayScheduleFeature({
       </div>
 
       <Card className="p-4">
-        <div className="flex flex-col sm:flex-row justify-between items-center mb-4 gap-4">
-          <h2 className="text-lg font-semibold text-primary">
-            {t("table.title")}
-          </h2>
-          <div className="relative flex-1 sm:w-64">
-            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 Tmuted-foreground" />
+        <div className="flex flex-col items-center justify-between gap-4 mb-4 sm:flex-row">
+          <div className="relative w-[350px]">
+            <Search className="absolute w-5 h-5 transform -translate-y-1/2 left-3 top-1/2 Tmuted-foreground" />
             <Input
               placeholder={t("table.searchPlaceholder")}
               value={searchQuery}
@@ -245,10 +241,10 @@ export function GiveawayScheduleFeature({
         <Table>
           <TableHeader>
             <TableRow>
+              <TableHead>{t("table.headers.no")}</TableHead>
               <TableHead>{t("table.headers.channel")}</TableHead>
+              <TableHead>{t("table.headers.description")}</TableHead>
               <TableHead>{t("table.headers.scheduleType")}</TableHead>
-              <TableHead>{t("table.headers.time")}</TableHead>
-              <TableHead>{t("table.headers.dayDate")}</TableHead>
               <TableHead>{t("table.headers.winners")}</TableHead>
               <TableHead>{t("table.headers.prize")}</TableHead>
               <TableHead>{t("table.headers.active")}</TableHead>
@@ -259,18 +255,18 @@ export function GiveawayScheduleFeature({
             {paginatedSchedules.length > 0 ? (
               paginatedSchedules.map((schedule: Schedule, index: number) => (
                 <TableRow key={schedule._id || index}>
-                  <TableCell>{schedule.channel}</TableCell>
-                  <TableCell>{schedule.scheduleType}</TableCell>
-                  <TableCell>{schedule.scheduleTime}</TableCell>
+                  <TableCell>{index + 1}</TableCell>
                   <TableCell>
-                    {schedule.scheduleType === "WEEKLY"
-                      ? schedule.scheduleDay
-                      : schedule.scheduleType === "MONTHLY"
-                        ? schedule.scheduleDate
-                        : "-"}
+                    {
+                      channels?.find(
+                        (channel: any) => channel?.id === schedule.channel
+                      )?.name
+                    }
                   </TableCell>
+                  <TableCell>{schedule.content}</TableCell>
+                  <TableCell>{schedule.scheduleType}</TableCell>
                   <TableCell>{schedule.winners}</TableCell>
-                  <TableCell>{schedule.prize}</TableCell>
+                  <TableCell>{toNumber(schedule.prize)}</TableCell>
                   <TableCell>{schedule.isActive ? "Yes" : "No"}</TableCell>
                   <TableCell className="flex gap-2">
                     <Button
@@ -308,7 +304,7 @@ export function GiveawayScheduleFeature({
             )}
           </TableBody>
         </Table>
-        <div className="flex justify-between items-center mt-4">
+        <div className="flex items-center justify-between mt-4">
           <p className="text-sm text-muted-foreground">
             {t("table.pagination", { currentPage, totalPages })}
           </p>

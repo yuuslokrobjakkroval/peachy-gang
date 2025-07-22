@@ -22,7 +22,7 @@ export const PostCard: React.FC<any> = ({ data }) => {
   const handleBookmark = () => setBookmarked((prev) => !prev);
 
   return (
-    <div className="max-w-[30rem] w-full rounded-ele bg-card border border-border p-4 flex flex-col gap-4 shadow-md animate-fade-in rounded-lg">
+    <div className="flex flex-col w-full gap-4 p-4 border rounded-lg shadow-md rounded-ele bg-card border-border animate-fade-in">
       {/* Header */}
       <div className="flex items-center justify-between gap-4">
         <div className="flex items-center gap-4">

@@ -50,7 +50,7 @@ export default function PeachyPage() {
           transition={{ duration: 0.2 }}
           className="z-50 flex items-center justify-center w-[140px] ml-auto"
         >
-          <div className="w-full max-w-xl p-4 mx-auto mt-8 space-y-4 border shadow-md animate-fade-in rounded-xl bg-card border-border">
+          <div className="w-full max-w-xl p-4 mt-8 space-y-4 border shadow-md animate-fade-in rounded-xl bg-card border-border">
             <Dialog open={open} onOpenChange={setOpen}>
               <DialogTrigger asChild>
                 <Button className="w-full font-ghibi-bold bg-primary text-primary-foreground hover:opacity-90">
@@ -79,13 +79,13 @@ export default function PeachyPage() {
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: 100 }}
           transition={{ duration: 0.2 }}
-          className="flex w-full my-3"
+          className="flex items-center justify-center w-full max-w-full my-3"
         >
           <div className="space-y-6 rounded-lg bg-background/50">
             {posts?.length > 0 ? (
               posts.map((post: any) => <PostCard key={post._id} data={post} />)
             ) : (
-              <div className="italic text-center text-muted-foreground font-ghibi">
+              <div className="juitalic text-muted-foreground font-ghibi">
                 No posts yet. Be the first to share something! 🌿
               </div>
             )}

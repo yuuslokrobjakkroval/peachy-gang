@@ -73,7 +73,7 @@ export function NavFooter({ user }: { user: UserInfo }) {
               className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground"
             >
               <Avatar className="w-8 h-8 rounded-lg">
-                <AvatarImage src="/images/favicon.ico" alt={"peachy"} />
+                <AvatarImage src="/favicon.ico" alt={"peachy"} />
                 <AvatarFallback className="rounded-lg">
                   {user?.global_name?.[0]}
                 </AvatarFallback>
