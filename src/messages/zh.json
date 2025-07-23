@@ -356,7 +356,8 @@
         "winners": "获奖者",
         "prize": "奖品",
         "active": "启用",
-        "actions": "操作"
+        "actions": "操作",
+        "createdBy": "创建者"
       }
     },
     "addButton": "添加计划",

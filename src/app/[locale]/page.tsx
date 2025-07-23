@@ -124,7 +124,7 @@ export default function Peachy() {
       title: moment("2024-07-27T06:40:24Z").format("Do MMM YYYY"),
       content: (
         <div className="space-y-4">
-          <p className="text-muted-foreground text-xs md:text-sm font-normal mb-8">
+          <p className="mb-8 text-xs font-normal text-muted-foreground md:text-sm">
             Built and launched Peachy, a community-driven platform for discord
           </p>
           <div className="grid grid-cols-2 gap-4">
@@ -164,7 +164,7 @@ export default function Peachy() {
       title: moment("2024-09-28T06:40:24Z").format("Do MMM YYYY"),
       content: (
         <div className="space-y-4">
-          <p className="text-muted-foreground text-xs md:text-sm font-normal">
+          <p className="text-xs font-normal text-muted-foreground md:text-sm">
             I cloned an open-source Discord bot dashboard from{" "}
             <a
               className="text-primary hover:underline"
@@ -204,11 +204,11 @@ export default function Peachy() {
       title: moment("2025-04-06T06:21:33Z").format("Do MMM YYYY"),
       content: (
         <div className="space-y-4">
-          <p className="text-muted-foreground text-xs md:text-sm font-normal">
+          <p className="text-xs font-normal text-muted-foreground md:text-sm">
             I created my own dashboard using Next.js (App Router) and Shadcn UI
             with Ghibli for a responsive UI.
           </p>
-          <p className="text-muted-foreground text-xs md:text-sm font-normal">
+          <p className="text-xs font-normal text-muted-foreground md:text-sm">
             The theme is sourced from{" "}
             <a
               className="text-primary hover:underline"
@@ -229,10 +229,10 @@ export default function Peachy() {
             </a>
             —huge shout-out for an exceptional UI theme!
           </p>
-          <p className="text-muted-foreground text-xs md:text-sm font-normal">
+          <p className="text-xs font-normal text-muted-foreground md:text-sm">
             Also inspired by amazing UI libraries:
           </p>
-          <ul className="list-disc pl-5 space-y-2 text-xs md:text-sm text-muted-foreground">
+          <ul className="pl-5 space-y-2 text-xs list-disc md:text-sm text-muted-foreground">
             <li>
               <a
                 className="text-primary hover:underline"
@@ -416,7 +416,7 @@ export default function Peachy() {
                   <span className="flex items-center space-x-2 text-xl transition-transform sm:space-x-3 sm:text-2xl font-ghibi-bold text-primary dark:text-foreground hover:scale-105">
                     <Image
                       className="w-8 mb-1 sm:w-10"
-                      src="/images/favicon.ico"
+                      src="/favicon.ico"
                       alt="Peachy Logo"
                       width={48}
                       height={48}
@@ -466,7 +466,7 @@ export default function Peachy() {
           transition={{ duration: 0.5 }}
         >
           <TextMorphAnimation
-            className="mb-6 text-primary font-ghibi-bold text-4xl sm:text-5xl lg:text-6xl"
+            className="mb-6 text-4xl text-primary font-ghibi-bold sm:text-5xl lg:text-6xl"
             texts={[t("home.welcome"), t("home.to"), t("home.peachy_gang")]}
           />
           <div className="w-full max-w-md mb-6 sm:max-w-lg md:max-w-xl lg:max-w-2xl sm:mb-8">
@@ -829,7 +829,7 @@ export default function Peachy() {
                 >
                   <Image
                     className="w-6 mb-2 sm:w-8 hover:animate-pulse"
-                    src="/images/favicon.ico"
+                    src="/favicon.ico"
                     alt="Peachy Logo"
                     width={48}
                     height={48}

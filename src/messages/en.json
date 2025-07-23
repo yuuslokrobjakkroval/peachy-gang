@@ -428,7 +428,8 @@
         "winners": "Winners",
         "prize": "Prize",
         "active": "Active",
-        "actions": "Actions"
+        "actions": "Actions",
+        "createdBy": "Created By"
       },
       "editLabel": "Edit schedule {id}",
       "deleteLabel": "Delete schedule {id}"

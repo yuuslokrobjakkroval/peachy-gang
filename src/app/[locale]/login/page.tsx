@@ -23,14 +23,14 @@ export default function LoginPage() {
               </Badge>
               <div
                 className={cn(
-                  "inline-flex items-center space-x-3 rounded-full px-4 transition-all ease-in hover:cursor-pointer",
+                  "inline-flex items-center space-x-3 rounded-full px-4 transition-all ease-in hover:cursor-pointer"
                 )}
               >
                 {/* Logo with text */}
                 <span className="flex items-center space-x-3 text-2xl transition-transform font-ghibi-bold text-primary dark:text-foreground hover:scale-105">
                   <Image
                     className="w-10 mb-1"
-                    src="/images/favicon.ico"
+                    src="/favicon.ico"
                     alt="Peachy Logo"
                     width={48}
                     height={48}

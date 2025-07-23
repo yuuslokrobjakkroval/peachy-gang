@@ -24,7 +24,11 @@ const spanVariants = {
   exit: { width: 0, opacity: 0 },
 };
 
-const transition = { delay: 0.1, type: "spring", bounce: 0, duration: 0.6 };
+const transition = {
+  delay: 0.1,
+  bounce: 0,
+  duration: 0.6,
+};
 
 export function MainNav() {
   const router = useRouter();
@@ -38,11 +42,11 @@ export function MainNav() {
           router.push("/");
         }}
         transition={transition}
-        className="relative flex items-center rounded-xl px-4 py-2 text-sm font-medium transition-colors duration-300 text-muted-foreground hover:bg-muted hover:text-foreground"
+        className="relative flex items-center px-4 py-2 text-sm font-medium transition-colors duration-300 rounded-xl text-muted-foreground hover:bg-muted hover:text-foreground"
       >
         <div className="px-2">
           <Image
-            src="/images/favicon.ico"
+            src="/favicon.ico"
             alt="Peachy Logo"
             width={48}
             height={48}
@@ -70,7 +74,7 @@ export function MainNav() {
           router.push("/admin/user-management");
         }}
         transition={transition}
-        className="relative flex items-center rounded-xl px-4 py-2 text-sm font-medium transition-colors duration-300 text-muted-foreground hover:bg-muted hover:text-foreground"
+        className="relative flex items-center px-4 py-2 text-sm font-medium transition-colors duration-300 rounded-xl text-muted-foreground hover:bg-muted hover:text-foreground"
       >
         <AnimatePresence initial={false}>
           <motion.span
@@ -93,7 +97,7 @@ export function MainNav() {
           router.push("/roles");
         }}
         transition={transition}
-        className="relative flex items-center rounded-xl px-4 py-2 text-sm font-medium transition-colors duration-300 text-muted-foreground hover:bg-muted hover:text-foreground"
+        className="relative flex items-center px-4 py-2 text-sm font-medium transition-colors duration-300 rounded-xl text-muted-foreground hover:bg-muted hover:text-foreground"
       >
         <AnimatePresence initial={false}>
           <motion.span

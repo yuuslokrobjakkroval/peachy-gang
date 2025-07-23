@@ -1,4 +1,4 @@
-import React, { forwardRef } from "react";
+import React, { forwardRef, useEffect, useMemo, useState } from "react";
 import { useGetGuildRolesQuery } from "@/redux/api/guild";
 import {
   Command,
@@ -33,11 +33,21 @@ export const MultiRoleSelectForm = forwardRef<
   HTMLDivElement,
   RoleSelectFormProps
 >(({ control, guild, value, onChange, description, className }, ref) => {
+  const [searchValue, setSearchValue] = useState("");
   const { data: roles = [], isLoading, isError } = useGetGuildRolesQuery(guild);
 
-  const options: Role[] =
-    roles?.filter((role: Role) => role.name !== "@everyone" && !role.tags) ||
-    [];
+  const options: Role[] = useMemo(
+    () =>
+      roles?.filter((role: Role) => role.name !== "@everyone" && !role.tags) ||
+      [],
+    [roles]
+  );
+
+  const filteredOptions = useMemo(() => {
+    return options?.filter((role: Role) =>
+      role.name.toLowerCase().includes(searchValue.toLowerCase())
+    );
+  }, [options, searchValue]);
 
   const handleChange = (selectedValue: string) => {
     if (selectedValue === "no-roles") return;
@@ -70,23 +80,25 @@ export const MultiRoleSelectForm = forwardRef<
             <CommandInput
               placeholder="Select roles"
               className={value.length > 0 ? "" : "text-muted-foreground"}
-              disabled={isLoading || options.length === 0}
+              disabled={isLoading || options?.length === 0}
+              value={searchValue}
+              onValueChange={(value) => setSearchValue(value)}
             />
-            <CommandList className="max-h-45 overflow-y-auto">
+            <CommandList className="overflow-y-auto max-h-45">
               {isLoading ? (
                 <div className="flex items-center justify-center p-2">
-                  <Spinner variant="ellipsis" className="h-4 w-4" />
+                  <Spinner variant="ellipsis" className="w-4 h-4" />
                 </div>
               ) : (
                 <>
-                  <CommandEmpty>No roles available</CommandEmpty>
+                  <CommandEmpty>No roles found</CommandEmpty>
                   <CommandGroup>
-                    {options.map((option: Role) => (
+                    {filteredOptions.map((option: Role) => (
                       <CommandItem
                         key={option.id}
-                        value={option.id}
+                        value={option.name}
                         onSelect={() => handleChange(option.id)}
-                        className="flex items-center gap-2 p-2 hover:bg-primary/10 rounded-md cursor-pointer"
+                        className="flex items-center gap-2 p-2 rounded-md cursor-pointer hover:bg-primary/10"
                       >
                         {roleIconUrl(option) ? (
                           <Image
@@ -97,7 +109,7 @@ export const MultiRoleSelectForm = forwardRef<
                             height={24}
                           />
                         ) : (
-                          <User className="h-6 w-6 text-muted-foreground" />
+                          <User className="w-6 h-6 text-muted-foreground" />
                         )}
                         <span
                           className={
@@ -109,7 +121,7 @@ export const MultiRoleSelectForm = forwardRef<
                           {option.name}
                         </span>
                         {value.includes(option.id) && (
-                          <Check className="ml-auto h-4 w-4 text-primary" />
+                          <Check className="w-4 h-4 ml-auto text-primary" />
                         )}
                       </CommandItem>
                     ))}
@@ -118,19 +130,19 @@ export const MultiRoleSelectForm = forwardRef<
               )}
             </CommandList>
           </Command>
-          {/* Display selected roles below the Command input */}
+
           {value.length > 0 && (
-            <div className="mt-2 flex flex-wrap gap-2">
+            <div className="flex flex-wrap gap-2 mt-2">
               {options
                 .filter((option: Role) => value.includes(option.id))
                 .map((option: Role) => (
                   <span
                     key={option.id}
-                    className="inline-flex items-center gap-1 px-2 py-1 bg-primary/10 text-primary rounded-full text-sm"
+                    className="inline-flex items-center gap-1 px-2 py-1 text-sm rounded-full bg-primary/10 text-primary"
                   >
                     {option.name}
                     <button
-                      type="button" // Prevent form submission
+                      type="button"
                       onClick={() => handleChange(option.id)}
                       className="ml-1 text-primary hover:text-red-500"
                     >

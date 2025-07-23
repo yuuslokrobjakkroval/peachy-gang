@@ -359,7 +359,8 @@
         "winners": "អ្នកឈ្នះ",
         "prize": "រង្វាន់",
         "active": "សកម្ម",
-        "actions": "សកម្មភាព"
+        "actions": "សកម្មភាព",
+        "createdBy": "បង្កើតដោយ"
       },
       "editLabel": "កែសម្រួលកាលវិភាគ {id}",
       "deleteLabel": "លុបកាលវិភាគ {id}"

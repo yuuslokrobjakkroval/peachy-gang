@@ -33,6 +33,7 @@ import { useTranslations } from "next-intl";
 import { Search } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Card } from "@/components/ui/card";
+import { useGetUsersQuery } from "@/redux/api/users";
 
 interface Schedule {
   _id?: string;
@@ -42,6 +43,10 @@ interface Schedule {
   scheduleType: "DAILY" | "WEEKLY" | "MONTHLY";
   winners: number;
   prize: number;
+  autopay: boolean;
+  roles: any[];
+  image: string;
+  createdBy: string;
 }
 
 export function GiveawayScheduleFeature({
@@ -55,6 +60,10 @@ export function GiveawayScheduleFeature({
   const tFeature = useTranslations("features");
   const t = useTranslations("giveawayScheduleFeature");
   const { data: channels } = useGetGuildChannelsQuery(guild);
+  const {
+    data: { items: users = [], meta } = { items: [], meta: {} },
+    isSuccess,
+  } = useGetUsersQuery(null);
   const [updateFeature, { isSuccess: updateSuccess }] =
     useUpdateFeatureMutation();
   const [disableFeature, { isLoading: disableLoading }] =
@@ -248,6 +257,7 @@ export function GiveawayScheduleFeature({
               <TableHead>{t("table.headers.winners")}</TableHead>
               <TableHead>{t("table.headers.prize")}</TableHead>
               <TableHead>{t("table.headers.active")}</TableHead>
+              <TableHead>{t("table.headers.createdBy")}</TableHead>
               <TableHead>{t("table.headers.actions")}</TableHead>
             </TableRow>
           </TableHeader>
@@ -268,6 +278,13 @@ export function GiveawayScheduleFeature({
                   <TableCell>{schedule.winners}</TableCell>
                   <TableCell>{toNumber(schedule.prize)}</TableCell>
                   <TableCell>{schedule.isActive ? "Yes" : "No"}</TableCell>
+                  <TableCell>
+                    {(isSuccess &&
+                      users?.find(
+                        (user: any) => user.userId === schedule.createdBy
+                      )?.username) ??
+                      ""}
+                  </TableCell>
                   <TableCell className="flex gap-2">
                     <Button
                       variant="ghost"
