@@ -69,11 +69,8 @@ import { Timeline } from "@/components/ui/timeline";
 import moment from "moment";
 import ImagePreview from "@/components/ui/Animations/spectrum/image-preview-dependecies";
 import TextMorphAnimation from "@/components/ui/Animations/bundui/text-morph";
-<<<<<<< HEAD
 import { GitHubStarsButton } from "../../components/ui/Animations/animate/buttons/github-stars";
-=======
 import FireCursor from "@/components/ui/Animations/fire-cursor";
->>>>>>> a9b907273153747276c90e8a3b88b57d5610837f
 
 type FormData = {
   name: string;
