@@ -15,6 +15,7 @@ export const FIRST_SUB_CLIENT_ID = process.env
 export const SECOND_SUB_CLIENT_ID = process.env
   .SECOND_SUB_BOT_CLIENT_ID as string;
 export const BETTER_AUTH_URL = process.env.BETTER_AUTH_URL as string;
+export const GITHUB_TOKEN = process.env.GITHUB_TOKEN as string;
 
 const TokenCookie = "ts-token";
 

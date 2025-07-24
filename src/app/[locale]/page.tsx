@@ -69,6 +69,7 @@ import { Timeline } from "@/components/ui/timeline";
 import moment from "moment";
 import ImagePreview from "@/components/ui/Animations/spectrum/image-preview-dependecies";
 import TextMorphAnimation from "@/components/ui/Animations/bundui/text-morph";
+import { GitHubStarsButton } from "../../components/ui/Animations/animate/buttons/github-stars";
 
 type FormData = {
   name: string;
@@ -426,6 +427,12 @@ export default function Peachy() {
                 </div>
               </span>
             </Link>
+            <div className="flex flex-col w-auto gap-3 text-center sm:text-left">
+              <GitHubStarsButton
+                username="yuuslokrobjakkroval"
+                repo="peachy-gang"
+              />
+            </div>
           </nav>
 
           {/* Expandable Tabs - Hidden on mobile, visible on larger screens */}
@@ -820,7 +827,7 @@ export default function Peachy() {
         <TooltipProvider>
           <footer className="relative grid max-w-screen-xl grid-cols-1 gap-6 px-4 pt-6 mx-auto mt-5 transition-all duration-500 sm:gap-8 sm:pt-8 sm:grid-cols-2 lg:grid-cols-5 bg-gradient-to-r sm:px-6">
             {/* Logo and Tagline */}
-            <div className="relative lg:col-span-2">
+            <div className="relative justify-between lg:col-span-2">
               <div className="flex flex-col w-full max-w-3xl gap-3 mx-auto text-center sm:text-left">
                 <Link
                   href="/"

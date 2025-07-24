@@ -13,6 +13,7 @@ const nextConfig: NextConfig = {
     BETTER_AUTH_SECRET: process.env.BETTER_AUTH_SECRET,
     OWNER_IDS: process.env.OWNER_IDS,
     STAFF_IDS: process.env.STAFF_IDS,
+    GITHUB_TOKEN: process.env.GITHUB_TOKEN,
   },
   reactStrictMode: true,
   images: {
