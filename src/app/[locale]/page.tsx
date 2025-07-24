@@ -69,6 +69,7 @@ import { Timeline } from "@/components/ui/timeline";
 import moment from "moment";
 import ImagePreview from "@/components/ui/Animations/spectrum/image-preview-dependecies";
 import TextMorphAnimation from "@/components/ui/Animations/bundui/text-morph";
+import FireCursor from "@/components/ui/Animations/fire-cursor";
 
 type FormData = {
   name: string;
@@ -393,6 +394,7 @@ export default function Peachy() {
   return (
     <>
       {/* <SplashCursor /> */}
+      <FireCursor />
       <div className="flex flex-wrap items-center justify-center gap-4 my-2">
         <AwardBadge title="Golden Award" content="PEACHY in Your Area 🌸" />
       </div>
