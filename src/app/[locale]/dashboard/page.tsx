@@ -33,8 +33,7 @@ import { FeatureUsageLineChart } from "@/components/applications/dashboard/featu
 export default function DashboardPage() {
   const chatIconRef = useRef<HTMLButtonElement>(null);
   const t = useTranslations();
-  const { userInfoByDiscord } = usePeachy();
-  const storedAccount = localStorage.getItem("account");
+  const { userInfoByDiscord, account } = usePeachy();
   const [amount, setAmount] = useState<number>(0);
   const [isChatOpen, setIsChatOpen] = useState(false);
   const [qrLoading, setQrLoading] = useState(false);
@@ -105,10 +104,10 @@ export default function DashboardPage() {
   };
 
   useEffect(() => {
-    if (storedAccount?.length > 0) {
+    if (account && account?.length > 0) {
       refetch();
     }
-  }, [storedAccount]);
+  }, [account]);
 
   return (
     <div className="relative w-full px-2 overflow-hidden rounded-lg sm:px-4 md:px-6">
