@@ -58,7 +58,6 @@ const balanceTypes = [
   "klaklouk",
 ];
 
-// Function to transform API data to chart format
 const transformChartData = (apiData: any) => {
   if (
     !apiData ||
@@ -66,7 +65,6 @@ const transformChartData = (apiData: any) => {
     !Array.isArray(apiData.datasets) ||
     apiData.datasets.length === 0
   ) {
-    console.warn("Invalid or empty API data:", apiData);
     return fallbackChartData;
   }
 
@@ -127,8 +125,7 @@ export function TotalBalanceAreaChart() {
   const getParams = () => {
     const days = parseInt(timeRange, 10);
     if (isNaN(days)) {
-      console.warn("Invalid timeRange value:", timeRange);
-      return { days: 90 }; // Default to 90 days
+      return { days: 90 };
     }
     return { days };
   };
@@ -152,10 +149,6 @@ export function TotalBalanceAreaChart() {
     try {
       const referenceDate = new Date(chartData[chartData.length - 1].date);
       if (isNaN(referenceDate.getTime())) {
-        console.warn(
-          "Invalid reference date:",
-          chartData[chartData.length - 1].date
-        );
         return fallbackChartData;
       }
 
