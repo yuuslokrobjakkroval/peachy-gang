@@ -4,7 +4,7 @@ const extendedApi = emptySplitApi.injectEndpoints({
   endpoints: (builder) => ({
     getDashboard: builder.query({
       query: (params) => ({
-        url: `${process.env.NEXT_PUBLIC_API_ENDPOINT}/api/dashboard/stats`,
+        url: `${process.env.NEXT_PUBLIC_API_ENDPOINT}/api/chart/stats`,
         method: "GET",
         params,
       }),
