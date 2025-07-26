@@ -5,10 +5,11 @@ import { AwardIcon, TrendingUpIcon, UserIcon } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import {
   Card,
-  CardDescription,
-  CardFooter,
   CardHeader,
   CardTitle,
+  CardDescription,
+  CardContent,
+  CardFooter,
 } from "@/components/ui/card";
 import CountUp from "@/components/ui/Animations/count-up";
 import { useGetDashboardQuery } from "@/redux/api/users";
