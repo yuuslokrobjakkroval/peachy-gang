@@ -1,6 +1,8 @@
 "use client";
 
 import React, { useEffect, useRef, useState } from "react";
+import Image from "next/image";
+
 import { AnimatePresence, motion } from "framer-motion";
 import { useTranslations } from "next-intl";
 import { useGetDashboardQuery } from "@/redux/api/users";
@@ -10,7 +12,6 @@ import {
 } from "@/redux/api/payment";
 import { usePeachy } from "@/contexts/peachy";
 import { SectionCards } from "@/components/applications/dashboard/section-cards";
-import Loading from "@/components/loading/circle";
 import { Meteors } from "@/components/ui/Animations/magic/meteors";
 import { Gift, Loader2, PawPrint, Send, X } from "lucide-react";
 import {
@@ -25,7 +26,6 @@ import {
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import Image from "next/image";
 import { UserBalancePieChart } from "@/components/applications/dashboard/user-balance-pie-chart";
 import { TotalBalanceAreaChart } from "@/components/applications/dashboard/total-balance-area-chart";
 import { FeatureUsageLineChart } from "@/components/applications/dashboard/feature-usage-line-chart";
@@ -58,7 +58,7 @@ export default function DashboardPage() {
     }
   };
 
-  const { data: dashboard, isLoading, refetch } = useGetDashboardQuery(null);
+  const { data: dashboard, refetch } = useGetDashboardQuery(null);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -134,7 +134,7 @@ export default function DashboardPage() {
               </p>
             </div>
           </div>
-          {isLoading ? <Loading /> : <SectionCards stats={dashboard} />}
+          <SectionCards stats={dashboard} />
           <div className="px-2 sm:px-4 lg:px-6">
             <div className="flex flex-col gap-4">
               <div className="flex flex-col gap-2">
