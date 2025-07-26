@@ -105,16 +105,7 @@ export default function DashboardPage() {
   };
 
   useEffect(() => {
-    return () => {
-      const overlay = document.querySelector("[data-radix-ui-portal]");
-      if (overlay) {
-        overlay.remove();
-      }
-    };
-  }, []);
-
-  useEffect(() => {
-    if (storedAccount) {
+    if (storedAccount?.length > 0) {
       refetch();
     }
   }, [storedAccount]);
