@@ -11,13 +11,11 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import CountUp from "@/components/ui/Animations/count-up";
+import { useGetDashboardQuery } from "@/redux/api/users";
 
-interface SectionCardsProps {
-  stats: any;
-}
-
-export function SectionCards({ stats }: SectionCardsProps) {
+export function SectionCards() {
   const t = useTranslations("dashboard");
+  const { data: stats } = useGetDashboardQuery(null);
 
   return (
     <div className="grid grid-cols-1 gap-4 px-4 @xl/main:grid-cols-2 @5xl/main:grid-cols-4 lg:px-6">

@@ -138,17 +138,14 @@ export function TotalBalanceAreaChart() {
 
   const chartData = React.useMemo(() => {
     if (!apiData) {
-      console.log("No API data, using fallback");
       return fallbackChartData;
     }
     const transformed = transformChartData(apiData);
-    console.log("Transformed chart data:", transformed);
     return transformed;
   }, [apiData]);
 
   const filteredData = React.useMemo(() => {
     if (!chartData || chartData.length === 0) {
-      console.log("No chart data, using fallback");
       return fallbackChartData;
     }
 
@@ -164,7 +161,6 @@ export function TotalBalanceAreaChart() {
 
       const daysToSubtract = parseInt(timeRange, 10);
       if (isNaN(daysToSubtract)) {
-        console.warn("Invalid daysToSubtract:", timeRange);
         return chartData;
       }
 
@@ -175,7 +171,6 @@ export function TotalBalanceAreaChart() {
         const itemDate = new Date(item.date);
         return !isNaN(itemDate.getTime()) && itemDate >= startDate;
       });
-      console.log("Filtered data:", filtered);
       return filtered.length > 0 ? filtered : fallbackChartData;
     } catch (error) {
       console.error("Error filtering chart data:", error);

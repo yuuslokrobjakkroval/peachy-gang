@@ -5,7 +5,7 @@ import Image from "next/image";
 
 import { AnimatePresence, motion } from "framer-motion";
 import { useTranslations } from "next-intl";
-import { useGetDashboardQuery } from "@/redux/api/users";
+
 import {
   useGenerateKHQRMutation,
   useGenerateTransactionIdMutation,
@@ -31,9 +31,9 @@ import { TotalBalanceAreaChart } from "@/components/applications/dashboard/total
 import { FeatureUsageLineChart } from "@/components/applications/dashboard/feature-usage-line-chart";
 
 export default function DashboardPage() {
-  const chatIconRef = useRef<HTMLButtonElement>(null);
+  const { userInfoByDiscord } = usePeachy();
   const t = useTranslations();
-  const { userInfoByDiscord, account } = usePeachy();
+  const chatIconRef = useRef<HTMLButtonElement>(null);
   const [amount, setAmount] = useState<number>(0);
   const [isChatOpen, setIsChatOpen] = useState(false);
   const [qrLoading, setQrLoading] = useState(false);
@@ -56,8 +56,6 @@ export default function DashboardPage() {
       chatIconRef.current?.focus();
     }
   };
-
-  const { data: dashboard, refetch } = useGetDashboardQuery(null);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -103,12 +101,6 @@ export default function DashboardPage() {
     }
   };
 
-  useEffect(() => {
-    if (account && account?.length > 0) {
-      refetch();
-    }
-  }, [account]);
-
   return (
     <div className="relative w-full px-2 overflow-hidden rounded-lg sm:px-4 md:px-6">
       <Meteors />
@@ -124,7 +116,7 @@ export default function DashboardPage() {
               </p>
             </div>
           </div>
-          <SectionCards stats={dashboard} />
+          <SectionCards />
           <div className="px-2 sm:px-4 lg:px-6">
             <div className="flex flex-col gap-4">
               <div className="flex flex-col gap-2">
