@@ -33,7 +33,7 @@ import { FeatureUsageLineChart } from "@/components/applications/dashboard/featu
 export default function DashboardPage() {
   const chatIconRef = useRef<HTMLButtonElement>(null);
   const t = useTranslations();
-  const { userInfoByDiscord } = usePeachy();
+  const { userInfoByDiscord, account } = usePeachy();
   const [amount, setAmount] = useState<number>(0);
   const [isChatOpen, setIsChatOpen] = useState(false);
   const [qrLoading, setQrLoading] = useState(false);
@@ -57,8 +57,11 @@ export default function DashboardPage() {
     }
   };
 
-  const { data: dashboard, isLoading: DashboardLoading } =
-    useGetDashboardQuery(null);
+  const {
+    data: dashboard,
+    isLoading: DashboardLoading,
+    refetch,
+  } = useGetDashboardQuery(null);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -113,18 +116,11 @@ export default function DashboardPage() {
     };
   }, []);
 
-  if (DashboardLoading) {
-    return (
-      <div className="w-full flex items-center justify-center min-h-[400px] px-4">
-        <div className="text-center">
-          <Loading />
-          <p className="mt-4 text-sm text-muted-foreground">
-            {t("dashboard.loading")}
-          </p>
-        </div>
-      </div>
-    );
-  }
+  useEffect(() => {
+    if (account) {
+      refetch();
+    }
+  }, [account]);
 
   return (
     <div className="relative w-full px-2 overflow-hidden rounded-lg sm:px-4 md:px-6">
@@ -141,7 +137,18 @@ export default function DashboardPage() {
               </p>
             </div>
           </div>
-          <SectionCards stats={dashboard} />
+          {isLoading ? (
+            <div className="w-full flex items-center justify-center min-h-[400px] px-4">
+              <div className="text-center">
+                <Loading />
+                <p className="mt-4 text-sm text-muted-foreground">
+                  {t("dashboard.loading")}
+                </p>
+              </div>
+            </div>
+          ) : (
+            <SectionCards stats={dashboard} />
+          )}
           <div className="px-2 sm:px-4 lg:px-6">
             <div className="flex flex-col gap-4">
               <div className="flex flex-col gap-2">
