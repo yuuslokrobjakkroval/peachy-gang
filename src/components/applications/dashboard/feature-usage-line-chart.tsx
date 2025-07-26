@@ -83,32 +83,9 @@ const chartConfig = {
   },
 } satisfies ChartConfig;
 
-const ErrorBoundary: React.FC<{
-  children: React.ReactNode;
-  fallback: React.ReactNode;
-}> = ({ children, fallback }) => {
-  const [hasError, setHasError] = React.useState(false);
-
-  React.useEffect(() => {
-    const errorHandler = (error: ErrorEvent) => {
-      console.error("Uncaught error in FeatureUsageLineChart:", error);
-      setHasError(true);
-    };
-    window.addEventListener("error", errorHandler);
-    return () => window.removeEventListener("error", errorHandler);
-  }, []);
-
-  if (hasError) return <>{fallback}</>;
-  return <>{children}</>;
-};
-
 export function FeatureUsageLineChart() {
   const t = useTranslations("dashboard");
-  const {
-    data: apiData,
-    isLoading,
-    isError,
-  } = useGetFeatureUsageChartQuery(null);
+  const { data: apiData, isLoading } = useGetFeatureUsageChartQuery(null);
 
   const chartData = React.useMemo(() => {
     if (!apiData) {
@@ -135,20 +112,6 @@ export function FeatureUsageLineChart() {
         <CardContent className="flex items-center justify-center h-[250px] sm:h-[300px] md:h-[350px]">
           <div className="text-center">
             <p className="text-sm text-muted-foreground">{t("loading")}</p>
-          </div>
-        </CardContent>
-      </Card>
-    );
-  }
-
-  if (isError || chartData === fallbackChartData) {
-    return (
-      <Card>
-        <CardContent className="flex items-center justify-center h-[250px] sm:h-[300px] md:h-[350px]">
-          <div className="text-center">
-            <p className="text-sm text-muted-foreground">
-              {t("no_data", { defaultMessage: "No data available to display" })}
-            </p>
           </div>
         </CardContent>
       </Card>
