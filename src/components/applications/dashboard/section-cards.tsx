@@ -20,13 +20,9 @@ export function SectionCards() {
 
   if (isLoading) {
     return (
-      <Card>
-        <CardContent className="flex items-center justify-center h-[250px] sm:h-[300px] md:h-[350px]">
-          <div className="text-center">
-            <p className="text-sm text-muted-foreground">{t("loading")}</p>
-          </div>
-        </CardContent>
-      </Card>
+      <div className="text-center">
+        <p className="text-sm text-muted-foreground">{t("loading")}</p>
+      </div>
     );
   }
 
