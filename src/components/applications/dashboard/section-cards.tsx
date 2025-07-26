@@ -1,5 +1,6 @@
 "use client";
 
+import React, { useMemo } from "react";
 import { useTranslations } from "next-intl";
 import { AwardIcon, TrendingUpIcon, UserIcon } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
@@ -8,15 +9,28 @@ import {
   CardHeader,
   CardTitle,
   CardDescription,
-  CardContent,
   CardFooter,
 } from "@/components/ui/card";
 import CountUp from "@/components/ui/Animations/count-up";
 import { useGetDashboardQuery } from "@/redux/api/users";
 
+const fallbackChartData = {
+  totalUsers: 0,
+  totalBalanceCoin: 0,
+  totalBalanceBank: 0,
+  averageLevel: 1,
+};
+
 export function SectionCards() {
   const t = useTranslations("dashboard");
   const { data: stats, isLoading } = useGetDashboardQuery(null);
+
+  const dashboard = useMemo(() => {
+    if (!stats) {
+      return fallbackChartData;
+    }
+    return stats;
+  }, [stats]);
 
   if (isLoading) {
     return (
@@ -38,7 +52,7 @@ export function SectionCards() {
           <CardTitle className="text-2xl font-bold tabular-nums text-primary @[250px]/card:text-3xl">
             <CountUp
               from={0}
-              to={stats?.totalUsers ?? 0}
+              to={dashboard?.totalUsers ?? 0}
               separator=","
               direction="up"
               duration={1}
@@ -89,7 +103,7 @@ export function SectionCards() {
           <CardTitle className="text-2xl font-bold tabular-nums text-yellow-600 dark:text-yellow-400 @[250px]/card:text-3xl">
             <CountUp
               from={0}
-              to={stats?.totalBalanceCoin ?? 0}
+              to={dashboard?.totalBalanceCoin ?? 0}
               separator=","
               direction="up"
               duration={1}
@@ -127,7 +141,7 @@ export function SectionCards() {
           <CardTitle className="text-2xl font-bold tabular-nums text-blue-600 dark:text-blue-400 @[250px]/card:text-3xl">
             <CountUp
               from={0}
-              to={stats?.totalBalanceBank ?? 0}
+              to={dashboard?.totalBalanceBank ?? 0}
               separator=","
               direction="up"
               duration={1}
@@ -153,7 +167,7 @@ export function SectionCards() {
           <CardTitle className="text-2xl font-bold tabular-nums text-purple-600 dark:text-purple-400 @[250px]/card:text-3xl">
             <CountUp
               from={0}
-              to={stats?.averageLevel ?? 1}
+              to={dashboard?.averageLevel ?? 1}
               separator=","
               direction="up"
               duration={1}
