@@ -57,11 +57,7 @@ export default function DashboardPage() {
     }
   };
 
-  const {
-    data: dashboard,
-    isLoading: DashboardLoading,
-    refetch,
-  } = useGetDashboardQuery(null);
+  const { data: dashboard, isLoading, refetch } = useGetDashboardQuery(null);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -117,7 +113,7 @@ export default function DashboardPage() {
   }, []);
 
   useEffect(() => {
-    if (account) {
+    if (account?.length > 0) {
       refetch();
     }
   }, [account]);
