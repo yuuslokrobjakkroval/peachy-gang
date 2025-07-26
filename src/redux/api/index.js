@@ -1,4 +1,3 @@
-import { authClient } from "@/lib/auth-client";
 import { createApi } from "@reduxjs/toolkit/query/react";
 import axios from "axios";
 
