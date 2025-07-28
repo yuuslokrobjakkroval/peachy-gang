@@ -43,13 +43,11 @@ const fallbackChartData = [
 const generateChartData = (user: any) => {
   // Check if user data is valid
   if (!user || !user.labels || !user.datasets || !user.datasets[0]?.data) {
-    console.warn("No valid user data provided, using fallback data.");
     return fallbackChartData;
   }
 
   const { labels, datasets } = user;
   if (datasets[0].data.length === 0) {
-    console.warn("No valid data in dataset, using fallback data.");
     return fallbackChartData;
   }
 
