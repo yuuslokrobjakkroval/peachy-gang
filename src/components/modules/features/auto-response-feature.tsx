@@ -35,17 +35,19 @@ import { Input } from "@/components/ui/input";
 import { Card } from "@/components/ui/card";
 import { FaTerminal } from "react-icons/fa6";
 import VariableDialog from "@/components/layouts/dialogs/variable";
-import { PencilRuler, Trash2 } from "lucide-react";
+import { PencilRuler, Trash2, CircleArrowLeft } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { TextAreaWithServerEmoji } from "@/components/form/textarea-with-emoji";
 import { useGetUsersQuery } from "@/redux/api/users";
+import { useRouter } from "next/navigation";
+import { Separator } from "@/components/ui/separator";
 
 const validationSchema = Yup.object({
   responses: Yup.array().of(
     Yup.object({
       trigger: Yup.string().required("Trigger is required"),
       response: Yup.string().required("Response is required"),
-    }),
+    })
   ),
   isActive: Yup.boolean(),
 });
@@ -65,17 +67,15 @@ export function AutoResponseFeature({
   const tCommon = useTranslations("common");
   const tFeature = useTranslations("features");
   const t = useTranslations("autoResponseFeature");
-
-  const { userInfoByDiscord } = usePeachy();
-  const {
-    data: { items: users = [], meta } = { items: [], meta: {} },
-    isSuccess,
-  } = useGetUsersQuery(null);
+  const { userInfoByDiscord, guild: guildInfo } = usePeachy();
+  const router = useRouter();
   const [searchQuery, setSearchQuery] = useState("");
   const [dialogOpen, setDialogOpen] = useState(false);
   const [variableDialogOpen, setVariableDialogOpen] = useState(false);
   const [editingResponse, setEditingResponse] = useState<any>(null);
   const [confirmDeleteId, setConfirmDeleteId] = useState<string | null>(null);
+  const { data: { items: users = [] } = { items: [] }, isSuccess } =
+    useGetUsersQuery(null);
   const [disableFeature, { isLoading: disableLoading }] =
     useDisableFeatureMutation();
   const [updateFeature, { isSuccess: updateSuccess }] =
@@ -101,7 +101,7 @@ export function AutoResponseFeature({
           {
             description: tCommon("updateSuccessDescription"),
             duration: 2000,
-          },
+          }
         );
         refetch();
       } catch (error) {
@@ -109,7 +109,7 @@ export function AutoResponseFeature({
           tCommon("updateError", { feature: toCapitalCase(feature) }),
           {
             duration: 1000,
-          },
+          }
         );
       }
     },
@@ -153,7 +153,7 @@ export function AutoResponseFeature({
           t("dialog.error", { action: editingResponse ? "update" : "add" }),
           {
             duration: 1000,
-          },
+          }
         );
       }
     },
@@ -166,12 +166,12 @@ export function AutoResponseFeature({
     formik.values.autoresponse?.filter((response: any) =>
       `${response.trigger} ${response.response}`
         .toLowerCase()
-        .includes(searchQuery.toLowerCase()),
+        .includes(searchQuery.toLowerCase())
     ) ?? [];
 
   const paginatedResponses = filteredResponses.slice(
     (currentPage - 1) * rowsPerPage,
-    currentPage * rowsPerPage,
+    currentPage * rowsPerPage
   );
 
   const totalPages = Math.ceil(filteredResponses.length / rowsPerPage) || 1;
@@ -202,7 +202,7 @@ export function AutoResponseFeature({
           description: tCommon("disableSuccessDescription"),
           duration: 1000,
           className: "bg-gradient-to-r from-pink-500 to-purple-500 text-white",
-        },
+        }
       );
       refetch();
     } catch (error) {
@@ -210,7 +210,7 @@ export function AutoResponseFeature({
         tCommon("disableError", { feature: toCapitalCase(feature) }),
         {
           duration: 1000,
-        },
+        }
       );
     }
   };
@@ -239,6 +239,20 @@ export function AutoResponseFeature({
     >
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6">
         <div className="flex flex-col">
+          <div className="flex gap-2 items-center">
+            <CircleArrowLeft
+              className="size-8 text-xl sm:text-2xl font-semibold tracking-tight text-[var(--primary)] cursor-pointer hover:text-[var(--primary)]/80 transition-colors"
+              onClick={() => router.back()}
+            />
+            <h4 className="pt-2 text-primary text-3xl md:text-4xl font-bold font-ghibi-bold tracking-tight text-[var(--primary)]">
+              {toCapitalCase(guildInfo?.name)}
+            </h4>
+          </div>
+
+          <div className="mt-2 sm:mt-3 mb-4 sm:mb-6">
+            <Separator className="text-[var(--card-foreground)]" />
+          </div>
+
           <h1 className="text-primary text-3xl md:text-4xl font-bold">
             {tFeature("auto-response")}
           </h1>
@@ -327,7 +341,7 @@ export function AutoResponseFeature({
                         <TableCell>
                           {(isSuccess &&
                             users?.find(
-                              (user: any) => user.userId === response.createdBy,
+                              (user: any) => user.userId === response.createdBy
                             )?.username) ??
                             ""}
                         </TableCell>

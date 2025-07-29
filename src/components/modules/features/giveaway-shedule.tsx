@@ -30,10 +30,13 @@ import { toast } from "sonner";
 import { CreateScheduleDialog } from "@/components/layouts/dialogs/create-schedule";
 import { FaEdit, FaTrash } from "react-icons/fa";
 import { useTranslations } from "next-intl";
-import { Search } from "lucide-react";
+import { CircleArrowLeft, Search } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Card } from "@/components/ui/card";
 import { useGetUsersQuery } from "@/redux/api/users";
+import { useRouter } from "next/navigation";
+import { Separator } from "@/components/ui/separator";
+import { usePeachy } from "@/contexts/peachy";
 
 interface Schedule {
   _id?: string;
@@ -59,18 +62,17 @@ export function GiveawayScheduleFeature({
   const tCommon = useTranslations("common");
   const tFeature = useTranslations("features");
   const t = useTranslations("giveawayScheduleFeature");
+  const { guild: guildInfo } = usePeachy();
+  const router = useRouter();
   const { data: channels } = useGetGuildChannelsQuery(guild);
-  const {
-    data: { items: users = [], meta } = { items: [], meta: {} },
-    isSuccess,
-  } = useGetUsersQuery(null);
+  const { data: { items: users = [] } = { items: [] }, isSuccess } =
+    useGetUsersQuery(null);
   const [updateFeature, { isSuccess: updateSuccess }] =
     useUpdateFeatureMutation();
   const [disableFeature, { isLoading: disableLoading }] =
     useDisableFeatureMutation();
   const [deleteSchedule, { isLoading: deleteLoading }] =
     useDeleteGiveawayScheduleMutation();
-
   const [dialogOpen, setDialogOpen] = useState(false);
   const [deleteId, setDeleteId] = useState<string | null>(null);
   const [deleteScheduleType, setDeleteScheduleType] = useState<string>("");
@@ -206,6 +208,20 @@ export function GiveawayScheduleFeature({
     >
       <div className="flex flex-col gap-3 mb-4 sm:gap-4 sm:mb-6 lg:flex-row lg:items-center lg:justify-between">
         <div className="flex flex-col space-y-1 sm:space-y-2">
+          <div className="flex gap-2 items-center">
+            <CircleArrowLeft
+              className="size-8 text-xl sm:text-2xl font-semibold tracking-tight text-[var(--primary)] cursor-pointer hover:text-[var(--primary)]/80 transition-colors"
+              onClick={() => router.back()}
+            />
+            <h4 className="pt-2 text-primary text-3xl md:text-4xl font-bold font-ghibi-bold tracking-tight text-[var(--primary)]">
+              {toCapitalCase(guildInfo?.name)}
+            </h4>
+          </div>
+
+          <div className="mt-2 sm:mt-3 mb-4 sm:mb-6">
+            <Separator className="text-[var(--card-foreground)]" />
+          </div>
+
           <h1 className="text-xl font-bold text-primary sm:text-2xl md:text-3xl lg:text-4xl">
             {tFeature("giveaway-schedule")}
           </h1>

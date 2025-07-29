@@ -1,25 +1,14 @@
 "use client";
 
 import React from "react";
-import { usePathname } from "next/navigation";
 import { AppSidebar } from "@/components/sidebar/app-sidebar";
-import {
-  Breadcrumb,
-  BreadcrumbItem,
-  BreadcrumbLink,
-  BreadcrumbList,
-  BreadcrumbPage,
-} from "@/components/ui/breadcrumb";
 import {
   SidebarInset,
   SidebarProvider,
   SidebarTrigger,
 } from "@/components/ui/sidebar";
 import { Separator } from "@/components/ui/separator";
-import { ChevronRight } from "lucide-react";
 import { useFetchUserInfoQuery } from "@/redux/api/discord";
-import { useGetGuildsQuery } from "@/redux/api/discord";
-import { Guild, toUpperCase } from "@/utils/common";
 import RTLNavbar from "@/components/navbar/RTL";
 import Loading from "@/components/loading/circle";
 
@@ -28,27 +17,9 @@ export default function PeachyLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const pathname = usePathname();
-  const currentPath = pathname.split("/").filter(Boolean);
-  const guildIdIndex = currentPath.indexOf("guilds") + 1;
-  const guildId =
-    guildIdIndex > 0 && guildIdIndex < currentPath.length
-      ? currentPath[guildIdIndex]
-      : undefined;
-
   const { data: user, isLoading: userLoading } = useFetchUserInfoQuery(null);
-  const { data: guilds, isLoading: guildLoading } = useGetGuildsQuery({});
 
-  const guild = guilds?.find((g: Guild) => g.id === guildId);
-
-  const breadcrumbPath = currentPath.map((segment, index) => {
-    if (index === guildIdIndex && guild?.name) {
-      return guild.name;
-    }
-    return segment;
-  });
-
-  if (userLoading || guildLoading) {
+  if (userLoading) {
     <div className="w-full">
       <Loading />
     </div>;

@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useEffect } from "react";
 import { useTranslations } from "next-intl";
 import { usePathname, useRouter } from "next/navigation";
 import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
@@ -18,6 +18,7 @@ import { Card } from "@/components/ui/card";
 
 export default function FeaturesPage() {
   const t = useTranslations("guilds");
+  const { setGuild } = usePeachy();
   const pathname = usePathname();
   const currentPath = pathname.split("/").filter(Boolean);
   const guildIdIndex = currentPath.indexOf("guilds") + 1;
@@ -31,6 +32,12 @@ export default function FeaturesPage() {
     isError,
     refetch,
   } = useGetGuildInfoQuery(guildId);
+
+  useEffect(() => {
+    if (guild) {
+      setGuild(guild);
+    }
+  }, [guild]);
 
   if (isLoading) {
     return <Loading />;
