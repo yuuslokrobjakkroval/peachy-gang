@@ -137,23 +137,29 @@ export function CreateScheduleDialog({
         backgroundRepeat: "no-repeat",
         aspectRatio: "16 / 9",
       }
-    : { backgroundColor: "#77CDFF" };
+    : {
+        backgroundColor: "#77CDFF",
+        aspectRatio: "16 / 9",
+      };
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="flex flex-col p-0 gap-0 sm:max-h-[min(640px,80vh)] sm:max-w-4xl [&>button:last-child]:top-3.5">
-        <DialogHeader className="space-y-0 text-left contents">
-          <DialogTitle className="px-3 py-4 text-base border-b">
+      <DialogContent className="flex flex-col p-0 gap-0 w-[95vw] max-w-[95vw] h-[90vh] max-h-[90vh] sm:w-[90vw] sm:max-w-[90vw] sm:h-[85vh] sm:max-h-[85vh] md:max-w-3xl lg:max-w-4xl md:h-auto md:max-h-[80vh] [&>button:last-child]:top-2 [&>button:last-child]:right-2 sm:[&>button:last-child]:top-3.5 sm:[&>button:last-child]:right-3.5">
+        <DialogHeader className="space-y-0 text-left contents shrink-0">
+          <DialogTitle className="px-3 py-3 sm:px-4 sm:py-4 text-sm sm:text-base border-b">
             {isEditing
               ? "Edit Giveaway Schedule"
               : "Create New Giveaway Schedule"}
           </DialogTitle>
         </DialogHeader>
-        <div className="p-3 overflow-y-auto">
+        <div className="p-2 sm:p-3 overflow-y-auto flex-1">
           <DialogDescription asChild>
-            <form onSubmit={formik.handleSubmit} className="flex-1 space-y-8">
-              <div className="grid grid-cols-1 gap-4 md:grid-cols-12">
-                <div className="col-span-6 sm:col-span-12">
+            <form
+              onSubmit={formik.handleSubmit}
+              className="flex-1 space-y-4 sm:space-y-6 lg:space-y-8"
+            >
+              <div className="grid grid-cols-1 gap-3 sm:gap-4 lg:gap-6 xl:grid-cols-12">
+                <div className="xl:col-span-6">
                   <SwitchForm
                     control={{
                       id: "isActive",
@@ -167,7 +173,7 @@ export function CreateScheduleDialog({
                   />
                 </div>
 
-                <div className="col-span-12">
+                <div className="xl:col-span-12">
                   <ChannelSelectForm
                     control={{
                       id: "channel",
@@ -182,7 +188,7 @@ export function CreateScheduleDialog({
                   />
                 </div>
 
-                <div className="col-span-12">
+                <div className="xl:col-span-12">
                   <TextAreaWithServerEmoji
                     control={{
                       id: "content",
@@ -198,7 +204,7 @@ export function CreateScheduleDialog({
                   />
                 </div>
 
-                <div className="col-span-12">
+                <div className="xl:col-span-6">
                   <InputForm
                     control={{
                       id: "prize",
@@ -211,7 +217,7 @@ export function CreateScheduleDialog({
                   />
                 </div>
 
-                <div className="col-span-12">
+                <div className="xl:col-span-6">
                   <SelectForm
                     control={{
                       id: "scheduleType",
@@ -230,7 +236,7 @@ export function CreateScheduleDialog({
                   />
                 </div>
 
-                <div className="col-span-12">
+                <div className="xl:col-span-6">
                   <CounterForm
                     control={{
                       id: "winners",
@@ -243,20 +249,7 @@ export function CreateScheduleDialog({
                   />
                 </div>
 
-                <div className="col-span-12">
-                  <MultiRoleSelectForm
-                    control={{
-                      id: "roles",
-                      label:
-                        "Choose Roles for mention (leave empty for @everyone)",
-                    }}
-                    guild={guild}
-                    value={formik.values.roles ?? []}
-                    onChange={(value) => formik.setFieldValue("roles", value)}
-                  />
-                </div>
-
-                <div className="col-span-6 sm:col-span-12">
+                <div className="xl:col-span-6">
                   <SwitchForm
                     control={{
                       id: "autopay",
@@ -271,7 +264,20 @@ export function CreateScheduleDialog({
                   />
                 </div>
 
-                <div className="col-span-6 sm:col-span-12">
+                <div className="xl:col-span-12">
+                  <MultiRoleSelectForm
+                    control={{
+                      id: "roles",
+                      label:
+                        "Choose Roles for mention (leave empty for @everyone)",
+                    }}
+                    guild={guild}
+                    value={formik.values.roles ?? []}
+                    onChange={(value) => formik.setFieldValue("roles", value)}
+                  />
+                </div>
+
+                <div className="xl:col-span-12">
                   <InputForm
                     control={{
                       id: "image",
@@ -287,18 +293,18 @@ export function CreateScheduleDialog({
                 </div>
 
                 {formik.values.image?.startsWith("https:") ? (
-                  <div className="col-span-12">
-                    <Card className="p-4">
+                  <div className="xl:col-span-12">
+                    <Card className="p-2 sm:p-4">
                       <div
-                        className="flex w-full bg-cover rounded-xl"
+                        className="flex w-full bg-cover rounded-lg sm:rounded-xl min-h-[120px] sm:min-h-[150px] md:min-h-[200px]"
                         style={backgroundStyle}
                       />
                     </Card>
                   </div>
                 ) : (
-                  <div className="col-span-12">
-                    <Card className="p-4">
-                      <p className="text-sm text-muted-foreground">
+                  <div className="xl:col-span-12">
+                    <Card className="p-2 sm:p-4">
+                      <p className="text-xs sm:text-sm text-muted-foreground text-center py-4">
                         {
                           "No background image provided. Please enter a valid image URL."
                         }
@@ -308,19 +314,20 @@ export function CreateScheduleDialog({
                 )}
               </div>
 
-              <div className="flex justify-between mx-4 mb-12">
+              <div className="flex flex-col sm:flex-row justify-between gap-3 sm:gap-4 pt-4 sm:pt-6 pb-2 sm:pb-4 px-2 sm:px-4 border-t bg-background/50">
                 <Button
                   variant="outline"
                   onClick={(e) => {
                     e.preventDefault();
                     onOpenChange(false);
                   }}
+                  className="w-full sm:w-auto order-2 sm:order-1"
                 >
                   {t("cancel")}
                 </Button>
                 <Button
                   type="submit"
-                  className="bg-primary text-primary-foreground hover:bg-primary/90"
+                  className="bg-primary text-primary-foreground hover:bg-primary/90 w-full sm:w-auto order-1 sm:order-2"
                   disabled={addLoading || updateLoading}
                 >
                   {isEditing ? t("update") : t("add")}
