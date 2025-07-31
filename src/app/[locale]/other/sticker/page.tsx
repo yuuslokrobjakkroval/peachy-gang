@@ -16,13 +16,14 @@ import {
   TooltipContent,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
-import { Download } from "lucide-react";
+import { Search, X } from "lucide-react";
 
-const EmojiManagementPage = () => {
+const StickerManagementPage = () => {
   const { guilds } = usePeachy();
   const [selectedGuildId, setSelectedGuildId] = useState<string | null>(null);
   const [page, setPage] = useState(1);
   const [downloadingIds, setDownloadingIds] = useState<Set<string>>(new Set());
+  const [searchQuery, setSearchQuery] = useState("");
   const emojisPerPage = 30;
 
   // Download handler function
@@ -89,20 +90,26 @@ const EmojiManagementPage = () => {
     }
   };
 
-  const guildsTabs = guilds
-    .filter(
-      (guild) =>
-        (Number(guild.permissions) & PermissionFlags.ADMINISTRATOR) !== 0
-    )
-    .map((guild) => ({
-      id: guild.id,
-      icon: guild.icon ? iconUrl(guild) : null,
-      label: guild.name,
-      onClick: () => {
-        setSelectedGuildId(guild.id);
-        setPage(1);
-      },
-    }));
+  // Clear search when switching guilds
+  const handleGuildChange = (guildId: string) => {
+    setSelectedGuildId(guildId);
+    setPage(1);
+    setSearchQuery("");
+  };
+
+  const guildsTabs = Array.isArray(guilds)
+    ? guilds
+        .filter(
+          (guild) =>
+            (Number(guild.permissions) & PermissionFlags.ADMINISTRATOR) !== 0
+        )
+        .map((guild) => ({
+          id: guild.id,
+          icon: guild.icon ? iconUrl(guild) : null,
+          label: guild.name,
+          onClick: () => handleGuildChange(guild.id),
+        }))
+    : [];
 
   const { data: guild, isLoading: isGuildLoading } =
     useGetGuildInfoQuery(selectedGuildId);
@@ -110,22 +117,36 @@ const EmojiManagementPage = () => {
   const { data: stickers = [], isLoading: isStickerLoading } =
     useGetGuildStickerQuery(selectedGuildId);
 
+  // Filter stickers based on search query
+  const filteredStickers = Array.isArray(stickers)
+    ? stickers.filter((sticker: any) =>
+        sticker.name.toLowerCase().includes(searchQuery.toLowerCase())
+      )
+    : [];
+
+  // Reset page when search changes
+  useEffect(() => {
+    setPage(1);
+  }, [searchQuery]);
+
   useEffect(() => {
     if (!selectedGuildId) {
-      const filtered = guilds.filter(
-        (guild) =>
-          (Number(guild.permissions) & PermissionFlags.ADMINISTRATOR) !== 0
-      );
+      const filtered = Array.isArray(guilds)
+        ? guilds.filter(
+            (guild) =>
+              (Number(guild.permissions) & PermissionFlags.ADMINISTRATOR) !== 0
+          )
+        : [];
       setSelectedGuildId(filtered[0]?.id ?? null);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedGuildId]);
 
-  const paginatedEmojis = stickers.slice(
+  const paginatedEmojis = filteredStickers.slice(
     (page - 1) * emojisPerPage,
     page * emojisPerPage
   );
-  const totalPages = Math.ceil(stickers.length / emojisPerPage);
+  const totalPages = Math.ceil(filteredStickers.length / emojisPerPage);
 
   if (isGuildLoading || isStickerLoading) {
     return (
@@ -140,7 +161,13 @@ const EmojiManagementPage = () => {
       <h1 className="mb-4 text-lg font-bold sm:text-xl md:text-2xl">
         Sticker Management :{" "}
         <span className="text-primary">
-          {guild?.name} {stickers?.length ?? 0} Stickers
+          {guild?.name} {filteredStickers?.length ?? 0} Stickers
+          {searchQuery && (
+            <span className="text-sm font-normal text-muted-foreground">
+              {" "}
+              (filtered from {stickers?.length ?? 0})
+            </span>
+          )}
         </span>
       </h1>
 
@@ -151,8 +178,32 @@ const EmojiManagementPage = () => {
           items={guildsTabs}
         />
       </div>
+
+      {/* Search Bar */}
+      <div className="mb-6">
+        <div className="relative max-w-md">
+          <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+            <Search className="w-4 h-4 text-muted-foreground" />
+          </div>
+          <input
+            type="text"
+            placeholder="Search stickers..."
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            className="w-full py-2 pl-10 pr-10 text-sm transition-colors border rounded-lg outline-none focus:ring-2 focus:ring-primary focus:border-transparent bg-background"
+          />
+          {searchQuery && (
+            <button
+              onClick={() => setSearchQuery("")}
+              className="absolute inset-y-0 right-0 flex items-center pr-3 transition-colors hover:text-primary"
+            >
+              <X className="w-4 h-4" />
+            </button>
+          )}
+        </div>
+      </div>
       {guild ? (
-        stickers?.length > 0 ? (
+        filteredStickers?.length > 0 ? (
           <>
             <div className="grid grid-cols-3 gap-3 xs:grid-cols-3 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-8 xl:grid-cols-10 xs:gap-4 sm:gap-6 md:gap-8">
               {paginatedEmojis.map((sticker: any) => (
@@ -226,7 +277,9 @@ const EmojiManagementPage = () => {
           </>
         ) : (
           <p className="mt-6 text-sm text-center text-muted-foreground sm:text-base">
-            No sticker found in this server.
+            {searchQuery
+              ? `No stickers found matching "${searchQuery}"`
+              : "No sticker found in this server."}
           </p>
         )
       ) : (
@@ -236,4 +289,4 @@ const EmojiManagementPage = () => {
   );
 };
 
-export default EmojiManagementPage;
+export default StickerManagementPage;

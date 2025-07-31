@@ -18,14 +18,15 @@ import { useGetGuildInfoQuery, useGetGuildEmojiQuery } from "@/redux/api/guild";
 import Image from "next/image";
 import Loading from "@/components/loading/circle";
 import NotJoined from "@/components/modules/guilds/not-join";
-import { Download } from "lucide-react";
+import { Search, X } from "lucide-react";
 
 const EmojiManagementPage = () => {
   const { guilds } = usePeachy();
   const [selectedGuildId, setSelectedGuildId] = useState<string | null>(null);
   const [page, setPage] = useState(1);
   const [downloadingIds, setDownloadingIds] = useState<Set<string>>(new Set());
-  const emojisPerPage = 30;
+  const [searchQuery, setSearchQuery] = useState("");
+  const emojisPerPage = 50;
 
   // Download handler function
   const handleDownload = async (emoji: any) => {
@@ -100,10 +101,7 @@ const EmojiManagementPage = () => {
       id: guild.id,
       icon: guild.icon ? iconUrl(guild) : null,
       label: guild.name,
-      onClick: () => {
-        setSelectedGuildId(guild.id);
-        setPage(1);
-      },
+      onClick: () => handleGuildChange(guild.id),
     }));
 
   const { data: guild, isLoading: isGuildLoading } =
@@ -111,6 +109,23 @@ const EmojiManagementPage = () => {
 
   const { data: emojis = [], isLoading: isEmojiLoading } =
     useGetGuildEmojiQuery(selectedGuildId);
+
+  // Filter emojis based on search query
+  const filteredEmojis = emojis.filter((emoji: any) =>
+    emoji.name.toLowerCase().includes(searchQuery.toLowerCase())
+  );
+
+  // Clear search when switching guilds
+  const handleGuildChange = (guildId: string) => {
+    setSelectedGuildId(guildId);
+    setPage(1);
+    setSearchQuery("");
+  };
+
+  // Reset page when search changes
+  useEffect(() => {
+    setPage(1);
+  }, [searchQuery]);
 
   useEffect(() => {
     if (!selectedGuildId) {
@@ -123,11 +138,11 @@ const EmojiManagementPage = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedGuildId]);
 
-  const paginatedEmojis = emojis.slice(
+  const paginatedEmojis = filteredEmojis.slice(
     (page - 1) * emojisPerPage,
     page * emojisPerPage
   );
-  const totalPages = Math.ceil(emojis.length / emojisPerPage);
+  const totalPages = Math.ceil(filteredEmojis.length / emojisPerPage);
 
   if (isGuildLoading || isEmojiLoading) {
     return (
@@ -142,21 +157,51 @@ const EmojiManagementPage = () => {
       <h1 className="mb-4 text-lg font-bold sm:text-xl md:text-2xl">
         Emoji Management :{" "}
         <span className="text-primary">
-          {guild?.name} {emojis?.length ?? 0} Emojis
+          {guild?.name} {filteredEmojis?.length ?? 0} Emojis
+          {searchQuery && (
+            <span className="text-sm font-normal text-muted-foreground">
+              {" "}
+              (filtered from {emojis?.length ?? 0})
+            </span>
+          )}
         </span>
       </h1>
 
-      <div className="py-6 mx-auto mb-6 overflow-x-hidden">
+      <div className="py-6 mx-auto mb-3 overflow-x-hidden">
         <LimelightGuild
           className="overflow-x-auto overflow-y-hidden"
           iconClassName="rounded-md object-cover w-8 h-8 sm:w-10 sm:h-10"
           items={guildsTabs}
         />
       </div>
+
+      {/* Search Bar */}
+      <div className="mb-6">
+        <div className="relative max-w-md">
+          <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+            <Search className="w-4 h-4 text-muted-foreground" />
+          </div>
+          <input
+            type="text"
+            placeholder="Search emojis..."
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            className="w-full py-2 pl-10 pr-10 text-sm transition-colors border rounded-lg outline-none focus:ring-2 focus:ring-primary focus:border-transparent bg-background"
+          />
+          {searchQuery && (
+            <button
+              onClick={() => setSearchQuery("")}
+              className="absolute inset-y-0 right-0 flex items-center pr-3 transition-colors hover:text-primary"
+            >
+              <X className="w-4 h-4" />
+            </button>
+          )}
+        </div>
+      </div>
       {guild ? (
-        emojis?.length > 0 ? (
+        filteredEmojis?.length > 0 ? (
           <>
-            <div className="grid grid-cols-3 gap-3 xs:grid-cols-3 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-8 xl:grid-cols-10 xs:gap-4 sm:gap-6 md:gap-8">
+            <div className="grid grid-cols-3 gap-3 mb-3 xs:grid-cols-3 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-8 xl:grid-cols-10 xs:gap-4 sm:gap-6 md:gap-8">
               {paginatedEmojis.map((emoji: any) => (
                 <div
                   key={emoji.id}
@@ -228,7 +273,9 @@ const EmojiManagementPage = () => {
           </>
         ) : (
           <p className="mt-6 text-sm text-center text-muted-foreground sm:text-base">
-            No emojis found in this server.
+            {searchQuery
+              ? `No emojis found matching "${searchQuery}"`
+              : "No emojis found in this server."}
           </p>
         )
       ) : (
