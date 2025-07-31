@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useEffect } from "react";
 import { useTranslations } from "next-intl";
 import { usePathname, useRouter } from "next/navigation";
 import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
@@ -18,6 +18,7 @@ import { Card } from "@/components/ui/card";
 
 export default function FeaturesPage() {
   const t = useTranslations("guilds");
+  const { setGuild } = usePeachy();
   const pathname = usePathname();
   const currentPath = pathname.split("/").filter(Boolean);
   const guildIdIndex = currentPath.indexOf("guilds") + 1;
@@ -31,6 +32,12 @@ export default function FeaturesPage() {
     isError,
     refetch,
   } = useGetGuildInfoQuery(guildId);
+
+  useEffect(() => {
+    if (guild) {
+      setGuild(guild);
+    }
+  }, [guild]);
 
   if (isLoading) {
     return <Loading />;
@@ -87,34 +94,36 @@ function GuildPanel({
       };
 
   return (
-    <div className="flex flex-col gap-4 py-4 md:gap-8 md:p-6 font-ghibi">
+    <div className="flex flex-col gap-3 py-3 sm:gap-4 sm:py-4 md:gap-6 md:py-6 lg:gap-8 lg:p-6 font-ghibi px-2 sm:px-4 lg:px-6">
       <div className="w-full">
-        <div className="flex gap-2">
+        <div className="flex gap-2 items-center">
           <CircleArrowLeft
-            className="text-2xl font-semibold tracking-tight text-[var(--primary)] mt-2 cursor-pointer"
+            className="text-xl sm:text-2xl font-semibold tracking-tight text-[var(--primary)] cursor-pointer hover:text-[var(--primary)]/80 transition-colors"
             onClick={() => router.back()}
           />
-          <h4 className="text-2xl font-ghibi-bold tracking-tight text-[var(--primary)] mt-1.5">
+          <h4 className="text-lg sm:text-xl md:text-2xl font-ghibi-bold tracking-tight text-[var(--primary)]">
             {toCapitalCase(info.name)}
-            <span className="w-full border-t border-[var(--border)]" />
           </h4>
         </div>
 
-        <div className="mt-3 mb-6">
+        <div className="mt-2 sm:mt-3 mb-4 sm:mb-6">
           <Separator className="text-[var(--card-foreground)]" />
         </div>
 
         <div className="relative mb-6">
           {/* Background and profile */}
-          <Card className="p-4">
+          <Card className="p-2 sm:p-3 md:p-4">
             <div
-              className="flex w-full bg-cover h-48 sm:h-32 md:h-56 lg:h-64 xl:h-[480px] rounded-xl"
+              className="flex w-full bg-cover h-32 xs:h-36 sm:h-40 md:h-48 lg:h-56 xl:h-64 2xl:h-[320px] rounded-lg sm:rounded-xl overflow-hidden"
               style={backgroundStyle}
             >
-              <div className="absolute -translate-x-1/2 -bottom-12 left-18">
-                <div className="relative w-[96px] h-[96px]">
+              {/* Overlay for better text readability if needed */}
+              <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent pointer-events-none" />
+
+              <div className="absolute -translate-x-1/2 -bottom-8 sm:-bottom-10 md:-bottom-12 left-12 sm:left-16 md:left-18">
+                <div className="relative w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 lg:w-[96px] lg:h-[96px]">
                   {/* Avatar */}
-                  <div className="relative w-[87px] h-[87px] rounded-full border-[4px] border-[var(--background)] bg-[var(--accent)] dark:!border-[var(--sidebar)] overflow-hidden ml-3">
+                  <div className="relative w-full h-full rounded-full border-2 sm:border-3 md:border-[4px] border-[var(--background)] bg-[var(--accent)] dark:!border-[var(--sidebar)] overflow-hidden shadow-lg">
                     <Image
                       src={iconUrl(info)}
                       alt={t("server_icon_alt", {
@@ -122,7 +131,7 @@ function GuildPanel({
                       })}
                       width={128}
                       height={128}
-                      className="object-cover rounded-full"
+                      className="object-cover rounded-full w-full h-full"
                     />
                   </div>
                 </div>
@@ -131,9 +140,9 @@ function GuildPanel({
           </Card>
         </div>
 
-        <div className="mt-12 mb-3">
+        <div className="mt-8 sm:mt-10 md:mt-12 lg:mt-14 mb-3">
           {info?.description && (
-            <p className="text-[var(--muted-foreground)] mt-3">
+            <p className="text-[var(--muted-foreground)] mt-2 sm:mt-3 text-sm sm:text-base">
               {info.description}
             </p>
           )}
@@ -152,7 +161,7 @@ function GuildPanel({
           </div>
         </div>
 
-        <div className="grid grid-cols-1 gap-4 mt-3 md:grid-cols-3">
+        <div className="grid grid-cols-1 gap-3 mt-2 sm:gap-4 sm:mt-3 md:grid-cols-2 lg:grid-cols-3 xl:gap-6">
           {features.map((feature: any) => (
             <Features
               key={feature.id}

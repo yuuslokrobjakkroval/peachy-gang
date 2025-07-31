@@ -26,6 +26,9 @@ import {
 } from "@/components/ui/tooltip";
 import { styles } from "@/styles";
 import { TextAreaWithServerEmoji } from "@/components/form/textarea-with-emoji";
+import { CircleArrowLeft } from "lucide-react";
+import { Separator } from "@/components/ui/separator";
+import { useRouter } from "next/navigation";
 
 const validationSchema = Yup.object({
   isActive: Yup.boolean(),
@@ -44,8 +47,8 @@ export function LevelingSystemFeature({
   const tCommon = useTranslations("common");
   const tFeature = useTranslations("features");
   const t = useTranslations("levelingFeature");
-
-  const { userInfoByDiscord } = usePeachy();
+  const { userInfoByDiscord, guild: guildInfo } = usePeachy();
+  const router = useRouter();
   const [open, setOpen] = useState<boolean>(false);
   const [sendMessage, { isLoading: sendMessageLoading }] =
     useSendMessageFeatureMutation();
@@ -104,7 +107,7 @@ export function LevelingSystemFeature({
           description: tCommon("disableSuccessDescription"),
           duration: 1000,
           className: "bg-gradient-to-r from-pink-500 to-purple-500 text-white",
-        },
+        }
       );
       refetch();
     } catch (error) {
@@ -112,7 +115,7 @@ export function LevelingSystemFeature({
         tCommon("disableError", { feature: toCapitalCase(feature) }),
         {
           duration: 1000,
-        },
+        }
       );
     }
   };
@@ -126,6 +129,20 @@ export function LevelingSystemFeature({
     >
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6">
         <div className="flex flex-col">
+          <div className="flex gap-2 items-center">
+            <CircleArrowLeft
+              className="size-8 text-xl sm:text-2xl font-semibold tracking-tight text-[var(--primary)] cursor-pointer hover:text-[var(--primary)]/80 transition-colors"
+              onClick={() => router.back()}
+            />
+            <h4 className="pt-2 text-primary text-3xl md:text-4xl font-bold font-ghibi-bold tracking-tight text-[var(--primary)]">
+              {toCapitalCase(guildInfo?.name)}
+            </h4>
+          </div>
+
+          <div className="mt-2 sm:mt-3 mb-4 sm:mb-6">
+            <Separator className="text-[var(--card-foreground)]" />
+          </div>
+
           <h1 className="text-primary text-3xl md:text-4xl font-bold">
             {tFeature("leveling-system")}
           </h1>

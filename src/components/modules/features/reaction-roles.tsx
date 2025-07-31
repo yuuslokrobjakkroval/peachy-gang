@@ -11,19 +11,11 @@ import {
 import { toCapitalCase } from "@/utils/common";
 import { motion } from "framer-motion";
 import { SwitchForm } from "@/components/form/switch-form";
-import { ChannelSelectForm } from "@/components/form/channel-select-form";
-import { TextAreaForm } from "@/components/form/textarea-form";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
 import { Card } from "@/components/ui/card";
 import { FaTerminal, FaWandSparkles } from "react-icons/fa6";
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableRow,
-} from "@/components/ui/table";
+import { Table, TableBody, TableCell, TableRow } from "@/components/ui/table";
 import UpdateFeaturePanel from "../update-feature";
 import VariableDialog from "@/components/layouts/dialogs/variable";
 import { useTranslations } from "next-intl";
@@ -39,8 +31,7 @@ export function ReactionRolesFeature({
   const tCommon = useTranslations("common");
   const tFeature = useTranslations("features");
   const t = useTranslations("reactionRolesFeature");
-
-  const { userInfoByDiscord } = usePeachy();
+  const { userInfoByDiscord, guild: guildInfo } = usePeachy();
   const [open, setOpen] = useState<boolean>(false);
   const [showMessageSelection, setShowMessageSelection] =
     useState<boolean>(false);
@@ -61,7 +52,7 @@ export function ReactionRolesFeature({
         {
           description: tCommon("disableSuccessDescription"),
           duration: 1000,
-        },
+        }
       );
       refetch();
     } catch (error) {
@@ -69,7 +60,7 @@ export function ReactionRolesFeature({
         tCommon("disableError", { feature: toCapitalCase(feature) }),
         {
           duration: 1000,
-        },
+        }
       );
     }
   };
@@ -105,7 +96,7 @@ export function ReactionRolesFeature({
           {
             description: tCommon("updateSuccessDescription"),
             duration: 2000,
-          },
+          }
         );
         refetch();
       } catch (error) {
@@ -113,7 +104,7 @@ export function ReactionRolesFeature({
           tCommon("updateError", { feature: toCapitalCase(feature) }),
           {
             duration: 1000,
-          },
+          }
         );
       }
     },
@@ -266,8 +257,8 @@ export function ReactionRolesFeature({
                             formik.setFieldValue(
                               "roles",
                               formik.values.roles.filter(
-                                (_: any, i: number) => i !== index,
-                              ),
+                                (_: any, i: number) => i !== index
+                              )
                             )
                           }
                           aria-label={t("table.removeLabel", { index })}

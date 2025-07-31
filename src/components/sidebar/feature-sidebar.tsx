@@ -15,6 +15,7 @@ import {
   UserMinus,
   Bot,
   RollerCoaster,
+  Castle,
 } from "lucide-react";
 import {
   Sidebar,
@@ -23,7 +24,6 @@ import {
   SidebarRail,
 } from "@/components/ui/sidebar";
 import { NavMain } from "@/components/navbar/nav-main";
-import { NavUser } from "@/components/navbar/nav-user";
 import { NavGuild } from "../navbar/nav-guild";
 
 export function FeatureSidebar({
@@ -44,6 +44,13 @@ export function FeatureSidebar({
         title: "Peachy",
         url: "/peachy",
         icon: Cat,
+        isActive: true,
+        items: [],
+      },
+      {
+        title: "Guilds",
+        url: "/guilds",
+        icon: Castle,
         isActive: true,
         items: [],
       },
