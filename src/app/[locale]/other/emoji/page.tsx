@@ -92,17 +92,16 @@ const EmojiManagementPage = () => {
     }
   };
 
-  const guildsTabs = guilds
-    ?.filter(
-      (guild) =>
-        (Number(guild.permissions) & PermissionFlags.ADMINISTRATOR) !== 0
-    )
-    ?.map((guild) => ({
-      id: guild.id,
-      icon: guild.icon ? iconUrl(guild) : null,
-      label: guild.name,
-      onClick: () => handleGuildChange(guild.id),
-    }));
+  const guildsTabs = Array.isArray(guilds)
+    ? [...guilds]
+        ?.sort((a, b) => a.name.localeCompare(b.name))
+        ?.map((guild) => ({
+          id: guild.id,
+          icon: guild.icon ? iconUrl(guild) : null,
+          label: guild.name,
+          onClick: () => handleGuildChange(guild.id),
+        }))
+    : [];
 
   const { data: guild, isLoading: isGuildLoading } =
     useGetGuildInfoQuery(selectedGuildId);
@@ -130,11 +129,10 @@ const EmojiManagementPage = () => {
 
   useEffect(() => {
     if (!selectedGuildId) {
-      const filteredGuilds = guilds?.filter(
-        (guild) =>
-          (Number(guild.permissions) & PermissionFlags.ADMINISTRATOR) !== 0
-      );
-      setSelectedGuildId(filteredGuilds?.[0]?.id ?? null);
+      const filtered = Array.isArray(guilds)
+        ? [...guilds]?.sort((a, b) => a.name.localeCompare(b.name))
+        : [];
+      setSelectedGuildId(filtered?.[0]?.id ?? null);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedGuildId]);

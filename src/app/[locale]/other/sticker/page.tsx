@@ -98,12 +98,9 @@ const StickerManagementPage = () => {
   };
 
   const guildsTabs = Array.isArray(guilds)
-    ? guilds
-        .filter(
-          (guild) =>
-            (Number(guild.permissions) & PermissionFlags.ADMINISTRATOR) !== 0
-        )
-        .map((guild) => ({
+    ? [...guilds]
+        ?.sort((a, b) => a.name.localeCompare(b.name))
+        ?.map((guild) => ({
           id: guild.id,
           icon: guild.icon ? iconUrl(guild) : null,
           label: guild.name,
@@ -132,10 +129,7 @@ const StickerManagementPage = () => {
   useEffect(() => {
     if (!selectedGuildId) {
       const filtered = Array.isArray(guilds)
-        ? guilds.filter(
-            (guild) =>
-              (Number(guild.permissions) & PermissionFlags.ADMINISTRATOR) !== 0
-          )
+        ? [...guilds]?.sort((a, b) => a.name.localeCompare(b.name))
         : [];
       setSelectedGuildId(filtered[0]?.id ?? null);
     }
