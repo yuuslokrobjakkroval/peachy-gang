@@ -26,7 +26,7 @@ const EmojiManagementPage = () => {
   const [page, setPage] = useState(1);
   const [downloadingIds, setDownloadingIds] = useState<Set<string>>(new Set());
   const [searchQuery, setSearchQuery] = useState("");
-  const emojisPerPage = 50;
+  const emojisPerPage = 60;
 
   // Download handler function
   const handleDownload = async (emoji: any) => {
