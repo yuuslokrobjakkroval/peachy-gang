@@ -161,21 +161,16 @@ const navigation = {
           url: "/other/tutorials",
           icon: Clapperboard,
         },
-        {
-          title: "Daily Rewards",
-          url: "/other/daily",
-          icon: Gift,
-        },
-        {
-          title: "Credits Transactions",
-          url: "/other/transactions",
-          icon: Banknote,
-        },
-        {
-          title: "Http Status Code",
-          url: "/other/http",
-          icon: Code,
-        },
+        // {
+        //   title: "Daily Rewards",
+        //   url: "/other/daily",
+        //   icon: Gift,
+        // },
+        // {
+        //   title: "Http Status Code",
+        //   url: "/other/http",
+        //   icon: Code,
+        // },
       ],
     },
   ],
@@ -187,20 +182,6 @@ const navigation = {
       isActive: true,
       items: [
         {
-          title: "Emoji Management",
-          url: "/general/emoji",
-          icon: BookHeart,
-          isActive: true,
-          items: [],
-        },
-        {
-          title: "Sticker Management",
-          url: "/general/sticker",
-          icon: Sticker,
-          isActive: true,
-          items: [],
-        },
-        {
           title: "Clip Management",
           url: "/general/tutorials",
           icon: Clapperboard,
@@ -211,20 +192,6 @@ const navigation = {
           title: "Movie Management",
           url: "/general/movies",
           icon: Popcorn,
-          isActive: true,
-          items: [],
-        },
-        {
-          title: "Role Management",
-          url: "/general/roles",
-          icon: ClipboardList,
-          isActive: true,
-          items: [],
-        },
-        {
-          title: "User Managemnet",
-          url: "/general/users",
-          icon: User,
           isActive: true,
           items: [],
         },
