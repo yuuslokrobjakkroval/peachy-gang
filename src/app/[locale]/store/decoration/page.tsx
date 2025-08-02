@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useCallback, useState } from "react";
-import { Search } from "lucide-react";
+import { Search, PhoneCall, X } from "lucide-react";
 import { Icons } from "@/components/icons";
 import { decorationsDataWithPricing } from "@/data/decorations-with-pricing";
 import Image from "@/components/image";
@@ -35,14 +35,177 @@ const SearchBar = ({
   );
 };
 
+const PricingDialog = ({
+  isOpen,
+  onClose,
+}: {
+  isOpen: boolean;
+  onClose: () => void;
+}) => {
+  if (!isOpen) return null;
+
+  return (
+    <div className="fixed inset-0 z-50 flex items-center justify-center">
+      {/* Backdrop */}
+      <div
+        className="absolute inset-0 bg-black/50 backdrop-blur-sm"
+        onClick={onClose}
+      />
+
+      {/* Dialog */}
+      <div className="relative w-full max-w-4xl max-h-[90vh] m-3 rounded-2xl bg-card shadow-2xl overflow-hidden border">
+        {/* Header */}
+        <div className="flex items-center justify-between p-4 border-b">
+          <h2 className="text-2xl font-bold text-primary">
+            🍑 PEACHY SHOP PRICING 🍑
+          </h2>
+          <button
+            onClick={onClose}
+            className="p-2 transition-colors rounded-lg hover:text-primary"
+          >
+            <X className="w-6 h-6" />
+          </button>
+        </div>
+
+        {/* Content */}
+        <div className="p-6 overflow-y-auto max-h-[calc(90vh-120px)]">
+          <div className="grid gap-12">
+            {/* Left Side - Pricing */}
+            <div className="space-y-4">
+              <div className="grid gap-3 sm:grid-cols-2">
+                {[
+                  { original: "$4.99", sale: "$2.37" },
+                  { original: "$5.99", sale: "$2.68" },
+                  { original: "$7.99", sale: "$3.09" },
+                  { original: "$8.49", sale: "$3.49" },
+                  { original: "$8.99", sale: "$3.86" },
+                  { original: "$9.99", sale: "$4.21" },
+                  { original: "$10.99", sale: "$4.66" },
+                  { original: "$11.99", sale: "$5.11" },
+                  { original: "$13.99", sale: "$5.73" },
+                ].map((price, index) => (
+                  <div
+                    key={index}
+                    className="flex items-center justify-center p-4 transition-shadow border rounded-lg hover:shadow-md"
+                  >
+                    <div className="space-y-1 text-center">
+                      <div className="flex items-center justify-center gap-2">
+                        <span className="text-sm line-through text-muted-foreground">
+                          {price.original}
+                        </span>
+                        <span className="text-lg font-bold">➝</span>
+                        <span className="text-lg font-bold text-primary">
+                          {price.sale}
+                        </span>
+                      </div>
+                      <div className="space-y-1 text-xs">
+                        <p className="font-semibold">
+                          Save $
+                          {(
+                            parseFloat(price.original.slice(1)) -
+                            parseFloat(price.sale.slice(1))
+                          ).toFixed(2)}
+                        </p>
+                        <p className="text-muted-foreground">
+                          {Math.round(
+                            ((parseFloat(price.original.slice(1)) -
+                              parseFloat(price.sale.slice(1))) /
+                              parseFloat(price.original.slice(1))) *
+                              100
+                          )}
+                          % OFF
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              {/* Bulk Discount */}
+              <div className="p-4 border rounded-lg">
+                <div className="space-y-2">
+                  <p className="font-semibold text-center">
+                    🎁 Special Bulk Discount Deal! 🎁
+                  </p>
+                  <p className="text-sm text-center">
+                    Purchase any 2 Avatar Decorations and get an additional{" "}
+                    <strong>$0.50 OFF</strong> your total order!
+                  </p>
+                  <div className="p-2 text-center rounded bg-card">
+                    <p className="text-xs">
+                      <strong>Example:</strong> Buy 2 decorations worth $5.00
+                      total = Pay only $4.50
+                    </p>
+                  </div>
+                  <p className="mt-3 font-semibold text-center">
+                    ទិញ 2 Avatar Decorations មាន Discount **$0.50** 🍑
+                  </p>
+                </div>
+              </div>
+              <div className="flex flex-col justify-center space-y-4">
+                <h3 className="text-lg font-semibold text-center">
+                  📞 Contact Information 📞
+                </h3>
+                <div className="p-6 border rounded-lg">
+                  <p className="mb-4 font-semibold text-center">
+                    Ready to get your decorations?
+                  </p>
+                  <div className="space-y-4 text-center">
+                    <p className="text-xl font-bold text-primary">
+                      Contact me: 👤 KYUU
+                    </p>
+                    <a
+                      href="https://discord.com/users/966688007493140591"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center px-6 py-3 bg-[#5865F2] text-white font-semibold rounded-lg transition-colors duration-200 shadow-lg hover:shadow-xl"
+                    >
+                      <svg
+                        className="w-5 h-5 mr-2"
+                        viewBox="0 0 24 24"
+                        fill="currentColor"
+                      >
+                        <path d="M20.317 4.3698a19.7913 19.7913 0 00-4.8851-1.5152.0741.0741 0 00-.0785.0371c-.211.3753-.4447.8648-.6083 1.2495-1.8447-.2762-3.68-.2762-5.4868 0-.1636-.3933-.4058-.8742-.6177-1.2495a.077.077 0 00-.0785-.037 19.7363 19.7363 0 00-4.8852 1.515.0699.0699 0 00-.0321.0277C.5334 9.0458-.319 13.5799.0992 18.0578a.0824.0824 0 00.0312.0561c2.0528 1.5076 4.0413 2.4228 5.9929 3.0294a.0777.0777 0 00.0842-.0276c.4616-.6304.8731-1.2952 1.226-1.9942a.076.076 0 00-.0416-.1057c-.6528-.2476-1.2743-.5495-1.8722-.8923a.077.077 0 01-.0076-.1277c.1258-.0943.2517-.1923.3718-.2914a.0743.0743 0 01.0776-.0105c3.9278 1.7933 8.18 1.7933 12.0614 0a.0739.0739 0 01.0785.0095c.1202.099.246.1981.3728.2924a.077.077 0 01-.0066.1276 12.2986 12.2986 0 01-1.873.8914.0766.0766 0 00-.0407.1067c.3604.698.7719 1.3628 1.225 1.9932a.076.076 0 00.0842.0286c1.961-.6067 3.9495-1.5219 6.0023-3.0294a.077.077 0 00.0313-.0552c.5004-5.177-.8382-9.6739-3.5485-13.6604a.061.061 0 00-.0312-.0286zM8.02 15.3312c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9555-2.4189 2.157-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419-.0189 1.3332-.9555 2.4189-2.1569 2.4189zm7.9748 0c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9554-2.4189 2.1569-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.9555 2.4189-2.1568 2.4189Z" />
+                      </svg>
+                      Contact on Discord
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
 const App = () => {
   const [decoSearch, setDecoSearch] = useState("");
+  const [isPricingDialogOpen, setIsPricingDialogOpen] = useState(false);
 
   return (
     <div className="relative w-full px-2 overflow-hidden rounded-lg sm:px-4 md:px-6">
-      <h1 className="mb-4 text-lg font-bold text-primary sm:text-xl md:text-2xl lg:text-3xl">
-        Discord Shop
-      </h1>
+      <div className="flex items-center justify-between mb-6">
+        <h1 className="text-lg font-bold text-primary sm:text-xl md:text-2xl lg:text-3xl">
+          🍑 PEACHY SHOP 🍑
+        </h1>
+      </div>
+
+      {/* Sticky Pricing Dialog Button */}
+      <Button
+        onClick={() => setIsPricingDialogOpen(true)}
+        className="fixed z-40 inline-flex items-center gap-2 px-4 py-2 font-semibold transition-all duration-200 transform rounded-lg shadow-lg bottom-4 right-4 hover:shadow-xl bg-primary text-primary-foreground hover:bg-primary/90"
+      >
+        <PhoneCall className="w-5 h-5" />
+      </Button>
+
+      {/* Pricing Dialog */}
+      <PricingDialog
+        isOpen={isPricingDialogOpen}
+        onClose={() => setIsPricingDialogOpen(false)}
+      />
+
       {/* SELECT DECORATION */}
       <h3 className="my-4 font-semibold text-sm scale-y-90 [letter-spacing:.05em]">
         AVATAR DECORATION
