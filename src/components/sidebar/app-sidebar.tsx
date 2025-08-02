@@ -26,6 +26,8 @@ import {
   Settings2,
   Smile,
   Sticker,
+  Squirrel,
+  Sparkle,
 } from "lucide-react";
 
 import { NavMain } from "@/components/navbar/nav-main";
@@ -97,15 +99,21 @@ const navigation = {
       isActive: true,
       items: [
         {
-          title: "Discord Shop",
-          url: "/store/discord",
-          icon: ShoppingBag,
-        },
-        {
           title: "Profile",
           url: "/store/profile",
           icon: User,
         },
+        {
+          title: "Decoration",
+          url: "/store/decoration",
+          icon: Squirrel,
+        },
+        {
+          title: "Effect",
+          url: "/store/effect",
+          icon: Sparkle,
+        },
+
         {
           title: "Background",
           url: "/store/background",

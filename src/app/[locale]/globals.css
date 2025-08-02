@@ -66,6 +66,13 @@ body {
   --color-chart-4: var(--chart-4);
   --color-chart-5: var(--chart-5);
   --color-sidebar: var(--sidebar);
+  --color-base-low: hsl(240, 5.769%, 20.392%);
+  --color-base-lower: hsl(240, 5.263%, 18.627%);
+  --color-base-lowest: hsl(240, 5.882%, 16.667%);
+  --color-surface-overlay: hsl(240, 5.263%, 7.451%);
+  --color-surface-high: hsl(240, 5.263%, 22.353%);
+  --color-surface-higher: hsl(240, 5.691%, 24.118%);
+  --color-surface-highest: hsl(240, 5.263%, 26.078%);
   --color-sidebar-foreground: var(--sidebar-foreground);
   --color-sidebar-primary: var(--sidebar-primary);
   --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
