@@ -1,8 +1,11 @@
 {
+  "user": {
+    "top_global": "排行榜奖励"
+  },
   "language": {
     "english": "英语",
-    "khmer": "高棉",
-    "china": "中国"
+    "khmer": "高棉语",
+    "china": "中文"
   },
   "navigation": {
     "home": "家",
@@ -43,30 +46,32 @@
   },
   "dashboard": {
     "title": "仪表板",
-    "description": "概述您的 PEACHY 帮派社区统计和分析。",
-    "loading": "加载仪表板数据...",
+    "user_title": "用户信息",
+    "user_info_description": "您的用户信息和余额统计概览",
+    "description": "概览您的 PEACHY GANG 社区统计和分析。",
+    "loading": "正在加载数据，请稍等...",
     "analytics_title": "社区分析",
-    "analytics_description": "跟踪用户参与度和随着时间的推移增长。",
+    "analytics_description": "跟踪用户参与度和随时间的增长。",
     "welcome_back": "欢迎回来",
-    "total_users": "总用户",
-    "active_guilds": "主动公会",
-    "total_coins": "总硬币",
-    "recent_activity": "最近的活动",
-    "total_coin": "总硬币",
+    "total_users": "总用户数",
+    "active_guilds": "活跃公会",
+    "total_coins": "总硬币数",
+    "recent_activity": "最近活动",
+    "total_coin": "总硬币数",
     "bank_reserves": "银行储备",
-    "user_engagement": "用户参与",
-    "active_this_week": "{count}活跃本周",
-    "based_on_last_login": "基于上次登录活动",
-    "across_wallets": "跨{count}钱包",
-    "sum_of_balances": "所有用户余额的总和",
+    "user_engagement": "用户参与度",
+    "active_this_week": "本周活跃 {count} 人",
+    "based_on_last_login": "基于最后登录活动",
+    "across_wallets": "跨 {count} 个钱包",
+    "sum_of_balances": "所有用户余额总和",
     "stored_securely": "安全存储",
-    "total_banked_coins": "总银币",
-    "average_level": "平均水平",
-    "based_on_xp": "基于XP和活动",
-    "growth_percentage": "+{percentage}％",
-    "last_six_months": "最近6个月",
+    "total_banked_coins": "总银行硬币数",
+    "average_level": "平均等级",
+    "based_on_xp": "基于经验值和活动",
+    "growth_percentage": "+{percentage}%",
     "total_balance_title": "总余额",
     "total_balance_description": "显示所有用户的总余额随时间变化",
+    "last_six_months": "最近6个月",
     "last_three_months": "最近3个月",
     "last_thirty_days": "最近30天",
     "last_seven_days": "最近7天",
@@ -75,11 +80,44 @@
       "bank": "银行",
       "slots": "老虎机",
       "blackjack": "二十一点",
-      "coinflip": "共同粉",
+      "coinflip": "抛硬币",
       "klaklouk": "克拉克卢克",
-      "sponsor": "赞助"
+      "sponsor": "赞助商",
+      "credit": "信用"
     },
-    "no_data": "没有可显示的用户数据"
+    "feature_usage_title": "功能使用情况",
+    "feature_usage_description": "显示功能使用统计随时间变化",
+    "features": {
+      "usage": "使用情况",
+      "autoresponse": "自动回复",
+      "boostermessage": "助推消息",
+      "giveawayschedule": "抽奖计划",
+      "goodbyemessage": "告别消息",
+      "invitetrackermessage": "邀请跟踪消息",
+      "joinroles": "加入角色",
+      "leveling": "等级系统",
+      "reactionroles": "反应角色",
+      "welcomemessage": "欢迎消息"
+    },
+    "no_data": "没有可显示的用户数据",
+    "error": "获取数据时发生错误。请重试。",
+    "sponsorTitle": "赞助商",
+    "enterAmountPrompt": "输入您想要赞助的金额。",
+    "scanQrPrompt": "扫描二维码完成您的赞助。",
+    "amountLabel": "金额",
+    "amountPlaceholder": "输入金额",
+    "qrCodeAlt": "赞助二维码",
+    "checkingPayment": "正在检查支付状态...",
+    "paymentSuccess": "支付成功！",
+    "paymentFailed": "支付失败。请重试。",
+    "qrGenerationFailed": "生成二维码时出错。请重试。",
+    "awaitingPayment": "等待支付中...",
+    "tryAgain": "重试",
+    "errors": {
+      "missingUserData": "用户邮箱或用户名丢失",
+      "invalidAmount": "请输入有效金额",
+      "qrGenerationFailed": "生成二维码失败"
+    }
   },
   "peachy": {
     "title": "桃子",
@@ -155,6 +193,9 @@
     "error_message": "糟糕，出了点问题。"
   },
   "features": {
+    "featureNotFoundTitle": "功能未找到",
+    "featureNotFoundDescription": "功能 {feature} 不可用。请检查功能列表或刷新页面。",
+    "refreshPage": "刷新",
     "enable_button": "启用",
     "config_button": "配置",
     "disable_button": "禁用",
@@ -178,6 +219,8 @@
     "booster-message_description": "当用户助力服务器时发送消息",
     "invite-tracker-message": "邀请消息",
     "invite-tracker-message_description": "当用户邀请的成员加入服务器时发送消息",
+    "reaction-roles": "反应角色",
+    "reaction-roles_description": "允许用户通过消息反应自我分配角色",
     "join-roles": "加入角色",
     "join-roles_description": "当用户加入服务器时自动分配角色",
     "leveling-system": "等级系统",
@@ -436,13 +479,22 @@
   },
   "rank": {
     "title": "排行榜",
-    "description": "硬币和经验的顶级用户",
-    "rank": "秩",
-    "user": "用户",
-    "coins": "硬币",
-    "level": "等级",
-    "experience": "经验",
-    "no_data": "没有可用的排名数据"
+    "description": "查看按余额排名的顶级用户。",
+    "searchPlaceholder": "搜索用户...",
+    "columns": {
+      "rank": "排名",
+      "user": "用户",
+      "coin": "硬币",
+      "credit": "信用",
+      "bank": "银行",
+      "slots": "老虎机",
+      "sponsor": "赞助商",
+      "blackjack": "二十一点",
+      "coinflip": "抛硬币",
+      "klaklouk": "克拉克卢克",
+      "levelChat": "文字等级",
+      "levelVoice": "语音等级"
+    }
   },
   "other": {
     "title": "其他",
@@ -664,6 +716,36 @@
       "noBackgroundImage": "没有提供背景图像"
     }
   },
+  "reactionRolesFeature": {
+    "table": {
+      "header": "允许用户通过消息反应自我分配角色。",
+      "removeLabel": "移除索引 {index} 处的角色"
+    },
+    "switch": {
+      "activeLabel": "活跃",
+      "activeDescription": "启用或禁用此功能"
+    },
+    "channel": {
+      "label": "频道",
+      "description": "发送反应角色消息的位置"
+    },
+    "content": {
+      "label": "消息内容",
+      "description": "反应角色消息的内容",
+      "placeholder": "输入消息的主要内容"
+    },
+    "noReactionRolesFound": "未找到反应角色",
+    "addMessage": "添加消息",
+    "newReactionRoles": "新反应角色",
+    "getStartedDescription": "让我们开始选择一条消息。您已经发送了一条消息来应用反应角色，还是应该由Sapphire为您创建一条新消息？",
+    "useExistingMessage": "使用现有消息",
+    "createNewMessage": "创建新消息",
+    "rolesDescription": "配置角色及其对应的表情符号（已配置 {count} 个角色）",
+    "addRole": "添加角色",
+    "roleEmojiLabel": "表情符号",
+    "roleIdLabel": "角色ID",
+    "removeRole": "移除角色"
+  },
   "movies": {
     "title": "探索我们的电影收藏",
     "title_description": "深入体验我们精心挑选的电影。点击视频开始观看！",
@@ -711,5 +793,17 @@
       "Bad Gateway": "错误网关",
       "Service Unavailable": "服务不可用"
     }
+  },
+  "table": {
+    "emptyMessage": "没有数据",
+    "emptySuggestion": "尝试调整您的搜索或筛选条件",
+    "activeFilters": "活跃筛选器:",
+    "paginationSummary": "显示 {start} 到 {end}，共 {total} 条结果"
+  },
+  "NotFound": {
+    "title": "页面丢失",
+    "description": "抱歉，您要查找的页面不存在或已被移动。",
+    "goBack": "返回",
+    "backToHome": "返回首页"
   }
 }

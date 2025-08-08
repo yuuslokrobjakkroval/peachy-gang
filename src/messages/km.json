@@ -1,114 +1,148 @@
 {
   "user": {
-    "top_global": "តារាងចំណាត់ថ្នាក់"
+    "top_global": "រង្វាន់តារាងពិន្ទុ"
   },
   "language": {
-    "english": "ភាសាអង់គ្លេស",
-    "khmer": "ភាសាខ្មែរ",
-    "china": "ភាសាចិន"
+    "english": "អង់គ្លេស",
+    "khmer": "ខ្មែរ",
+    "china": "ចិន"
   },
-
   "navigation": {
-    "home": "ទំព័រដើម",
-    "dashboard": "ផ្ទាំងគ្រប់គ្រង",
-    "features": "មុខងារ",
+    "home": "ផ្ទះ",
+    "dashboard": "ផ្ទាំងបញ្ជា",
+    "features": "លក្ខណៈពិសេស",
     "guilds": "ក្រុម",
-    "bots": "បត",
+    "bots": "រូបយន្ត",
     "games": "ល្បែង",
     "profile": "ប្រវត្តិរូប",
     "settings": "ការកំណត់",
     "store": "ហាង",
-    "rank": "ចំណាត់ថ្នាក់",
-    "other": "ផ្សេងៗ",
+    "rank": "លំដាប់ថ្នាក់",
+    "other": "ផ្សេងទៀត",
     "logout": "ចាកចេញ",
     "login": "ចូល"
   },
   "login": {
-    "title": "សូមស្វាគមន៍ត្រឡប់មកវិញ",
-    "description": "ចូលគណនីរបស់អ្នកដើម្បីបន្ត",
+    "title": "ស្វាគមន៍ត្រឡប់មកវិញ",
+    "description": "ចូលទៅគណនីរបស់អ្នកដើម្បីបន្ត",
     "discord_login": "បន្តជាមួយ Discord",
-    "username": "ឈ្មោះអ្នកប្រើ",
-    "password": "លេខសម្ងាត់",
+    "username": "ឈ្មោះអ្នកប្រើប្រាស់",
+    "password": "ពាក្យសម្ងាត់",
     "submit": "ចូល",
-    "forgotPassword": "ភ្លេចលេខសម្ងាត់?",
-    "terms_agreement": "ដោយបន្ត អ្នកយល់ព្រមនឹង",
+    "forgotPassword": "ភ្លេចពាក្យសម្ងាត់?",
+    "terms_agreement": "តាមរយៈការបន្ត អ្នកយល់ព្រមនឹង",
     "terms_of_service": "លក្ខខណ្ឌនៃសេវាកម្ម",
     "and": "និង",
-    "privacy_policy": "គោលការណ៍ឯកជនភាព"
+    "privacy_policy": "គោលការណ៍ភាពឯកជន"
   },
   "home": {
-    "welcome": "សូមស្វាគមន៍",
+    "welcome": "ស្វាគមន៍",
     "to": "មកកាន់",
-    "peachy_gang": "PEACHY GANG",
-    "title": " PEACHY GANG",
+    "peachy_gang": "ក្រុម PEACHY",
     "get_started": "ចាប់ផ្តើម",
     "learn_more": "ស្វែងយល់បន្ថែម",
     "background_alt": "រូបភាព Peach និង Goma"
   },
   "dashboard": {
-    "title": "ផ្ទាំងគ្រប់គ្រង",
-    "description": "ទិដ្ឋភាពទូទៅនៃស្ថិតិ និងការវិភាគសហគមន៍ PEACHY GANG របស់អ្នក។",
-    "loading": "កំពុងផ្ទុកទិន្នន័យផ្ទាំងគ្រប់គ្រង...",
+    "title": "ផ្ទាំងបញ្ជា",
+    "user_title": "ព័ត៌មានអ្នកប្រើប្រាស់",
+    "user_info_description": "ទិដ្ឋភាពទូទៅនៃព័ត៌មាន និងស្ថិតិសមតុល្យភាពរបស់អ្នក",
+    "description": "ទិដ្ឋភាពទូទៅនៃស្ថិតិសហគមន៍ និងការវិភាគ PEACHY GANG របស់អ្នក។",
+    "loading": "កំពុងផ្ទុកទិន្នន័យ សូមរង់ចាំ...",
     "analytics_title": "ការវិភាគសហគមន៍",
-    "analytics_description": "តាមដានការចូលរួម និងកំណើនរបស់អ្នកប្រើប្រាស់តាមពេលវេលា។",
-    "welcome_back": "សូមស្វាគមន៍ត្រឡប់មកវិញ",
-    "total_users": "អ្នកប្រើសរុប",
+    "analytics_description": "តាមដានការចូលរួមរបស់អ្នកប្រើប្រាស់ និងការលូតលាស់តាមពេលវេលា។",
+    "welcome_back": "ស្វាគមន៍ត្រឡប់មកវិញ",
+    "total_users": "អ្នកប្រើប្រាស់សរុប",
     "active_guilds": "ក្រុមសកម្ម",
     "total_coins": "កាក់សរុប",
     "recent_activity": "សកម្មភាពថ្មីៗ",
     "total_coin": "កាក់សរុប",
-    "bank_reserves": "ទុនបម្រុងធនាគារ",
-    "user_engagement": "ការចូលរួមរបស់អ្នកប្រើ",
-    "active_this_week": "{count} សកម្មក្នុងសប្តាហ៍នេះ",
+    "bank_reserves": "ទុនបំរុងរបស់ធនាគារ",
+    "user_engagement": "ការចូលរួមរបស់អ្នកប្រើប្រាស់",
+    "active_this_week": "{count} សកម្មនៅសប្តាហ៍នេះ",
     "based_on_last_login": "ផ្អែកលើសកម្មភាពចូលចុងក្រោយ",
-    "across_wallets": "នៅទូទាំង {count} កាបូប",
+    "across_wallets": "ឆ្លងកាត់ {count} កាបូប",
     "sum_of_balances": "ផលបូកនៃសមតុល្យអ្នកប្រើទាំងអស់",
     "stored_securely": "រក្សាទុកដោយសុវត្ថិភាព",
-    "total_banked_coins": "កាក់សរុបនៅក្នុងធនាគារ",
-    "average_level": "កម្រិតជាមធ្យម",
+    "total_banked_coins": "កាក់ធនាគារសរុប",
+    "average_level": "កំរិតមធ្យម",
     "based_on_xp": "ផ្អែកលើ XP និងសកម្មភាព",
-    "growth_percentage": "+{percentage}%",
+    "growth_percentage": "+ {percentage}%",
     "total_balance_title": "សមតុល្យសរុប",
-    "total_balance_description": "បង្ហាញសមតុល្យសរុបសម្រាប់អ្នកប្រើប្រាស់ទាំងអស់តាមពេលវេលា",
+    "total_balance_description": "បង្ហាញសមតុល្យសរុបសម្រាប់អ្នកប្រើប្រាស់ទាំងអស់ក្នុងរយៈពេលយូរ",
+    "last_six_months": "6 ខែចុងក្រោយ",
+    "last_three_months": "3 ខែចុងក្រោយ",
+    "last_thirty_days": "30 ថ្ងៃចុងក្រោយ",
+    "last_seven_days": "7 ថ្ងៃចុងក្រោយ",
     "information": {
       "coin": "កាក់",
       "bank": "ធនាគារ",
+      "slots": "ម៉ាស៊ីនស្លុត",
+      "blackjack": "ល្បែងបៀ",
+      "coinflip": "បោះកាក់",
+      "klaklouk": "ខ្លាឃ្លោក",
       "sponsor": "អ្នកឧបត្ថម្ភ",
-      "slots": "ស្លត",
-      "blackjack": "ប្ល៊ែកជែក",
-      "coinflip": "កាក់ហ្វ្លិប",
-      "klaklouk": "ក្លាក់ឡុក"
+      "credit": "ឥណទាន"
     },
-    "last_three_months": "៣ ខែចុងក្រោយ",
-    "last_thirty_days": "៣០ ថ្ងៃចុងក្រោយ",
-    "last_seven_days": "៧ ថ្ងៃចុងក្រោយ",
-    "no_data": "គ្មានទិន្នន័យអ្នកប្រើអាចប្រើបាន"
+    "feature_usage_title": "ការប្រើប្រាស់លក្ខណៈពិសេស",
+    "feature_usage_description": "ការបង្ហាញស្ថិតិប្រើប្រាស់លក្ខណៈពិសេសតាមពេលវេលា",
+    "features": {
+      "usage": "ការប្រើប្រាស់",
+      "autoresponse": "ការឆ្លើយតបដោយស្វ័យប្រវត្តិ",
+      "boostermessage": "សារពង្រឹង",
+      "giveawayschedule": "កាលវិភាគផ្តល់ជូន",
+      "goodbyemessage": "សារលាហើយ",
+      "invitetrackermessage": "សារតាមដានការអញ្ជើញ",
+      "joinroles": "តួនាទីចូលរួម",
+      "leveling": "ប្រព័ន្ធកម្រិត",
+      "reactionroles": "តួនាទីប្រតិកម្ម",
+      "welcomemessage": "សារស្វាគមន៍"
+    },
+    "no_data": "មិនមានទិន្នន័យអ្នកប្រើដើម្បីបង្ហាញ",
+    "error": "កំហុសមួយបានកើតឡើងខណៈពេលទៅរកទិន្នន័យ។ សូមព្យាយាមម្តងទៀត។",
+    "sponsorTitle": "អ្នកឧបត្ថម្ភ",
+    "enterAmountPrompt": "បញ្ចូលចំនួនទឹកប្រាក់ដែលអ្នកចង់ឧបត្ថម្ភ។",
+    "scanQrPrompt": "ស្កេនកូដ QR ដើម្បីបញ្ចប់ការឧបត្ថម្ភរបស់អ្នក។",
+    "amountLabel": "ចំនួន",
+    "amountPlaceholder": "បញ្ចូលចំនួនទឹកប្រាក់",
+    "qrCodeAlt": "កូដ QR អ្នកឧបត្ថម្ភ",
+    "checkingPayment": "កំពុងពិនិត្យស្ថានភាពទូទាត់...",
+    "paymentSuccess": "ការទូទាត់បានជោគជ័យ!",
+    "paymentFailed": "ការទូទាត់បានបរាជ័យ។ សូមព្យាយាមម្តងទៀត។",
+    "qrGenerationFailed": "កំហុសក្នុងការបង្កើតកូដ QR។ សូមព្យាយាមម្តងទៀត។",
+    "awaitingPayment": "កំពុងរង់ចាំការទូទាត់...",
+    "tryAgain": "ព្យាយាមម្តងទៀត",
+    "errors": {
+      "missingUserData": "អ៊ីមែលអ្នកប្រើ ឬឈ្មោះអ្នកប្រើកំពុងបាត់",
+      "invalidAmount": "សូមបញ្ចូលចំនួនទឹកប្រាក់ត្រឹមត្រូវ",
+      "qrGenerationFailed": "បានបរាជ័យក្នុងការបង្កើត QR កូដ"
+    }
   },
   "peachy": {
     "title": "PEACHY",
-    "description": "ជជែកជាមួយជំនួយការ AI PEACHY",
+    "description": "ជជែកជាមួយអ្នកជំនួយការ PEACHY AI",
     "chat_title": "ជជែកជាមួយ PEACHY",
-    "type_message": "វាយសាររបស់អ្នកនៅទីនេះ...",
-    "no_messages": "មិនទាន់មានសារទេ",
+    "type_message": "វាយបញ្ចូលសាររបស់អ្នកនៅទីនេះ...",
+    "no_messages": "មិនទាន់មានសារ",
     "send": "ផ្ញើ",
     "abort": "បោះបង់",
     "retry": "ព្យាយាមម្តងទៀត",
     "billing": {
-      "title": "វិក្កយបត្រ និងការជាវ",
-      "description": "គ្រប់គ្រងការជាវ និងវិធីបង់ប្រាក់របស់អ្នក",
+      "title": "វិក័យប័ត្រ និងការជាវ",
+      "description": "គ្រប់គ្រងការជាវ និងវិធីទូទាត់របស់អ្នក",
       "subscription_plan": "ផែនការជាវ",
       "manage_subscription": "គ្រប់គ្រងផែនការជាវរបស់អ្នក",
       "monthly": "ប្រចាំខែ",
       "yearly": "ប្រចាំឆ្នាំ",
       "basic": "មូលដ្ឋាន",
-      "pro": "ប្រូ",
+      "pro": "កម្រិតពិសេស",
       "enterprise": "សហគ្រាស",
-      "basic_description": "មុខងារសំខាន់ៗសម្រាប់បុគ្គល",
-      "pro_description": "មុខងារកម្រិតខ្ពស់សម្រាប់អ្នកជំនាញ",
+      "basic_description": "លក្ខណៈពិសេសចាំបាច់សម្រាប់បុគ្គល",
+      "pro_description": "លក្ខណៈពិសេសកម្រិតខ្ពស់សម្រាប់អ្នកជំនាញ",
       "enterprise_description": "ដំណោះស្រាយពេញលេញសម្រាប់ក្រុម",
-      "next_billing": "កាលបរិច្ឆេទវិក្កយបត្របន្ទាប់",
+      "next_billing": "កាលបរិច្ឆេទវិក័យប័ត្របន្ទាប់",
       "update_subscription": "ធ្វើបច្ចុប្បន្នភាពការជាវ",
-      "secure_payment": "ព័ត៌មានទូទាត់របស់អ្នកមានសុវត្ថិភាព និងអ៊ីនគ្រីប"
+      "secure_payment": "ព័ត៌មានទូទាត់របស់អ្នកមានសុវត្ថិភាព និងការអ៊ិនគ្រីប"
     }
   },
   "profile": {
@@ -119,7 +153,7 @@
       "bio": "ជីវប្រវត្តិ",
       "gender": "ភេទ",
       "birthday": "ថ្ងៃកំណើត",
-      "zodiac_sign": "រាសី",
+      "zodiac_sign": "សញ្ញារាសីចក្រ",
       "level": "កម្រិត",
       "exp": "បទពិសោធន៍",
       "exp_format": "{current} / {total}"
@@ -127,431 +161,475 @@
     "information": {
       "coin": "កាក់",
       "bank": "ធនាគារ",
-      "slot": "ស្លត",
-      "blackjack": "ប្លែកជែក",
-      "coin_flip": "កាក់ស៊ើ"
+      "slot": "ស្លុត",
+      "blackjack": "ល្បែងបៀ",
+      "coin_flip": "បោះកាក់"
     },
     "inventory": {
-      "title": "ស្តុក",
-      "no_wallpapers": "មិនទាន់មានរូបភាពផ្ទៃខាងក្រោយនៅក្នុងស្តុករបស់អ្នកទេ!"
+      "title": "សារពើភណ្ឌ",
+      "no_wallpapers": "គ្មានផ្ទាំងរូបភាពនៅក្នុងសារពើភណ្ឌរបស់អ្នកនៅឡើយទេ!"
     },
     "settings": {
       "title": "ការកំណត់",
       "dark_mode": "របៀបងងឹត",
-      "dark_mode_description": "បើករបៀបងងឹតដើម្បីការពារភ្នែករបស់អ្នក",
+      "dark_mode_description": "បើកដំណើរការស្បែកងងឹតដើម្បីការពារភ្នែករបស់អ្នក",
       "developer_mode": "របៀបអ្នកអភិវឌ្ឍន៍",
-      "developer_mode_description": "ប្រើសម្រាប់ការបំបាត់កំហុស និងការសាកល្បង",
+      "developer_mode_description": "ប្រើសម្រាប់ការបំបាត់កំហុស និងការធ្វើតេស្ត",
       "logout": "ចាកចេញ"
     }
   },
   "guilds": {
-    "title": "ក្រុម",
-    "server_icon_alt": "រូបតំណាងសហគមន៍",
-    "features_title": "មុខងារ",
-    "description": "គ្រប់គ្រងសហគមន៍ Discord របស់អ្នក",
-    "no_guilds": "រកមិនឃើញក្រុមទេ",
-    "invite_bot": "អញ្ជើញបុត",
-    "bot_not_in_server": "វានៅឯណា?",
-    "bot_not_in_server_description": "បុតមិនអាចចូលប្រើសហគមន៍បានទេ សូមអញ្ជើញវា!",
-    "go_back": "ត្រឡប់",
-    "server_features": "មុខងារសហគមន៍",
-    "error_message": "អុប! មានអ្វីមួយខុសប្រក្រតី។ សូមព្យាយាមម្តងទៀត!"
+    "title": "Guilds",
+    "server_icon_alt": "រូបតំណាងម៉ាស៊ីនមេ",
+    "features_title": "លក្ខណៈពិសេស",
+    "description": "គ្រប់គ្រងម៉ាស៊ីនមេ Discord របស់អ្នក",
+    "no_guilds": "រកមិនឃើញ Guilds",
+    "invite_bot": "អញ្ជើញ bot",
+    "bot_not_in_server": "តើវានៅឯណា?",
+    "bot_not_in_server_description": "bot មិនអាចចូលប្រើម៉ាស៊ីនមេសូមអញ្ជើញគាត់!",
+    "go_back": "ត្រឡប់ទៅក្រោយវិញ",
+    "server_features": "លក្ខណៈពិសេសរបស់ម៉ាស៊ីនមេ",
+    "error_message": "អូ, មានអ្វីមួយខុសប្រក្រតី។ "
   },
   "features": {
-    "enable_button": "បើក",
-    "config_button": "កំណត់រចនាសម្ព័ន្ធ",
+    "featureNotFoundTitle": "រកមិនឃើញលក្ខណៈពិសេស",
+    "featureNotFoundDescription": "លក្ខណៈពិសេស {feature} មិនអាចប្រើបានទេ។ សូមពិនិត្យបញ្ជីលក្ខណៈពិសេស ឬធ្វើបច្ចុប្បន្នភាពទំព័រ។",
+    "refreshPage": "ធ្វើបច្ចុប្បន្នភាព",
+    "welcome-message": "សារស្វាគមន៍",
+    "welcome-message_description": "ផ្ញើសារនៅពេលអ្នកប្រើប្រាស់ចូលរួមម៉ាស៊ីនមេ",
+    "auto-response": "ការឆ្លើយតបដោយស្វ័យប្រវត្តិ",
+    "auto-response_description": "ផ្ញើសារសម្រាប់ការសន្ទនាជាមួយរូបយន្ត",
+    "booster-message": "សារពង្រឹង",
+    "booster-message_description": "ផ្ញើសារនៅពេលអ្នកប្រើប្រាស់បង្កើនម៉ាស៊ីនមេ",
+    "invite-tracker-message": "សារអញ្ជើញ",
+    "invite-tracker-message_description": "ផ្ញើសារនៅពេលអ្នកប្រើប្រាស់អញ្ជើញសមាជិកចូលរួមជាមួយម៉ាស៊ីនមេ",
+    "reaction-roles": "តួនាទីប្រតិកម្ម",
+    "reaction-roles_description": "អនុញ្ញាតឱ្យអ្នកប្រើប្រាស់កំណត់ខ្លួនឯងនូវតួនាទីតាមរយៈប្រតិកម្មសារ",
+    "join-roles": "តួនាទីចូលរួម",
+    "join-roles_description": "កំណត់តួនាទីដោយស្វ័យប្រវត្តិនៅពេលអ្នកប្រើប្រាស់ចូលរួមម៉ាស៊ីនមេ",
+    "leveling-system": "ប្រព័ន្ធកម្រិត",
+    "leveling-system_description": "កម្រិតម៉ាស៊ីនមេរបស់អ្នកជាមួយនឹងប្រព័ន្ធកម្រិត",
+    "giveaway-schedule": "កាលវិភាគផ្តល់ជូន",
+    "giveaway-schedule_description": "គ្រប់គ្រងការផ្តល់ជូនដោយងាយស្រួលសម្រាប់ម៉ាស៊ីនមេរបស់អ្នក",
+    "goodbye-message": "សារលាហើយ",
+    "goodbye-message_description": "ផ្ញើសារនៅពេលអ្នកប្រើប្រាស់ចាកចេញពីម៉ាស៊ីនមេ",
+    "enable_button": "បើកដំណើរការ",
+    "config_button": "កំណត់រចនាសម្ពន្ធ",
     "disable_button": "បិទ",
-    "enabling": "កំពុងបើក...",
+    "enabling": "កំពុងបើកដំណើរការ...",
     "disabling": "កំពុងបិទ...",
     "enable_success": "បានបើក {name}",
-    "enable_success_description": "អ្នកបានបើកមុខងារនេះដោយជោគជ័យ។ ចង់កំណត់រចនាសម្ព័ន្ធឥឡូវនេះទេ?",
+    "enable_success_description": "អ្នកបានបើកដំណើរការមុខងារនេះដោយជោគជ័យ។ កំណត់រចនាសម្ពន្ធឥឡូវនេះ?",
     "disable_success": "បានបិទ {name}",
     "disable_success_description": "អ្នកបានបិទមុខងារនេះដោយជោគជ័យ។",
-    "undo_enable": "អ្នកបានលុបចោលសកម្មភាពបើកដោយជោគជ័យ។",
-    "undo_disable": "អ្នកបានលុបចោលសកម្មភាពបិទដោយជោគជ័យ។",
-    "enable_error": "បរាជ័យក្នុងការបើក {name}",
-    "disable_error": "បរាជ័យក្នុងការបិទ {name}",
-    "enableButtonLabel": "បើក {name}",
-    "configureButtonLabel": "កំណត់រចនាសម្ព័ន្ធ {name}",
-    "welcome-message": "សារស្វាគមន៍",
-    "welcome-message_description": "ផ្ញើសារនៅពេលអ្នកប្រើប្រាស់ចូលរួម Server  មេ",
-    "auto-response": "ការឆ្លើយតបស្វ័យប្រវត្តិ",
-    "auto-response_description": "ផ្ញើសារសម្រាប់ការសន្ទនាជាមួយបុតស្តែត",
-    "booster-message": "សារជំរុញ",
-    "booster-message_description": "ផ្ញើសារនៅពេលអ្នកប្រើប្រាស់ជំរុញ Server  មេ",
-    "invite-tracker-message": "សារអញ្ជើញ",
-    "invite-tracker-message_description": "ផ្ញើសារនៅពេលអ្នកប្រើប្រាស់អញ្ជើញសមាជិកចូលរួម Server  មេ",
-    "join-roles": "តួនាទីចូលរួម",
-    "join-roles_description": "ចាត់តាំងតួនាទីដោយស្វ័យប្រវត្តិនៅពេលអ្នកប្រើប្រាស់ចូលរួម Server  មេ",
-    "leveling-system": "ប្រព័ន្ធកម្រិត",
-    "leveling-system_description": "បង្កើនកម្រិត Server  មេរបស់អ្នកជាមួយប្រព័ន្ធកម្រិត",
-    "giveaway-schedule": "កាលវិភាគអំណោយ",
-    "giveaway-schedule_description": "គ្រប់គ្រងអំណោយដោយភាពងាយស្រួលសម្រាប់ Server  មេរបស់អ្នក",
-    "goodbye-message": "សារលា",
-    "goodbye-message_description": "ផ្ញើសារនៅពេលអ្នកប្រើប្រាស់ចាកចេញពី Server  មេ"
+    "undo_enable": "អ្នកបានធ្វើសកម្មភាពមិនបើកដំណើរការដោយជោគជ័យ។",
+    "undo_disable": "អ្នកបានធ្វើសកម្មភាពមិនបិទដំណើរការដោយជោគជ័យ។",
+    "enable_error": "បានបរាជ័យក្នុងការបើកដំណើរការ {name}",
+    "disable_error": "បានបរាជ័យក្នុងការបិទ {name}",
+    "enableButtonLabel": "បើកដំណើរការ {name}",
+    "configureButtonLabel": "កំណត់រចនាសម្ពន្ធ {name}"
   },
   "welcomeFeature": {
     "switch": {
       "activeLabel": "សកម្ម",
-      "activeDescription": "បើក ឬបិទមុខងារនេះ"
+      "activeDescription": "បើកដំណើរការឬបិទមុខងារនេះ"
     },
     "channel": {
-      "label": "ប៉ុស្តិ៍",
+      "label": "របលាយតឹក",
       "description": "កន្លែងដែលត្រូវផ្ញើសារស្វាគមន៍"
     },
     "content": {
-      "label": "មាតិកាសារ",
-      "description": "មាតិកានៃសារ",
-      "placeholder": "វាយបញ្ចូលមាតិកាសំខាន់នៃសារ"
+      "label": "ខ្លឹមសារសារ",
+      "description": "ខ្លឹមសារនៃសារ",
+      "placeholder": "វាយបញ្ចូលខ្លឹមសារសំខាន់នៃសារ"
     },
     "customImage": {
       "label": "រូបភាពផ្ទាល់ខ្លួន",
-      "description": "បើកដើម្បីកំណត់រូបភាពផ្ទាល់ខ្លួន"
+      "description": "បើកដំណើរការសម្រាប់រូបភាពប្តូរតាមបំណង"
     },
     "backgroundImage": {
       "label": "រូបភាពផ្ទៃខាងក្រោយ",
       "description": "ផ្តល់តំណភ្ជាប់ទៅរូបភាពផ្ទៃខាងក្រោយ",
       "placeholder": "វាយបញ្ចូល URL រូបភាព"
     },
-    "noBackgroundImage": "មិនមានរូបភាពផ្ទៃខាងក្រោយផ្តល់ឱ្យ"
+    "noBackgroundImage": "មិនមានរូបភាពផ្ទៃខាងក្រោយដែលបានផ្តល់"
   },
   "autoResponseFeature": {
     "switch": {
       "activeLabel": "សកម្ម",
-      "activeDescription": "បើក ឬបិទមុខងារនេះ"
+      "activeDescription": "បើកដំណើរការឬបិទមុខងារនេះ"
     },
     "table": {
-      "title": "ការឆ្លើយតបស្វ័យប្រវត្តិ",
-      "addButton": "បន្ថែម",
-      "searchPlaceholder": "ស្វែងរក",
-      "noMatchingResponses": "រកមិនឃើញ",
+      "title": "ការឆ្លើយតបដោយស្វ័យប្រវត្តិ",
+      "addButton": "បុក / ករ",
+      "searchPlaceholder": "ការឆេកឆេ",
+      "noMatchingResponses": "គ្មានការឆ្លើយតបឆ្លើយតបនឹងការស្វែងរករបស់អ្នកទេ។",
       "headers": {
-        "no": "ល.រ",
-        "trigger": "ផ្ទុក",
+        "no": "ដេលក្ផាន",
+        "trigger": "កៃ",
         "response": "ការឆ្លើយតប",
-        "createdBy": "បង្កើតដោយ",
-        "createdAt": "បង្កើតនៅ",
-        "action": "សកម្មភាព"
+        "createdBy": "បង្កើតឡើងដោយ",
+        "createdAt": "បានបង្កើតនៅ",
+        "action": "កិច្ច"
       },
-      "noResponses": "រកមិនឃើញការឆ្លើយតបស្វ័យប្រវត្តិ",
-      "pagination": "ទំព័រ {currentPage} នៃ {totalPages}",
-      "prevButton": "មុន",
-      "nextButton": "បន្ទាប់"
+      "noResponses": "រកមិនឃើញចម្លើយដោយស្វ័យប្រវត្តិ",
+      "pagination": "ទំព័រ {បច្ចុប្បន្ន} នៃ {សរុប}",
+      "prevButton": "ម្យ៉ាងដើមជាងមុន",
+      "nextButton": "បន្ទាប់បិនេហ"
     },
     "dialog": {
-      "addTitle": "បន្ថែមការឆ្លើយតបស្វ័យប្រវត្តិ",
-      "editTitle": "កែសម្រួលការឆ្លើយតបស្វ័យប្រវត្តិ",
-      "triggerPlaceholder": "បញ្ចូលអត្ថបទផ្ទុក",
+      "addTitle": "បន្ថែមការឆ្លើយតបដោយស្វ័យប្រវត្តិ",
+      "editTitle": "កែសម្រួលការឆ្លើយតបដោយស្វ័យប្រវត្តិ",
+      "triggerPlaceholder": "បញ្ចូលអត្ថបទកេះ",
       "responsePlaceholder": "បញ្ចូលអត្ថបទឆ្លើយតប",
-      "addButton": "បន្ថែម",
-      "updateButton": "ធ្វើបច្ចុប្បន្នភាព",
-      "addSuccess": "បានបន្ថែមការឆ្លើយតបស្វ័យប្រវត្តិ",
-      "updateSuccess": "បានធ្វើបច្ចុប្បន្នភាពការឆ្លើយតបស្វ័យប្រវត្តិ",
-      "error": "បរាជ័យក្នុងការផ្ទុក {action} ការឆ្លើយតបស្វ័យប្រវត្តិ"
+      "addButton": "បុក / ករ",
+      "updateButton": "ធេវីអាេយយរមយរ",
+      "addSuccess": "បន្ថែមការឆ្លើយតបដោយស្វ័យប្រវត្តិ",
+      "updateSuccess": "ធ្វើឱ្យទាន់សម័យដោយស្វ័យប្រវត្តិការឆ្លើយតប",
+      "error": "បានបរាជ័យក្នុងការទទួលបាន {សកម្មភាព} ការឆ្លើយតបដោយស្វ័យប្រវត្តិ"
     },
     "deleteDialog": {
       "title": "បញ្ជាក់ការលុប",
-      "message": "តើអ្នកប្រាកដថាចង់លុបការឆ្លើយតបស្វ័យប្រវត្តិនេះទេ?",
-      "cancelButton": "បោះបង់",
-      "deleteButton": "លុប"
+      "message": "តើអ្នកពិតជាចង់លុបការឆ្លើយតបដោយស្វ័យប្រវត្តិនេះឬ?",
+      "cancelButton": "លប់ចោល",
+      "deleteButton": "របៅបេលរសច"
     },
-    "deleteSuccess": "បានលុបការឆ្លើយតបស្វ័យប្រវត្តិ",
-    "deleteError": "បរាជ័យក្នុងការលុបការឆ្លើយតបស្វ័យប្រវត្តិ"
+    "deleteSuccess": "ការឆ្លើយតបដោយស្វ័យប្រវត្តិបានលុប",
+    "deleteError": "បានបរាជ័យក្នុងការលុបការឆ្លើយតបដោយស្វ័យប្រវត្តិ"
   },
   "boosterFeature": {
     "switch": {
       "activeLabel": "សកម្ម",
-      "activeDescription": "បើក ឬបិទមុខងារនេះ"
+      "activeDescription": "បើកដំណើរការឬបិទមុខងារនេះ"
     },
     "channel": {
-      "label": "ប៉ុស្តិ៍",
-      "description": "កន្លែងដែលត្រូវផ្ញើសារបង្កើនកម្រិត"
+      "label": "របលាយតឹក",
+      "description": "កន្លែងដែលត្រូវផ្ញើសាររំកិល"
     },
     "content": {
-      "label": "មាតិកាសារ",
-      "description": "មាតិកានៃសារ",
-      "placeholder": "វាយបញ្ចូលមាតិកាសំខាន់នៃសារ"
+      "label": "ខ្លឹមសារសារ",
+      "description": "ខ្លឹមសារនៃសារ",
+      "placeholder": "វាយបញ្ចូលខ្លឹមសារសំខាន់នៃសារ"
     },
     "customImage": {
       "label": "រូបភាពផ្ទាល់ខ្លួន",
-      "description": "បើកដើម្បីកំណត់រូបភាពផ្ទាល់ខ្លួន"
+      "description": "បើកដំណើរការសម្រាប់រូបភាពប្តូរតាមបំណង"
     },
     "backgroundImage": {
       "label": "រូបភាពផ្ទៃខាងក្រោយ",
       "description": "ផ្តល់តំណភ្ជាប់ទៅរូបភាពផ្ទៃខាងក្រោយ",
       "placeholder": "វាយបញ្ចូល URL រូបភាព"
     },
-    "noBackgroundImage": "មិនមានរូបភាពផ្ទៃខាងក្រោយផ្តល់ឱ្យ"
+    "noBackgroundImage": "មិនមានរូបភាពផ្ទៃខាងក្រោយដែលបានផ្តល់"
   },
   "inviteTrackerFeature": {
     "switch": {
       "activeLabel": "សកម្ម",
-      "activeDescription": "បើក ឬបិទមុខងារនេះ"
+      "activeDescription": "បើកដំណើរការឬបិទមុខងារនេះ"
     },
     "channel": {
-      "label": "ប៉ុស្តិ៍",
-      "description": "កន្លែងដែលត្រូវផ្ញើសារតាមដានក inviter"
+      "label": "របលាយតឹក",
+      "description": "កន្លែងដែលត្រូវផ្ញើសារកម្មវិធីតាមដានការអញ្ជើញ"
     },
     "content": {
-      "label": "មាតិកាសារ",
-      "description": "មាតិកានៃសារ",
-      "placeholder": "វាយបញ្ចូលមាតិកាសំខាន់នៃសារ"
+      "label": "ខ្លឹមសារសារ",
+      "description": "ខ្លឹមសារនៃសារ",
+      "placeholder": "វាយបញ្ចូលខ្លឹមសារសំខាន់នៃសារ"
     },
     "customImage": {
       "label": "រូបភាពផ្ទាល់ខ្លួន",
-      "description": "បើកដើម្បីកំណត់រូបភាពផ្ទាល់ខ្លួន"
+      "description": "បើកដំណើរការសម្រាប់រូបភាពប្តូរតាមបំណង"
     },
     "backgroundImage": {
       "label": "រូបភាពផ្ទៃខាងក្រោយ",
       "description": "ផ្តល់តំណភ្ជាប់ទៅរូបភាពផ្ទៃខាងក្រោយ",
       "placeholder": "វាយបញ្ចូល URL រូបភាព"
     },
-    "noBackgroundImage": "មិនមានរូបភាពផ្ទៃខាងក្រោយផ្តល់ឱ្យ"
+    "noBackgroundImage": "មិនមានរូបភាពផ្ទៃខាងក្រោយដែលបានផ្តល់"
+  },
+  "reactionRolesFeature": {
+    "table": {
+      "header": "អនុញ្ញាតឱ្យអ្នកប្រើប្រាស់កំណត់ខ្លួនឯងតាមតួនាទីតាមរយៈប្រតិកម្មសារ។",
+      "removeLabel": "យកតួនាទីនៅលិបិក្រម {សន្ទស្សន៍}"
+    },
+    "switch": {
+      "activeLabel": "សកម្ម",
+      "activeDescription": "បើកដំណើរការឬបិទមុខងារនេះ"
+    },
+    "channel": {
+      "label": "របលាយតឹក",
+      "description": "កន្លែងដែលត្រូវផ្ញើសារប្រតិកម្មប្រតិកម្ម"
+    },
+    "content": {
+      "label": "ខ្លឹមសារសារ",
+      "description": "ខ្លឹមសារនៃសារប្រតិកម្មប្រតិកម្ម",
+      "placeholder": "វាយបញ្ចូលខ្លឹមសារសំខាន់នៃសារ"
+    },
+    "noReactionRolesFound": "រកមិនឃើញតួនាទីប្រតិកម្ម",
+    "addMessage": "បន្ថែមសារ",
+    "newReactionRoles": "តួនាទីប្រតិកម្មថ្មី",
+    "getStartedDescription": "តោះចាប់ផ្តើមដោយជ្រើសរើសសារមួយ។ ",
+    "useExistingMessage": "ប្រើសារដែលមានស្រាប់",
+    "createNewMessage": "បង្កើតសារថ្មី",
+    "rolesDescription": "កំណត់រចនាសម្ព័ន្ធតួនាទីនិងរូបសញ្ញាដែលត្រូវគ្នា ({រាប់} ដែលត្រូវបានតំឡើង)",
+    "addRole": "បន្ថែមតួនាទី",
+    "roleEmojiLabel": "emoji",
+    "roleIdLabel": "លេខសម្គាល់តួនាទី",
+    "removeRole": "យកតួនាទីចេញ"
   },
   "joinRoleFeature": {
     "switch": {
       "activeLabel": "សកម្ម",
-      "activeDescription": "បើក ឬបិទមុខងារនេះ"
+      "activeDescription": "បើកដំណើរការឬបិទមុខងារនេះ"
     },
     "userRoles": {
-      "label": "តួនាទីអ្នកប្រើ",
-      "description": "ជ្រើសរើសតួនាទីដើម្បីផ្តល់ឱ្យអ្នកប្រើ"
+      "label": "តួនាទីរបស់អ្នកប្រើប្រាស់",
+      "description": "ជ្រើសរើសតួនាទីដើម្បីចាត់តាំងអ្នកប្រើប្រាស់"
     },
     "botRoles": {
-      "label": "តួនាទីប៊ីត",
-      "description": "ជ្រើសរើសតួនាទីដើម្បីផ្តល់ឱ្យប៊ីត"
+      "label": "តួនាទីរបស់ bot",
+      "description": "ជ្រើសរើសតួនាទីដើម្បីកំណត់ទៅរករូបយន្ត"
     }
   },
   "levelingFeature": {
     "switch": {
       "activeLabel": "សកម្ម",
-      "activeDescription": "បើក ឬបិទមុខងារនេះ"
+      "activeDescription": "បើកដំណើរការឬបិទមុខងារនេះ"
     },
     "channel": {
-      "label": "ប៉ុស្តិ៍",
-      "description": "កន្លែងដែលត្រូវផ្ញើសារកើនកម្រិត"
+      "label": "របលាយតឹក",
+      "description": "កន្លែងដែលត្រូវផ្ញើសារកម្រិត"
     },
     "content": {
-      "label": "មាតិកាសារ",
-      "description": "មាតិកានៃសារ",
-      "placeholder": "វាយបញ្ចូលសារកើនកម្រិត"
+      "label": "ខ្លឹមសារសារ",
+      "description": "ខ្លឹមសារនៃសារ",
+      "placeholder": "វាយបញ្ចូលក្នុងកម្រិតនៃសារ"
     },
-    "updateSuccess": "បានធ្វើបច្ចុប្បន្នភាពកម្រិត",
-    "updateSuccessDescription": "ការកំណត់កម្រិតត្រូវបានរក្សាទុកដោយជោគជ័យ។",
-    "updateError": "បរាជ័យក្នុងការធ្វើបច្ចុប្បន្នភាពកម្រិត"
+    "updateSuccess": "កំរិតកាន់តែប្រសើរឡើង",
+    "updateSuccessDescription": "ការកំណត់កម្រិតបានរក្សាទុកដោយជោគជ័យ។",
+    "updateError": "បានបរាជ័យក្នុងការធ្វើបច្ចុប្បន្នភាពកម្រិត"
   },
   "giveawayScheduleFeature": {
     "table": {
-      "searchPlaceholder": "ស្វែងរក",
-      "noMatchingSchedules": "គ្មានកាលវិភាគណាមួយត្រូវនឹងការស្វែងរករបស់អ្នកទេ។",
-      "title": "កាលវិភាគផ្តល់រង្វាន់",
-      "pagination": "ទំព័រទី {currentPage} នៃ {totalPages}",
-      "prevButton": "មុន",
-      "nextButton": "បន្ទាប់",
-      "noSchedules": "គ្មានកាលវិភាគផ្តល់រង្វាន់ត្រូវបានកំណត់ទេ។",
+      "searchPlaceholder": "ការឆេកឆេ",
+      "noMatchingSchedules": "មិនមានកាលវិភាគផ្គូផ្គងនឹងការស្វែងរករបស់អ្នកទេ។",
+      "title": "កាលវិភាគ Giveaway",
+      "pagination": "ទំព័រ {បច្ចុប្បន្ន} នៃ {សរុប}",
+      "prevButton": "ចាដមបុង",
+      "nextButton": "បន្ទាប់បិនេហ",
+      "noSchedules": "មិនមានកាលវិភាគដឹកជញ្ជូនត្រូវបានតំឡើងទេ។",
       "headers": {
-        "no": "លេខល.រ",
-        "channel": "ឆានែល",
-        "description": "ការពិពណ៌នា",
+        "no": "ការដុត",
+        "channel": "របលាយតឹក",
+        "description": "ការបិបន៍នា",
         "scheduleType": "ប្រភេទកាលវិភាគ",
-        "time": "ម៉ោង",
-        "dayDate": "ថ្ងៃ/កាលបរិច្ឆេទ",
-        "winners": "អ្នកឈ្នះ",
-        "prize": "រង្វាន់",
+        "time": "បេលវេលា",
+        "dayDate": "ថ្ងៃ / កាលបរិច្ឆេទ",
+        "winners": "រសីអ្នកតមបន់",
+        "prize": "វត្ថុរត់បន្ធ",
         "active": "សកម្ម",
         "actions": "សកម្មភាព",
-        "createdBy": "បង្កើតដោយ"
+        "createdBy": "បង្កើតឡើងដោយ"
       },
-      "editLabel": "កែសម្រួលកាលវិភាគ {id}",
+      "editLabel": "កែសម្រួលកាលវិភាគ {លេខសម្គាល់}",
       "deleteLabel": "លុបកាលវិភាគ {id}"
     },
     "addButton": "បន្ថែមកាលវិភាគ",
-    "addButtonLabel": "បន្ថែមកាលវិភាគផ្តល់រង្វាន់",
+    "addButtonLabel": "បន្ថែមកាលវិភាគវិមាត្រ",
     "deleteDialog": {
-      "title": "លុបកាលវិភាគផ្តល់រង្វាន់",
-      "description": "តើអ្នកប្រាកដទេថាចង់លុបកាលួភាគផ្តល់រង្វាន់ {type} នេះ?",
-      "cancel": "បោះបង់",
-      "delete": "លុប"
+      "title": "លុបកាលវិភាគផ្តល់ជូន",
+      "description": "តើអ្នកប្រាកដជាចង់លុប {វាយ} កាលវិភាគវិមជ្ឈការនេះឬ?",
+      "cancel": "លប់ចោល",
+      "delete": "របៅបេលរសច"
     },
-    "deleteSuccess": "កាលវិភាគផ្តល់រង្វាន់ {type} ត្រូវបានលុបដោយជោគជ័យ។",
-    "deleteSuccessDescription": "កាលវិភាគផ្តល់រង្វាន់ត្រូវបានលុបចេញដោយជោគជ័យ។",
-    "deleteError": "បរាជ័យក្នុងការលុបកាលវិភាគផ្តល់រង្វាន់ {type}។"
+    "deleteSuccess": "{វាយ} កាលវិភាគផ្សព្វផ្សាយបានលុបដោយជោគជ័យ។",
+    "deleteSuccessDescription": "កាលវិភាគ Giveaway ត្រូវបានដកចេញដោយជោគជ័យ។",
+    "deleteError": "បានបរាជ័យក្នុងការលុប {វាយ} កាលវិភាគផ្សព្វផ្សាយ។"
   },
   "goodByeMessageFeature": {
     "switch": {
       "activeLabel": "សកម្ម",
-      "activeDescription": "បើក ឬបិទមុខងារនេះ"
+      "activeDescription": "បើកដំណើរការឬបិទមុខងារនេះ"
     },
     "channel": {
-      "label": "ប៉ុស្តិ៍",
-      "description": "កន្លែងដែលត្រូវផ្ញើសារលា"
+      "label": "របលាយតឹក",
+      "description": "កន្លែងដែលត្រូវផ្ញើសារលាហើយ"
     },
     "content": {
-      "label": "មាតិកាសារ",
-      "description": "មាតិកានៃសារ",
-      "placeholder": "វាយបញ្ចូលមាតិកាសំខាន់នៃសារ"
+      "label": "ខ្លឹមសារសារ",
+      "description": "ខ្លឹមសារនៃសារ",
+      "placeholder": "វាយបញ្ចូលខ្លឹមសារសំខាន់នៃសារ"
     },
     "customImage": {
       "label": "រូបភាពផ្ទាល់ខ្លួន",
-      "description": "បើកដើម្បីកំណត់រូបភាពផ្ទាល់ខ្លួន"
+      "description": "បើកដំណើរការសម្រាប់រូបភាពប្តូរតាមបំណង"
     },
     "backgroundImage": {
       "label": "រូបភាពផ្ទៃខាងក្រោយ",
       "description": "ផ្តល់តំណភ្ជាប់ទៅរូបភាពផ្ទៃខាងក្រោយ",
       "placeholder": "វាយបញ្ចូល URL រូបភាព"
     },
-    "noBackgroundImage": "មិនមានរូបភាពផ្ទៃខាងក្រោយផ្តល់ឱ្យ"
+    "noBackgroundImage": "មិនមានរូបភាពផ្ទៃខាងក្រោយដែលបានផ្តល់"
   },
   "games": {
-    "title": "ល្បែង",
-    "description": "លេងល្បែងសប្បាយៗ និងទទួលបានរង្វាន់",
     "2048": {
       "title": "2048",
-      "description": "ល្បែងលេខបែបបុរាណ",
-      "score": "ពិន្ទុ",
-      "best": "ល្អបំផុត",
-      "game_over": "ចប់ល្បែង",
+      "description": "ល្បែងផ្គុំរូបលេខបុរាណ",
+      "score": "បិន្ទុ",
+      "best": "ល្អបមផុត",
+      "game_over": "ល្បែងលើ",
       "you_win": "អ្នកឈ្នះ!",
       "try_again": "ព្យាយាមម្តងទៀត",
       "new_game": "ល្បែងថ្មី"
     },
+    "title": "ល្បេក",
+    "description": "លេងល្បែងកំសាន្តសប្បាយនិងទទួលបានរង្វាន់",
     "memory": {
       "title": "ល្បែងចងចាំ",
       "description": "សាកល្បងជំនាញចងចាំរបស់អ្នក",
-      "moves": "ចលនា",
-      "time": "ពេលវេលា",
-      "pairs_found": "គូបានរកឃើញ",
-      "congratulations": "សូមអបអរសាទរ!",
+      "moves": "ផ្លាស់ទី",
+      "time": "បេលវេលា",
+      "pairs_found": "រកឃើញគូ",
+      "congratulations": "អបអរសាទរ!",
       "play_again": "លេងម្តងទៀត"
     }
   },
   "store": {
-    "title": "ហាង",
-    "description": "រកមើល និងទិញទំនិញ",
-    "backgrounds": "ផ្ទៃខាងក្រោយ",
-    "profiles": "ប្រវត្តិរូប",
-    "search_placeholder": "ស្វែងរកទំនិញ...",
-    "buy": "ទិញ",
-    "purchase": "ការទិញ",
+    "title": "តុប",
+    "description": "រកមើលនិងទិញរបស់របរ",
+    "backgrounds": "សាវតា",
+    "profiles": "រុសផាត",
+    "search_placeholder": "ស្វែងរករបស់របរ ...",
+    "buy": "តិញ",
+    "purchase": "តិញ",
     "confirm_purchase": "បញ្ជាក់ការទិញ",
-    "cost": "តម្លៃ",
-    "credits": "ក្រេឌីត",
+    "cost": "តមលៃ",
+    "credits": "សេវាឥណទាន",
     "owned": "ជាម្ចាស់",
-    "not_enough_credits": "ក្រេឌីតមិនគ្រប់គ្រាន់"
+    "not_enough_credits": "មិនមានក្រេឌីតគ្រប់គ្រាន់ទេ"
   },
   "rank": {
-    "title": "តារាងចំណាត់ថ្នាក់",
-    "description": "អ្នកប្រើកំពូលដោយកាក់ និងបទពិសោធន៍",
-    "rank": "ចំណាត់ថ្នាក់",
-    "user": "អ្នកប្រើ",
-    "coins": "កាក់",
-    "level": "កម្រិត",
-    "experience": "បទពិសោធន៍",
-    "no_data": "គ្មានទិន្នន័យចំណាត់ថ្នាក់អាចប្រើបាន"
+    "title": "តារាងពិន្ទុ",
+    "description": "មើលអ្នកប្រើកំពូលដែលត្រូវបានចាត់ថ្នាក់ដោយសមតុល្យរបស់ពួកគេ។",
+    "searchPlaceholder": "ស្វែងរកអ្នកប្រើប្រាស់ ...",
+    "columns": {
+      "rank": "លមដាប់ថ្នាក់",
+      "user": "អ្នករេបី",
+      "coin": "របាក់ធេវីបីលោហធាតុ",
+      "credit": "តមនុកចិត្ដ",
+      "bank": "ធនាការ",
+      "slots": "តុកម្ផងក់",
+      "sponsor": "អ្នកឧបត្ថម្ក",
+      "blackjack": "ការបង្ហុប",
+      "coinflip": "Coinflip",
+      "klaklouk": "Kloklouk",
+      "levelChat": "កំរិតអត្ថបទ",
+      "levelVoice": "កម្រិតសំឡេង"
+    }
   },
   "other": {
-    "title": "ផ្សេងៗ",
-    "description": "មុខងារ និងឧបករណ៍បន្ថែម",
+    "title": "ផេសងត្យេត",
+    "description": "លក្ខណៈពិសេសនិងឧបករណ៍បន្ថែម",
     "daily_reward": "រង្វាន់ប្រចាំថ្ងៃ",
-    "transaction": "ប្រតិបត្តិការ",
+    "transaction": "ការងារចមនយញ",
     "daily": {
       "title": "រង្វាន់ប្រចាំថ្ងៃ",
       "description": "ទាមទាររង្វាន់ប្រចាំថ្ងៃរបស់អ្នក",
-      "claim": "ទាមទារ",
+      "claim": "ទាមទាររង្វាន់",
       "claimed": "បានទាមទាររួចហើយ",
-      "next_reward": "រង្វាន់បន្ទាប់ក្នុង",
-      "streak": "បន្តជាប់ៗ"
+      "next_reward": "រង្វាន់បន្ទាប់នៅក្នុង",
+      "streak": "របចុម"
     },
     "all_transaction": {
-      "title": "ប្រតិបត្តិការក្រេឌីត",
+      "title": "ប្រតិបត្តិការឥណទាន",
       "view_description": "មើលប្រវត្តិប្រតិបត្តិការរបស់អ្នក",
-      "amount": "ចំនួន",
-      "type": "ប្រភេទ",
-      "date": "កាលបរិច្ឆេទ",
-      "description": "ការពិពណ៌នា",
-      "income": "ចំណូល",
-      "expense": "ចំណាយ"
+      "amount": "ចមនយន",
+      "type": "បុម្ពអកសរ",
+      "date": "កាលកមនត់",
+      "description": "ការបិបន៍នា",
+      "income": "របាក់ចមនុល",
+      "expense": "ការចមនាយ"
     }
   },
   "privacy": {
-    "title": "គោលការណ៍ឯកជនភាព Peach និង Goma",
-    "introduction": "សេចក្តីផ្តើម",
+    "title": "គោលការណ៍ភាពឯកជន Peach និង GOMA",
+    "introduction": "ការនេនាមអាេយស្គាល់",
     "scope": "វិសាលភាពនៃគោលការណ៍នេះ",
-    "consent": "ការយល់ព្រម",
+    "consent": "ការយល់របម",
     "information_collect": "ព័ត៌មានដែលយើងប្រមូល",
     "how_we_use": "របៀបដែលយើងប្រើព័ត៌មានរបស់អ្នក",
-    "log_files": "ឯកសារកំណត់ហេតុ",
-    "cookies": "ខូគី និង Web Beacons",
-    "third_party": "គោលការណ៍ឯកជនភាពភាគីទីបី",
-    "ccpa_rights": "សិទ្ធិឯកជនភាព CCPA",
-    "gdpr_rights": "សិទ្ធិការពារទិន្នន័យ GDPR",
+    "log_files": "ឯកសារកំណត់ហេតុឯកសារ",
+    "cookies": "ឃុកឃីនិងកម្មវិធីត្រួតពិនិត្យសកម្មភាពលើអ៊ីនធឺណិត",
+    "third_party": "គោលការណ៍ឯកជនភាពរបស់ភាគីទីបី",
+    "ccpa_rights": "សិទ្ធិឯកជនរបស់ CCPA",
+    "gdpr_rights": "សិទ្ធិការពារទិន្នន័យរបស់ GDPR",
     "children_info": "ព័ត៌មានកុមារ",
     "questions": "សំណួរ?"
   },
   "about": {
     "beginnings": "ការចាប់ផ្តើមរបស់យើង",
-    "beginnings_description": "Peach និង Goma បានចាប់ផ្តើមជាតួអង្គជាទីស្រឡាញ់ដែលបានទាក់ទាញបេះដូងទូទាំងពិភពលោកជាមួយនឹងដំណើរផ្សងព្រេងដ៏គួរឱ្យស្រឡាញ់ និងរឿងរ៉ាវដ៏កក់ក្តៅ។",
-    "global_reach": "ការឈានទៅសកល",
-    "global_reach_description": "ពីការចាប់ផ្តើមដ៏រាបទាប Peach និង Goma បានក្លាយជាបាតុភូតសកល ដែលនាំមកនូវភាពរីករាយ និងស្នាមញញឹមដល់អ្នកគាំទ្ររាប់លាននាក់នៅទូទាំងវប្បធម៌ និងភាសាផ្សេងៗ។",
+    "beginnings_description": "Peach និង Gind បានចាប់ផ្តើមជាតួអង្គជាទីស្រឡាញ់ដែលបានចាប់យកដួងចិត្តនៅទូទាំងពិភពលោកជាមួយនឹងដំណើរផ្សងព្រេងគួរឱ្យស្រឡាញ់របស់ពួកគេនិងរឿងរ៉ាវដ៏កក់ក្តៅ។",
+    "global_reach": "ពិភពលោកឈានដល់",
+    "global_reach_description": "ពីការចាប់ផ្តើមដ៏រាបទាប Peach និង GOMO បានរីកចម្រើនទៅជាបាតុភូតសកលដែលនាំមកនូវសេចក្តីអំណរនិងស្នាមញញឹមដល់អ្នកគាំទ្ររាប់លាននាក់នៅទូទាំងវប្បធម៌និងភាសាផ្សេងៗគ្នា។",
     "mission": "បេសកកម្មរបស់យើង",
-    "mission_description": "យើងខិតខំបង្កើតសហគមន៍ស្វាគមន៍មួយដែលអ្នកគាំទ្រអាចភ្ជាប់ទំនាក់ទំនង ចែករំលែកក្តីស្រឡាញ់របស់ពួកគេចំពោះតួអង្គទាំងនេះ និងរីករាយជាមួយបទពិសោធន៍អន្តរកម្មជាមួយគ្នា។"
+    "mission_description": "យើងខិតខំបង្កើតសហគមន៍ស្វាគមន៍មួយដែលអ្នកគាំទ្រអាចភ្ជាប់ទំនាក់ទំនងស្នេហារបស់ពួកគេចំពោះតួទាំងនេះហើយរីករាយនឹងបទពិសោធន៍រួមគ្នា។"
   },
   "faq": {
-    "title": "សំណួរដែលសួរញឹកញាប់",
-    "who_created": "តើនរណាបានបង្កើត Peach និង Goma?",
-    "who_created_answer": "Peach និង Goma ត្រូវបានបង្កើតជាផ្នែកមួយនៃស៊េរីតួអង្គដ៏គួរឱ្យទាក់ទាញដែលបានទាក់ទាញបេះដូងអ្នកគាំទ្រទូទាំងពិភពលោក។",
+    "title": "សំណួរដែលគេសួរញឹកញាប់",
+    "who_created": "តើអ្នកណាបានបង្កើត Peach និង Goma?",
+    "who_created_answer": "Peach និង Goma ត្រូវបានបង្កើតឡើងជាផ្នែកមួយនៃស៊េរីតួអក្សរដែលមានមន្តស្នេហ៍ដែលបានទទួលយកដួងចិត្តរបស់អ្នកគាំទ្រទូទាំងពិភពលោក។",
     "where_from": "តើតួអង្គទាំងនេះមកពីណា?",
-    "where_from_answer": "តួអង្គគួរឱ្យស្រឡាញ់ទាំងនេះមានប្រភពចេញពីការនិទានរឿងប្រកបដោយភាពច្នៃប្រឌិត និងបានវិវត្តទៅជាតួអង្គម៉ាស្កូតជាទីស្រឡាញ់សម្រាប់សហគមន៍របស់យើង។",
-    "who_are": "តើ Peach និង Goma ជានរណា?",
-    "who_are_answer": "Peach និង Goma ជាតួអង្គគួរឱ្យស្រឡាញ់ពីរដែលល្បីល្បាញដោយសារមិត្តភាព ដំណើរផ្សងព្រេង និងភាពរីករាយដែលពួកគេនាំមកជូនអ្នកគាំទ្រ។",
-    "get_stickers": "តើខ្ញុំអាចទទួលបានស្ទីគ័រ Peach និង Goma ដោយរបៀបណា?",
-    "get_stickers_answer": "អ្នកអាចស្វែងរកស្ទីគ័រ និងមាតិកាផ្តាច់មុខនៅក្នុង",
-    "telegram_channel": "ឆានែល Telegram ផ្លូវការ"
+    "where_from_answer": "តួអង្គគួរឱ្យស្រឡាញ់ទាំងនេះមានប្រភពមកពីការនិទានរឿងច្នៃប្រឌិតហើយបានវិវត្តទៅជាម៉ាស្កាយជាទីស្រឡាញ់សម្រាប់សហគមន៍របស់យើង។",
+    "who_are": "តើអ្នកណាជា Peach និង Goma?",
+    "who_are_answer": "Peach និង Goma គឺជាតួអង្គគួរឱ្យស្រឡាញ់ពីរដែលត្រូវបានគេស្គាល់ថាជាមិត្តភាពរបស់ពួកគេដំណើរផ្សងព្រេងនិងសេចក្តីអំណរដែលពួកគេនាំយកទៅឱ្យអ្នកគាំទ្ររបស់ពួកគេ។",
+    "get_stickers": "តើខ្ញុំអាចទទួលបាន peach ក្រដាសបិទខ្មៅយ៉ាងដូចម្តេច?",
+    "get_stickers_answer": "អ្នកអាចរកឃើញផ្ទាំងបិទនិងមាតិកាពិសេសរបស់យើង",
+    "telegram_channel": "ឆានែលទូរគមនាគមន៍ផ្លូវការ"
   },
   "contact": {
-    "title": "ទាក់ទងមកយើង",
-    "description": "យើងរីករាយក្នុងការឮពីអ្នក។ ផ្ញើសារមកយើង ហើយយើងនឹងឆ្លើយតបឱ្យបានឆាប់តាមដែលអាចធ្វើទៅបាន។",
+    "title": "ទទួលបានក្នុងការប៉ះ",
+    "description": "យើងចង់ from ពីអ្នក។ ",
     "form_title": "ផ្ញើសារមកយើង",
-    "name": "ឈ្មោះ",
+    "name": "ឈ្ផោហ",
     "name_placeholder": "ឈ្មោះរបស់អ្នក",
-    "name_required": "តម្រូវឱ្យបំពេញឈ្មោះ",
+    "name_required": "ឈ្មោះគឺចាំបាច់",
     "email": "អ៊ីមែល",
-    "email_placeholder": "your.email@example.com",
-    "email_required": "តម្រូវឱ្យបំពេញអ៊ីមែល",
+    "email_placeholder": "របស់អ្នក។ ememail@example.com",
+    "email_required": "អ៊ីមែលត្រូវបានទាមទារ",
     "email_invalid": "សូមបញ្ចូលអាសយដ្ឋានអ៊ីមែលត្រឹមត្រូវ",
-    "message": "សារ",
-    "message_placeholder": "សាររបស់អ្នក...",
+    "message": "ប៍តមាន",
+    "message_placeholder": "សាររបស់អ្នក ...",
     "submit": "ផ្ញើសារ",
-    "sending": "កំពុងផ្ញើ...",
-    "success": "ផ្ញើសារបានជោគជ័យ!",
-    "error": "បរាជ័យក្នុងការផ្ញើសារ"
+    "sending": "ការផ្ញើ ...",
+    "success": "សារបានផ្ញើដោយជោគជ័យ!",
+    "error": "បានបរាជ័យក្នុងការផ្ញើសារ"
   },
   "footer": {
-    "tagline": "Peach និង Goma គឺជាតួអង្គដ៏ចូលចិត្តដែលបានគាប់ចិត្តពិភពលោកជាមួយនឹងផ្សងព្រេងគួរឱ្យស្រឡាញ់ និងរឿងរ៉ាវរំភើបចិត្ត។",
-    "follow_us": "តាមដានយើងខ្ញុំ",
-    "newsletter": "សារព័ត៌មាន",
-    "features": "លក្ខណៈពិសេសរបស់ PEACHY",
-    "features_description": "PEACHY បន្ថែមរសជាតិដល់ Server របស់អ្នកជាមួយនឹងអារម្មណ៍សប្បាយ សេដ្ឋកិច្ច ហ្គេម និងច្រើនទៀត។\nជាប្រព័ន្ធផ្ទេរទិន្នន័យដ៏ល្អសម្រាប់ការចូលរួម!",
-    "techno_language": "បច្ចេកវិទ្យា និងភាសា",
-    "techno_language_description": "ជាប់ភ្ជាប់ជាមួយ Node.js, React និងច្រើនទៀត។\nគាំទ្រភាសាជាច្រើនសម្រាប់បទពិសោធន៍សកលដ៏រលូន!"
+    "tagline": "Peach និង Gind បានចាប់ផ្តើមជាតួអង្គជាទីស្រឡាញ់ដែលបានចាប់យកដួងចិត្តនៅទូទាំងពិភពលោកជាមួយនឹងដំណើរផ្សងព្រេងគួរឱ្យស្រឡាញ់របស់ពួកគេនិងរឿងរ៉ាវដ៏កក់ក្តៅ។",
+    "follow_us": "តាមពួកយើង",
+    "newsletter": "ខេមើរ",
+    "features": "លក្ខណៈពិសេសរបស់ Peachy",
+    "features_description": "គ្រឿងទេស peachy បានលក់ម៉ាស៊ីនមេរបស់អ្នកជាមួយនឹងអារម្មណ៍រីករាយសេដ្ឋកិច្ចល្បែងហ្គេមនិងច្រើនទៀត។\n",
+    "techno_language": "បច្ចេកវិទ្យានិងភាសា",
+    "techno_language_description": "ឧបត្ថម្ភដោយ node.js ប្រតិកម្មនិងច្រើនទៀត។\n"
   },
   "error": {
-    "unknown": "កំហុសមិនស្គាល់កើតឡើង",
+    "unknown": "កំហុសដែលមិនស្គាល់បានកើតឡើង",
     "network": "កំហុសបណ្តាញ",
-    "server": "កំហុស Server  បម្រើ",
+    "server": "កំហុសម៉ាស៊ីនមេ",
     "not_found": "រកមិនឃើញទំព័រ",
-    "unauthorized": "ការចូលប្រើគ្មានការអនុញ្ញាត",
-    "forbidden": "ការចូលប្រើត្រូវបានហាមឃាត់"
+    "unauthorized": "ការចូលប្រើដោយគ្មានការអនុញ្ញាត",
+    "forbidden": "ការប្រើការចូលប្រើត្រូវបានហាមឃាត់"
   },
   "NotFound": {
-    "title": "អ្វីមួយបាត់",
-    "description": "សូមអភ័យទោស ទំព័រដែលអ្នកកំពុងស្វែងរកមិនមាន ឬត្រូវបានផ្លាស់ប្តូរ។",
-    "goBack": "ត្រឡប់ក្រោយ",
-    "backToHome": "ត្រឡប់ទៅទំព័រដើម"
+    "title": "បាត់អ្វីមួយ",
+    "description": "សូមអភ័យទោសទំព័រដែលអ្នកកំពុងរកមិនមានឬត្រូវបានផ្លាស់ប្តូរ។",
+    "goBack": "ត្រឡប់ទៅក្រោយវិញ",
+    "backToHome": "ត្រឡប់ទៅផ្ទះ"
   },
   "RTLNavbar": {
-    "themeTooltip": "ស្បែក",
-    "languageTooltip": "ភាសា",
+    "themeTooltip": "និក្ខេបត",
+    "languageTooltip": "ផាសា",
     "language": {
       "english": "អង់គ្លេស",
       "khmer": "ខ្មែរ",
@@ -559,108 +637,108 @@
     },
     "notificationsTooltip": "ការជូនដំណឹង",
     "notifications": "ការជូនដំណឹង",
-    "markAllRead": "សម្គាល់ទាំងអស់ថាបានអាន",
-    "notificationFilters": "តម្រងការជូនដំណឹង",
-    "allTab": "ទាំងអស់",
-    "unreadTab": "មិនទាន់អាន",
-    "archiveTab": "បណ្ណសារ",
-    "userTooltip": "អ្នកប្រើប្រាស់",
-    "greeting": "សួស្តី, {name}",
-    "avatarDecorationAlt": "ការតុបតែងរូបភាព",
+    "markAllRead": "សម្គាល់ការអានទាំងអស់",
+    "notificationFilters": "តម្រងជូនដំណឹង",
+    "allTab": "តាមងអស់",
+    "unreadTab": "មិនអាន",
+    "archiveTab": "លាក់ទុក",
+    "userTooltip": "អ្នករេបី",
+    "greeting": "ហេ {name}",
+    "avatarDecorationAlt": "ការតុបតែងអាវ៉ាតា",
     "profile": "ប្រវត្តិរូប",
     "settings": "ការកំណត់",
-    "logOut": "ចាកចេញ"
+    "logOut": "ចេញ"
   },
   "common": {
-    "loading": "កំពុងផ្ទុក...",
-    "error": "កំហុស",
-    "success": "ជោគជ័យ",
-    "cancel": "បោះបង់",
-    "confirm": "បញ្ជាក់",
-    "add": "បន្ថែម",
-    "save": "រក្សាទុក",
-    "edit": "កែសម្រួល",
-    "update": "ធ្វើបច្ចុប្បន្នភាព",
-    "delete": "លុប",
-    "back": "ត្រឡប់",
-    "next": "បន្ទាប់",
-    "previous": "មុន",
-    "search": "ស្វែងរក",
-    "filter": "តម្រង",
-    "sort": "តម្រៀប",
-    "refresh": "ធ្វើឱ្យស្រស់",
-    "close": "បិទ",
-    "open": "បើក",
-    "submit": "ដាក់ស្នើ",
+    "loading": "កំពុងផ្ទុក ...",
+    "error": "កមហុស",
+    "success": "ចោកច័យ",
+    "cancel": "លប់ចោល",
+    "confirm": "បហ្ជាក់",
+    "add": "បុក / ករ",
+    "save": "សរេង្គាហ",
+    "edit": "បិនិត្យ",
+    "update": "ធេវីអាេយយរមយរ",
+    "delete": "របៅបេលរសច",
+    "back": "រតលប់",
+    "next": "បន្ទាប់បិនេហ",
+    "previous": "ចាដមបុង",
+    "search": "ការឆេកឆេ",
+    "filter": "តរមង",
+    "sort": "ញេក",
+    "refresh": "ធេវីអាេយថ្ផី",
+    "close": "បិត",
+    "open": "ដេលចមហរ",
+    "submit": "ដាក់រេកាមបង្គាប់",
     "reset": "កំណត់ឡើងវិញ",
-    "clear": "សម្អាត",
-    "select": "ជ្រើសរើស",
-    "upload": "បង្ហោះ",
-    "download": "ទាញយក",
-    "copy": "ចម្លង",
-    "paste": "បិទភ្ជាប់",
-    "cut": "កាត់",
+    "clear": "ផ្លឺ",
+    "select": "រេចីសរើស",
+    "upload": "ផ្ទុកឡើង",
+    "download": "របចាបរេកា",
+    "copy": "ការចម្លង",
+    "paste": "រេនាយោហរការ",
+    "cut": "ចមនេក",
     "undo": "មិនធ្វើវិញ",
-    "redo": "ធ្វើឡើងវិញ",
-    "yes": "បាទ/ចាស",
-    "no": "ទេ",
+    "redo": "ធ្វើវិញ",
+    "yes": "បាត",
+    "no": "ដេលក្ផាន",
     "ok": "យល់ព្រម",
     "and": "និង",
-    "or": "ឬ",
-    "not": "មិនមែន",
-    "all": "ទាំងអស់",
-    "none": "គ្មាន",
-    "other": "ផ្សេងទៀត",
-    "more": "ច្រើនទៀត",
-    "less": "តិចជាង",
-    "view": "មើល",
+    "or": "រឺ",
+    "not": "មិនមេន",
+    "all": "តាមងអស់",
+    "none": "ឥតមានអវីសោហ",
+    "other": "ផេសងត្យេត",
+    "more": "រេចីនចាង",
+    "less": "អន់",
+    "view": "កមហើញ",
     "hide": "លាក់",
     "show": "បង្ហាញ",
     "not_set": "មិនបានកំណត់",
-    "disableSuccess": "បានបិទ {feature}",
+    "disableSuccess": "បានបិទ {លក្ខណៈពិសេស}",
     "disableSuccessDescription": "អ្នកបានបិទមុខងារនេះដោយជោគជ័យ។",
-    "disableError": "បរាជ័យក្នុងការបិទ {feature}",
-    "updateSuccess": "បានធ្វើបច្ចុប្បន្នភាព {feature}",
-    "updateSuccessDescription": "ការកំណត់មុខងារត្រូវបានរក្សាទុកដោយជោគជ័យ។",
-    "updateError": "បរាជ័យក្នុងការធ្វើបច្ចុប្បន្នភាព {feature}",
-    "disableButtonLabel": "បិទ {feature}",
-    "disabling": "កំពុងបិទ...",
-    "disable": "បិទ",
-    "pickVariableLabel": "ជ្រើសយកអថេរ",
-    "testMessageLabel": "សាកល្បងសារ",
-    "sendMessageSuccess": "បានផ្ញើសារដោយជោគជ័យ!",
-    "sendMessageError": "បរាជ័យក្នុងការផ្ញើសារ។",
+    "disableError": "បានបរាជ័យក្នុងការបិទ {លក្ខណៈពិសេស}",
+    "updateSuccess": "ធ្វើបច្ចុប្បន្នភាព {លក្ខណៈពិសេស}",
+    "updateSuccessDescription": "ការកំណត់លក្ខណៈពិសេសបានរក្សាទុកដោយជោគជ័យ។",
+    "updateError": "បានបរាជ័យក្នុងការធ្វើបច្ចុប្បន្នភាព {លក្ខណៈពិសេស}",
+    "disableButtonLabel": "បិទ {លក្ខណៈពិសេស}",
+    "disabling": "ការបិទ ...",
+    "disable": "ផ្លាស់ប្តូរ",
+    "pickVariableLabel": "ជ្រើសរើសអថេរ",
+    "testMessageLabel": "សារសាកល្បង",
+    "sendMessageSuccess": "សារបានផ្ញើដោយជោគជ័យ!",
+    "sendMessageError": "បានបរាជ័យក្នុងការផ្ញើសារ។",
     "validation": {
-      "channelRequired": "តម្រូវឱ្យមានប៉ុស្តិ៍",
-      "contentRequired": "តម្រូវឱ្យមានមាតិកា",
-      "userRolesRequired": "User តម្រូវឱ្យមាន Role",
-      "botRolesRequired": "Bot តម្រូវឱ្យមានមាតិកា Role"
+      "channelRequired": "ឆានែលគឺចាំបាច់",
+      "contentRequired": "មាតិកាត្រូវបានទាមទារ",
+      "userRolesRequired": "តួនាទីរបស់អ្នកប្រើគឺចាំបាច់",
+      "botRolesRequired": "តួនាទី bot គឺចាំបាច់"
     },
     "customImage": {
       "layout": {
-        "label": "ប្លង់",
+        "label": "តមរបថតឹម",
         "description": "ជ្រើសរើសប្លង់សម្រាប់រូបភាពផ្ទាល់ខ្លួន",
         "placeholder": "ជ្រើសរើសប្លង់"
       },
       "avatarShape": {
-        "label": "រូបរាង Avatar",
-        "description": "ជ្រើសរើសរូបរាងនៃ Avatar ក្នុងរូបភាពផ្ទាល់ខ្លួន"
+        "label": "រូបរាងអាវ៉ារ",
+        "description": "ជ្រើសរើសរូបរាងនៃរូបតំណាងក្នុងរូបភាពផ្ទាល់ខ្លួន"
       },
       "circleColor": {
         "label": "ពណ៌រង្វង់",
-        "description": "ជ្រើសរើសពណ៌សម្រាប់រង្វង់"
+        "description": "ជ្រើសរើសសម្រាប់រង្វង់"
       },
       "featureColor": {
-        "label": "ពណ៌ស្វាគមន៍",
-        "description": "ជ្រើសរើសពណ៌សម្រាប់អត្ថបទមុខងារ"
+        "label": "ស្វាគមន៍ពណ៌",
+        "description": "ជ្រើសរើសសម្រាប់អត្ថបទលក្ខណៈពិសេស"
       },
       "usernameColor": {
         "label": "ពណ៌ឈ្មោះអ្នកប្រើ",
-        "description": "ជ្រើសរើសពណ៌សម្រាប់អត្ថបទឈ្មោះអ្នកប្រើ"
+        "description": "ជ្រើសសម្រាប់អត្ថបទឈ្មោះអ្នកប្រើ"
       },
       "messageColor": {
         "label": "ពណ៌សារ",
-        "description": "ជ្រើសរើសពណ៌សម្រាប់អត្ថបទសារ"
+        "description": "ជ្រើសរើសអត្ថបទសារ"
       },
       "backgroundImage": {
         "label": "រូបភាពផ្ទៃខាងក្រោយ",
@@ -668,27 +746,36 @@
         "placeholder": "វាយបញ្ចូល URL រូបភាព"
       },
       "message": {
-        "label": "សារ",
-        "description": "ផ្តល់សារសម្រាប់រូបភាពផ្ទៃខាងក្រោយ",
+        "label": "ប៍តមាន",
+        "description": "ផ្តល់សារទៅរូបភាពផ្ទៃខាងក្រោយ",
         "placeholder": "វាយបញ្ចូលសារ"
       },
-      "noBackgroundImage": "មិនមានរូបភាពផ្ទៃខាងក្រោយផ្តល់ឱ្យ"
+      "noBackgroundImage": "មិនមានរូបភាពផ្ទៃខាងក្រោយដែលបានផ្តល់"
+    },
+    "dialog": {
+      "addTitle": "បុក / ករ",
+      "editTitle": "បិនិត្យ",
+      "addButton": "បុក / ករ",
+      "updateButton": "ធេវីអាេយយរមយរ",
+      "addSuccess": "ទិន្នន័យត្រូវបានបន្ថែមដោយជោគជ័យ។",
+      "updateSuccess": "ទិន្នន័យត្រូវបានធ្វើបច្ចុប្បន្នភាពដោយជោគជ័យ។",
+      "error": "បានបរាជ័យក្នុងការបន្ថែម / ធ្វើបច្ចុប្បន្នភាពទិន្នន័យ"
     }
   },
   "movies": {
-    "title": "ស្វែងរកបណ្តុំភាពយន្តរបស់យើង",
-    "title_description": "ស្វែងយល់ពីជម្រើសភាពយន្តដែលបានជ្រើសរើសរបស់យើង។ ចុចលើវីដេអូដើម្បីចាប់ផ្តើមមើល!",
-    "no_videos": "មិនមានភាពយន្តអាចរកបាននៅពេលនេះទេ។"
+    "title": "ស្វែងយល់ពីបណ្តុំភាពយន្តរបស់យើង",
+    "title_description": "ជ្រមុជទឹកចូលក្នុងការជ្រើសរើសភាពយន្តដែលបានជ្រើសរើសរបស់យើង។ ចុចលើវីដេអូដើម្បីចាប់ផ្តើមមើល!",
+    "no_videos": "មិនមានភាពយន្តនៅពេលនេះទេ។"
   },
   "tutorial_video": {
     "title": "មើលវីដេអូបង្រៀនរបស់យើង",
-    "title_description": "ស្វែងយល់ពីការណែនាំជាជំហានៗ និងគន្លឹះដើម្បីទទួលបានអត្ថប្រយោជន៍ច្រើនបំផុតពីវេទិការបស់យើង។ ចុចលើវីដេអូខាងក្រោមដើម្បីចាប់ផ្តើមរៀន!"
+    "title_description": "ស្វែងយល់ពីការណែនាំ និងគន្លឹះជាជំហានៗ ដើម្បីទទួលបានអត្ថប្រយោជន៍ច្រើនបំផុតពីវេទិការបស់យើង។"
   },
   "http_status_code": {
-    "title": "សេចក្តីយោងកូដស្ថានភាព HTTP",
-    "title_description": "ស្វែងយល់ពីកូដស្ថានភាព HTTP ដែលបែងចែកជាប្រភេទជាមួយការពិពណ៌នា និងការគាំទ្រតម្រង។",
-    "searchPlaceholder": "ស្វែងរកកូដស្ថានភាព...",
-    "statusCode": "កូដស្ថានភាព",
+    "title": "ការយោងលេខកូដស្ថានភាព HTTP",
+    "title_description": "ស្វែងយល់ពីលេខកូដស្ថានភាព HTTP ដែលមានប្រភេទ ការពិពណ៌នា និងការគាំទ្រការតម្រង។",
+    "searchPlaceholder": "ស្វែងរកលេខកូដស្ថានភាព...",
+    "statusCode": "លេខកូដស្ថានភាព",
     "category": "ប្រភេទ",
     "description": "ការពិពណ៌នា",
     "previous": "មុន",
@@ -698,29 +785,40 @@
     "categories": {
       "informational": "ព័ត៌មាន",
       "success": "ជោគជ័យ",
-      "redirection": "ប្តូរទិស",
+      "redirection": "ការបញ្ជូនបន្ត",
       "clientError": "កំហុសអតិថិជន",
-      "serverError": "កំហុស Server  មេ"
+      "serverError": "កំហុសម៉ាស៊ីនមេ"
     },
     "descriptions": {
       "Continue": "បន្ត",
-      "Switching Protocols": "ការប្តូរពិធីការ",
+      "Switching Protocols": "ប្តូរពិធីការ",
       "OK": "យល់ព្រម",
       "Created": "បានបង្កើត",
-      "Accepted": "បានទទួលយក",
+      "Accepted": "ទទួលយក",
       "No Content": "គ្មានមាតិកា",
-      "Multiple Choices": "ជម្រើសច្រើន",
-      "Moved Permanently": "ផ្លាស់ប្តូរជាអចិន្ត្រៃយ៍",
+      "Multiple Choices": "ជម្រើសជាច្រើន",
+      "Moved Permanently": "ផ្លាស់ទីជាអចិន្ត្រៃយ៍",
       "Found": "បានរកឃើញ",
-      "Not Modified": "មិនបានកែប្រែ",
+      "Not Modified": "មិនត្រូវបានកែប្រែ",
       "Bad Request": "សំណើមិនល្អ",
-      "Unauthorized": "គ្មានសិទ្ធិ",
-      "Forbidden": "ហាមឃាត់",
+      "Unauthorized": "មិនមានការអនុញ្ញាត",
+      "Forbidden": "ត្រូវបានហាមឃាត់",
       "Not Found": "រកមិនឃើញ",
-      "Internal Server Error": "កំហុស Server  មេខាងក្នុង",
-      "Not Implemented": "មិនបានអនុវត្ត",
-      "Bad Gateway": "ច្រកផ្លូវមិនល្អ",
-      "Service Unavailable": "សេវាមិនអាចប្រើបាន"
+      "Internal Server Error": "កំហុសម៉ាស៊ីនមេខាងក្នុង",
+      "Not Implemented": "មិនត្រូវបានអនុវត្ត",
+      "Bad Gateway": "ផ្លូវចេញចូលមិនល្អ",
+      "Service Unavailable": "សេវាកម្មមិនអាចប្រើបាន"
     }
+  },
+  "table": {
+    "emptyMessage": "មិនមានទិន្នន័យ",
+    "emptySuggestion": "ព្យាយាមកែសម្រួលការស្វែងរក ឬលក្ខខណ្ឌបញ្ចោះរបស់អ្នក",
+    "activeFilters": "តម្រងសកម្ម:",
+    "paginationSummary": "កំពុងបង្ហាញ {start} ទៅ {end} នៃលទ្ធផល {total}"
+  },
+  "notFound": {
+    "title": "រកមិនឃើញទំព័រ",
+    "description": "ទំព័រដែលអ្នកកំពុងរកមិនមានទេ។",
+    "backHome": "ត្រឡប់ទៅផ្ទះ"
   }
 }
