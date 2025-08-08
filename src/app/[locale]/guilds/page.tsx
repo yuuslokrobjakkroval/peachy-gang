@@ -21,6 +21,7 @@ export default function GuildPage() {
   }, [guilds]);
 
   const botCard = CARD.map((config: AppConfig, index: number) => ({
+    id: index + 1,
     area: `area-${index + 1}`,
     icon: config.icon,
     title: config.name,

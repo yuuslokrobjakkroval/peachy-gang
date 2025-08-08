@@ -6,8 +6,7 @@ import { useGetGuildQuery } from "@/redux/api/guild";
 import { getFeatures, iconUrl, toCapitalCase } from "@/utils/common";
 import Features from "@/components/features";
 import { Button } from "@/components/ui/button";
-import { config, configPeach, configGoma } from "@/utils/config";
-import BannerPage from "@/components/applications/banner";
+import { config } from "@/utils/config";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { CircleArrowLeft, Mailbox } from "lucide-react";
 import { Separator } from "@/components/ui/separator";
@@ -64,7 +63,7 @@ function GuildPanel({
       <div className="w-full">
         <div className="flex gap-2">
           <CircleArrowLeft
-            className="text-2xl font-semibold tracking-tight text-primary mt-2 cursor-pointer"
+            className="mt-2 text-2xl font-semibold tracking-tight cursor-pointer text-primary"
             onClick={() => router.back()}
           />
           <Avatar className="mt-0.5 ml-1">
@@ -76,7 +75,7 @@ function GuildPanel({
               {toCapitalCase(info.name)}
             </AvatarFallback>
           </Avatar>
-          <h4 className="text-2xl font-semibold tracking-tight text-primary mt-1">
+          <h4 className="mt-1 text-2xl font-semibold tracking-tight text-primary">
             {toCapitalCase(info.name)}
             <span className="w-full border-t border-border" />
           </h4>
@@ -98,8 +97,8 @@ function GuildPanel({
           <div className="absolute inset-0 flex items-center">
             <span className="w-full border-t border-border" />
           </div>
-          <div className="relative flex justify-center text-xs sm:text-sm uppercase">
-            <span className="bg-background px-3 text-muted-foreground">
+          <div className="relative flex justify-center text-xs uppercase sm:text-sm">
+            <span className="px-3 bg-background text-muted-foreground">
               <h4 className="text-2xl font-semibold tracking-tight text-primary">
                 {t("features.title")}
               </h4>
@@ -107,7 +106,7 @@ function GuildPanel({
           </div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-3">
+        <div className="grid grid-cols-1 gap-4 mt-3 md:grid-cols-3">
           {features.map((feature) => (
             <Features
               key={feature.id}
@@ -129,17 +128,17 @@ function NotJoined({ guild }: { guild: string }) {
   const pathname = usePathname();
   const redirectUrl = `${getAbsoluteUrl()}${pathname}`;
   const inviteUrl = `${config.inviteUrl}&scope=bot&guild_id=${guild}&permissions=8&redirect_uri=${encodeURIComponent(
-    `${getAbsoluteUrl()}/api/invite/callback`,
+    `${getAbsoluteUrl()}/api/invite/callback`
   )}&response_type=code&state=${encodeURIComponent(redirectUrl)}`;
 
   return (
-    <div className="flex min-h-svh w-full items-center justify-center">
-      <section className="rounded-2xl p-6 mb-8">
-        <div className="w-full items-center flex flex-col justify-center gap-3">
-          <div className="text-center text-2xl font-semibold text-primary">
+    <div className="flex items-center justify-center w-full min-h-svh">
+      <section className="p-6 mb-8 rounded-2xl">
+        <div className="flex flex-col items-center justify-center w-full gap-3">
+          <div className="text-2xl font-semibold text-center text-primary">
             <Mailbox width={72} height={72} />
           </div>
-          <h1 className="text-center text-2xl font-semibold text-primary">
+          <h1 className="text-2xl font-semibold text-center text-primary">
             {t("guilds.bot_not_in_server")}
           </h1>
           <p className="text-sm text-muted-foreground">

@@ -94,9 +94,9 @@ function GuildPanel({
       };
 
   return (
-    <div className="flex flex-col gap-3 py-3 sm:gap-4 sm:py-4 md:gap-6 md:py-6 lg:gap-8 lg:p-6 font-ghibi px-2 sm:px-4 lg:px-6">
+    <div className="flex flex-col gap-3 px-2 py-3 sm:gap-4 sm:py-4 md:gap-6 md:py-6 lg:gap-8 lg:p-6 font-ghibi sm:px-4 lg:px-6">
       <div className="w-full">
-        <div className="flex gap-2 items-center">
+        <div className="flex items-center gap-2">
           <CircleArrowLeft
             className="text-xl sm:text-2xl font-semibold tracking-tight text-[var(--primary)] cursor-pointer hover:text-[var(--primary)]/80 transition-colors"
             onClick={() => router.back()}
@@ -106,7 +106,7 @@ function GuildPanel({
           </h4>
         </div>
 
-        <div className="mt-2 sm:mt-3 mb-4 sm:mb-6">
+        <div className="mt-2 mb-4 sm:mt-3 sm:mb-6">
           <Separator className="text-[var(--card-foreground)]" />
         </div>
 
@@ -118,12 +118,12 @@ function GuildPanel({
               style={backgroundStyle}
             >
               {/* Overlay for better text readability if needed */}
-              <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent pointer-events-none" />
+              <div className="absolute inset-0 pointer-events-none" />
 
               <div className="absolute -translate-x-1/2 -bottom-8 sm:-bottom-10 md:-bottom-12 left-12 sm:left-16 md:left-18">
                 <div className="relative w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 lg:w-[96px] lg:h-[96px]">
                   {/* Avatar */}
-                  <div className="relative w-full h-full rounded-full border-2 sm:border-3 md:border-[4px] border-[var(--background)] bg-[var(--accent)] dark:!border-[var(--sidebar)] overflow-hidden shadow-lg">
+                  <div className="relative w-full h-full rounded-full border-2 sm:border-3 md:border-[4px] border-[var(--background)] bg-[var(--accent)] dark:!border-[var(--sidebar)] overflow-hidden">
                     <Image
                       src={iconUrl(info)}
                       alt={t("server_icon_alt", {
@@ -131,7 +131,7 @@ function GuildPanel({
                       })}
                       width={128}
                       height={128}
-                      className="object-cover rounded-full w-full h-full"
+                      className="object-cover w-full h-full rounded-full"
                     />
                   </div>
                 </div>
@@ -140,7 +140,7 @@ function GuildPanel({
           </Card>
         </div>
 
-        <div className="mt-8 sm:mt-10 md:mt-12 lg:mt-14 mb-3">
+        <div className="mt-8 mb-3 sm:mt-10 md:mt-12 lg:mt-14">
           {info?.description && (
             <p className="text-[var(--muted-foreground)] mt-2 sm:mt-3 text-sm sm:text-base">
               {info.description}
@@ -185,7 +185,7 @@ function NotJoined({ guildId }: { guildId: string }) {
 
   return (
     <div className="flex min-h-svh w-full items-center justify-center bg-[var(--background)] font-ghibi">
-      <section className="rounded-[var(--radius)] p-6 mb-8 border-2 shadow-primary">
+      <section className="rounded-[var(--radius)] p-6 mb-8 border-2">
         <div className="flex flex-col items-center justify-center w-full gap-3">
           <div className="text-center text-2xl font-ghibi-bold text-[var(--primary)]">
             <Mailbox width={72} height={72} />
@@ -202,7 +202,7 @@ function NotJoined({ guildId }: { guildId: string }) {
           <div className="flex justify-between gap-3">
             <Button
               variant="outline"
-              className="border-2 shadow-primary"
+              className="border-2 "
               onClick={() => router.back()}
             >
               {t("go_back", {
@@ -210,7 +210,7 @@ function NotJoined({ guildId }: { guildId: string }) {
               })}
             </Button>
             <Button
-              className="border-2 shadow-primary"
+              className="border-2"
               onClick={() => {
                 window.open(inviteUrl, "_blank");
               }}

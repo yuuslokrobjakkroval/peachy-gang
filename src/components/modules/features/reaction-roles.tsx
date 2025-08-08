@@ -72,6 +72,8 @@ export function ReactionRolesFeature({
       content: featureInfo.content ?? "",
       messageId: featureInfo.messageId ?? "",
       roles: featureInfo.roles ?? [],
+      _newEmoji: "",
+      _newRoleId: "",
     },
     validationSchema: Yup.object({
       isActive: Yup.boolean(),
@@ -148,14 +150,14 @@ export function ReactionRolesFeature({
 
   return (
     <motion.div
-      className="w-full container mx-auto xl:px-0"
+      className="container w-full mx-auto xl:px-0"
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
     >
-      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6">
+      <div className="flex flex-col gap-4 mb-6 sm:flex-row sm:items-center sm:justify-between">
         <div className="flex flex-col">
-          <h1 className="text-primary text-3xl md:text-4xl font-bold">
+          <h1 className="text-3xl font-bold text-primary md:text-4xl">
             {tFeature("reaction-roles")}
           </h1>
           <p className="text-muted-foreground">
@@ -174,9 +176,9 @@ export function ReactionRolesFeature({
       </div>
 
       <form onSubmit={formik.handleSubmit} className="space-y-6">
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-4">
+        <div className="grid grid-cols-1 gap-4 md:grid-cols-12">
           <div className="col-span-12">
-            <div className="flex flex-row items-center justify-between gap-2 min-w-0">
+            <div className="flex flex-row items-center justify-between min-w-0 gap-2">
               <div className="flex-1 min-w-0">
                 <SwitchForm
                   control={{
@@ -192,7 +194,7 @@ export function ReactionRolesFeature({
               </div>
               <div className="flex items-center justify-end gap-2">
                 <Button
-                  className="cursor-pointer bg-primary text-primary-foreground hover:bg-primary/90 rounded-lg"
+                  className="rounded-lg cursor-pointer bg-primary text-primary-foreground hover:bg-primary/90"
                   aria-label={tCommon("pickVariableLabel")}
                   onClick={(e) => {
                     e.preventDefault();
@@ -202,7 +204,7 @@ export function ReactionRolesFeature({
                   <FaTerminal size="20" />
                 </Button>
                 <Button
-                  className="cursor-pointer bg-primary text-primary-foreground hover:bg-primary/90 rounded-lg"
+                  className="rounded-lg cursor-pointer bg-primary text-primary-foreground hover:bg-primary/90"
                   aria-label={tCommon("testMessageLabel")}
                   disabled={sendMessageLoading}
                   onClick={async (e) => {
@@ -231,27 +233,75 @@ export function ReactionRolesFeature({
           </div>
 
           <div className="col-span-12">
-            <Table>
-              <thead>
-                {" "}
-                {/* Use thead instead of TableHead for proper HTML structure */}
-                <tr>
-                  {" "}
-                  {/* Use tr as a direct child of thead */}
-                  <th colSpan={2}>{t("table.header")}</th>{" "}
-                  {/* Use th instead of TableCell */}
-                </tr>
-              </thead>
-              <TableBody>
-                {featureInfo?.roles?.length > 0 ? (
-                  featureInfo.roles.map((role: any, index: number) => (
-                    <TableRow key={index}>
-                      <TableCell>
-                        {role.emoji} - {role.roleId}
+            <Card className="p-4">
+              <h2 className="mb-2 text-lg font-semibold">
+                {t("table.header")}
+              </h2>
+              <div className="flex flex-col gap-2 mb-4 md:flex-row">
+                <input
+                  type="text"
+                  placeholder={t("emojiPlaceholder", {
+                    defaultValue: "Emoji (e.g. 😃)",
+                  })}
+                  className="w-24 px-2 py-1 border rounded"
+                  value={formik.values._newEmoji || ""}
+                  onChange={(e) =>
+                    formik.setFieldValue("_newEmoji", e.target.value)
+                  }
+                  maxLength={2}
+                />
+                <input
+                  type="text"
+                  placeholder={t("roleIdPlaceholder", {
+                    defaultValue: "Role ID",
+                  })}
+                  className="flex-1 px-2 py-1 border rounded"
+                  value={formik.values._newRoleId || ""}
+                  onChange={(e) =>
+                    formik.setFieldValue("_newRoleId", e.target.value)
+                  }
+                />
+                <Button
+                  type="button"
+                  onClick={() => {
+                    if (!formik.values._newEmoji || !formik.values._newRoleId) {
+                      toast.error(t("addRoleValidation"));
+                      return;
+                    }
+                    formik.setFieldValue("roles", [
+                      ...formik.values.roles,
+                      {
+                        emoji: formik.values._newEmoji,
+                        roleId: formik.values._newRoleId,
+                      },
+                    ]);
+                    formik.setFieldValue("_newEmoji", "");
+                    formik.setFieldValue("_newRoleId", "");
+                  }}
+                  className="text-white bg-green-500 hover:bg-green-600"
+                >
+                  {t("addRole")}
+                </Button>
+              </div>
+              <Table>
+                <TableBody>
+                  {formik.values.roles.length === 0 && (
+                    <TableRow>
+                      <TableCell
+                        colSpan={3}
+                        className="text-center text-muted-foreground"
+                      >
+                        {t("noReactionRolesFound")}
                       </TableCell>
+                    </TableRow>
+                  )}
+                  {formik.values.roles.map((role: any, index: number) => (
+                    <TableRow key={index}>
+                      <TableCell className="text-xl">{role.emoji}</TableCell>
+                      <TableCell>{role.roleId}</TableCell>
                       <TableCell>
                         <Button
-                          variant="ghost"
+                          variant="destructive"
                           size="sm"
                           onClick={() =>
                             formik.setFieldValue(
@@ -263,31 +313,14 @@ export function ReactionRolesFeature({
                           }
                           aria-label={t("table.removeLabel", { index })}
                         >
-                          Remove
+                          {t("remove")}
                         </Button>
                       </TableCell>
                     </TableRow>
-                  ))
-                ) : (
-                  <TableRow>
-                    <TableCell colSpan={2} className="text-center">
-                      {t("noReactionRolesFound")}
-                    </TableCell>
-                  </TableRow>
-                )}
-                <TableRow>
-                  <TableCell colSpan={2} className="text-center">
-                    <Button
-                      type="button"
-                      onClick={handleAddMessageClick}
-                      className="mt-2"
-                    >
-                      {t("addMessage")}
-                    </Button>
-                  </TableCell>
-                </TableRow>
-              </TableBody>
-            </Table>
+                  ))}
+                </TableBody>
+              </Table>
+            </Card>
           </div>
 
           {showMessageSelection && (
@@ -302,13 +335,13 @@ export function ReactionRolesFeature({
                 <div className="flex gap-4 mt-4">
                   <Button
                     onClick={handleUseExistingMessage}
-                    className="bg-blue-500 text-white hover:bg-blue-600"
+                    className="text-white bg-blue-500 hover:bg-blue-600"
                   >
                     {t("useExistingMessage")}
                   </Button>
                   <Button
                     onClick={handleCreateNewMessage}
-                    className="bg-green-500 text-white hover:bg-green-600"
+                    className="text-white bg-green-500 hover:bg-green-600"
                     disabled={sendMessageLoading}
                   >
                     {sendMessageLoading
@@ -321,7 +354,7 @@ export function ReactionRolesFeature({
           )}
 
           <div
-            className="fixed left-1/2 z-50 mx-auto rounded-2xl"
+            className="fixed z-50 mx-auto left-1/2 rounded-2xl"
             style={styles}
           >
             {formik.dirty && (

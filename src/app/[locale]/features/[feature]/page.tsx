@@ -49,7 +49,7 @@ export default function FeaturePage() {
   }
 
   return (
-    <div className="w-full flex flex-col p-6 md:p-10 gap-6">
+    <div className="flex flex-col w-full gap-6 p-6 md:p-10">
       {featureInfo?.isActive ? (
         <IsEnabledPage
           featureInfo={featureInfo}
@@ -134,7 +134,7 @@ export function IsEnabledPage({
           />
         );
 
-      case "reactions-roles":
+      case "reaction-roles":
         return (
           <ReactionRolesFeature
             featureConfig={featureConfig}
@@ -192,7 +192,7 @@ export function IsEnabledPage({
       default:
         return (
           <motion.div
-            className="flex justify-center items-center"
+            className="flex items-center justify-center"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
@@ -205,7 +205,7 @@ export function IsEnabledPage({
                 {f("featureNotFoundDescription", { feature })}
               </p>
 
-              <CardFooter className="flex justify-end items-start gap-3">
+              <CardFooter className="flex items-start justify-end gap-3">
                 <Button variant="outline" onClick={() => router.back()}>
                   {t("back")}
                 </Button>
@@ -259,12 +259,12 @@ export function IsDisabledPage({ guild, feature, refetch }: any) {
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
-      className="w-full flex flex-col items-center justify-center min-h-svh"
+      className="flex flex-col items-center justify-center w-full min-h-svh"
     >
-      <h1 className="text-3xl font-bold text-primary mb-4">
+      <h1 className="mb-4 text-3xl font-bold text-primary">
         Feature is Disabled
       </h1>
-      <p className="text-muted-foreground mb-6">
+      <p className="mb-6 text-muted-foreground">
         This feature is currently disabled. Enable it to configure settings.
       </p>
       <Button
