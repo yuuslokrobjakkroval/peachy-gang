@@ -6,4 +6,4 @@ Allow: /
 Host: https://peachyganggg.com
 
 # Sitemaps
-Sitemap: https://peachyganggg.com/sitemap.xml
+Sitemap: https://peachyganggg.com/peachy-sitemap.xml
