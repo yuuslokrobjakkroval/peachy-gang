@@ -52,7 +52,7 @@ export default async function LocaleLayout({
         {/* <meta name="theme-color" content="#000000" /> */}
         <meta
           name="google-site-verification"
-          content="R2Yfe67ddlF9A6UTmMbSAz-t1zTWIs7PjVFYA4w3GMQ"
+          content="Jlg3X3ZqWGdi3VwKI03Fa8SnVe3zfcZ2vq6QsrWdnjQ"
         />
         <meta name="robots" content="noindex" />
         <meta
