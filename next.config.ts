@@ -3,8 +3,6 @@ import createNextIntlPlugin from "next-intl/plugin";
 
 /** @type {import('next').NextConfig} */
 const nextConfig: NextConfig = {
-  siteUrl: "https://peachygang.xyz",
-  generateRobotsTxt: true,
   env: {
     APP_URL: process.env.APP_URL,
     BOT_CLIENT_ID: process.env.BOT_CLIENT_ID,
