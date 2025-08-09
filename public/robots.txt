@@ -3,7 +3,7 @@ User-agent: *
 Allow: /
 
 # Host
-Host: https://peachygang.xyz
+Host: https://peachyganggg.com
 
 # Sitemaps
-Sitemap: https://peachygang.xyz/sitemap.xml
+Sitemap: https://peachyganggg.com/sitemap.xml
