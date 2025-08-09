@@ -1,5 +1,5 @@
 {
-  "installCommand": "npm install prisma @prisma/client better-auth --force && npx prisma generate",
+  "installCommand": "npm install prisma @prisma/client better-auth --force && npx prisma generate && npm run postbuild",
   "buildCommand": "npm run build",
   "framework": "nextjs"
 }
