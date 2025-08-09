@@ -1,9 +1,19 @@
-# *
+# Example 1: Block only Googlebot
+User-agent: Googlebot
+Disallow: /
+
+# Example 2: Block Googlebot and Adsbot
+User-agent: Googlebot
+User-agent: AdsBot-Google
+Disallow: /
+
+# Example 3: Block all crawlers except AdsBot (AdsBot crawlers must be named explicitly)
 User-agent: *
-Allow: /
+Disallow: /
 
 # Host
 Host: https://peachyganggg.com
 
 # Sitemaps
-Sitemap: https://peachyganggg.com/peachy-sitemap.xml
+Sitemap: https://peachyganggg.com/sitemap.xml
+Sitemap: https://www.peachyganggg.com/sitemap.xml
