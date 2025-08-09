@@ -1,6 +1,6 @@
 // next-sitemap.config.js
 module.exports = {
-  siteUrl: "https://peachygang.xyz",
+  siteUrl: "https://peachyganggg.com",
   generateRobotsTxt: true,
   sitemapSize: 5000,
   changefreq: "daily",
