@@ -134,7 +134,7 @@ export function IsEnabledPage({
           />
         );
 
-      case "reaction-roles":
+      case "reactions-roles":
         return (
           <ReactionRolesFeature
             featureConfig={featureConfig}
@@ -192,29 +192,27 @@ export function IsEnabledPage({
       default:
         return (
           <motion.div
-            className="flex items-center justify-center"
+            className="flex items-center justify-center min-h-[300px] relative overflow-hidden"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
           >
-            <Card className="flex flex-col p-6">
-              <h1 className="text-2xl font-bold text-primary">
-                {f("featureNotFoundTitle")}
+            {/* Background image */}
+            <div
+              className="absolute inset-0 z-0 bg-center bg-cover opacity-30 blur-sm"
+              style={{ backgroundImage: "url(/backgrounds/dreamy.jpg)" }}
+              aria-hidden="true"
+            />
+            <Card className="z-10 flex flex-col items-center p-6 shadow-lg bg-white/80 backdrop-blur-md">
+              <h1 className="mb-2 text-3xl font-bold text-primary">
+                Coming Soon
               </h1>
-              <p className="text-muted-foreground">
-                {f("featureNotFoundDescription", { feature })}
+              <p className="mb-4 text-muted-foreground">
+                This feature is not available yet. Please check back later!
               </p>
-
               <CardFooter className="flex items-start justify-end gap-3">
                 <Button variant="outline" onClick={() => router.back()}>
                   {t("back")}
-                </Button>
-                <Button
-                  onClick={() => {
-                    refetch();
-                  }}
-                >
-                  {f("refreshPage")}
                 </Button>
               </CardFooter>
             </Card>
