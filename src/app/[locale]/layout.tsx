@@ -1,6 +1,5 @@
 import { NextIntlClientProvider, hasLocale } from "next-intl";
 import type { Metadata } from "next";
-import { Nunito, PT_Sans } from "next/font/google";
 import { routing } from "@/i18n/routing";
 import { ThemeProvider } from "@/components/provider/theme-provider";
 import ReduxProvider from "@/components/provider/redux-provider";

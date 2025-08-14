@@ -10,7 +10,6 @@ import {
   Castle,
   Gamepad,
   BookHeart,
-  Gift,
   Banknote,
   Store,
   User,
@@ -19,15 +18,13 @@ import {
   ClipboardList,
   Brain,
   Puzzle,
-  Code,
   Popcorn,
   Clapperboard,
-  ShoppingBag,
   Settings2,
-  Smile,
   Sticker,
   Squirrel,
   Sparkle,
+  Smile,
 } from "lucide-react";
 
 import { NavMain } from "@/components/navbar/nav-main";
@@ -66,6 +63,13 @@ const navigation = {
       title: "Guilds",
       url: "/guilds",
       icon: Castle,
+      isActive: true,
+      items: [],
+    },
+    {
+      title: "Emojis",
+      url: "/emojigg",
+      icon: Smile,
       isActive: true,
       items: [],
     },

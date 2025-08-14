@@ -10,9 +10,9 @@ export const API_ENDPOINT = "https://discord.com/api/v10";
 export const CLIENT_TOKEN = process.env.BOT_TOKEN as string;
 export const CLIENT_ID = process.env.BOT_CLIENT_ID as string;
 export const CLIENT_SECRET = process.env.BOT_CLIENT_SECRET as string;
-export const FIRST_SUB_CLIENT_ID = process.env
+export const FIRST_SUB_BOT_CLIENT_ID = process.env
   .FIRST_SUB_BOT_CLIENT_ID as string;
-export const SECOND_SUB_CLIENT_ID = process.env
+export const SECOND_SUB_BOT_CLIENT_ID = process.env
   .SECOND_SUB_BOT_CLIENT_ID as string;
 export const BETTER_AUTH_URL = process.env.BETTER_AUTH_URL as string;
 export const GITHUB_TOKEN = process.env.GITHUB_TOKEN as string;
