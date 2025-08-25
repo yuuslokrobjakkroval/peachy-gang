@@ -64,7 +64,7 @@
     "emailjs-com": "^3.2.0",
     "embla-carousel-react": "^8.6.0",
     "formik": "^2.4.6",
-    "framer-motion": "^12.23.6",
+    "framer-motion": "^12.23.12",
     "gray-matter": "^4.0.3",
     "gsap": "^3.13.0",
     "install": "^0.13.0",
