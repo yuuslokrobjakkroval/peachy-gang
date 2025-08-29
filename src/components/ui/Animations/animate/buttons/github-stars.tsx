@@ -75,10 +75,11 @@ function GitHubStarsButton({
     [username, repo]
   );
 
+  console.log(GITHUB_TOKEN);
   React.useEffect(() => {
     fetch(`https://api.github.com/repos/${username}/${repo}`, {
       headers: {
-        Authorization: `Bearer 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`,
+        Authorization: `Bearer ${GITHUB_TOKEN}`,
         Accept: "application/vnd.github.v3+json",
       },
     })

@@ -25,6 +25,7 @@ import {
   Squirrel,
   Sparkle,
   Smile,
+  Terminal,
 } from "lucide-react";
 
 import { NavMain } from "@/components/navbar/nav-main";
@@ -194,16 +195,9 @@ const navigation = {
       isActive: true,
       items: [
         {
-          title: "Clip Management",
-          url: "/general/tutorials",
-          icon: Clapperboard,
-          isActive: true,
-          items: [],
-        },
-        {
-          title: "Movie Management",
-          url: "/general/movies",
-          icon: Popcorn,
+          title: "Env Management",
+          url: "/general/envs",
+          icon: Terminal,
           isActive: true,
           items: [],
         },
