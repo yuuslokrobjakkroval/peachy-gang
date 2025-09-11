@@ -89,11 +89,9 @@ export function FeatureUsageLineChart() {
 
   const chartData = React.useMemo(() => {
     if (!apiData) {
-      console.log("No API data, using fallback");
       return fallbackChartData;
     }
     const transformed = transformChartData(apiData);
-    console.log("Transformed chart data:", transformed);
     return transformed;
   }, [apiData]);
 
