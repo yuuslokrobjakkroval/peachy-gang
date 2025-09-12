@@ -3,9 +3,14 @@
 import * as React from "react";
 import { usePeachy } from "@/contexts/peachy";
 import {
-  Cat,
   LayoutDashboard,
-  FeatherIcon,
+  Cat,
+  Castle,
+  Eye,
+  Settings,
+  Send,
+  HandCoins,
+  TreePalm,
   Hand,
   Rocket,
   UserPlus,
@@ -15,12 +20,12 @@ import {
   UserMinus,
   Bot,
   RollerCoaster,
-  Castle,
+  Dna,
 } from "lucide-react";
 import {
   Sidebar,
   SidebarContent,
-  SidebarFooter,
+  // SidebarFooter,
   SidebarRail,
 } from "@/components/ui/sidebar";
 import { NavMain } from "@/components/navbar/nav-main";
@@ -55,9 +60,37 @@ export function FeatureSidebar({
         items: [],
       },
       {
+        title: "General",
+        url: "#",
+        icon: Dna,
+        isActive: true,
+        items: [
+          {
+            title: "Overview",
+            url: "/features/overview",
+            icon: Eye,
+          },
+          {
+            title: "Server Settings",
+            url: "/features/server-settings",
+            icon: Settings,
+          },
+          {
+            title: "Embed Messages",
+            url: "/features/embed-message",
+            icon: Send,
+          },
+          {
+            title: "Get Premium",
+            url: "/features/premium",
+            icon: HandCoins,
+          },
+        ],
+      },
+      {
         title: "Feature",
         url: "#",
-        icon: FeatherIcon,
+        icon: TreePalm,
         isActive: true,
         items: [
           {

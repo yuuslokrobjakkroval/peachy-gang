@@ -78,7 +78,6 @@ function GuildPanel({
   const t = useTranslations("guilds");
   const { userInfoByDiscord }: { userInfoByDiscord: any } = usePeachy();
   const router = useRouter();
-
   const features = getFeatures();
 
   const backgroundStyle = info.banner
@@ -101,7 +100,7 @@ function GuildPanel({
             className="text-xl sm:text-2xl font-semibold tracking-tight text-[var(--primary)] cursor-pointer hover:text-[var(--primary)]/80 transition-colors"
             onClick={() => router.back()}
           />
-          <h4 className="text-lg sm:text-xl md:text-2xl font-ghibi-bold tracking-tight text-[var(--primary)]">
+          <h4 className="text-lg sm:text-xl md:text-2xl mt-1 font-ghibi-bold tracking-tight text-[var(--primary)]">
             {toCapitalCase(info.name)}
           </h4>
         </div>
@@ -148,7 +147,32 @@ function GuildPanel({
           )}
         </div>
 
-        <div className="relative mb-6">
+        {/* <div className="relative my-6">
+          <div className="absolute inset-0 flex items-center">
+            <span className="w-full border-t border-[var(--border)]" />
+          </div>
+          <div className="relative flex justify-center text-xs uppercase sm:text-sm">
+            <span className="bg-[var(--background)] px-3 text-[var(--muted-foreground)]">
+              <h4 className="text-2xl font-ghibi-bold tracking-tight text-[var(--primary)]">
+                Global Information
+              </h4>
+            </span>
+          </div>
+        </div>
+
+        <div className="grid grid-cols-1 gap-3 mt-2 sm:gap-4 sm:mt-3 md:grid-cols-2 lg:grid-cols-3 xl:gap-6">
+          {globalConfig.map((feature: any) => (
+            <Features
+              key={feature.id}
+              guild={id}
+              feature={feature}
+              enabled={info.enabledFeatures.includes(feature.id)}
+              refetch={refetch}
+            />
+          ))}
+        </div> */}
+
+        <div className="relative my-6">
           <div className="absolute inset-0 flex items-center">
             <span className="w-full border-t border-[var(--border)]" />
           </div>

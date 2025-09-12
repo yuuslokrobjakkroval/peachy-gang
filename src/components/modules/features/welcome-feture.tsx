@@ -158,28 +158,14 @@ export function WelcomeMessageFeature({
 
   return (
     <motion.div
-      className="w-full container mx-auto xl:px-0"
+      className="container w-full mx-auto xl:px-0"
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
     >
-      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6">
+      <div className="flex flex-col gap-4 mb-6 sm:flex-row sm:items-center sm:justify-between">
         <div className="flex flex-col">
-          <div className="flex gap-2 items-center">
-            <CircleArrowLeft
-              className="size-8 text-xl sm:text-2xl font-semibold tracking-tight text-[var(--primary)] cursor-pointer hover:text-[var(--primary)]/80 transition-colors"
-              onClick={() => router.back()}
-            />
-            <h4 className="pt-2 text-primary text-3xl md:text-4xl font-bold font-ghibi-bold tracking-tight text-[var(--primary)]">
-              {toCapitalCase(guildInfo?.name)}
-            </h4>
-          </div>
-
-          <div className="mt-2 sm:mt-3 mb-4 sm:mb-6">
-            <Separator className="text-[var(--card-foreground)]" />
-          </div>
-
-          <h1 className="text-primary text-3xl md:text-4xl font-bold">
+          <h1 className="text-3xl font-bold text-primary md:text-4xl">
             {tFeature("welcome-message")}
           </h1>
           <p className="text-muted-foreground">
@@ -198,9 +184,9 @@ export function WelcomeMessageFeature({
       </div>
 
       <form onSubmit={formik.handleSubmit} className="space-y-6">
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-4">
+        <div className="grid grid-cols-1 gap-4 md:grid-cols-12">
           <div className="col-span-12">
-            <div className="flex flex-row items-center justify-between gap-2 min-w-0">
+            <div className="flex flex-row items-center justify-between min-w-0 gap-2">
               <div className="flex-1 min-w-0">
                 <SwitchForm
                   control={{
@@ -218,7 +204,7 @@ export function WelcomeMessageFeature({
                 <Tooltip>
                   <TooltipTrigger asChild>
                     <Button
-                      className="cursor-pointer bg-primary text-primary-foreground hover:bg-primary/90 rounded-lg"
+                      className="rounded-lg cursor-pointer bg-primary text-primary-foreground hover:bg-primary/90"
                       aria-label={tCommon("pickVariableLabel")}
                       onClick={(e) => {
                         e.preventDefault();
@@ -236,7 +222,7 @@ export function WelcomeMessageFeature({
                 <Tooltip>
                   <TooltipTrigger asChild>
                     <Button
-                      className="cursor-pointer bg-primary text-primary-foreground hover:bg-primary/90 rounded-lg"
+                      className="rounded-lg cursor-pointer bg-primary text-primary-foreground hover:bg-primary/90"
                       aria-label={tCommon("testMessageLabel")}
                       disabled={sendMessageLoading}
                       onClick={async (e) => {
@@ -341,7 +327,7 @@ export function WelcomeMessageFeature({
                 <div className="col-span-12">
                   <Card className="p-4">
                     <div
-                      className="flex w-full rounded-xl bg-cover"
+                      className="flex w-full bg-cover rounded-xl"
                       style={backgroundStyle}
                     />
                   </Card>
@@ -360,7 +346,7 @@ export function WelcomeMessageFeature({
 
           <div
             style={styles}
-            className="fixed left-1/2 z-50 mx-auto rounded-2xl"
+            className="fixed z-50 mx-auto left-1/2 rounded-2xl"
           >
             {formik.dirty && (
               <UpdateFeaturePanel

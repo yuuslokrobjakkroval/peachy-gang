@@ -26,11 +26,23 @@ import { GoodByeMessageFeature } from "@/components/modules/features/goodbye-fet
 import { Card, CardFooter } from "@/components/ui/card";
 import { useTranslations } from "next-intl";
 import Loading from "@/components/loading/circle";
+import ServerSettings from "@/components/modules/features/server-settings";
+import SendDiscordMessage from "@/components/modules/features/embed-message";
+import PremiumPlans from "@/components/modules/features/premuim";
+import ServerOverview from "@/components/modules/features/overview";
 
 export default function FeaturePage() {
   const t = useTranslations("common");
   const f = useTranslations("features");
   const { guildId, feature } = usePeachy();
+  const { feature: featureParam } = useParams();
+
+  const generals: string[] = [
+    "overview",
+    "server-settings",
+    "embed-message",
+    "premium",
+  ];
 
   const {
     data: featureInfo,
@@ -50,7 +62,9 @@ export default function FeaturePage() {
 
   return (
     <div className="flex flex-col w-full gap-6 p-6 md:p-10">
-      {featureInfo?.isActive ? (
+      {typeof featureParam === "string" && generals.includes(featureParam) ? (
+        <IsOverviewPage guild={guildId} feature={featureParam} t={t} f={f} />
+      ) : featureInfo?.isActive ? (
         <IsEnabledPage
           featureInfo={featureInfo}
           guild={guildId}
@@ -69,6 +83,67 @@ export default function FeaturePage() {
         />
       )}
     </div>
+  );
+}
+
+export function IsOverviewPage({ guild, feature, t, f }: any) {
+  const router = useRouter();
+
+  function handleFeature({ guild, feature }: any) {
+    switch (feature) {
+      case "overview":
+        return <ServerOverview guild={guild} />;
+
+      case "server-settings":
+        return <ServerSettings />;
+        
+      case "embed-message":
+        return <SendDiscordMessage guild={guild} feature={feature} />;
+
+      case "premium":
+        return <PremiumPlans />;
+
+      default:
+        return (
+          <motion.div
+            className="flex items-center justify-center min-h-[300px] relative overflow-hidden"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+          >
+            {/* Background image */}
+            <div
+              className="absolute inset-0 z-0 bg-center bg-cover opacity-30 blur-sm"
+              style={{ backgroundImage: "url(/backgrounds/dreamy.jpg)" }}
+              aria-hidden="true"
+            />
+            <Card className="z-10 flex flex-col items-center p-6 shadow-lg bg-white/80 backdrop-blur-md">
+              <h1 className="mb-2 text-3xl font-bold text-primary">
+                Coming Soon
+              </h1>
+              <p className="mb-4 text-muted-foreground">
+                This feature is not available yet. Please check back later!
+              </p>
+              <CardFooter className="flex items-start justify-end gap-3">
+                <Button variant="outline" onClick={() => router.back()}>
+                  {t("back")}
+                </Button>
+              </CardFooter>
+            </Card>
+          </motion.div>
+        );
+    }
+  }
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5 }}
+      className="w-full"
+    >
+      {handleFeature({ guild, feature })}
+    </motion.div>
   );
 }
 
