@@ -58,6 +58,11 @@ export default async function LocaleLayout({
           name="keywords"
           content="nextjs, react, typescript, tailwindcss, peachy gang"
         />
+        <script
+          src="https://challenges.cloudflare.com/turnstile/v0/api.js"
+          async
+          defer
+        ></script>
       </head>
       <body cz-shortcut-listen="true">
         <NextIntlClientProvider locale={locale} messages={messages}>
@@ -71,8 +76,14 @@ export default async function LocaleLayout({
               <ReduxProvider>
                 <PeachyProvider>
                   <div className="texture" />
-
                   {children}
+                  <div
+                    class="cf-turnstile"
+                    data-sitekey="0x4AAAAAAB1e77hsMiUJDHZb"
+                    data-theme="dark"
+                    data-size="normal"
+                    data-callback="onSuccess"
+                  ></div>
                   <Toaster position="top-right" />
                   <Analytics />
                   <SpeedInsights />
@@ -82,6 +93,7 @@ export default async function LocaleLayout({
           </SettingsProvider>
         </NextIntlClientProvider>
       </body>
+      
     </html>
   );
 }
