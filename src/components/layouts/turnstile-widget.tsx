@@ -15,7 +15,7 @@ export default function TurnstileWidget() {
       // Render Turnstile in the div
       // @ts-ignore
       window.turnstile.render(widgetRef.current, {
-        sitekey: process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY!,
+        sitekey: '0x4AAAAAAB1e77hsMiUJDHZb',
         callback: (token: string) => setToken(token),
         theme: "auto",
       });
