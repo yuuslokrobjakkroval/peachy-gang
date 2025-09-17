@@ -11,8 +11,6 @@ import { getMode, getSettingsFromCookie } from "@/utils/serverHelpers";
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { notFound } from "next/navigation";
-import Script from "next/script";
-import TurnstileWidget from "@/components/layouts/turnstile-widget";
 
 export const metadata: Metadata = {
   title: "PEACHY GANG",
@@ -60,11 +58,6 @@ export default async function LocaleLayout({
           name="keywords"
           content="nextjs, react, typescript, tailwindcss, peachy gang"
         />
-         <Script
-            src="https://challenges.cloudflare.com/turnstile/v0/api.js"
-            async
-            defer
-          />
       </head>
       <body cz-shortcut-listen="true">
         <NextIntlClientProvider locale={locale} messages={messages}>
@@ -79,7 +72,6 @@ export default async function LocaleLayout({
                 <PeachyProvider>
                   <div className="texture" />
                   {children}
-                  <TurnstileWidget />
                   <Toaster position="top-right" />
                   <Analytics />
                   <SpeedInsights />
@@ -89,7 +81,6 @@ export default async function LocaleLayout({
           </SettingsProvider>
         </NextIntlClientProvider>
       </body>
-      
     </html>
   );
 }
