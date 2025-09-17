@@ -5,11 +5,14 @@ import { TabItem } from "@/components/ui/expandable-tabs";
 import {
   Banana,
   BicepsFlexed,
+  Book,
   Coins,
+  Contact,
   Donut,
   Home,
   PawPrint,
   PiggyBank,
+  ShieldQuestion,
   Spade,
 } from "lucide-react";
 
@@ -483,9 +486,9 @@ export const getRandomEmoji = (): string => {
 export const expandableTabs: TabItem[] = [
   { title: "PEACHY", icon: Home },
   { type: "separator" },
-  // { title: "About Us", icon: Book },
-  // { title: "FAQ", icon: MessageCircleQuestion },
-  // { title: "Contact", icon: Contact },
+  { title: "About Us", icon: Book },
+  { title: "FAQ", icon: ShieldQuestion },
+  { title: "Contact", icon: Contact },
 ];
 
 export const expandableRankTabs: TabItem[] = [

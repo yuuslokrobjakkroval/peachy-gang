@@ -1019,10 +1019,10 @@ export default function Peachy() {
       <div className="fixed z-50 bottom-4 right-4 sm:bottom-5 sm:right-5">
         <Button
           onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-          className="p-2 transition-colors duration-300 rounded-full shadow-lg sm:p-3 bg-primary hover:bg-primary-dark focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
+          className="p-2 transition-all duration-300 rounded-full shadow-lg sm:p-3 bg-primary hover:bg-primary-dark hover:scale-110 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
           aria-label="Scroll to top"
         >
-          <FaArrowUp size={16} className="sm:w-5 sm:h-5" />
+          <FaArrowUp className="w-4 h-4 transition-all duration-300 sm:w-5 sm:h-5 md:w-6 md:h-6 lg:w-7 lg:h-7 xl:w-8 xl:h-8" />
         </Button>
       </div>
     </>
