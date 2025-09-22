@@ -5,6 +5,7 @@ const axiosBaseQuery =
   () =>
   async ({ url, method, body, params }) => {
     const storedAccount = localStorage.getItem("account");
+    console.log(JSON.parse(storedAccount)?.accessToken ?? "");
     const headers = {
       "Content-Type": "application/json",
       Authorization: `Bearer ${JSON.parse(storedAccount)?.accessToken ?? ""}`,
