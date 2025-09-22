@@ -1,6 +1,15 @@
-import { getBetterAuthUrl } from "@/utils/get-absolute-url";
 import { createAuthClient } from "better-auth/client";
 
 export const authClient = createAuthClient({
-  baseURL: getBetterAuthUrl(),
+  baseURL:
+    process.env.NEXT_PUBLIC_APP_URL ||
+    process.env.BETTER_AUTH_URL ||
+    "http://localhost:3000",
+  fetchOptions: {
+    onError(e) {
+      if (e.error.status === 401) {
+        window.location.href = "/login";
+      }
+    },
+  },
 });

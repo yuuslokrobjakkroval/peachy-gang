@@ -4,6 +4,7 @@ import { routing } from "@/i18n/routing";
 import { ThemeProvider } from "@/components/provider/theme-provider";
 import ReduxProvider from "@/components/provider/redux-provider";
 import { PeachyProvider } from "@/contexts/peachy";
+import { AuthProvider } from "@/contexts/auth-provider";
 import { Toaster } from "@/components/ui/sonner";
 import "./globals.css";
 import { SettingsProvider } from "@/contexts/settingsContext";
@@ -69,13 +70,15 @@ export default async function LocaleLayout({
               disableTransitionOnChange
             >
               <ReduxProvider>
-                <PeachyProvider>
-                  <div className="texture" />
-                  {children}
-                  <Toaster position="top-right" />
-                  <Analytics />
-                  <SpeedInsights />
-                </PeachyProvider>
+                <AuthProvider>
+                  <PeachyProvider>
+                    <div className="texture" />
+                    {children}
+                    <Toaster position="top-right" />
+                    <Analytics />
+                    <SpeedInsights />
+                  </PeachyProvider>
+                </AuthProvider>
               </ReduxProvider>
             </ThemeProvider>
           </SettingsProvider>
