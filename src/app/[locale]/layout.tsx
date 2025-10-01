@@ -74,7 +74,7 @@ export default async function LocaleLayout({
                   <PeachyProvider>
                     <div className="texture" />
                     {children}
-                    <Toaster position="top-right" />
+                    <Toaster position="top-center" />
                     <Analytics />
                     <SpeedInsights />
                   </PeachyProvider>
