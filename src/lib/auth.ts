@@ -14,7 +14,7 @@ const prisma =
     log: ["query"],
   });
 
-if (process.env.NODE_ENV !== "production") globalForPrisma.prisma = prisma;
+globalForPrisma.prisma = prisma;
 
 export const auth = betterAuth({
   database: prismaAdapter(prisma, {
@@ -49,7 +49,7 @@ export const auth = betterAuth({
       options: {
         httpOnly: true,
         sameSite: "lax",
-        secure: process.env.NODE_ENV === "production",
+        secure: "production",
         path: "/",
       },
     },
@@ -62,9 +62,7 @@ export const auth = betterAuth({
     crossSubDomainCookies: {
       enabled: true,
       domain:
-        process.env.NODE_ENV === "production"
-          ? process.env.PRODUCTION_DOMAIN || "peachyganggg.com"
-          : "localhost",
+        process.env.PRODUCTION_DOMAIN || "peachyganggg.com" || "localhost",
     },
   },
 });
