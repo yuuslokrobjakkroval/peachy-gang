@@ -16,7 +16,6 @@ export const StickyBanner = ({
   const { scrollY } = useScroll();
 
   useMotionValueEvent(scrollY, "change", (latest) => {
-    console.log(latest);
     if (hideOnScroll && latest > 40) {
       setOpen(false);
     } else {
@@ -52,10 +51,10 @@ export const StickyBanner = ({
         animate={{
           scale: 1,
         }}
-        className="absolute top-1/2 right-2 -translate-y-1/2 cursor-pointer"
+        className="absolute -translate-y-1/2 cursor-pointer top-1/2 right-2"
         onClick={() => setOpen(!open)}
       >
-        <CloseIcon className="h-5 w-5 text-white" />
+        <CloseIcon className="w-5 h-5 text-white" />
       </motion.button>
     </motion.div>
   );

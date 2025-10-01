@@ -14,7 +14,6 @@ export default function ServerOverview({ guild }: { guild: string }) {
   const { userInfoByDiscord }: { userInfoByDiscord: any } = usePeachy();
   const { data: guildInfo, isLoading } = useGetGuildInfoQuery(guild);
   const [ownerId, setOwnerId] = useState<string>("");
-  console.log("ownerId", ownerId);
 
   const { data: userInfo } = useGetUserByIdQuery(ownerId, {
     skip: !ownerId,
@@ -22,8 +21,6 @@ export default function ServerOverview({ guild }: { guild: string }) {
 
   useEffect(() => {
     if (!!guildInfo) {
-      console.log("hi");
-
       setOwnerId(guildInfo.ownerId);
     }
   }, [guildInfo]);

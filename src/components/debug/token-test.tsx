@@ -22,7 +22,6 @@ export default function TokenTestComponent() {
     try {
       const testResult = await testStoredDiscordToken();
       setResult(testResult);
-      console.log("Token test result:", testResult);
     } catch (error) {
       setResult({
         success: false,
@@ -45,24 +44,12 @@ export default function TokenTestComponent() {
         return;
       }
 
-      // Try direct API call
-      console.log(
-        "Making direct API call with token:",
-        token.substring(0, 20) + "..."
-      );
-
       const response = await fetch("https://discord.com/api/v10/users/@me", {
         headers: {
           Authorization: `Bearer ${token}`,
           "Content-Type": "application/json",
         },
       });
-
-      console.log("Response status:", response.status);
-      console.log(
-        "Response headers:",
-        Object.fromEntries(response.headers.entries())
-      );
 
       if (response.ok) {
         const userData = await response.json();
@@ -141,10 +128,10 @@ export default function TokenTestComponent() {
               )}
 
               <details className="text-sm">
-                <summary className="cursor-pointer font-medium">
+                <summary className="font-medium cursor-pointer">
                   Raw Result
                 </summary>
-                <pre className="mt-2 p-2 bg-muted rounded overflow-x-auto">
+                <pre className="p-2 mt-2 overflow-x-auto rounded bg-muted">
                   {JSON.stringify(result, null, 2)}
                 </pre>
               </details>

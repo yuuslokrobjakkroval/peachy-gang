@@ -16,11 +16,6 @@ const axiosBaseQuery =
       console.error("Failed to parse stored account:", error);
     }
 
-    console.log(
-      "Using access token:",
-      accessToken ? accessToken.substring(0, 20) + "..." : "None"
-    );
-
     const headers = {
       "Content-Type": "application/json",
       ...(accessToken && { Authorization: `Bearer ${accessToken}` }),

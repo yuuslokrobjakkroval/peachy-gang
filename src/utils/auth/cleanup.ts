@@ -17,8 +17,6 @@ export async function cleanupExpiredVerifications() {
         },
       },
     });
-
-    console.log(`Cleaned up ${result.count} expired verification tokens`);
     return result.count;
   } catch (error) {
     console.error("Error cleaning up expired verifications:", error);
@@ -42,10 +40,6 @@ export async function cleanupOldVerifications(hoursOld: number = 24) {
         },
       },
     });
-
-    console.log(
-      `Cleaned up ${result.count} old verification tokens (older than ${hoursOld} hours)`
-    );
     return result.count;
   } catch (error) {
     console.error("Error cleaning up old verifications:", error);

@@ -227,8 +227,6 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
     const fetchAccount = async () => {
       try {
         const { data: accounts } = await authClient.listAccounts();
-        console.log("Accounts:", accounts);
-
         if (accounts && accounts.length > 0) {
           const { data: accountData } = await authClient.getAccessToken({
             providerId: accounts[0].provider,

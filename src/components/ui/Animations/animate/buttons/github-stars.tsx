@@ -75,7 +75,6 @@ function GitHubStarsButton({
     [username, repo]
   );
 
-  console.log(GITHUB_TOKEN);
   React.useEffect(() => {
     fetch(`https://api.github.com/repos/${username}/${repo}`, {
       headers: {

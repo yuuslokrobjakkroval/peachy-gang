@@ -74,18 +74,10 @@ export default function DiscordTokenDebugPage() {
         },
       });
 
-      console.log("Direct API call result:", {
-        status: response.status,
-        statusText: response.statusText,
-        headers: Object.fromEntries(response.headers.entries()),
-      });
-
       if (response.ok) {
         const userData = await response.json();
-        console.log("User data:", userData);
       } else {
         const errorText = await response.text();
-        console.log("Error response:", errorText);
       }
     } catch (error) {
       console.error("API call failed:", error);
@@ -93,7 +85,7 @@ export default function DiscordTokenDebugPage() {
   };
 
   return (
-    <div className="container mx-auto p-6 space-y-6">
+    <div className="container p-6 mx-auto space-y-6">
       <h1 className="text-3xl font-bold">Discord Token Debug Tool</h1>
 
       {/* Stored Account Info */}
@@ -191,7 +183,7 @@ export default function DiscordTokenDebugPage() {
             {tokenInfo.user && (
               <div className="space-y-2">
                 <h4 className="font-semibold">User Information:</h4>
-                <pre className="bg-muted p-3 rounded text-sm overflow-x-auto">
+                <pre className="p-3 overflow-x-auto text-sm rounded bg-muted">
                   {JSON.stringify(tokenInfo.user, null, 2)}
                 </pre>
               </div>
@@ -207,7 +199,7 @@ export default function DiscordTokenDebugPage() {
             <CardTitle>OAuth Token Information</CardTitle>
           </CardHeader>
           <CardContent>
-            <pre className="bg-muted p-3 rounded text-sm overflow-x-auto">
+            <pre className="p-3 overflow-x-auto text-sm rounded bg-muted">
               {JSON.stringify(oauthInfo, null, 2)}
             </pre>
           </CardContent>
@@ -222,7 +214,7 @@ export default function DiscordTokenDebugPage() {
         <CardContent className="space-y-3">
           <div>
             <strong>401 Unauthorized:</strong>
-            <ul className="list-disc ml-5">
+            <ul className="ml-5 list-disc">
               <li>Token is expired or invalid</li>
               <li>Wrong token type (user vs bot token)</li>
               <li>Incorrect Authorization header format</li>
@@ -232,7 +224,7 @@ export default function DiscordTokenDebugPage() {
 
           <div>
             <strong>Token Types:</strong>
-            <ul className="list-disc ml-5">
+            <ul className="ml-5 list-disc">
               <li>
                 <code>Bearer [token]</code> - For user OAuth tokens
               </li>
@@ -244,7 +236,7 @@ export default function DiscordTokenDebugPage() {
 
           <div>
             <strong>API Versions:</strong>
-            <ul className="list-disc ml-5">
+            <ul className="ml-5 list-disc">
               <li>
                 <code>v10</code> - Latest recommended version
               </li>
