@@ -194,7 +194,7 @@ const alertVariants = cva(
       appearance: "solid",
       size: "md",
     },
-  },
+  }
 );
 
 interface AlertProps
@@ -225,7 +225,7 @@ function Alert({
       role="alert"
       className={cn(
         alertVariants({ variant, size, icon, appearance }),
-        className,
+        className
       )}
       {...props}
     >
@@ -233,8 +233,6 @@ function Alert({
       {close && (
         <Button
           size="sm"
-          variant="inverse"
-          mode="icon"
           onClick={onClose}
           aria-label="Dismiss"
           data-slot="alert-close"
@@ -302,7 +300,7 @@ function AlertContent({
       data-slot="alert-content"
       className={cn(
         "space-y-2 [&_[data-slot=alert-title]]:font-semibold",
-        className,
+        className
       )}
       {...props}
     />

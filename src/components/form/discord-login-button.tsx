@@ -52,7 +52,7 @@ export function DiscordLoginButton() {
       <p className="text-sm text-muted-foreground">{t("login.description")}</p>
 
       {error && (
-        <div className="w-full p-3 text-sm text-red-600 bg-red-50 dark:bg-red-950 dark:text-red-400 border border-red-200 dark:border-red-800 rounded-md">
+        <div className="w-full p-3 text-sm text-red-600 border border-red-200 rounded-md bg-red-50 dark:bg-red-950 dark:text-red-400 dark:border-red-800">
           {error}
         </div>
       )}
@@ -66,7 +66,6 @@ export function DiscordLoginButton() {
         {loading ? (
           <>
             <Spinner className="w-4 h-4 mr-2" />
-            {tCommon("loading")}
           </>
         ) : (
           <>

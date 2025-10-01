@@ -63,7 +63,7 @@ export const auth = betterAuth({
       enabled: true,
       domain:
         process.env.NODE_ENV === "production"
-          ? "peachyganggg.com"
+          ? process.env.PRODUCTION_DOMAIN || "peachyganggg.com"
           : "localhost",
     },
   },
