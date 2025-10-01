@@ -1,0 +1,4 @@
+# Vercel ignore patterns
+node_modules/.prisma/client/query_engine-*.node
+node_modules/@prisma/engines/
+*.node.tmp*
