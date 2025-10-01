@@ -1,14 +1,40 @@
-import tailwindcssAnimate from "tailwindcss-animate";
-
 /** @type {import('tailwindcss').Config} */
-const config = {
+module.exports = {
   content: [
-    "./pages/**/*.{js,ts,jsx,tsx,mdx}",
-    "./components/**/*.{js,ts,jsx,tsx,mdx}",
-    "./app/**/*.{js,ts,jsx,tsx,mdx}",
-    "./src/**/*.{js,ts,jsx,tsx,mdx}",
+    "./pages/**/*.{js,ts,jsx,tsx}",
+    "./components/**/*.{js,ts,jsx,tsx}",
+    "./app/**/*.{js,ts,jsx,tsx}",
+    "./components/ui/**/*.{js,ts,jsx,tsx}",
   ],
-  plugins: [tailwindcssAnimate],
+  theme: {
+    extend: {
+      fontFamily: {
+        ghibli: ["Ghibli", "serif"],
+        "ghibli-bold": ["Ghibli-Bold", "serif"],
+      },
+      animation: {
+        "shiny-text": "shiny-text 8s infinite",
+      },
+      keyframes: {
+        "shiny-text": {
+          "0%, 90%, 100%": {
+            "background-position": "calc(-100% - var(--shiny-width)) 0",
+          },
+          "30%, 60%": {
+            "background-position": "calc(100% + var(--shiny-width)) 0",
+          },
+        },
+      },
+    },
+  },
+  plugins: [
+    function ({ addUtilities }) {
+      addUtilities({
+        ".text-ghibli-bold": {
+          fontFamily: '"Ghibli-Bold", serif',
+          fontWeight: "700",
+        },
+      });
+    },
+  ],
 };
-
-export default config;
