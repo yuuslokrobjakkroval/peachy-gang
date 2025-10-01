@@ -4,11 +4,26 @@ import axios from "axios";
 const axiosBaseQuery =
   () =>
   async ({ url, method, body, params }) => {
-    const storedAccount = localStorage.getItem("account");
-    console.log(JSON.parse(storedAccount)?.accessToken ?? "");
+    let accessToken = "";
+
+    try {
+      const storedAccount = localStorage.getItem("account");
+      if (storedAccount) {
+        const parsed = JSON.parse(storedAccount);
+        accessToken = parsed?.accessToken || "";
+      }
+    } catch (error) {
+      console.error("Failed to parse stored account:", error);
+    }
+
+    console.log(
+      "Using access token:",
+      accessToken ? accessToken.substring(0, 20) + "..." : "None"
+    );
+
     const headers = {
       "Content-Type": "application/json",
-      Authorization: `Bearer ${JSON.parse(storedAccount)?.accessToken ?? ""}`,
+      ...(accessToken && { Authorization: `Bearer ${accessToken}` }),
     };
 
     try {

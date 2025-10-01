@@ -39,6 +39,10 @@ export const auth = betterAuth({
       maxAge: 5 * 60, // 5 minutes
     },
   },
+  emailVerification: {
+    expiresIn: 60 * 30, // 30 minutes instead of 10
+    sendOnSignUp: false, // Disable email verification for OAuth
+  },
   cookies: {
     sessionToken: {
       name: "better-auth.session_token",
@@ -54,6 +58,13 @@ export const auth = betterAuth({
   advanced: {
     database: {
       generateId: () => crypto.randomUUID(),
+    },
+    crossSubDomainCookies: {
+      enabled: true,
+      domain:
+        process.env.NODE_ENV === "production"
+          ? "peachyganggg.com"
+          : "localhost",
     },
   },
 });
