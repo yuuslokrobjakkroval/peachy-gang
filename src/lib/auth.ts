@@ -3,6 +3,7 @@ import { prismaAdapter } from "better-auth/adapters/prisma";
 import { PrismaClient } from "@prisma/client";
 import { nextCookies } from "better-auth/next-js";
 import { NODE_ENV } from "@/utils/auth/server";
+import { getAbsoluteUrl } from "@/utils/get-absolute-url";
 
 // Singleton pattern for PrismaClient
 const globalForPrisma = globalThis as unknown as {
@@ -21,10 +22,7 @@ export const auth = betterAuth({
   database: prismaAdapter(prisma, {
     provider: "mongodb",
   }),
-  baseURL:
-    NODE_ENV === "development"
-      ? "http://localhost:3000"
-      : "http://peachyganggg.com",
+  baseURL: getAbsoluteUrl(),
   socialProviders: {
     discord: {
       clientId: process.env.BOT_CLIENT_ID as string,
