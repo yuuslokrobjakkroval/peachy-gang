@@ -22,7 +22,9 @@ export const auth = betterAuth({
     provider: "mongodb",
   }),
   baseURL:
-    NODE_ENV !== "dev" ? "http://peachyganggg.com" : "http://localhost:3000",
+    NODE_ENV === "development"
+      ? "http://localhost:3000"
+      : "http://peachyganggg.com",
   socialProviders: {
     discord: {
       clientId: process.env.BOT_CLIENT_ID as string,
@@ -48,10 +50,7 @@ export const auth = betterAuth({
       options: {
         httpOnly: true,
         sameSite: "lax",
-        secure:
-          NODE_ENV !== "dev"
-            ? "http://peachyganggg.com"
-            : "http://localhost:3000",
+        secure: NODE_ENV !== "development",
         path: "/",
       },
     },
