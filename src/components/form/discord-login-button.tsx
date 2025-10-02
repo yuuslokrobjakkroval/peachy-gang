@@ -20,16 +20,29 @@ export function DiscordLoginButton() {
       setLoading(true);
       setError(null);
 
+      console.log("Starting Discord login process...");
+      console.log("Current URL:", window.location.href);
+      console.log("Auth client base URL:", window.location.origin);
+
       const result = await authClient.signIn.social({
         provider: "discord",
         callbackURL: "/dashboard",
       });
 
+      console.log("Discord login result:", result);
+
       if (result.error) {
+        console.error("Discord login error:", result.error);
         setError(result.error.message || "Failed to sign in with Discord");
         toast.error("Login failed", {
           description: result.error.message || "Please try again",
         });
+      } else if (result.data) {
+        console.log("Login successful, redirecting...");
+        // Force a redirect to ensure we're in the right state
+        setTimeout(() => {
+          window.location.href = "/dashboard";
+        }, 100);
       }
     } catch (err) {
       const errorMessage =

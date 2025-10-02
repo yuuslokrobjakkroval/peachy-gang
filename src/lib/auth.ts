@@ -16,14 +16,33 @@ const prisma =
 
 globalForPrisma.prisma = prisma;
 
+// Helper function to get the correct base URL
+function getBaseURL(): string {
+  if (process.env.BETTER_AUTH_URL) {
+    return process.env.BETTER_AUTH_URL;
+  }
+
+  if (process.env.APP_URL) {
+    return process.env.APP_URL;
+  }
+
+  if (process.env.VERCEL_URL) {
+    return `https://${process.env.VERCEL_URL}`;
+  }
+
+  return "http://localhost:3000";
+}
+
+// Helper function to determine if we're in production
+function isProduction(): boolean {
+  return process.env.NODE_ENV === "production" || process.env.VERCEL === "1";
+}
+
 export const auth = betterAuth({
   database: prismaAdapter(prisma, {
     provider: "mongodb",
   }),
-  baseURL:
-    process.env.BETTER_AUTH_URL ||
-    process.env.APP_URL ||
-    "http://localhost:3000",
+  baseURL: getBaseURL(),
   socialProviders: {
     discord: {
       clientId: process.env.BOT_CLIENT_ID as string,
@@ -49,7 +68,7 @@ export const auth = betterAuth({
       options: {
         httpOnly: true,
         sameSite: "lax",
-        secure: "production",
+        secure: isProduction(),
         path: "/",
       },
     },
@@ -60,9 +79,7 @@ export const auth = betterAuth({
       generateId: () => crypto.randomUUID(),
     },
     crossSubDomainCookies: {
-      enabled: true,
-      domain:
-        process.env.PRODUCTION_DOMAIN || "peachyganggg.com" || "localhost",
+      enabled: false, // Disable for now to avoid domain issues
     },
   },
 });
