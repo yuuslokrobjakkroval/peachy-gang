@@ -1,26 +1,93 @@
 "use client";
 
 import React, { useState } from "react";
-import { Button } from "@/components/ui/button";
-import { createAuthClient } from "better-auth/client";
 import { useTranslations } from "next-intl";
-const authClient = createAuthClient();
+import { Button } from "@/components/ui/button";
+import { authClient } from "@/lib/auth-client";
+import { Spinner } from "../loading/spinner";
+import { toast } from "sonner";
 
 export function DiscordLoginButton() {
   const t = useTranslations();
-  const tCommon = useTranslations("common");
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   const signInWithDiscord = async () => {
     try {
       setLoading(true);
-      await authClient.signIn.social({
+      setError(null);
+
+      console.log("Starting Discord login process...");
+      console.log("Current URL:", window.location.href);
+      console.log("Auth client base URL:", window.location.origin);
+      console.log("Environment check:", {
+        isVercel: !!process.env.VERCEL_URL,
+        domain: window.location.hostname,
+        protocol: window.location.protocol,
+      });
+
+      const result = await authClient.signIn.social({
         provider: "discord",
         callbackURL: "/dashboard",
         errorCallbackURL: "/auth/error",
       });
+
+      console.log("Discord login result:", result);
+
+      if (result.error) {
+        console.error("Discord login error:", result.error);
+        const errorMessage =
+          result.error.message || "Failed to sign in with Discord";
+
+        // Provide more specific error messages
+        let userFriendlyMessage = errorMessage;
+        if (errorMessage.includes("redirect_uri")) {
+          userFriendlyMessage =
+            "OAuth redirect URI mismatch. Please check Discord app configuration.";
+        } else if (errorMessage.includes("client_id")) {
+          userFriendlyMessage =
+            "Discord app configuration error. Please check client ID.";
+        } else if (errorMessage.includes("CORS")) {
+          userFriendlyMessage =
+            "Cross-origin request blocked. Please check app configuration.";
+        }
+
+        setError(userFriendlyMessage);
+        toast.error("Login failed", {
+          description: userFriendlyMessage,
+        });
+      } else if (result.data) {
+        console.log("Login successful, redirecting...");
+        // Force a redirect to ensure we're in the right state
+        setTimeout(() => {
+          window.location.href = "/dashboard";
+        }, 100);
+      } else {
+        // Handle unexpected response format
+        console.warn("Unexpected response format:", result);
+        toast.error("Login initiated", {
+          description: "Redirecting to Discord...",
+        });
+      }
     } catch (err) {
+      const errorMessage =
+        err instanceof Error ? err.message : "Failed to sign in with Discord";
       console.error("Discord login failed:", err);
+
+      // Provide more specific error messages for common issues
+      let userFriendlyMessage = errorMessage;
+      if (errorMessage.includes("fetch")) {
+        userFriendlyMessage =
+          "Network error. Please check your connection and try again.";
+      } else if (errorMessage.includes("cors")) {
+        userFriendlyMessage =
+          "Cross-origin request blocked. Please contact support.";
+      }
+
+      setError(userFriendlyMessage);
+      toast.error("Login failed", {
+        description: userFriendlyMessage,
+      });
     } finally {
       setLoading(false);
     }
@@ -33,29 +100,35 @@ export function DiscordLoginButton() {
       </h1>
       <p className="text-sm text-muted-foreground">{t("login.description")}</p>
 
-      {loading ? (
-        <Button
-          disabled={loading}
-          onClick={signInWithDiscord}
-          className="w-full cursor-pointer"
-        >
-          <svg className="w-4 h-4 mr-2" viewBox="0 0 24 24" fill="currentColor">
-            <path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515a.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0a18.18 18.18 0 0 0-.617-1.25a.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057a19.9 19.9 0 0 0 5.993 3.03a.078.078 0 0 0 .084-.028a14.09 14.09 0 0 0 1.226-1.994a.076.076 0 0 0-.041-.106a13.107 13.107 0 0 1-1.872-.892a.077.077 0 0 1 .008-.128a10.2 10.2 0 0 0 .372-.292a.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1 .006.127a12.299 12.299 0 0 1-1.873.892a.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028a19.839 19.839 0 0 0 6.002-3.03a.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419c0-1.333.956-2.419 2.157-2.419c1.21 0 2.176 1.096 2.157 2.42c0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419c0-1.333.955-2.419 2.157-2.419c1.21 0 2.176 1.096 2.157 2.42c0 1.333-.946 2.418-2.157 2.418z" />
-          </svg>
-          {tCommon("loading")}
-        </Button>
-      ) : (
-        <Button
-          disabled={loading}
-          onClick={signInWithDiscord}
-          className="w-full cursor-pointer"
-        >
-          <svg className="w-4 h-4 mr-2" viewBox="0 0 24 24" fill="currentColor">
-            <path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515a.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0a18.18 18.18 0 0 0-.617-1.25a.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057a19.9 19.9 0 0 0 5.993 3.03a.078.078 0 0 0 .084-.028a14.09 14.09 0 0 0 1.226-1.994a.076.076 0 0 0-.041-.106a13.107 13.107 0 0 1-1.872-.892a.077.077 0 0 1 .008-.128a10.2 10.2 0 0 0 .372-.292a.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1 .006.127a12.299 12.299 0 0 1-1.873.892a.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028a19.839 19.839 0 0 0 6.002-3.03a.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419c0-1.333.956-2.419 2.157-2.419c1.21 0 2.176 1.096 2.157 2.42c0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419c0-1.333.955-2.419 2.157-2.419c1.21 0 2.176 1.096 2.157 2.42c0 1.333-.946 2.418-2.157 2.418z" />
-          </svg>
-          {t("login.discord_login")}
-        </Button>
+      {error && (
+        <div className="w-full p-3 text-sm text-red-600 border border-red-200 rounded-md bg-red-50 dark:bg-red-950 dark:text-red-400 dark:border-red-800">
+          {error}
+        </div>
       )}
+
+      <Button
+        disabled={loading}
+        onClick={signInWithDiscord}
+        className="w-full cursor-pointer"
+        variant={error ? "destructive" : "default"}
+      >
+        {loading ? (
+          <>
+            <Spinner className="w-4 h-4 mr-2" />
+          </>
+        ) : (
+          <>
+            <svg
+              className="w-4 h-4 mr-2"
+              viewBox="0 0 24 24"
+              fill="currentColor"
+            >
+              <path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515a.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0a18.18 18.18 0 0 0-.617-1.25a.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057a19.9 19.9 0 0 0 5.993 3.03a.078.078 0 0 0 .084-.028a14.09 14.09 0 0 0 1.226-1.994a.076.076 0 0 0-.041-.106a13.107 13.107 0 0 1-1.872-.892a.077.077 0 0 1 .008-.128a10.2 10.2 0 0 0 .372-.292a.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1 .006.127a12.299 12.299 0 0 1-1.873.892a.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028a19.839 19.839 0 0 0 6.002-3.03a.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419c0-1.333.956-2.419 2.157-2.419c1.21 0 2.176 1.096 2.157 2.42c0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419c0-1.333.955-2.419 2.157-2.419c1.21 0 2.176 1.096 2.157 2.42c0 1.333-.946 2.418-2.157 2.418z" />
+            </svg>
+            {error ? "Try Again" : t("login.discord_login")}
+          </>
+        )}
+      </Button>
     </div>
   );
 }

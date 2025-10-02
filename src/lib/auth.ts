@@ -18,16 +18,28 @@ const prisma =
 
 globalForPrisma.prisma = prisma;
 
+const isProduction = NODE_ENV === "production";
+const baseURL = getAbsoluteUrl();
+
+console.log("Better Auth Configuration:", {
+  NODE_ENV,
+  baseURL,
+  isProduction,
+  hasClientId: !!process.env.BOT_CLIENT_ID,
+  hasClientSecret: !!process.env.BOT_CLIENT_SECRET,
+});
+
 export const auth = betterAuth({
   database: prismaAdapter(prisma, {
     provider: "mongodb",
   }),
-  baseURL: getAbsoluteUrl(),
+  baseURL,
   socialProviders: {
     discord: {
       clientId: process.env.BOT_CLIENT_ID as string,
       clientSecret: process.env.BOT_CLIENT_SECRET as string,
-      scope: ["identify", "email", "guilds"], // Proper Discord OAuth scopes
+      scope: ["identify", "email", "guilds"],
+      redirectURI: `${baseURL}/api/auth/callback/discord`,
     },
   },
   session: {
@@ -39,7 +51,7 @@ export const auth = betterAuth({
     },
   },
   emailVerification: {
-    expiresIn: 60 * 30, // 30 minutes instead of 10
+    expiresIn: 60 * 30, // 30 minutes
     sendOnSignUp: false, // Disable email verification for OAuth
   },
   cookies: {
@@ -47,19 +59,22 @@ export const auth = betterAuth({
       name: "better-auth.session_token",
       options: {
         httpOnly: true,
-        sameSite: "lax",
-        secure: NODE_ENV !== "development",
+        sameSite: isProduction ? "none" : "lax", // Use "none" for production cross-site requests
+        secure: isProduction, // Always secure in production
         path: "/",
+        domain: isProduction ? undefined : undefined, // Let browser handle domain
       },
     },
   },
   plugins: [nextCookies()],
+  trustedOrigins: [baseURL], // Add trusted origins for CORS
   advanced: {
     database: {
       generateId: () => crypto.randomUUID(),
     },
     crossSubDomainCookies: {
-      enabled: false, // Disable for now to avoid domain issues
+      enabled: false,
     },
+    generateId: false, // Let Better Auth handle ID generation
   },
 });
