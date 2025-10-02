@@ -16,6 +16,7 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import { useLoginMutation } from "@/redux/api/auth";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 export function LoginForm({
   className,
@@ -89,7 +90,7 @@ export function LoginForm({
                   <Label htmlFor="password">Password</Label>
                   {/* <a
                     href="#"
-                    className="ml-auto inline-block text-sm underline-offset-4 hover:underline"
+                    className="inline-block ml-auto text-sm underline-offset-4 hover:underline"
                   >
                     Forgot your password?
                   </a> */}
@@ -123,11 +124,10 @@ export function LoginForm({
                 </Button>
               </div>
             </div>
-            <div className="mt-4 text-center text-sm">
-              Don&apos;t have an account?{" "}
-              <a href="/signup" className="underline underline-offset-4">
+            <div className="mt-4 text-sm text-center">
+              <Link href="/signup" className="underline underline-offset-4">
                 Sign up
-              </a>
+              </Link>
             </div>
           </form>
         </CardContent>

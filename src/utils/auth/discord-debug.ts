@@ -18,10 +18,6 @@ export interface DiscordTokenInfo {
 export async function debugDiscordToken(
   token: string
 ): Promise<DiscordTokenInfo> {
-  console.log("🔍 Debugging Discord token...");
-  console.log("Token preview:", token.substring(0, 20) + "...");
-
-  // Test different API versions and formats
   const testCases = [
     {
       url: "https://discord.com/api/v10/users/@me",
@@ -42,23 +38,12 @@ export async function debugDiscordToken(
 
   for (const testCase of testCases) {
     try {
-      console.log(`\n🧪 Testing ${testCase.name}...`);
-
       const response = await fetch(testCase.url, {
         method: "GET",
         headers: testCase.headers,
       });
-
-      console.log(`Status: ${response.status} ${response.statusText}`);
-
       if (response.ok) {
         const userData = await response.json();
-        console.log("✅ Success! User data:", {
-          id: userData.id,
-          username: userData.username,
-          discriminator: userData.discriminator,
-        });
-
         return {
           isValid: true,
           tokenType: testCase.name.includes("Bot") ? "bot" : "user",
@@ -90,19 +75,11 @@ export function getStoredTokenInfo(): any {
   if (account) {
     try {
       const parsed = JSON.parse(account);
-      console.log("📱 Stored account info:", {
-        hasAccessToken: !!parsed.accessToken,
-        tokenPreview: parsed.accessToken?.substring(0, 20) + "...",
-        providerId: parsed.providerId,
-        createdAt: parsed.createdAt,
-      });
       return parsed;
     } catch (e) {
-      console.log("❌ Failed to parse stored account:", e);
+      return null;
     }
   }
-
-  return null;
 }
 
 /**
@@ -135,18 +112,11 @@ export async function getDiscordTokenInfo(token: string): Promise<any> {
 
     if (response.ok) {
       const tokenInfo = await response.json();
-      console.log("🔑 Token info:", tokenInfo);
       return tokenInfo;
     } else {
-      console.log(
-        "❌ Failed to get token info:",
-        response.status,
-        response.statusText
-      );
       return null;
     }
   } catch (error) {
-    console.log("💥 Error getting token info:", error);
     return null;
   }
 }

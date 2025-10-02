@@ -153,7 +153,7 @@ const DropdownMenu = ({ children, trigger }: DropdownMenuProps) => {
       </div>
       {isOpen && (
         <div
-          className="origin-top-right absolute right-0 mt-2 w-64 rounded-2xl shadow-xl bg-white dark:bg-zinc-900 ring-1 ring-black ring-opacity-5 focus:outline-none z-50 animate-in fade-in-0 zoom-in-95 p-2"
+          className="absolute right-0 z-50 w-64 p-2 mt-2 origin-top-right bg-white shadow-xl rounded-2xl dark:bg-zinc-900 ring-1 ring-black ring-opacity-5 focus:outline-none animate-in fade-in-0 zoom-in-95"
           role="menu"
           aria-orientation="vertical"
         >
@@ -197,15 +197,15 @@ const DropdownMenuItem = ({
 );
 
 const DropdownMenuSeparator = () => (
-  <div className="my-2 h-px bg-zinc-200 dark:bg-zinc-700" />
+  <div className="h-px my-2 bg-zinc-200 dark:bg-zinc-700" />
 );
 
 export default function Dropdown() {
   return (
-    <div className=" flex items-center justify-center font-sans p-8">
+    <div className="flex items-center justify-center p-8 font-sans ">
       <DropdownMenu
         trigger={
-          <button className="px-5 py-2 text-sm font-semibold text-zinc-800 dark:text-zinc-100 bg-white dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-lg shadow-sm hover:bg-zinc-100 dark:hover:bg-zinc-700 transition-colors">
+          <button className="px-5 py-2 text-sm font-semibold transition-colors bg-white border rounded-lg shadow-sm text-zinc-800 dark:text-zinc-100 dark:bg-zinc-800 border-zinc-200 dark:border-zinc-700 hover:bg-zinc-100 dark:hover:bg-zinc-700">
             Open Menu
           </button>
         }
@@ -215,33 +215,33 @@ export default function Dropdown() {
             onClick={() => console.log("Profile clicked")}
             active={true}
           >
-            <User className="mr-3 h-5 w-5 text-zinc-500" />
+            <User className="w-5 h-5 mr-3 text-zinc-500" />
             <span>Profile</span>
           </DropdownMenuItem>
           <DropdownMenuItem onClick={() => console.log("Community clicked")}>
-            <Community className="mr-3 h-5 w-5 text-zinc-500" />
+            <Community className="w-5 h-5 mr-3 text-zinc-500" />
             <span>Community</span>
           </DropdownMenuItem>
           <DropdownMenuItem onClick={() => console.log("Subscription clicked")}>
-            <Subscription className="mr-3 h-5 w-5 text-zinc-500" />
+            <Subscription className="w-5 h-5 mr-3 text-zinc-500" />
             <span>Subscription</span>
             <span className="ml-auto text-xs font-bold text-white bg-gradient-to-r from-pink-500 to-purple-500 rounded-full px-2 py-0.5">
               PRO
             </span>
           </DropdownMenuItem>
           <DropdownMenuItem onClick={() => console.log("Settings clicked")}>
-            <Settings className="mr-3 h-5 w-5 text-zinc-500" />
+            <Settings className="w-5 h-5 mr-3 text-zinc-500" />
             <span>Settings</span>
           </DropdownMenuItem>
         </div>
         <DropdownMenuSeparator />
         <div className="flex flex-col space-y-1">
           <DropdownMenuItem onClick={() => console.log("Help Center clicked")}>
-            <HelpCenter className="mr-3 h-5 w-5 text-zinc-500" />
+            <HelpCenter className="w-5 h-5 mr-3 text-zinc-500" />
             <span>Help center</span>
           </DropdownMenuItem>
           <DropdownMenuItem onClick={() => console.log("Sign Out clicked")}>
-            <SignOut className="mr-3 h-5 w-5 text-zinc-500" />
+            <SignOut className="w-5 h-5 mr-3 text-zinc-500" />
             <span>Sign out</span>
           </DropdownMenuItem>
         </div>
