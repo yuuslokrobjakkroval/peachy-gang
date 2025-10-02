@@ -6,9 +6,12 @@ const handler = toNextJsHandler(auth);
 
 // Add CORS headers for production
 const addCorsHeaders = (response: NextResponse) => {
-  const origin = process.env.VERCEL_URL
-    ? `https://${process.env.VERCEL_URL}`
-    : process.env.APP_URL || "http://localhost:3000";
+  // Use custom domain if we're on Vercel or have production URLs set
+  const origin =
+    process.env.VERCEL_URL ||
+    (process.env.APP_URL && !process.env.APP_URL.includes("localhost"))
+      ? "https://peachyganggg.com"
+      : process.env.APP_URL || "http://localhost:3000";
 
   response.headers.set("Access-Control-Allow-Origin", origin);
   response.headers.set("Access-Control-Allow-Credentials", "true");

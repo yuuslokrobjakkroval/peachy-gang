@@ -22,7 +22,9 @@ export function AuthDebugInfo() {
     const info: DebugInfo = {
       baseURL: window.location.origin,
       currentURL: window.location.href,
-      isVercel: window.location.hostname.includes("vercel.app"),
+      isVercel:
+        window.location.hostname.includes("vercel.app") ||
+        window.location.hostname === "peachyganggg.com",
       environment: process.env.NODE_ENV || "unknown",
       domain: window.location.hostname,
       protocol: window.location.protocol,
