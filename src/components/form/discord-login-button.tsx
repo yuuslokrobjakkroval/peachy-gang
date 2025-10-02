@@ -5,13 +5,10 @@ import { useTranslations } from "next-intl";
 import { Button } from "@/components/ui/button";
 import { authClient } from "@/lib/auth-client";
 import { Spinner } from "../loading/spinner";
-import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 
 export function DiscordLoginButton() {
   const t = useTranslations();
-  const tCommon = useTranslations("common");
-  const router = useRouter();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
