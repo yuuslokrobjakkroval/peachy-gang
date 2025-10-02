@@ -5,6 +5,7 @@ import { NextRequest } from "next/server";
 import { z } from "zod";
 import type { IncomingMessage } from "http";
 
+export const NODE_ENV = process.env.NODE_ENV as string;
 export const APP_URL = process.env.APP_URL as string;
 export const API_ENDPOINT = "https://discord.com/api/v10";
 export const CLIENT_TOKEN = process.env.BOT_TOKEN as string;

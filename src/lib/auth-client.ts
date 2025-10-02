@@ -1,4 +1,4 @@
-import { APP_URL, BETTER_AUTH_URL } from "@/utils/auth/server";
+import { APP_URL, BETTER_AUTH_URL, NODE_ENV } from "@/utils/auth/server";
 import { createAuthClient } from "better-auth/client";
 
 // Get the base URL based on environment
@@ -16,7 +16,9 @@ function getBaseURL() {
 
   console.log("No environment variable found for base URL.");
   // Fallback for development
-  return "http://localhost:3000";
+  return NODE_ENV === "dev"
+    ? "http://peachyganggg.com"
+    : "http://localhost:3000";
 }
 
 export const authClient = createAuthClient({
