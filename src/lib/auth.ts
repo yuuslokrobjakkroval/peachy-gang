@@ -2,6 +2,7 @@ import { betterAuth } from "better-auth";
 import { prismaAdapter } from "better-auth/adapters/prisma";
 import { PrismaClient } from "@prisma/client";
 import { nextCookies } from "better-auth/next-js";
+import { APP_URL, BETTER_AUTH_URL, NODE_ENV } from "@/utils/auth/server";
 
 // Singleton pattern for PrismaClient
 const globalForPrisma = globalThis as unknown as {
@@ -16,23 +17,25 @@ const prisma =
 
 globalForPrisma.prisma = prisma;
 
-// Helper function to get the correct base URL
-function getBaseURL(): string {
-  if (process.env.BETTER_AUTH_URL) {
-    return process.env.BETTER_AUTH_URL;
+// Get the base URL based on environment
+function getBaseURL() {
+  // In browser, use window.location.origin
+  console.log("Start Determining base URL...");
+  // In server-side, use environment variables
+  if (BETTER_AUTH_URL) {
+    return BETTER_AUTH_URL;
   }
 
-  if (process.env.APP_URL) {
-    return process.env.APP_URL;
+  if (APP_URL) {
+    return APP_URL;
   }
 
-  if (process.env.VERCEL_URL) {
-    return `https://${process.env.VERCEL_URL}`;
-  }
-
-  return "http://localhost:3000";
+  console.log("No environment variable found for base URL.");
+  // Fallback for development
+  return NODE_ENV !== "dev"
+    ? "http://peachyganggg.com"
+    : "http://localhost:3000";
 }
-
 // Helper function to determine if we're in production
 function isProduction(): boolean {
   return process.env.NODE_ENV === "production" || process.env.VERCEL === "1";
