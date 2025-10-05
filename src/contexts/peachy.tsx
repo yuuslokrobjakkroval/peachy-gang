@@ -16,6 +16,7 @@ type StoredAccount = {
   accessToken?: string;
   refreshToken?: string;
   accessTokenExpiresAt?: string;
+  scopes?: string[];
   [key: string]: unknown;
 };
 
@@ -195,11 +196,24 @@ export function PeachyProvider<T>({ children }: PeachyProviderProps) {
 
     try {
       // authSession.session.token is the session token provided by better-auth
-      const token = (authSession as any)?.session?.token;
+      const sessionObj: any = authSession?.session ?? (authSession as any);
+      const token = sessionObj?.token;
+      const expiresAt = sessionObj?.expiresAt ?? sessionObj?.expires;
+      // scopes may be returned in different shapes depending on provider
+      const rawScopes: any = sessionObj?.scopes ?? (authSession as any)?.scopes;
+
       if (token && !account) {
-        // store minimal account shape expected by other utils
+        let parsedScopes: string[] = [];
+        if (Array.isArray(rawScopes)) parsedScopes = rawScopes;
+        else if (typeof rawScopes === "string")
+          parsedScopes = rawScopes.split(/[ ,]+/).filter(Boolean);
+
         const stored: StoredAccount = {
           accessToken: token,
+          accessTokenExpiresAt: expiresAt
+            ? new Date(expiresAt).toISOString()
+            : undefined,
+          scopes: parsedScopes,
         };
         setAccount(stored);
       }
