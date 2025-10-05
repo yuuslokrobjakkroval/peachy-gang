@@ -226,23 +226,40 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   React.useEffect(() => {
     const fetchAccount = async () => {
       try {
-        const { data: accounts } = await authClient.listAccounts();
+        const { data: accounts, error: accountsError } = await authClient.listAccounts();
+        if (accountsError) {
+          throw accountsError;
+        }
+
         if (accounts && accounts.length > 0) {
-          const account = accounts[0];
-          const { data: accountData } = await authClient.getAccessToken({
-            providerId: account.provider,
-            accountId: account.accountId,
+          const primaryAccount =
+            accounts.find((entry) => entry.provider === "discord") ?? accounts[0];
+
+          if (!primaryAccount.accountId) {
+            throw new Error("Discord account is missing an accountId");
+          }
+
+          const { data: accountData, error } = await authClient.getAccessToken({
+            providerId: primaryAccount.provider,
+            accountId: primaryAccount.accountId,
           });
 
+          if (!accountData || error) {
+            throw error ?? new Error("Failed to fetch Discord access token");
+          }
+
           setAccount(accountData);
-          localStorage.setItem("account", JSON.stringify(accountData));
+
+          if (typeof window !== "undefined") {
+            localStorage.setItem("account", JSON.stringify(accountData));
+          }
         } else {
-          // No account found → toast + delay + redirect
-          toast.error("Oopsie! 🌸 You’re not logged in yet…", {
+          // No account found -> toast + delay + redirect
+          toast.error("Oopsie! You're not logged in yet.", {
             description: (
               <>
-                <p>Hang tight! 🌼</p>
-                <p>We’re taking you to the login page in 3 seconds 🐾</p>
+                <p>Hang tight!</p>
+                <p>We'll take you to the login page in 3 seconds.</p>
               </>
             ),
           });
@@ -253,6 +270,12 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
         }
       } catch (error) {
         console.error("Error fetching account:", error);
+        toast.error("We couldn't refresh your Discord session.", {
+          description: "Please try signing in again.",
+        });
+        if (typeof window !== "undefined") {
+          localStorage.removeItem("account");
+        }
       }
     };
 
