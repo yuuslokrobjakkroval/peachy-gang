@@ -70,9 +70,7 @@ function getEnvUrl(): string | undefined {
   return undefined;
 }
 
-function getRequestOrigin(
-  request?: Request | NextRequest
-): string | undefined {
+function getRequestOrigin(request?: Request | NextRequest): string | undefined {
   if (!request) {
     return undefined;
   }
@@ -81,7 +79,9 @@ function getRequestOrigin(
   const forwardedProto = headers.get("x-forwarded-proto");
   const forwardedHost = headers.get("x-forwarded-host");
   if (forwardedProto && forwardedHost) {
-    const forwardedOrigin = normalizeUrl(`${forwardedProto}://${forwardedHost}`);
+    const forwardedOrigin = normalizeUrl(
+      `${forwardedProto}://${forwardedHost}`
+    );
     if (forwardedOrigin) {
       return forwardedOrigin;
     }
