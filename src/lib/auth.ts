@@ -17,39 +17,17 @@ const prisma =
 
 globalForPrisma.prisma = prisma;
 
-const baseURL = getAbsoluteUrl();
-const isSecureOrigin = baseURL.startsWith("https://");
-const discordRedirectUri = new URL(
-  "/api/auth/callback/discord",
-  baseURL
-).toString();
+// --- Simplified & Explicit URL Configuration ---
+// This now relies on a single, clear environment variable.
+const baseURL = process.env.BETTER_AUTH_URL || "http://localhost:3000";
+const isSecureOrigin = baseURL.startsWith("https");
+const discordRedirectUri = `${baseURL}/api/auth/callback/discord`;
+const trustedOrigins = [baseURL]; // Only trust the base URL.
 
-const additionalOrigins = [
-  baseURL,
-  process.env.APP_URL,
-  process.env.BETTER_AUTH_URL,
-  process.env.NEXT_PUBLIC_APP_URL,
-  process.env.NEXT_PUBLIC_SITE_URL,
-  process.env.NEXT_PUBLIC_URL,
-  process.env.NEXT_PUBLIC_VERCEL_URL,
-  process.env.VERCEL_PROJECT_PRODUCTION_URL,
-  process.env.VERCEL_URL ? `${process.env.VERCEL_URL}` : undefined,
-  process.env.NEXT_PUBLIC_DEFAULT_DOMAIN,
-];
-
-const trustedOrigins = Array.from(
-  new Set(
-    additionalOrigins
-      .map((origin) => normalizeUrl(origin))
-      .filter((origin): origin is string => Boolean(origin))
-  )
-);
-
-if (!trustedOrigins.includes(baseURL)) {
-  trustedOrigins.unshift(baseURL);
-}
-
-console.log("✅ [auth.ts] Better Auth Configuration being used:", {
+// --- Critical Startup Log ---
+// This is the most important log. If you don't see this in your Vercel logs,
+// it means a critical ENV VAR is missing and the server crashed on startup.
+console.log("✅ [auth.ts] FINAL CHECK - Better Auth Configuration:", {
   baseURL,
   isSecureOrigin,
   discordRedirectUri,
