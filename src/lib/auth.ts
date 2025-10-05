@@ -70,6 +70,7 @@ export const auth = betterAuth({
       clientSecret: process.env.BOT_CLIENT_SECRET as string,
       scope: ["identify", "email", "guilds"],
       redirectURI: discordRedirectUri,
+      storeAccessToken: true,
     },
   },
   session: {

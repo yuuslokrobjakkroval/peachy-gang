@@ -221,68 +221,69 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
         setAccount(JSON.parse(storedAccount));
       }
     }
-  }, [setAccount]);
+  }, [account, setAccount]);
+
+  const fetchAccount = React.useCallback(async () => {
+    try {
+      const { data: accounts, error: accountsError } =
+        await authClient.listAccounts();
+      if (accountsError) {
+        throw accountsError;
+      }
+
+      if (accounts && accounts.length > 0) {
+        const primaryAccount =
+          accounts.find((entry) => entry.provider === "discord") ?? accounts[0];
+
+        if (!primaryAccount.accountId) {
+          throw new Error("Discord account is missing an accountId");
+        }
+
+        const { data: accountData, error } = await authClient.getAccessToken({
+          providerId: primaryAccount.provider,
+          accountId: primaryAccount.accountId,
+        });
+
+        if (!accountData || error) {
+          throw error ?? new Error("Failed to fetch Discord access token");
+        }
+
+        setAccount(accountData);
+
+        if (typeof window !== "undefined") {
+          localStorage.setItem("account", JSON.stringify(accountData));
+        }
+      } else {
+        // No account found -> toast + delay + redirect
+        toast.error("Oopsie! You're not logged in yet.", {
+          description: (
+            <>
+              <p>Hang tight!</p>
+              <p>We'll take you to the login page in 3 seconds.</p>
+            </>
+          ),
+        });
+
+        setTimeout(() => {
+          router.push("/login");
+        }, 3000);
+      }
+    } catch (error) {
+      console.error("Error fetching account:", error);
+      toast.error("We couldn't refresh your Discord session.", {
+        description: "Please try signing in again.",
+      });
+      if (typeof window !== "undefined") {
+        localStorage.removeItem("account");
+      }
+    }
+  }, [router, setAccount]);
 
   React.useEffect(() => {
-    const fetchAccount = async () => {
-      try {
-        const { data: accounts, error: accountsError } = await authClient.listAccounts();
-        if (accountsError) {
-          throw accountsError;
-        }
-
-        if (accounts && accounts.length > 0) {
-          const primaryAccount =
-            accounts.find((entry) => entry.provider === "discord") ?? accounts[0];
-
-          if (!primaryAccount.accountId) {
-            throw new Error("Discord account is missing an accountId");
-          }
-
-          const { data: accountData, error } = await authClient.getAccessToken({
-            providerId: primaryAccount.provider,
-            accountId: primaryAccount.accountId,
-          });
-
-          if (!accountData || error) {
-            throw error ?? new Error("Failed to fetch Discord access token");
-          }
-
-          setAccount(accountData);
-
-          if (typeof window !== "undefined") {
-            localStorage.setItem("account", JSON.stringify(accountData));
-          }
-        } else {
-          // No account found -> toast + delay + redirect
-          toast.error("Oopsie! You're not logged in yet.", {
-            description: (
-              <>
-                <p>Hang tight!</p>
-                <p>We'll take you to the login page in 3 seconds.</p>
-              </>
-            ),
-          });
-
-          setTimeout(() => {
-            router.push("/login");
-          }, 3000);
-        }
-      } catch (error) {
-        console.error("Error fetching account:", error);
-        toast.error("We couldn't refresh your Discord session.", {
-          description: "Please try signing in again.",
-        });
-        if (typeof window !== "undefined") {
-          localStorage.removeItem("account");
-        }
-      }
-    };
-
     if (!account) {
       fetchAccount();
     }
-  }, [account, setAccount]);
+  }, [account, fetchAccount]);
 
   React.useEffect(() => {
     if (account && typeof window !== "undefined") {
@@ -324,3 +325,4 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
     </Sidebar>
   );
 }
+
