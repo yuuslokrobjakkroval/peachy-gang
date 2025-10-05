@@ -1,4 +1,4 @@
-import { NextIntlClientProvider, hasLocale } from "next-intl";
+﻿import { NextIntlClientProvider, hasLocale } from "next-intl";
 import type { Metadata } from "next";
 import { routing } from "@/i18n/routing";
 import { ThemeProvider } from "@/components/provider/theme-provider";
@@ -10,6 +10,8 @@ import "./globals.css";
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { notFound } from "next/navigation";
+
+const enableVercelMetrics = process.env.VERCEL === "1";
 
 export const metadata: Metadata = {
   title: "PEACHY GANG",
@@ -69,8 +71,8 @@ export default async function LocaleLayout({
                   <div className="texture" />
                   {children}
                   <Toaster position="top-center" />
-                  <Analytics />
-                  <SpeedInsights />
+                  {enableVercelMetrics && <Analytics />}
+                  {enableVercelMetrics && <SpeedInsights />}
                 </PeachyProvider>
               </AuthProvider>
             </ReduxProvider>

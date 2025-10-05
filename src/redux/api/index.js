@@ -1,4 +1,4 @@
-import { createApi } from "@reduxjs/toolkit/query/react";
+﻿import { createApi } from "@reduxjs/toolkit/query/react";
 import axios from "axios";
 
 const axiosBaseQuery =
@@ -8,13 +8,11 @@ const axiosBaseQuery =
 
     try {
       const storedAccount = localStorage.getItem("account");
-      console.log("Stored account:", storedAccount);
       if (storedAccount) {
         const parsed = JSON.parse(storedAccount);
         accessToken = parsed?.accessToken || "";
       }
     } catch (error) {
-      console.error("Failed to parse stored account:", error);
     }
 
     const headers = {
