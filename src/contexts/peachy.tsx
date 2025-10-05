@@ -7,18 +7,9 @@ import {
   useEffect,
   ReactNode,
 } from "react";
-import { useAuth } from "@/contexts/auth-provider";
 
 import { UserInfo, Guild } from "@/utils/common";
 import { User } from "@/utils/types";
-
-type StoredAccount = {
-  accessToken?: string;
-  refreshToken?: string;
-  accessTokenExpiresAt?: string;
-  scopes?: string[];
-  [key: string]: unknown;
-};
 
 // Define the context value type
 interface PeachyContextType<T = any> {
@@ -58,8 +49,6 @@ interface PeachyProviderProps {
 }
 
 export function PeachyProvider<T>({ children }: PeachyProviderProps) {
-  // get auth session from AuthProvider so we can keep `account` in sync
-  const { session: authSession, loading: authLoading } = useAuth();
   // State for user info by discord
   const [userInfoByDiscord, setUserInfoByDiscord] = useState<UserInfo>(() => {
     if (typeof window !== "undefined") {
@@ -188,40 +177,6 @@ export function PeachyProvider<T>({ children }: PeachyProviderProps) {
       localStorage.removeItem("account");
     }
   }, [account]);
-
-  // When auth session becomes available, populate Peachy account if empty.
-  useEffect(() => {
-    // wait until auth provider finished loading
-    if (authLoading) return;
-
-    try {
-      // authSession.session.token is the session token provided by better-auth
-      const sessionObj: any = authSession?.session ?? (authSession as any);
-      const token = sessionObj?.token;
-      const expiresAt = sessionObj?.expiresAt ?? sessionObj?.expires;
-      // scopes may be returned in different shapes depending on provider
-      const rawScopes: any = sessionObj?.scopes ?? (authSession as any)?.scopes;
-
-      if (token && !account) {
-        let parsedScopes: string[] = [];
-        if (Array.isArray(rawScopes)) parsedScopes = rawScopes;
-        else if (typeof rawScopes === "string")
-          parsedScopes = rawScopes.split(/[ ,]+/).filter(Boolean);
-
-        const stored: StoredAccount = {
-          accessToken: token,
-          accessTokenExpiresAt: expiresAt
-            ? new Date(expiresAt).toISOString()
-            : undefined,
-          scopes: parsedScopes,
-        };
-        setAccount(stored);
-      }
-    } catch (e) {
-      // noop
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [authLoading, authSession]);
 
   return (
     <PeachyContext.Provider
