@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useEffect, useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 
@@ -144,6 +144,13 @@ const navigation = {
   ],
 };
 
+type StoredAccount = {
+  accessToken?: string;
+  refreshToken?: string;
+  accessTokenExpiresAt?: string;
+  [key: string]: unknown;
+};
+
 export function AppSidebar(props: React.ComponentProps<typeof Sidebar>) {
   const router = useRouter();
   const { setUserInfoByDiscord, setGuilds, setAccount, account } = usePeachy();
@@ -151,14 +158,41 @@ export function AppSidebar(props: React.ComponentProps<typeof Sidebar>) {
   const { data: guilds, isSuccess: guildSuccess } = useGetGuildsQuery(null);
   const [isOwner, setIsOwner] = useState(false);
 
+  const isBrowser = typeof window !== "undefined";
+
   // Restore cached account on first render
   useEffect(() => {
-    if (typeof window === "undefined") return;
+    if (!isBrowser || account) return;
     const storedAccount = localStorage.getItem("account");
-    if (storedAccount && !account) {
-      setAccount(JSON.parse(storedAccount));
+    if (storedAccount) {
+      try {
+        const parsed = JSON.parse(storedAccount) as StoredAccount;
+        setAccount(parsed);
+      } catch {
+        localStorage.removeItem("account");
+      }
     }
-  }, [account, setAccount]);
+  }, [account, isBrowser, setAccount]);
+
+  const maybePersistAccount = useCallback(
+    (value: StoredAccount | null) => {
+      if (!isBrowser) return;
+      if (value) {
+        localStorage.setItem("account", JSON.stringify(value));
+      } else {
+        localStorage.removeItem("account");
+      }
+    },
+    [isBrowser]
+  );
+
+  const hydrateAccount = useCallback(
+    (payload: StoredAccount | null) => {
+      setAccount(payload);
+      maybePersistAccount(payload);
+    },
+    [maybePersistAccount, setAccount]
+  );
 
   const fetchAccount = useCallback(async () => {
     try {
@@ -166,29 +200,7 @@ export function AppSidebar(props: React.ComponentProps<typeof Sidebar>) {
         await authClient.listAccounts();
       if (accountsError) throw accountsError;
 
-      if (accounts?.length) {
-        const primaryAccount =
-          accounts.find((entry) => entry.provider === "discord") ?? accounts[0];
-
-        if (!primaryAccount.accountId) {
-          throw new Error("Discord account is missing an accountId");
-        }
-
-        const { data: accountData, error } = await authClient.getAccessToken({
-          providerId: primaryAccount.provider,
-          accountId: primaryAccount.accountId,
-        });
-
-        if (!accountData || error) {
-          throw error ?? new Error("Failed to fetch Discord access token");
-        }
-
-        setAccount(accountData);
-
-        if (typeof window !== "undefined") {
-          localStorage.setItem("account", JSON.stringify(accountData));
-        }
-      } else {
+      if (!accounts?.length) {
         toast.error("Oopsie! You're not logged in yet.", {
           description: (
             <>
@@ -197,39 +209,76 @@ export function AppSidebar(props: React.ComponentProps<typeof Sidebar>) {
             </>
           ),
         });
-
         setTimeout(() => router.push("/login"), 3000);
+        return;
       }
-    } catch (error) {
-      console.error("Error fetching account:", error);
+
+      const primaryAccount =
+        accounts.find((entry) => entry.provider === "discord") ?? accounts[0];
+
+      if (!primaryAccount.accountId) {
+        throw new Error("Discord account is missing an accountId");
+      }
+
+      const fetchToken = async () =>
+        authClient.getAccessToken({
+          providerId: primaryAccount.provider,
+          accountId: primaryAccount.accountId,
+        });
+
+      let { data: tokenData, error } = await fetchToken();
+
+      if ((!tokenData || !tokenData.accessToken) && !error) {
+        const refresh = await authClient.refreshToken({
+          providerId: primaryAccount.provider,
+          accountId: primaryAccount.accountId,
+        });
+        tokenData = refresh.data
+          ? {
+              accessToken: refresh.data.accessToken ?? undefined,
+              accessTokenExpiresAt:
+                refresh.data.accessTokenExpiresAt ?? undefined,
+              scopes: refresh.data.scopes ?? [],
+              idToken: refresh.data.idToken ?? undefined,
+            }
+          : tokenData;
+        error = refresh.error ?? error;
+      }
+
+      if (!tokenData?.accessToken || error) {
+        throw error ?? new Error("Unable to obtain a Discord access token");
+      }
+
+      hydrateAccount(tokenData as StoredAccount);
+    } catch (err) {
+      console.error("Error fetching account:", err);
       toast.error("We couldn't refresh your Discord session.", {
         description: "Please try signing in again.",
       });
-      if (typeof window !== "undefined") {
-        localStorage.removeItem("account");
-      }
+      hydrateAccount(null);
     }
-  }, [router, setAccount]);
+  }, [hydrateAccount, router]);
 
-  // Fetch Better Auth account if not already cached
   useEffect(() => {
     if (!account) {
-      fetchAccount();
+      void fetchAccount();
     }
   }, [account, fetchAccount]);
 
-  // Keep account cache in sync
   useEffect(() => {
-    if (typeof window === "undefined") return;
+    if (!account) return;
 
-    if (account) {
-      localStorage.setItem("account", JSON.stringify(account));
-    } else {
-      localStorage.removeItem("account");
+    const maybeExpired = (() => {
+      if (!account?.accessTokenExpiresAt) return false;
+      const expiry = new Date(account.accessTokenExpiresAt).getTime();
+      return Number.isFinite(expiry) && expiry <= Date.now() + 60_000;
+    })();
+
+    if (maybeExpired) {
+      void fetchAccount();
     }
-  }, [account]);
+  }, [account, fetchAccount]);
 
-  // Sync user + guilds into context when data is ready
   useEffect(() => {
     if (userSuccess && guildSuccess) {
       setUserInfoByDiscord(user);
@@ -244,13 +293,14 @@ export function AppSidebar(props: React.ComponentProps<typeof Sidebar>) {
     setGuilds,
   ]);
 
-  // Flag owner-only UI
   useEffect(() => {
     setIsOwner(ownerId?.includes(user?.id));
   }, [user]);
 
+  const sidebarProps = useMemo(() => props, [props]);
+
   return (
-    <Sidebar collapsible="icon" {...props}>
+    <Sidebar collapsible="icon" {...sidebarProps}>
       <SidebarContent>
         <NavMain items={navigation.navMain} />
         <NavGuild guilds={guilds} />
