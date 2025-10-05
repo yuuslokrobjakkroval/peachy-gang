@@ -50,13 +50,15 @@ if (!trustedOrigins.includes(baseURL)) {
   trustedOrigins.unshift(baseURL);
 }
 
-console.log("Better Auth Configuration:", {
+console.log("✅ [auth.ts] Better Auth Configuration being used:", {
   NODE_ENV,
   baseURL,
-  trustedOrigins,
   isSecureOrigin,
-  hasClientId: Boolean(process.env.BOT_CLIENT_ID),
-  hasClientSecret: Boolean(process.env.BOT_CLIENT_SECRET),
+  discordRedirectUri,
+  trustedOrigins: JSON.stringify(trustedOrigins),
+  hasClientId: !!process.env.BOT_CLIENT_ID,
+  hasClientSecret: !!process.env.BOT_CLIENT_SECRET,
+  hasDatabaseUrl: !!process.env.DATABASE_URL,
 });
 
 export const auth = betterAuth({
