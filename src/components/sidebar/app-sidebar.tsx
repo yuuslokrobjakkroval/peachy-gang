@@ -221,6 +221,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
         setAccount(JSON.parse(storedAccount));
       }
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [setAccount]);
 
   React.useEffect(() => {
@@ -260,6 +261,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
     if (!account) {
       fetchAccount();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [account, setAccount]);
 
   React.useEffect(() => {
