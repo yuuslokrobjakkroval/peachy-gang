@@ -9,6 +9,7 @@ const nextConfig: NextConfig = {
     BOT_CLIENT_SECRET: process.env.BOT_CLIENT_SECRET,
     FIRST_SUB_BOT_CLIENT_ID: process.env.FIRST_SUB_BOT_CLIENT_ID,
     SECOND_SUB_BOT_CLIENT_ID: process.env.SECOND_SUB_BOT_CLIENT_ID,
+    VERCEL_URL: process.env.VERCEL_URL,
     BETTER_AUTH_URL: process.env.BETTER_AUTH_URL,
     BETTER_AUTH_SECRET: process.env.BETTER_AUTH_SECRET,
     OWNER_IDS: process.env.OWNER_IDS,

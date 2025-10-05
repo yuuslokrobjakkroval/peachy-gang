@@ -20,6 +20,7 @@ export function DiscordLoginButton() {
       console.log("Starting Discord login process...");
       console.log("Current URL:", window.location.href);
       console.log("Auth client base URL:", window.location.origin);
+      console.log("VERCEL_URL:", process.env.VERCEL_URL);
       console.log("Environment check:", {
         isVercel: !!process.env.VERCEL_URL,
         domain: window.location.hostname,
