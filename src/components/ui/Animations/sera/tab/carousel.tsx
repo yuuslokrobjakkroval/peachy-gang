@@ -143,7 +143,7 @@ const cardData: CardData[] = [
 
 export default function Carousel() {
   const [activeIndex, setActiveIndex] = useState(
-    Math.floor(cardData.length / 2),
+    Math.floor(cardData.length / 2)
   );
   const [isPaused, setIsPaused] = useState(false);
   const autoplayIntervalRef = useRef<NodeJS.Timeout | null>(null);
@@ -177,7 +177,7 @@ export default function Carousel() {
 
   const onDragEnd = (
     event: MouseEvent | TouchEvent | PointerEvent,
-    info: PanInfo,
+    info: PanInfo
   ) => {
     const dragThreshold = 75;
     const dragOffset = info.offset.x;
@@ -189,21 +189,21 @@ export default function Carousel() {
   };
 
   return (
-    <section className="w-full flex-col items-center justify-center font-sans overflow-hidden">
+    <section className="flex-col items-center justify-center w-full overflow-hidden font-sans">
       <div
-        className="w-full max-w-5xl mx-auto p-4"
+        className="w-full max-w-5xl p-4 mx-auto"
         onMouseEnter={() => setIsPaused(true)}
         onMouseLeave={() => setIsPaused(false)}
       >
-        <div className="relative flex w-full flex-col rounded-3xl border border-white/10 dark:border-white/10 bg-white dark:bg-neutral-900 p-4 pt-6 md:p-6">
-          <Badge className="absolute left-4 top-6 rounded-xl border border-gray-300 dark:border-white/10 text-base text-gray-700 dark:text-white/80 bg-gray-100/80 dark:bg-black/20 backdrop-blur-sm md:left-6">
+        <div className="relative flex flex-col w-full p-4 pt-6 bg-white border rounded-3xl border-white/10 dark:border-white/10 dark:bg-neutral-900 md:p-6">
+          <Badge className="absolute text-base text-gray-700 border border-gray-300 left-4 top-6 rounded-xl dark:border-white/10 dark:text-white/80 bg-gray-100/80 dark:bg-black/20 backdrop-blur-sm md:left-6">
             <SparklesIcon className="fill-[#EEBDE0] stroke-1 text-neutral-800 h-5 w-5 mr-1" />
             Enhanced Carousel
           </Badge>
 
           <div className="relative w-full h-[280px] md:h-[400px] flex items-center justify-center overflow-hidden pt-12">
             <motion.div
-              className="w-full h-full flex items-center justify-center"
+              className="flex items-center justify-center w-full h-full"
               drag="x"
               dragConstraints={{ left: 0, right: 0 }}
               dragElastic={0.2}
@@ -224,7 +224,7 @@ export default function Carousel() {
           <div className="flex items-center justify-center gap-6 mt-6">
             <button
               onClick={() => changeSlide(activeIndex - 1)}
-              className="p-2 rounded-full bg-gray-100 dark:bg-white/5 hover:bg-gray-200 dark:hover:bg-white/10 border border-gray-300 dark:border-white/10 text-gray-700 dark:text-white transition-colors focus:outline-none focus:ring-2 focus:ring-pink-500"
+              className="p-2 text-gray-700 transition-colors bg-gray-100 border border-gray-300 rounded-full dark:bg-white/5 hover:bg-gray-200 dark:hover:bg-white/10 dark:border-white/10 dark:text-white focus:outline-none focus:ring-2 focus:ring-pink-500"
             >
               <ChevronLeftIcon className="w-6 h-6" />
             </button>
@@ -246,7 +246,7 @@ export default function Carousel() {
 
             <button
               onClick={() => changeSlide(activeIndex + 1)}
-              className="p-2 rounded-full bg-gray-100 dark:bg-white/5 hover:bg-gray-200 dark:hover:bg-white/10 border border-gray-300 dark:border-white/10 text-gray-700 dark:text-white transition-colors focus:outline-none focus:ring-2 focus:ring-pink-500"
+              className="p-2 text-gray-700 transition-colors bg-gray-100 border border-gray-300 rounded-full dark:bg-white/5 hover:bg-gray-200 dark:hover:bg-white/10 dark:border-white/10 dark:text-white focus:outline-none focus:ring-2 focus:ring-pink-500"
             >
               <ChevronRightIcon className="w-6 h-6" />
             </button>
@@ -284,11 +284,11 @@ function Card({ card, index, activeIndex, totalCards }: CardProps) {
       animate={animate}
       initial={false}
     >
-      <div className="relative w-full h-full rounded-3xl shadow-2xl overflow-hidden bg-gray-200 dark:bg-neutral-800">
+      <div className="relative w-full h-full overflow-hidden bg-gray-200 shadow-2xl rounded-3xl dark:bg-neutral-800">
         <img
           src={card.imageUrl}
           alt={card.title}
-          className="w-full h-full object-cover pointer-events-none"
+          className="object-cover w-full h-full pointer-events-none"
           onError={(e) => {
             const target = e.target as HTMLImageElement;
             target.onerror = null;
@@ -297,7 +297,7 @@ function Card({ card, index, activeIndex, totalCards }: CardProps) {
           }}
         />
         <div className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black/70 to-transparent">
-          <h4 className="text-white text-lg font-semibold">{card.title}</h4>
+          <h4 className="text-lg font-semibold text-white">{card.title}</h4>
         </div>
       </div>
     </motion.div>

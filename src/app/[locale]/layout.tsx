@@ -7,7 +7,6 @@ import { PeachyProvider } from "@/contexts/peachy";
 import { AuthProvider } from "@/contexts/auth-provider";
 import { Toaster } from "@/components/ui/sonner";
 import "./globals.css";
-import { SettingsProvider } from "@/contexts/settingsContext";
 import { getMode, getSettingsFromCookie } from "@/utils/serverHelpers";
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
@@ -62,26 +61,24 @@ export default async function LocaleLayout({
       </head>
       <body cz-shortcut-listen="true">
         <NextIntlClientProvider locale={locale} messages={messages}>
-          <SettingsProvider settingsCookie={settingsCookie} mode={mode}>
-            <ThemeProvider
-              attribute="class"
-              defaultTheme="system"
-              enableSystem
-              disableTransitionOnChange
-            >
-              <ReduxProvider>
-                <AuthProvider>
-                  <PeachyProvider>
-                    <div className="texture" />
-                    {children}
-                    <Toaster position="top-center" />
-                    <Analytics />
-                    <SpeedInsights />
-                  </PeachyProvider>
-                </AuthProvider>
-              </ReduxProvider>
-            </ThemeProvider>
-          </SettingsProvider>
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="system"
+            enableSystem
+            disableTransitionOnChange
+          >
+            <ReduxProvider>
+              <AuthProvider>
+                <PeachyProvider>
+                  <div className="texture" />
+                  {children}
+                  <Toaster position="top-center" />
+                  <Analytics />
+                  <SpeedInsights />
+                </PeachyProvider>
+              </AuthProvider>
+            </ReduxProvider>
+          </ThemeProvider>
         </NextIntlClientProvider>
       </body>
     </html>
