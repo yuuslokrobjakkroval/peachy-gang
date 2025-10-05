@@ -186,21 +186,37 @@ export function PeachyProvider<T>({ children }: PeachyProviderProps) {
 
     if (session && !account) {
       const fetchToken = async () => {
+        console.log(
+          "[PeachyProvider] Session found, attempting to fetch full token from /api/auth/token"
+        );
         try {
           const response = await fetch("/api/auth/token");
+          console.log("[PeachyProvider] API response status:", response.status);
+
           if (response.ok) {
             const tokenData = await response.json();
+            console.log("[PeachyProvider] Token data received:", tokenData);
             if (tokenData.accessToken) {
               setAccount(tokenData);
             }
+          } else {
+            const errorData = await response.text();
+            console.error(
+              "[PeachyProvider] Failed to fetch token, API responded with error:",
+              errorData
+            );
           }
         } catch (error) {
-          console.error("Failed to fetch token:", error);
+          console.error(
+            "[PeachyProvider] An error occurred while fetching the token:",
+            error
+          );
         }
       };
 
       fetchToken();
     } else if (!session && account) {
+      console.log("[PeachyProvider] Session ended, clearing account state.");
       setAccount(null);
     }
   }, [session, account, authLoading, setAccount]);
