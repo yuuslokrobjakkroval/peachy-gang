@@ -18,8 +18,8 @@ const prisma =
 
 globalForPrisma.prisma = prisma;
 
-const isProduction = NODE_ENV === "production";
 const baseURL = getAbsoluteUrl();
+const isSecureOrigin = baseURL.startsWith("https://");
 const discordRedirectUri = new URL(
   "/api/auth/callback/discord",
   baseURL
@@ -54,7 +54,7 @@ console.log("Better Auth Configuration:", {
   NODE_ENV,
   baseURL,
   trustedOrigins,
-  isProduction,
+  isSecureOrigin,
   hasClientId: Boolean(process.env.BOT_CLIENT_ID),
   hasClientSecret: Boolean(process.env.BOT_CLIENT_SECRET),
 });
@@ -89,8 +89,8 @@ export const auth = betterAuth({
       name: "better-auth.session_token",
       options: {
         httpOnly: true,
-        sameSite: isProduction ? "none" : "lax",
-        secure: isProduction,
+        sameSite: isSecureOrigin ? "none" : "lax",
+        secure: isSecureOrigin,
         path: "/",
       },
     },
@@ -104,6 +104,6 @@ export const auth = betterAuth({
     crossSubDomainCookies: {
       enabled: false,
     },
-    useSecureCookies: isProduction,
+    useSecureCookies: isSecureOrigin,
   },
 });
