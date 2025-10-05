@@ -23,7 +23,8 @@ globalForPrisma.prisma = prisma;
 
 // 1. BETTER_AUTH_URL: This MUST be your full production domain.
 //    Example: https://peachyganggg.com
-const baseURL = process.env.BETTER_AUTH_URL || "http://localhost:3000";
+const baseURL =
+  process.env.APP_URL || process.env.BETTER_AUTH_URL || "http://localhost:3000";
 const isSecureOrigin = baseURL.startsWith("https");
 
 // 2. This is derived from your baseURL.
