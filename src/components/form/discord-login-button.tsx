@@ -20,7 +20,6 @@ export function DiscordLoginButton() {
       console.log("Starting Discord login process...");
       console.log("Current URL:", window.location.href);
       console.log("Auth client base URL:", window.location.origin);
-      console.log("VERCEL_URL:", process.env.VERCEL_URL);
       console.log("Environment check:", {
         isVercel: !!process.env.VERCEL_URL,
         domain: window.location.hostname,
@@ -40,7 +39,6 @@ export function DiscordLoginButton() {
         const errorMessage =
           result.error.message || "Failed to sign in with Discord";
 
-        // Provide more specific error messages
         let userFriendlyMessage = errorMessage;
         if (errorMessage.includes("redirect_uri")) {
           userFriendlyMessage =
@@ -57,25 +55,46 @@ export function DiscordLoginButton() {
         toast.error("Login failed", {
           description: userFriendlyMessage,
         });
-      } else if (result.data) {
-        console.log("Login successful, redirecting...");
-        // Force a redirect to ensure we're in the right state
+        return;
+      }
+
+      if (result.data) {
+        const { redirect, url } = result.data as {
+          redirect?: boolean;
+          url?: string;
+        };
+
+        if (redirect && url) {
+          toast.message(t("login.discord_login"), {
+            description: "Redirecting to Discord...",
+          });
+
+          setTimeout(() => {
+            if (window.location.href === url) return;
+            window.location.href = url;
+          }, 150);
+          return;
+        }
+
+        toast.success("Login successful", {
+          description: "Redirecting to dashboard...",
+        });
+
         setTimeout(() => {
           window.location.href = "/dashboard";
-        }, 100);
-      } else {
-        // Handle unexpected response format
-        console.warn("Unexpected response format:", result);
-        toast.error("Login initiated", {
-          description: "Redirecting to Discord...",
-        });
+        }, 200);
+        return;
       }
+
+      console.warn("Unexpected response format:", result);
+      toast.error("Login initiated", {
+        description: "Redirecting to Discord...",
+      });
     } catch (err) {
       const errorMessage =
         err instanceof Error ? err.message : "Failed to sign in with Discord";
       console.error("Discord login failed:", err);
 
-      // Provide more specific error messages for common issues
       let userFriendlyMessage = errorMessage;
       if (errorMessage.includes("fetch")) {
         userFriendlyMessage =
