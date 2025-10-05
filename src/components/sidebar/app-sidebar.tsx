@@ -181,7 +181,7 @@ export function AppSidebar(props: React.ComponentProps<typeof Sidebar>) {
 
   useEffect(() => {
     if (!account) {
-      toast.error("Oopsie! You're not logged in yet.", {
+      toast.message("Oopsie! You're not logged in yet.", {
         description: (
           <>
             <p>Hang tight!</p>
@@ -189,7 +189,6 @@ export function AppSidebar(props: React.ComponentProps<typeof Sidebar>) {
           </>
         ),
       });
-
       setTimeout(() => router.push("/login"), 3000);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps

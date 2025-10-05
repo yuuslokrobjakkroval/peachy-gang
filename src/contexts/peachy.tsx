@@ -7,9 +7,17 @@ import {
   useEffect,
   ReactNode,
 } from "react";
+import { useAuth } from "@/contexts/auth-provider";
 
 import { UserInfo, Guild } from "@/utils/common";
 import { User } from "@/utils/types";
+
+type StoredAccount = {
+  accessToken?: string;
+  refreshToken?: string;
+  accessTokenExpiresAt?: string;
+  [key: string]: unknown;
+};
 
 // Define the context value type
 interface PeachyContextType<T = any> {
@@ -40,7 +48,7 @@ interface PeachyContextType<T = any> {
 }
 
 const PeachyContext = createContext<PeachyContextType<any> | undefined>(
-  undefined,
+  undefined
 );
 
 // Props type for PeachyProvider
@@ -49,6 +57,8 @@ interface PeachyProviderProps {
 }
 
 export function PeachyProvider<T>({ children }: PeachyProviderProps) {
+  // get auth session from AuthProvider so we can keep `account` in sync
+  const { session: authSession, loading: authLoading } = useAuth();
   // State for user info by discord
   const [userInfoByDiscord, setUserInfoByDiscord] = useState<UserInfo>(() => {
     if (typeof window !== "undefined") {
@@ -117,7 +127,7 @@ export function PeachyProvider<T>({ children }: PeachyProviderProps) {
     if (userInfoByDiscord !== null) {
       localStorage.setItem(
         "userInfoByDiscord",
-        JSON.stringify(userInfoByDiscord),
+        JSON.stringify(userInfoByDiscord)
       );
     } else {
       localStorage.removeItem("userInfoByDiscord");
@@ -177,6 +187,27 @@ export function PeachyProvider<T>({ children }: PeachyProviderProps) {
       localStorage.removeItem("account");
     }
   }, [account]);
+
+  // When auth session becomes available, populate Peachy account if empty.
+  useEffect(() => {
+    // wait until auth provider finished loading
+    if (authLoading) return;
+
+    try {
+      // authSession.session.token is the session token provided by better-auth
+      const token = (authSession as any)?.session?.token;
+      if (token && !account) {
+        // store minimal account shape expected by other utils
+        const stored: StoredAccount = {
+          accessToken: token,
+        };
+        setAccount(stored);
+      }
+    } catch (e) {
+      // noop
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [authLoading, authSession]);
 
   return (
     <PeachyContext.Provider
