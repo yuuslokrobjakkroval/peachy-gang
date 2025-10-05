@@ -2,23 +2,33 @@ import { NextRequest, NextResponse } from "next/server";
 import { auth } from "@/lib/auth";
 
 export async function GET(req: NextRequest) {
+  console.log("[/api/auth/token] Received request.");
   try {
     const session = await auth.api.getSession({
       headers: req.headers,
     });
 
     if (!session) {
+      console.error(
+        "[/api/auth/token] Authentication failed: No session found."
+      );
       return NextResponse.json({ error: "Not authenticated" }, { status: 401 });
     }
 
-    // The provider token is stored server-side. Let's find it.
-    // Common locations are `session.provider` or `session.providerTokens`.
+    // Log the entire session object to see what we're getting on the server
+    console.log(
+      "[/api/auth/token] Full session object:",
+      JSON.stringify(session, null, 2)
+    );
+
     const providerTokenData =
       (session as any).provider?.discord ??
       (session as any).providerTokens?.discord;
 
     if (!providerTokenData || !providerTokenData.access_token) {
-      console.error("Discord provider token not found in session:", session);
+      console.error(
+        "[/api/auth/token] Discord provider token not found in session."
+      );
       return NextResponse.json(
         { error: "Discord token not found in session." },
         { status: 404 }
@@ -33,9 +43,12 @@ export async function GET(req: NextRequest) {
       scopes: providerTokenData.scope?.split(" ") ?? [],
     };
 
+    console.log(
+      "[/api/auth/token] Successfully found token. Sending response."
+    );
     return NextResponse.json(response);
   } catch (error) {
-    console.error("[/api/auth/token] Error:", error);
+    console.error("[/api/auth/token] An unexpected error occurred:", error);
     return NextResponse.json(
       { error: "Internal Server Error" },
       { status: 500 }
