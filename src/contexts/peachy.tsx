@@ -11,6 +11,8 @@ import {
 import { UserInfo, Guild } from "@/utils/common";
 import { User } from "@/utils/types";
 
+import { useAuth } from "./auth-provider";
+
 // Define the context value type
 interface PeachyContextType<T = any> {
   // USER
@@ -49,6 +51,7 @@ interface PeachyProviderProps {
 }
 
 export function PeachyProvider<T>({ children }: PeachyProviderProps) {
+  const { session, loading: authLoading } = useAuth();
   // State for user info by discord
   const [userInfoByDiscord, setUserInfoByDiscord] = useState<UserInfo>(() => {
     if (typeof window !== "undefined") {
@@ -177,6 +180,30 @@ export function PeachyProvider<T>({ children }: PeachyProviderProps) {
       localStorage.removeItem("account");
     }
   }, [account]);
+
+  useEffect(() => {
+    if (authLoading) return;
+
+    if (session && !account) {
+      const fetchToken = async () => {
+        try {
+          const response = await fetch("/api/auth/token");
+          if (response.ok) {
+            const tokenData = await response.json();
+            if (tokenData.accessToken) {
+              setAccount(tokenData);
+            }
+          }
+        } catch (error) {
+          console.error("Failed to fetch token:", error);
+        }
+      };
+
+      fetchToken();
+    } else if (!session && account) {
+      setAccount(null);
+    }
+  }, [session, account, authLoading, setAccount]);
 
   return (
     <PeachyContext.Provider

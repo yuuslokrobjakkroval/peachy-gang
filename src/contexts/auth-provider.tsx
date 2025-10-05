@@ -38,6 +38,12 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const fetchSession = async () => {
     try {
       const { data } = await authClient.getSession();
+      // Debug: print session payload so we can compare environments (local vs prod)
+      try {
+        console.debug("authClient.getSession() data:", data);
+      } catch (e) {
+        // ignore
+      }
       setSession(
         data
           ? {
