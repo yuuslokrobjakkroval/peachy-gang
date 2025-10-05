@@ -2,7 +2,6 @@ import { betterAuth } from "better-auth";
 import { prismaAdapter } from "better-auth/adapters/prisma";
 import { PrismaClient } from "@prisma/client";
 import { nextCookies } from "better-auth/next-js";
-import { NODE_ENV } from "@/utils/auth/server";
 import { getAbsoluteUrl, normalizeUrl } from "@/utils/get-absolute-url";
 
 // Singleton pattern for PrismaClient
@@ -51,7 +50,6 @@ if (!trustedOrigins.includes(baseURL)) {
 }
 
 console.log("✅ [auth.ts] Better Auth Configuration being used:", {
-  NODE_ENV,
   baseURL,
   isSecureOrigin,
   discordRedirectUri,
