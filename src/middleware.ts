@@ -13,31 +13,25 @@ export default async function middleware(request: NextRequest) {
   }
 
   // Protected routes that require authentication
-  const protectedRoutes = [
-    "/dashboard",
-    "/profile",
-    "/general",
-    "/rank",
-    "/store",
-  ];
-  const isProtectedRoute = protectedRoutes.some(
-    (route) =>
-      pathname.includes(route) ||
-      pathname.match(new RegExp(`^/[a-z]{2}${route}`))
-  );
+  // const protectedRoutes = ["/profile", "/general", "/rank", "/store"];
+  // const isProtectedRoute = protectedRoutes.some(
+  //   (route) =>
+  //     pathname.includes(route) ||
+  //     pathname.match(new RegExp(`^/[a-z]{2}${route}`))
+  // );
 
-  if (isProtectedRoute) {
-    // Simple cookie-based auth check to avoid PrismaClient in Edge Runtime
-    const sessionToken = request.cookies.get("better-auth.session_token");
+  // if (isProtectedRoute) {
+  //   // Simple cookie-based auth check to avoid PrismaClient in Edge Runtime
+  //   const sessionToken = request.cookies.get("better-auth.session_token");
 
-    if (!sessionToken || !sessionToken.value) {
-      const locale = request.cookies.get("NEXT_LOCALE")?.value || "en";
-      const loginUrl = new URL(`/${locale}/login`, request.url);
-      return NextResponse.redirect(loginUrl);
-    }
+  //   if (!sessionToken || !sessionToken.value) {
+  //     const locale = request.cookies.get("NEXT_LOCALE")?.value || "en";
+  //     const loginUrl = new URL(`/${locale}/login`, request.url);
+  //     return NextResponse.redirect(loginUrl);
+  //   }
 
-    // Note: Full session validation happens on the server-side in components
-  }
+  //   // Note: Full session validation happens on the server-side in components
+  // }
 
   // Apply internationalization middleware
   return intlMiddleware(request);
