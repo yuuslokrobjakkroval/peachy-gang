@@ -13,6 +13,7 @@ const axiosBaseQuery =
         accessToken = parsed?.accessToken || "";
       }
     } catch (error) {
+      console.error("Failed to parse stored account:", error);
     }
 
     const headers = {
