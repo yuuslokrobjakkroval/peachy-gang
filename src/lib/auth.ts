@@ -3,6 +3,7 @@ import { prismaAdapter } from "better-auth/adapters/prisma";
 import { PrismaClient } from "@prisma/client";
 import { nextCookies } from "better-auth/next-js";
 
+// This sets up a single, shared Prisma Client instance to avoid creating too many connections.
 const globalForPrisma = globalThis as unknown as {
   prisma: PrismaClient | undefined;
 };
@@ -10,19 +11,31 @@ const globalForPrisma = globalThis as unknown as {
 const prisma =
   globalForPrisma.prisma ??
   new PrismaClient({
+    // Optional: logs database queries to the console. Useful for debugging.
     log: ["query"],
   });
 
 globalForPrisma.prisma = prisma;
 
-// --- Simplified & Explicit URL Configuration ---
+// --- Explicit URL and Environment Configuration ---
+// This section is CRITICAL for Vercel. It removes all "magic" URL detection.
+// It relies on ONE clear environment variable that you MUST set in your Vercel dashboard.
+
+// 1. BETTER_AUTH_URL: This MUST be your full production domain.
+//    Example: https://peachyganggg.com
 const baseURL = process.env.BETTER_AUTH_URL || "http://localhost:3000";
 const isSecureOrigin = baseURL.startsWith("https");
+
+// 2. This is derived from your baseURL.
 const discordRedirectUri = `${baseURL}/api/auth/callback/discord`;
+
+// 3. This is also derived. No need to add more URLs.
 const trustedOrigins = [baseURL];
 
 // --- Critical Startup Log ---
-console.log("✅ [auth.ts] FINAL CHECK - Better Auth Configuration:", {
+// This log runs when your Vercel server starts. If you do not see this in your Vercel logs,
+// it means a critical environment variable is missing and the server crashed.
+console.log("✅ [auth.ts] FINAL CONFIGURATION CHECK:", {
   baseURL,
   isSecureOrigin,
   discordRedirectUri,

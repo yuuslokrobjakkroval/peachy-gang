@@ -181,43 +181,79 @@ export function PeachyProvider<T>({ children }: PeachyProviderProps) {
     }
   }, [account]);
 
+  // This is the core logic for syncing the server session with the client-side `account` state.
   useEffect(() => {
-    if (authLoading) return;
+    // Do nothing while authentication is still loading.
+    if (authLoading) {
+      console.log("[PeachyProvider] Waiting for auth to finish loading...");
+      return;
+    }
 
+    // Condition 1: User is logged in (has a session) but we don't have the full account details yet.
     if (session && !account) {
       const fetchToken = async () => {
         console.log(
-          "[PeachyProvider] Session found, attempting to fetch full token from /api/auth/token"
+          "➡️ [PeachyProvider] Session detected, but no account info. Fetching full token from '/api/auth/token'..."
         );
         try {
           const response = await fetch("/api/auth/token");
-          console.log("[PeachyProvider] API response status:", response.status);
+          const responseText = await response.text(); // Read response body once
+
+          console.log(
+            `[PeachyProvider] API response received. Status: ${response.status}`
+          );
 
           if (response.ok) {
-            const tokenData = await response.json();
-            console.log("[PeachyProvider] Token data received:", tokenData);
-            if (tokenData.accessToken) {
-              setAccount(tokenData);
+            try {
+              const tokenData = JSON.parse(responseText);
+              console.log(
+                "✅ [PeachyProvider] Successfully fetched and parsed token data:",
+                tokenData
+              );
+              if (tokenData.accessToken) {
+                setAccount(tokenData);
+                console.log("✅ [PeachyProvider] Account state has been set.");
+              } else {
+                console.warn(
+                  "⚠️ [PeachyProvider] API response was OK, but accessToken was missing in the data."
+                );
+              }
+            } catch (e) {
+              console.error(
+                "❌ [PeachyProvider] Failed to parse JSON from API response. Body:",
+                responseText,
+                e
+              );
             }
           } else {
-            const errorData = await response.text();
             console.error(
-              "[PeachyProvider] Failed to fetch token, API responded with error:",
-              errorData
+              `❌ [PeachyProvider] Failed to fetch token. API responded with status ${response.status}. Body:`,
+              responseText
             );
           }
         } catch (error) {
           console.error(
-            "[PeachyProvider] An error occurred while fetching the token:",
+            "❌ [PeachyProvider] A network or unexpected error occurred while fetching the token:",
             error
           );
         }
       };
 
       fetchToken();
-    } else if (!session && account) {
-      console.log("[PeachyProvider] Session ended, clearing account state.");
+    }
+    // Condition 2: User has logged out (session is gone) but the account info is still in state.
+    else if (!session && account) {
+      console.log(
+        "➡️ [PeachyProvider] Session has ended. Clearing account state."
+      );
       setAccount(null);
+    }
+    // Condition 3: Everything is stable (either logged out with no account, or logged in with account).
+    else {
+      console.log("[PeachyProvider] State is stable.", {
+        hasSession: !!session,
+        hasAccount: !!account,
+      });
     }
   }, [session, account, authLoading, setAccount]);
 
