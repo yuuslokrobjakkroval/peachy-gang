@@ -80,10 +80,6 @@ export const auth = betterAuth({
       maxAge: 5 * 60, // 5 minutes
     },
   },
-  emailVerification: {
-    expiresIn: 60 * 30, // 30 minutes
-    sendOnSignUp: false, // Disable email verification for OAuth
-  },
   cookies: {
     sessionToken: {
       name: "better-auth.session_token",

@@ -228,15 +228,14 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
       try {
         const { data: accounts } = await authClient.listAccounts();
         if (accounts && accounts.length > 0) {
+          const account = accounts[0];
           const { data: accountData } = await authClient.getAccessToken({
-            providerId: accounts[0].provider,
+            providerId: account.provider,
+            accountId: account.accountId,
           });
 
           setAccount(accountData);
-
-          if (typeof window !== "undefined") {
-            localStorage.setItem("account", JSON.stringify(accountData));
-          }
+          localStorage.setItem("account", JSON.stringify(accountData));
         } else {
           // No account found → toast + delay + redirect
           toast.error("Oopsie! 🌸 You’re not logged in yet…", {
