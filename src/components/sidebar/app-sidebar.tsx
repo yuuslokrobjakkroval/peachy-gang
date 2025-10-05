@@ -152,132 +152,12 @@ type StoredAccount = {
 };
 
 export function AppSidebar(props: React.ComponentProps<typeof Sidebar>) {
-  const router = useRouter();
-  const { setUserInfoByDiscord, setGuilds, setAccount, account } = usePeachy();
+  const { setUserInfoByDiscord, setGuilds, account } = usePeachy();
   const { data: user, isSuccess: userSuccess } = useFetchUserInfoQuery(null);
   const { data: guilds, isSuccess: guildSuccess } = useGetGuildsQuery(null);
   const [isOwner, setIsOwner] = useState(false);
-
-  const isBrowser = typeof window !== "undefined";
-
-  // Restore cached account on first render
-  useEffect(() => {
-    if (!isBrowser || account) return;
-    const storedAccount = localStorage.getItem("account");
-    if (storedAccount) {
-      try {
-        const parsed = JSON.parse(storedAccount) as StoredAccount;
-        setAccount(parsed);
-      } catch {
-        localStorage.removeItem("account");
-      }
-    }
-  }, [account, isBrowser, setAccount]);
-
-  const maybePersistAccount = useCallback(
-    (value: StoredAccount | null) => {
-      if (!isBrowser) return;
-      if (value) {
-        localStorage.setItem("account", JSON.stringify(value));
-      } else {
-        localStorage.removeItem("account");
-      }
-    },
-    [isBrowser]
-  );
-
-  const hydrateAccount = useCallback(
-    (payload: StoredAccount | null) => {
-      setAccount(payload);
-      maybePersistAccount(payload);
-    },
-    [maybePersistAccount, setAccount]
-  );
-
-  const fetchAccount = useCallback(async () => {
-    try {
-      const { data: accounts, error: accountsError } =
-        await authClient.listAccounts();
-      if (accountsError) throw accountsError;
-
-      if (!accounts?.length) {
-        toast.error("Oopsie! You're not logged in yet.", {
-          description: (
-            <>
-              <p>Hang tight!</p>
-              <p>We'll take you to the login page in 3 seconds.</p>
-            </>
-          ),
-        });
-        setTimeout(() => router.push("/login"), 3000);
-        return;
-      }
-
-      const primaryAccount =
-        accounts.find((entry) => entry.provider === "discord") ?? accounts[0];
-
-      if (!primaryAccount.accountId) {
-        throw new Error("Discord account is missing an accountId");
-      }
-
-      const fetchToken = async () =>
-        authClient.getAccessToken({
-          providerId: primaryAccount.provider,
-          accountId: primaryAccount.accountId,
-        });
-
-      let { data: tokenData, error } = await fetchToken();
-
-      if ((!tokenData || !tokenData.accessToken) && !error) {
-        const refresh = await authClient.refreshToken({
-          providerId: primaryAccount.provider,
-          accountId: primaryAccount.accountId,
-        });
-        tokenData = refresh.data
-          ? {
-              accessToken: refresh.data.accessToken ?? undefined,
-              accessTokenExpiresAt:
-                refresh.data.accessTokenExpiresAt ?? undefined,
-              scopes: refresh.data.scopes ?? [],
-              idToken: refresh.data.idToken ?? undefined,
-            }
-          : tokenData;
-        error = refresh.error ?? error;
-      }
-
-      if (!tokenData?.accessToken || error) {
-        throw error ?? new Error("Unable to obtain a Discord access token");
-      }
-
-      hydrateAccount(tokenData as StoredAccount);
-    } catch (err) {
-      console.error("Error fetching account:", err);
-      toast.error("We couldn't refresh your Discord session.", {
-        description: "Please try signing in again.",
-      });
-      hydrateAccount(null);
-    }
-  }, [hydrateAccount, router]);
-
-  useEffect(() => {
-    if (!account) {
-      void fetchAccount();
-    }
-  }, [account, fetchAccount]);
-
-  useEffect(() => {
-    if (!account) return;
-
-    const maybeExpired = (() => {
-      if (!account?.accessTokenExpiresAt) return false;
-      const expiry = new Date(account.accessTokenExpiresAt).getTime();
-      return Number.isFinite(expiry) && expiry <= Date.now() + 60_000;
-    })();
-
-    if (maybeExpired) {
-      void fetchAccount();
-    }
-  }, [account, fetchAccount]);
+  const router = useRouter();
+  console.log("account:", account);
 
   useEffect(() => {
     if (userSuccess && guildSuccess) {
@@ -298,6 +178,22 @@ export function AppSidebar(props: React.ComponentProps<typeof Sidebar>) {
   }, [user]);
 
   const sidebarProps = useMemo(() => props, [props]);
+
+  useEffect(() => {
+    if (!account) {
+      toast.error("Oopsie! You're not logged in yet.", {
+        description: (
+          <>
+            <p>Hang tight!</p>
+            <p>We'll take you to the login page in 3 seconds.</p>
+          </>
+        ),
+      });
+
+      setTimeout(() => router.push("/login"), 3000);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [account]);
 
   return (
     <Sidebar collapsible="icon" {...sidebarProps}>
