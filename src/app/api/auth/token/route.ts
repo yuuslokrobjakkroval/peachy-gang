@@ -15,7 +15,6 @@ export async function GET(req: NextRequest) {
       return NextResponse.json({ error: "Not authenticated" }, { status: 401 });
     }
 
-    // Log the entire session object to see what we're getting on the server
     console.log(
       "[/api/auth/token] Full session object:",
       JSON.stringify(session, null, 2)
