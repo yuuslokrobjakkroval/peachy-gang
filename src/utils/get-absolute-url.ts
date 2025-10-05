@@ -58,6 +58,7 @@ function getEnvUrl(): string | undefined {
     return vercelHost;
   }
 
+  console.log(`${process.env.VERCEL_ENV} : production`);
   if (process.env.VERCEL_ENV === "production") {
     const fallbackProd = normalizeUrl(
       process.env.NEXT_PUBLIC_DEFAULT_DOMAIN ?? DEFAULT_PRODUCTION_DOMAIN
