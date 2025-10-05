@@ -2,8 +2,8 @@ import { betterAuth } from "better-auth";
 import { prismaAdapter } from "better-auth/adapters/prisma";
 import { PrismaClient } from "@prisma/client";
 import { nextCookies } from "better-auth/next-js";
+import { AUTH_CONFIG } from "@/lib/auth-config";
 
-// This sets up a single, shared Prisma Client instance to avoid creating too many connections.
 const globalForPrisma = globalThis as unknown as {
   prisma: PrismaClient | undefined;
 };
@@ -11,46 +11,38 @@ const globalForPrisma = globalThis as unknown as {
 const prisma =
   globalForPrisma.prisma ??
   new PrismaClient({
-    // Optional: logs database queries to the console. Useful for debugging.
     log: ["query"],
   });
 
 globalForPrisma.prisma = prisma;
 
-// --- Explicit URL and Environment Configuration ---
-// This section is CRITICAL for Vercel. It removes all "magic" URL detection.
-// It relies on ONE clear environment variable that you MUST set in your Vercel dashboard.
+const { baseUrl, isSecure, discordRedirectUri, trustedOrigins } = AUTH_CONFIG;
 
-// 1. BETTER_AUTH_URL: This MUST be your full production domain.
-//    Example: https://peachyganggg.com
-const baseURL =
-  process.env.APP_URL || process.env.BETTER_AUTH_URL || "http://localhost:3000";
-const isSecureOrigin = baseURL.startsWith("https");
+if (!process.env.BOT_CLIENT_ID || !process.env.BOT_CLIENT_SECRET) {
+  console.error(
+    "❌ [auth.ts] Missing Discord OAuth credentials. Please set BOT_CLIENT_ID and BOT_CLIENT_SECRET."
+  );
+}
 
-// 2. This is derived from your baseURL.
-const discordRedirectUri = `${baseURL}/api/auth/callback/discord`;
+if (!process.env.DATABASE_URL) {
+  console.error(
+    "❌ [auth.ts] DATABASE_URL is not configured. Prisma adapter will fail without a database connection."
+  );
+}
 
-// 3. This is also derived. No need to add more URLs.
-const trustedOrigins = [baseURL];
-
-// --- Critical Startup Log ---
-// This log runs when your Vercel server starts. If you do not see this in your Vercel logs,
-// it means a critical environment variable is missing and the server crashed.
-console.log("✅ [auth.ts] FINAL CONFIGURATION CHECK:", {
-  baseURL,
-  isSecureOrigin,
+console.log("✅ [auth.ts] Loaded Better Auth configuration", {
+  baseUrl,
+  isSecure,
   discordRedirectUri,
-  trustedOrigins: JSON.stringify(trustedOrigins),
-  hasClientId: !!process.env.BOT_CLIENT_ID,
-  hasClientSecret: !!process.env.BOT_CLIENT_SECRET,
-  hasDatabaseUrl: !!process.env.DATABASE_URL,
+  trustedOrigins,
 });
 
 export const auth = betterAuth({
+  baseURL: baseUrl,
   database: prismaAdapter(prisma, {
     provider: "mongodb",
   }),
-  baseURL,
+  trustedOrigins,
   socialProviders: {
     discord: {
       clientId: process.env.BOT_CLIENT_ID as string,
@@ -61,23 +53,22 @@ export const auth = betterAuth({
     },
   },
   session: {
-    expiresIn: 60 * 60 * 24 * 7, // 7 days
-    updateAge: 60 * 60 * 24, // Update session daily
+    expiresIn: 60 * 60 * 24 * 7,
+    updateAge: 60 * 60 * 24,
   },
   cookies: {
     sessionToken: {
       name: "better-auth.session_token",
       options: {
         httpOnly: true,
-        sameSite: isSecureOrigin ? "none" : "lax",
-        secure: isSecureOrigin,
+        sameSite: isSecure ? "none" : "lax",
+        secure: isSecure,
         path: "/",
       },
     },
   },
   plugins: [nextCookies()],
-  trustedOrigins,
   advanced: {
-    useSecureCookies: isSecureOrigin,
+    useSecureCookies: isSecure,
   },
 });

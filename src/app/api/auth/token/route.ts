@@ -7,6 +7,7 @@ console.log(
 
 import { NextRequest, NextResponse } from "next/server";
 import { auth } from "@/lib/auth";
+import { extractDiscordTokenFromSession } from "@/utils/auth/discord-session";
 
 // If the log above appeared but this one DOESN'T, it means the `import { auth }` line crashed the server.
 console.log(
@@ -33,40 +34,25 @@ export async function GET(req: NextRequest) {
       "✅ [/api/auth/token] Session found. Checking for provider token..."
     );
 
-    // The full provider token is stored in the `providerTokens` object on the session.
-    // Adjust the type assertion to inform TypeScript about the providerTokens property.
-    const providerTokens =
-      (session as any).providerTokens ??
-      (session as any).session?.providerTokens;
-    const discordToken = providerTokens?.discord;
+    const discordToken = extractDiscordTokenFromSession(session);
 
-    if (!discordToken?.access_token) {
-      console.error(
-        "❌ [/api/auth/token] Discord provider token not found in session!",
-        {
-          sessionExists: !!session,
-          providerTokensExist: !!providerTokens,
-          discordTokenExists: !!providerTokens?.discord,
-        }
-      );
+    if (!discordToken) {
+      console.error("❌ [/api/auth/token] Discord provider token not found in session!");
       return NextResponse.json(
         { error: "Discord token not found in session." },
         { status: 404 }
       );
     }
 
-    const response = {
-      accessToken: discordToken.access_token,
-      accessTokenExpiresAt: discordToken.expires_at
-        ? new Date(discordToken.expires_at * 1000).toISOString()
-        : undefined,
-      scopes: discordToken.scope?.split(" ") ?? [],
-    };
-
     console.log(
-      "✅ [/api/auth/token] Successfully extracted token. Sending response."
+      "✅ [/api/auth/token] Successfully extracted token. Sending response.",
+      {
+        hasRefreshToken: Boolean(discordToken.refreshToken),
+        scopes: discordToken.scopes,
+        expiresAt: discordToken.expiresAt,
+      }
     );
-    return NextResponse.json(response);
+    return NextResponse.json(discordToken);
   } catch (error) {
     console.error("❌ [/api/auth/token] An unexpected error occurred:", error);
     return NextResponse.json(

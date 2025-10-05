@@ -1,3 +1,4 @@
+import { AUTH_CONFIG } from "@/lib/auth-config";
 import { auth } from "@/lib/auth";
 import { getAbsoluteUrl, normalizeUrl } from "@/utils/get-absolute-url";
 import { toNextJsHandler } from "better-auth/next-js";
@@ -9,15 +10,7 @@ const allowedOrigins = new Set(
   [
     getAbsoluteUrl(),
     "http://localhost:3000",
-    process.env.APP_URL,
-    process.env.BETTER_AUTH_URL,
-    process.env.NEXT_PUBLIC_APP_URL,
-    process.env.NEXT_PUBLIC_SITE_URL,
-    process.env.NEXT_PUBLIC_URL,
-    process.env.NEXT_PUBLIC_VERCEL_URL,
-    process.env.VERCEL_PROJECT_PRODUCTION_URL,
-    process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : undefined,
-    process.env.NEXT_PUBLIC_DEFAULT_DOMAIN,
+    ...AUTH_CONFIG.trustedOrigins,
   ]
     .map((origin) => normalizeUrl(origin))
     .filter((origin): origin is string => Boolean(origin))

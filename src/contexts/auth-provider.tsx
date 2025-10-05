@@ -1,6 +1,12 @@
 "use client";
 
-import React, { createContext, useContext, useEffect, useState } from "react";
+import React, {
+  createContext,
+  useCallback,
+  useContext,
+  useEffect,
+  useMemo,
+} from "react";
 import { authClient } from "@/lib/auth-client";
 
 interface User {
@@ -32,54 +38,45 @@ interface AuthContextType {
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 export function AuthProvider({ children }: { children: React.ReactNode }) {
-  const [session, setSession] = useState<Session | null>(null);
-  const [loading, setLoading] = useState(true);
-
-  const fetchSession = async () => {
-    try {
-      const { data } = await authClient.getSession();
-      // Debug: print session payload so we can compare environments (local vs prod)
-      try {
-        console.debug("authClient.getSession() data:", data);
-      } catch (e) {
-        // ignore
-      }
-      setSession(
-        data
-          ? {
-              ...data,
-              user: { ...data.user, image: data.user.image ?? undefined },
-            }
-          : null
-      );
-    } catch (error) {
-      console.error("Failed to fetch session:", error);
-      setSession(null);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const signOut = async () => {
-    try {
-      await authClient.signOut();
-      setSession(null);
-      window.location.href = "/login";
-    } catch (error) {
-      console.error("Sign out failed:", error);
-    }
-  };
+  const {
+    data,
+    isPending,
+    error,
+    refetch: refreshSession,
+  } = authClient.useSession();
 
   useEffect(() => {
-    fetchSession();
-  }, []);
+    if (error) {
+      console.error("Failed to resolve session:", error);
+    }
+  }, [error]);
 
-  const value: AuthContextType = {
-    session,
-    loading,
+  const refetch = useCallback(async () => {
+    refreshSession();
+  }, [refreshSession]);
+
+  const signOut = useCallback(async () => {
+    try {
+      await authClient.signOut();
+    } catch (err) {
+      console.error("Sign out failed:", err);
+    } finally {
+      refreshSession();
+      window.location.href = "/login";
+    }
+  }, [refreshSession]);
+
+  const value = useMemo<AuthContextType>(() => ({
+    session: data
+      ? {
+          ...data,
+          user: { ...data.user, image: data.user.image ?? undefined },
+        }
+      : null,
+    loading: isPending,
     signOut,
-    refetch: fetchSession,
-  };
+    refetch,
+  }), [data, isPending, refetch, signOut]);
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 }
