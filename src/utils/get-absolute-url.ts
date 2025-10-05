@@ -1,49 +1,139 @@
-import { APP_URL, BETTER_AUTH_URL } from "./auth/server";
+import type { NextRequest } from "next/server";
 
-export function getAbsoluteUrl(): string {
-  // Use custom domain for production deployments
-  // Check if we have Vercel environment or if APP_URL/BETTER_AUTH_URL is not localhost
-  if (
-    process.env.VERCEL_URL ||
-    (APP_URL && !APP_URL.includes("localhost")) ||
-    (BETTER_AUTH_URL && !BETTER_AUTH_URL.includes("localhost"))
-  ) {
-    return "https://peachyganggg.com";
+const DEFAULT_LOCAL_URL = "http://localhost:3000";
+const DEFAULT_PRODUCTION_DOMAIN = "https://peachyganggg.com";
+
+const ENV_URL_KEYS: (keyof NodeJS.ProcessEnv)[] = [
+  "BETTER_AUTH_URL",
+  "APP_URL",
+  "NEXT_PUBLIC_APP_URL",
+  "NEXT_PUBLIC_SITE_URL",
+  "NEXT_PUBLIC_URL",
+  "NEXT_PUBLIC_FRONTEND_URL",
+  "NEXT_PUBLIC_WEBSITE_URL",
+  "SITE_URL",
+  "VERCEL_PROJECT_PRODUCTION_URL",
+  "VERCEL_BRANCH_URL",
+];
+
+function normalizeUrl(value?: string | null): string | undefined {
+  if (!value) {
+    return undefined;
   }
 
-  // For development, use APP_URL or BETTER_AUTH_URL if set
-  if (APP_URL) {
-    return APP_URL;
+  const trimmed = value.trim();
+  if (!trimmed) {
+    return undefined;
   }
 
-  if (BETTER_AUTH_URL) {
-    return BETTER_AUTH_URL;
-  }
+  const candidate = /^https?:\/\//i.test(trimmed)
+    ? trimmed
+    : `https://${trimmed}`;
 
-  // Development fallback
-  return "http://localhost:3000";
+  try {
+    const url = new URL(candidate);
+    return url.origin;
+  } catch {
+    return undefined;
+  }
 }
 
-export function getBetterAuthUrl(): string {
-  // Use custom domain for production deployments
-  // Check if we have Vercel environment or if BETTER_AUTH_URL/APP_URL is not localhost
-  if (
-    process.env.VERCEL_URL ||
-    (BETTER_AUTH_URL && !BETTER_AUTH_URL.includes("localhost")) ||
-    (APP_URL && !APP_URL.includes("localhost"))
-  ) {
-    return "https://peachyganggg.com";
+function getEnvUrl(): string | undefined {
+  for (const key of ENV_URL_KEYS) {
+    const value = normalizeUrl(process.env[key]);
+    if (value) {
+      return value;
+    }
   }
 
-  // For development, use BETTER_AUTH_URL or APP_URL if set
-  if (BETTER_AUTH_URL) {
-    return BETTER_AUTH_URL;
+  const nextPublicVercel = normalizeUrl(process.env.NEXT_PUBLIC_VERCEL_URL);
+  if (nextPublicVercel) {
+    return nextPublicVercel;
   }
 
-  if (APP_URL) {
-    return APP_URL;
+  const vercelHost = process.env.VERCEL_URL
+    ? normalizeUrl(`https://${process.env.VERCEL_URL}`)
+    : undefined;
+  if (vercelHost) {
+    return vercelHost;
   }
 
-  // Development fallback
-  return "http://localhost:3000";
+  if (process.env.VERCEL_ENV === "production") {
+    const fallbackProd = normalizeUrl(
+      process.env.NEXT_PUBLIC_DEFAULT_DOMAIN ?? DEFAULT_PRODUCTION_DOMAIN
+    );
+    if (fallbackProd) {
+      return fallbackProd;
+    }
+  }
+
+  return undefined;
 }
+
+function getRequestOrigin(
+  request?: Request | NextRequest
+): string | undefined {
+  if (!request) {
+    return undefined;
+  }
+
+  const headers = request.headers;
+  const forwardedProto = headers.get("x-forwarded-proto");
+  const forwardedHost = headers.get("x-forwarded-host");
+  if (forwardedProto && forwardedHost) {
+    const forwardedOrigin = normalizeUrl(`${forwardedProto}://${forwardedHost}`);
+    if (forwardedOrigin) {
+      return forwardedOrigin;
+    }
+  }
+
+  const originHeader = headers.get("origin") ?? headers.get("referer");
+  const normalizedOrigin = normalizeUrl(originHeader);
+  if (normalizedOrigin) {
+    return normalizedOrigin;
+  }
+
+  const maybeNext = request as NextRequest;
+  const nextUrlOrigin = maybeNext?.nextUrl?.origin;
+  const normalizedNextOrigin = normalizeUrl(nextUrlOrigin);
+  if (normalizedNextOrigin) {
+    return normalizedNextOrigin;
+  }
+
+  const requestUrl = (request as Request).url;
+  const normalizedRequestUrl = normalizeUrl(requestUrl);
+  if (normalizedRequestUrl) {
+    return normalizedRequestUrl;
+  }
+
+  return undefined;
+}
+
+export type AbsoluteUrlOptions = {
+  request?: Request | NextRequest;
+  fallback?: string;
+};
+
+export function getAbsoluteUrl(options?: AbsoluteUrlOptions): string {
+  if (typeof window !== "undefined" && window.location?.origin) {
+    return window.location.origin;
+  }
+
+  const requestOrigin = getRequestOrigin(options?.request);
+  if (requestOrigin) {
+    return requestOrigin;
+  }
+
+  const envUrl = getEnvUrl();
+  if (envUrl) {
+    return envUrl;
+  }
+
+  return options?.fallback ?? DEFAULT_LOCAL_URL;
+}
+
+export function getBetterAuthUrl(options?: AbsoluteUrlOptions): string {
+  return getAbsoluteUrl(options);
+}
+
+export { normalizeUrl };

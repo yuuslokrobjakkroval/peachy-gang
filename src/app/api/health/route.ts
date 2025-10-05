@@ -1,39 +1,82 @@
 import { NextRequest, NextResponse } from "next/server";
-import { getAbsoluteUrl } from "@/utils/get-absolute-url";
+import { getAbsoluteUrl, normalizeUrl } from "@/utils/get-absolute-url";
 
 export async function GET(request: NextRequest) {
-  const baseURL = getAbsoluteUrl();
+  const baseURL = getAbsoluteUrl({ request });
+  const baseHost = (() => {
+    try {
+      return new URL(baseURL).hostname;
+    } catch {
+      return undefined;
+    }
+  })();
 
-  const healthCheck = {
-    status: "ok",
-    timestamp: new Date().toISOString(),
-    environment: process.env.NODE_ENV,
-    baseURL,
-    isCustomDomain: request.nextUrl.hostname === "peachyganggg.com",
-    isVercel: !!process.env.VERCEL_URL,
-    vercelUrl: process.env.VERCEL_URL,
-    domain: request.nextUrl.hostname,
-    protocol: request.nextUrl.protocol,
-    configuration: {
-      hasAppUrl: !!process.env.APP_URL,
-      hasBetterAuthUrl: !!process.env.BETTER_AUTH_URL,
-      hasClientId: !!process.env.BOT_CLIENT_ID,
-      hasClientSecret: !!process.env.BOT_CLIENT_SECRET,
-      hasDatabaseUrl: !!process.env.DATABASE_URL,
+  const runtimeOrigin = normalizeUrl(request.headers.get("origin"));
+  const response = NextResponse.json(
+    {
+      status: "ok",
+      timestamp: new Date().toISOString(),
+      environment: process.env.NODE_ENV,
+      baseURL,
+      domain: request.nextUrl.hostname,
+      protocol: request.nextUrl.protocol,
+      isCustomDomain: baseHost ? request.nextUrl.hostname === baseHost : false,
+      isVercel: Boolean(process.env.VERCEL_URL),
+      vercelUrl: process.env.VERCEL_URL,
+      configuration: {
+        hasAppUrl: Boolean(process.env.APP_URL),
+        hasBetterAuthUrl: Boolean(process.env.BETTER_AUTH_URL),
+        hasClientId: Boolean(process.env.BOT_CLIENT_ID),
+        hasClientSecret: Boolean(process.env.BOT_CLIENT_SECRET),
+        hasDatabaseUrl: Boolean(process.env.DATABASE_URL),
+      },
+      expectedRedirectUri: new URL(
+        "/api/auth/callback/discord",
+        baseURL
+      ).toString(),
+      authEndpoint: new URL("/api/auth", baseURL).toString(),
+      recommendations: [],
     },
-    expectedRedirectUri: "https://peachyganggg.com/api/auth/callback/discord",
-    authEndpoint: "https://peachyganggg.com/api/auth",
-    recommendations: [],
-  };
+    {
+      status: 200,
+    }
+  );
 
-  return NextResponse.json(healthCheck, {
-    status: 200,
-    headers: {
-      "Cache-Control": "no-cache, no-store, must-revalidate",
-      "Content-Type": "application/json",
-      "Access-Control-Allow-Origin": process.env.VERCEL_URL
-        ? "https://peachyganggg.com"
-        : "*",
-    },
-  });
+  response.headers.set(
+    "Cache-Control",
+    "no-cache, no-store, must-revalidate"
+  );
+  response.headers.set("Content-Type", "application/json");
+
+  const corsOrigin =
+    runtimeOrigin ?? normalizeUrl(request.nextUrl.origin) ?? baseURL;
+
+  response.headers.set("Access-Control-Allow-Origin", corsOrigin);
+  response.headers.set("Access-Control-Allow-Credentials", "true");
+  response.headers.set(
+    "Access-Control-Allow-Methods",
+    "GET, POST, PUT, PATCH, DELETE, OPTIONS"
+  );
+  response.headers.set(
+    "Access-Control-Allow-Headers",
+    "Content-Type, Authorization, X-Requested-With, Accept"
+  );
+
+  const varyHeaders = [
+    "Origin",
+    "Access-Control-Request-Headers",
+    "Access-Control-Request-Method",
+  ];
+  const existingVary = response.headers.get("Vary");
+  const varySet = new Set(
+    existingVary?.split(",").map((value) => value.trim()).filter(Boolean)
+  );
+  for (const header of varyHeaders) {
+    if (!varySet.has(header)) {
+      varySet.add(header);
+    }
+  }
+  response.headers.set("Vary", Array.from(varySet).join(", "));
+
+  return response;
 }
