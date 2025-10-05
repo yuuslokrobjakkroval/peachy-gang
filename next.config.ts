@@ -5,17 +5,21 @@ import createNextIntlPlugin from "next-intl/plugin";
 const nextConfig: NextConfig = {
   env: {
     APP_URL: process.env.APP_URL,
+    NEXT_PUBLIC_APP_URL: process.env.NEXT_PUBLIC_APP_URL,
+    NEXT_PUBLIC_SITE_URL: process.env.NEXT_PUBLIC_SITE_URL,
     BOT_CLIENT_ID: process.env.BOT_CLIENT_ID,
     BOT_CLIENT_SECRET: process.env.BOT_CLIENT_SECRET,
     FIRST_SUB_BOT_CLIENT_ID: process.env.FIRST_SUB_BOT_CLIENT_ID,
     SECOND_SUB_BOT_CLIENT_ID: process.env.SECOND_SUB_BOT_CLIENT_ID,
     VERCEL_PROJECT_PRODUCTION_URL: process.env.VERCEL_PROJECT_PRODUCTION_URL,
     VERCEL_URL: process.env.VERCEL_URL,
+    NEXT_PUBLIC_VERCEL_URL: process.env.NEXT_PUBLIC_VERCEL_URL,
     BETTER_AUTH_URL: process.env.BETTER_AUTH_URL,
     BETTER_AUTH_SECRET: process.env.BETTER_AUTH_SECRET,
     OWNER_IDS: process.env.OWNER_IDS,
     STAFF_IDS: process.env.STAFF_IDS,
     GITHUB_TOKEN: process.env.GITHUB_TOKEN,
+    NEXT_PUBLIC_DEFAULT_DOMAIN: process.env.NEXT_PUBLIC_DEFAULT_DOMAIN,
   },
   reactStrictMode: true,
   images: {
