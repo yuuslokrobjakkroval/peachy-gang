@@ -1,4 +1,4 @@
-export interface DiscordProviderToken {
+﻿export interface DiscordProviderToken {
   accessToken: string;
   refreshToken?: string;
   expiresAt?: string;
@@ -7,7 +7,7 @@ export interface DiscordProviderToken {
 
 function coerceScopes(value: unknown): string[] {
   if (Array.isArray(value)) {
-    return value.filter((scope): scope is string => typeof scope === "string");
+    return value.filter((scope): scope is string => typeof scope === "string" && scope.length > 0);
   }
 
   if (typeof value === "string" && value.length > 0) {
@@ -21,7 +21,6 @@ function coerceTimestamp(value: unknown): string | undefined {
   if (!value) return undefined;
 
   if (typeof value === "number") {
-    // Discord provider tokens are usually seconds since epoch
     const millis = value > 1e12 ? value : value * 1000;
     return new Date(millis).toISOString();
   }
@@ -45,6 +44,94 @@ function coerceTimestamp(value: unknown): string | undefined {
   return undefined;
 }
 
+function coerceAccountList(value: unknown): unknown[] {
+  if (Array.isArray(value)) {
+    return value;
+  }
+
+  if (value && typeof value === "object") {
+    return Object.values(value as Record<string, unknown>);
+  }
+
+  return [];
+}
+
+function extractFromProviderToken(candidate: unknown): DiscordProviderToken | null {
+  if (!candidate || typeof candidate !== "object") {
+    return null;
+  }
+
+  const accessToken = (candidate as any).access_token ?? (candidate as any).accessToken;
+  if (typeof accessToken !== "string" || accessToken.length === 0) {
+    return null;
+  }
+
+  const refreshToken = (candidate as any).refresh_token ?? (candidate as any).refreshToken;
+
+  return {
+    accessToken,
+    refreshToken:
+      typeof refreshToken === "string" && refreshToken.length > 0 ? refreshToken : undefined,
+    expiresAt: coerceTimestamp(
+      (candidate as any).expires_at ??
+        (candidate as any).expiresAt ??
+        (candidate as any).expiry ??
+        (candidate as any).accessTokenExpiresAt
+    ),
+    scopes: coerceScopes((candidate as any).scope ?? (candidate as any).scopes),
+  };
+}
+
+function extractFromAccount(account: unknown): DiscordProviderToken | null {
+  if (!account || typeof account !== "object") {
+    return null;
+  }
+
+  const rawProvider =
+    (account as any).providerId ?? (account as any).provider ?? (account as any).provider_id;
+  if (typeof rawProvider !== "string" || rawProvider.toLowerCase() !== "discord") {
+    return null;
+  }
+
+  const accessToken = (account as any).accessToken ?? (account as any).access_token;
+  if (typeof accessToken !== "string" || accessToken.length === 0) {
+    return null;
+  }
+
+  const refreshToken = (account as any).refreshToken ?? (account as any).refresh_token;
+
+  return {
+    accessToken,
+    refreshToken:
+      typeof refreshToken === "string" && refreshToken.length > 0 ? refreshToken : undefined,
+    expiresAt: coerceTimestamp(
+      (account as any).accessTokenExpiresAt ??
+        (account as any).access_token_expires_at ??
+        (account as any).expires_at ??
+        (account as any).expiresAt
+    ),
+    scopes: coerceScopes((account as any).scope ?? (account as any).scopes),
+  };
+}
+
+function collectPotentialAccounts(session: any): unknown[] {
+  const sources = [
+    session?.accounts,
+    session?.user?.accounts,
+    session?.session?.accounts,
+    session?.session?.user?.accounts,
+  ];
+
+  const aggregated: unknown[] = [];
+  for (const source of sources) {
+    const accounts = coerceAccountList(source);
+    if (accounts.length > 0) {
+      aggregated.push(...accounts);
+    }
+  }
+  return aggregated;
+}
+
 export function extractDiscordTokenFromSession(
   session: unknown
 ): DiscordProviderToken | null {
@@ -52,31 +139,29 @@ export function extractDiscordTokenFromSession(
     return null;
   }
 
-  const candidate =
-    (session as any).providerTokens?.discord ??
-    (session as any).session?.providerTokens?.discord ??
-    (session as any).session?.providerTokens?.Discord ??
-    (session as any).session?.providerTokens?.DISCORD ??
-    null;
+  const candidates = [
+    (session as any).providerTokens?.discord,
+    (session as any).providerTokens?.Discord,
+    (session as any).providerTokens?.DISCORD,
+    (session as any).session?.providerTokens?.discord,
+    (session as any).session?.providerTokens?.Discord,
+    (session as any).session?.providerTokens?.DISCORD,
+  ];
 
-  if (!candidate) {
-    return null;
+  for (const candidate of candidates) {
+    const token = extractFromProviderToken(candidate);
+    if (token) {
+      return token;
+    }
   }
 
-  const accessToken = candidate.access_token ?? candidate.accessToken;
-  if (typeof accessToken !== "string" || accessToken.length === 0) {
-    return null;
+  const accounts = collectPotentialAccounts(session as any);
+  for (const account of accounts) {
+    const token = extractFromAccount(account);
+    if (token) {
+      return token;
+    }
   }
 
-  const refreshToken =
-    candidate.refresh_token ?? candidate.refreshToken ?? undefined;
-
-  return {
-    accessToken,
-    refreshToken,
-    expiresAt: coerceTimestamp(
-      candidate.expires_at ?? candidate.expiresAt ?? candidate.expiry
-    ),
-    scopes: coerceScopes(candidate.scope ?? candidate.scopes),
-  };
+  return null;
 }

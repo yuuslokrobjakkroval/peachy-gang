@@ -7,7 +7,6 @@ import { PeachyProvider } from "@/contexts/peachy";
 import { AuthProvider } from "@/contexts/auth-provider";
 import { Toaster } from "@/components/ui/sonner";
 import "./globals.css";
-import { getMode, getSettingsFromCookie } from "@/utils/serverHelpers";
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { notFound } from "next/navigation";
@@ -37,9 +36,6 @@ export default async function LocaleLayout({
   } catch (error) {
     notFound();
   }
-
-  const mode = await getMode();
-  const settingsCookie = await getSettingsFromCookie();
 
   return (
     <html lang="en" className="light" suppressHydrationWarning>
