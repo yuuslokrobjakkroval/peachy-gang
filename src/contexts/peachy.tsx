@@ -205,7 +205,7 @@ export function PeachyProvider<T>({ children }: PeachyProviderProps) {
             "➡️ [PeachyProvider] Session detected without provider token. Fetching from '/api/auth/token'..."
           );
           try {
-            const response = await fetch("/api/auth/token");
+            const response = await fetch("/api/auth/session/token");
             if (!response.ok) {
               console.error(
                 `❌ [PeachyProvider] Failed to fetch token. Status: ${response.status}`
