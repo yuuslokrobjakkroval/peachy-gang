@@ -202,10 +202,10 @@ export function PeachyProvider<T>({ children }: PeachyProviderProps) {
       if (!token && !account) {
         const fetchToken = async () => {
           console.log(
-            "➡️ [PeachyProvider] Session detected without provider token. Fetching from '/api/auth/token'..."
+            "➡️ [PeachyProvider] Session detected without provider token. Fetching from '/api/auth/get-access-token'..."
           );
           try {
-            const response = await fetch("/api/auth/session/token");
+            const response = await fetch("/api/auth/get-access-token");
             if (!response.ok) {
               console.error(
                 `❌ [PeachyProvider] Failed to fetch token. Status: ${response.status}`
