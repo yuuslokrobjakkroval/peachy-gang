@@ -16,13 +16,6 @@ export async function GET(req: Request) {
     // No scopes property exists, so return empty array or string
     const scopes: string[] | string = "";
 
-    if (!providerAccessToken) {
-      return NextResponse.json(
-        { error: "access token not found in session" },
-        { status: 404 }
-      );
-    }
-
     return NextResponse.json({
       accessToken: providerAccessToken,
       accessTokenExpiresAt: expiresAt

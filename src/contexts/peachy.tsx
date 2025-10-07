@@ -206,6 +206,7 @@ export function PeachyProvider<T>({ children }: PeachyProviderProps) {
           );
           try {
             const response = await fetch("/api/auth/get-access-token");
+            console.log("🌐 [PeachyProvider] Fetch response:", response);
             if (!response.ok) {
               console.error(
                 `❌ [PeachyProvider] Failed to fetch token. Status: ${response.status}`
@@ -214,6 +215,7 @@ export function PeachyProvider<T>({ children }: PeachyProviderProps) {
             }
 
             const tokenData = await response.json();
+            console.log("🔑 [PeachyProvider] Token data received:", tokenData);
             if (tokenData?.accessToken) {
               console.log(
                 "✅ [PeachyProvider] Retrieved provider token from API route."
