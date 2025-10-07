@@ -1,4 +1,4 @@
-// src/app/api/session/token/route.ts
+// src/app/api/session/get-access-token/route.ts
 import { NextResponse } from "next/server";
 import { auth } from "@/lib/auth"; // server better-auth instance
 
