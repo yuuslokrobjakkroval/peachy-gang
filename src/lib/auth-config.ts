@@ -30,12 +30,6 @@ function resolveBaseUrl(): string {
     return inferred;
   }
 
-  const vercelUrl =
-    process.env.VERCEL_URL && normalizeUrl(`https://${process.env.VERCEL_URL}`);
-  if (vercelUrl) {
-    return vercelUrl;
-  }
-
   return getAbsoluteUrl({ fallback: DEFAULT_AUTH_FALLBACK });
 }
 
@@ -56,8 +50,6 @@ export const AUTH_CONFIG = {
       process.env.NEXT_PUBLIC_FRONTEND_URL,
       process.env.NEXT_PUBLIC_WEBSITE_URL,
       process.env.SITE_URL,
-      process.env.VERCEL_PROJECT_PRODUCTION_URL,
-      process.env.VERCEL_URL && `https://${process.env.VERCEL_URL}`,
       process.env.NEXT_PUBLIC_DEFAULT_DOMAIN,
     ].map((origin) => normalizeUrl(origin))
   ),
