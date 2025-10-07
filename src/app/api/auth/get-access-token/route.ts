@@ -39,3 +39,7 @@ export async function GET(req: Request) {
     return NextResponse.json({ error: "failed" }, { status: 500 });
   }
 }
+
+export async function POST(req: Request) {
+  return GET(req);
+}
