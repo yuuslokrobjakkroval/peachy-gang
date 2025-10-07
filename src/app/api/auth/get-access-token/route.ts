@@ -1,4 +1,4 @@
-// src/app/api/auth/get-access-token/route.ts
+// src/app/api/session/token/route.ts
 import { NextResponse } from "next/server";
 import { auth } from "@/lib/auth"; // server better-auth instance
 
@@ -13,6 +13,8 @@ export async function GET(req: Request) {
     const expiresAt = session.session?.expiresAt
       ? new Date(session.session.expiresAt).toISOString()
       : null;
+    // No scopes property exists, so return empty array or string
+    const scopes: string[] | string = "";
 
     if (!providerAccessToken) {
       return NextResponse.json(
@@ -23,13 +25,17 @@ export async function GET(req: Request) {
 
     return NextResponse.json({
       accessToken: providerAccessToken,
-      expiresAt: expiresAt,
+      accessTokenExpiresAt: expiresAt
+        ? new Date(expiresAt).toISOString()
+        : null,
+      scopes: Array.isArray(scopes)
+        ? scopes
+        : typeof scopes === "string"
+          ? scopes.split(/[ ,]+/)
+          : [],
     });
   } catch (err) {
     console.error("get-access-token error:", err);
-    return NextResponse.json(
-      { error: "failed to get access token" },
-      { status: 500 }
-    );
+    return NextResponse.json({ error: "failed" }, { status: 500 });
   }
 }
