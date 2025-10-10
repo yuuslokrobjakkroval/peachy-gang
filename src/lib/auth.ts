@@ -16,7 +16,13 @@ const prisma =
 
 globalForPrisma.prisma = prisma;
 
-const { baseUrl, isSecure, discordRedirectUri, trustedOrigins } = AUTH_CONFIG;
+const {
+  baseUrl,
+  authApiBaseUrl,
+  isSecure,
+  discordRedirectUri,
+  trustedOrigins,
+} = AUTH_CONFIG;
 
 if (!process.env.BOT_CLIENT_ID || !process.env.BOT_CLIENT_SECRET) {
   console.error(
@@ -32,13 +38,14 @@ if (!process.env.DATABASE_URL) {
 
 console.log("✅ [auth.ts] Loaded Better Auth configuration", {
   baseUrl,
+  authApiBaseUrl,
   isSecure,
   discordRedirectUri,
   trustedOrigins,
 });
 
 export const auth = betterAuth({
-  baseURL: baseUrl,
+  baseURL: authApiBaseUrl,
   database: prismaAdapter(prisma, {
     provider: "mongodb",
   }),

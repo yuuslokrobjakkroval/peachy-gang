@@ -34,9 +34,11 @@ function resolveBaseUrl(): string {
 }
 
 const AUTH_BASE_URL = resolveBaseUrl();
+const AUTH_API_BASE_URL = `${AUTH_BASE_URL.replace(/\/$/, "")}/api/auth`;
 
 export const AUTH_CONFIG = {
   baseUrl: AUTH_BASE_URL,
+  authApiBaseUrl: AUTH_API_BASE_URL,
   isSecure: AUTH_BASE_URL.startsWith("https://"),
   discordRedirectUri: `${AUTH_BASE_URL.replace(/\/$/, "")}/api/auth/callback/discord`,
   trustedOrigins: uniqueStrings(

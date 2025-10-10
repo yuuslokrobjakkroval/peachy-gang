@@ -61,7 +61,10 @@ function extractFromProviderToken(candidate: unknown): DiscordProviderToken | nu
     return null;
   }
 
-  const accessToken = (candidate as any).access_token ?? (candidate as any).accessToken;
+  const accessToken =
+    (candidate as any).access_token ??
+    (candidate as any).accessToken ??
+    (candidate as any).token;
   if (typeof accessToken !== "string" || accessToken.length === 0) {
     return null;
   }
@@ -149,7 +152,7 @@ export function extractDiscordTokenFromSession(
   ];
 
   for (const candidate of candidates) {
-    const token = extractFromProviderToken(candidate);
+    const token = normalizeDiscordToken(candidate);
     if (token) {
       return token;
     }
@@ -157,9 +160,34 @@ export function extractDiscordTokenFromSession(
 
   const accounts = collectPotentialAccounts(session as any);
   for (const account of accounts) {
-    const token = extractFromAccount(account);
+    const token = normalizeDiscordToken(account);
     if (token) {
       return token;
+    }
+  }
+
+  return null;
+}
+
+export function normalizeDiscordToken(candidate: unknown): DiscordProviderToken | null {
+  return extractFromProviderToken(candidate) ?? extractFromAccount(candidate);
+}
+
+export function resolveDiscordUserId(session: unknown): string | null {
+  if (!session || typeof session !== "object") {
+    return null;
+  }
+
+  const candidates = [
+    (session as any).user?.id,
+    (session as any).session?.user?.id,
+    (session as any).session?.userId,
+    (session as any).session?.user?.userId,
+  ];
+
+  for (const candidate of candidates) {
+    if (typeof candidate === "string" && candidate.length > 0) {
+      return candidate;
     }
   }
 
