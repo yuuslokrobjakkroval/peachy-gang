@@ -7,7 +7,9 @@
 
 function coerceScopes(value: unknown): string[] {
   if (Array.isArray(value)) {
-    return value.filter((scope): scope is string => typeof scope === "string" && scope.length > 0);
+    return value.filter(
+      (scope): scope is string => typeof scope === "string" && scope.length > 0
+    );
   }
 
   if (typeof value === "string" && value.length > 0) {
@@ -56,7 +58,9 @@ function coerceAccountList(value: unknown): unknown[] {
   return [];
 }
 
-function extractFromProviderToken(candidate: unknown): DiscordProviderToken | null {
+function extractFromProviderToken(
+  candidate: unknown
+): DiscordProviderToken | null {
   if (!candidate || typeof candidate !== "object") {
     return null;
   }
@@ -69,12 +73,17 @@ function extractFromProviderToken(candidate: unknown): DiscordProviderToken | nu
     return null;
   }
 
-  const refreshToken = (candidate as any).refresh_token ?? (candidate as any).refreshToken;
+  const refreshToken =
+    (candidate as any).refresh_token ?? (candidate as any).refreshToken;
+
+  console.log("Extracted Discord token:", { accessToken, refreshToken });
 
   return {
     accessToken,
     refreshToken:
-      typeof refreshToken === "string" && refreshToken.length > 0 ? refreshToken : undefined,
+      typeof refreshToken === "string" && refreshToken.length > 0
+        ? refreshToken
+        : undefined,
     expiresAt: coerceTimestamp(
       (candidate as any).expires_at ??
         (candidate as any).expiresAt ??
@@ -91,22 +100,31 @@ function extractFromAccount(account: unknown): DiscordProviderToken | null {
   }
 
   const rawProvider =
-    (account as any).providerId ?? (account as any).provider ?? (account as any).provider_id;
-  if (typeof rawProvider !== "string" || rawProvider.toLowerCase() !== "discord") {
+    (account as any).providerId ??
+    (account as any).provider ??
+    (account as any).provider_id;
+  if (
+    typeof rawProvider !== "string" ||
+    rawProvider.toLowerCase() !== "discord"
+  ) {
     return null;
   }
 
-  const accessToken = (account as any).accessToken ?? (account as any).access_token;
+  const accessToken =
+    (account as any).accessToken ?? (account as any).access_token;
   if (typeof accessToken !== "string" || accessToken.length === 0) {
     return null;
   }
 
-  const refreshToken = (account as any).refreshToken ?? (account as any).refresh_token;
+  const refreshToken =
+    (account as any).refreshToken ?? (account as any).refresh_token;
 
   return {
     accessToken,
     refreshToken:
-      typeof refreshToken === "string" && refreshToken.length > 0 ? refreshToken : undefined,
+      typeof refreshToken === "string" && refreshToken.length > 0
+        ? refreshToken
+        : undefined,
     expiresAt: coerceTimestamp(
       (account as any).accessTokenExpiresAt ??
         (account as any).access_token_expires_at ??
@@ -169,7 +187,9 @@ export function extractDiscordTokenFromSession(
   return null;
 }
 
-export function normalizeDiscordToken(candidate: unknown): DiscordProviderToken | null {
+export function normalizeDiscordToken(
+  candidate: unknown
+): DiscordProviderToken | null {
   return extractFromProviderToken(candidate) ?? extractFromAccount(candidate);
 }
 
