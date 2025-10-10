@@ -8,6 +8,7 @@ const axiosBaseQuery =
 
     try {
       const storedAccount = localStorage.getItem("account");
+      console.log("Redux API Stored account:", storedAccount);
       if (storedAccount) {
         const parsed = JSON.parse(storedAccount);
         accessToken = parsed?.accessToken || "";
