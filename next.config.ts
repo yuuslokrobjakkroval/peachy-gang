@@ -7,6 +7,7 @@ const nextConfig: NextConfig = {
     APP_URL: process.env.APP_URL,
     NEXT_PUBLIC_APP_URL: process.env.NEXT_PUBLIC_APP_URL,
     NEXT_PUBLIC_SITE_URL: process.env.NEXT_PUBLIC_SITE_URL,
+    NEXT_PUBLIC_API_ENDPOINT: process.env.NEXT_PUBLIC_API_ENDPOINT,
     BOT_CLIENT_ID: process.env.BOT_CLIENT_ID,
     BOT_CLIENT_SECRET: process.env.BOT_CLIENT_SECRET,
     FIRST_SUB_BOT_CLIENT_ID: process.env.FIRST_SUB_BOT_CLIENT_ID,
@@ -17,6 +18,16 @@ const nextConfig: NextConfig = {
     STAFF_IDS: process.env.STAFF_IDS,
     GITHUB_TOKEN: process.env.GITHUB_TOKEN,
     NEXT_PUBLIC_DEFAULT_DOMAIN: process.env.NEXT_PUBLIC_DEFAULT_DOMAIN,
+  },
+  async rewrites() {
+    const backend = process.env.BACKEND_API_BASE;
+    if (!backend) return [];
+    return [
+      {
+        source: "/api/v1/:path*",
+        destination: `${backend}/:path*`,
+      },
+    ];
   },
   reactStrictMode: true,
   images: {

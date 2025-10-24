@@ -1,3 +1,5 @@
 {
-  "i18n-ally.localesPaths": ["src/i18n", "src/messages"]
+  "github.copilot.inlineSuggest.enable": true,
+  "editor.inlineSuggest.enabled": true,
+  "i18n-ally.localesPaths": ["src/i18n", "src/messages"],
 }

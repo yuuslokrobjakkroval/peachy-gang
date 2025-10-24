@@ -7,8 +7,8 @@ const intlMiddleware = createMiddleware(routing);
 export default async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
-  // Skip auth handling for auth routes - let them be handled by the API route directly
-  if (pathname.startsWith("/api/auth")) {
+  // Skip all API routes (including auth) so middleware/i18n don't affect APIs
+  if (pathname.startsWith("/api")) {
     return NextResponse.next();
   }
 

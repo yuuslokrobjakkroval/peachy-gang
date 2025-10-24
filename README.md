@@ -39,7 +39,8 @@ BOT_CLIENT_SECRET="<YOUR_BOT_CLIENT_SECRET>"
 APP_URL="http://localhost:3000"
 
 # API Endpoint of your Backend (NestJS)
-NEXT_PUBLIC_API_ENDPOINT="http://localhost:8080"
+NEXT_PUBLIC_API_ENDPOINT="/api/v1"
+BACKEND_API_BASE="http://localhost:8080" # or your https://api.example.com
 ```
 
 ---
