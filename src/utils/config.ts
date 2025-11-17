@@ -13,7 +13,7 @@ export const ownerId: string[] = process.env.OWNER_IDS?.split(",").map((id) =>
 
 export const staffId: string[] = process.env.STAFF_IDS?.split(",").map((id) =>
   id.trim()
-) || ["765216076430180384", "1206564732388118558", "982564593039736842"];
+);
 // AppConfig definitions remain the same
 export const config: AppConfig = {
   id: 0,
