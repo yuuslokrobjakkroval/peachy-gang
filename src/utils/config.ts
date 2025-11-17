@@ -13,7 +13,7 @@ export const ownerId: string[] = process.env.OWNER_IDS?.split(",").map((id) =>
 
 export const staffId: string[] = process.env.STAFF_IDS?.split(",").map((id) =>
   id.trim()
-);
+) || [];
 // AppConfig definitions remain the same
 export const config: AppConfig = {
   id: 0,
