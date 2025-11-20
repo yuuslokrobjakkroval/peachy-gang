@@ -29,10 +29,10 @@ const envData = {
       GEMINI_API_KEY: "",
     },
     "PEACHY GANG": {
-      APP_URL: "http://localhost:3000",
+      APP_URL: "",
       OWNER_IDS: "",
       STAFF_IDS: "",
-      NEXT_PUBLIC_API_ENDPOINT: "http://localhost:8080",
+      NEXT_PUBLIC_API_ENDPOINT: "",
       BOT_CLIENT_ID: "",
       BOT_CLIENT_SECRET: "",
       FIRST_SUB_BOT_CLIENT_ID: "",
@@ -40,7 +40,7 @@ const envData = {
       DATABASE_URL: "",
       NODE_ENV: "dev",
       BETTER_AUTH_SECRET: "",
-      BETTER_AUTH_URL: "http://localhost:3000",
+      BETTER_AUTH_URL: "",
       GITHUB_TOKEN: "",
 
       // optional, but useful for testing OAuth locally
@@ -57,11 +57,11 @@ const envData = {
       BOT_CLIENT_ID: "",
       BOT_CLIENT_SECRET: "",
       MONGODB_URI: "",
-      PORT: "8080",
-      PRODUCTION: "true",
-      WEB_URL: "http://localhost:3000",
-      API_ENDPOINT: "https://discord.com/api/v10",
-      GEMINI_API_KEY: "AIzaSyBj_YF3CLn-Zmd8V3yoFJohDfLlNvbvF24",
+      PORT: "",
+      PRODUCTION: "",
+      WEB_URL: "",
+      API_ENDPOINT: "",
+      GEMINI_API_KEY: "A",
     },
   },
 };
